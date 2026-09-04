@@ -6,7 +6,7 @@
     <div class="trayectoria__container">
         <!-- Lado izquierdo -->
         <div class="trayectoria__content">
-            <span class="section-tag">Nuestra Trayectoria</span>
+            <span class="section-tag"><?= content_get('trayectoria', 'etiqueta_superior', 'NUESTRA TRAYECTORIA') ?></span>
             <h2 class="trayectoria__title">
                 <?= content_get('trayectoria', 'titulo', 'Trayectoria y Compromiso con la Educación') ?>
             </h2>
@@ -26,7 +26,7 @@
             </div>
 
             <a href="#" class="btn btn--outline-dark" id="btn-historia">
-                Nuestra Historia <i class="fas fa-arrow-right"></i>
+                <?= content_get('trayectoria', 'btn_historia', 'Nuestra Historia') ?> <i class="fas fa-arrow-right"></i>
             </a>
         </div>
 
@@ -37,21 +37,21 @@
                     <i class="fas fa-calendar-alt"></i>
                 </div>
                 <span class="trayectoria__stat-number"><?= content_get('trayectoria', 'stat_anios', '29+') ?></span>
-                <span class="trayectoria__stat-label">Años de<br>Experiencia</span>
+                <span class="trayectoria__stat-label"><?= str_replace('\n', '<br>', content_get('trayectoria', 'stat_anios_label', 'Años de<br>Experiencia')) ?></span>
             </div>
             <div class="trayectoria__stat-card">
                 <div class="trayectoria__stat-icon">
                     <i class="fas fa-user-graduate"></i>
                 </div>
                 <span class="trayectoria__stat-number"><?= content_get('trayectoria', 'stat_graduados', '+17,000') ?></span>
-                <span class="trayectoria__stat-label">Estudiantes<br>Graduados</span>
+                <span class="trayectoria__stat-label"><?= str_replace('\n', '<br>', content_get('trayectoria', 'stat_graduados_label', 'Estudiantes<br>Graduados')) ?></span>
             </div>
             <div class="trayectoria__stat-card">
                 <div class="trayectoria__stat-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
                 <span class="trayectoria__stat-number"><?= content_get('trayectoria', 'stat_carreras', '+35') ?></span>
-                <span class="trayectoria__stat-label">Carreras<br>Disponibles</span>
+                <span class="trayectoria__stat-label"><?= str_replace('\n', '<br>', content_get('trayectoria', 'stat_carreras_label', 'Carreras<br>Disponibles')) ?></span>
             </div>
         </div>
     </div>

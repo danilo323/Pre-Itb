@@ -108,17 +108,31 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ── Abrir sección guardada si viene de guardar ──────
-    // Si el hash de la URL indica que guardamos, abrir esa sección
     const params = new URLSearchParams(window.location.search);
-    const savedSection = params.get('section');
+    const savedSection = params.get('panel_section');
     if (savedSection) {
+        // Abrir la pestaña de secciones (por si acaso)
+        document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
+        document.querySelector('[data-tab="secciones"]').classList.add('active');
+        document.getElementById('tab-secciones').style.display = 'flex';
+
+        // Marcar la card como activa y mostrar el formulario
         const card = document.querySelector(`.section-card[data-section="${savedSection}"]`);
         if (card) {
             card.classList.add('active');
             mostrarFormulario(savedSection);
+            
+            // Hacer scroll a la sección en el frontend
             const target = document.getElementById(savedSection);
-            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            if (target) {
+                setTimeout(() => {
+                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }, 100);
+            }
         }
+
+        // Limpiar la URL para que no vuelva a abrirse si el usuario recarga la página
+        window.history.replaceState({}, document.title, window.location.pathname);
     }
 
     // ── REPEATER — clonar y eliminar ───────────────────

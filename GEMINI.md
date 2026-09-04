@@ -70,17 +70,21 @@ Buscador JS en tabla ✅ ⏸️ Esperando Cuando coleccion.php tenga datos reale
 - **Dispatcher:** `admin/fields/_loader.php` (Lógica para decidir qué campo pintar).
 - **Campos (Fields):** Se crearon los 7 campos necesarios para toda la landing (`text`, `textarea`, `repeater`, `image`, `bool`, `select`, `date`). Incluyen funciones de renderizado (HTML) y validación estricta/limpieza (`parse`).
 - **Vista Singleton:** `admin/singleton.php` (Genera el formulario dinámico con protección CSRF y whitelist de sección).
-- **Pruebas (CLI):** `admin/test_motor.php` (Script de pruebas por consola que verifica el renderizado y parse de los campos exitosamente).
+- **Integración Frontend-Backend (Temporales/Mock):** Se logró integrar al 100% las secciones de la landing (`hero.php`, `servicios.php`, `autoridades.php`, `testimonios.php`, `experiencia.php`, `programas.php`, `areas.php`) usando el motor. Se reescribió el `schema_mock.php` para que todas estas secciones operen como `singleton` (asegurando un orden visual exacto) y se habilitó la subida real de imágenes guardando rutas temporales en `$_SESSION`.
 
 **🚀 Lo que falta programar (Trabajo pendiente de Persona 2):**
-- **Vista Colección:** Programar `admin/coleccion.php` (La tabla que lista registros).
+- **Vista Colección:** Programar `admin/coleccion.php` (La tabla que lista registros). *(Opcional si al final todas las secciones del frontend se manejan como singleton por diseño)*.
 - **Vista Edición:** Programar `admin/editar.php` (El formulario para editar un ítem de la colección).
 - **Javascript del Repeater:** Lógica en `admin/assets/admin.js` para clonar campos al presionar "+ Añadir".
 
-**⏳ Dependencias (Bloqueado esperando a Persona 1 y 3):**
-- **Backend (P3):** Funciones `storage_save()` y `storage_get()` para persistir datos reales en SQL Server.
-- **Backend (P3):** El archivo `schema.php` real y la autenticación `auth.php` (Login/CSRF).
-- **Frontend (P1):** Paleta de colores/CSS público para crear los estilos del admin (`admin.css`) de forma armónica.
+**⏳ Tareas Críticas para Persona 3 (Backend & Base de Datos):**
+- **Persistencia Real (SQL Server):** Actualmente, `admin/guardar.php` guarda todo temporalmente en la memoria de la sesión (`$_SESSION`), lo que significa que los datos se pierden si se reinicia el servidor. Persona 3 **debe** crear las funciones `storage_save()` y `storage_get()` para que la data se guarde y lea permanentemente desde SQL Server.
+- **Schema Real:** Reemplazar el archivo temporal `admin/schema_mock.php` por el `admin/schema.php` definitivo.
+- **Seguridad (Auth):** Implementar el sistema de login real contra la base de datos en `auth.php`, reemplazando el usuario "admin/1234" temporal.
+
+**🎨 Tareas para Persona 1 (Frontend):**
+- **Cuidado con el Merge (includes/):** Persona 1 debe tener extremo cuidado al entregar sus archivos finales de `includes/*.php`. **NO debe sobreescribirlos a ciegas**, de lo contrario borrará las etiquetas PHP (`<?= content_get() ?>`) que Persona 2 ya conectó al panel. Lo ideal es que Persona 2 haga la fusión manual del HTML final.
+- **Paleta de Colores:** Proveer los colores finales para estilizar el panel de administración (`admin.css`) de forma armónica.
 
 ---
 

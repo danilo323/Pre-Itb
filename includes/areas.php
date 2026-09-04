@@ -4,12 +4,12 @@
 <section class="areas" id="areas">
     <div class="areas__container">
         <div class="areas__header">
-            <span class="section-tag section-tag--light">Áreas de Conocimiento</span>
+            <span class="section-tag section-tag--light"><?= content_get('areas', 'etiqueta_superior', 'Áreas de Conocimiento') ?></span>
             <h2 class="areas__title">
-                Nuestras Áreas de <span class="text-orange">Formación</span>
+                <?= content_get('areas', 'titulo_seccion_1', 'Nuestras Áreas de') ?> <span class="text-orange"><?= content_get('areas', 'titulo_seccion_2', 'Formación') ?></span>
             </h2>
             <p class="areas__subtitle">
-                Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional
+                <?= content_get('areas', 'descripcion', 'Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional') ?>
             </p>
         </div>
 
@@ -19,18 +19,21 @@
                 <div class="areas__card-icon">
                     <i class="fas fa-heartbeat"></i>
                 </div>
-                <h3 class="areas__card-title">Salud</h3>
+                <h3 class="areas__card-title"><?= content_get('areas', 'area1_titulo', 'Salud') ?></h3>
                 <p class="areas__card-description">
-                    Formación integral en ciencias de la salud con laboratorios 
-                    especializados y prácticas clínicas reales.
+                    <?= content_get('areas', 'area1_desc', 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.') ?>
                 </p>
                 <ul class="areas__card-list">
-                    <li>Enfermería</li>
-                    <li>Fisioterapia</li>
-                    <li>Laboratorio Clínico</li>
+                    <?php
+                    $lista1 = explode("\n", content_get('areas', 'area1_programas', "Enfermería\nFisioterapia\nLaboratorio Clínico"));
+                    foreach ($lista1 as $item) {
+                        $item = trim($item);
+                        if ($item) echo "<li>{$item}</li>\n";
+                    }
+                    ?>
                 </ul>
                 <a href="#" class="areas__card-btn">
-                    Explorar programas <i class="fas fa-arrow-right"></i>
+                    <?= content_get('areas', 'area1_btn', 'Explorar programas') ?> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
 
@@ -39,18 +42,21 @@
                 <div class="areas__card-icon">
                     <i class="fas fa-briefcase"></i>
                 </div>
-                <h3 class="areas__card-title">Ciencias Empresariales</h3>
+                <h3 class="areas__card-title"><?= content_get('areas', 'area2_titulo', 'Ciencias Empresariales') ?></h3>
                 <p class="areas__card-description">
-                    Desarrolla habilidades de liderazgo, gestión y emprendimiento 
-                    con enfoque práctico y global.
+                    <?= content_get('areas', 'area2_desc', 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.') ?>
                 </p>
                 <ul class="areas__card-list">
-                    <li>Administración de Empresas</li>
-                    <li>Contabilidad</li>
-                    <li>Marketing Digital</li>
+                    <?php
+                    $lista2 = explode("\n", content_get('areas', 'area2_programas', "Administración de Empresas\nContabilidad\nMarketing Digital"));
+                    foreach ($lista2 as $item) {
+                        $item = trim($item);
+                        if ($item) echo "<li>{$item}</li>\n";
+                    }
+                    ?>
                 </ul>
                 <a href="#" class="areas__card-btn">
-                    Explorar programas <i class="fas fa-arrow-right"></i>
+                    <?= content_get('areas', 'area2_btn', 'Explorar programas') ?> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
 
@@ -59,18 +65,21 @@
                 <div class="areas__card-icon">
                     <i class="fas fa-ship"></i>
                 </div>
-                <h3 class="areas__card-title">Transporte</h3>
+                <h3 class="areas__card-title"><?= content_get('areas', 'area3_titulo', 'Transporte') ?></h3>
                 <p class="areas__card-description">
-                    Especialízate en logística y transporte marítimo, 
-                    terrestre y multimodal con certificaciones internacionales.
+                    <?= content_get('areas', 'area3_desc', 'Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.') ?>
                 </p>
                 <ul class="areas__card-list">
-                    <li>Logística y Transporte</li>
-                    <li>Comercio Exterior</li>
-                    <li>Operaciones Portuarias</li>
+                    <?php
+                    $lista3 = explode("\n", content_get('areas', 'area3_programas', "Logística y Transporte\nComercio Exterior\nOperaciones Portuarias"));
+                    foreach ($lista3 as $item) {
+                        $item = trim($item);
+                        if ($item) echo "<li>{$item}</li>\n";
+                    }
+                    ?>
                 </ul>
                 <a href="#" class="areas__card-btn">
-                    Explorar programas <i class="fas fa-arrow-right"></i>
+                    <?= content_get('areas', 'area3_btn', 'Explorar programas') ?> <i class="fas fa-arrow-right"></i>
                 </a>
             </div>
         </div>

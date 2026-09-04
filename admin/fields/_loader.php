@@ -11,6 +11,7 @@ require_once __DIR__ . '/image.php';
 require_once __DIR__ . '/bool.php';
 require_once __DIR__ . '/select.php';
 require_once __DIR__ . '/date.php';
+require_once __DIR__ . '/divider.php';
 
 /**
  * Renderiza el HTML de un campo específico basándose en su tipo.

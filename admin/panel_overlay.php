@@ -59,7 +59,7 @@ foreach ($schema as $key => $section) {
                 <small>{$type_label}</small>
             </div>
         </div>
-        <form method=\"POST\" action=\"/admin/guardar.php\" class=\"panel-form\">
+        <form method=\"POST\" action=\"/admin/guardar.php\" class=\"panel-form\" enctype=\"multipart/form-data\">
             <input type=\"hidden\" name=\"section\" value=\"{$key}\">
             <input type=\"hidden\" name=\"csrf_token\" value=\"{$csrf}\">
             <div class=\"pform-fields\">

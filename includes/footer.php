@@ -10,13 +10,13 @@
         </div>
         <div class="prefooter__buttons">
             <a href="#" class="prefooter__btn">
-                <i class="fas fa-comments"></i> Chatea con nosotros
+                <i class="fas fa-comments"></i> <?= content_get('footer', 'prefooter_btn_1', 'Chatea con nosotros') ?>
             </a>
             <a href="#" class="prefooter__btn">
-                <i class="fas fa-phone-alt"></i> Llámanos
+                <i class="fas fa-phone-alt"></i> <?= content_get('footer', 'prefooter_btn_2', 'Llámanos') ?>
             </a>
             <a href="#" class="prefooter__btn">
-                <i class="fas fa-map-marker-alt"></i> Visítanos
+                <i class="fas fa-map-marker-alt"></i> <?= content_get('footer', 'prefooter_btn_3', 'Visítanos') ?>
             </a>
         </div>
     </div>
@@ -47,19 +47,21 @@
 
             <!-- Columna 2: Enlaces rápidos -->
             <div class="footer__col">
-                <h4 class="footer__heading">Enlaces Rápidos</h4>
+                <h4 class="footer__heading"><?= content_get('footer', 'col1_titulo', 'Enlaces Rápidos') ?></h4>
                 <ul class="footer__list">
-                    <li><a href="#" class="footer__link">Oferta Académica</a></li>
-                    <li><a href="#" class="footer__link">Admisiones</a></li>
-                    <li><a href="#" class="footer__link">Vida Estudiantil</a></li>
-                    <li><a href="#" class="footer__link">Investigación</a></li>
-                    <li><a href="#" class="footer__link">Educación Continua</a></li>
+                    <?php
+                    $enlaces_raw = content_raw('footer', 'enlaces_rapidos', "Oferta Académica\nAdmisiones\nVida Estudiantil\nInvestigación\nEducación Continua");
+                    $enlaces = array_filter(array_map('trim', explode("\n", $enlaces_raw)));
+                    foreach ($enlaces as $enlace):
+                    ?>
+                        <li><a href="#" class="footer__link"><?= htmlspecialchars($enlace, ENT_QUOTES, 'UTF-8') ?></a></li>
+                    <?php endforeach; ?>
                 </ul>
             </div>
 
             <!-- Columna 3: Contacto -->
             <div class="footer__col">
-                <h4 class="footer__heading">Contacto</h4>
+                <h4 class="footer__heading"><?= content_get('footer', 'col2_titulo', 'Contacto') ?></h4>
                 <ul class="footer__list footer__list--contact">
                     <li>
                         <i class="fas fa-map-marker-alt"></i>
@@ -78,7 +80,7 @@
 
             <!-- Columna 4: Horarios -->
             <div class="footer__col">
-                <h4 class="footer__heading">Horarios de Atención</h4>
+                <h4 class="footer__heading"><?= content_get('footer', 'col3_titulo', 'Horarios de Atención') ?></h4>
                 <ul class="footer__list">
                     <li><?= content_get('footer', 'horario_semana', 'Lunes a Viernes: 08:00 - 17:00') ?></li>
                     <li><?= content_get('footer', 'horario_sabado', 'Sábados: 08:00 - 13:00') ?></li>

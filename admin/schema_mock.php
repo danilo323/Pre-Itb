@@ -44,6 +44,7 @@ return [
         'type'  => 'singleton',
         'icon'  => '🦸',
         'fields' => [
+            'div_left' => ['type' => 'divider', 'label' => 'Lado Izquierdo (Textos y Botón)'],
             'subtitulo' => [
                 'type'    => 'text',
                 'label'   => 'Subtítulo (etiqueta pequeña)',
@@ -64,21 +65,30 @@ return [
             ],
             'cta_texto' => [
                 'type'    => 'text',
-                'label'   => 'Texto del botón CTA',
+                'label'   => 'Texto del botón',
                 'default' => 'Explorar Programas',
                 'help'    => 'Texto del botón principal de la portada.',
             ],
+
+            'div_stats' => ['type' => 'divider', 'label' => 'Estadísticas (Debajo del botón)'],
             'stat_numero' => [
                 'type'    => 'text',
-                'label'   => 'Estadística (ej: +20K Estudiantes)',
+                'label'   => 'Texto de estadística (ej: +20K...)',
                 'default' => '+20K Estudiantes Graduados',
                 'help'    => 'Dato destacado que aparece debajo del botón.',
             ],
             'rating' => [
                 'type'    => 'text',
-                'label'   => 'Calificación (ej: 4.9)',
+                'label'   => 'Calificación de estrellas',
                 'default' => '4.9',
                 'help'    => 'Número de calificación con estrellas. Solo números.',
+            ],
+
+            'div_right' => ['type' => 'divider', 'label' => 'Lado Derecho y Fondo (Multimedia)'],
+            'circular_text' => [
+                'type'    => 'text',
+                'label'   => 'Texto circular (repite la frase)',
+                'default' => 'ITB INSTITUTO UNIVERSITARIO • EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995 •',
             ],
             'video_url' => [
                 'type'    => 'text',
@@ -109,53 +119,77 @@ return [
         'type'  => 'singleton',
         'icon'  => '📅',
         'fields' => [
+            'div_global' => ['type' => 'divider', 'label' => 'Textos Generales'],
+            'etiqueta_superior' => [
+                'type'    => 'text',
+                'label'   => 'Etiqueta superior',
+                'default' => 'NUESTRA TRAYECTORIA',
+            ],
             'titulo' => [
                 'type'    => 'textarea',
                 'label'   => 'Título de la sección',
                 'default' => 'Trayectoria y Compromiso con la Educación',
-                'help'    => 'Título principal de la sección Trayectoria.',
             ],
             'descripcion' => [
                 'type'    => 'textarea',
                 'label'   => 'Descripción',
                 'default' => 'Desde 1995, el Instituto Superior Tecnológico Bolivariano de Tecnología ha formado profesionales con una educación integral basada en valores, innovación y excelencia académica. Nuestro compromiso es transformar vidas a través del conocimiento.',
-                'help'    => 'Párrafo de descripción institucional.',
+            ],
+            
+            'div_perfil' => ['type' => 'divider', 'label' => 'Perfil del Canciller'],
+            'canciller_foto' => [
+                'type'    => 'image',
+                'label'   => 'Foto',
+                'default' => 'img/canciller.jpg',
             ],
             'canciller_nombre' => [
                 'type'    => 'text',
-                'label'   => 'Nombre del Canciller',
+                'label'   => 'Nombre',
                 'default' => 'PhD. Roberto Tolozano Benites',
-                'help'    => 'Nombre completo con título académico.',
             ],
             'canciller_cargo' => [
                 'type'    => 'text',
-                'label'   => 'Cargo del Canciller',
+                'label'   => 'Cargo',
                 'default' => 'Canciller del ITB',
-                'help'    => 'Cargo que aparece debajo del nombre.',
             ],
-            'canciller_foto' => [
-                'type'    => 'image',
-                'label'   => 'Foto del Canciller',
-                'default' => 'img/canciller.jpg',
-                'help'    => 'Foto circular del perfil. Tamaño recomendado: 200x200px.',
+
+            'div_btn' => ['type' => 'divider', 'label' => 'Botón'],
+            'btn_historia' => [
+                'type'    => 'text',
+                'label'   => 'Texto del botón',
+                'default' => 'Nuestra Historia',
             ],
+
+            'div_stats' => ['type' => 'divider', 'label' => 'Estadísticas (Lado Derecho)'],
             'stat_anios' => [
                 'type'    => 'text',
-                'label'   => 'Estadística: Años de Experiencia',
+                'label'   => 'Número: Años de Experiencia',
                 'default' => '29+',
-                'help'    => 'Número destacado (solo el número o número+símbolo).',
+            ],
+            'stat_anios_label' => [
+                'type'    => 'text',
+                'label'   => 'Texto: Años de Experiencia',
+                'default' => 'Años de Experiencia',
             ],
             'stat_graduados' => [
                 'type'    => 'text',
-                'label'   => 'Estadística: Estudiantes Graduados',
+                'label'   => 'Número: Estudiantes Graduados',
                 'default' => '+17,000',
-                'help'    => 'Número de estudiantes graduados.',
+            ],
+            'stat_graduados_label' => [
+                'type'    => 'text',
+                'label'   => 'Texto: Estudiantes Graduados',
+                'default' => 'Estudiantes Graduados',
             ],
             'stat_carreras' => [
                 'type'    => 'text',
-                'label'   => 'Estadística: Carreras Disponibles',
+                'label'   => 'Número: Carreras Disponibles',
                 'default' => '+35',
-                'help'    => 'Número de carreras disponibles.',
+            ],
+            'stat_carreras_label' => [
+                'type'    => 'text',
+                'label'   => 'Texto: Carreras Disponibles',
+                'default' => 'Carreras Disponibles',
             ],
         ],
     ],
@@ -165,27 +199,32 @@ return [
     // =====================================================
     'areas' => [
         'label' => 'Áreas de Formación',
-        'type'  => 'collection',
+        'type'  => 'singleton',
         'icon'  => '📚',
         'fields' => [
-            'nombre' => [
-                'type'    => 'text',
-                'label'   => 'Nombre del Área',
-                'default' => 'Salud',
-                'help'    => 'Ej: Salud, Ciencias Empresariales, Transporte.',
-            ],
-            'descripcion' => [
-                'type'    => 'textarea',
-                'label'   => 'Descripción',
-                'default' => 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.',
-                'help'    => 'Descripción corta del área de formación.',
-            ],
-            'programas_lista' => [
-                'type'    => 'textarea',
-                'label'   => 'Programas (uno por línea)',
-                'default' => "Enfermería\nFisioterapia\nLaboratorio Clínico",
-                'help'    => 'Lista de carreras. Escribe uno por línea.',
-            ],
+            'div_global' => ['type' => 'divider', 'label' => 'Textos Generales'],
+            'etiqueta_superior' => ['type' => 'text', 'label' => 'Etiqueta superior', 'default' => 'Áreas de Conocimiento'],
+            'titulo_seccion_1'  => ['type' => 'text', 'label' => 'Título (parte oscura)', 'default' => 'Nuestras Áreas de'],
+            'titulo_seccion_2'  => ['type' => 'text', 'label' => 'Título (parte naranja)', 'default' => 'Formación'],
+            'descripcion'       => ['type' => 'textarea', 'label' => 'Subtítulo', 'default' => 'Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional'],
+
+            'div_area1' => ['type' => 'divider', 'label' => 'Área 1'],
+            'area1_titulo'    => ['type' => 'text', 'label' => 'Título', 'default' => 'Salud'],
+            'area1_desc'      => ['type' => 'textarea', 'label' => 'Descripción', 'default' => 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.'],
+            'area1_programas' => ['type' => 'textarea', 'label' => 'Programas (uno por línea)', 'default' => "Enfermería\nFisioterapia\nLaboratorio Clínico"],
+            'area1_btn'       => ['type' => 'text', 'label' => 'Texto del botón', 'default' => 'Explorar programas'],
+
+            'div_area2' => ['type' => 'divider', 'label' => 'Área 2'],
+            'area2_titulo'    => ['type' => 'text', 'label' => 'Título', 'default' => 'Ciencias Empresariales'],
+            'area2_desc'      => ['type' => 'textarea', 'label' => 'Descripción', 'default' => 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.'],
+            'area2_programas' => ['type' => 'textarea', 'label' => 'Programas (uno por línea)', 'default' => "Administración de Empresas\nContabilidad\nMarketing Digital"],
+            'area2_btn'       => ['type' => 'text', 'label' => 'Texto del botón', 'default' => 'Explorar programas'],
+
+            'div_area3' => ['type' => 'divider', 'label' => 'Área 3'],
+            'area3_titulo'    => ['type' => 'text', 'label' => 'Título', 'default' => 'Transporte'],
+            'area3_desc'      => ['type' => 'textarea', 'label' => 'Descripción', 'default' => 'Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.'],
+            'area3_programas' => ['type' => 'textarea', 'label' => 'Programas (uno por línea)', 'default' => "Logística y Transporte\nComercio Exterior\nOperaciones Portuarias"],
+            'area3_btn'       => ['type' => 'text', 'label' => 'Texto del botón', 'default' => 'Explorar programas'],
         ],
     ],
 
@@ -194,46 +233,46 @@ return [
     // =====================================================
     'programas' => [
         'label' => 'Programas Destacados',
-        'type'  => 'collection',
+        'type'  => 'singleton',
         'icon'  => '🎓',
         'fields' => [
-            'titulo' => [
-                'type'    => 'text',
-                'label'   => 'Nombre del Programa',
-                'default' => 'Tecnología Superior en Enfermería',
-                'help'    => 'Nombre completo del programa académico.',
-            ],
-            'area' => [
-                'type'    => 'text',
-                'label'   => 'Área',
-                'default' => 'Salud',
-                'help'    => 'Área a la que pertenece el programa (ej: Salud, Tecnología).',
-            ],
-            'modalidad' => [
-                'type'    => 'select',
-                'label'   => 'Modalidad',
-                'default' => 'Presencial',
-                'options' => ['Presencial', 'Híbrido', 'En línea'],
-                'help'    => 'Modalidad de estudio del programa.',
-            ],
-            'duracion' => [
-                'type'    => 'text',
-                'label'   => 'Duración',
-                'default' => '5 Semestres',
-                'help'    => 'Duración del programa (ej: 5 Semestres).',
-            ],
-            'sede' => [
-                'type'    => 'text',
-                'label'   => 'Sede',
-                'default' => 'Guayaquil',
-                'help'    => 'Ciudad donde se imparte el programa.',
-            ],
-            'imagen' => [
-                'type'    => 'image',
-                'label'   => 'Imagen del Programa',
-                'default' => 'img/programa-enfermeria.jpg',
-                'help'    => 'Foto de portada del programa. Recomendado: 600x400px.',
-            ],
+            'div_global' => ['type' => 'divider', 'label' => 'Textos Generales'],
+            'etiqueta_superior' => ['type' => 'text', 'label' => 'Etiqueta superior', 'default' => 'Oferta Académica'],
+            'titulo_seccion_1'  => ['type' => 'text', 'label' => 'Título (parte oscura)', 'default' => 'Programas'],
+            'titulo_seccion_2'  => ['type' => 'text', 'label' => 'Título (parte naranja)', 'default' => 'Destacados'],
+            'btn_ver_todos'     => ['type' => 'text', 'label' => 'Botón "Ver todos"', 'default' => 'Ver todos los programas'],
+
+            'div_prog1' => ['type' => 'divider', 'label' => 'Programa 1 (Salud)'],
+            'prog1_imagen'    => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/programa-enfermeria.jpg'],
+            'prog1_modalidad' => ['type' => 'text', 'label' => 'Modalidad', 'default' => 'Presencial', 'help' => 'Ej: Presencial, Híbrido, En línea'],
+            'prog1_area'      => ['type' => 'text', 'label' => 'Área', 'default' => 'Salud'],
+            'prog1_titulo'    => ['type' => 'text', 'label' => 'Título del programa', 'default' => 'Tecnología Superior en Enfermería'],
+            'prog1_duracion'  => ['type' => 'text', 'label' => 'Duración', 'default' => '5 Semestres'],
+            'prog1_sede'      => ['type' => 'text', 'label' => 'Sede', 'default' => 'Guayaquil'],
+
+            'div_prog2' => ['type' => 'divider', 'label' => 'Programa 2 (Empresariales)'],
+            'prog2_imagen'    => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/programa-marketing.jpg'],
+            'prog2_modalidad' => ['type' => 'text', 'label' => 'Modalidad', 'default' => 'Presencial', 'help' => 'Ej: Presencial, Híbrido, En línea'],
+            'prog2_area'      => ['type' => 'text', 'label' => 'Área', 'default' => 'Ciencias Empresariales'],
+            'prog2_titulo'    => ['type' => 'text', 'label' => 'Título del programa', 'default' => 'Tecnología Superior en Marketing Digital'],
+            'prog2_duracion'  => ['type' => 'text', 'label' => 'Duración', 'default' => '5 Semestres'],
+            'prog2_sede'      => ['type' => 'text', 'label' => 'Sede', 'default' => 'Guayaquil'],
+
+            'div_prog3' => ['type' => 'divider', 'label' => 'Programa 3 (Logística)'],
+            'prog3_imagen'    => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/programa-logistica.jpg'],
+            'prog3_modalidad' => ['type' => 'text', 'label' => 'Modalidad', 'default' => 'Presencial', 'help' => 'Ej: Presencial, Híbrido, En línea'],
+            'prog3_area'      => ['type' => 'text', 'label' => 'Área', 'default' => 'Transporte'],
+            'prog3_titulo'    => ['type' => 'text', 'label' => 'Título del programa', 'default' => 'Tecnología Superior en Logística y Transporte'],
+            'prog3_duracion'  => ['type' => 'text', 'label' => 'Duración', 'default' => '5 Semestres'],
+            'prog3_sede'      => ['type' => 'text', 'label' => 'Sede', 'default' => 'Guayaquil'],
+
+            'div_prog4' => ['type' => 'divider', 'label' => 'Programa 4 (Software)'],
+            'prog4_imagen'    => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/programa-software.jpg'],
+            'prog4_modalidad' => ['type' => 'text', 'label' => 'Modalidad', 'default' => 'Híbrido', 'help' => 'Ej: Presencial, Híbrido, En línea'],
+            'prog4_area'      => ['type' => 'text', 'label' => 'Área', 'default' => 'Tecnología'],
+            'prog4_titulo'    => ['type' => 'text', 'label' => 'Título del programa', 'default' => 'Tecnología Superior en Desarrollo de Software'],
+            'prog4_duracion'  => ['type' => 'text', 'label' => 'Duración', 'default' => '5 Semestres'],
+            'prog4_sede'      => ['type' => 'text', 'label' => 'Sede', 'default' => 'Guayaquil'],
         ],
     ],
 
@@ -245,35 +284,63 @@ return [
         'type'  => 'singleton',
         'icon'  => '⭐',
         'fields' => [
-            'titulo' => [
-                'type'    => 'textarea',
-                'label'   => 'Título de la sección',
-                'default' => 'Tu Experiencia ITB',
-                'help'    => 'Título principal de la sección.',
+            'div_header' => ['type' => 'divider', 'label' => 'Cabecera (Textos Principales)'],
+            'etiqueta_superior' => [
+                'type'    => 'text',
+                'label'   => 'Etiqueta superior (badge)',
+                'default' => 'Vida Estudiantil',
+            ],
+            'titulo_seccion_1' => [
+                'type'    => 'text',
+                'label'   => 'Título (parte oscura)',
+                'default' => 'Tu Experiencia',
+            ],
+            'titulo_seccion_2' => [
+                'type'    => 'text',
+                'label'   => 'Título (parte naranja)',
+                'default' => 'ITB',
             ],
             'descripcion' => [
                 'type'    => 'textarea',
                 'label'   => 'Descripción',
                 'default' => 'Más allá de lo académico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseñados para tu bienestar.',
-                'help'    => 'Párrafo de descripción de la sección.',
+                'help'    => 'Párrafo bajo el título principal.',
+            ],
+            
+            'div_c1' => ['type' => 'divider', 'label' => 'Característica 1'],
+            'caract1_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Servicios Médicos'],
+            'caract1_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Atención médica y odontológica gratuita para estudiantes.'],
+            
+            'div_c2' => ['type' => 'divider', 'label' => 'Característica 2'],
+            'caract2_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Becas y Financiamiento'],
+            'caract2_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Programas de becas por excelencia académica y apoyo financiero.'],
+            
+            'div_c3' => ['type' => 'divider', 'label' => 'Característica 3'],
+            'caract3_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Laboratorios Modernos'],
+            'caract3_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Tecnología de punta en todos nuestros laboratorios especializados.'],
+            
+            'div_c4' => ['type' => 'divider', 'label' => 'Característica 4'],
+            'caract4_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Bolsa de Empleo'],
+            'caract4_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Conexión directa con empresas aliadas para tus prácticas y primer empleo.'],
+
+            'div_btn' => ['type' => 'divider', 'label' => 'Botón'],
+            'btn_texto' => ['type' => 'text', 'label' => 'Texto del botón', 'default' => 'Más beneficios'],
+
+            'div_img' => ['type' => 'divider', 'label' => 'Imagen e Indicador (Derecha)'],
+            'imagen' => [
+                'type'    => 'image',
+                'label'   => 'Imagen principal',
+                'default' => 'img/experiencia-itb.jpg',
             ],
             'badge_numero' => [
                 'type'    => 'text',
-                'label'   => 'Badge: Número (ej: 98%)',
+                'label'   => 'Número del indicador (ej: 115%)',
                 'default' => '98%',
-                'help'    => 'Número del badge sobre la imagen. Solo texto corto.',
             ],
             'badge_texto' => [
                 'type'    => 'text',
-                'label'   => 'Badge: Texto (ej: Satisfacción)',
+                'label'   => 'Texto del indicador',
                 'default' => 'Satisfacción Estudiantil',
-                'help'    => 'Texto descriptivo del badge.',
-            ],
-            'imagen' => [
-                'type'    => 'image',
-                'label'   => 'Imagen de la sección',
-                'default' => 'img/experiencia-itb.jpg',
-                'help'    => 'Foto del lado derecho. Recomendado: 600x700px.',
             ],
         ],
     ],
@@ -283,32 +350,55 @@ return [
     // =====================================================
     'testimonios' => [
         'label' => 'Testimonios',
-        'type'  => 'collection',
+        'type'  => 'singleton',
         'icon'  => '💬',
         'fields' => [
-            'nombre' => [
-                'type'    => 'text',
-                'label'   => 'Nombre del Graduado',
-                'default' => 'María Fernanda López',
-                'help'    => 'Nombre completo del autor del testimonio.',
+            'div_global' => [
+                'type'  => 'divider',
+                'label' => 'Textos Generales',
             ],
-            'carrera' => [
+            'etiqueta_superior' => [
                 'type'    => 'text',
-                'label'   => 'Carrera y Promoción',
-                'default' => 'Graduada en Enfermería - Promoción 2022',
-                'help'    => 'Ej: Graduado en Marketing Digital - Promoción 2023.',
+                'label'   => 'Etiqueta superior (badge)',
+                'default' => 'HISTORIAS DE ÉXITO',
             ],
-            'cita' => [
-                'type'    => 'textarea',
-                'label'   => 'Testimonio',
-                'default' => 'El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional.',
-                'help'    => 'Texto del testimonio. Máx. 3-4 oraciones.',
+            'titulo_seccion_1' => [
+                'type'    => 'text',
+                'label'   => 'Título (parte blanca)',
+                'default' => 'Lo que dicen nuestros',
+            ],
+            'titulo_seccion_2' => [
+                'type'    => 'text',
+                'label'   => 'Título (parte naranja)',
+                'default' => 'Graduados',
+            ],
+            'div_testimonio' => [
+                'type'  => 'divider',
+                'label' => 'Testimonio Principal',
             ],
             'imagen' => [
                 'type'    => 'image',
                 'label'   => 'Foto del Graduado',
                 'default' => 'img/testimonio-estudiante.jpg',
-                'help'    => 'Foto del graduado. Recomendado: 500x600px.',
+                'help'    => 'Foto que aparece a la izquierda.',
+            ],
+            'cita' => [
+                'type'    => 'textarea',
+                'label'   => 'Testimonio',
+                'default' => '"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí."',
+                'help'    => 'Texto del testimonio. Máx. 3-4 oraciones.',
+            ],
+            'nombre' => [
+                'type'    => 'text',
+                'label'   => 'Nombre del Graduado',
+                'default' => 'María Fernanda López',
+                'help'    => 'Nombre que aparece bajo el testimonio.',
+            ],
+            'carrera' => [
+                'type'    => 'text',
+                'label'   => 'Carrera y Promoción',
+                'default' => 'Graduada en Enfermería - Promoción 2022',
+                'help'    => 'Aparece al final, bajo el nombre.',
             ],
         ],
     ],
@@ -318,39 +408,35 @@ return [
     // =====================================================
     'autoridades' => [
         'label' => 'Autoridades',
-        'type'  => 'collection',
+        'type'  => 'singleton',
         'icon'  => '👤',
         'fields' => [
-            'nombre' => [
-                'type'    => 'text',
-                'label'   => 'Nombre completo',
-                'default' => 'PhD. Roberto Tolozano Benites',
-                'help'    => 'Nombre con título académico (ej: PhD., Mgs., Ing.).',
-            ],
-            'cargo' => [
-                'type'    => 'text',
-                'label'   => 'Cargo',
-                'default' => 'Canciller',
-                'help'    => 'Cargo institucional (ej: Rector, Vicerrector Académico).',
-            ],
-            'imagen' => [
-                'type'    => 'image',
-                'label'   => 'Foto',
-                'default' => 'img/autoridad-1.jpg',
-                'help'    => 'Foto formal. Recomendado: 400x500px.',
-            ],
-            'linkedin_url' => [
-                'type'    => 'text',
-                'label'   => 'URL de LinkedIn',
-                'default' => '#',
-                'help'    => 'Enlace al perfil de LinkedIn de la autoridad.',
-            ],
-            'email' => [
-                'type'    => 'text',
-                'label'   => 'Email institucional',
-                'default' => '#',
-                'help'    => 'Correo institucional de contacto.',
-            ],
+            'div_global' => ['type' => 'divider', 'label' => 'Textos Generales'],
+            'etiqueta_superior' => ['type' => 'text', 'label' => 'Etiqueta superior', 'default' => 'Nuestro Equipo'],
+            'titulo_seccion_1'  => ['type' => 'text', 'label' => 'Título (parte oscura)', 'default' => 'Nuestras'],
+            'titulo_seccion_2'  => ['type' => 'text', 'label' => 'Título (parte naranja)', 'default' => 'Autoridades'],
+            'btn_directorio'    => ['type' => 'text', 'label' => 'Botón "Ver Directorio"', 'default' => 'Ver Directorio'],
+
+            'div_aut1' => ['type' => 'divider', 'label' => 'Autoridad 1'],
+            'aut1_nombre' => ['type' => 'text', 'label' => 'Nombre completo', 'default' => 'PhD. Roberto Tolozano Benites'],
+            'aut1_cargo'  => ['type' => 'text', 'label' => 'Cargo', 'default' => 'Canciller'],
+            'aut1_imagen' => ['type' => 'image', 'label' => 'Foto', 'default' => 'img/autoridad-1.jpg'],
+            'aut1_linkedin' => ['type' => 'text', 'label' => 'URL de LinkedIn', 'default' => '#'],
+            'aut1_email'  => ['type' => 'text', 'label' => 'Email institucional', 'default' => '#'],
+
+            'div_aut2' => ['type' => 'divider', 'label' => 'Autoridad 2'],
+            'aut2_nombre' => ['type' => 'text', 'label' => 'Nombre completo', 'default' => 'Mgs. Nombre Apellido'],
+            'aut2_cargo'  => ['type' => 'text', 'label' => 'Cargo', 'default' => 'Rector'],
+            'aut2_imagen' => ['type' => 'image', 'label' => 'Foto', 'default' => 'img/autoridad-2.jpg'],
+            'aut2_linkedin' => ['type' => 'text', 'label' => 'URL de LinkedIn', 'default' => '#'],
+            'aut2_email'  => ['type' => 'text', 'label' => 'Email institucional', 'default' => '#'],
+
+            'div_aut3' => ['type' => 'divider', 'label' => 'Autoridad 3'],
+            'aut3_nombre' => ['type' => 'text', 'label' => 'Nombre completo', 'default' => 'Mgs. Nombre Apellido'],
+            'aut3_cargo'  => ['type' => 'text', 'label' => 'Cargo', 'default' => 'Vicerrector Académico'],
+            'aut3_imagen' => ['type' => 'image', 'label' => 'Foto', 'default' => 'img/autoridad-3.jpg'],
+            'aut3_linkedin' => ['type' => 'text', 'label' => 'URL de LinkedIn', 'default' => '#'],
+            'aut3_email'  => ['type' => 'text', 'label' => 'Email institucional', 'default' => '#'],
         ],
     ],
 
@@ -359,33 +445,58 @@ return [
     // =====================================================
     'servicios' => [
         'label' => 'Servicios Institucionales',
-        'type'  => 'collection',
+        'type'  => 'singleton',
         'icon'  => '🏛️',
         'fields' => [
-            'titulo' => [
+            'div_global' => [
+                'type'    => 'divider',
+                'label'   => 'Textos Generales',
+            ],
+            'etiqueta_superior' => [
                 'type'    => 'text',
-                'label'   => 'Título del Servicio',
-                'default' => 'Bienestar Estudiantil',
-                'help'    => 'Nombre del servicio (ej: Campus Virtual, Horarios).',
+                'label'   => 'Etiqueta superior (badge)',
+                'default' => 'Servicios Institucionales',
             ],
-            'descripcion' => [
+            'titulo_seccion_1' => [
                 'type'    => 'text',
-                'label'   => 'Descripción corta',
-                'default' => 'Servicios médicos, psicológicos y odontológicos gratuitos',
-                'help'    => 'Descripción breve visible sobre la imagen del servicio.',
+                'label'   => 'Título (parte oscura)',
+                'default' => 'Todo lo que necesitas en ',
             ],
-            'imagen' => [
-                'type'    => 'image',
-                'label'   => 'Imagen de fondo',
-                'default' => 'img/servicio-bienestar.jpg',
-                'help'    => 'Foto de fondo de la tarjeta. Recomendado: 800x600px.',
-            ],
-            'enlace_url' => [
+            'titulo_seccion_2' => [
                 'type'    => 'text',
-                'label'   => 'URL del enlace',
-                'default' => '#',
-                'help'    => 'URL a donde lleva al hacer clic en la tarjeta.',
+                'label'   => 'Título (parte naranja)',
+                'default' => 'un solo lugar',
             ],
+
+            'div_serv1' => ['type' => 'divider', 'label' => 'Servicio 1: Bienestar'],
+            'serv1_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Bienestar Estudiantil'],
+            'serv1_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Servicios médicos, psicológicos y odontológicos gratuitos'],
+            'serv1_imagen' => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/servicio-bienestar.jpg'],
+            
+            'div_serv2' => ['type' => 'divider', 'label' => 'Servicio 2: Campus'],
+            'serv2_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Campus Virtual'],
+            'serv2_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Plataforma educativa 24/7'],
+            'serv2_imagen' => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/servicio-campus.jpg'],
+            
+            'div_serv3' => ['type' => 'divider', 'label' => 'Servicio 3: Horarios'],
+            'serv3_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Horarios'],
+            'serv3_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Consulta tus horarios de clase'],
+            'serv3_imagen' => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/servicio-horarios.jpg'],
+            
+            'div_serv4' => ['type' => 'divider', 'label' => 'Servicio 4: Digitales'],
+            'serv4_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Servicios Digitales'],
+            'serv4_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Trámites en línea y gestión académica'],
+            'serv4_imagen' => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/servicio-digital.jpg'],
+            
+            'div_serv5' => ['type' => 'divider', 'label' => 'Servicio 5: Podcast'],
+            'serv5_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Podcast ITB'],
+            'serv5_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Escucha nuestro contenido educativo'],
+            'serv5_imagen' => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/servicio-podcast.jpg'],
+            
+            'div_serv6' => ['type' => 'divider', 'label' => 'Servicio 6: Deportes'],
+            'serv6_titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Arte y Deportes'],
+            'serv6_desc'   => ['type' => 'text', 'label' => 'Descripción', 'default' => 'Clubes deportivos, grupos artísticos y actividades recreativas'],
+            'serv6_imagen' => ['type' => 'image', 'label' => 'Imagen', 'default' => 'img/servicio-deportes.jpg'],
         ],
     ],
 
@@ -397,6 +508,12 @@ return [
         'type'  => 'singleton',
         'icon'  => '📋',
         'fields' => [
+            'etiqueta_superior' => [
+                'type'    => 'text',
+                'label'   => 'Etiqueta superior (badge)',
+                'default' => 'Admisiones Abiertas',
+                'help'    => 'Texto pequeño que aparece arriba del título.',
+            ],
             'titulo' => [
                 'type'    => 'textarea',
                 'label'   => 'Título de la sección',
@@ -433,6 +550,18 @@ return [
                 'default' => 'Enviar Solicitud',
                 'help'    => 'Texto del botón de envío del formulario de admisión.',
             ],
+            'form_titulo' => [
+                'type'    => 'text',
+                'label'   => 'Título del Formulario',
+                'default' => 'Solicita Información',
+                'help'    => 'Título que aparece arriba de los campos del formulario.',
+            ],
+            'form_terminos' => [
+                'type'    => 'text',
+                'label'   => 'Texto de Términos',
+                'default' => 'Al enviar este formulario, aceptas nuestra Política de Privacidad.',
+                'help'    => 'Texto legal o nota pequeña debajo del botón.',
+            ],
         ],
     ],
 
@@ -441,9 +570,41 @@ return [
     // =====================================================
     'noticias' => [
         'label' => 'Noticias',
-        'type'  => 'collection',
+        'type'  => 'singleton',
         'icon'  => '📰',
         'fields' => [
+            'div_global' => [
+                'type'    => 'divider',
+                'label'   => 'Textos Generales de la Sección',
+            ],
+            'etiqueta_superior' => [
+                'type'    => 'text',
+                'label'   => 'Etiqueta superior (badge)',
+                'default' => 'Actualidad ITB',
+                'help'    => 'Texto pequeño que aparece arriba del título.',
+            ],
+            'titulo_seccion_1' => [
+                'type'    => 'text',
+                'label'   => 'Título (parte oscura)',
+                'default' => 'Noticias y',
+                'help'    => 'La primera parte del título, color oscuro.',
+            ],
+            'titulo_seccion_2' => [
+                'type'    => 'text',
+                'label'   => 'Título (parte naranja)',
+                'default' => 'Eventos',
+                'help'    => 'La segunda parte del título, aparecerá en color naranja.',
+            ],
+            'boton_todas' => [
+                'type'    => 'text',
+                'label'   => 'Botón "Todas las noticias"',
+                'default' => 'Todas las noticias',
+                'help'    => 'Texto del botón superior derecho.',
+            ],
+            'div_noticia' => [
+                'type'    => 'divider',
+                'label'   => 'Noticia Destacada Principal',
+            ],
             'titulo' => [
                 'type'    => 'text',
                 'label'   => 'Título de la Noticia',
@@ -451,29 +612,85 @@ return [
                 'help'    => 'Título principal de la noticia.',
             ],
             'categoria' => [
-                'type'    => 'select',
+                'type'    => 'text',
                 'label'   => 'Categoría',
                 'default' => 'Evento',
-                'options' => ['Evento', 'Académico', 'Convenio', 'Logro', 'Noticia'],
-                'help'    => 'Categoría que se muestra como badge en la noticia.',
+                'help'    => 'Categoría que se muestra como badge (ej: Evento, Académico).',
             ],
             'fecha' => [
-                'type'    => 'date',
+                'type'    => 'text',
                 'label'   => 'Fecha de publicación',
-                'default' => '2025-09-15',
-                'help'    => 'Fecha de publicación de la noticia.',
+                'default' => '15 Sep 2025',
+                'help'    => 'Fecha de publicación (ej: 15 Sep 2025).',
             ],
             'descripcion' => [
                 'type'    => 'textarea',
                 'label'   => 'Descripción / Resumen',
                 'default' => 'Visita nuestro campus y conoce de primera mano nuestras instalaciones, docentes y oferta académica en la Casa Abierta más grande del año.',
-                'help'    => 'Resumen corto de la noticia (máx. 2-3 oraciones).',
+                'help'    => 'Resumen corto de la noticia.',
             ],
             'imagen' => [
                 'type'    => 'image',
-                'label'   => 'Imagen de la Noticia',
+                'label'   => 'Imagen de la Noticia Principal',
                 'default' => 'img/noticia-principal.jpg',
-                'help'    => 'Imagen destacada de la noticia. Recomendado: 800x500px.',
+                'help'    => 'Imagen destacada de la noticia.',
+            ],
+            'div_sec1' => [
+                'type'    => 'divider',
+                'label'   => 'Noticia Secundaria 1',
+            ],
+            'sec1_titulo' => [
+                'type'    => 'text',
+                'label'   => 'Título Noticia 1',
+                'default' => 'Convenio internacional con universidad de España',
+            ],
+            'sec1_fecha' => [
+                'type'    => 'text',
+                'label'   => 'Fecha Noticia 1',
+                'default' => '10 Sep 2025',
+            ],
+            'sec1_imagen' => [
+                'type'    => 'image',
+                'label'   => 'Imagen Noticia 1',
+                'default' => 'img/noticia-2.jpg',
+            ],
+            'div_sec2' => [
+                'type'    => 'divider',
+                'label'   => 'Noticia Secundaria 2',
+            ],
+            'sec2_titulo' => [
+                'type'    => 'text',
+                'label'   => 'Título Noticia 2',
+                'default' => 'Graduación de la promoción 2025: más de 500 nuevos profesionales',
+            ],
+            'sec2_fecha' => [
+                'type'    => 'text',
+                'label'   => 'Fecha Noticia 2',
+                'default' => '05 Sep 2025',
+            ],
+            'sec2_imagen' => [
+                'type'    => 'image',
+                'label'   => 'Imagen Noticia 2',
+                'default' => 'img/noticia-3.jpg',
+            ],
+            'div_sec3' => [
+                'type'    => 'divider',
+                'label'   => 'Noticia Secundaria 3',
+            ],
+            'sec3_titulo' => [
+                'type'    => 'text',
+                'label'   => 'Título Noticia 3',
+                'default' => 'ITB inaugura nuevo laboratorio de simulación clínica',
+            ],
+            'sec3_fecha' => [
+                'type'    => 'text',
+                'label'   => 'Fecha Noticia 3',
+                'default' => '01 Sep 2025',
+            ],
+            'sec3_imagen' => [
+                'type'    => 'image',
+                'label'   => 'Imagen Noticia 3',
+                'default' => 'img/noticia-4.jpg',
             ],
         ],
     ],
@@ -497,6 +714,32 @@ return [
                 'label'   => 'Descripción institucional',
                 'default' => 'Instituto Superior Tecnológico Bolivariano de Tecnología. Formando profesionales de excelencia desde 1995.',
                 'help'    => 'Texto corto debajo del logo en el footer.',
+            ],
+            'div_titulos' => [
+                'type'    => 'divider',
+                'label'   => 'Títulos de Columnas',
+            ],
+            'col1_titulo' => [
+                'type'    => 'text',
+                'label'   => 'Columna 1',
+                'default' => 'Enlaces Rápidos',
+                'help'    => 'Título de la primera columna.',
+            ],
+            'col2_titulo' => [
+                'type'    => 'text',
+                'label'   => 'Columna 2',
+                'default' => 'Contacto',
+                'help'    => 'Título de la segunda columna.',
+            ],
+            'col3_titulo' => [
+                'type'    => 'text',
+                'label'   => 'Columna 3',
+                'default' => 'Horarios de Atención',
+                'help'    => 'Título de la tercera columna.',
+            ],
+            'div_contacto' => [
+                'type'    => 'divider',
+                'label'   => 'Datos de Contacto',
             ],
             'direccion' => [
                 'type'    => 'text',
@@ -563,6 +806,34 @@ return [
                 'label'   => 'Pre-footer: Subtítulo',
                 'default' => 'Te ayudamos a encontrar la carrera ideal para ti',
                 'help'    => 'Texto de apoyo debajo del título del pre-footer.',
+            ],
+            'div_botones' => [
+                'type'    => 'divider',
+                'label'   => 'Botones del Pre-footer',
+            ],
+            'prefooter_btn_1' => [
+                'type'    => 'text',
+                'label'   => 'Botón 1',
+                'default' => 'Chatea con nosotros',
+                'help'    => 'Ej: Chatea con nosotros',
+            ],
+            'prefooter_btn_2' => [
+                'type'    => 'text',
+                'label'   => 'Botón 2',
+                'default' => 'Llámanos',
+                'help'    => 'Ej: Llámanos',
+            ],
+            'prefooter_btn_3' => [
+                'type'    => 'text',
+                'label'   => 'Botón 3',
+                'default' => 'Visítanos',
+                'help'    => 'Ej: Visítanos',
+            ],
+            'enlaces_rapidos' => [
+                'type'    => 'textarea',
+                'label'   => 'Enlaces Rápidos (uno por línea)',
+                'default' => "Oferta Académica\nAdmisiones\nVida Estudiantil\nInvestigación\nEducación Continua",
+                'help'    => 'Lista de enlaces rápidos. Escribe uno por línea.',
             ],
         ],
     ],

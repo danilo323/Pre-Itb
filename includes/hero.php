@@ -13,7 +13,7 @@
             <span class="hero__subtitle"><?= content_get('hero', 'subtitulo', 'Educación Superior de Excelencia') ?></span>
 
             <h1 class="hero__title">
-                <?= content_get('hero', 'titulo', 'Construye tu Futuro, Lidera el Mañana') ?>
+                <?= str_replace('\n', '<br>', content_get('hero', 'titulo', 'Construye tu Futuro, Lidera el Mañana')) ?>
             </h1>
 
             <p class="hero__description">
@@ -54,7 +54,7 @@
                         </defs>
                         <text>
                             <textPath href="#circlePath" class="hero__circular-text-path">
-                                ITB INSTITUTO UNIVERSITARIO • EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995 •
+                                <?= content_get('hero', 'circular_text', 'ITB INSTITUTO UNIVERSITARIO • EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995 •') ?>
                             </textPath>
                         </text>
                     </svg>

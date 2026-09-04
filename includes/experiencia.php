@@ -6,9 +6,9 @@
     <div class="experiencia__container">
         <!-- Lado izquierdo -->
         <div class="experiencia__content">
-            <span class="section-tag">Vida Estudiantil</span>
+            <span class="section-tag"><?= content_get('experiencia', 'etiqueta_superior', 'Vida Estudiantil') ?></span>
             <h2 class="experiencia__title">
-                Tu Experiencia <span class="text-orange"><?= content_get('experiencia', 'titulo', 'ITB') ?></span>
+                <?= content_get('experiencia', 'titulo_seccion_1', 'Tu Experiencia') ?> <span class="text-orange"><?= content_get('experiencia', 'titulo_seccion_2', 'ITB') ?></span>
             </h2>
             <p class="experiencia__description">
                 <?= content_get('experiencia', 'descripcion', 'Más allá de lo académico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseñados para tu bienestar.') ?>
@@ -18,35 +18,35 @@
                 <li class="experiencia__list-item">
                     <span class="experiencia__list-icon"><i class="fas fa-stethoscope"></i></span>
                     <div>
-                        <strong>Servicios Médicos</strong>
-                        <p>Atención médica y odontológica gratuita para estudiantes.</p>
+                        <strong><?= content_get('experiencia', 'caract1_titulo', 'Servicios Médicos') ?></strong>
+                        <p><?= content_get('experiencia', 'caract1_desc', 'Atención médica y odontológica gratuita para estudiantes.') ?></p>
                     </div>
                 </li>
                 <li class="experiencia__list-item">
                     <span class="experiencia__list-icon"><i class="fas fa-award"></i></span>
                     <div>
-                        <strong>Becas y Financiamiento</strong>
-                        <p>Programas de becas por excelencia académica y apoyo financiero.</p>
+                        <strong><?= content_get('experiencia', 'caract2_titulo', 'Becas y Financiamiento') ?></strong>
+                        <p><?= content_get('experiencia', 'caract2_desc', 'Programas de becas por excelencia académica y apoyo financiero.') ?></p>
                     </div>
                 </li>
                 <li class="experiencia__list-item">
                     <span class="experiencia__list-icon"><i class="fas fa-laptop-code"></i></span>
                     <div>
-                        <strong>Laboratorios Modernos</strong>
-                        <p>Tecnología de punta en todos nuestros laboratorios especializados.</p>
+                        <strong><?= content_get('experiencia', 'caract3_titulo', 'Laboratorios Modernos') ?></strong>
+                        <p><?= content_get('experiencia', 'caract3_desc', 'Tecnología de punta en todos nuestros laboratorios especializados.') ?></p>
                     </div>
                 </li>
                 <li class="experiencia__list-item">
                     <span class="experiencia__list-icon"><i class="fas fa-handshake"></i></span>
                     <div>
-                        <strong>Bolsa de Empleo</strong>
-                        <p>Conexión directa con empresas aliadas para tus prácticas y primer empleo.</p>
+                        <strong><?= content_get('experiencia', 'caract4_titulo', 'Bolsa de Empleo') ?></strong>
+                        <p><?= content_get('experiencia', 'caract4_desc', 'Conexión directa con empresas aliadas para tus prácticas y primer empleo.') ?></p>
                     </div>
                 </li>
             </ul>
 
             <a href="#" class="btn btn--solid" id="btn-beneficios">
-                Más beneficios <i class="fas fa-arrow-right"></i>
+                <?= content_get('experiencia', 'btn_texto', 'Más beneficios') ?> <i class="fas fa-arrow-right"></i>
             </a>
         </div>
 

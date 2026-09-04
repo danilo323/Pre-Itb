@@ -1,0 +1,23 @@
+# Archivos de configuración local y base de datos
+.env
+.env.*
+config_local.json
+
+# Archivos de planificación del proyecto (No subir al repo)
+GEMINI.md
+README.md
+.gemini/
+
+# Archivos temporales de PHP / Sesiones (por si acaso)
+*.log
+*.tmp
+error_log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db

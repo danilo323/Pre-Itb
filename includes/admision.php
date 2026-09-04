@@ -6,7 +6,7 @@
     <div class="admision__container">
         <!-- Lado izquierdo: Texto -->
         <div class="admision__content">
-            <span class="section-tag section-tag--light">Admisiones Abiertas</span>
+            <span class="section-tag"><?= content_get('admision', 'etiqueta_superior', 'Admisiones Abiertas') ?></span>
             <h2 class="admision__title">
                 <?= content_get('admision', 'titulo', 'Inicia tu proceso de admisión') ?>
             </h2>
@@ -32,7 +32,7 @@
         <!-- Lado derecho: Formulario -->
         <div class="admision__form-wrapper">
             <form class="admision__form" id="admision-form" action="#" method="POST">
-                <h3 class="admision__form-title">Solicita Información</h3>
+                <h3 class="admision__form-title"><?= content_get('admision', 'form_titulo', 'Solicita Información') ?></h3>
 
                 <div class="admision__form-row">
                     <div class="admision__form-group">
@@ -79,7 +79,7 @@
                 </button>
 
                 <p class="admision__form-terms">
-                    Al enviar este formulario, aceptas nuestra <a href="#">Política de Privacidad</a>.
+                    <?= content_raw('admision', 'form_terminos', 'Al enviar este formulario, aceptas nuestra <a href="#">Política de Privacidad</a>.') ?>
                 </p>
             </form>
         </div>
