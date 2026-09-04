@@ -1,3 +1,4 @@
+<?php /* includes/trayectoria.php */ ?>
 <!-- ============================================= -->
 <!-- TRAYECTORIA Y COMPROMISO EDUCATIVO            -->
 <!-- ============================================= -->
@@ -7,23 +8,20 @@
         <div class="trayectoria__content">
             <span class="section-tag">Nuestra Trayectoria</span>
             <h2 class="trayectoria__title">
-                Trayectoria y Compromiso<br>
-                con la <span class="text-orange">Educación</span>
+                <?= content_get('trayectoria', 'titulo', 'Trayectoria y Compromiso con la Educación') ?>
             </h2>
             <p class="trayectoria__description">
-                Desde 1995, el Instituto Superior Tecnológico Bolivariano de Tecnología ha formado 
-                profesionales con una educación integral basada en valores, innovación y excelencia académica. 
-                Nuestro compromiso es transformar vidas a través del conocimiento.
+                <?= content_get('trayectoria', 'descripcion', 'Desde 1995, el Instituto Superior Tecnológico Bolivariano de Tecnología ha formado profesionales con una educación integral basada en valores, innovación y excelencia académica. Nuestro compromiso es transformar vidas a través del conocimiento.') ?>
             </p>
 
             <!-- Perfil del Canciller -->
             <div class="trayectoria__profile">
                 <div class="trayectoria__profile-img">
-                    <img src="img/canciller.jpg" alt="PhD. Roberto Tolozano Benites">
+                    <img src="<?= content_raw('trayectoria', 'canciller_foto', 'img/canciller.jpg') ?>" alt="<?= content_get('trayectoria', 'canciller_nombre', 'PhD. Roberto Tolozano Benites') ?>">
                 </div>
                 <div class="trayectoria__profile-info">
-                    <span class="trayectoria__profile-name">PhD. Roberto Tolozano Benites</span>
-                    <span class="trayectoria__profile-role">Canciller del ITB</span>
+                    <span class="trayectoria__profile-name"><?= content_get('trayectoria', 'canciller_nombre', 'PhD. Roberto Tolozano Benites') ?></span>
+                    <span class="trayectoria__profile-role"><?= content_get('trayectoria', 'canciller_cargo', 'Canciller del ITB') ?></span>
                 </div>
             </div>
 
@@ -38,21 +36,21 @@
                 <div class="trayectoria__stat-icon">
                     <i class="fas fa-calendar-alt"></i>
                 </div>
-                <span class="trayectoria__stat-number">29+</span>
+                <span class="trayectoria__stat-number"><?= content_get('trayectoria', 'stat_anios', '29+') ?></span>
                 <span class="trayectoria__stat-label">Años de<br>Experiencia</span>
             </div>
             <div class="trayectoria__stat-card">
                 <div class="trayectoria__stat-icon">
                     <i class="fas fa-user-graduate"></i>
                 </div>
-                <span class="trayectoria__stat-number">+17,000</span>
+                <span class="trayectoria__stat-number"><?= content_get('trayectoria', 'stat_graduados', '+17,000') ?></span>
                 <span class="trayectoria__stat-label">Estudiantes<br>Graduados</span>
             </div>
             <div class="trayectoria__stat-card">
                 <div class="trayectoria__stat-icon">
                     <i class="fas fa-graduation-cap"></i>
                 </div>
-                <span class="trayectoria__stat-number">+35</span>
+                <span class="trayectoria__stat-number"><?= content_get('trayectoria', 'stat_carreras', '+35') ?></span>
                 <span class="trayectoria__stat-label">Carreras<br>Disponibles</span>
             </div>
         </div>

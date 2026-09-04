@@ -1,0 +1,199 @@
+// admin/assets/admin.js
+
+document.addEventListener('DOMContentLoaded', function () {
+
+    const panel     = document.getElementById('admin-panel');
+    const closeBtn  = document.getElementById('panel-close-btn');
+    const toggleBtn = document.getElementById('admin-toggle-btn');
+    const grid      = document.getElementById('panel-sections-grid');
+    const formContainer = document.getElementById('panel-form-container');
+
+    if (!panel) return;
+
+    // ── Abrir panel al cargar ───────────────────────────
+    document.body.classList.add('panel-open');
+
+    // ── Cerrar / Reabrir panel ──────────────────────────
+    if (closeBtn) {
+        closeBtn.addEventListener('click', () => {
+            panel.classList.add('hidden');
+            document.body.classList.remove('panel-open');
+            toggleBtn.classList.add('visible');
+        });
+    }
+
+    if (toggleBtn) {
+        toggleBtn.addEventListener('click', () => {
+            panel.classList.remove('hidden');
+            document.body.classList.add('panel-open');
+            toggleBtn.classList.remove('visible');
+        });
+    }
+
+    // ── Tabs (SECCIONES / CUENTA) ───────────────────────
+    document.querySelectorAll('.panel-tab').forEach(tab => {
+        tab.addEventListener('click', function () {
+            const tabId = this.dataset.tab;
+            document.querySelectorAll('.panel-tab').forEach(t => t.classList.remove('active'));
+            document.querySelectorAll('.panel-tab-content').forEach(c => c.style.display = 'none');
+            this.classList.add('active');
+            const content = document.getElementById('tab-' + tabId);
+            if (content) content.style.display = 'flex';
+        });
+    });
+
+    // ── Click en card de sección ────────────────────────
+    document.querySelectorAll('.section-card').forEach(card => {
+        card.addEventListener('click', function () {
+            const sectionKey = this.dataset.section;
+            const anchor     = this.dataset.anchor;
+
+            // 1. Resaltar card activa
+            document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
+            this.classList.add('active');
+
+            // 2. Scroll suave a la sección en la landing page
+            const target = document.getElementById(anchor);
+            if (target) {
+                target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+
+            // 3. Mostrar formulario de esa sección
+            mostrarFormulario(sectionKey);
+        });
+    });
+
+    // ── Botón Volver ────────────────────────────────────
+    document.querySelectorAll('[data-back]').forEach(btn => {
+        btn.addEventListener('click', () => {
+            volverAlGrid();
+        });
+    });
+
+    function mostrarFormulario(sectionKey) {
+        // Ocultar grid de cards
+        if (grid) grid.style.display = 'none';
+
+        // Mostrar contenedor de formularios
+        if (formContainer) formContainer.style.display = 'flex';
+
+        // Ocultar todos los forms
+        document.querySelectorAll('.panel-section-form').forEach(f => f.style.display = 'none');
+
+        // Mostrar el form correcto
+        const form = document.getElementById('form-' + sectionKey);
+        if (form) form.style.display = 'flex';
+    }
+
+    function volverAlGrid() {
+        // Ocultar todos los forms y el contenedor
+        document.querySelectorAll('.panel-section-form').forEach(f => f.style.display = 'none');
+        if (formContainer) formContainer.style.display = 'none';
+
+        // Mostrar el grid
+        if (grid) grid.style.display = 'block';
+
+        // Quitar activo de cards
+        document.querySelectorAll('.section-card').forEach(c => c.classList.remove('active'));
+    }
+
+    // ── Auto-cerrar flash message ───────────────────────
+    const flash = document.getElementById('panel-flash');
+    if (flash) {
+        setTimeout(() => {
+            flash.style.transition = 'opacity 0.4s ease';
+            flash.style.opacity = '0';
+            setTimeout(() => flash.remove(), 400);
+        }, 3500);
+    }
+
+    // ── Abrir sección guardada si viene de guardar ──────
+    // Si el hash de la URL indica que guardamos, abrir esa sección
+    const params = new URLSearchParams(window.location.search);
+    const savedSection = params.get('section');
+    if (savedSection) {
+        const card = document.querySelector(`.section-card[data-section="${savedSection}"]`);
+        if (card) {
+            card.classList.add('active');
+            mostrarFormulario(savedSection);
+            const target = document.getElementById(savedSection);
+            if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+    }
+
+    // ── REPEATER — clonar y eliminar ───────────────────
+    document.querySelectorAll('.repeater-group').forEach(repeater => {
+        const items  = repeater.querySelector('.repeater-items');
+        const btnAdd = repeater.querySelector('.btn-add');
+        if (!items || !btnAdd) return;
+
+        // Eliminar en items existentes
+        items.querySelectorAll('.btn-remove').forEach(btn => {
+            btn.addEventListener('click', () => {
+                btn.closest('.repeater-item').remove();
+                recalcularIndices(items);
+            });
+        });
+
+        // Añadir nuevo item
+        btnAdd.addEventListener('click', () => {
+            const allItems = items.querySelectorAll('.repeater-item');
+            const newIndex = allItems.length;
+            const template = items.querySelector('.repeater-item');
+            if (!template) return;
+
+            const newItem = template.cloneNode(true);
+            newItem.dataset.index = newIndex;
+
+            newItem.querySelectorAll('input, textarea, select').forEach(input => {
+                input.name  = input.name.replace(/\[\d+\]/, '[' + newIndex + ']');
+                input.value = '';
+            });
+
+            const h4 = newItem.querySelector('h4');
+            if (h4 && h4.childNodes[0]) h4.childNodes[0].textContent = 'Item ' + (newIndex + 1) + ' ';
+
+            const btnRemove = newItem.querySelector('.btn-remove');
+            if (btnRemove) {
+                btnRemove.addEventListener('click', () => {
+                    newItem.remove();
+                    recalcularIndices(items);
+                });
+            }
+
+            items.appendChild(newItem);
+        });
+    });
+
+    function recalcularIndices(container) {
+        container.querySelectorAll('.repeater-item').forEach((item, index) => {
+            item.dataset.index = index;
+            const h4 = item.querySelector('h4');
+            if (h4 && h4.childNodes[0]) h4.childNodes[0].textContent = 'Item ' + (index + 1) + ' ';
+            item.querySelectorAll('input, textarea, select').forEach(input => {
+                input.name = input.name.replace(/\[\d+\]/, '[' + index + ']');
+            });
+        });
+    }
+
+    // ── Preview de imagen ───────────────────────────────
+    document.querySelectorAll('.field-image input[type="file"]').forEach(fileInput => {
+        fileInput.addEventListener('change', function () {
+            const file = this.files[0];
+            if (!file) return;
+            const reader = new FileReader();
+            const group  = this.closest('.field-image');
+            let preview  = group.querySelector('.image-preview');
+            reader.onload = e => {
+                if (!preview) {
+                    preview = document.createElement('div');
+                    preview.className = 'image-preview';
+                    this.parentNode.insertBefore(preview, this);
+                }
+                preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
+            };
+            reader.readAsDataURL(file);
+        });
+    });
+
+});

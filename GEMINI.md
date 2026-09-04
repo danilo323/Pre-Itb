@@ -81,3 +81,28 @@ Buscador JS en tabla ✅ ⏸️ Esperando Cuando coleccion.php tenga datos reale
 - **Backend (P3):** Funciones `storage_save()` y `storage_get()` para persistir datos reales en SQL Server.
 - **Backend (P3):** El archivo `schema.php` real y la autenticación `auth.php` (Login/CSRF).
 - **Frontend (P1):** Paleta de colores/CSS público para crear los estilos del admin (`admin.css`) de forma armónica.
+
+---
+
+## 🖥️ Desarrollo Local
+
+### Iniciar servidor:
+```bash
+php -S localhost:8000 -t /home/daly/Documentos/Innotech/Proyecto_Frontend
+```
+
+### URLs:
+
+| Página | URL |
+|---|---|
+| 🌍 Landing Page (pública) | `http://localhost:8000` |
+| 🔐 Inicio de Sesión Admin | `http://localhost:8000/admin/login.php` |
+| 🚪 Cerrar Sesión Admin | `http://localhost:8000/admin/logout.php` |
+
+### 🔑 Credenciales temporales:
+| Campo | Valor |
+|---|---|
+| Usuario | `admin` |
+| Contraseña | `1234` |
+
+> ⚠️ Estas credenciales son temporales para desarrollo. La Persona 3 implementará el sistema de autenticación real contra SQL Server.

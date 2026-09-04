@@ -1,3 +1,4 @@
+<?php /* includes/experiencia.php */ ?>
 <!-- ============================================= -->
 <!-- TU EXPERIENCIA ITB                            -->
 <!-- ============================================= -->
@@ -7,11 +8,10 @@
         <div class="experiencia__content">
             <span class="section-tag">Vida Estudiantil</span>
             <h2 class="experiencia__title">
-                Tu Experiencia <span class="text-orange">ITB</span>
+                Tu Experiencia <span class="text-orange"><?= content_get('experiencia', 'titulo', 'ITB') ?></span>
             </h2>
             <p class="experiencia__description">
-                Más allá de lo académico, el ITB te ofrece una experiencia universitaria 
-                completa con servicios y beneficios diseñados para tu bienestar.
+                <?= content_get('experiencia', 'descripcion', 'Más allá de lo académico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseñados para tu bienestar.') ?>
             </p>
 
             <ul class="experiencia__list">
@@ -52,10 +52,10 @@
 
         <!-- Lado derecho: Imagen -->
         <div class="experiencia__image">
-            <img src="img/experiencia-itb.jpg" alt="Experiencia estudiantil ITB">
+            <img src="<?= content_raw('experiencia', 'imagen', 'img/experiencia-itb.jpg') ?>" alt="Experiencia estudiantil ITB">
             <div class="experiencia__image-badge">
-                <span class="experiencia__image-badge-number">98%</span>
-                <span class="experiencia__image-badge-text">Satisfacción<br>Estudiantil</span>
+                <span class="experiencia__image-badge-number"><?= content_get('experiencia', 'badge_numero', '98%') ?></span>
+                <span class="experiencia__image-badge-text"><?= content_get('experiencia', 'badge_texto', 'Satisfacción Estudiantil') ?></span>
             </div>
         </div>
     </div>

@@ -1,3 +1,7 @@
+<?php
+session_start();
+require_once 'includes/content_helper.php';
+?>
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -31,5 +35,8 @@
     <?php include 'includes/footer.php'; ?>
 
     <script src="js/main.js"></script>
+
+    <?php if (!empty($_SESSION['admin_logged'])) include 'admin/panel_overlay.php'; ?>
+
 </body>
 </html>

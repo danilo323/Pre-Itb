@@ -1,3 +1,4 @@
+<?php /* includes/header.php */ ?>
 <!-- ============================================= -->
 <!-- BARRA SUPERIOR (Top Bar)                      -->
 <!-- ============================================= -->
@@ -35,7 +36,7 @@
     <div class="navbar__container">
         <!-- Logo -->
         <a href="index.php" class="navbar__logo">
-            <img src="img/logo-itb.png" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
+            <img src="<?= content_raw('header', 'logo', 'img/logo-itb.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
         </a>
 
         <!-- Botón hamburguesa (Mobile) -->
@@ -80,9 +81,9 @@
 
             <!-- Botones CTA -->
             <div class="navbar__cta">
-                <a href="#" class="navbar__btn navbar__btn--outline" id="btn-solicitar">Solicitar Información</a>
+                <a href="#" class="navbar__btn navbar__btn--outline" id="btn-solicitar"><?= content_get('header', 'cta_btn_1', 'Solicitar Información') ?></a>
                 <a href="#" class="navbar__btn navbar__btn--solid" id="btn-matricula">
-                    Matricúlame
+                    <?= content_get('header', 'cta_btn_2', 'Matricúlame') ?>
                     <span class="navbar__btn-icon"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>

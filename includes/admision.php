@@ -1,3 +1,4 @@
+<?php /* includes/admision.php */ ?>
 <!-- ============================================= -->
 <!-- FORMULARIO DE ADMISIÓN                        -->
 <!-- ============================================= -->
@@ -7,25 +8,23 @@
         <div class="admision__content">
             <span class="section-tag section-tag--light">Admisiones Abiertas</span>
             <h2 class="admision__title">
-                Inicia tu proceso de <span class="text-orange">admisión</span>
+                <?= content_get('admision', 'titulo', 'Inicia tu proceso de admisión') ?>
             </h2>
             <p class="admision__description">
-                Da el primer paso hacia tu futuro profesional. Completa el formulario 
-                y un asesor académico se pondrá en contacto contigo para guiarte 
-                en todo el proceso de inscripción.
+                <?= content_get('admision', 'descripcion', 'Da el primer paso hacia tu futuro profesional. Completa el formulario y un asesor académico se pondrá en contacto contigo para guiarte en todo el proceso de inscripción.') ?>
             </p>
             <div class="admision__features">
                 <div class="admision__feature">
                     <i class="fas fa-check-circle"></i>
-                    <span>Proceso 100% en línea</span>
+                    <span><?= content_get('admision', 'feature_1', 'Proceso 100% en línea') ?></span>
                 </div>
                 <div class="admision__feature">
                     <i class="fas fa-check-circle"></i>
-                    <span>Asesoría personalizada</span>
+                    <span><?= content_get('admision', 'feature_2', 'Asesoría personalizada') ?></span>
                 </div>
                 <div class="admision__feature">
                     <i class="fas fa-check-circle"></i>
-                    <span>Respuesta en 24 horas</span>
+                    <span><?= content_get('admision', 'feature_3', 'Respuesta en 24 horas') ?></span>
                 </div>
             </div>
         </div>
@@ -76,12 +75,11 @@
                 </div>
 
                 <button type="submit" class="admision__form-btn" id="admision-submit">
-                    Enviar Solicitud <i class="fas fa-paper-plane"></i>
+                    <?= content_get('admision', 'btn_enviar', 'Enviar Solicitud') ?> <i class="fas fa-paper-plane"></i>
                 </button>
 
                 <p class="admision__form-terms">
-                    Al enviar este formulario, aceptas nuestra 
-                    <a href="#">Política de Privacidad</a>.
+                    Al enviar este formulario, aceptas nuestra <a href="#">Política de Privacidad</a>.
                 </p>
             </form>
         </div>
