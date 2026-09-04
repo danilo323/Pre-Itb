@@ -63,28 +63,20 @@ Buscador JS en tabla ✅ ⏸️ Esperando Cuando coleccion.php tenga datos reale
 
 ---
 
-### Estado Actual del Motor del Panel de Administración (Persona 2)
+### Estado Actual del Motor del Panel de Administración (Versión 1 Finalizada)
 
-**✅ Lo que ya está construido:**
-- **Layout base:** `admin/views/layout.php` (Genera el menú lateral leyendo el schema y maneja alertas flash).
-- **Dispatcher:** `admin/fields/_loader.php` (Lógica para decidir qué campo pintar).
-- **Campos (Fields):** Se crearon los 7 campos necesarios para toda la landing (`text`, `textarea`, `repeater`, `image`, `bool`, `select`, `date`). Incluyen funciones de renderizado (HTML) y validación estricta/limpieza (`parse`).
-- **Vista Singleton:** `admin/singleton.php` (Genera el formulario dinámico con protección CSRF y whitelist de sección).
-- **Integración Frontend-Backend (Temporales/Mock):** Se logró integrar al 100% las secciones de la landing (`hero.php`, `servicios.php`, `autoridades.php`, `testimonios.php`, `experiencia.php`, `programas.php`, `areas.php`) usando el motor. Se reescribió el `schema_mock.php` para que todas estas secciones operen como `singleton` (asegurando un orden visual exacto) y se habilitó la subida real de imágenes guardando rutas temporales en `$_SESSION`.
+**✅ Lo que ya está construido y probado (Persona 2 y Persona 1):**
+- **Layout base:** `admin/views/layout.php` (Genera el menú lateral leyendo el schema automáticamente).
+- **Dispatcher:** `admin/fields/_loader.php`.
+- **Vista Colección y Edición:** Programado `admin/coleccion.php` y `admin/editar.php`.
+- **Campos (Fields):** Motor completo de los 7 campos (text, textarea, repeater, image, bool, select, date).
+- **Javascript Dinámico:** Preview de imágenes interactivo y motor de clonación para campos tipo Repeater en `admin/assets/admin.js`.
+- **Fusión Frontend:** La Landing Page (13 secciones en total) está 100% conectada al panel mediante `content_get()` y `content_raw()`. Cero conflictos, diseño de Persona 1 respetado y probado.
 
-**🚀 Lo que falta programar (Trabajo pendiente de Persona 2):**
-- **Vista Colección:** Programar `admin/coleccion.php` (La tabla que lista registros). *(Opcional si al final todas las secciones del frontend se manejan como singleton por diseño)*.
-- **Vista Edición:** Programar `admin/editar.php` (El formulario para editar un ítem de la colección).
-- **Javascript del Repeater:** Lógica en `admin/assets/admin.js` para clonar campos al presionar "+ Añadir".
-
-**⏳ Tareas Críticas para Persona 3 (Backend & Base de Datos):**
-- **Persistencia Real (SQL Server):** Actualmente, `admin/guardar.php` guarda todo temporalmente en la memoria de la sesión (`$_SESSION`), lo que significa que los datos se pierden si se reinicia el servidor. Persona 3 **debe** crear las funciones `storage_save()` y `storage_get()` para que la data se guarde y lea permanentemente desde SQL Server.
-- **Schema Real:** Reemplazar el archivo temporal `admin/schema_mock.php` por el `admin/schema.php` definitivo.
+**⏳ Siguiente Paso: Tareas Críticas para Persona 3 (Backend & Base de Datos):**
+- **Persistencia Real (SQL Server):** Actualmente, `admin/guardar.php` guarda todo temporalmente en la memoria de la sesión (`$_SESSION`), lo que significa que los datos se pierden si se reinicia el servidor local. Persona 3 **debe** crear las funciones `storage_save()` y `storage_get()` para que la data se guarde y lea permanentemente desde la Base de Datos.
+- **Schema Real:** Mover la estructura definida en el archivo temporal `admin/schema_mock.php` al archivo `admin/schema.php` definitivo que interactuará con la BD.
 - **Seguridad (Auth):** Implementar el sistema de login real contra la base de datos en `auth.php`, reemplazando el usuario "admin/1234" temporal.
-
-**🎨 Tareas para Persona 1 (Frontend):**
-- **Cuidado con el Merge (includes/):** Persona 1 debe tener extremo cuidado al entregar sus archivos finales de `includes/*.php`. **NO debe sobreescribirlos a ciegas**, de lo contrario borrará las etiquetas PHP (`<?= content_get() ?>`) que Persona 2 ya conectó al panel. Lo ideal es que Persona 2 haga la fusión manual del HTML final.
-- **Paleta de Colores:** Proveer los colores finales para estilizar el panel de administración (`admin.css`) de forma armónica.
 
 ---
 
