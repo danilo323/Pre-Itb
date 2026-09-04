@@ -191,23 +191,43 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     // ── Preview de imagen ───────────────────────────────
-    document.querySelectorAll('.field-image input[type="file"]').forEach(fileInput => {
-        fileInput.addEventListener('change', function () {
-            const file = this.files[0];
-            if (!file) return;
-            const reader = new FileReader();
-            const group  = this.closest('.field-image');
-            let preview  = group.querySelector('.image-preview');
-            reader.onload = e => {
-                if (!preview) {
-                    preview = document.createElement('div');
-                    preview.className = 'image-preview';
-                    this.parentNode.insertBefore(preview, this);
-                }
-                preview.innerHTML = `<img src="${e.target.result}" alt="Preview">`;
-            };
-            reader.readAsDataURL(file);
-        });
+    // ── Preview de imagen interactivo ────────────────────
+    document.querySelectorAll('.field-image').forEach(group => {
+        const fileInput   = group.querySelector('input[type="file"]');
+        const hiddenInput = group.querySelector('input[type="hidden"]');
+        const box         = group.querySelector('.image-upload-box');
+        const preview     = box.querySelector('.image-preview');
+        const img         = preview ? preview.querySelector('img') : null;
+        const placeholder = box.querySelector('.image-placeholder');
+        const removeBtn   = box.querySelector('.btn-remove-image');
+
+        if (fileInput) {
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (!file) return;
+                const reader = new FileReader();
+                
+                reader.onload = e => {
+                    if (img) img.src = e.target.result;
+                    if (preview) preview.style.display = 'block';
+                    if (placeholder) placeholder.style.display = 'none';
+                    if (removeBtn) removeBtn.style.display = 'inline-flex';
+                };
+                reader.readAsDataURL(file);
+            });
+        }
+
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function () {
+                if (fileInput) fileInput.value = '';
+                if (hiddenInput) hiddenInput.value = '';
+                
+                if (img) img.src = '';
+                if (preview) preview.style.display = 'none';
+                if (placeholder) placeholder.style.display = 'flex';
+                this.style.display = 'none';
+            });
+        }
     });
 
 });

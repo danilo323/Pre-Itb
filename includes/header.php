@@ -10,11 +10,11 @@
     <div class="top-bar">
         <div class="top-bar__container">
             <nav class="top-bar__nav">
-                <a href="#" class="top-bar__link top-bar__link--active">Portal Estudiantil SGA</a>
-                <a href="#" class="top-bar__link">Educación Continua</a>
-                <a href="#" class="top-bar__link">Vinculación</a>
-                <a href="#" class="top-bar__link">Investigación</a>
-                <a href="#" class="top-bar__link">UNIEBEC</a>
+                <a href="#" class="top-bar__link top-bar__link--active"><?= content_get('header', 'top_link_1', 'Portal Estudiantil SGA') ?></a>
+                <a href="#" class="top-bar__link"><?= content_get('header', 'top_link_2', 'Educación Continua') ?></a>
+                <a href="#" class="top-bar__link"><?= content_get('header', 'top_link_3', 'Vinculación') ?></a>
+                <a href="#" class="top-bar__link"><?= content_get('header', 'top_link_4', 'Investigación') ?></a>
+                <a href="#" class="top-bar__link"><?= content_get('header', 'top_link_5', 'UNIEBEC') ?></a>
             </nav>
             <div class="top-bar__actions">
                 <div class="top-bar__search top-bar__search--light">
@@ -42,7 +42,7 @@
         <div class="navbar__container">
             <!-- Logo -->
             <a href="index.php" class="navbar__logo">
-                <img src="img/logo.png" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
+                <img src="<?= content_raw('header', 'logo', 'img/logo.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
             </a>
 
             <!-- Botón hamburguesa (Mobile) -->
@@ -57,29 +57,29 @@
                 <ul class="navbar__list">
                     <li class="navbar__item navbar__item--dropdown">
                         <a href="#" class="navbar__link" id="dropdown-instituto">
-                            Instituto <i class="fas fa-chevron-down navbar__dropdown-icon"></i>
+                            <?= content_get('header', 'nav_link_1', 'Instituto') ?> <i class="fas fa-chevron-down navbar__dropdown-icon"></i>
                         </a>
 
                     </li>
                     <li class="navbar__item">
-                        <a href="#" class="navbar__link">Oferta Académica</a>
+                        <a href="#" class="navbar__link"><?= content_get('header', 'nav_link_2', 'Oferta Académica') ?></a>
                     </li>
                     <li class="navbar__item navbar__item--dropdown">
                         <a href="#" class="navbar__link" id="dropdown-vida">
-                            Vida Estudiantil <i class="fas fa-chevron-down navbar__dropdown-icon"></i>
+                            <?= content_get('header', 'nav_link_3', 'Vida Estudiantil') ?> <i class="fas fa-chevron-down navbar__dropdown-icon"></i>
                         </a>
 
                     </li>
                     <li class="navbar__item">
-                        <a href="#" class="navbar__link">Admisiones</a>
+                        <a href="#" class="navbar__link"><?= content_get('header', 'nav_link_4', 'Admisiones') ?></a>
                     </li>
                 </ul>
 
                 <!-- Botones CTA -->
                 <div class="navbar__cta">
-                    <a href="#" class="navbar__btn navbar__btn--outline" id="btn-solicitar">Solicitar Información</a>
+                    <a href="#" class="navbar__btn navbar__btn--outline" id="btn-solicitar"><?= content_get('header', 'cta_btn_1', 'Solicitar Información') ?></a>
                     <a href="#" class="navbar__btn navbar__btn--solid" id="btn-matricula">
-                        Matricúlame
+                        <?= content_get('header', 'cta_btn_2', 'Matricúlame') ?>
                         <span class="navbar__btn-icon"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>

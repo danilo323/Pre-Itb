@@ -1,19 +1,42 @@
-<?php /* includes/hero.php */ ?>
+<?php
+// includes/hero.php
+
+// 1. Extraer URLs de imágenes para el slideshow
+$img1 = content_get('hero', 'imagen_1', 'img/salud.jpg');
+$img2 = content_get('hero', 'imagen_2', 'img/student.jpg');
+$img3 = content_get('hero', 'imagen_3', 'img/student 2.jpg');
+$slides = [];
+if (!empty($img1)) $slides[] = $img1;
+if (!empty($img2)) $slides[] = $img2;
+if (!empty($img3)) $slides[] = $img3;
+// Fallback por si borraron todas
+if (empty($slides)) {
+    $slides[] = 'img/salud.jpg';
+}
+
+// 2. Formatear la URL de YouTube a modo "embed"
+$raw_video_url = content_raw('hero', 'video_url', 'https://youtu.be/eTgzLxWGgS4');
+$embed_url = $raw_video_url;
+// Regex para encontrar el ID del video de youtube
+if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i', $raw_video_url, $matches)) {
+    $embed_url = 'https://www.youtube.com/embed/' . $matches[1] . '?autoplay=1';
+}
+?>
 <!-- ============================================= -->
 <!-- HERO SECTION                                  -->
 <!-- ============================================= -->
 <section class="hero" id="hero">
     <!-- Slideshow con efecto Ken Burns -->
     <div class="hero__slideshow">
-        <div class="hero__slide hero__slide--1 hero__slide--active hero__slide--init">
-            <div class="hero__slide-img" style="background-image: url('img/salud.jpg')"></div>
-        </div>
-        <div class="hero__slide hero__slide--2">
-            <div class="hero__slide-img" style="background-image: url('img/student.jpg')"></div>
-        </div>
-        <div class="hero__slide hero__slide--3">
-            <div class="hero__slide-img" style="background-image: url('img/student 2.jpg')"></div>
-        </div>
+        <?php foreach ($slides as $index => $img_path): ?>
+            <?php 
+                $class_num = $index + 1;
+                $active_class = $index === 0 ? 'hero__slide--active hero__slide--init' : '';
+            ?>
+            <div class="hero__slide hero__slide--<?= $class_num ?> <?= $active_class ?>">
+                <div class="hero__slide-img" style="background-image: url('<?= htmlspecialchars($img_path, ENT_QUOTES, 'UTF-8') ?>')"></div>
+            </div>
+        <?php endforeach; ?>
         <div class="hero__overlay"></div>
     </div>
 
@@ -53,7 +76,7 @@
             </div>
         </div>
 
-        <!-- Círculo de video con texto giratorio -->
+        <!-- Círculo de video -->
         <div class="hero__media">
             <div class="hero__video-wrapper">
                 <div class="hero__circular-text" id="hero-circular-text">
@@ -63,14 +86,21 @@
                         </defs>
                         <text>
                             <textPath href="#circlePath" class="hero__circular-text-path" textLength="345" lengthAdjust="spacing">
-                                <?= content_get('hero', 'circular_text', 'ITB INSTITUTO UNIVERSITARIO • EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995 •') ?>
+                                <?php 
+                                    $circ = content_get('hero', 'circular_text', '• EST. 1995 • ITB INSTITUTO UNIVERSITARIO ');
+                                    // Si por error se quedó guardado el texto doble en la sesión de prueba, lo corregimos a la fuerza:
+                                    if (strpos($circ, 'EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995') !== false) {
+                                        $circ = '• EST. 1995 • ITB INSTITUTO UNIVERSITARIO ';
+                                    }
+                                    echo $circ;
+                                ?>
                             </textPath>
                         </text>
                     </svg>
                 </div>
                 <div class="hero__video-card">
                     <button type="button" class="hero__play-btn js-video-modal-trigger"
-                        id="hero-play-btn" aria-label="Reproducir video institucional" data-video-url="<?= content_raw('hero', 'video_url', 'https://www.youtube.com/embed/eTgzLxWGgS4?autoplay=1') ?>">
+                        id="hero-play-btn" aria-label="Reproducir video institucional" data-video-url="<?= htmlspecialchars($embed_url, ENT_QUOTES, 'UTF-8') ?>">
                         <i class="fas fa-play"></i>
                     </button>
                 </div>

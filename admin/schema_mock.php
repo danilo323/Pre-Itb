@@ -15,23 +15,70 @@ return [
         'type'  => 'singleton',
         'icon'  => '🔝',
         'fields' => [
+            'div_top' => ['type' => 'divider', 'label' => 'Barra Superior (Top Bar)'],
+            'top_link_1' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Superior 1',
+                'default' => 'Portal Estudiantil SGA',
+            ],
+            'top_link_2' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Superior 2',
+                'default' => 'Educación Continua',
+            ],
+            'top_link_3' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Superior 3',
+                'default' => 'Vinculación',
+            ],
+            'top_link_4' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Superior 4',
+                'default' => 'Investigación',
+            ],
+            'top_link_5' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Superior 5',
+                'default' => 'UNIEBEC',
+            ],
+
+            'div_logo' => ['type' => 'divider', 'label' => 'Logo y Navegación Principal'],
             'logo' => [
                 'type'    => 'image',
                 'label'   => 'Logo principal',
-                'default' => 'img/logo-itb.png',
-                'help'    => 'Logo que aparece en la barra de navegación superior.',
+                'default' => 'img/logo.png',
             ],
+            'nav_link_1' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Menú 1',
+                'default' => 'Instituto',
+            ],
+            'nav_link_2' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Menú 2',
+                'default' => 'Oferta Académica',
+            ],
+            'nav_link_3' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Menú 3',
+                'default' => 'Vida Estudiantil',
+            ],
+            'nav_link_4' => [
+                'type'    => 'text',
+                'label'   => 'Enlace Menú 4',
+                'default' => 'Admisiones',
+            ],
+
+            'div_cta' => ['type' => 'divider', 'label' => 'Botones (Llamado a la acción)'],
             'cta_btn_1' => [
                 'type'    => 'text',
-                'label'   => 'Botón 1 (Solicitar)',
+                'label'   => 'Botón 1 (Secundario)',
                 'default' => 'Solicitar Información',
-                'help'    => 'Texto del primer botón del menú superior.',
             ],
             'cta_btn_2' => [
                 'type'    => 'text',
-                'label'   => 'Botón 2 (Matricúlate)',
+                'label'   => 'Botón 2 (Principal)',
                 'default' => 'Matricúlame',
-                'help'    => 'Texto del segundo botón (CTA principal del menú).',
             ],
         ],
     ],
@@ -88,7 +135,8 @@ return [
             'circular_text' => [
                 'type'    => 'text',
                 'label'   => 'Texto circular (repite la frase)',
-                'default' => 'ITB INSTITUTO UNIVERSITARIO • EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995 •',
+                'default' => '• EST. 1995 • ITB INSTITUTO UNIVERSITARIO ',
+                'help'    => 'Cuidado: No lo hagas muy largo (máximo 45 caracteres aprox) o las letras se amontonarán para caber en el círculo.',
             ],
             'video_url' => [
                 'type'    => 'text',
@@ -96,11 +144,23 @@ return [
                 'default' => 'https://youtu.be/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B',
                 'help'    => 'Enlace del video institucional que se abre al presionar play.',
             ],
-            'imagen_bg' => [
+            'imagen_1' => [
                 'type'    => 'image',
-                'label'   => 'Imagen de fondo del Hero',
-                'default' => 'img/hero-bg.jpg',
-                'help'    => 'Foto de fondo principal. Tamaño recomendado: 1920x1080px.',
+                'label'   => 'Imagen de fondo 1',
+                'default' => 'img/salud.jpg',
+                'help'    => 'Primera foto del carrusel de fondo. Tamaño recomendado: 1920x1080px.',
+            ],
+            'imagen_2' => [
+                'type'    => 'image',
+                'label'   => 'Imagen de fondo 2 (Opcional)',
+                'default' => 'img/student.jpg',
+                'help'    => 'Si se sube, el fondo rotará.',
+            ],
+            'imagen_3' => [
+                'type'    => 'image',
+                'label'   => 'Imagen de fondo 3 (Opcional)',
+                'default' => 'img/student 2.jpg',
+                'help'    => 'Tercera foto para el carrusel.',
             ],
             'imagen_video_thumb' => [
                 'type'    => 'image',

@@ -4,8 +4,6 @@
 config_local.json
 
 # Archivos de planificación del proyecto (No subir al repo)
-GEMINI.md
-README.md
 .gemini/
 
 # Archivos temporales de PHP / Sesiones (por si acaso)
