@@ -5,6 +5,54 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =========================================
+    // 0. HERO SLIDESHOW — Ken Burns Effect
+    // =========================================
+    const slides = document.querySelectorAll('.hero__slide');
+    if (slides.length > 1) {
+        // Quitar clase init tras el primer frame (evita transición al cargar)
+        requestAnimationFrame(() => slides[0].classList.remove('hero__slide--init'));
+
+        let current = 0;
+        let animating = false;
+        const SLIDE_DURATION = 7000; // 7s por slide
+
+        const goToSlide = (nextIndex) => {
+            if (animating) return;
+            animating = true;
+
+            const outgoing = slides[current];
+            current = nextIndex % slides.length;
+            const incoming = slides[current];
+
+            // Slide saliente: sube y sale por arriba
+            outgoing.classList.add('hero__slide--leaving');
+
+            // Slide entrante: entra desde abajo
+            incoming.classList.add('hero__slide--active');
+
+            // Reiniciar Ken Burns en el nuevo slide
+            const img = incoming.querySelector('.hero__slide-img');
+            img.style.animation = 'none';
+            img.offsetHeight; // fuerza reflow
+            img.style.animation = '';
+
+            // Limpiar clases al terminar la transición
+            outgoing.addEventListener('transitionend', () => {
+                // Deshabilitar transición para que el reset sea instantáneo (sin animación visible)
+                outgoing.style.transition = 'none';
+                outgoing.classList.remove('hero__slide--active', 'hero__slide--leaving');
+                outgoing.offsetHeight; // fuerza reflow
+                outgoing.style.transition = ''; // restaurar transición
+                animating = false;
+            }, { once: true });
+        };
+
+        setInterval(() => {
+            goToSlide(current + 1);
+        }, SLIDE_DURATION);
+    }
+
+    // =========================================
     // 1. NAVBAR — Menú Hamburguesa (Mobile)
     // =========================================
     const navbarToggle = document.getElementById('navbar-toggle');
@@ -45,13 +93,13 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // =========================================
-    // 3. NAVBAR — Efecto scroll (sombra)
+    // 3. SITE HEADER — Efecto scroll (sombra)
     // =========================================
-    const navbar = document.getElementById('navbar');
+    const siteHeader = document.getElementById('site-header');
 
-    if (navbar) {
+    if (siteHeader) {
         window.addEventListener('scroll', () => {
-            navbar.classList.toggle('navbar--scrolled', window.scrollY > 10);
+            siteHeader.classList.toggle('site-header--scrolled', window.scrollY > 10);
         });
     }
 
@@ -122,6 +170,45 @@ document.addEventListener('DOMContentLoaded', () => {
                 submitBtn.disabled = false;
                 admisionForm.reset();
             }, 3000);
+        });
+    }
+
+    // =========================================
+    // 7. VIDEO MODAL
+    // =========================================
+    const videoTriggers = document.querySelectorAll('.js-video-modal-trigger');
+    const videoModal = document.getElementById('video-modal');
+    const videoIframe = document.getElementById('video-modal-iframe');
+    const videoClose = document.getElementById('video-modal-close');
+    const videoOverlay = document.getElementById('video-modal-overlay');
+
+    if (videoModal && videoIframe) {
+        const closeModal = () => {
+            videoModal.classList.remove('hero__video-modal--active');
+            videoIframe.src = ''; // Detener el video al cerrar
+            document.body.style.overflow = '';
+        };
+
+        videoTriggers.forEach(trigger => {
+            trigger.addEventListener('click', (e) => {
+                e.preventDefault();
+                const videoUrl = trigger.getAttribute('data-video-url');
+                if (videoUrl) {
+                    videoIframe.src = videoUrl;
+                    videoModal.classList.add('hero__video-modal--active');
+                    document.body.style.overflow = 'hidden'; // Evitar scroll de la pagina
+                }
+            });
+        });
+
+        if (videoClose) videoClose.addEventListener('click', closeModal);
+        if (videoOverlay) videoOverlay.addEventListener('click', closeModal);
+        
+        // Cerrar con Escape
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && videoModal.classList.contains('hero__video-modal--active')) {
+                closeModal();
+            }
         });
     }
 

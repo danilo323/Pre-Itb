@@ -3,8 +3,17 @@
 <!-- HERO SECTION                                  -->
 <!-- ============================================= -->
 <section class="hero" id="hero">
-    <div class="hero__bg">
-        <img src="<?= content_raw('hero', 'imagen_bg', 'img/hero-bg.jpg') ?>" alt="Estudiantes ITB" class="hero__bg-img">
+    <!-- Slideshow con efecto Ken Burns -->
+    <div class="hero__slideshow">
+        <div class="hero__slide hero__slide--1 hero__slide--active hero__slide--init">
+            <div class="hero__slide-img" style="background-image: url('img/salud.jpg')"></div>
+        </div>
+        <div class="hero__slide hero__slide--2">
+            <div class="hero__slide-img" style="background-image: url('img/student.jpg')"></div>
+        </div>
+        <div class="hero__slide hero__slide--3">
+            <div class="hero__slide-img" style="background-image: url('img/student 2.jpg')"></div>
+        </div>
         <div class="hero__overlay"></div>
     </div>
 
@@ -48,23 +57,36 @@
         <div class="hero__media">
             <div class="hero__video-wrapper">
                 <div class="hero__circular-text" id="hero-circular-text">
-                    <svg viewBox="0 0 300 300" class="hero__circular-svg">
+                    <svg viewBox="0 0 160 160" class="hero__circular-svg">
                         <defs>
-                            <path id="circlePath" d="M 150, 150 m -120, 0 a 120,120 0 1,1 240,0 a 120,120 0 1,1 -240,0" />
+                            <path id="circlePath" d="M 80,80 m -55,0 a 55,55 0 1,1 110,0 a 55,55 0 1,1 -110,0" />
                         </defs>
                         <text>
-                            <textPath href="#circlePath" class="hero__circular-text-path">
+                            <textPath href="#circlePath" class="hero__circular-text-path" textLength="345" lengthAdjust="spacing">
                                 <?= content_get('hero', 'circular_text', 'ITB INSTITUTO UNIVERSITARIO • EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995 •') ?>
                             </textPath>
                         </text>
                     </svg>
                 </div>
                 <div class="hero__video-card">
-                    <img src="<?= content_raw('hero', 'imagen_video_thumb', 'img/hero-video-thumb.jpg') ?>" alt="Video institucional ITB" class="hero__video-thumb">
-                    <a href="<?= content_raw('hero', 'video_url', 'https://youtu.be/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B') ?>" target="_blank" class="hero__play-btn" id="hero-play-btn" aria-label="Reproducir video institucional">
+                    <button type="button" class="hero__play-btn js-video-modal-trigger"
+                        id="hero-play-btn" aria-label="Reproducir video institucional" data-video-url="<?= content_raw('hero', 'video_url', 'https://www.youtube.com/embed/eTgzLxWGgS4?autoplay=1') ?>">
                         <i class="fas fa-play"></i>
-                    </a>
+                    </button>
                 </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal para el Video -->
+    <div class="hero__video-modal" id="video-modal">
+        <div class="hero__video-modal-overlay" id="video-modal-overlay"></div>
+        <div class="hero__video-modal-content">
+            <button type="button" class="hero__video-modal-close" id="video-modal-close" aria-label="Cerrar video">
+                <i class="fas fa-times"></i>
+            </button>
+            <div class="hero__video-modal-iframe-wrapper">
+                <iframe id="video-modal-iframe" src="" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
             </div>
         </div>
     </div>
