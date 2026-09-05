@@ -1,3 +1,4 @@
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('noticias')) return; ?>
 <!-- ============================================= -->
 <!-- NOTICIAS, EVENTOS Y ALIANZAS                  -->
 <!-- ============================================= -->
@@ -7,7 +8,7 @@
             <div>
                 <span class="section-tag"><?= content_get('noticias', 'etiqueta_superior', 'Actualidad ITB') ?></span>
                 <h2 class="noticias__title">
-                    <?= content_get('noticias', 'titulo_seccion_1', 'Noticias y') ?> <span class="text-orange"><?= content_get('noticias', 'titulo_seccion_2', 'Eventos') ?></span>
+                    <?= content_title('noticias', 'titulo', 'Noticias y *Eventos*') ?>
                 </h2>
             </div>
             <a href="#" class="btn btn--outline-dark" id="btn-todas-noticias">

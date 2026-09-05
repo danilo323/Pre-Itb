@@ -11,7 +11,7 @@ function field_text_render(string $name_path, $value, array $config): string {
 <div class="field-group">
     <label>{$label}</label>
     {$help}
-    <input type="text" name="{$name_path}" value="{$val}" {$readonly}>
+    <input type="text" name="{$name_path}" value="{$val}" class="form-control" {$readonly}>
 </div>
 HTML;
 }

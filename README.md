@@ -11,15 +11,17 @@ El proyecto actualmente cuenta con todo el motor Frontend y Backend visual compl
 - **7 Campos Inteligentes Soportados:** Texto, Área de texto, Imagen (con previsualización en vivo, arrastrar y soltar, y botón de eliminar), Select, Fecha, Booleano y Repetidor (para crear galerías o preguntas frecuentes infinitas).
 
 ## Desarrollo Local (Instrucciones)
-Para levantar el servidor de pruebas y simular la base de datos temporal:
+Para levantar el servidor de pruebas local correctamente, abre tu terminal y ejecuta:
 
 ```bash
+cd /home/daly/Documentos/Innotech/Proyecto_Frontend
 php -S localhost:8000
 ```
 
 ### Accesos Rápidos
-- 🌍 **Web Pública:** `http://localhost:8000/`
-- 🔐 **Login Panel Admin:** `http://localhost:8000/admin/login.php`
+Una vez que el servidor esté corriendo, haz clic en estos enlaces:
+- 🌍 **Web Pública:** [http://localhost:8000/](http://localhost:8000/)
+- 🔐 **Login Panel Admin:** [http://localhost:8000/admin/login.php](http://localhost:8000/admin/login.php)
 
 > **Credenciales temporales de desarrollo:**
 > Usuario: `admin` | Contraseña: `1234`

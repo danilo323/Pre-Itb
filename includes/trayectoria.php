@@ -1,3 +1,4 @@
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('trayectoria')) return; ?>
 <?php /* includes/trayectoria.php */ ?>
 <!-- ============================================= -->
 <!-- TRAYECTORIA Y COMPROMISO EDUCATIVO            -->

@@ -1,3 +1,4 @@
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('experiencia')) return; ?>
 <?php /* includes/experiencia.php */ ?>
 <!-- ============================================= -->
 <!-- TU EXPERIENCIA ITB                            -->
@@ -8,7 +9,7 @@
         <div class="experiencia__content">
             <span class="section-tag"><?= content_get('experiencia', 'etiqueta_superior', 'Vida Estudiantil') ?></span>
             <h2 class="experiencia__title">
-                <?= content_get('experiencia', 'titulo_seccion_1', 'Tu Experiencia') ?> <span class="text-orange"><?= content_get('experiencia', 'titulo_seccion_2', 'ITB') ?></span>
+                <?= content_title('experiencia', 'titulo', 'Tu Experiencia *ITB*') ?>
             </h2>
             <p class="experiencia__description">
                 <?= content_get('experiencia', 'descripcion', 'Más allá de lo académico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseñados para tu bienestar.') ?>

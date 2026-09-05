@@ -1,3 +1,4 @@
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('programas')) return; ?>
 <!-- ============================================= -->
 <!-- PROGRAMAS DESTACADOS                          -->
 <!-- ============================================= -->
@@ -7,7 +8,7 @@
             <div class="programas__header-left">
                 <span class="section-tag"><?= content_get('programas', 'etiqueta_superior', 'Oferta Académica') ?></span>
                 <h2 class="programas__title">
-                    <?= content_get('programas', 'titulo_seccion_1', 'Programas') ?> <span class="text-orange"><?= content_get('programas', 'titulo_seccion_2', 'Destacados') ?></span>
+                    <?= content_title('programas', 'titulo', 'Programas *Destacados*') ?>
                 </h2>
             </div>
             <a href="#" class="btn btn--outline-dark" id="btn-ver-todos">

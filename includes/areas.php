@@ -1,3 +1,4 @@
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('areas')) return; ?>
 <!-- ============================================= -->
 <!-- ÁREAS DE FORMACIÓN                            -->
 <!-- ============================================= -->
@@ -6,7 +7,7 @@
         <div class="areas__header">
             <span class="section-tag section-tag--light"><?= content_get('areas', 'etiqueta_superior', 'Áreas de Conocimiento') ?></span>
             <h2 class="areas__title">
-                <?= content_get('areas', 'titulo_seccion_1', 'Nuestras Áreas de') ?> <span class="text-orange"><?= content_get('areas', 'titulo_seccion_2', 'Formación') ?></span>
+                <?= content_title('areas', 'titulo', 'Nuestras Áreas de *Formación*') ?>
             </h2>
             <p class="areas__subtitle">
                 <?= content_get('areas', 'descripcion', 'Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional') ?>

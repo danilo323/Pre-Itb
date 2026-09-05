@@ -1,3 +1,4 @@
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('servicios')) return; ?>
 <!-- ============================================= -->
 <!-- GRILLA DE SERVICIOS / BIENESTAR (BENTO)       -->
 <!-- ============================================= -->
@@ -6,7 +7,7 @@
         <div class="servicios__header">
             <span class="section-tag"><?= content_get('servicios', 'etiqueta_superior', 'Servicios Institucionales') ?></span>
             <h2 class="servicios__title">
-                <?= content_get('servicios', 'titulo_seccion_1', 'Todo lo que necesitas en ') ?><span class="text-orange"><?= content_get('servicios', 'titulo_seccion_2', 'un solo lugar') ?></span>
+                <?= content_title('servicios', 'titulo', 'Todo lo que necesitas en  *un solo lugar*') ?>
             </h2>
         </div>
 

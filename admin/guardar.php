@@ -1,61 +1,78 @@
 <?php
 // admin/guardar.php
-// Guarda temporalmente en $_SESSION hasta que Persona 3 conecte el storage.php real.
+// Guarda temporalmente en $_SESSION (Versión 2.0)
 
 session_start();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: /');
+    header('Location: index.php');
     exit;
 }
 
-$section = $_POST['section'] ?? '';
-$schema  = require __DIR__ . '/schema_mock.php';
+$section_key = $_POST['section'] ?? '';
+$schema = require __DIR__ . '/schema_mock.php';
 
-// Validar que la sección existe en el schema (whitelist)
-if (!array_key_exists($section, $schema)) {
+if (!isset($schema['items'][$section_key])) {
     $_SESSION['flash_message'] = 'Sección no válida.';
     $_SESSION['flash_type']    = 'error';
-    header('Location: /');
+    header('Location: index.php');
     exit;
 }
 
-// Guardar los campos en la sesión (temporal, sin BD)
 if (!isset($_SESSION['admin_data'])) {
     $_SESSION['admin_data'] = [];
 }
 
-$campos_validos = array_keys($schema[$section]['fields']);
-foreach ($campos_validos as $campo) {
-    // 1. Campos de texto normales
-    if (isset($_POST[$campo])) {
-        $_SESSION['admin_data'][$section][$campo] = htmlspecialchars(trim($_POST[$campo]), ENT_QUOTES, 'UTF-8');
+// 1. Procesar campos de texto enviados
+foreach ($_POST as $post_key => $raw_value) {
+    // Si la clave tiene doble guion bajo, ej: hero__titulo
+    if (strpos($post_key, '__') !== false) {
+        list($sub_key, $field) = explode('__', $post_key, 2);
+        
+        // Si el valor es de la sección plana (ej: footer__logo_blanco)
+        // O si es de un acordeón (hero)
+        if (!isset($_SESSION['admin_data'][$sub_key])) {
+            $_SESSION['admin_data'][$sub_key] = [];
+        }
+        
+        // Limpiamos (podemos llamar a field_parse si importamos _loader.php)
+        $_SESSION['admin_data'][$sub_key][$field] = is_string($raw_value) 
+            ? htmlspecialchars(trim($raw_value), ENT_QUOTES, 'UTF-8') 
+            : $raw_value;
     }
-    
-    // 2. Archivos subidos (imágenes)
-    $file_field = $campo . '_file';
-    if (isset($_FILES[$file_field]) && $_FILES[$file_field]['error'] === UPLOAD_ERR_OK) {
-        $tmp_name = $_FILES[$file_field]['tmp_name'];
-        $name     = basename($_FILES[$file_field]['name']);
+}
+
+// 2. Procesar imágenes / archivos enviados
+foreach ($_FILES as $file_key => $file_info) {
+    // Los inputs de archivo se llaman, por ejemplo: hero__imagen_1_file
+    if (strpos($file_key, '__') !== false && str_ends_with($file_key, '_file')) {
+        // Extraemos hero y imagen_1
+        $base_key = substr($file_key, 0, -5); // quitamos '_file'
+        list($sub_key, $field) = explode('__', $base_key, 2);
         
-        // Carpeta destino (frontend img/)
-        $upload_dir = dirname(__DIR__) . '/img/';
-        if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
-        
-        // Renombrar archivo para evitar colisiones
-        $new_name = time() . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', $name);
-        $dest     = $upload_dir . $new_name;
-        
-        if (move_uploaded_file($tmp_name, $dest)) {
-            // Guardar la ruta relativa para el frontend
-            $_SESSION['admin_data'][$section][$campo] = 'img/' . $new_name;
+        if ($file_info['error'] === UPLOAD_ERR_OK) {
+            $tmp_name = $file_info['tmp_name'];
+            $name     = basename($file_info['name']);
+            
+            $upload_dir = dirname(__DIR__) . '/img/';
+            if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
+            
+            $new_name = time() . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', $name);
+            $dest     = $upload_dir . $new_name;
+            
+            if (move_uploaded_file($tmp_name, $dest)) {
+                if (!isset($_SESSION['admin_data'][$sub_key])) {
+                    $_SESSION['admin_data'][$sub_key] = [];
+                }
+                $_SESSION['admin_data'][$sub_key][$field] = 'img/' . $new_name;
+            }
         }
     }
 }
 
-$_SESSION['flash_message'] = '✅ Sección "' . htmlspecialchars($schema[$section]['label'], ENT_QUOTES, 'UTF-8') . '" guardada temporalmente.';
+$_SESSION['flash_message'] = '✅ Cambios guardados correctamente.';
 $_SESSION['flash_type']    = 'success';
 
-// Volver a la landing haciendo scroll a la sección y abriendo su panel
-header('Location: ../index.php?panel_section=' . urlencode($section) . '#' . urlencode($section));
+// Volver al singleton (y mantener la sección abierta si quisiéramos)
+header('Location: singleton.php?c=' . urlencode($section_key));
 exit;

@@ -1,77 +1,103 @@
 <?php
 // admin/singleton.php
+// Renderiza páginas y singletons (Versión 2.0)
 require_once __DIR__ . '/views/layout.php';
 require_once __DIR__ . '/fields/_loader.php';
 
-// Simulamos que cargamos el schema (Persona 3 hará esto)
 $schema = require __DIR__ . '/schema_mock.php';
+$section_key = $_GET['c'] ?? '';
 
-// Obtener qué sección estamos editando (ej: ?c=faq)
-$section = $_GET['c'] ?? 'faq';
-
-// SEGURIDAD: Whitelist — solo aceptar claves que existan en el schema
-$secciones_validas = array_keys($schema);
-if (!in_array($section, $secciones_validas, true) || $schema[$section]['type'] !== 'singleton') {
-    die("Sección no encontrada o no es un singleton.");
+if (!isset($schema['items'][$section_key])) {
+    header("Location: index.php");
+    exit;
 }
 
-$config = $schema[$section];
+$config = $schema['items'][$section_key];
 
-// Si es un POST (el usuario le dio a guardar)
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    // SEGURIDAD: Verificar token CSRF antes de procesar cualquier dato
-    // La Persona 3 creará la función csrf_verify() en auth.php
-    // Por ahora lo dejamos preparado:
-    // if (!csrf_verify($_POST['csrf_token'] ?? '')) {
-    //     die('Token CSRF inválido. Recargá la página.');
-    // }
-    
-    $data_to_save = [];
-    foreach ($config['fields'] as $key => $field_config) {
-        $raw_value = $_POST[$key] ?? null;
-        $data_to_save[$key] = field_parse($field_config['type'], $raw_value, $field_config);
-    }
-    
-    // Aquí la Persona 3 usaría storage_save()
-    // Por ahora solo simulamos que guardamos
-    echo "<div style='background:green; color:white; padding:10px;'>Guardado exitosamente. (Data simulada)</div>";
-    
-    // Para depurar en consola
-    if (php_sapi_name() === 'cli') {
-        print_r($data_to_save);
-    }
+if ($config['type'] === 'collection') {
+    header("Location: coleccion.php?c=" . urlencode($section_key));
+    exit;
 }
 
-// Simulamos obtener los datos actuales (Persona 3 usaría storage_get())
-$current_data = [
-    'titulo' => 'Preguntas Frecuentes',
-    'preguntas' => [
-        [
-            'pregunta' => '¿Tienen clases presenciales?',
-            'respuesta' => 'Sí, en modalidad híbrida.'
-        ]
-    ]
-];
+// Simulador de storage_get para la V2
+// Lee los datos guardados en la sesión, si no existen usa los 'default' del schema
+function get_saved_data($sec_key, $field_key, $default) {
+    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+    if (isset($_SESSION['admin_data'][$sec_key][$field_key])) {
+        return $_SESSION['admin_data'][$sec_key][$field_key];
+    }
+    return $default;
+}
 
 // Comienza el HTML
-echo layout_start("Editando: " . $config['label']);
+echo layout_start($config['label'], $section_key);
 ?>
 
-<form method="POST" action="">
-    <!-- SEGURIDAD: Token CSRF — Persona 3 lo generará en auth.php, nosotros lo incluimos -->
+<form method="POST" action="guardar.php" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+    <input type="hidden" name="section" value="<?= htmlspecialchars($section_key, ENT_QUOTES, 'UTF-8') ?>">
     
-    <?php
-    // Bucle mágico: iteramos sobre el schema y dejamos que el dispatcher haga el trabajo
-    foreach ($config['fields'] as $key => $field_config) {
-        $value = $current_data[$key] ?? null;
-        echo field_render($key, $value, $field_config);
-    }
-    ?>
+    <?php if ($config['type'] === 'page' && !empty($config['sections'])): ?>
+        
+        <!-- MÓDULO DE ORDEN Y VISIBILIDAD -->
+        <div class="order-block">
+            <h3>ORDEN DE LAS SECCIONES DE LA PÁGINA</h3>
+            <p>Desmarca "Visible" para ocultar una sección sin borrar su contenido. Se guarda al dar clic en Guardar cambios.</p>
+            <div class="order-list">
+                <?php 
+                $i = 1;
+                foreach ($config['sections'] as $sub_key => $sub_config): 
+                    $is_visible = $_SESSION['admin_data'][$sub_key]['_visible'] ?? '1';
+                ?>
+                <div class="order-item">
+                    <div class="order-item-left">
+                        <span class="order-number"><?= $i++ ?></span>
+                        <span class="order-name"><?= htmlspecialchars($sub_config['label']) ?></span>
+                    </div>
+                    <label class="order-visibility">
+                        <input type="hidden" name="<?= $sub_key ?>___visible" value="0">
+                        <input type="checkbox" name="<?= $sub_key ?>___visible" value="1" <?= $is_visible ? 'checked' : '' ?>>
+                        Visible
+                    </label>
+                </div>
+                <?php endforeach; ?>
+            </div>
+        </div>
+
+        <!-- ACORDEONES (SUBSECCIONES) -->
+        <?php foreach ($config['sections'] as $sub_key => $sub_config): ?>
+            <details class="admin-accordion">
+                <summary><?= htmlspecialchars($sub_config['label']) ?></summary>
+                <div class="accordion-content">
+                    <?php 
+                    foreach ($sub_config['fields'] as $fk => $fc) {
+                        $val = get_saved_data($sub_key, $fk, $fc['default'] ?? '');
+                        // Formato: hero__titulo
+                        $input_name = "{$sub_key}__{$fk}";
+                        echo field_render($input_name, $val, $fc);
+                    }
+                    ?>
+                </div>
+            </details>
+        <?php endforeach; ?>
+
+    <?php else: ?>
+        <!-- SINGLETON PLANO (Ej: Ajustes, Footer) -->
+        <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; padding:32px;">
+            <?php 
+            foreach ($config['fields'] as $fk => $fc) {
+                $val = get_saved_data($section_key, $fk, $fc['default'] ?? '');
+                // Formato: footer__logo_blanco
+                $input_name = "{$section_key}__{$fk}";
+                echo field_render($input_name, $val, $fc);
+            }
+            ?>
+        </div>
+    <?php endif; ?>
     
-    <div style="margin-top: 20px;">
-        <button type="submit">Guardar Cambios</button>
+    <div class="form-actions">
+        <a href="index.php" class="btn btn-outline">Cancelar</a>
+        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar cambios</button>
     </div>
 </form>
 

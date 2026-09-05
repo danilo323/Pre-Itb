@@ -8,10 +8,11 @@ function field_bool_render(string $name_path, $value, array $config): string {
     
     return <<<HTML
 <div class="field-group field-bool">
-    <label>
+    <label class="bool-toggle-label">
         <input type="hidden" name="{$name_path}" value="0">
-        <input type="checkbox" name="{$name_path}" value="1" {$checked}>
-        {$label}
+        <input type="checkbox" name="{$name_path}" value="1" {$checked} class="bool-toggle-input">
+        <span class="bool-toggle-switch"></span>
+        <span class="bool-toggle-text">{$label}</span>
     </label>
     {$help}
 </div>

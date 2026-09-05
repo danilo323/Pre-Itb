@@ -70,10 +70,18 @@
 - Se añadió efecto **Ken Burns** con transiciones CSS "slide-up" (desde abajo hacia arriba) automáticas de 7 segundos.
 - Se implementó una **Ventana Modal** en `hero.php` y `main.js` para visualizar un video de YouTube sin salir de la página principal.
 
+### 7. Motor CRUD Temporal en Memoria (Panel Admin - Persona 2)
+- Se programó un motor de guardado temporal utilizando `$_SESSION['admin_data']` para permitir probar el panel sin base de datos.
+- Se implementó la subida de imágenes (`move_uploaded_file`) en `admin/editar.php` guardando en la carpeta `img/`.
+- Se implementó reordenamiento automático (swap) mediante el campo `orden` en las colecciones.
+- Cero mock data estática: todos los formularios y selects (como las posiciones de orden) se calculan en tiempo real contando los items de la sesión.
+- Integración visual del panel (inputs, selects, switches estilo iOS) mediante `admin/assets/admin.css`.
+- **Implementación del Constructor de Menú (`menu_builder.php`)**: Se creó un campo personalizado en el motor para la navegación principal, clonando la interfaz drag-and-drop tipo árbol (Padre/Hijo) basada en el diseño de UNIEBEC. El frontend (`includes/header.php`) fue refactorizado para consumir este array plano y pintar recursivamente los desplegables.
+
 ---
 
 ## 🎯 Próximos Pasos y Tareas Pendientes
 
-- [ ] Continuar refinando o agregando nuevas secciones según solicitud del usuario.
-- [ ] Conectar formularios de contacto/admisión a backend/base de datos si es necesario.
+- [ ] Continuar integrando el frontend con el motor `content_get()` y `collection_items()` en las siguientes secciones (Sobre Nosotros, Oferta Académica, Testimonios, etc.).
+- [ ] Conectar formularios de contacto/admisión a backend/base de datos si es necesario (Persona 3).
 - [ ] Optimizar imágenes y rendimiento SEO adicional.

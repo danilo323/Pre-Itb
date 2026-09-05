@@ -1,48 +1,59 @@
 <?php
 // admin/views/layout.php
-// Esqueleto principal del Panel de Administración (Responsabilidad: Persona 2)
+// Esqueleto principal del Panel de Administración (Versión 2.0 - Rediseño Blanco)
 
-// Iniciar sesión si no está iniciada
 if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
-// Protección de acceso — redirige al login si no hay sesión
 if (empty($_SESSION['admin_logged'])) {
     header('Location: ' . dirname($_SERVER['PHP_SELF'], 1) . '/login.php');
     exit;
 }
 
-/**
- * Genera el sidebar dinámicamente leyendo el schema.
- */
-function layout_sidebar(): string {
+function layout_sidebar($current_key = ''): string {
     $schema = require __DIR__ . '/../schema_mock.php';
+    
+    $html = "<div class=\"sidebar-brand\">\n";
+    $html .= "    <i class=\"bi bi-mortarboard-fill\"></i>\n";
+    $html .= "    <span>Configuración</span>\n";
+    $html .= "</div>\n";
+    $html .= "<nav class=\"sidebar-nav\">\n";
+    $html .= "    <ul>\n";
+    $html .= "        <li><a href=\"index.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard</a></li>\n";
 
-    $html = "<li><a href=\"index.php\">🏠 Dashboard</a></li>\n";
-    $html .= "<li class=\"sidebar-section-label\">CONTENIDO</li>\n";
+    // Agrupar items
+    $groups = $schema['groups'] ?? [];
+    $items_by_group = [];
+    foreach ($schema['items'] as $key => $item) {
+        $group = $item['group'] ?? 'otros';
+        $items_by_group[$group][$key] = $item;
+    }
 
-    foreach ($schema as $key => $section) {
-        $label = htmlspecialchars($section['label'], ENT_QUOTES, 'UTF-8');
-        $type  = $section['type'];
-        $icon  = ($type === 'singleton') ? '✏️' : '📋';
-
-        if ($type === 'singleton') {
-            $html .= "<li><a href=\"singleton.php?c={$key}\">{$icon} {$label}</a></li>\n";
-        } elseif ($type === 'collection') {
-            $html .= "<li><a href=\"coleccion.php?c={$key}\">{$icon} {$label}</a></li>\n";
+    foreach ($groups as $group_key => $group_label) {
+        if (empty($items_by_group[$group_key])) continue;
+        
+        $html .= "        <li class=\"sidebar-section-label\">" . htmlspecialchars($group_label) . "</li>\n";
+        
+        foreach ($items_by_group[$group_key] as $key => $item) {
+            $label = htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8');
+            $icon  = $item['icon'] ?? 'bi bi-file-earmark-text';
+            $active = ($current_key === $key) ? 'class="active"' : '';
+            
+            $url = ($item['type'] === 'collection') ? "coleccion.php?c={$key}" : "singleton.php?c={$key}";
+            
+            $html .= "        <li><a href=\"{$url}\" {$active}><i class=\"{$icon}\"></i> {$label}</a></li>\n";
         }
     }
+
+    $html .= "    </ul>\n";
+    $html .= "</nav>\n";
 
     return $html;
 }
 
-/**
- * Muestra flash messages una sola vez.
- */
 function layout_flash(): string {
     if (session_status() !== PHP_SESSION_ACTIVE) return '';
-
     $html = '';
     if (!empty($_SESSION['flash_message'])) {
         $msg  = htmlspecialchars($_SESSION['flash_message'], ENT_QUOTES, 'UTF-8');
@@ -53,20 +64,17 @@ function layout_flash(): string {
     return $html;
 }
 
-/**
- * Helper para guardar un flash message desde cualquier pantalla.
- */
 function flash_set(string $message, string $type = 'success'): void {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     $_SESSION['flash_message'] = $message;
     $_SESSION['flash_type']    = $type;
 }
 
-function layout_start(string $title = "Panel de Administración"): string {
+function layout_start(string $title = "Panel de Administración", string $current_key = ''): string {
     $safe_title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-    $sidebar    = layout_sidebar();
+    $sidebar    = layout_sidebar($current_key);
     $flash      = layout_flash();
-    $user       = htmlspecialchars($_SESSION['user'] ?? 'Admin', ENT_QUOTES, 'UTF-8');
+    $user       = htmlspecialchars($_SESSION['user'] ?? 'HOLA', ENT_QUOTES, 'UTF-8');
 
     return <<<HTML
 <!DOCTYPE html>
@@ -74,38 +82,33 @@ function layout_start(string $title = "Panel de Administración"): string {
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{$safe_title} — ITB Admin</title>
+    <title>{$safe_title} — Configuración</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="/admin/assets/admin.css">
 </head>
 <body>
-    <div class="admin-container">
+    <div class="admin-topbar">
+        <div class="topbar-left">
+            <!-- Oculto en móvil -->
+        </div>
+        <div class="topbar-right">
+            <a href="/" target="_blank" class="topbar-link"><i class="bi bi-box-arrow-up-right"></i> Ver sitio</a>
+            <span class="topbar-user"><i class="bi bi-person-fill"></i> {$user}</span>
+            <a href="logout.php" class="topbar-link topbar-logout"><i class="bi bi-door-open-fill"></i> Cerrar sesión</a>
+        </div>
+    </div>
 
-        <!-- Sidebar dinámico generado del schema -->
+    <div class="admin-container">
+        <!-- Sidebar dinámico -->
         <aside class="admin-sidebar">
-            <div class="sidebar-brand">
-                <h2>ITB Admin</h2>
-                <p>Panel de Control</p>
-            </div>
-            <nav>
-                <ul>
-                    {$sidebar}
-                </ul>
-            </nav>
-            <div class="sidebar-footer">
-                <span style="color:rgba(255,255,255,0.5);font-size:0.8rem;">👤 {$user}</span>
-                <a href="logout.php" style="margin-top:8px;">🚪 Cerrar Sesión</a>
-            </div>
+            {$sidebar}
         </aside>
 
         <!-- Contenido principal -->
         <main class="admin-main">
-            <div class="admin-topbar">
-                <h1>{$safe_title}</h1>
-                <a href="/" target="_blank" class="btn btn-outline btn-sm">👁️ Ver Landing Page</a>
-            </div>
             <div class="admin-content">
                 {$flash}
 HTML;

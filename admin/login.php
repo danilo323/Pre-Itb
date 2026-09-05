@@ -2,9 +2,9 @@
 // admin/login.php
 session_start();
 
-// Si ya está logueado, ir directo a la landing
+// Si ya está logueado, ir directo al panel
 if (!empty($_SESSION['admin_logged'])) {
-    header('Location: /');
+    header('Location: index.php');
     exit;
 }
 
@@ -18,7 +18,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if ($user === 'admin' && $pass === '1234') {
         $_SESSION['admin_logged'] = true;
         $_SESSION['user'] = $user;
-        header('Location: /');
+        header('Location: index.php');
         exit;
     } else {
         $error = 'Usuario o contraseña incorrectos.';
