@@ -3,13 +3,13 @@
 <!-- ============================================= -->
 <section class="areas" id="areas">
     <div class="areas__container">
-        <div class="areas__header">
-            <span class="section-tag section-tag--light">Áreas de Conocimiento</span>
-            <h2 class="areas__title">
-                Nuestras Áreas de <span class="text-orange">Formación</span>
+        <div class="areas__header" style="text-align: center;">
+            <span class="text-orange" style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 8px;">Oferta Académica de Vanguardia</span>
+            <h2 class="areas__title" style="font-family: var(--font-heading); font-size: 2.8rem;">
+                Áreas de Formación
             </h2>
-            <p class="areas__subtitle">
-                Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional
+            <p class="areas__subtitle" style="margin: 0 auto 40px auto;">
+                Programas tecnológicos de nivel superior diseñados para responder a las exigencias del mercado laboral actual con un enfoque 100% práctico.
             </p>
         </div>
 
@@ -17,60 +17,56 @@
             <!-- Card 1: Salud -->
             <div class="areas__card">
                 <div class="areas__card-icon">
-                    <i class="fas fa-heartbeat"></i>
+                    <img src="img/estetoscopio.png" alt="Salud" class="areas__icon-img">
                 </div>
-                <h3 class="areas__card-title">Salud</h3>
+                <h3 class="areas__card-title">Facultad de Salud
+                    y Servicios Sociales (FASSS)</h3>
                 <p class="areas__card-description">
-                    Formación integral en ciencias de la salud con laboratorios 
-                    especializados y prácticas clínicas reales.
+                    Carreras técnicas y tecnológicas enfocadas en el
+                    cuidado de la salud, enfermería, rehabilitación y
+                    bienestar comunitario.
                 </p>
-                <ul class="areas__card-list">
-                    <li>Enfermería</li>
-                    <li>Fisioterapia</li>
-                    <li>Laboratorio Clínico</li>
-                </ul>
-                <a href="#" class="areas__card-btn">
-                    Explorar programas <i class="fas fa-arrow-right"></i>
+                <a href="#" class="btn btn--solid">
+                    Explorar programas
+                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
 
             <!-- Card 2: Ciencias Empresariales -->
-            <div class="areas__card">
+            <div class="areas__card areas__card--image" style="background-image: linear-gradient(rgba(26, 54, 104, 0.8), rgba(26, 54, 104, 0.8)), url('img/estudiantes1.png');">
                 <div class="areas__card-icon">
-                    <i class="fas fa-briefcase"></i>
+                    <img src="img/laptop.png" alt="Empresariales" class="areas__icon-img">
                 </div>
-                <h3 class="areas__card-title">Ciencias Empresariales</h3>
+                <h3 class="areas__card-title">Facultad de Ciencias Empresariales
+                    y Sistemas / Económicas y
+                    Empresariales (FACES)</h3>
                 <p class="areas__card-description">
-                    Desarrolla habilidades de liderazgo, gestión y emprendimiento 
-                    con enfoque práctico y global.
+                    Programas de gestión, contabilidad, marketing y
+                    comercio para liderar en el sector empresarial e
+                    industrial.
+
                 </p>
-                <ul class="areas__card-list">
-                    <li>Administración de Empresas</li>
-                    <li>Contabilidad</li>
-                    <li>Marketing Digital</li>
-                </ul>
-                <a href="#" class="areas__card-btn">
-                    Explorar programas <i class="fas fa-arrow-right"></i>
+                <a href="#" class="btn btn--solid">
+                    Explorar programas
+                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
 
             <!-- Card 3: Transporte -->
             <div class="areas__card">
                 <div class="areas__card-icon">
-                    <i class="fas fa-ship"></i>
+                    <img src="img/transporte.png" alt="Transporte" class="areas__icon-img">
                 </div>
-                <h3 class="areas__card-title">Transporte</h3>
+                <h3 class="areas__card-title">Facultad de Transporte
+                    y Vialidad (FATV)</h3>
                 <p class="areas__card-description">
-                    Especialízate en logística y transporte marítimo, 
-                    terrestre y multimodal con certificaciones internacionales.
+                    Formación especializada en mecánica, gestión de
+                    transporte, seguridad vial y escuela de conducción
                 </p>
-                <ul class="areas__card-list">
-                    <li>Logística y Transporte</li>
-                    <li>Comercio Exterior</li>
-                    <li>Operaciones Portuarias</li>
-                </ul>
-                <a href="#" class="areas__card-btn">
-                    Explorar programas <i class="fas fa-arrow-right"></i>
+
+                <a href="#" class="btn btn--solid">
+                    Explorar programas
+                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
         </div>
