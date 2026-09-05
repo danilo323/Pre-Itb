@@ -13,67 +13,83 @@
                 <?= htmlspecialchars(content_get('servicios', 'serv1_desc', 'Impulsamos tu desarrollo integral dentro y fuera del aula con beneficios exclusivos para tu carrera.'), ENT_QUOTES, 'UTF-8') ?>
             </p>
             <a href="#" class="btn--solid" id="btn-servicios-main">
-                Más servicios
+                <?= htmlspecialchars(content_get('servicios', 'serv1_btn', 'Más servicios'), ENT_QUOTES, 'UTF-8') ?>
                 <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
         <!-- Tarjetas (Cards) -->
         <div class="servicios__cards">
-            
-            <!-- Card 1 -->
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title"><?= nl2br(htmlspecialchars(content_get('servicios', 'serv2_titulo', "Campus\nVirtual 360°"), ENT_QUOTES, 'UTF-8')) ?></h3>
-                <p class="servicios__card-text"><?= htmlspecialchars(content_get('servicios', 'serv2_desc', 'Conoce nuestras instalaciones, aulas y laboratorios de forma interactiva.'), ENT_QUOTES, 'UTF-8') ?></p>
-                <a href="#" class="btn--outline-servicios">
-                    Ver Tour
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
+            <?php
+            $lista_servicios = content_raw('servicios', 'lista_servicios', [
+                [
+                    'titulo' => "Campus Virtual",
+                    'desc' => "Plataforma educativa 24/7",
+                    'btn_texto' => "Ver Tour",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Horarios",
+                    'desc' => "Consulta tus horarios de clase",
+                    'btn_texto' => "Ver Horarios",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Servicios Digitales",
+                    'desc' => "Trámites en línea y gestión académica",
+                    'btn_texto' => "Acceder",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Podcast ITB",
+                    'desc' => "Escucha nuestro contenido educativo",
+                    'btn_texto' => "Escuchar",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Arte y Deportes",
+                    'desc' => "Clubes deportivos, grupos artísticos y actividades recreativas",
+                    'btn_texto' => "Conocer Más",
+                    'imagen' => "img/estudiantes1.png"
+                ]
+            ]);
 
-            <!-- Card 2 -->
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title"><?= nl2br(htmlspecialchars(content_get('servicios', 'serv3_titulo', "Horarios y\nClases"), ENT_QUOTES, 'UTF-8')) ?></h3>
-                <p class="servicios__card-text"><?= htmlspecialchars(content_get('servicios', 'serv3_desc', 'Consulta turnos presenciales, nocturnos y de fin de semana.'), ENT_QUOTES, 'UTF-8') ?></p>
-                <a href="#" class="btn--outline-servicios">
-                    Ver Horarios
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
+            foreach ((array)$lista_servicios as $servicio): 
+                $foto_path = trim($servicio['imagen'] ?? '');
+                $titulo = nl2br(htmlspecialchars($servicio['titulo'] ?? '', ENT_QUOTES, 'UTF-8'));
+                $desc = htmlspecialchars($servicio['desc'] ?? '', ENT_QUOTES, 'UTF-8');
+                $btn_texto = htmlspecialchars($servicio['btn_texto'] ?? 'Ver más', ENT_QUOTES, 'UTF-8');
 
-            <!-- Card 3 -->
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title"><?= nl2br(htmlspecialchars(content_get('servicios', 'serv4_titulo', "Servicios\nDigitales"), ENT_QUOTES, 'UTF-8')) ?></h3>
-                <p class="servicios__card-text"><?= htmlspecialchars(content_get('servicios', 'serv4_desc', 'Accede al Aula Virtual, App Móvil y herramientas académicas.'), ENT_QUOTES, 'UTF-8') ?></p>
-                <a href="#" class="btn--outline-servicios">
-                    Acceder
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title"><?= nl2br(htmlspecialchars(content_get('servicios', 'serv5_titulo', "#Podcast\nITB"), ENT_QUOTES, 'UTF-8')) ?></h3>
-                <p class="servicios__card-text"><?= htmlspecialchars(content_get('servicios', 'serv5_desc', 'Historias de éxito y consejos de docentes y graduados.'), ENT_QUOTES, 'UTF-8') ?></p>
-                <a href="#" class="btn--outline-servicios">
-                    Escuchar
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
-
-            <!-- Card 5 (Imagen de fondo) -->
-            <div class="servicios__card-image">
-                <img src="<?= htmlspecialchars(content_raw('servicios', 'serv6_imagen', 'img/estudiantes1.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Arte y Deportes">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <h3 class="servicios__card-title-white"><?= nl2br(htmlspecialchars(content_get('servicios', 'serv6_titulo', "Arte y\nDeportes"), ENT_QUOTES, 'UTF-8')) ?></h3>
-                    <p class="servicios__card-text-white"><?= htmlspecialchars(content_get('servicios', 'serv6_desc', 'Participa en grupos culturales, eventos y torneos.'), ENT_QUOTES, 'UTF-8') ?></p>
-                    <a href="#" class="btn--solid">
-                        Conocer Más
-                        <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                // Regla de imagen: Si NO hay imagen, usamos diseño simple. Si la hay, diseño con fondo.
+                if (empty($foto_path)): 
+            ?>
+                <!-- Tarjeta Simple (Sin Imagen) -->
+                <div class="servicios__card-simple">
+                    <h3 class="servicios__card-title"><?= $titulo ?></h3>
+                    <p class="servicios__card-text"><?= $desc ?></p>
+                    <a href="#" class="btn--outline-servicios">
+                        <?= $btn_texto ?>
+                        <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
-            </div>
+            <?php else: ?>
+                <!-- Tarjeta con Imagen de Fondo -->
+                <div class="servicios__card-image">
+                    <img src="<?= htmlspecialchars($foto_path, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(strip_tags($titulo), ENT_QUOTES, 'UTF-8') ?>">
+                    <div class="servicios__card-overlay"></div>
+                    <div class="servicios__card-content">
+                        <h3 class="servicios__card-title-white"><?= $titulo ?></h3>
+                        <p class="servicios__card-text-white"><?= $desc ?></p>
+                        <a href="#" class="btn--solid">
+                            <?= $btn_texto ?>
+                            <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            <?php 
+                endif; 
+            endforeach; 
+            ?>
 
         </div>
 

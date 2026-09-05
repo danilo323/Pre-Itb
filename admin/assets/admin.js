@@ -5,6 +5,63 @@
 
 document.addEventListener('DOMContentLoaded', function () {
 
+    // ── CUSTOM CONFIRM MODAL ───────────────────────────
+    window.customConfirm = function(message, onConfirm) {
+        let modal = document.getElementById('admin-confirm-modal');
+        if (!modal) {
+            modal = document.createElement('div');
+            modal.id = 'admin-confirm-modal';
+            modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.6); z-index:9999; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.2s;';
+            modal.innerHTML = `
+                <div style="background:var(--bg-panel); width:90%; max-width:400px; border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); transform:scale(0.95); transition:transform 0.2s;">
+                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
+                        <i class="bi bi-exclamation-triangle-fill" style="color:var(--primary); font-size:24px;"></i>
+                        <h3 style="margin:0; font-size:16px; color:var(--text-main);">Confirmar acción</h3>
+                    </div>
+                    <p id="admin-confirm-msg" style="color:var(--text-muted); margin-bottom:24px; font-size:14px; line-height:1.5;"></p>
+                    <div style="display:flex; justify-content:flex-end; gap:12px;">
+                        <button type="button" id="admin-confirm-cancel" class="btn btn-outline">Cancelar</button>
+                        <button type="button" id="admin-confirm-ok" class="btn btn-primary">Sí, eliminar</button>
+                    </div>
+                </div>
+            `;
+            document.body.appendChild(modal);
+        }
+
+        const msgEl = document.getElementById('admin-confirm-msg');
+        const btnCancel = document.getElementById('admin-confirm-cancel');
+        const btnOk = document.getElementById('admin-confirm-ok');
+
+        msgEl.textContent = message;
+        modal.style.display = 'flex';
+        setTimeout(() => {
+            modal.style.opacity = '1';
+            modal.querySelector('div').style.transform = 'scale(1)';
+        }, 10);
+
+        const close = () => {
+            modal.style.opacity = '0';
+            modal.querySelector('div').style.transform = 'scale(0.95)';
+            setTimeout(() => { modal.style.display = 'none'; }, 200);
+        };
+
+        btnCancel.onclick = close;
+        btnOk.onclick = () => {
+            close();
+            if (typeof onConfirm === 'function') onConfirm();
+        };
+    };
+
+    // ── BOTONES ELIMINAR COLECCIÓN ─────────────────────
+    document.querySelectorAll('.js-delete-btn').forEach(btn => {
+        btn.addEventListener('click', function() {
+            const form = this.closest('form');
+            window.customConfirm('¿Estás seguro de eliminar este registro?', () => {
+                form.submit();
+            });
+        });
+    });
+
     // ── Auto-cerrar flash message ───────────────────────
     const flash = document.getElementById('panel-flash');
     if (flash) {
@@ -42,12 +99,14 @@ document.addEventListener('DOMContentLoaded', function () {
 
         if (removeBtn) {
             removeBtn.addEventListener('click', function () {
-                if (fileInput) fileInput.value = '';
-                if (hiddenInput) hiddenInput.value = '';
-                if (img) img.src = '';
-                if (preview) preview.style.display = 'none';
-                if (placeholder) placeholder.style.display = 'block';
-                this.style.display = 'none';
+                window.customConfirm('¿Estás seguro de que deseas quitar esta imagen?', () => {
+                    if (fileInput) fileInput.value = '';
+                    if (hiddenInput) hiddenInput.value = '';
+                    if (img) img.src = '';
+                    if (preview) preview.style.display = 'none';
+                    if (placeholder) placeholder.style.display = 'block';
+                    removeBtn.style.display = 'none';
+                });
             });
         }
     }
@@ -80,8 +139,10 @@ document.addEventListener('DOMContentLoaded', function () {
         // Botones de eliminar en items existentes al cargar
         items.querySelectorAll('.btn-remove').forEach(btn => {
             btn.addEventListener('click', () => {
-                btn.closest('.repeater-item').remove();
-                recalcularIndices(items);
+                window.customConfirm('¿Estás seguro de que deseas eliminar este elemento?', () => {
+                    btn.closest('.repeater-item').remove();
+                    recalcularIndices(items);
+                });
             });
         });
 
@@ -124,8 +185,10 @@ document.addEventListener('DOMContentLoaded', function () {
             const btnRemove = newItem.querySelector('.btn-remove');
             if (btnRemove) {
                 btnRemove.addEventListener('click', () => {
-                    newItem.remove();
-                    recalcularIndices(items);
+                    window.customConfirm('¿Estás seguro de que deseas eliminar este elemento?', () => {
+                        newItem.remove();
+                        recalcularIndices(items);
+                    });
                 });
             }
 

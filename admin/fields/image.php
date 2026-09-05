@@ -93,12 +93,18 @@ function field_image_parse($raw, array $config) {
         }
     }
     
-    // 2. Si no subieron nada, verificamos si el usuario borró la imagen
-    // El JS vacía el campo oculto cuando presiona "Quitar"
+    // 2. Si el usuario presionó "Quitar", el JS vacía el campo oculto
     if (is_string($raw) && $raw === '') {
         return '';
     }
     
-    // 3. Mantenemos la imagen anterior
+    // 3. Si el campo oculto trae un valor (la imagen actual), confiamos en él.
+    // Esto es crucial para los repeaters, porque al eliminar items los índices cambian
+    // y $old_val se desincroniza, pero el hidden input (que viaja con el HTML del item) siempre es correcto.
+    if (is_string($raw) && !empty($raw)) {
+        return $raw;
+    }
+    
+    // Fallback de seguridad
     return $old_val;
 }

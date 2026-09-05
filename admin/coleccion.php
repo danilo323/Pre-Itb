@@ -127,11 +127,11 @@ echo layout_start($title_label);
                     <?php endforeach; ?>
                     <td class="actions-cell">
                         <a href="editar.php?c=<?= urlencode($section) ?>&id=<?= $item['id'] ?>" class="btn btn-sm btn-secondary"><i class="bi bi-pencil-fill"></i> Editar</a>
-                        <form method="POST" action="" style="display:inline;" onsubmit="return confirm('¿Estás seguro de eliminar este registro?');">
+                        <form method="POST" action="" style="display:inline;" class="form-delete-record">
                             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="id" value="<?= $item['id'] ?>">
-                            <button type="submit" class="btn btn-sm btn-danger"><i class="bi bi-trash-fill"></i> Eliminar</button>
+                            <button type="button" class="btn btn-sm btn-outline js-delete-btn"><i class="bi bi-trash-fill"></i> Eliminar</button>
                         </form>
                     </td>
                 </tr>

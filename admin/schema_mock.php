@@ -765,133 +765,71 @@ Educación Continua",
                 'servicios' => [
                     'label' => 'SERVICIOS INSTITUCIONALES',
                     'fields' => [
-                        'div_global' => [
-                            'type' => 'divider',
-                            'label' => 'Textos Generales',
-                        ],
-                        'etiqueta_superior' => [
-                            'type' => 'text',
-                            'label' => 'Etiqueta superior (badge)',
-                            'default' => 'Servicios Institucionales',
-                        ],
-                        'titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título de la sección',
-                            'default' => 'Todo lo que necesitas en un solo lugar',
-                        ],
                         'div_serv1' => [
                             'type' => 'divider',
-                            'label' => 'Servicio 1: Bienestar',
+                            'label' => 'Bloque Principal (Izquierda)',
                         ],
                         'serv1_titulo' => [
                             'type' => 'text',
-                            'label' => 'Título',
+                            'label' => 'Título Principal',
                             'default' => 'Bienestar Estudiantil',
                         ],
                         'serv1_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
+                            'type' => 'textarea',
+                            'label' => 'Descripción Principal',
                             'default' => 'Servicios médicos, psicológicos y odontológicos gratuitos',
                         ],
-                        'serv1_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/salud.jpg',
+                        'serv1_btn' => [
+                            'type' => 'text',
+                            'label' => 'Texto del Botón',
+                            'default' => 'Más servicios',
                         ],
-                        'div_serv2' => [
+                        'div_servicios_lista' => [
                             'type' => 'divider',
-                            'label' => 'Servicio 2: Campus',
+                            'label' => 'Tarjetas de Servicios (Derecha)',
                         ],
-                        'serv2_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Campus Virtual',
-                        ],
-                        'serv2_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Plataforma educativa 24/7',
-                        ],
-                        'serv2_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/salud.jpg',
-                        ],
-                        'div_serv3' => [
-                            'type' => 'divider',
-                            'label' => 'Servicio 3: Horarios',
-                        ],
-                        'serv3_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Horarios',
-                        ],
-                        'serv3_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Consulta tus horarios de clase',
-                        ],
-                        'serv3_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/salud.jpg',
-                        ],
-                        'div_serv4' => [
-                            'type' => 'divider',
-                            'label' => 'Servicio 4: Digitales',
-                        ],
-                        'serv4_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Servicios Digitales',
-                        ],
-                        'serv4_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Trámites en línea y gestión académica',
-                        ],
-                        'serv4_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/salud.jpg',
-                        ],
-                        'div_serv5' => [
-                            'type' => 'divider',
-                            'label' => 'Servicio 5: Podcast',
-                        ],
-                        'serv5_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Podcast ITB',
-                        ],
-                        'serv5_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Escucha nuestro contenido educativo',
-                        ],
-                        'serv5_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/salud.jpg',
-                        ],
-                        'div_serv6' => [
-                            'type' => 'divider',
-                            'label' => 'Servicio 6: Deportes',
-                        ],
-                        'serv6_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Arte y Deportes',
-                        ],
-                        'serv6_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Clubes deportivos, grupos artísticos y actividades recreativas',
-                        ],
-                        'serv6_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/salud.jpg',
+                        'lista_servicios' => [
+                            'type' => 'repeater',
+                            'label' => 'Lista de Servicios',
+                            'item_label' => 'Servicio',
+                            'subfields' => [
+                                'titulo' => ['type' => 'text', 'label' => 'Título', 'required' => true],
+                                'desc' => ['type' => 'textarea', 'label' => 'Descripción', 'required' => true],
+                                'btn_texto' => ['type' => 'text', 'label' => 'Texto del Botón (ej: Ver Tour, Acceder)'],
+                                'imagen' => ['type' => 'image', 'label' => 'Imagen de Fondo (Opcional)']
+                            ],
+                            'default' => [
+                                [
+                                    'titulo' => "Campus Virtual",
+                                    'desc' => "Plataforma educativa 24/7",
+                                    'btn_texto' => "Ver Tour",
+                                    'imagen' => ""
+                                ],
+                                [
+                                    'titulo' => "Horarios",
+                                    'desc' => "Consulta tus horarios de clase",
+                                    'btn_texto' => "Ver Horarios",
+                                    'imagen' => ""
+                                ],
+                                [
+                                    'titulo' => "Servicios Digitales",
+                                    'desc' => "Trámites en línea y gestión académica",
+                                    'btn_texto' => "Acceder",
+                                    'imagen' => ""
+                                ],
+                                [
+                                    'titulo' => "Podcast ITB",
+                                    'desc' => "Escucha nuestro contenido educativo",
+                                    'btn_texto' => "Escuchar",
+                                    'imagen' => ""
+                                ],
+                                [
+                                    'titulo' => "Arte y Deportes",
+                                    'desc' => "Clubes deportivos, grupos artísticos y actividades recreativas",
+                                    'btn_texto' => "Conocer Más",
+                                    'imagen' => "img/estudiantes1.png"
+                                ]
+                            ]
                         ],
                     ],
                 ],
