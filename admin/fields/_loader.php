@@ -12,6 +12,7 @@ require_once __DIR__ . '/bool.php';
 require_once __DIR__ . '/select.php';
 require_once __DIR__ . '/date.php';
 require_once __DIR__ . '/divider.php';
+require_once __DIR__ . '/alert.php';
 require_once __DIR__ . '/menu_builder.php';
 
 /**

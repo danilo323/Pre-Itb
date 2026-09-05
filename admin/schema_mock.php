@@ -709,6 +709,11 @@ Educación Continua",
                             'default' => '"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí."',
                             'help' => 'Texto del testimonio. Máx. 3-4 oraciones.',
                         ],
+                        'rol' => [
+                            'type' => 'text',
+                            'label' => 'Rol o Título',
+                            'default' => 'Graduada',
+                        ],
                         'nombre' => [
                             'type' => 'text',
                             'label' => 'Nombre del Graduado',
@@ -726,6 +731,11 @@ Educación Continua",
                 'autoridades' => [
                     'label' => 'AUTORIDADES',
                     'fields' => [
+                        'info_gestion' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>INFORMACIÓN IMPORTANTE:</strong> Para agregar, editar o eliminar las personas que aparecen aquí, dirígete al menú principal en la sección <strong>CONTENIDO -> Equipo</strong> y marca la casilla <strong>Mostrar en Home</strong> en cada perfil.',
+                        ],
                         'div_global' => [
                             'type' => 'divider',
                             'label' => 'Textos Generales',
@@ -739,6 +749,11 @@ Educación Continua",
                             'type' => 'text',
                             'label' => 'Título de la sección',
                             'default' => 'Nuestras Autoridades',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Descripción',
+                            'default' => 'Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.',
                         ],
                         'btn_directorio' => [
                             'type' => 'text',

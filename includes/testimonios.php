@@ -24,7 +24,7 @@
             </div>
 
             <div class="testimonios__author">
-                <!-- Se puede omitir el role si no está en el panel o extraer la primera palabra de la carrera -->
+                <p class="testimonios__author-role"><?= content_get('testimonios', 'rol', 'Graduada') ?></p>
                 <p class="testimonios__author-name"><?= content_get('testimonios', 'nombre', 'María Fernanda Gómez') ?></p>
                 <p class="testimonios__author-program"><?= content_get('testimonios', 'carrera', 'Tecnología Superior en Enfermería') ?></p>
             </div>

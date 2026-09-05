@@ -42,8 +42,9 @@
 
             $count = 0;
             foreach ($equipo_filtrado as $miembro) {
+                $foto_path = trim($miembro['foto'] ?? '');
+                // Regla de Imagen: si está vacía, no mostramos error sino un diseño por defecto
                 
-                $foto = !empty($miembro['foto']) ? htmlspecialchars($miembro['foto'], ENT_QUOTES, 'UTF-8') : 'img/placeholder.jpg';
                 $nombre = htmlspecialchars($miembro['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8');
                 $cargo = nl2br(htmlspecialchars($miembro['cargo'] ?? '', ENT_QUOTES, 'UTF-8'));
                 $linkedin = htmlspecialchars($miembro['linkedin'] ?? '#', ENT_QUOTES, 'UTF-8');
@@ -54,11 +55,21 @@
                 <!-- Card <?= $count ?> -->
                 <div class="autoridades__card">
                     <div class="autoridades__card-img">
-                        <img src="<?= $foto ?>" alt="<?= $nombre ?>">
+                        <?php if (!empty($foto_path)): ?>
+                            <img src="<?= htmlspecialchars($foto_path, ENT_QUOTES, 'UTF-8') ?>" alt="<?= $nombre ?>">
+                        <?php else: ?>
+                            <div style="width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.9rem;">
+                                Ninguna imagen seleccionada
+                            </div>
+                        <?php endif; ?>
                         <div class="autoridades__card-actions">
                             <div class="autoridades__card-socials">
-                                <a href="<?= $email ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
-                                <a href="<?= $linkedin ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
+                                <?php if (!empty($email) && $email !== '#'): ?>
+                                    <a href="<?= $email ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
+                                <?php endif; ?>
+                                <?php if (!empty($linkedin) && $linkedin !== '#'): ?>
+                                    <a href="<?= $linkedin ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
+                                <?php endif; ?>
                             </div>
                             <button class="autoridades__card-plus" aria-label="Ver perfil">
                                 <i class="fas fa-plus"></i>
@@ -73,7 +84,7 @@
             <?php } ?>
             
             <?php if ($count === 0): ?>
-                <p>No hay autoridades destacadas en este momento.</p>
+                <p style="grid-column: 1/-1; text-align: center; color: #666;">No hay autoridades agregadas en este momento.</p>
             <?php endif; ?>
         </div>
     </div>

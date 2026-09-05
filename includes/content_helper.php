@@ -49,6 +49,7 @@ function collection_items(string $collection_name): array {
                 1 => [
                     'id' => 1, 
                     'orden' => '1',
+                    'nombre' => 'Roberto Tolozano Benites',
                     'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
                     'cargo' => 'Canciller', 
                     'linkedin' => '#',
@@ -60,6 +61,7 @@ function collection_items(string $collection_name): array {
                 2 => [
                     'id' => 2, 
                     'orden' => '2',
+                    'nombre' => 'Elena Tolozano Benites',
                     'nombre_completo' => 'PhD. Elena Tolozano Benites', 
                     'cargo' => 'Rectora', 
                     'linkedin' => '#',
@@ -71,6 +73,7 @@ function collection_items(string $collection_name): array {
                 3 => [
                     'id' => 3, 
                     'orden' => '3',
+                    'nombre' => 'Luis Alzate Peralta',
                     'nombre_completo' => 'PhD. Luis Alzate Peralta', 
                     'cargo' => 'Vicerrector Académico y de Investigación', 
                     'linkedin' => '#',
@@ -82,6 +85,7 @@ function collection_items(string $collection_name): array {
                 4 => [
                     'id' => 4, 
                     'orden' => '4',
+                    'nombre' => 'Michelle Tolozano Lapierre',
                     'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
                     'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
                     'linkedin' => '#',

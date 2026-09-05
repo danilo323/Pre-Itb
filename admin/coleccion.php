@@ -37,43 +37,25 @@ if ($is_sortable) {
     });
 }
 
-// Manejar Reordenamiento (POST)
-if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'reorder') {
-    $id_to_move = (int)$_POST['id'];
-    $direction = $_POST['direction'] ?? 'up';
+// Manejar Guardado de Orden (POST)
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_order') {
+    $order_data = json_decode($_POST['order_data'] ?? '[]', true);
     
-    // Encontrar el índice actual en el array ordenado
-    $current_index = -1;
-    foreach ($items as $idx => $item) {
-        if ($item['id'] === $id_to_move) {
-            $current_index = $idx;
-            break;
-        }
-    }
-    
-    if ($current_index !== -1) {
-        $swap_index = ($direction === 'up') ? $current_index - 1 : $current_index + 1;
-        
-        if (isset($items[$swap_index])) {
-            $item_a = $items[$current_index];
-            $item_b = $items[$swap_index];
-            
-            // Intercambiar campo orden
-            $temp_orden = $item_a['orden'] ?? (string)($current_index + 1);
-            $item_a['orden'] = $item_b['orden'] ?? (string)($swap_index + 1);
-            $item_b['orden'] = $temp_orden;
-            
-            // Guardar en sesión
+    if (is_array($order_data) && !empty($order_data)) {
+        foreach ($order_data as $index => $id) {
+            $id = (int)$id;
             foreach ($_SESSION['admin_data'][$section]['items'] as &$sess_item) {
-                if ($sess_item['id'] === $item_a['id']) $sess_item['orden'] = $item_a['orden'];
-                if ($sess_item['id'] === $item_b['id']) $sess_item['orden'] = $item_b['orden'];
+                if ($sess_item['id'] === $id) {
+                    $sess_item['orden'] = (string)($index + 1);
+                    break;
+                }
             }
             unset($sess_item);
-            
-            if (session_status() === PHP_SESSION_ACTIVE) {
-                $_SESSION['flash_message'] = "Orden actualizado exitosamente";
-                $_SESSION['flash_type'] = "success";
-            }
+        }
+        
+        if (session_status() === PHP_SESSION_ACTIVE) {
+            $_SESSION['flash_message'] = "Orden guardado exitosamente";
+            $_SESSION['flash_type'] = "success";
         }
     }
     
@@ -132,24 +114,12 @@ echo layout_start($title_label);
         </thead>
         <tbody>
             <?php foreach ($items as $idx => $item): ?>
-                <tr>
+                <tr data-id="<?= $item['id'] ?>">
                     <td>#<?= $item['id'] ?></td>
                     <?php if ($is_sortable): ?>
                         <td class="actions-cell">
-                            <form method="POST" action="" style="display:inline;">
-                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                                <input type="hidden" name="action" value="reorder">
-                                <input type="hidden" name="direction" value="up">
-                                <input type="hidden" name="id" value="<?= $item['id'] ?>">
-                                <button type="submit" class="btn btn-sm btn-outline" <?= ($idx === 0) ? 'disabled style="opacity: 0.3;"' : '' ?>><i class="bi bi-arrow-up"></i></button>
-                            </form>
-                            <form method="POST" action="" style="display:inline;">
-                                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
-                                <input type="hidden" name="action" value="reorder">
-                                <input type="hidden" name="direction" value="down">
-                                <input type="hidden" name="id" value="<?= $item['id'] ?>">
-                                <button type="submit" class="btn btn-sm btn-outline" <?= ($idx === count($items) - 1) ? 'disabled style="opacity: 0.3;"' : '' ?>><i class="bi bi-arrow-down"></i></button>
-                            </form>
+                            <button type="button" class="btn btn-sm btn-outline js-move-up"><i class="bi bi-arrow-up"></i></button>
+                            <button type="button" class="btn btn-sm btn-outline js-move-down"><i class="bi bi-arrow-down"></i></button>
                         </td>
                     <?php endif; ?>
                     <?php foreach ($columnas as $col): ?>
@@ -169,6 +139,46 @@ echo layout_start($title_label);
         </tbody>
     </table>
 </div>
+
+<?php if ($is_sortable): ?>
+<form id="save-order-form" method="POST" action="" style="display:none;">
+    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
+    <input type="hidden" name="action" value="save_order">
+    <input type="hidden" name="order_data" id="order-data-input" value="">
+</form>
+
+<div id="order-actions" style="display: none; margin-top: 24px; padding: 16px; background: #fffbe2; border: 1px solid #fde68a; border-radius: 8px;">
+    <p style="margin-bottom: 12px; font-weight: 500; color: #b45309;"><i class="bi bi-info-circle-fill"></i> Has modificado el orden de los registros. No olvides guardar.</p>
+    <button type="button" class="btn btn-primary" onclick="submitOrder()"><i class="bi bi-floppy-fill"></i> Guardar Cambios de Orden</button>
+    <button type="button" class="btn btn-outline" onclick="location.reload()">Cancelar</button>
+</div>
+
+<script>
+document.querySelectorAll('.js-move-up').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const row = this.closest('tr');
+        if (row.previousElementSibling) {
+            row.parentNode.insertBefore(row, row.previousElementSibling);
+            document.getElementById('order-actions').style.display = 'block';
+        }
+    });
+});
+document.querySelectorAll('.js-move-down').forEach(btn => {
+    btn.addEventListener('click', function() {
+        const row = this.closest('tr');
+        if (row.nextElementSibling) {
+            row.parentNode.insertBefore(row.nextElementSibling, row);
+            document.getElementById('order-actions').style.display = 'block';
+        }
+    });
+});
+function submitOrder() {
+    const ids = Array.from(document.querySelectorAll('tr[data-id]')).map(tr => tr.getAttribute('data-id'));
+    document.getElementById('order-data-input').value = JSON.stringify(ids);
+    document.getElementById('save-order-form').submit();
+}
+</script>
+<?php endif; ?>
 
 <?php
 echo layout_end();
