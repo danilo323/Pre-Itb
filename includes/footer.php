@@ -31,7 +31,7 @@
             <!-- Columna 1: Logo y descripción -->
             <div class="footer__col">
                 <a href="index.php" class="footer__logo">
-                    <img src="<?= content_raw('ajustes', 'logo_blanco', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer__logo-img">
+                    <img src="<?= content_raw('ajustes', 'logo_blanco', 'img/logo.png') ?>" alt="ITB Logo" class="footer__logo-img">
                 </a>
                 <p class="footer__description">
                     <?= content_get('footer', 'descripcion', 'Instituto Superior Tecnológico Bolivariano de Tecnología. Formando profesionales de excelencia desde 1995.') ?>

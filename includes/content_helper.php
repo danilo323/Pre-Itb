@@ -53,7 +53,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Canciller', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/autoridad-1.jpg',
+                    'foto' => 'img/PHD_Roberto.jpg',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ],
@@ -64,7 +64,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Rectora', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/autoridad-2.jpg',
+                    'foto' => 'img/PHD.Elena_Tolozano.jpg',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ],
@@ -75,7 +75,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Vicerrector Académico y de Investigación', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/autoridad-3.jpg',
+                    'foto' => 'img/PHD.Luis_alzate.jpg',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ],
@@ -86,7 +86,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/autoridad-4.jpg',
+                    'foto' => 'img/PHD.Michelle_tolozano.webp',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ]

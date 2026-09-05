@@ -47,7 +47,7 @@ return [
                 'logo_blanco' => [
                     'type' => 'image',
                     'label' => 'Logo Blanco (Footer)',
-                    'default' => 'img/logo-itb-white.png',
+                    'default' => 'img/logo.png',
                 ],
             ],
         ],
@@ -781,7 +781,7 @@ Educación Continua",
                         'serv1_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-bienestar.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv2' => [
                             'type' => 'divider',
@@ -800,7 +800,7 @@ Educación Continua",
                         'serv2_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-campus.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv3' => [
                             'type' => 'divider',
@@ -819,7 +819,7 @@ Educación Continua",
                         'serv3_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-horarios.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv4' => [
                             'type' => 'divider',
@@ -838,7 +838,7 @@ Educación Continua",
                         'serv4_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-digital.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv5' => [
                             'type' => 'divider',
@@ -857,7 +857,7 @@ Educación Continua",
                         'serv5_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-podcast.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv6' => [
                             'type' => 'divider',
@@ -876,7 +876,7 @@ Educación Continua",
                         'serv6_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-deportes.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                     ],
                 ],
@@ -989,7 +989,7 @@ Educación Continua",
                         'imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen de la Noticia Principal',
-                            'default' => 'img/noticia-principal.jpg',
+                            'default' => 'img/estudiantes1.png',
                             'help' => 'Imagen destacada de la noticia.',
                         ],
                         'div_sec1' => [
@@ -1009,7 +1009,7 @@ Educación Continua",
                         'sec1_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen Noticia 1',
-                            'default' => 'img/noticia-2.jpg',
+                            'default' => 'img/estudiantes1.png',
                         ],
                         'div_sec2' => [
                             'type' => 'divider',
@@ -1028,7 +1028,7 @@ Educación Continua",
                         'sec2_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen Noticia 2',
-                            'default' => 'img/noticia-3.jpg',
+                            'default' => 'img/estudiantes1.png',
                         ],
                         'div_sec3' => [
                             'type' => 'divider',
@@ -1047,7 +1047,7 @@ Educación Continua",
                         'sec3_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen Noticia 3',
-                            'default' => 'img/noticia-4.jpg',
+                            'default' => 'img/estudiantes1.png',
                         ],
                     ],
                 ],
