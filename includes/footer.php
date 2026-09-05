@@ -104,3 +104,18 @@
 <div id="top-to-bottom">
     <i class="fas fa-angles-up"></i>
 </div>
+
+<!-- Botón flotante WhatsApp -->
+<div class="whatsapp-float" id="whatsapp-float">
+    <a href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20ITB" 
+       target="_blank" 
+       class="whatsapp-float__link" 
+       aria-label="Chatea con ITBChat por WhatsApp">
+        <div class="whatsapp-float__label">
+            <span>¿Tienes preguntas? Pregunta a ITBChat</span>
+        </div>
+        <div class="whatsapp-float__icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
+</div>

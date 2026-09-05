@@ -1,81 +1,81 @@
 <!-- ============================================= -->
-<!-- GRILLA DE SERVICIOS / BIENESTAR (BENTO)       -->
+<!-- BIENESTAR ESTUDIANTIL / SERVICIOS             -->
 <!-- ============================================= -->
 <section class="servicios" id="servicios">
     <div class="servicios__container">
-        <div class="servicios__header">
-            <span class="section-tag">Servicios Institucionales</span>
-            <h2 class="servicios__title">
-                Todo lo que necesitas en <span class="text-orange">un solo lugar</span>
-            </h2>
-        </div>
 
-        <div class="servicios__bento">
-            <!-- Bloque grande: Bienestar Estudiantil -->
-            <a href="#" class="servicios__card servicios__card--large" id="card-bienestar">
-                <img src="img/servicio-bienestar.jpg" alt="Bienestar Estudiantil" class="servicios__card-bg">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <span class="servicios__card-icon"><i class="fas fa-heart"></i></span>
-                    <h3 class="servicios__card-title">Bienestar Estudiantil</h3>
-                    <p class="servicios__card-desc">Servicios médicos, psicológicos y odontológicos gratuitos</p>
-                </div>
-            </a>
-
-            <!-- Bloque: Campus Virtual -->
-            <a href="#" class="servicios__card" id="card-campus">
-                <img src="img/servicio-campus.jpg" alt="Campus Virtual" class="servicios__card-bg">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <span class="servicios__card-icon"><i class="fas fa-laptop"></i></span>
-                    <h3 class="servicios__card-title">Campus Virtual</h3>
-                    <p class="servicios__card-desc">Plataforma educativa 24/7</p>
-                </div>
-            </a>
-
-            <!-- Bloque: Horarios -->
-            <a href="#" class="servicios__card" id="card-horarios">
-                <img src="img/servicio-horarios.jpg" alt="Horarios" class="servicios__card-bg">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <span class="servicios__card-icon"><i class="fas fa-calendar-check"></i></span>
-                    <h3 class="servicios__card-title">Horarios</h3>
-                    <p class="servicios__card-desc">Consulta tus horarios de clase</p>
-                </div>
-            </a>
-
-            <!-- Bloque: Servicios Digitales -->
-            <a href="#" class="servicios__card" id="card-digitales">
-                <img src="img/servicio-digital.jpg" alt="Servicios Digitales" class="servicios__card-bg">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <span class="servicios__card-icon"><i class="fas fa-cogs"></i></span>
-                    <h3 class="servicios__card-title">Servicios Digitales</h3>
-                    <p class="servicios__card-desc">Trámites en línea y gestión académica</p>
-                </div>
-            </a>
-
-            <!-- Bloque: Podcast ITB -->
-            <a href="#" class="servicios__card" id="card-podcast">
-                <img src="img/servicio-podcast.jpg" alt="Podcast ITB" class="servicios__card-bg">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <span class="servicios__card-icon"><i class="fas fa-microphone"></i></span>
-                    <h3 class="servicios__card-title">Podcast ITB</h3>
-                    <p class="servicios__card-desc">Escucha nuestro contenido educativo</p>
-                </div>
-            </a>
-
-            <!-- Bloque grande: Arte y Deportes -->
-            <a href="#" class="servicios__card servicios__card--large" id="card-deportes">
-                <img src="img/servicio-deportes.jpg" alt="Arte y Deportes" class="servicios__card-bg">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <span class="servicios__card-icon"><i class="fas fa-running"></i></span>
-                    <h3 class="servicios__card-title">Arte y Deportes</h3>
-                    <p class="servicios__card-desc">Clubes deportivos, grupos artísticos y actividades recreativas</p>
-                </div>
+        <!-- Columna de Texto Principal -->
+        <div class="servicios__intro">
+            <h2 class="servicios__title">Bienestar<br>Estudiantil</h2>
+            <p class="servicios__desc">
+                Impulsamos tu desarrollo integral dentro y fuera del aula con beneficios
+                exclusivos para tu carrera.
+            </p>
+            <a href="#" class="btn--solid" id="btn-servicios-main">
+                Más servicios
+                <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
+
+        <!-- Tarjetas (Cards) -->
+        <div class="servicios__cards">
+            
+            <!-- Card 1 -->
+            <div class="servicios__card-simple">
+                <h3 class="servicios__card-title">Campus<br>Virtual 360°</h3>
+                <p class="servicios__card-text">Conoce nuestras instalaciones, aulas y laboratorios de forma interactiva.</p>
+                <a href="#" class="btn--outline-servicios">
+                    Ver Tour
+                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+
+            <!-- Card 2 -->
+            <div class="servicios__card-simple">
+                <h3 class="servicios__card-title">Horarios y<br>Clases</h3>
+                <p class="servicios__card-text">Consulta turnos presenciales, nocturnos y de fin de semana.</p>
+                <a href="#" class="btn--outline-servicios">
+                    Ver Horarios
+                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+
+            <!-- Card 3 -->
+            <div class="servicios__card-simple">
+                <h3 class="servicios__card-title">Servicios<br>Digitales</h3>
+                <p class="servicios__card-text">Accede al Aula Virtual, App Móvil y herramientas académicas.</p>
+                <a href="#" class="btn--outline-servicios">
+                    Acceder
+                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+
+            <!-- Card 4 -->
+            <div class="servicios__card-simple">
+                <h3 class="servicios__card-title">#Podcast<br>ITB</h3>
+                <p class="servicios__card-text">Historias de éxito y consejos de docentes y graduados.</p>
+                <a href="#" class="btn--outline-servicios">
+                    Escuchar
+                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
+                </a>
+            </div>
+
+            <!-- Card 5 (Imagen de fondo) -->
+            <div class="servicios__card-image">
+                <img src="img/estudiantes1.png" alt="Arte y Deportes">
+                <div class="servicios__card-overlay"></div>
+                <div class="servicios__card-content">
+                    <h3 class="servicios__card-title-white">Arte y<br>Deportes</h3>
+                    <p class="servicios__card-text-white">Participa en grupos culturales, eventos y torneos.</p>
+                    <a href="#" class="btn--solid">
+                        Conocer Más
+                        <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                    </a>
+                </div>
+            </div>
+
+        </div>
+
     </div>
 </section>
+

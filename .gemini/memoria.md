@@ -70,6 +70,13 @@
 - Se añadió efecto **Ken Burns** con transiciones CSS "slide-up" (desde abajo hacia arriba) automáticas de 7 segundos.
 - Se implementó una **Ventana Modal** en `hero.php` y `main.js` para visualizar un video de YouTube sin salir de la página principal.
 
+### 7. Rediseño Secciones "Autoridades" y "Bienestar Estudiantil" (Servicios)
+- **Autoridades**: Se rediseñó el layout a un grid de 4 columnas perfectas. Se aplicó color de fondo `#f5f5f5`, ajuste estricto de colores y tamaños de tarjeta (`height: 380px`).
+- Se añadió un botón "Ver Directorio" (`.btn--outline-directorio`) a la medida con efecto de *slide* naranja.
+- Se implementó interacción de íconos sociales flotantes al pasar el ratón sobre el botón `+`. Se corrigió el hover de la imagen usando `:not(:has(...))` para aislar el zoom.
+- **Bienestar (Servicios)**: Se abandonó el viejo Bento Grid para usar un layout de 1 columna izquierda (texto y CTA) y 5 tarjetas alineadas a la derecha, calcando el diseño de la maqueta original.
+- Se agregaron las tarjetas con tipografía y botones propios (`.btn--outline-servicios`) y la tarjeta de fondo completo para "Arte y Deportes".
+
 ---
 
 ## 🎯 Próximos Pasos y Tareas Pendientes
