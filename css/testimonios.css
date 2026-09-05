@@ -1,0 +1,119 @@
+﻿/* =============================================
+   TESTIMONIOS
+   ============================================= */
+.testimonios {
+    padding: 100px 0;
+    background: var(--primary-blue);
+}
+
+.testimonios__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.testimonios__image {
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.testimonios__image img {
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+}
+
+.testimonios__content {
+    color: var(--white);
+}
+
+.testimonios__content .section-tag {
+    background: rgba(232, 113, 42, 0.2);
+}
+
+.testimonios__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-weight: 800;
+    margin-bottom: 28px;
+}
+
+.testimonios__quote {
+    margin-bottom: 28px;
+}
+
+.testimonios__quote-icon {
+    font-size: 2rem;
+    color: var(--primary-orange);
+    margin-bottom: 12px;
+    display: block;
+}
+
+.testimonios__text {
+    font-size: 1.05rem;
+    font-style: italic;
+    line-height: 1.8;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.testimonios__author-name {
+    font-weight: 700;
+    font-size: 1rem;
+    display: block;
+    margin-bottom: 4px;
+}
+
+.testimonios__author-career {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+}
+
+/* Nav testimonios */
+.testimonios__nav {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-top: 28px;
+}
+
+.testimonios__nav-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--white);
+    font-size: 0.8rem;
+    transition: var(--transition);
+}
+
+.testimonios__nav-btn:hover {
+    background: var(--primary-orange);
+    border-color: var(--primary-orange);
+}
+
+.testimonios__nav-dots {
+    display: flex;
+    gap: 8px;
+}
+
+.testimonios__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    transition: var(--transition);
+}
+
+.testimonios__dot--active {
+    background: var(--primary-orange);
+    width: 28px;
+    border-radius: 10px;
+}

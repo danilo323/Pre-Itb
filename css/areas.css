@@ -1,0 +1,137 @@
+/* =============================================
+   ÃREAS DE FORMACIÃ“N
+   ============================================= */
+.areas {
+    padding: 100px 0;
+    background: var(--gray-50);
+}
+
+.areas__container {
+    max-width: 1350px; /* Aumentado para que las tarjetas sean más anchas a los lados */
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.areas__header {
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.areas__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin-bottom: 12px;
+}
+
+.areas__subtitle {
+    font-size: 1rem;
+    color: var(--gray-600);
+    max-width: 100%; /* Cambiado para que NUNCA se vaya para abajo (wrap) si hay espacio */
+    margin: 0 auto;
+    line-height: 1.5;
+}
+
+.areas__grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+}
+
+.areas__card {
+    background: var(--primary-blue);
+    border-radius: 8px; /* Reducido para que las esquinas no sean tan redondeadas */
+    padding: 24px 28px 36px;
+    color: var(--white);
+    display: flex;
+    flex-direction: column;
+    transition: var(--transition);
+    position: relative;
+    overflow: hidden;
+}
+
+.areas__card--image {
+    background-size: cover;
+    background-position: center;
+}
+
+.areas__card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 12px 40px rgba(27, 42, 74, 0.3);
+}
+
+
+.areas__card-icon {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-bottom: 20px;
+}
+
+.areas__icon-img {
+    width: 48px;
+    height: 48px;
+    object-fit: contain;
+    filter: brightness(0) invert(1); /* Fuerza a que los iconos sean totalmente blancos */
+}
+
+.areas__card-title {
+    font-family: var(--font-heading);
+    font-size: 1.35rem;
+    font-weight: 700;
+    margin-bottom: 12px;
+    line-height: 1.3;
+}
+
+.areas__card-description {
+    font-size: 0.88rem;
+    color: rgba(255, 255, 255, 0.85);
+    line-height: 1.5;
+    margin-bottom: 24px;
+    flex-grow: 1; /* Permite que la descripciÃ³n empuje el botÃ³n hacia abajo si no hay lista */
+}
+
+.areas__card .btn--solid {
+    margin-top: auto;
+    align-self: center; /* Centra el botÃ³n horizontalmente */
+}
+
+.areas__card-list {
+    margin-bottom: 24px;
+    flex-grow: 1;
+}
+
+.areas__card-list li {
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.6);
+    padding: 6px 0;
+    padding-left: 16px;
+    position: relative;
+}
+
+.areas__card-list li::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 50%;
+    width: 6px;
+    height: 6px;
+    background: var(--primary-orange);
+    border-radius: 50%;
+    transform: translateY(-50%);
+}
+
+.areas__card-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--primary-orange);
+    transition: var(--transition);
+}
+
+.areas__card-btn:hover {
+    gap: 12px;
+}

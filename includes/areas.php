@@ -17,7 +17,7 @@
             <!-- Card 1: Salud -->
             <div class="areas__card">
                 <div class="areas__card-icon">
-                    <img src="img/estetoscopio.png" alt="Salud" class="areas__icon-img">
+                    <img src="img/doctor.png" alt="Salud" class="areas__icon-img">
                 </div>
                 <h3 class="areas__card-title">Facultad de Salud
                     y Servicios Sociales (FASSS)</h3>
@@ -55,7 +55,7 @@
             <!-- Card 3: Transporte -->
             <div class="areas__card">
                 <div class="areas__card-icon">
-                    <img src="img/transporte.png" alt="Transporte" class="areas__icon-img">
+                    <img src="img/coche.png" alt="Transporte" class="areas__icon-img">
                 </div>
                 <h3 class="areas__card-title">Facultad de Transporte
                     y Vialidad (FATV)</h3>

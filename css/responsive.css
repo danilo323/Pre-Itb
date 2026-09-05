@@ -1,0 +1,264 @@
+﻿/* =============================================
+   RESPONSIVE â€” TABLET (<=1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+    .top-bar__nav {
+        display: none;
+    }
+
+    .navbar__toggle {
+        display: flex;
+    }
+
+    .navbar__menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 320px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: stretch;
+        padding: 80px 24px 40px;
+        box-shadow: var(--shadow-xl);
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: 1001;
+    }
+
+    .navbar__menu.active {
+        right: 0;
+    }
+
+    .navbar__list {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+    }
+
+    .navbar__link {
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+
+    .navbar__dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        padding: 0 0 0 16px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .navbar__item--dropdown.active .navbar__dropdown {
+        max-height: 300px;
+    }
+
+    .navbar__cta {
+        margin-left: 0;
+        margin-top: 16px;
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .navbar__btn {
+        width: 100%;
+        justify-content: center;
+        padding: 14px 24px;
+    }
+
+    /* Secciones */
+    .hero__container {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+    }
+
+    .hero__media {
+        justify-content: center;
+    }
+
+    .trayectoria__container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+
+
+    .areas__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .programas__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experiencia__container {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonios__container {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonios__image {
+        order: -1;
+    }
+
+    .autoridades__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .servicios__bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .servicios__card--large {
+        grid-column: span 2;
+    }
+
+    .admision__container {
+        grid-template-columns: 1fr;
+    }
+
+    .noticias__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .prefooter__container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .prefooter__buttons {
+        justify-content: center;
+    }
+}
+
+/* =============================================
+   RESPONSIVE â€” MÃ“VIL (<=640px)
+   ============================================= */
+@media (max-width: 640px) {
+    :root {
+        --header-height: 60px;
+        --top-bar-height: 36px;
+    }
+
+    .top-bar__search-input {
+        width: 70px;
+    }
+
+    .navbar__menu {
+        width: 100%;
+    }
+
+    .navbar__logo-img {
+        height: 38px;
+    }
+
+    .hero__container {
+        padding: 48px 20px;
+    }
+
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    .hero__description {
+        font-size: 0.9rem;
+    }
+
+    .hero__actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .hero__media {
+        display: none;
+    }
+
+
+
+    .programas__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .programas__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .experiencia__image img {
+        height: 300px;
+    }
+
+    .testimonios__image img {
+        height: 300px;
+    }
+
+    .autoridades__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .autoridades__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .servicios__bento {
+        grid-template-columns: 1fr;
+    }
+
+    .servicios__card--large {
+        grid-column: span 1;
+    }
+
+    .admision__form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .noticias__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .noticias__item {
+        flex-direction: column;
+    }
+
+    .noticias__item-img {
+        width: 100%;
+        height: 160px;
+    }
+
+    .prefooter__buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .prefooter__btn {
+        justify-content: center;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer__bottom-links {
+        justify-content: center;
+    }
+}
