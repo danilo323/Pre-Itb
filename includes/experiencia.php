@@ -5,71 +5,97 @@
 <!-- ============================================= -->
 <section class="experiencia" id="experiencia">
     <div class="experiencia__container">
-        <!-- Lado izquierdo -->
+
+        <!-- Lado izquierdo: Texto -->
         <div class="experiencia__content">
-            <span class="section-tag"><?= content_get('experiencia', 'etiqueta_superior', 'Vida Estudiantil') ?></span>
+            <span class="experiencia__tag"><?= content_get('experiencia', 'etiqueta_superior', '¿Por qué elegir el ITB?') ?></span>
             <h2 class="experiencia__title">
-                <?= content_title('experiencia', 'titulo', 'Tu Experiencia *ITB*') ?>
+                <?= htmlspecialchars(content_get('experiencia', 'titulo', 'Tu Experiencia ITB'), ENT_QUOTES, 'UTF-8') ?>
             </h2>
             <p class="experiencia__description">
-                <?= content_get('experiencia', 'descripcion', 'Más allá de lo académico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseñados para tu bienestar.') ?>
+                <?= content_get('experiencia', 'descripcion', 'En el ITB no solo te formamos académicamente; nos preocupamos por tu bienestar integral. Te ofrecemos beneficios exclusivos diseñados para apoyarte durante toda tu carrera universitaria.') ?>
             </p>
 
             <ul class="experiencia__list">
                 <?php
                 $caracteristicas = content_raw('experiencia', 'lista_caracteristicas', [
                     [
-                        'icono' => 'fas fa-stethoscope',
-                        'titulo' => 'Servicios Médicos',
-                        'descripcion' => 'Atención médica y odontológica gratuita para estudiantes.'
+                        'titulo' => 'Servicios Médicos Gratuitos',
+                        'descripcion' => '(Podología, psicología, medicina general)'
                     ],
                     [
-                        'icono' => 'fas fa-award',
-                        'titulo' => 'Becas y Financiamiento',
-                        'descripcion' => 'Programas de becas por excelencia académica y apoyo financiero.'
+                        'titulo' => 'Becas y Apoyo Económico',
+                        'descripcion' => '(Académicas, deportivas y culturales)'
                     ],
                     [
-                        'icono' => 'fas fa-laptop-code',
-                        'titulo' => 'Laboratorios Modernos',
-                        'descripcion' => 'Tecnología de punta en todos nuestros laboratorios especializados.'
+                        'titulo' => 'Gimnasio y SPA Gratis',
+                        'descripcion' => '(Acceso exclusivo a ITB GYM)'
                     ],
                     [
-                        'icono' => 'fas fa-handshake',
-                        'titulo' => 'Bolsa de Empleo',
-                        'descripcion' => 'Conexión directa con empresas aliadas para tus prácticas y primer empleo.'
+                        'titulo' => 'Modalidades a Tu Medida',
+                        'descripcion' => '(Presencial, híbrida u online)'
                     ]
                 ]);
                 
-                $default_icons = ['fas fa-stethoscope', 'fas fa-award', 'fas fa-laptop-code', 'fas fa-handshake'];
-                $index = 0;
                 foreach ((array)$caracteristicas as $c):
-                    $icono_class = $default_icons[$index % 4];
                 ?>
                 <li class="experiencia__list-item">
-                    <span class="experiencia__list-icon"><i class="<?= $icono_class ?>"></i></span>
-                    <div>
-                        <strong><?= htmlspecialchars($c['titulo'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong>
-                        <p><?= nl2br(htmlspecialchars($c['descripcion'] ?? '', ENT_QUOTES, 'UTF-8')) ?></p>
-                    </div>
+                    <span class="experiencia__check"><i class="fas fa-check"></i></span>
+                    <p><strong><?= htmlspecialchars($c['titulo'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong> <?= htmlspecialchars($c['descripcion'] ?? '', ENT_QUOTES, 'UTF-8') ?></p>
                 </li>
                 <?php 
-                    $index++;
                 endforeach; 
                 ?>
             </ul>
 
-            <a href="#" class="btn btn--solid" id="btn-beneficios">
-                <?= content_get('experiencia', 'btn_texto', 'Más beneficios') ?> <i class="fas fa-arrow-right"></i>
+            <a href="#" class="btn--solid" id="btn-beneficios">
+                <?= content_get('experiencia', 'btn_texto', 'Más beneficios') ?>
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
         <!-- Lado derecho: Imagen -->
         <div class="experiencia__image">
-            <img src="<?= content_raw('experiencia', 'imagen', 'img/experiencia-itb.jpg') ?>" alt="Experiencia estudiantil ITB">
-            <div class="experiencia__image-badge">
-                <span class="experiencia__image-badge-number"><?= content_get('experiencia', 'badge_numero', '98%') ?></span>
-                <span class="experiencia__image-badge-text"><?= content_get('experiencia', 'badge_texto', 'Satisfacción Estudiantil') ?></span>
-            </div>
+            <img src="<?= htmlspecialchars(content_raw('experiencia', 'imagen', 'img/experiencia.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Experiencia estudiantil ITB">
         </div>
+
     </div>
 </section>
+
+<!-- ============================================= -->
+<!-- TESTIMONIOS - LO QUE DICEN NUESTROS           -->
+<!-- ESTUDIANTES                                   -->
+<!-- ============================================= -->
+<section class="testimonios" id="testimonios">
+    <div class="testimonios__container">
+
+        <!-- Foto a la izquierda -->
+        <div class="testimonios__photo">
+            <img src="img/MariaFernanda.png" alt="María Fernanda Gómez">
+        </div>
+
+        <!-- Contenido a la derecha -->
+        <div class="testimonios__content">
+            <span class="testimonios__tag">Historias de Éxito</span>
+            <h2 class="testimonios__title">Lo que dicen nuestros<br>estudiantes</h2>
+
+            <div class="testimonios__quote-block">
+                <span class="testimonios__quote-icon">&ldquo;</span>
+                <p class="testimonios__quote-text">
+                    Gracias a la modalidad híbrida del ITB y la formación
+                    práctica en laboratorios, pude incorporarme rápidamente
+                    al sector laboral mientras terminaba mi carrera.
+                </p>
+            </div>
+
+            <div class="testimonios__author">
+                <p class="testimonios__author-role">Graduada</p>
+                <p class="testimonios__author-name">María Fernanda Gómez</p>
+                <p class="testimonios__author-program">Tecnología Superior en Enfermería</p>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+

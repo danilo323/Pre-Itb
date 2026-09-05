@@ -27,7 +27,6 @@ require_once 'includes/content_helper.php';
         <?php include 'includes/areas.php'; ?>
         <?php include 'includes/programas.php'; ?>
         <?php include 'includes/experiencia.php'; ?>
-        <?php include 'includes/testimonios.php'; ?>
         <?php include 'includes/autoridades.php'; ?>
         <?php include 'includes/servicios.php'; ?>
         <?php include 'includes/admision.php'; ?>

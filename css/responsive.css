@@ -1,4 +1,4 @@
-﻿/* =============================================
+/* =============================================
    RESPONSIVE â€” TABLET (<=1024px)
    ============================================= */
 @media (max-width: 1024px) {
@@ -88,8 +88,13 @@
 
 
 
+    .areas {
+        padding: 60px 0;
+    }
+
     .areas__grid {
-        grid-template-columns: 1fr;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 20px;
     }
 
     .programas__grid {
@@ -187,6 +192,22 @@
     }
 
 
+
+    .areas {
+        padding: 40px 0;
+    }
+
+    .areas__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .areas__header {
+        margin-bottom: 40px;
+    }
+
+    .areas__card {
+        padding: 20px 20px 24px;
+    }
 
     .programas__grid {
         grid-template-columns: 1fr;

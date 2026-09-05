@@ -1,4 +1,4 @@
-﻿/* =============================================
+/* =============================================
    PRE-FOOTER
    ============================================= */
 .prefooter {
@@ -319,3 +319,60 @@
     transform: translateY(-5px);
     box-shadow: 0 6px 20px rgba(232, 113, 42, 0.6);
 }
+
+/* =============================================
+   BOTÓN FLOTANTE WHATSAPP
+   ============================================= */
+.whatsapp-float {
+    position: fixed;
+    bottom: 24px;
+    right: 24px;
+    z-index: 9999;
+}
+
+.whatsapp-float__link {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    text-decoration: none;
+    filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.25));
+}
+
+/* Etiqueta de texto a la izquierda */
+.whatsapp-float__label {
+    background-color: #1b2a4a;
+    color: #ffffff;
+    font-size: 0.78rem;
+    font-weight: 600;
+    padding: 10px 16px;
+    border-radius: 24px 0 0 24px;
+    white-space: nowrap;
+    letter-spacing: 0.02em;
+    text-transform: uppercase;
+    transition: background-color 0.3s ease;
+}
+
+/* Ícono WhatsApp verde */
+.whatsapp-float__icon {
+    background-color: #25d366;
+    color: #ffffff;
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.whatsapp-float__link:hover .whatsapp-float__icon {
+    background-color: #1ebe57;
+    transform: scale(1.08);
+}
+
+.whatsapp-float__link:hover .whatsapp-float__label {
+    background-color: #253f6e;
+}
+

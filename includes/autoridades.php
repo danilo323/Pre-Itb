@@ -4,18 +4,25 @@
 <!-- ============================================= -->
 <section class="autoridades" id="autoridades">
     <div class="autoridades__container">
+
+        <!-- Header -->
         <div class="autoridades__header">
-            <div>
-                <span class="section-tag"><?= content_get('autoridades', 'etiqueta_superior', 'Nuestro Equipo') ?></span>
+            <div class="autoridades__header-left">
+                <span class="autoridades__tag"><?= content_get('autoridades', 'etiqueta_superior', 'Liderazgo Institucional') ?></span>
                 <h2 class="autoridades__title">
-                    <?= content_title('autoridades', 'titulo', 'Nuestras *Autoridades*') ?>
+                    <?= htmlspecialchars(content_get('autoridades', 'titulo', 'Nuestras Autoridades'), ENT_QUOTES, 'UTF-8') ?>
                 </h2>
+                <p class="autoridades__subtitle">
+                    <?= content_get('autoridades', 'descripcion', 'Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.') ?>
+                </p>
             </div>
-            <a href="#" class="btn btn--outline-dark" id="btn-directorio">
-                <?= content_get('autoridades', 'btn_directorio', 'Ver Directorio') ?> <i class="fas fa-arrow-right"></i>
+            <a href="#" class="btn--outline-directorio" id="btn-directorio">
+                <?= content_get('autoridades', 'btn_directorio', 'Ver Directorio') ?>
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
+        <!-- Grid de cards -->
         <div class="autoridades__grid">
             <?php
             $equipo = collection_items('equipo');
@@ -38,7 +45,7 @@
                 
                 $foto = !empty($miembro['foto']) ? htmlspecialchars($miembro['foto'], ENT_QUOTES, 'UTF-8') : 'img/placeholder.jpg';
                 $nombre = htmlspecialchars($miembro['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8');
-                $cargo = htmlspecialchars($miembro['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
+                $cargo = nl2br(htmlspecialchars($miembro['cargo'] ?? '', ENT_QUOTES, 'UTF-8'));
                 $linkedin = htmlspecialchars($miembro['linkedin'] ?? '#', ENT_QUOTES, 'UTF-8');
                 $email = htmlspecialchars($miembro['email'] ?? '#', ENT_QUOTES, 'UTF-8');
                 
@@ -48,9 +55,14 @@
                 <div class="autoridades__card">
                     <div class="autoridades__card-img">
                         <img src="<?= $foto ?>" alt="<?= $nombre ?>">
-                        <div class="autoridades__card-social">
-                            <a href="<?= $linkedin ?>" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="<?= $email ?>" aria-label="Email"><i class="fas fa-envelope"></i></a>
+                        <div class="autoridades__card-actions">
+                            <div class="autoridades__card-socials">
+                                <a href="<?= $email ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
+                                <a href="<?= $linkedin ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
+                            </div>
+                            <button class="autoridades__card-plus" aria-label="Ver perfil">
+                                <i class="fas fa-plus"></i>
+                            </button>
                         </div>
                     </div>
                     <div class="autoridades__card-body">
@@ -66,3 +78,4 @@
         </div>
     </div>
 </section>
+
