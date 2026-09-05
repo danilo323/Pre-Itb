@@ -47,7 +47,7 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 24px;
-    align-items: start;
+    align-items: stretch;
 }
 
 /* Tarjeta con borde gris sutil */
@@ -68,6 +68,7 @@
 /* Imagen con padding interno (efecto flotante) */
 .programas__card-img {
     padding: 16px 16px 0 16px;
+    min-height: 196px; /* Mantiene el espacio en blanco si no hay imagen (180px img + 16px padding) */
 }
 
 .programas__card-img img {

@@ -67,6 +67,7 @@
     align-items: center;
     justify-content: flex-start;
     margin-bottom: 20px;
+    min-height: 48px; /* Mantiene el espacio en blanco si no hay ícono (48px height del img) */
 }
 
 .areas__icon-img {

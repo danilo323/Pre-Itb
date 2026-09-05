@@ -23,7 +23,11 @@ function field_repeater_render(string $name_path, $value, array $config): string
         $html .= "    <div class='repeater-item' data-index='{$index}' style='border:1px solid var(--border-color); padding:16px; margin-bottom:16px; border-radius:8px; background:var(--bg-main);'>\n";
         $html .= "      <div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:1px solid var(--border-color); padding-bottom:12px;'>\n";
         $html .= "          <h4 style='margin:0; font-size:15px; color:var(--text-main);'>{$item_label} {$display_index}</h4>\n";
-        $html .= "          <button type='button' class='btn-remove' style='background:transparent; border:none; color:var(--danger); cursor:pointer; font-size:14px;'>Eliminar</button>\n";
+        
+        if (empty($config['fixed_items'])) {
+            $html .= "          <button type='button' class='btn-remove' style='background:transparent; border:none; color:var(--danger); cursor:pointer; font-size:14px;'>Eliminar</button>\n";
+        }
+        
         $html .= "      </div>\n";
         // Renderizar subcampos
         foreach ($subfields as $sub_key => $sub_config) {
@@ -41,7 +45,9 @@ function field_repeater_render(string $name_path, $value, array $config): string
     $html .= "  </div>\n";
     
     // Botón para añadir (JavaScript lo usará)
-    $html .= "  <button type='button' class='btn-add btn btn-outline' style='width:100%; justify-content:center; border-style:dashed;'><i class='bi bi-plus-circle'></i> Añadir {$item_label}</button>\n";
+    if (empty($config['fixed_items'])) {
+        $html .= "  <button type='button' class='btn-add btn btn-outline' style='width:100%; justify-content:center; border-style:dashed;'><i class='bi bi-plus-circle'></i> Añadir {$item_label}</button>\n";
+    }
     $html .= "</div>\n";
     
     return $html;

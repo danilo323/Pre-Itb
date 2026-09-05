@@ -40,16 +40,10 @@
                     'btn_texto' => 'Explorar programas'
                 ]
             ]);
-            $index = 0;
-            $default_icons = ['img/doctor.png', 'img/laptop.png', 'img/coche.png'];
             
             foreach ((array)$areas_list as $area):
-                // Fallbacks si el usuario deja la imagen en blanco (o si son los valores por defecto que ahora vienen vacíos)
-                $fallback_icon = $default_icons[$index % 3];
-                $icono = !empty($area['icono']) ? $area['icono'] : $fallback_icon;
-                
-                // Solo la segunda área tiene fondo por defecto
-                $imagen_fondo = !empty($area['imagen_fondo']) ? $area['imagen_fondo'] : (($index % 3) === 1 ? 'img/estudiantes1.png' : '');
+                $icono = $area['icono'] ?? '';
+                $imagen_fondo = $area['imagen_fondo'] ?? '';
                 
                 $has_bg = !empty($imagen_fondo);
                 $card_class = $has_bg ? 'areas__card areas__card--image' : 'areas__card';
@@ -58,7 +52,7 @@
             <div class="<?= $card_class ?>" style="<?= $bg_style ?>">
                 <div class="areas__card-icon">
                     <?php if (!empty($icono)): ?>
-                        <img src="<?= htmlspecialchars($icono, ENT_QUOTES, 'UTF-8') ?>" alt="Ícono" class="areas__icon-img">
+                        <img src="<?= htmlspecialchars($icono, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($area['titulo'] ?? 'Área', ENT_QUOTES, 'UTF-8') ?>" class="areas__icon-img">
                     <?php endif; ?>
                 </div>
                 <h3 class="areas__card-title"><?= nl2br(htmlspecialchars($area['titulo'] ?? '', ENT_QUOTES, 'UTF-8')) ?></h3>

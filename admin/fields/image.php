@@ -31,11 +31,9 @@ function field_image_render(string $name_path, $value, array $config): string {
     $inputId = 'file_' . md5($name_path . rand());
     
     // Texto del placeholder
-    $placeholder_icon = $has_image && !$image_exists ? 'bi-exclamation-triangle' : 'bi-image';
-    $placeholder_color = $has_image && !$image_exists ? '#ef4444' : 'var(--text-muted)';
-    $placeholder_text = $has_image && !$image_exists 
-        ? "La imagen <strong>{$val}</strong> no se encuentra en el servidor."
-        : "Ninguna imagen seleccionada";
+    $placeholder_icon = 'bi-image';
+    $placeholder_color = 'var(--text-muted)';
+    $placeholder_text = "Ninguna imagen seleccionada";
 
     return <<<HTML
 <div class="form-group field-image">
@@ -46,7 +44,6 @@ function field_image_render(string $name_path, $value, array $config): string {
         <!-- Preview si hay imagen -->
         <div class="image-preview" style="{$preview_style} text-align: center;">
             <img src="{$img_src}" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
-            <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Ruta actual: {$val}</div>
         </div>
         
         <!-- Placeholder si no hay imagen o si está rota -->

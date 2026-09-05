@@ -6,15 +6,14 @@
     <div class="testimonios__container">
         <!-- Lado izquierdo: Imagen -->
         <div class="testimonios__image">
-            <img src="<?= content_raw('testimonios', 'imagen', 'img/testimonio-estudiante.jpg') ?>" alt="<?= content_get('testimonios', 'nombre', 'Estudiante ITB') ?>">
+            <img src="<?= content_raw('testimonios', 'imagen', 'img/MariaFernanda.png') ?>" alt="<?= content_get('testimonios', 'nombre', 'Estudiante ITB') ?>">
         </div>
 
         <!-- Lado derecho: Contenido del testimonio -->
         <div class="testimonios__content">
             <span class="section-tag section-tag--light"><?= content_get('testimonios', 'etiqueta_superior', 'HISTORIAS DE ÉXITO') ?></span>
             <h2 class="testimonios__title">
-                <?= content_get('testimonios', 'titulo_seccion_1', 'Lo que dicen nuestros') ?><br>
-                <span class="text-orange"><?= content_get('testimonios', 'titulo_seccion_2', 'Graduados') ?></span>
+                <?= htmlspecialchars(content_get('testimonios', 'titulo', 'Lo que dicen nuestros Graduados'), ENT_QUOTES, 'UTF-8') ?>
             </h2>
             
             <div class="testimonios__slider">

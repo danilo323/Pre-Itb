@@ -44,15 +44,15 @@
                 ]
             ]);
             
-            $default_imgs = ['img/enfermeria.jpg', 'img/Mecanica.jpg', 'img/desarrollo_software.jpg', 'img/administracion.jpg'];
             $index = 0;
             foreach ((array)$programas_list as $prog):
-                $fallback_img = $default_imgs[$index % 4];
-                $img_src = !empty($prog['imagen']) ? $prog['imagen'] : $fallback_img;
+                $img_src = $prog['imagen'] ?? '';
             ?>
             <div class="programas__card">
                 <div class="programas__card-img">
-                    <img src="<?= htmlspecialchars($img_src, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($prog['titulo'] ?? 'Programa', ENT_QUOTES, 'UTF-8') ?>">
+                    <?php if (!empty($img_src)): ?>
+                        <img src="<?= htmlspecialchars($img_src, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($prog['titulo'] ?? 'Programa', ENT_QUOTES, 'UTF-8') ?>">
+                    <?php endif; ?>
                 </div>
                 <div class="programas__card-body">
                     <h3 class="programas__card-title"><?= nl2br(htmlspecialchars($prog['titulo'] ?? 'Título del programa', ENT_QUOTES, 'UTF-8')) ?></h3>

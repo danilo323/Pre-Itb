@@ -532,8 +532,12 @@ Educación Continua",
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título de la sección',
-                            'default' => 'Programas *Destacados*',
-                            'help' => 'Usa asteriscos *texto* para pintar una palabra de color naranja.',
+                            'default' => 'Programas Destacados',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Descripción',
+                            'default' => 'Descubre nuestros programas tecnológicos de mayor demanda laboral, diseñados para insertarte rápidamente en el mercado de trabajo.',
                         ],
                         'btn_ver_todos' => [
                             'type' => 'text',
@@ -544,6 +548,7 @@ Educación Continua",
                             'type' => 'repeater',
                             'label' => 'Lista de Programas',
                             'item_label' => 'Programa',
+                            'fixed_items' => true,
                             'subfields' => [
                                 'imagen' => ['type' => 'image', 'label' => 'Imagen'],
                                 'modalidad' => ['type' => 'text', 'label' => 'Modalidad', 'help' => 'Ej: Presencial, Híbrido, En línea'],
@@ -554,7 +559,7 @@ Educación Continua",
                             ],
                             'default' => [
                                 [
-                                    'imagen' => '',
+                                    'imagen' => 'img/enfermeria.jpg',
                                     'modalidad' => 'Presencial',
                                     'area' => 'Salud',
                                     'titulo' => 'Tecnología Superior en Enfermería',
@@ -562,7 +567,7 @@ Educación Continua",
                                     'sede' => 'Guayaquil'
                                 ],
                                 [
-                                    'imagen' => '',
+                                    'imagen' => 'img/Mecanica.jpg',
                                     'modalidad' => 'Presencial',
                                     'area' => 'Ciencias Empresariales',
                                     'titulo' => 'Tecnología Superior en Marketing Digital',
@@ -570,7 +575,7 @@ Educación Continua",
                                     'sede' => 'Guayaquil'
                                 ],
                                 [
-                                    'imagen' => '',
+                                    'imagen' => 'img/desarrollo_software.jpg',
                                     'modalidad' => 'Presencial',
                                     'area' => 'Transporte',
                                     'titulo' => 'Tecnología Superior en Logística y Transporte',
@@ -578,7 +583,7 @@ Educación Continua",
                                     'sede' => 'Guayaquil'
                                 ],
                                 [
-                                    'imagen' => '',
+                                    'imagen' => 'img/administracion.jpg',
                                     'modalidad' => 'Híbrido',
                                     'area' => 'Tecnología',
                                     'titulo' => 'Tecnología Superior en Desarrollo de Software',
@@ -604,8 +609,7 @@ Educación Continua",
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título principal',
-                            'default' => 'Tu Experiencia *ITB*',
-                            'help' => 'Usa asteriscos *texto* para pintar una palabra de color naranja.',
+                            'default' => 'Tu Experiencia ITB',
                             'required' => true
                         ],
                         'descripcion' => [
@@ -658,7 +662,7 @@ Educación Continua",
                         'imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen principal',
-                            'default' => 'img/experiencia-itb.jpg',
+                            'default' => 'img/experiencia.png',
                         ],
                         'badge_numero' => [
                             'type' => 'text',
@@ -687,8 +691,7 @@ Educación Continua",
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título de la sección',
-                            'default' => 'Lo que dicen nuestros *Graduados*',
-                            'help' => 'Usa asteriscos *texto* para pintar una palabra de color naranja.',
+                            'default' => 'Lo que dicen nuestros Graduados',
                         ],
                         'div_testimonio' => [
                             'type' => 'divider',
@@ -697,7 +700,7 @@ Educación Continua",
                         'imagen' => [
                             'type' => 'image',
                             'label' => 'Foto del Graduado',
-                            'default' => 'img/testimonio-estudiante.jpg',
+                            'default' => 'img/MariaFernanda.png',
                             'help' => 'Foto que aparece a la izquierda.',
                         ],
                         'cita' => [
@@ -735,8 +738,7 @@ Educación Continua",
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título de la sección',
-                            'default' => 'Nuestras *Autoridades*',
-                            'help' => 'Usa asteriscos *texto* para pintar una palabra de color naranja.',
+                            'default' => 'Nuestras Autoridades',
                         ],
                         'btn_directorio' => [
                             'type' => 'text',
@@ -760,8 +762,7 @@ Educación Continua",
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título de la sección',
-                            'default' => 'Todo lo que necesitas en  *un solo lugar*',
-                            'help' => 'Usa asteriscos *texto* para pintar una palabra de color naranja.',
+                            'default' => 'Todo lo que necesitas en un solo lugar',
                         ],
                         'div_serv1' => [
                             'type' => 'divider',
