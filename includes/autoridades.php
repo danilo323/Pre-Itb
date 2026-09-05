@@ -4,65 +4,103 @@
 <!-- ============================================= -->
 <section class="autoridades" id="autoridades">
     <div class="autoridades__container">
+
+        <!-- Header -->
         <div class="autoridades__header">
-            <div>
-                <span class="section-tag"><?= content_get('autoridades', 'etiqueta_superior', 'Nuestro Equipo') ?></span>
-                <h2 class="autoridades__title">
-                    <?= content_title('autoridades', 'titulo', 'Nuestras *Autoridades*') ?>
-                </h2>
+            <div class="autoridades__header-left">
+                <span class="autoridades__tag"><?= content_get('autoridades', 'etiqueta_superior', 'Liderazgo Institucional') ?></span>
+                <h2 class="autoridades__title"><?= content_title('autoridades', 'titulo', 'Nuestras *Autoridades*') ?></h2>
+                <p class="autoridades__subtitle"><?= content_get('autoridades', 'subtitulo', 'Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.') ?></p>
             </div>
-            <a href="#" class="btn btn--outline-dark" id="btn-directorio">
-                <?= content_get('autoridades', 'btn_directorio', 'Ver Directorio') ?> <i class="fas fa-arrow-right"></i>
+            <a href="#" class="btn--outline-directorio" id="btn-directorio">
+                <?= content_get('autoridades', 'btn_directorio', 'Ver Directorio') ?>
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
+        <!-- Grid de cards -->
         <div class="autoridades__grid">
-            <?php
-            $equipo = collection_items('equipo');
-            $equipo_filtrado = [];
-            foreach ($equipo as $miembro) {
-                if (!empty($miembro['mostrar_en_home']) && !empty($miembro['publicado'])) {
-                    $equipo_filtrado[] = $miembro;
-                }
-            }
-
-            // Ordenar por el campo 'orden'
-            usort($equipo_filtrado, function($a, $b) {
-                $orden_a = isset($a['orden']) ? (int)$a['orden'] : 999;
-                $orden_b = isset($b['orden']) ? (int)$b['orden'] : 999;
-                return $orden_a <=> $orden_b;
-            });
-
-            $count = 0;
-            foreach ($equipo_filtrado as $miembro) {
-                
-                $foto = !empty($miembro['foto']) ? htmlspecialchars($miembro['foto'], ENT_QUOTES, 'UTF-8') : 'img/placeholder.jpg';
-                $nombre = htmlspecialchars($miembro['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8');
-                $cargo = htmlspecialchars($miembro['cargo'] ?? '', ENT_QUOTES, 'UTF-8');
-                $linkedin = htmlspecialchars($miembro['linkedin'] ?? '#', ENT_QUOTES, 'UTF-8');
-                $email = htmlspecialchars($miembro['email'] ?? '#', ENT_QUOTES, 'UTF-8');
-                
-                $count++;
-            ?>
-                <!-- Card <?= $count ?> -->
-                <div class="autoridades__card">
-                    <div class="autoridades__card-img">
-                        <img src="<?= $foto ?>" alt="<?= $nombre ?>">
-                        <div class="autoridades__card-social">
-                            <a href="<?= $linkedin ?>" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
-                            <a href="<?= $email ?>" aria-label="Email"><i class="fas fa-envelope"></i></a>
+            <!-- Card 1: Roberto Tolozano -->
+            <div class="autoridades__card">
+                <div class="autoridades__card-img">
+                    <img src="<?= content_raw('autoridades', 'aut1_foto', 'img/PHD.Roberto_tolozano.jpg') ?>" alt="<?= content_get('autoridades', 'aut1_nombre', 'PhD. Roberto Tolozano Benites') ?>">
+                    <div class="autoridades__card-actions">
+                        <div class="autoridades__card-socials">
+                            <a href="<?= content_get('autoridades', 'aut1_email', '#') ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
+                            <a href="<?= content_get('autoridades', 'aut1_telf', '#') ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
                         </div>
-                    </div>
-                    <div class="autoridades__card-body">
-                        <h3 class="autoridades__card-name"><?= $nombre ?></h3>
-                        <span class="autoridades__card-role"><?= $cargo ?></span>
+                        <button class="autoridades__card-plus" aria-label="Ver perfil">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
-            <?php } ?>
-            
-            <?php if ($count === 0): ?>
-                <p>No hay autoridades destacadas en este momento.</p>
-            <?php endif; ?>
+                <div class="autoridades__card-body">
+                    <h3 class="autoridades__card-name"><?= content_get('autoridades', 'aut1_nombre', 'PhD. Roberto Tolozano Benites') ?></h3>
+                    <span class="autoridades__card-role"><?= content_get('autoridades', 'aut1_cargo', 'Canciller') ?></span>
+                </div>
+            </div>
+
+            <!-- Card 2: Elena Tolozano -->
+            <div class="autoridades__card">
+                <div class="autoridades__card-img">
+                    <img src="<?= content_raw('autoridades', 'aut2_foto', 'img/PHD.Elena_Tolozano.jpg') ?>" alt="<?= content_get('autoridades', 'aut2_nombre', 'PhD. Elena Tolozano Benites') ?>">
+                    <div class="autoridades__card-actions">
+                        <div class="autoridades__card-socials">
+                            <a href="<?= content_get('autoridades', 'aut2_email', '#') ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
+                            <a href="<?= content_get('autoridades', 'aut2_telf', '#') ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
+                        </div>
+                        <button class="autoridades__card-plus" aria-label="Ver perfil">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="autoridades__card-body">
+                    <h3 class="autoridades__card-name"><?= content_get('autoridades', 'aut2_nombre', 'PhD. Elena Tolozano Benites') ?></h3>
+                    <span class="autoridades__card-role"><?= content_get('autoridades', 'aut2_cargo', 'Rectora') ?></span>
+                </div>
+            </div>
+
+            <!-- Card 3: Luis Alzate -->
+            <div class="autoridades__card">
+                <div class="autoridades__card-img">
+                    <img src="<?= content_raw('autoridades', 'aut3_foto', 'img/PHD.Luis_alzate.jpg') ?>" alt="<?= content_get('autoridades', 'aut3_nombre', 'PhD. Luis Alzate Peralta') ?>">
+                    <div class="autoridades__card-actions">
+                        <div class="autoridades__card-socials">
+                            <a href="<?= content_get('autoridades', 'aut3_email', '#') ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
+                            <a href="<?= content_get('autoridades', 'aut3_telf', '#') ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
+                        </div>
+                        <button class="autoridades__card-plus" aria-label="Ver perfil">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="autoridades__card-body">
+                    <h3 class="autoridades__card-name"><?= content_get('autoridades', 'aut3_nombre', 'PhD. Luis Alzate Peralta') ?></h3>
+                    <span class="autoridades__card-role"><?= content_get('autoridades', 'aut3_cargo', 'Vicerrector Académico<br>y de Investigación') ?></span>
+                </div>
+            </div>
+
+            <!-- Card 4: Michelle Tolozano -->
+            <div class="autoridades__card">
+                <div class="autoridades__card-img">
+                    <img src="<?= content_raw('autoridades', 'aut4_foto', 'img/PHD.Michelle_tolozano.webp') ?>" alt="<?= content_get('autoridades', 'aut4_nombre', 'PhD. Michelle Tolozano Lapierre') ?>">
+                    <div class="autoridades__card-actions">
+                        <div class="autoridades__card-socials">
+                            <a href="<?= content_get('autoridades', 'aut4_email', '#') ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
+                            <a href="<?= content_get('autoridades', 'aut4_telf', '#') ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
+                        </div>
+                        <button class="autoridades__card-plus" aria-label="Ver perfil">
+                            <i class="fas fa-plus"></i>
+                        </button>
+                    </div>
+                </div>
+                <div class="autoridades__card-body">
+                    <h3 class="autoridades__card-name"><?= content_get('autoridades', 'aut4_nombre', 'PhD. Michelle Tolozano Lapierre') ?></h3>
+                    <span class="autoridades__card-role"><?= content_get('autoridades', 'aut4_cargo', 'Vicerrectora de Extensión<br>y Gestión Administrativa') ?></span>
+                </div>
+            </div>
         </div>
     </div>
 </section>
+
+

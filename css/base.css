@@ -1,4 +1,4 @@
-﻿/* =============================================
+/* =============================================
    VARIABLES Y RESET
    ============================================= */
 :root {
@@ -140,14 +140,30 @@ button {
     border-radius: 12px;
     font-size: 0.9rem;
     font-weight: 400;
-    /* Texto normal, sin bold */
     display: inline-flex;
     align-items: center;
     justify-content: space-between;
     width: fit-content;
-    /* Evita que se estire al 100% del contenedor */
     gap: 16px;
     text-decoration: none;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.btn--solid::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #111111;
+    z-index: -1;
+    transform: translateX(-101%);
+    transition: transform 0.4s ease;
+    border-radius: 12px;
 }
 
 .btn--solid .btn__icon-right {
@@ -169,10 +185,12 @@ button {
 }
 
 .btn--solid:hover {
-    background-color: #111111;
-    /* Cambia a color negro/oscuro */
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(17, 17, 17, 0.3);
+}
+
+.btn--solid:hover::before {
+    transform: translateX(0);
 }
 
 .btn--solid:hover .btn__icon-right i {

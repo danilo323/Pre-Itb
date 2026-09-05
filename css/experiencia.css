@@ -1,9 +1,9 @@
-﻿/* =============================================
-   EXPERIENCIA ITB
+/* =============================================
+   TU EXPERIENCIA ITB
    ============================================= */
 .experiencia {
     padding: 100px 0;
-    background: var(--gray-50);
+    background: var(--white);
 }
 
 .experiencia__container {
@@ -12,99 +12,93 @@
     padding: 0 24px;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    gap: 80px;
     align-items: center;
+}
+
+/* ---- Columna izquierda ---- */
+.experiencia__tag {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    margin-bottom: 16px;
 }
 
 .experiencia__title {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
     font-weight: 800;
-    color: var(--primary-blue);
-    margin-bottom: 16px;
+    color: #111111;
+    line-height: 1.1;
+    margin-bottom: 24px;
 }
 
 .experiencia__description {
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: var(--gray-600);
-    line-height: 1.8;
-    margin-bottom: 28px;
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 480px;
 }
 
+/* Lista de checkmarks */
 .experiencia__list {
-    margin-bottom: 28px;
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
     display: flex;
     flex-direction: column;
-    gap: 18px;
+    gap: 20px;
 }
 
 .experiencia__list-item {
     display: flex;
     align-items: flex-start;
-    gap: 14px;
+    gap: 16px;
 }
 
-.experiencia__list-icon {
-    width: 44px;
-    height: 44px;
-    background: var(--primary-orange-light);
-    border-radius: var(--radius-md);
+/* Círculo con check naranja */
+.experiencia__check {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background-color: var(--primary-orange);
+    border-radius: 50%;
     display: flex;
     align-items: center;
     justify-content: center;
-    color: var(--primary-orange);
-    font-size: 1rem;
-    flex-shrink: 0;
+    margin-top: 2px;
 }
 
-.experiencia__list-item strong {
-    font-size: 0.9rem;
-    color: var(--primary-blue);
-    display: block;
-    margin-bottom: 2px;
+.experiencia__check i {
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 900;
 }
 
 .experiencia__list-item p {
-    font-size: 0.82rem;
-    color: var(--gray-500);
+    font-size: 0.95rem;
+    color: #333333;
     line-height: 1.5;
 }
 
-/* Imagen con badge */
+.experiencia__list-item strong {
+    font-weight: 700;
+    color: #111111;
+}
+
+/* ---- Columna derecha: Imagen ---- */
 .experiencia__image {
     position: relative;
-    border-radius: var(--radius-xl);
-    overflow: hidden;
 }
 
 .experiencia__image img {
     width: 100%;
-    height: 500px;
+    height: 520px;
     object-fit: cover;
-    border-radius: var(--radius-xl);
-}
-
-.experiencia__image-badge {
-    position: absolute;
-    bottom: 24px;
-    left: 24px;
-    background: var(--primary-orange);
-    color: var(--white);
-    padding: 16px 20px;
-    border-radius: var(--radius-lg);
-    text-align: center;
-    box-shadow: var(--shadow-lg);
-}
-
-.experiencia__image-badge-number {
-    font-size: 2rem;
-    font-weight: 800;
+    object-position: top center;
+    border-radius: 16px;
     display: block;
-    line-height: 1;
 }
 
-.experiencia__image-badge-text {
-    font-size: 0.75rem;
-    font-weight: 500;
-    line-height: 1.3;
-}

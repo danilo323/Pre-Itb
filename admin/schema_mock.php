@@ -391,8 +391,8 @@ Educación Continua",
                         ],
                         'canciller_foto' => [
                             'type' => 'image',
-                            'label' => 'Foto',
-                            'default' => 'img/canciller.jpg',
+                            'label' => 'Foto del Canciller',
+                            'default' => 'img/PHD_Roberto.jpg',
                         ],
                         'canciller_nombre' => [
                             'type' => 'text',
@@ -403,6 +403,16 @@ Educación Continua",
                             'type' => 'text',
                             'label' => 'Cargo',
                             'default' => 'Canciller del ITB',
+                        ],
+                        'div_campus_img' => [
+                            'type' => 'divider',
+                            'label' => 'Foto del Campus (Centro)',
+                        ],
+                        'imagen_campus' => [
+                            'type' => 'image',
+                            'label' => 'Foto del Campus',
+                            'default' => 'img/estudiantes1.png',
+                            'help' => 'Imagen central con efecto Jarallax.',
                         ],
                         'div_btn' => [
                             'type' => 'divider',
@@ -474,24 +484,22 @@ Educación Continua",
                         ],
                         'div_area1' => [
                             'type' => 'divider',
-                            'label' => 'Área 1',
+                            'label' => 'Área 1: Salud',
+                        ],
+                        'area1_icono' => [
+                            'type' => 'image',
+                            'label' => 'Ícono Área 1 (PNG blanco)',
+                            'default' => 'img/doctor.png',
                         ],
                         'area1_titulo' => [
                             'type' => 'text',
                             'label' => 'Título',
-                            'default' => 'Salud',
+                            'default' => "Facultad de Salud\ny Servicios Sociales (FASSS)",
                         ],
                         'area1_desc' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
-                            'default' => 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.',
-                        ],
-                        'area1_programas' => [
-                            'type' => 'textarea',
-                            'label' => 'Programas (uno por línea)',
-                            'default' => 'Enfermería
-Fisioterapia
-Laboratorio Clínico',
+                            'default' => 'Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.',
                         ],
                         'area1_btn' => [
                             'type' => 'text',
@@ -500,24 +508,28 @@ Laboratorio Clínico',
                         ],
                         'div_area2' => [
                             'type' => 'divider',
-                            'label' => 'Área 2',
+                            'label' => 'Área 2: Ciencias Empresariales',
+                        ],
+                        'area2_icono' => [
+                            'type' => 'image',
+                            'label' => 'Ícono Área 2 (PNG blanco)',
+                            'default' => 'img/laptop.png',
+                        ],
+                        'area2_bg' => [
+                            'type' => 'image',
+                            'label' => 'Imagen de Fondo de la Tarjeta',
+                            'default' => 'img/estudiantes1.png',
+                            'help' => 'Imagen fotográfica con filtro azul para la tarjeta destacada.',
                         ],
                         'area2_titulo' => [
                             'type' => 'text',
                             'label' => 'Título',
-                            'default' => 'Ciencias Empresariales',
+                            'default' => "Facultad de Ciencias Empresariales\ny Sistemas / Económicas y\nEmpresariales (FACES)",
                         ],
                         'area2_desc' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
-                            'default' => 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.',
-                        ],
-                        'area2_programas' => [
-                            'type' => 'textarea',
-                            'label' => 'Programas (uno por línea)',
-                            'default' => 'Administración de Empresas
-Contabilidad
-Marketing Digital',
+                            'default' => 'Programas de gestión, contabilidad, marketing y comercio para liderar en el sector empresarial e industrial.',
                         ],
                         'area2_btn' => [
                             'type' => 'text',
@@ -526,24 +538,22 @@ Marketing Digital',
                         ],
                         'div_area3' => [
                             'type' => 'divider',
-                            'label' => 'Área 3',
+                            'label' => 'Área 3: Transporte',
+                        ],
+                        'area3_icono' => [
+                            'type' => 'image',
+                            'label' => 'Ícono Área 3 (PNG blanco)',
+                            'default' => 'img/coche.png',
                         ],
                         'area3_titulo' => [
                             'type' => 'text',
                             'label' => 'Título',
-                            'default' => 'Transporte',
+                            'default' => "Facultad de Transporte\ny Vialidad (FATV)",
                         ],
                         'area3_desc' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
-                            'default' => 'Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.',
-                        ],
-                        'area3_programas' => [
-                            'type' => 'textarea',
-                            'label' => 'Programas (uno por línea)',
-                            'default' => 'Logística y Transporte
-Comercio Exterior
-Operaciones Portuarias',
+                            'default' => 'Formación especializada en mecánica, gestión de transporte, seguridad vial y escuela de conducción',
                         ],
                         'area3_btn' => [
                             'type' => 'text',
@@ -582,7 +592,7 @@ Operaciones Portuarias',
                         'prog1_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/programa-enfermeria.jpg',
+                            'default' => 'img/enfermeria.jpg',
                         ],
                         'prog1_modalidad' => [
                             'type' => 'text',
@@ -617,7 +627,7 @@ Operaciones Portuarias',
                         'prog2_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/programa-marketing.jpg',
+                            'default' => 'img/Mecanica.jpg',
                         ],
                         'prog2_modalidad' => [
                             'type' => 'text',
@@ -652,7 +662,7 @@ Operaciones Portuarias',
                         'prog3_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/programa-logistica.jpg',
+                            'default' => 'img/desarrollo_software.jpg',
                         ],
                         'prog3_modalidad' => [
                             'type' => 'text',
@@ -687,7 +697,7 @@ Operaciones Portuarias',
                         'prog4_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/programa-software.jpg',
+                            'default' => 'img/administracion.jpg',
                         ],
                         'prog4_modalidad' => [
                             'type' => 'text',
@@ -813,7 +823,7 @@ Operaciones Portuarias',
                         'imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen principal',
-                            'default' => 'img/experiencia-itb.jpg',
+                            'default' => 'img/experiencia.png',
                         ],
                         'badge_numero' => [
                             'type' => 'text',
@@ -852,7 +862,7 @@ Operaciones Portuarias',
                         'imagen' => [
                             'type' => 'image',
                             'label' => 'Foto del Graduado',
-                            'default' => 'img/testimonio-estudiante.jpg',
+                            'default' => 'img/MariaFernanda.png',
                             'help' => 'Foto que aparece a la izquierda.',
                         ],
                         'cita' => [
@@ -864,7 +874,7 @@ Operaciones Portuarias',
                         'nombre' => [
                             'type' => 'text',
                             'label' => 'Nombre del Graduado',
-                            'default' => 'María Fernanda López',
+                            'default' => 'María Fernanda Gómez',
                             'help' => 'Nombre que aparece bajo el testimonio.',
                         ],
                         'carrera' => [
@@ -897,6 +907,127 @@ Operaciones Portuarias',
                             'type' => 'text',
                             'label' => 'Botón "Ver Directorio"',
                             'default' => 'Ver Directorio',
+                        ],
+                        'subtitulo' => [
+                            'type' => 'textarea',
+                            'label' => 'Subtítulo',
+                            'default' => 'Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.',
+                        ],
+                        'div_aut1' => [
+                            'type' => 'divider',
+                            'label' => 'Autoridad 1: Canciller',
+                        ],
+                        'aut1_foto' => [
+                            'type' => 'image',
+                            'label' => 'Foto Autoridad 1',
+                            'default' => 'img/PHD.Roberto_tolozano.jpg',
+                        ],
+                        'aut1_nombre' => [
+                            'type' => 'text',
+                            'label' => 'Nombre',
+                            'default' => 'PhD. Roberto Tolozano Benites',
+                        ],
+                        'aut1_cargo' => [
+                            'type' => 'text',
+                            'label' => 'Cargo',
+                            'default' => 'Canciller',
+                        ],
+                        'aut1_email' => [
+                            'type' => 'text',
+                            'label' => 'Correo',
+                            'default' => '#',
+                        ],
+                        'aut1_telf' => [
+                            'type' => 'text',
+                            'label' => 'Teléfono',
+                            'default' => '#',
+                        ],
+                        'div_aut2' => [
+                            'type' => 'divider',
+                            'label' => 'Autoridad 2: Rectora',
+                        ],
+                        'aut2_foto' => [
+                            'type' => 'image',
+                            'label' => 'Foto Autoridad 2',
+                            'default' => 'img/PHD.Elena_Tolozano.jpg',
+                        ],
+                        'aut2_nombre' => [
+                            'type' => 'text',
+                            'label' => 'Nombre',
+                            'default' => 'PhD. Elena Tolozano Benites',
+                        ],
+                        'aut2_cargo' => [
+                            'type' => 'text',
+                            'label' => 'Cargo',
+                            'default' => 'Rectora',
+                        ],
+                        'aut2_email' => [
+                            'type' => 'text',
+                            'label' => 'Correo',
+                            'default' => '#',
+                        ],
+                        'aut2_telf' => [
+                            'type' => 'text',
+                            'label' => 'Teléfono',
+                            'default' => '#',
+                        ],
+                        'div_aut3' => [
+                            'type' => 'divider',
+                            'label' => 'Autoridad 3: Vicerrector Académico',
+                        ],
+                        'aut3_foto' => [
+                            'type' => 'image',
+                            'label' => 'Foto Autoridad 3',
+                            'default' => 'img/PHD.Luis_alzate.jpg',
+                        ],
+                        'aut3_nombre' => [
+                            'type' => 'text',
+                            'label' => 'Nombre',
+                            'default' => 'PhD. Luis Alzate Peralta',
+                        ],
+                        'aut3_cargo' => [
+                            'type' => 'text',
+                            'label' => 'Cargo',
+                            'default' => 'Vicerrector Académico y de Investigación',
+                        ],
+                        'aut3_email' => [
+                            'type' => 'text',
+                            'label' => 'Correo',
+                            'default' => '#',
+                        ],
+                        'aut3_telf' => [
+                            'type' => 'text',
+                            'label' => 'Teléfono',
+                            'default' => '#',
+                        ],
+                        'div_aut4' => [
+                            'type' => 'divider',
+                            'label' => 'Autoridad 4: Vicerrectora de Extensión',
+                        ],
+                        'aut4_foto' => [
+                            'type' => 'image',
+                            'label' => 'Foto Autoridad 4',
+                            'default' => 'img/PHD.Michelle_tolozano.webp',
+                        ],
+                        'aut4_nombre' => [
+                            'type' => 'text',
+                            'label' => 'Nombre',
+                            'default' => 'PhD. Michelle Tolozano Lapierre',
+                        ],
+                        'aut4_cargo' => [
+                            'type' => 'text',
+                            'label' => 'Cargo',
+                            'default' => 'Vicerrectora de Extensión y Gestión Administrativa',
+                        ],
+                        'aut4_email' => [
+                            'type' => 'text',
+                            'label' => 'Correo',
+                            'default' => '#',
+                        ],
+                        'aut4_telf' => [
+                            'type' => 'text',
+                            'label' => 'Teléfono',
+                            'default' => '#',
                         ],
                     ],
                 ],
@@ -973,7 +1104,7 @@ Operaciones Portuarias',
                         'serv3_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-horarios.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv4' => [
                             'type' => 'divider',
@@ -992,7 +1123,7 @@ Operaciones Portuarias',
                         'serv4_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-digital.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv5' => [
                             'type' => 'divider',
@@ -1011,7 +1142,7 @@ Operaciones Portuarias',
                         'serv5_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-podcast.jpg',
+                            'default' => 'img/salud.jpg',
                         ],
                         'div_serv6' => [
                             'type' => 'divider',
@@ -1030,7 +1161,7 @@ Operaciones Portuarias',
                         'serv6_imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen',
-                            'default' => 'img/servicio-deportes.jpg',
+                            'default' => 'img/estudiantes1.png',
                         ],
                     ],
                 ],

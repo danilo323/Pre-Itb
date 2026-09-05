@@ -71,7 +71,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
         }
     }
 
-    flash_set($is_new ? "Registro creado exitosamente (Memoria)" : "Registro actualizado exitosamente (Memoria)");
+    // 4. Persistir en MySQL para que la landing lo muestre de inmediato
+    require_once __DIR__ . '/storage.php';
+    $allCollectionItems = array_values($_SESSION['admin_data'][$section]['items'] ?? []);
+    storage_set($section, 'items', json_encode($allCollectionItems, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    storage_clear_cache();
+
+    flash_set($is_new ? "Registro creado exitosamente" : "Registro actualizado exitosamente");
     header("Location: coleccion.php?c=" . urlencode($section));
     exit;
 }

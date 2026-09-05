@@ -68,20 +68,31 @@ try {
         echo "[INFO] El usuario '{$adminEmail}' ya existe en la base de datos.\n";
     }
 
-    echo "== Configuración completada con éxito ==\n";
-
     // -------------------------------------------------
-    // Generar archivo de configuración (config.php) si no existe
+    // Generar archivo de configuración (admin/config.php) si no existe
     // -------------------------------------------------
-    $configPath = __DIR__ . '/../config.php';
-    if (!file_exists($configPath)) {
-        $configData = "<?php\nreturn [\n    'host' => '{$host}',\n    'port' => {$port},\n    'dbname' => '{$dbname}',\n    'user' => '{$user}',\n    'pass' => '{$pass}',\n];\n?>";
-        if (file_put_contents($configPath, $configData) !== false) {
-            echo "[OK] Archivo de configuración creado: config.php\n";
-        } else {
-            echo "[WARNING] No se pudo crear config.php\n";
+    $adminConfigPath = dirname(__DIR__) . '/admin/config.php';
+    if (!file_exists($adminConfigPath)) {
+        $configContent = "<?php\n// admin/config.php - Generado automáticamente\nreturn [\n"
+            . "    'db_host'               => '{$host}',\n"
+            . "    'db_port'               => {$port},\n"
+            . "    'db_name'               => '{$dbname}',\n"
+            . "    'db_user'               => '{$user}',\n"
+            . "    'db_pass'               => '{$pass}',\n"
+            . "    'session_name'          => 'itb_admin_sess',\n"
+            . "    'session_timeout'       => 3600,\n"
+            . "    'login_max_attempts'    => 5,\n"
+            . "    'login_lockout_seconds' => 900,\n"
+            . "    'data_path'             => __DIR__ . '/../data',\n"
+            . "    'uploads_path'          => __DIR__ . '/../uploads',\n"
+            . "    'max_upload_mb'         => 8,\n"
+            . "];\n";
+        if (file_put_contents($adminConfigPath, $configContent) !== false) {
+            echo "[OK] Archivo de configuración creado: admin/config.php\n";
         }
     }
+
+    echo "== Configuración completada con éxito ==\n";
 
 } catch (PDOException $e) {
     echo "[ERROR] Falló la configuración de base de datos: " . $e->getMessage() . "\n";

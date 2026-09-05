@@ -31,7 +31,7 @@
             <!-- Columna 1: Logo y descripción -->
             <div class="footer__col">
                 <a href="index.php" class="footer__logo">
-                    <img src="<?= content_raw('ajustes', 'logo_blanco', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer__logo-img">
+                    <img src="<?= content_raw('ajustes', 'logo_blanco', 'img/logo.png') ?>" alt="ITB Logo" class="footer__logo-img">
                 </a>
                 <p class="footer__description">
                     <?= content_get('footer', 'descripcion', 'Instituto Superior Tecnológico Bolivariano de Tecnología. Formando profesionales de excelencia desde 1995.') ?>
@@ -105,4 +105,19 @@
 <!-- Botón Ir Arriba -->
 <div id="top-to-bottom">
     <i class="fas fa-angles-up"></i>
+</div>
+
+<!-- Botón flotante WhatsApp -->
+<div class="whatsapp-float" id="whatsapp-float">
+    <a href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20ITB" 
+       target="_blank" 
+       class="whatsapp-float__link" 
+       aria-label="Chatea con ITBChat por WhatsApp">
+        <div class="whatsapp-float__label">
+            <span>¿Tienes preguntas? Pregunta a ITBChat</span>
+        </div>
+        <div class="whatsapp-float__icon">
+            <i class="fab fa-whatsapp"></i>
+        </div>
+    </a>
 </div>

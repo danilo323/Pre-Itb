@@ -1,9 +1,9 @@
-﻿/* =============================================
-   TESTIMONIOS
+/* =============================================
+   TESTIMONIOS - LO QUE DICEN NUESTROS ESTUDIANTES
    ============================================= */
 .testimonios {
-    padding: 100px 0;
-    background: var(--primary-blue);
+    padding: 80px 0 100px;
+    background: #ffffff !important;
 }
 
 .testimonios__container {
@@ -11,109 +11,85 @@
     margin: 0 auto;
     padding: 0 24px;
     display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 60px;
+    grid-template-columns: 420px 1fr;
+    gap: 80px;
     align-items: center;
 }
 
-.testimonios__image {
-    border-radius: var(--radius-xl);
+/* ---- Foto izquierda ---- */
+.testimonios__photo {
+    border-radius: 16px;
     overflow: hidden;
+    height: 520px;
 }
 
-.testimonios__image img {
+.testimonios__photo img {
     width: 100%;
-    height: 480px;
+    height: 100%;
     object-fit: cover;
-    border-radius: var(--radius-xl);
+    object-position: top center;
+    display: block;
 }
 
-.testimonios__content {
-    color: var(--white);
-}
-
-.testimonios__content .section-tag {
-    background: rgba(232, 113, 42, 0.2);
+/* ---- Contenido derecha ---- */
+.testimonios__tag {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    margin-bottom: 16px;
 }
 
 .testimonios__title {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 3.5vw, 2.5rem);
+    font-size: clamp(2rem, 3.5vw, 3rem);
     font-weight: 800;
-    margin-bottom: 28px;
+    color: #111111 !important;
+    line-height: 1.15;
+    margin-bottom: 40px;
 }
 
-.testimonios__quote {
-    margin-bottom: 28px;
+/* Bloque de cita */
+.testimonios__quote-block {
+    margin-bottom: 36px;
 }
 
 .testimonios__quote-icon {
-    font-size: 2rem;
+    display: block;
+    font-size: 3.5rem;
+    line-height: 1;
     color: var(--primary-orange);
+    font-family: Georgia, serif;
     margin-bottom: 12px;
-    display: block;
 }
 
-.testimonios__text {
-    font-size: 1.05rem;
-    font-style: italic;
-    line-height: 1.8;
-    color: rgba(255, 255, 255, 0.85);
+.testimonios__quote-text {
+    font-size: 1.25rem;
+    color: #444444 !important;
+    line-height: 1.6;
+    max-width: 650px;
 }
 
-.testimonios__author-name {
-    font-weight: 700;
-    font-size: 1rem;
-    display: block;
+/* Autor */
+.testimonios__author {
+    padding-top: 16px;
+}
+
+.testimonios__author-role {
+    font-size: 0.8rem;
+    color: var(--gray-500);
     margin-bottom: 4px;
 }
 
-.testimonios__author-career {
+.testimonios__author-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 4px;
+}
+
+.testimonios__author-program {
     font-size: 0.85rem;
-    color: rgba(255, 255, 255, 0.6);
+    color: var(--gray-500);
 }
 
-/* Nav testimonios */
-.testimonios__nav {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    margin-top: 28px;
-}
-
-.testimonios__nav-btn {
-    width: 40px;
-    height: 40px;
-    border-radius: 50%;
-    border: 2px solid rgba(255, 255, 255, 0.3);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: var(--white);
-    font-size: 0.8rem;
-    transition: var(--transition);
-}
-
-.testimonios__nav-btn:hover {
-    background: var(--primary-orange);
-    border-color: var(--primary-orange);
-}
-
-.testimonios__nav-dots {
-    display: flex;
-    gap: 8px;
-}
-
-.testimonios__dot {
-    width: 10px;
-    height: 10px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.3);
-    transition: var(--transition);
-}
-
-.testimonios__dot--active {
-    background: var(--primary-orange);
-    width: 28px;
-    border-radius: 10px;
-}

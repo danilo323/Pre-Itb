@@ -69,14 +69,20 @@
 - Se reemplazó el fondo estático del hero por un slideshow de 3 imágenes rotativas (`salud.jpg`, `student.jpg`, `student 2.jpg`).
 - Se añadió efecto **Ken Burns** con transiciones CSS "slide-up" (desde abajo hacia arriba) automáticas de 7 segundos.
 - Se implementó una **Ventana Modal** en `hero.php` y `main.js` para visualizar un video de YouTube sin salir de la página principal.
+### 7. Rediseño Secciones "Autoridades" y "Bienestar Estudiantil" (Servicios)
+- **Autoridades**: Se rediseñó el layout a un grid de 4 columnas perfectas. Se aplicó color de fondo `#f5f5f5`, ajuste estricto de colores y tamaños de tarjeta (`height: 380px`).
+- Se añadió un botón "Ver Directorio" (`.btn--outline-directorio`) a la medida con efecto de *slide* naranja.
+- Se implementó interacción de íconos sociales flotantes al pasar el ratón sobre el botón `+`. Se corrigió el hover de la imagen usando `:not(:has(...))` para aislar el zoom.
+- **Bienestar (Servicios)**: Se abandonó el viejo Bento Grid para usar un layout de 1 columna izquierda (texto y CTA) y 5 tarjetas alineadas a la derecha, calcando el diseño de la maqueta original.
+- Se agregaron las tarjetas con tipografía y botones propios (`.btn--outline-servicios`) y la tarjeta de fondo completo para "Arte y Deportes".
 
-### 7. Motor CRUD Temporal en Memoria (Panel Admin - Persona 2)
-- Se programó un motor de guardado temporal utilizando `$_SESSION['admin_data']` para permitir probar el panel sin base de datos.
-- Se implementó la subida de imágenes (`move_uploaded_file`) en `admin/editar.php` guardando en la carpeta `img/`.
-- Se implementó reordenamiento automático (swap) mediante el campo `orden` en las colecciones.
-- Cero mock data estática: todos los formularios y selects (como las posiciones de orden) se calculan en tiempo real contando los items de la sesión.
-- Integración visual del panel (inputs, selects, switches estilo iOS) mediante `admin/assets/admin.css`.
-- **Implementación del Constructor de Menú (`menu_builder.php`)**: Se creó un campo personalizado en el motor para la navegación principal, clonando la interfaz drag-and-drop tipo árbol (Padre/Hijo) basada en el diseño de UNIEBEC. El frontend (`includes/header.php`) fue refactorizado para consumir este array plano y pintar recursivamente los desplegables.
+### 8. Panel Admin V2 y Almacenamiento MySQL
+- Persistencia completa en MySQL mediante tabla `site_content`.
+- Previsualización en tiempo real de imágenes antes de guardar.
+- Optimización de guardado en transacción batch.
+- Subida de todos los formatos de imagen y eliminación automática de fotos antiguas al reemplazar.
+- Auto-generación de configuración de conexión si es necesario.
+
 
 ---
 

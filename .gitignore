@@ -21,20 +21,3 @@ error_log
 .Trashes
 ehthumbs.db
 Thumbs.db
-
-# Ignore all image files (any format)
-*.png
-*.jpg
-*.jpeg
-*.gif
-*.webp
-*.svg
-*.avif
-*.bmp
-*.tiff
-*.tif
-*.ico
-*.heic
-*.heif
-# Ignore image folder
-img/

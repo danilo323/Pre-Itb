@@ -190,44 +190,87 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     }
 
-    // ── Preview de imagen ───────────────────────────────
     // ── Preview de imagen interactivo ────────────────────
     document.querySelectorAll('.field-image').forEach(group => {
         const fileInput   = group.querySelector('input[type="file"]');
         const hiddenInput = group.querySelector('input[type="hidden"]');
-        const box         = group.querySelector('.image-upload-box');
-        const preview     = box.querySelector('.image-preview');
-        const img         = preview ? preview.querySelector('img') : null;
-        const placeholder = box.querySelector('.image-placeholder');
-        const removeBtn   = box.querySelector('.btn-remove-image');
+        const preview     = group.querySelector('.image-preview');
+        // El img puede estar dentro de preview aunque esté oculto (display:none)
+        const img         = group.querySelector('.image-preview img');
+        const placeholder = group.querySelector('.image-placeholder');
+        const removeBtn   = group.querySelector('.btn-remove-image');
+        const pathText    = group.querySelector('.image-current-path');
+        const uploadBox   = group.querySelector('.image-upload-box');
+
+        function showPreview(src, filename) {
+            if (!img) return;
+            img.src = src;
+            if (preview)     preview.style.display = 'block';
+            if (placeholder) placeholder.style.display = 'none';
+            if (removeBtn)   removeBtn.style.display = 'inline-flex';
+            if (pathText)    pathText.textContent = filename ? 'Nuevo archivo: ' + filename : pathText.textContent;
+        }
+
+        function clearPreview() {
+            if (img)         img.src = '';
+            if (preview)     preview.style.display = 'none';
+            if (placeholder) placeholder.style.display = 'flex';
+            if (removeBtn)   removeBtn.style.display = 'none';
+            if (pathText)    pathText.textContent = 'Ningun archivo';
+        }
+
+        function loadFile(file) {
+            if (!file) return;
+            const reader = new FileReader();
+            reader.onload = e => showPreview(e.target.result, file.name);
+            reader.readAsDataURL(file);
+        }
 
         if (fileInput) {
             fileInput.addEventListener('change', function () {
-                const file = this.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                
-                reader.onload = e => {
-                    if (img) img.src = e.target.result;
-                    if (preview) preview.style.display = 'block';
-                    if (placeholder) placeholder.style.display = 'none';
-                    if (removeBtn) removeBtn.style.display = 'inline-flex';
-                };
-                reader.readAsDataURL(file);
+                loadFile(this.files[0]);
+            });
+        }
+
+        // Drag & drop sobre el recuadro de la imagen
+        if (uploadBox) {
+            uploadBox.addEventListener('dragover', e => {
+                e.preventDefault();
+                uploadBox.classList.add('drag-over');
+            });
+            uploadBox.addEventListener('dragleave', () => uploadBox.classList.remove('drag-over'));
+            uploadBox.addEventListener('drop', e => {
+                e.preventDefault();
+                uploadBox.classList.remove('drag-over');
+                const file = e.dataTransfer.files[0];
+                if (file && fileInput) {
+                    // Asignar al input para que se incluya en el formulario
+                    const dt = new DataTransfer();
+                    dt.items.add(file);
+                    fileInput.files = dt.files;
+                    loadFile(file);
+                }
             });
         }
 
         if (removeBtn) {
             removeBtn.addEventListener('click', function () {
-                if (fileInput) fileInput.value = '';
+                if (fileInput)   fileInput.value = '';
                 if (hiddenInput) hiddenInput.value = '';
-                
-                if (img) img.src = '';
-                if (preview) preview.style.display = 'none';
-                if (placeholder) placeholder.style.display = 'flex';
-                this.style.display = 'none';
+                clearPreview();
             });
         }
+    });
+
+    // ── Estado de carga al guardar formulario ────────────
+    document.querySelectorAll('form[action="guardar.php"]').forEach(form => {
+        form.addEventListener('submit', function () {
+            const btn = this.querySelector('button[type="submit"]');
+            if (btn) {
+                btn.disabled = true;
+                btn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Guardando...';
+            }
+        });
     });
 
 });
