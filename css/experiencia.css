@@ -1,0 +1,110 @@
+﻿/* =============================================
+   EXPERIENCIA ITB
+   ============================================= */
+.experiencia {
+    padding: 100px 0;
+    background: var(--gray-50);
+}
+
+.experiencia__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.experiencia__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    color: var(--primary-blue);
+    margin-bottom: 16px;
+}
+
+.experiencia__description {
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    line-height: 1.8;
+    margin-bottom: 28px;
+}
+
+.experiencia__list {
+    margin-bottom: 28px;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+}
+
+.experiencia__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+}
+
+.experiencia__list-icon {
+    width: 44px;
+    height: 44px;
+    background: var(--primary-orange-light);
+    border-radius: var(--radius-md);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-orange);
+    font-size: 1rem;
+    flex-shrink: 0;
+}
+
+.experiencia__list-item strong {
+    font-size: 0.9rem;
+    color: var(--primary-blue);
+    display: block;
+    margin-bottom: 2px;
+}
+
+.experiencia__list-item p {
+    font-size: 0.82rem;
+    color: var(--gray-500);
+    line-height: 1.5;
+}
+
+/* Imagen con badge */
+.experiencia__image {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+}
+
+.experiencia__image img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    border-radius: var(--radius-xl);
+}
+
+.experiencia__image-badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: var(--primary-orange);
+    color: var(--white);
+    padding: 16px 20px;
+    border-radius: var(--radius-lg);
+    text-align: center;
+    box-shadow: var(--shadow-lg);
+}
+
+.experiencia__image-badge-number {
+    font-size: 2rem;
+    font-weight: 800;
+    display: block;
+    line-height: 1;
+}
+
+.experiencia__image-badge-text {
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.3;
+}

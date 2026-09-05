@@ -4,13 +4,13 @@
 <!-- ============================================= -->
 <section class="areas" id="areas">
     <div class="areas__container">
-        <div class="areas__header">
-            <span class="section-tag section-tag--light"><?= content_get('areas', 'etiqueta_superior', 'Áreas de Conocimiento') ?></span>
-            <h2 class="areas__title">
-                <?= content_title('areas', 'titulo', 'Nuestras Áreas de *Formación*') ?>
+        <div class="areas__header" style="text-align: center;">
+            <span class="text-orange" style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 8px;"><?= content_get('areas', 'etiqueta_superior', 'Oferta Académica de Vanguardia') ?></span>
+            <h2 class="areas__title" style="font-family: var(--font-heading); font-size: 2.8rem;">
+                <?= content_title('areas', 'titulo', 'Áreas de Formación') ?>
             </h2>
-            <p class="areas__subtitle">
-                <?= content_get('areas', 'descripcion', 'Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional') ?>
+            <p class="areas__subtitle" style="margin: 0 auto 40px auto;">
+                <?= content_get('areas', 'descripcion', 'Programas tecnológicos de nivel superior diseñados para responder a las exigencias del mercado laboral actual con un enfoque 100% práctico.') ?>
             </p>
         </div>
 
@@ -18,69 +18,46 @@
             <!-- Card 1: Salud -->
             <div class="areas__card">
                 <div class="areas__card-icon">
-                    <i class="fas fa-heartbeat"></i>
+                    <img src="img/doctor.png" alt="Salud" class="areas__icon-img">
                 </div>
-                <h3 class="areas__card-title"><?= content_get('areas', 'area1_titulo', 'Salud') ?></h3>
+                <h3 class="areas__card-title"><?= content_get('areas', 'area1_titulo', "Facultad de Salud\ny Servicios Sociales (FASSS)") ?></h3>
                 <p class="areas__card-description">
-                    <?= content_get('areas', 'area1_desc', 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.') ?>
+                    <?= content_get('areas', 'area1_desc', "Carreras técnicas y tecnológicas enfocadas en el\ncuidado de la salud, enfermería, rehabilitación y\nbienestar comunitario.") ?>
                 </p>
-                <ul class="areas__card-list">
-                    <?php
-                    $lista1 = explode("\n", content_get('areas', 'area1_programas', "Enfermería\nFisioterapia\nLaboratorio Clínico"));
-                    foreach ($lista1 as $item) {
-                        $item = trim($item);
-                        if ($item) echo "<li>{$item}</li>\n";
-                    }
-                    ?>
-                </ul>
-                <a href="#" class="areas__card-btn">
-                    <?= content_get('areas', 'area1_btn', 'Explorar programas') ?> <i class="fas fa-arrow-right"></i>
+                <a href="#" class="btn btn--solid">
+                    <?= content_get('areas', 'area1_btn', 'Explorar programas') ?>
+                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
 
             <!-- Card 2: Ciencias Empresariales -->
-            <div class="areas__card">
+            <div class="areas__card areas__card--image" style="background-image: linear-gradient(rgba(26, 54, 104, 0.8), rgba(26, 54, 104, 0.8)), url('img/estudiantes1.png');">
                 <div class="areas__card-icon">
-                    <i class="fas fa-briefcase"></i>
+                    <img src="img/laptop.png" alt="Empresariales" class="areas__icon-img">
                 </div>
-                <h3 class="areas__card-title"><?= content_get('areas', 'area2_titulo', 'Ciencias Empresariales') ?></h3>
+                <h3 class="areas__card-title"><?= content_get('areas', 'area2_titulo', "Facultad de Ciencias Empresariales\ny Sistemas / Económicas y\nEmpresariales (FACES)") ?></h3>
                 <p class="areas__card-description">
-                    <?= content_get('areas', 'area2_desc', 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.') ?>
+                    <?= content_get('areas', 'area2_desc', "Programas de gestión, contabilidad, marketing y\ncomercio para liderar en el sector empresarial e\nindustrial.") ?>
                 </p>
-                <ul class="areas__card-list">
-                    <?php
-                    $lista2 = explode("\n", content_get('areas', 'area2_programas', "Administración de Empresas\nContabilidad\nMarketing Digital"));
-                    foreach ($lista2 as $item) {
-                        $item = trim($item);
-                        if ($item) echo "<li>{$item}</li>\n";
-                    }
-                    ?>
-                </ul>
-                <a href="#" class="areas__card-btn">
-                    <?= content_get('areas', 'area2_btn', 'Explorar programas') ?> <i class="fas fa-arrow-right"></i>
+                <a href="#" class="btn btn--solid">
+                    <?= content_get('areas', 'area2_btn', 'Explorar programas') ?>
+                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
 
             <!-- Card 3: Transporte -->
             <div class="areas__card">
                 <div class="areas__card-icon">
-                    <i class="fas fa-ship"></i>
+                    <img src="img/coche.png" alt="Transporte" class="areas__icon-img">
                 </div>
-                <h3 class="areas__card-title"><?= content_get('areas', 'area3_titulo', 'Transporte') ?></h3>
+                <h3 class="areas__card-title"><?= content_get('areas', 'area3_titulo', "Facultad de Transporte\ny Vialidad (FATV)") ?></h3>
                 <p class="areas__card-description">
-                    <?= content_get('areas', 'area3_desc', 'Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.') ?>
+                    <?= content_get('areas', 'area3_desc', "Formación especializada en mecánica, gestión de\ntransporte, seguridad vial y escuela de conducción") ?>
                 </p>
-                <ul class="areas__card-list">
-                    <?php
-                    $lista3 = explode("\n", content_get('areas', 'area3_programas', "Logística y Transporte\nComercio Exterior\nOperaciones Portuarias"));
-                    foreach ($lista3 as $item) {
-                        $item = trim($item);
-                        if ($item) echo "<li>{$item}</li>\n";
-                    }
-                    ?>
-                </ul>
-                <a href="#" class="areas__card-btn">
-                    <?= content_get('areas', 'area3_btn', 'Explorar programas') ?> <i class="fas fa-arrow-right"></i>
+
+                <a href="#" class="btn btn--solid">
+                    <?= content_get('areas', 'area3_btn', 'Explorar programas') ?>
+                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
         </div>

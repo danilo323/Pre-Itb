@@ -212,6 +212,76 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // =========================================
+    // 8. JARALLAX — Parallax en Imagen de Trayectoria
+    // =========================================
+    if (typeof jarallax !== 'undefined') {
+        jarallax(document.querySelectorAll('[data-jarallax]'), {
+            speed: 0.5
+        });
+    }
+
+    // =========================================
+    // 9. CONTADOR ANIMADO — CountUp.js (Elementor-style)
+    // =========================================
+    const statNumbers = document.querySelectorAll('.trayectoria__stat-number[data-count]');
+
+    if (statNumbers.length && typeof countUp !== 'undefined') {
+        const CountUp = countUp.CountUp;
+
+        const counterObserver = new IntersectionObserver((entries, obs) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const el = entry.target;
+                    const target = parseInt(el.getAttribute('data-count'), 10);
+                    const suffix = el.getAttribute('data-suffix') || '';
+                    const prefix = el.getAttribute('data-prefix') || '';
+                    const useGrouping = el.getAttribute('data-format') === 'thousands';
+
+                    const counter = new CountUp(el, target, {
+                        duration: 1.5,       // 1.5 segundos como Elementor
+                        separator: ',',       // Separador de miles
+                        prefix: prefix,
+                        suffix: suffix,
+                        useGrouping: useGrouping,
+                        useEasing: true,      // Aceleración suave
+                    });
+
+                    if (!counter.error) {
+                        counter.start();
+                    }
+                    obs.unobserve(el);
+                }
+            });
+        }, { threshold: 0.2 });
+
+        statNumbers.forEach(el => counterObserver.observe(el));
+    }
+
+    // =========================================
+    // 10. BOTÓN IR ARRIBA (Scroll to top)
+    // =========================================
+    const scrollToTopBtn = document.getElementById('top-to-bottom');
+
+    if (scrollToTopBtn) {
+        // Mostrar u ocultar el botón al hacer scroll
+        window.addEventListener('scroll', () => {
+            if (window.scrollY > 300) {
+                scrollToTopBtn.classList.add('scroll_visible');
+            } else {
+                scrollToTopBtn.classList.remove('scroll_visible');
+            }
+        });
+
+        // Animación suave al hacer click
+        scrollToTopBtn.addEventListener('click', () => {
+            window.scrollTo({
+                top: 0,
+                behavior: 'smooth'
+            });
+        });
+    }
+
 });
 
 /* =============================================

@@ -392,7 +392,7 @@ Educación Continua",
                         'canciller_foto' => [
                             'type' => 'image',
                             'label' => 'Foto',
-                            'default' => 'img/canciller.jpg',
+                            'default' => 'img/PHD_Roberto.jpg',
                         ],
                         'canciller_nombre' => [
                             'type' => 'text',

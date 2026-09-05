@@ -1,0 +1,59 @@
+﻿/* =============================================
+   ALIANZAS
+   ============================================= */
+.alianzas {
+    padding: 48px 0;
+    background: var(--gray-50);
+    overflow: hidden;
+}
+
+.alianzas__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.alianzas__title {
+    text-align: center;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: var(--gray-500);
+    margin-bottom: 28px;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.alianzas__track {
+    overflow: hidden;
+}
+
+.alianzas__logos {
+    display: flex;
+    gap: 48px;
+    align-items: center;
+    animation: scrollLogos 30s linear infinite;
+    width: max-content;
+}
+
+.alianzas__logos img {
+    height: 40px;
+    width: auto;
+    filter: grayscale(100%);
+    opacity: 0.5;
+    transition: var(--transition);
+}
+
+.alianzas__logos img:hover {
+    filter: grayscale(0%);
+    opacity: 1;
+}
+
+@keyframes scrollLogos {
+    0% {
+        transform: translateX(0);
+    }
+
+    100% {
+        transform: translateX(-50%);
+    }
+}
