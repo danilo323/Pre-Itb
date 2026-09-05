@@ -7,7 +7,7 @@
         <div class="areas__header" style="text-align: center;">
             <span class="text-orange" style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 8px;"><?= content_get('areas', 'etiqueta_superior', 'Oferta Académica de Vanguardia') ?></span>
             <h2 class="areas__title" style="font-family: var(--font-heading); font-size: 2.8rem;">
-                <?= content_title('areas', 'titulo', 'Áreas de Formación') ?>
+                <?= htmlspecialchars(content_get('areas', 'titulo', 'Nuestras Áreas de Formación'), ENT_QUOTES, 'UTF-8') ?>
             </h2>
             <p class="areas__subtitle" style="margin: 0 auto 40px auto;">
                 <?= content_get('areas', 'descripcion', 'Programas tecnológicos de nivel superior diseñados para responder a las exigencias del mercado laboral actual con un enfoque 100% práctico.') ?>
@@ -15,51 +15,65 @@
         </div>
 
         <div class="areas__grid">
-            <!-- Card 1: Salud -->
-            <div class="areas__card">
+            <?php
+            // Obtener las áreas desde el repeater
+            $areas_list = content_raw('areas', 'lista_areas', [
+                [
+                    'titulo' => "Facultad de Salud\ny Servicios Sociales (FASSS)",
+                    'descripcion' => "Carreras técnicas y tecnológicas enfocadas en el\ncuidado de la salud, enfermería, rehabilitación y\nbienestar comunitario.",
+                    'icono' => 'img/doctor.png',
+                    'imagen_fondo' => '',
+                    'btn_texto' => 'Explorar programas'
+                ],
+                [
+                    'titulo' => "Facultad de Ciencias Empresariales\ny Sistemas / Económicas y\nEmpresariales (FACES)",
+                    'descripcion' => "Programas de gestión, contabilidad, marketing y\ncomercio para liderar en el sector empresarial e\nindustrial.",
+                    'icono' => 'img/laptop.png',
+                    'imagen_fondo' => 'img/estudiantes1.png',
+                    'btn_texto' => 'Explorar programas'
+                ],
+                [
+                    'titulo' => "Facultad de Transporte\ny Vialidad (FATV)",
+                    'descripcion' => "Formación especializada en mecánica, gestión de\ntransporte, seguridad vial y escuela de conducción",
+                    'icono' => 'img/coche.png',
+                    'imagen_fondo' => '',
+                    'btn_texto' => 'Explorar programas'
+                ]
+            ]);
+            $index = 0;
+            $default_icons = ['img/doctor.png', 'img/laptop.png', 'img/coche.png'];
+            
+            foreach ((array)$areas_list as $area):
+                // Fallbacks si el usuario deja la imagen en blanco (o si son los valores por defecto que ahora vienen vacíos)
+                $fallback_icon = $default_icons[$index % 3];
+                $icono = !empty($area['icono']) ? $area['icono'] : $fallback_icon;
+                
+                // Solo la segunda área tiene fondo por defecto
+                $imagen_fondo = !empty($area['imagen_fondo']) ? $area['imagen_fondo'] : (($index % 3) === 1 ? 'img/estudiantes1.png' : '');
+                
+                $has_bg = !empty($imagen_fondo);
+                $card_class = $has_bg ? 'areas__card areas__card--image' : 'areas__card';
+                $bg_style = $has_bg ? 'background-image: linear-gradient(rgba(26, 54, 104, 0.8), rgba(26, 54, 104, 0.8)), url(\'' . htmlspecialchars($imagen_fondo, ENT_QUOTES, 'UTF-8') . '\');' : '';
+            ?>
+            <div class="<?= $card_class ?>" style="<?= $bg_style ?>">
                 <div class="areas__card-icon">
-                    <img src="img/doctor.png" alt="Salud" class="areas__icon-img">
+                    <?php if (!empty($icono)): ?>
+                        <img src="<?= htmlspecialchars($icono, ENT_QUOTES, 'UTF-8') ?>" alt="Ícono" class="areas__icon-img">
+                    <?php endif; ?>
                 </div>
-                <h3 class="areas__card-title"><?= content_get('areas', 'area1_titulo', "Facultad de Salud\ny Servicios Sociales (FASSS)") ?></h3>
+                <h3 class="areas__card-title"><?= nl2br(htmlspecialchars($area['titulo'] ?? '', ENT_QUOTES, 'UTF-8')) ?></h3>
                 <p class="areas__card-description">
-                    <?= content_get('areas', 'area1_desc', "Carreras técnicas y tecnológicas enfocadas en el\ncuidado de la salud, enfermería, rehabilitación y\nbienestar comunitario.") ?>
+                    <?= nl2br(htmlspecialchars($area['descripcion'] ?? '', ENT_QUOTES, 'UTF-8')) ?>
                 </p>
                 <a href="#" class="btn btn--solid">
-                    <?= content_get('areas', 'area1_btn', 'Explorar programas') ?>
+                    <?= htmlspecialchars($area['btn_texto'] ?? 'Explorar programas', ENT_QUOTES, 'UTF-8') ?>
                     <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
-
-            <!-- Card 2: Ciencias Empresariales -->
-            <div class="areas__card areas__card--image" style="background-image: linear-gradient(rgba(26, 54, 104, 0.8), rgba(26, 54, 104, 0.8)), url('img/estudiantes1.png');">
-                <div class="areas__card-icon">
-                    <img src="img/laptop.png" alt="Empresariales" class="areas__icon-img">
-                </div>
-                <h3 class="areas__card-title"><?= content_get('areas', 'area2_titulo', "Facultad de Ciencias Empresariales\ny Sistemas / Económicas y\nEmpresariales (FACES)") ?></h3>
-                <p class="areas__card-description">
-                    <?= content_get('areas', 'area2_desc', "Programas de gestión, contabilidad, marketing y\ncomercio para liderar en el sector empresarial e\nindustrial.") ?>
-                </p>
-                <a href="#" class="btn btn--solid">
-                    <?= content_get('areas', 'area2_btn', 'Explorar programas') ?>
-                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
-
-            <!-- Card 3: Transporte -->
-            <div class="areas__card">
-                <div class="areas__card-icon">
-                    <img src="img/coche.png" alt="Transporte" class="areas__icon-img">
-                </div>
-                <h3 class="areas__card-title"><?= content_get('areas', 'area3_titulo', "Facultad de Transporte\ny Vialidad (FATV)") ?></h3>
-                <p class="areas__card-description">
-                    <?= content_get('areas', 'area3_desc', "Formación especializada en mecánica, gestión de\ntransporte, seguridad vial y escuela de conducción") ?>
-                </p>
-
-                <a href="#" class="btn btn--solid">
-                    <?= content_get('areas', 'area3_btn', 'Explorar programas') ?>
-                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
+            <?php 
+                $index++;
+            endforeach; 
+            ?>
         </div>
     </div>
 </section>

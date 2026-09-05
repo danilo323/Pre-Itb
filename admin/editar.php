@@ -24,6 +24,41 @@ $items = collection_items($section);
 
 // Manejar POST (Crear o Actualizar)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST['action'] !== 'delete')) {
+    
+    // 0. Normalizar $_FILES para soportar nombres como foto[file] generados por el admin
+    if (!function_exists('normalize_files_array')) {
+        function normalize_files_array($files) {
+            $out = [];
+            foreach ($files as $top_key => $f) {
+                if (!is_array($f['name'])) {
+                    $out[$top_key] = $f;
+                    continue;
+                }
+                $keys = ['name', 'type', 'tmp_name', 'error', 'size'];
+                $walker = function($data, $path) use (&$walker, &$out, $keys, $top_key, $f) {
+                    foreach ($data as $k => $v) {
+                        $cur = $path . '[' . $k . ']';
+                        if (is_array($v)) {
+                            $walker($v, $cur);
+                        } else {
+                            $item = [];
+                            foreach ($keys as $prop) {
+                                $val = $f[$prop];
+                                preg_match_all('/\[(.*?)\]/', $cur, $m);
+                                foreach ($m[1] as $pk) { $val = $val[$pk]; }
+                                $item[$prop] = $val;
+                            }
+                            $out[$top_key . $cur] = $item;
+                        }
+                    }
+                };
+                $walker($f['name'], '');
+            }
+            return $out;
+        }
+    }
+    $_FILES = normalize_files_array($_FILES);
+
     $data_to_save = [];
     
     // 0. Preservar campos internos (como el orden) si es edición

@@ -22,7 +22,44 @@ echo layout_start('Dashboard');
 
 <div class="dash-header">
     <h1><?= $saludo ?>, <?= htmlspecialchars($user, ENT_QUOTES, 'UTF-8') ?></h1>
-    <p>Bienvenido al panel administrativo de ITB.</p>
+    <p>Bienvenido al panel administrativo de ITB. Aquí tienes un resumen de tu sitio.</p>
+</div>
+
+<!-- Métricas Rápidas -->
+<?php
+// Calcular algunas métricas reales leyendo de $_SESSION
+$total_equipo = isset($_SESSION['admin_data']['equipo']['items']) ? count($_SESSION['admin_data']['equipo']['items']) : 0;
+$total_testimonios = isset($_SESSION['admin_data']['testimonios']['items']) ? count($_SESSION['admin_data']['testimonios']['items']) : 0;
+$total_noticias = isset($_SESSION['admin_data']['noticias']['items']) ? count($_SESSION['admin_data']['noticias']['items']) : 0;
+?>
+<div class="dash-metrics">
+    <div class="dash-metric-card">
+        <div class="dash-metric-icon">
+            <i class="bi bi-people-fill"></i>
+        </div>
+        <div class="dash-metric-info">
+            <h4><?= $total_equipo ?></h4>
+            <span>Miembros del Equipo</span>
+        </div>
+    </div>
+    <div class="dash-metric-card">
+        <div class="dash-metric-icon">
+            <i class="bi bi-chat-quote-fill"></i>
+        </div>
+        <div class="dash-metric-info">
+            <h4><?= $total_testimonios ?></h4>
+            <span>Testimonios Activos</span>
+        </div>
+    </div>
+    <div class="dash-metric-card">
+        <div class="dash-metric-icon">
+            <i class="bi bi-newspaper"></i>
+        </div>
+        <div class="dash-metric-info">
+            <h4><?= $total_noticias ?></h4>
+            <span>Noticias Publicadas</span>
+        </div>
+    </div>
 </div>
 
 <?php

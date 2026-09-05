@@ -17,81 +17,70 @@
         </div>
 
         <div class="programas__grid">
-            <!-- Card 1 -->
+            <?php
+            // Obtener programas del repeater
+            $programas_list = content_raw('programas', 'lista_programas', [
+                [
+                    'imagen' => 'img/programa-enfermeria.jpg',
+                    'modalidad' => 'Presencial',
+                    'area' => 'Salud',
+                    'titulo' => 'Tecnología Superior en Enfermería',
+                    'duracion' => '5 Semestres',
+                    'sede' => 'Guayaquil'
+                ],
+                [
+                    'imagen' => 'img/programa-marketing.jpg',
+                    'modalidad' => 'Presencial',
+                    'area' => 'Ciencias Empresariales',
+                    'titulo' => 'Tecnología Superior en Marketing Digital',
+                    'duracion' => '5 Semestres',
+                    'sede' => 'Guayaquil'
+                ],
+                [
+                    'imagen' => 'img/programa-logistica.jpg',
+                    'modalidad' => 'Presencial',
+                    'area' => 'Transporte',
+                    'titulo' => 'Tecnología Superior en Logística y Transporte',
+                    'duracion' => '5 Semestres',
+                    'sede' => 'Guayaquil'
+                ],
+                [
+                    'imagen' => 'img/programa-software.jpg',
+                    'modalidad' => 'Híbrido',
+                    'area' => 'Tecnología',
+                    'titulo' => 'Tecnología Superior en Desarrollo de Software',
+                    'duracion' => '5 Semestres',
+                    'sede' => 'Guayaquil'
+                ]
+            ]);
+            
+            $default_imgs = ['img/programa-enfermeria.jpg', 'img/programa-marketing.jpg', 'img/programa-logistica.jpg', 'img/programa-software.jpg'];
+            $index = 0;
+            foreach ((array)$programas_list as $prog):
+                $fallback_img = $default_imgs[$index % 4];
+                $img_src = !empty($prog['imagen']) ? $prog['imagen'] : $fallback_img;
+            ?>
             <div class="programas__card">
                 <div class="programas__card-img">
-                    <img src="<?= content_raw('programas', 'prog1_imagen', 'img/programa-enfermeria.jpg') ?>" alt="<?= content_get('programas', 'prog1_titulo', 'Enfermería') ?>">
-                    <span class="programas__card-badge"><?= content_get('programas', 'prog1_modalidad', 'Presencial') ?></span>
+                    <img src="<?= htmlspecialchars($img_src, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars($prog['titulo'] ?? 'Programa', ENT_QUOTES, 'UTF-8') ?>">
+                    <span class="programas__card-badge"><?= htmlspecialchars($prog['modalidad'] ?? 'Presencial', ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
                 <div class="programas__card-body">
-                    <span class="programas__card-area"><?= content_get('programas', 'prog1_area', 'Salud') ?></span>
-                    <h3 class="programas__card-title"><?= content_get('programas', 'prog1_titulo', 'Tecnología Superior en Enfermería') ?></h3>
+                    <span class="programas__card-area"><?= htmlspecialchars($prog['area'] ?? 'Área', ENT_QUOTES, 'UTF-8') ?></span>
+                    <h3 class="programas__card-title"><?= htmlspecialchars($prog['titulo'] ?? 'Título del programa', ENT_QUOTES, 'UTF-8') ?></h3>
                     <div class="programas__card-meta">
-                        <span><i class="fas fa-clock"></i> <?= content_get('programas', 'prog1_duracion', '5 Semestres') ?></span>
-                        <span><i class="fas fa-map-marker-alt"></i> <?= content_get('programas', 'prog1_sede', 'Guayaquil') ?></span>
+                        <span><i class="fas fa-clock"></i> <?= htmlspecialchars($prog['duracion'] ?? '5 Semestres', ENT_QUOTES, 'UTF-8') ?></span>
+                        <span><i class="fas fa-map-marker-alt"></i> <?= htmlspecialchars($prog['sede'] ?? 'Guayaquil', ENT_QUOTES, 'UTF-8') ?></span>
                     </div>
                     <a href="#" class="programas__card-btn">
                         Ver programa <i class="fas fa-arrow-right"></i>
                     </a>
                 </div>
             </div>
-
-            <!-- Card 2 -->
-            <div class="programas__card">
-                <div class="programas__card-img">
-                    <img src="<?= content_raw('programas', 'prog2_imagen', 'img/programa-marketing.jpg') ?>" alt="<?= content_get('programas', 'prog2_titulo', 'Marketing Digital') ?>">
-                    <span class="programas__card-badge"><?= content_get('programas', 'prog2_modalidad', 'Presencial') ?></span>
-                </div>
-                <div class="programas__card-body">
-                    <span class="programas__card-area"><?= content_get('programas', 'prog2_area', 'Ciencias Empresariales') ?></span>
-                    <h3 class="programas__card-title"><?= content_get('programas', 'prog2_titulo', 'Tecnología Superior en Marketing Digital') ?></h3>
-                    <div class="programas__card-meta">
-                        <span><i class="fas fa-clock"></i> <?= content_get('programas', 'prog2_duracion', '5 Semestres') ?></span>
-                        <span><i class="fas fa-map-marker-alt"></i> <?= content_get('programas', 'prog2_sede', 'Guayaquil') ?></span>
-                    </div>
-                    <a href="#" class="programas__card-btn">
-                        Ver programa <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 3 -->
-            <div class="programas__card">
-                <div class="programas__card-img">
-                    <img src="<?= content_raw('programas', 'prog3_imagen', 'img/programa-logistica.jpg') ?>" alt="<?= content_get('programas', 'prog3_titulo', 'Logística y Transporte') ?>">
-                    <span class="programas__card-badge"><?= content_get('programas', 'prog3_modalidad', 'Presencial') ?></span>
-                </div>
-                <div class="programas__card-body">
-                    <span class="programas__card-area"><?= content_get('programas', 'prog3_area', 'Transporte') ?></span>
-                    <h3 class="programas__card-title"><?= content_get('programas', 'prog3_titulo', 'Tecnología Superior en Logística y Transporte') ?></h3>
-                    <div class="programas__card-meta">
-                        <span><i class="fas fa-clock"></i> <?= content_get('programas', 'prog3_duracion', '5 Semestres') ?></span>
-                        <span><i class="fas fa-map-marker-alt"></i> <?= content_get('programas', 'prog3_sede', 'Guayaquil') ?></span>
-                    </div>
-                    <a href="#" class="programas__card-btn">
-                        Ver programa <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
-
-            <!-- Card 4 -->
-            <div class="programas__card">
-                <div class="programas__card-img">
-                    <img src="<?= content_raw('programas', 'prog4_imagen', 'img/programa-software.jpg') ?>" alt="<?= content_get('programas', 'prog4_titulo', 'Desarrollo de Software') ?>">
-                    <span class="programas__card-badge"><?= content_get('programas', 'prog4_modalidad', 'Híbrido') ?></span>
-                </div>
-                <div class="programas__card-body">
-                    <span class="programas__card-area"><?= content_get('programas', 'prog4_area', 'Tecnología') ?></span>
-                    <h3 class="programas__card-title"><?= content_get('programas', 'prog4_titulo', 'Tecnología Superior en Desarrollo de Software') ?></h3>
-                    <div class="programas__card-meta">
-                        <span><i class="fas fa-clock"></i> <?= content_get('programas', 'prog4_duracion', '5 Semestres') ?></span>
-                        <span><i class="fas fa-map-marker-alt"></i> <?= content_get('programas', 'prog4_sede', 'Guayaquil') ?></span>
-                    </div>
-                    <a href="#" class="programas__card-btn">
-                        Ver programa <i class="fas fa-arrow-right"></i>
-                    </a>
-                </div>
-            </div>
+            <?php 
+                $index++;
+            endforeach; 
+            ?>
         </div>
     </div>
 </section>

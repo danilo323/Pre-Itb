@@ -34,38 +34,31 @@
 
         <!-- Centro: Imagen con Jarallax -->
         <div class="trayectoria__image" data-jarallax data-speed="0.5" data-img-position="top">
-            <img src="img/estudiantes1.png" alt="Estudiantes ITB en el campus" class="jarallax-img">
+            <img src="<?= content_raw('trayectoria', 'imagen_central', 'img/estudiantes1.png') ?>" alt="Estudiantes ITB en el campus" class="jarallax-img">
         </div>
 
         <!-- Lado derecho: Estadísticas -->
+        <?php
+        // Íconos por posición (0, 1, 2) — se mantienen fijos del diseño original
+        $stat_icons = ['fa-user-graduate', 'fa-users', 'fa-laptop-code'];
+        $stats = content_raw('trayectoria', 'estadisticas', [
+            ['numero' => '29+', 'texto' => 'Años de Experiencia'],
+            [' numero' => '+17,000', 'texto' => 'Estudiantes Graduados'],
+            ['numero' => '+35', 'texto' => 'Carreras Disponibles'],
+        ]);
+        ?>
         <div class="trayectoria__stats">
+            <?php foreach ((array)$stats as $i => $stat): ?>
             <div class="trayectoria__stat-card">
                 <div class="trayectoria__stat-icon">
-                    <i class="fas fa-user-graduate"></i>
+                    <i class="fas <?= $stat_icons[$i] ?? 'fa-star' ?>"></i>
                 </div>
                 <div class="trayectoria__stat-text">
-                    <span class="trayectoria__stat-number" data-count="<?= content_get('trayectoria', 'stat_anios', '29') ?>" data-suffix="+"><?= content_get('trayectoria', 'stat_anios', '29') ?>+</span>
-                    <span class="trayectoria__stat-label"><?= str_replace('\n', '<br>', content_get('trayectoria', 'stat_anios_label', "Años transformando vidas\ny formando profesionales.")) ?></span>
+                    <span class="trayectoria__stat-number"><?= htmlspecialchars($stat['numero'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="trayectoria__stat-label"><?= htmlspecialchars($stat['texto'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
             </div>
-            <div class="trayectoria__stat-card">
-                <div class="trayectoria__stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="trayectoria__stat-text">
-                    <span class="trayectoria__stat-number" data-count="<?= content_get('trayectoria', 'stat_graduados', '17000') ?>" data-format="thousands" data-prefix="+" data-suffix="">+<?= number_format((int)content_get('trayectoria', 'stat_graduados', '17000')) ?></span>
-                    <span class="trayectoria__stat-label"><?= str_replace('\n', '<br>', content_get('trayectoria', 'stat_graduados_label', "Estudiantes formándose\ncon metodologías activas.")) ?></span>
-                </div>
-            </div>
-            <div class="trayectoria__stat-card">
-                <div class="trayectoria__stat-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <div class="trayectoria__stat-text">
-                    <span class="trayectoria__stat-number" data-count="<?= content_get('trayectoria', 'stat_carreras', '35') ?>" data-prefix="+" data-suffix="">+<?= content_get('trayectoria', 'stat_carreras', '35') ?></span>
-                    <span class="trayectoria__stat-label"><?= str_replace('\n', '<br>', content_get('trayectoria', 'stat_carreras_label', "Carreras técnicas y\ntecnológicas disponibles.")) ?></span>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

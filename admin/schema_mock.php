@@ -49,35 +49,6 @@ return [
                     'label' => 'Logo Blanco (Footer)',
                     'default' => 'img/logo-itb-white.png',
                 ],
-                'div_redes' => [
-                    'type' => 'divider',
-                    'label' => 'Redes Sociales',
-                ],
-                'facebook_url' => [
-                    'type' => 'text',
-                    'label' => 'Facebook URL',
-                    'default' => '#',
-                ],
-                'instagram_url' => [
-                    'type' => 'text',
-                    'label' => 'Instagram URL',
-                    'default' => '#',
-                ],
-                'twitter_url' => [
-                    'type' => 'text',
-                    'label' => 'Twitter / X URL',
-                    'default' => '#',
-                ],
-                'youtube_url' => [
-                    'type' => 'text',
-                    'label' => 'YouTube URL',
-                    'default' => '#',
-                ],
-                'linkedin_url' => [
-                    'type' => 'text',
-                    'label' => 'LinkedIn URL',
-                    'default' => '#',
-                ],
             ],
         ],
         'menu' => [
@@ -175,6 +146,35 @@ return [
                     'type' => 'textarea',
                     'label' => 'Lema / Descripción Institucional',
                     'default' => 'Instituto Superior Tecnológico Bolivariano de Tecnología. Formando profesionales de excelencia desde 1995.',
+                ],
+                'div_redes' => [
+                    'type' => 'divider',
+                    'label' => 'Redes Sociales',
+                ],
+                'facebook_url' => [
+                    'type' => 'text',
+                    'label' => 'Facebook URL',
+                    'default' => '#',
+                ],
+                'instagram_url' => [
+                    'type' => 'text',
+                    'label' => 'Instagram URL',
+                    'default' => '#',
+                ],
+                'twitter_url' => [
+                    'type' => 'text',
+                    'label' => 'Twitter / X URL',
+                    'default' => '#',
+                ],
+                'youtube_url' => [
+                    'type' => 'text',
+                    'label' => 'YouTube URL',
+                    'default' => '#',
+                ],
+                'linkedin_url' => [
+                    'type' => 'text',
+                    'label' => 'LinkedIn URL',
+                    'default' => '#',
                 ],
                 'div_contacto' => [
                     'type' => 'divider',
@@ -337,30 +337,29 @@ Educación Continua",
                             'default' => 'https://youtu.be/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B',
                             'help' => 'Enlace del video institucional que se abre al presionar play.',
                         ],
-                        'imagen_1' => [
-                            'type' => 'image',
-                            'label' => 'Imagen de fondo 1',
-                            'default' => 'img/salud.jpg',
-                            'help' => 'Primera foto del carrusel de fondo. Tamaño recomendado: 1920x1080px.',
+                        'div_galeria' => [
+                            'type' => 'divider',
+                            'label' => 'Galería de Imágenes de Fondo',
                         ],
-                        'imagen_2' => [
-                            'type' => 'image',
-                            'label' => 'Imagen de fondo 2 (Opcional)',
-                            'default' => 'img/student.jpg',
-                            'help' => 'Si se sube, el fondo rotará.',
+                        'imagenes_fondo' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Imagen',
+                            'help' => 'Agrega tantas fotos de fondo como desees. El carrusel rotará automáticamente.',
+                            'default' => [
+                                ['archivo' => 'img/salud.jpg'],
+                                ['archivo' => 'img/student.jpg'],
+                                ['archivo' => 'img/student 2.jpg'],
+                            ],
+                            'subfields' => [
+                                'archivo' => [
+                                    'type' => 'image',
+                                    'label' => 'Foto de Fondo',
+                                    'help' => 'Tamaño recomendado: 1920x1080px',
+                                ]
+                            ]
                         ],
-                        'imagen_3' => [
-                            'type' => 'image',
-                            'label' => 'Imagen de fondo 3 (Opcional)',
-                            'default' => 'img/student 2.jpg',
-                            'help' => 'Tercera foto para el carrusel.',
-                        ],
-                        'imagen_video_thumb' => [
-                            'type' => 'image',
-                            'label' => 'Miniatura del Video (círculo)',
-                            'default' => 'img/hero-video-thumb.jpg',
-                            'help' => 'Foto circular del video. Tamaño recomendado: 400x400px.',
-                        ],
+
                     ],
                 ],
                 'trayectoria' => [
@@ -379,6 +378,7 @@ Educación Continua",
                             'type' => 'textarea',
                             'label' => 'Título de la sección',
                             'default' => 'Trayectoria y Compromiso con la Educación',
+                            'required' => true
                         ],
                         'descripcion' => [
                             'type' => 'textarea',
@@ -398,6 +398,7 @@ Educación Continua",
                             'type' => 'text',
                             'label' => 'Nombre',
                             'default' => 'PhD. Roberto Tolozano Benites',
+                            'required' => true
                         ],
                         'canciller_cargo' => [
                             'type' => 'text',
@@ -413,39 +414,42 @@ Educación Continua",
                             'label' => 'Texto del botón',
                             'default' => 'Nuestra Historia',
                         ],
+                        'div_imagen' => [
+                            'type' => 'divider',
+                            'label' => 'Imagen Central',
+                        ],
+                        'imagen_central' => [
+                            'type' => 'image',
+                            'label' => 'Foto central de la sección',
+                            'default' => 'img/estudiantes1.png',
+                            'help' => 'Foto grande del centro de la sección. Tamaño recomendado: 600x700px.',
+                        ],
                         'div_stats' => [
                             'type' => 'divider',
                             'label' => 'Estadísticas (Lado Derecho)',
                         ],
-                        'stat_anios' => [
-                            'type' => 'text',
-                            'label' => 'Número: Años de Experiencia',
-                            'default' => '29+',
-                        ],
-                        'stat_anios_label' => [
-                            'type' => 'text',
-                            'label' => 'Texto: Años de Experiencia',
-                            'default' => 'Años de Experiencia',
-                        ],
-                        'stat_graduados' => [
-                            'type' => 'text',
-                            'label' => 'Número: Estudiantes Graduados',
-                            'default' => '+17,000',
-                        ],
-                        'stat_graduados_label' => [
-                            'type' => 'text',
-                            'label' => 'Texto: Estudiantes Graduados',
-                            'default' => 'Estudiantes Graduados',
-                        ],
-                        'stat_carreras' => [
-                            'type' => 'text',
-                            'label' => 'Número: Carreras Disponibles',
-                            'default' => '+35',
-                        ],
-                        'stat_carreras_label' => [
-                            'type' => 'text',
-                            'label' => 'Texto: Carreras Disponibles',
-                            'default' => 'Carreras Disponibles',
+                        'estadisticas' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Estadística',
+                            'help' => 'Agrega o edita los bloques de números del lado derecho. Máximo recomendado: 3.',
+                            'default' => [
+                                ['numero' => '29+', 'texto' => 'Años de Experiencia'],
+                                ['numero' => '+17,000', 'texto' => 'Estudiantes Graduados'],
+                                ['numero' => '+35', 'texto' => 'Carreras Disponibles'],
+                            ],
+                            'subfields' => [
+                                'numero' => [
+                                    'type' => 'text',
+                                    'label' => 'Número',
+                                    'help' => 'Ej: 29+ o +17,000',
+                                ],
+                                'texto' => [
+                                    'type' => 'text',
+                                    'label' => 'Descripción',
+                                    'help' => 'Ej: Años de Experiencia',
+                                ],
+                            ],
                         ],
                     ],
                 ],
@@ -464,93 +468,54 @@ Educación Continua",
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título de la sección',
-                            'default' => 'Nuestras Áreas de *Formación*',
-                            'help' => 'Usa asteriscos *texto* para pintar una palabra de color naranja.',
+                            'default' => 'Nuestras Áreas de Formación',
+                            'required' => true
                         ],
                         'descripcion' => [
                             'type' => 'textarea',
                             'label' => 'Subtítulo',
                             'default' => 'Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional',
                         ],
-                        'div_area1' => [
-                            'type' => 'divider',
-                            'label' => 'Área 1',
-                        ],
-                        'area1_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Salud',
-                        ],
-                        'area1_desc' => [
-                            'type' => 'textarea',
-                            'label' => 'Descripción',
-                            'default' => 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.',
-                        ],
-                        'area1_programas' => [
-                            'type' => 'textarea',
-                            'label' => 'Programas (uno por línea)',
-                            'default' => 'Enfermería
-Fisioterapia
-Laboratorio Clínico',
-                        ],
-                        'area1_btn' => [
-                            'type' => 'text',
-                            'label' => 'Texto del botón',
-                            'default' => 'Explorar programas',
-                        ],
-                        'div_area2' => [
-                            'type' => 'divider',
-                            'label' => 'Área 2',
-                        ],
-                        'area2_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Ciencias Empresariales',
-                        ],
-                        'area2_desc' => [
-                            'type' => 'textarea',
-                            'label' => 'Descripción',
-                            'default' => 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.',
-                        ],
-                        'area2_programas' => [
-                            'type' => 'textarea',
-                            'label' => 'Programas (uno por línea)',
-                            'default' => 'Administración de Empresas
-Contabilidad
-Marketing Digital',
-                        ],
-                        'area2_btn' => [
-                            'type' => 'text',
-                            'label' => 'Texto del botón',
-                            'default' => 'Explorar programas',
-                        ],
-                        'div_area3' => [
-                            'type' => 'divider',
-                            'label' => 'Área 3',
-                        ],
-                        'area3_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Transporte',
-                        ],
-                        'area3_desc' => [
-                            'type' => 'textarea',
-                            'label' => 'Descripción',
-                            'default' => 'Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.',
-                        ],
-                        'area3_programas' => [
-                            'type' => 'textarea',
-                            'label' => 'Programas (uno por línea)',
-                            'default' => 'Logística y Transporte
-Comercio Exterior
-Operaciones Portuarias',
-                        ],
-                        'area3_btn' => [
-                            'type' => 'text',
-                            'label' => 'Texto del botón',
-                            'default' => 'Explorar programas',
-                        ],
-                    ],
+                        'lista_areas' => [
+                            'type' => 'repeater',
+                            'label' => 'Facultades / Áreas',
+                            'item_label' => 'Área',
+                            'subfields' => [
+                                'titulo' => ['type' => 'text', 'label' => 'Título', 'default' => 'Nueva Área', 'required' => true],
+                                'descripcion' => ['type' => 'textarea', 'label' => 'Descripción', 'required' => true],
+                                'programas' => ['type' => 'textarea', 'label' => 'Programas (uno por línea)', 'required' => true],
+                                'icono' => ['type' => 'image', 'label' => 'Ícono (PNG/SVG)'],
+                                'imagen_fondo' => ['type' => 'image', 'label' => 'Imagen de Fondo (Opcional)', 'help' => 'Si agregas una imagen aquí, la tarjeta tomará el estilo oscuro con fondo.'],
+                                'btn_texto' => ['type' => 'text', 'label' => 'Texto del botón', 'default' => 'Explorar programas', 'required' => true]
+                            ],
+                            'default' => [
+                                [
+                                    'titulo' => 'Salud',
+                                    'descripcion' => 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.',
+                                    'programas' => "Enfermería\nFisioterapia\nLaboratorio Clínico",
+                                    'icono' => 'img/doctor.png',
+                                    'imagen_fondo' => '',
+                                    'btn_texto' => 'Explorar programas'
+                                ],
+                                [
+                                    'titulo' => 'Ciencias Empresariales',
+                                    'descripcion' => 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.',
+                                    'programas' => "Administración de Empresas\nContabilidad\nMarketing Digital",
+                                    'icono' => 'img/laptop.png',
+                                    'imagen_fondo' => 'img/student 2.jpg',
+                                    'btn_texto' => 'Explorar programas'
+                                ],
+                                [
+                                    'titulo' => 'Transporte',
+                                    'descripcion' => 'Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.',
+                                    'programas' => "Logística y Transporte\nComercio Exterior\nOperaciones Portuarias",
+                                    'icono' => 'img/coche.png',
+                                    'imagen_fondo' => '',
+                                    'btn_texto' => 'Explorar programas'
+                                ]
+                            ]
+                        ]
+                    ]
                 ],
                 'programas' => [
                     'label' => 'PROGRAMAS DESTACADOS',
@@ -575,146 +540,53 @@ Operaciones Portuarias',
                             'label' => 'Botón "Ver todos"',
                             'default' => 'Ver todos los programas',
                         ],
-                        'div_prog1' => [
-                            'type' => 'divider',
-                            'label' => 'Programa 1 (Salud)',
-                        ],
-                        'prog1_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/programa-enfermeria.jpg',
-                        ],
-                        'prog1_modalidad' => [
-                            'type' => 'text',
-                            'label' => 'Modalidad',
-                            'default' => 'Presencial',
-                            'help' => 'Ej: Presencial, Híbrido, En línea',
-                        ],
-                        'prog1_area' => [
-                            'type' => 'text',
-                            'label' => 'Área',
-                            'default' => 'Salud',
-                        ],
-                        'prog1_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del programa',
-                            'default' => 'Tecnología Superior en Enfermería',
-                        ],
-                        'prog1_duracion' => [
-                            'type' => 'text',
-                            'label' => 'Duración',
-                            'default' => '5 Semestres',
-                        ],
-                        'prog1_sede' => [
-                            'type' => 'text',
-                            'label' => 'Sede',
-                            'default' => 'Guayaquil',
-                        ],
-                        'div_prog2' => [
-                            'type' => 'divider',
-                            'label' => 'Programa 2 (Empresariales)',
-                        ],
-                        'prog2_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/programa-marketing.jpg',
-                        ],
-                        'prog2_modalidad' => [
-                            'type' => 'text',
-                            'label' => 'Modalidad',
-                            'default' => 'Presencial',
-                            'help' => 'Ej: Presencial, Híbrido, En línea',
-                        ],
-                        'prog2_area' => [
-                            'type' => 'text',
-                            'label' => 'Área',
-                            'default' => 'Ciencias Empresariales',
-                        ],
-                        'prog2_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del programa',
-                            'default' => 'Tecnología Superior en Marketing Digital',
-                        ],
-                        'prog2_duracion' => [
-                            'type' => 'text',
-                            'label' => 'Duración',
-                            'default' => '5 Semestres',
-                        ],
-                        'prog2_sede' => [
-                            'type' => 'text',
-                            'label' => 'Sede',
-                            'default' => 'Guayaquil',
-                        ],
-                        'div_prog3' => [
-                            'type' => 'divider',
-                            'label' => 'Programa 3 (Logística)',
-                        ],
-                        'prog3_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/programa-logistica.jpg',
-                        ],
-                        'prog3_modalidad' => [
-                            'type' => 'text',
-                            'label' => 'Modalidad',
-                            'default' => 'Presencial',
-                            'help' => 'Ej: Presencial, Híbrido, En línea',
-                        ],
-                        'prog3_area' => [
-                            'type' => 'text',
-                            'label' => 'Área',
-                            'default' => 'Transporte',
-                        ],
-                        'prog3_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del programa',
-                            'default' => 'Tecnología Superior en Logística y Transporte',
-                        ],
-                        'prog3_duracion' => [
-                            'type' => 'text',
-                            'label' => 'Duración',
-                            'default' => '5 Semestres',
-                        ],
-                        'prog3_sede' => [
-                            'type' => 'text',
-                            'label' => 'Sede',
-                            'default' => 'Guayaquil',
-                        ],
-                        'div_prog4' => [
-                            'type' => 'divider',
-                            'label' => 'Programa 4 (Software)',
-                        ],
-                        'prog4_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen',
-                            'default' => 'img/programa-software.jpg',
-                        ],
-                        'prog4_modalidad' => [
-                            'type' => 'text',
-                            'label' => 'Modalidad',
-                            'default' => 'Híbrido',
-                            'help' => 'Ej: Presencial, Híbrido, En línea',
-                        ],
-                        'prog4_area' => [
-                            'type' => 'text',
-                            'label' => 'Área',
-                            'default' => 'Tecnología',
-                        ],
-                        'prog4_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del programa',
-                            'default' => 'Tecnología Superior en Desarrollo de Software',
-                        ],
-                        'prog4_duracion' => [
-                            'type' => 'text',
-                            'label' => 'Duración',
-                            'default' => '5 Semestres',
-                        ],
-                        'prog4_sede' => [
-                            'type' => 'text',
-                            'label' => 'Sede',
-                            'default' => 'Guayaquil',
-                        ],
+                        'lista_programas' => [
+                            'type' => 'repeater',
+                            'label' => 'Lista de Programas',
+                            'item_label' => 'Programa',
+                            'subfields' => [
+                                'imagen' => ['type' => 'image', 'label' => 'Imagen'],
+                                'modalidad' => ['type' => 'text', 'label' => 'Modalidad', 'help' => 'Ej: Presencial, Híbrido, En línea'],
+                                'area' => ['type' => 'text', 'label' => 'Área'],
+                                'titulo' => ['type' => 'text', 'label' => 'Título del programa', 'required' => true],
+                                'duracion' => ['type' => 'text', 'label' => 'Duración'],
+                                'sede' => ['type' => 'text', 'label' => 'Sede']
+                            ],
+                            'default' => [
+                                [
+                                    'imagen' => '',
+                                    'modalidad' => 'Presencial',
+                                    'area' => 'Salud',
+                                    'titulo' => 'Tecnología Superior en Enfermería',
+                                    'duracion' => '5 Semestres',
+                                    'sede' => 'Guayaquil'
+                                ],
+                                [
+                                    'imagen' => '',
+                                    'modalidad' => 'Presencial',
+                                    'area' => 'Ciencias Empresariales',
+                                    'titulo' => 'Tecnología Superior en Marketing Digital',
+                                    'duracion' => '5 Semestres',
+                                    'sede' => 'Guayaquil'
+                                ],
+                                [
+                                    'imagen' => '',
+                                    'modalidad' => 'Presencial',
+                                    'area' => 'Transporte',
+                                    'titulo' => 'Tecnología Superior en Logística y Transporte',
+                                    'duracion' => '5 Semestres',
+                                    'sede' => 'Guayaquil'
+                                ],
+                                [
+                                    'imagen' => '',
+                                    'modalidad' => 'Híbrido',
+                                    'area' => 'Tecnología',
+                                    'titulo' => 'Tecnología Superior en Desarrollo de Software',
+                                    'duracion' => '5 Semestres',
+                                    'sede' => 'Guayaquil'
+                                ]
+                            ]
+                        ]
                     ],
                 ],
                 'experiencia' => [
@@ -731,71 +603,44 @@ Operaciones Portuarias',
                         ],
                         'titulo' => [
                             'type' => 'text',
-                            'label' => 'Título de la sección',
+                            'label' => 'Título principal',
                             'default' => 'Tu Experiencia *ITB*',
                             'help' => 'Usa asteriscos *texto* para pintar una palabra de color naranja.',
+                            'required' => true
                         ],
                         'descripcion' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
                             'default' => 'Más allá de lo académico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseñados para tu bienestar.',
                             'help' => 'Párrafo bajo el título principal.',
+                            'required' => true
                         ],
-                        'div_c1' => [
-                            'type' => 'divider',
-                            'label' => 'Característica 1',
-                        ],
-                        'caract1_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Servicios Médicos',
-                        ],
-                        'caract1_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Atención médica y odontológica gratuita para estudiantes.',
-                        ],
-                        'div_c2' => [
-                            'type' => 'divider',
-                            'label' => 'Característica 2',
-                        ],
-                        'caract2_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Becas y Financiamiento',
-                        ],
-                        'caract2_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Programas de becas por excelencia académica y apoyo financiero.',
-                        ],
-                        'div_c3' => [
-                            'type' => 'divider',
-                            'label' => 'Característica 3',
-                        ],
-                        'caract3_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Laboratorios Modernos',
-                        ],
-                        'caract3_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Tecnología de punta en todos nuestros laboratorios especializados.',
-                        ],
-                        'div_c4' => [
-                            'type' => 'divider',
-                            'label' => 'Característica 4',
-                        ],
-                        'caract4_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título',
-                            'default' => 'Bolsa de Empleo',
-                        ],
-                        'caract4_desc' => [
-                            'type' => 'text',
-                            'label' => 'Descripción',
-                            'default' => 'Conexión directa con empresas aliadas para tus prácticas y primer empleo.',
+                        'lista_caracteristicas' => [
+                            'type' => 'repeater',
+                            'label' => 'Lista de Beneficios',
+                            'item_label' => 'Beneficio',
+                            'subfields' => [
+                                'titulo' => ['type' => 'text', 'label' => 'Título (Obligatorio)', 'required' => true],
+                                'descripcion' => ['type' => 'textarea', 'label' => 'Descripción (Obligatorio)', 'required' => true]
+                            ],
+                            'default' => [
+                                [
+                                    'titulo' => 'Servicios Médicos',
+                                    'descripcion' => 'Atención médica y odontológica gratuita para estudiantes.'
+                                ],
+                                [
+                                    'titulo' => 'Becas y Financiamiento',
+                                    'descripcion' => 'Programas de becas por excelencia académica y apoyo financiero.'
+                                ],
+                                [
+                                    'titulo' => 'Laboratorios Modernos',
+                                    'descripcion' => 'Tecnología de punta en todos nuestros laboratorios especializados.'
+                                ],
+                                [
+                                    'titulo' => 'Bolsa de Empleo',
+                                    'descripcion' => 'Conexión directa con empresas aliadas para tus prácticas y primer empleo.'
+                                ]
+                            ]
                         ],
                         'div_btn' => [
                             'type' => 'divider',

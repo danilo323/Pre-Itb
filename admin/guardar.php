@@ -11,6 +11,8 @@ if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
 
 $section_key = $_POST['section'] ?? '';
 $schema = require __DIR__ . '/schema_mock.php';
+require_once __DIR__ . '/fields/_loader.php';
+require_once __DIR__ . '/../includes/content_helper.php';
 
 if (!isset($schema['items'][$section_key])) {
     $_SESSION['flash_message'] = 'Sección no válida.';
@@ -23,56 +25,79 @@ if (!isset($_SESSION['admin_data'])) {
     $_SESSION['admin_data'] = [];
 }
 
-// 1. Procesar campos de texto enviados
-foreach ($_POST as $post_key => $raw_value) {
-    // Si la clave tiene doble guion bajo, ej: hero__titulo
-    if (strpos($post_key, '__') !== false) {
-        list($sub_key, $field) = explode('__', $post_key, 2);
-        
-        // Si el valor es de la sección plana (ej: footer__logo_blanco)
-        // O si es de un acordeón (hero)
-        if (!isset($_SESSION['admin_data'][$sub_key])) {
-            $_SESSION['admin_data'][$sub_key] = [];
+// 1. Normalizar $_FILES para soportar repeaters
+function normalize_files_array($files) {
+    $out = [];
+    foreach ($files as $top_key => $f) {
+        if (!is_array($f['name'])) {
+            $out[$top_key] = $f;
+            continue;
         }
-        
-        // Limpiamos (podemos llamar a field_parse si importamos _loader.php)
-        $_SESSION['admin_data'][$sub_key][$field] = is_string($raw_value) 
-            ? htmlspecialchars(trim($raw_value), ENT_QUOTES, 'UTF-8') 
-            : $raw_value;
+        $keys = ['name', 'type', 'tmp_name', 'error', 'size'];
+        $walker = function($data, $path) use (&$walker, &$out, $keys, $top_key, $f) {
+            foreach ($data as $k => $v) {
+                $cur = $path . '[' . $k . ']';
+                if (is_array($v)) {
+                    $walker($v, $cur);
+                } else {
+                    $item = [];
+                    foreach ($keys as $prop) {
+                        $val = $f[$prop];
+                        preg_match_all('/\[(.*?)\]/', $cur, $m);
+                        foreach ($m[1] as $pk) { $val = $val[$pk]; }
+                        $item[$prop] = $val;
+                    }
+                    $out[$top_key . $cur] = $item;
+                }
+            }
+        };
+        $walker($f['name'], '');
+    }
+    return $out;
+}
+$_FILES = normalize_files_array($_FILES);
+
+$config = $schema['items'][$section_key];
+
+// 2. Procesar visibilidad (para secciones tipo page)
+if ($config['type'] === 'page' && !empty($config['sections'])) {
+    foreach ($config['sections'] as $sub_key => $sub_config) {
+        if (isset($_POST[$sub_key . '___visible'])) {
+            $_SESSION['admin_data'][$sub_key]['_visible'] = $_POST[$sub_key . '___visible'];
+        }
     }
 }
 
-// 2. Procesar imágenes / archivos enviados
-foreach ($_FILES as $file_key => $file_info) {
-    // Los inputs de archivo se llaman, por ejemplo: hero__imagen_1_file
-    if (strpos($file_key, '__') !== false && str_ends_with($file_key, '_file')) {
-        // Extraemos hero y imagen_1
-        $base_key = substr($file_key, 0, -5); // quitamos '_file'
-        list($sub_key, $field) = explode('__', $base_key, 2);
-        
-        if ($file_info['error'] === UPLOAD_ERR_OK) {
-            $tmp_name = $file_info['tmp_name'];
-            $name     = basename($file_info['name']);
-            
-            $upload_dir = dirname(__DIR__) . '/img/';
-            if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
-            
-            $new_name = time() . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', $name);
-            $dest     = $upload_dir . $new_name;
-            
-            if (move_uploaded_file($tmp_name, $dest)) {
-                if (!isset($_SESSION['admin_data'][$sub_key])) {
-                    $_SESSION['admin_data'][$sub_key] = [];
-                }
-                $_SESSION['admin_data'][$sub_key][$field] = 'img/' . $new_name;
-            }
+// 3. Procesar campos usando field_parse() dinámico
+if ($config['type'] === 'page' && !empty($config['sections'])) {
+    // Es un page con acordeones
+    foreach ($config['sections'] as $sub_key => $sub_config) {
+        if (!isset($_SESSION['admin_data'][$sub_key])) {
+            $_SESSION['admin_data'][$sub_key] = [];
         }
+        foreach ($sub_config['fields'] as $fk => $fc) {
+            $raw_value = $_POST[$sub_key . '__' . $fk] ?? null;
+            $fc['name_path'] = $sub_key . '__' . $fk;
+            $fc['_old_value'] = $_SESSION['admin_data'][$sub_key][$fk] ?? ($fc['default'] ?? '');
+            $_SESSION['admin_data'][$sub_key][$fk] = field_parse($fc['type'], $raw_value, $fc);
+        }
+    }
+} else {
+    // Es un singleton plano (ej: Ajustes, Footer)
+    if (!isset($_SESSION['admin_data'][$section_key])) {
+        $_SESSION['admin_data'][$section_key] = [];
+    }
+    foreach ($config['fields'] as $fk => $fc) {
+        $raw_value = $_POST[$section_key . '__' . $fk] ?? null;
+        $fc['name_path'] = $section_key . '__' . $fk;
+        $fc['_old_value'] = $_SESSION['admin_data'][$section_key][$fk] ?? ($fc['default'] ?? '');
+        $_SESSION['admin_data'][$section_key][$fk] = field_parse($fc['type'], $raw_value, $fc);
     }
 }
 
 $_SESSION['flash_message'] = '✅ Cambios guardados correctamente.';
 $_SESSION['flash_type']    = 'success';
 
-// Volver al singleton (y mantener la sección abierta si quisiéramos)
+// Volver al singleton
 header('Location: singleton.php?c=' . urlencode($section_key));
 exit;

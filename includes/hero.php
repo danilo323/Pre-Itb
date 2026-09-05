@@ -3,13 +3,19 @@
 // includes/hero.php
 
 // 1. Extraer URLs de imágenes para el slideshow
-$img1 = content_get('hero', 'imagen_1', 'img/salud.jpg');
-$img2 = content_get('hero', 'imagen_2', 'img/student.jpg');
-$img3 = content_get('hero', 'imagen_3', 'img/student 2.jpg');
+$imagenes = content_raw('hero', 'imagenes_fondo', [
+    ['archivo' => 'img/salud.jpg'],
+    ['archivo' => 'img/student.jpg'],
+    ['archivo' => 'img/student 2.jpg']
+]);
 $slides = [];
-if (!empty($img1)) $slides[] = $img1;
-if (!empty($img2)) $slides[] = $img2;
-if (!empty($img3)) $slides[] = $img3;
+if (is_array($imagenes)) {
+    foreach ($imagenes as $img) {
+        if (!empty($img['archivo'])) {
+            $slides[] = $img['archivo'];
+        }
+    }
+}
 // Fallback por si borraron todas
 if (empty($slides)) {
     $slides[] = 'img/salud.jpg';

@@ -37,11 +37,11 @@
                     <?= content_get('footer', 'descripcion', 'Instituto Superior Tecnológico Bolivariano de Tecnología. Formando profesionales de excelencia desde 1995.') ?>
                 </p>
                 <div class="footer__social">
-                    <a href="<?= content_raw('ajustes', 'facebook_url', '#') ?>" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="<?= content_raw('ajustes', 'instagram_url', '#') ?>" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="<?= content_raw('ajustes', 'twitter_url', '#') ?>" class="footer__social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                    <a href="<?= content_raw('ajustes', 'youtube_url', '#') ?>" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="<?= content_raw('ajustes', 'linkedin_url', '#') ?>" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                    <a href="<?= content_raw('footer', 'facebook_url', '#') ?>" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
+                    <a href="<?= content_raw('footer', 'instagram_url', '#') ?>" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
+                    <a href="<?= content_raw('footer', 'twitter_url', '#') ?>" class="footer__social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
+                    <a href="<?= content_raw('footer', 'youtube_url', '#') ?>" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
+                    <a href="<?= content_raw('footer', 'linkedin_url', '#') ?>" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
                 </div>
             </div>
 

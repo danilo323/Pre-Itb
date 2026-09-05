@@ -16,34 +16,46 @@
             </p>
 
             <ul class="experiencia__list">
+                <?php
+                $caracteristicas = content_raw('experiencia', 'lista_caracteristicas', [
+                    [
+                        'icono' => 'fas fa-stethoscope',
+                        'titulo' => 'Servicios Médicos',
+                        'descripcion' => 'Atención médica y odontológica gratuita para estudiantes.'
+                    ],
+                    [
+                        'icono' => 'fas fa-award',
+                        'titulo' => 'Becas y Financiamiento',
+                        'descripcion' => 'Programas de becas por excelencia académica y apoyo financiero.'
+                    ],
+                    [
+                        'icono' => 'fas fa-laptop-code',
+                        'titulo' => 'Laboratorios Modernos',
+                        'descripcion' => 'Tecnología de punta en todos nuestros laboratorios especializados.'
+                    ],
+                    [
+                        'icono' => 'fas fa-handshake',
+                        'titulo' => 'Bolsa de Empleo',
+                        'descripcion' => 'Conexión directa con empresas aliadas para tus prácticas y primer empleo.'
+                    ]
+                ]);
+                
+                $default_icons = ['fas fa-stethoscope', 'fas fa-award', 'fas fa-laptop-code', 'fas fa-handshake'];
+                $index = 0;
+                foreach ((array)$caracteristicas as $c):
+                    $icono_class = $default_icons[$index % 4];
+                ?>
                 <li class="experiencia__list-item">
-                    <span class="experiencia__list-icon"><i class="fas fa-stethoscope"></i></span>
+                    <span class="experiencia__list-icon"><i class="<?= $icono_class ?>"></i></span>
                     <div>
-                        <strong><?= content_get('experiencia', 'caract1_titulo', 'Servicios Médicos') ?></strong>
-                        <p><?= content_get('experiencia', 'caract1_desc', 'Atención médica y odontológica gratuita para estudiantes.') ?></p>
+                        <strong><?= htmlspecialchars($c['titulo'] ?? '', ENT_QUOTES, 'UTF-8') ?></strong>
+                        <p><?= nl2br(htmlspecialchars($c['descripcion'] ?? '', ENT_QUOTES, 'UTF-8')) ?></p>
                     </div>
                 </li>
-                <li class="experiencia__list-item">
-                    <span class="experiencia__list-icon"><i class="fas fa-award"></i></span>
-                    <div>
-                        <strong><?= content_get('experiencia', 'caract2_titulo', 'Becas y Financiamiento') ?></strong>
-                        <p><?= content_get('experiencia', 'caract2_desc', 'Programas de becas por excelencia académica y apoyo financiero.') ?></p>
-                    </div>
-                </li>
-                <li class="experiencia__list-item">
-                    <span class="experiencia__list-icon"><i class="fas fa-laptop-code"></i></span>
-                    <div>
-                        <strong><?= content_get('experiencia', 'caract3_titulo', 'Laboratorios Modernos') ?></strong>
-                        <p><?= content_get('experiencia', 'caract3_desc', 'Tecnología de punta en todos nuestros laboratorios especializados.') ?></p>
-                    </div>
-                </li>
-                <li class="experiencia__list-item">
-                    <span class="experiencia__list-icon"><i class="fas fa-handshake"></i></span>
-                    <div>
-                        <strong><?= content_get('experiencia', 'caract4_titulo', 'Bolsa de Empleo') ?></strong>
-                        <p><?= content_get('experiencia', 'caract4_desc', 'Conexión directa con empresas aliadas para tus prácticas y primer empleo.') ?></p>
-                    </div>
-                </li>
+                <?php 
+                    $index++;
+                endforeach; 
+                ?>
             </ul>
 
             <a href="#" class="btn btn--solid" id="btn-beneficios">
