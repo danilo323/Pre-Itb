@@ -99,13 +99,7 @@ if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|y
                         </text>
                     </svg>
                 </div>
-                <div class="hero__video-card" style="overflow: hidden;">
-                    <?php 
-                        $videoThumb = content_raw('hero', 'imagen_video_thumb', '');
-                        if (!empty($videoThumb)):
-                    ?>
-                        <img src="<?= htmlspecialchars($videoThumb, ENT_QUOTES, 'UTF-8') ?>" alt="Miniatura Video" class="hero__video-thumb" style="width: 100%; height: 100%; object-fit: cover; border-radius: 50%;">
-                    <?php endif; ?>
+                <div class="hero__video-card">
                     <button type="button" class="hero__play-btn js-video-modal-trigger"
                         id="hero-play-btn" aria-label="Reproducir video institucional" data-video-url="<?= htmlspecialchars($embed_url, ENT_QUOTES, 'UTF-8') ?>">
                         <i class="fas fa-play"></i>

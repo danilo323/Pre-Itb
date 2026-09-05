@@ -66,19 +66,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-card">
 
         <div class="login-header">
-            <h2>ITB Admin</h2>
+            <h2>🎓 ITB Admin</h2>
             <p>Panel de Administración — Acceso Seguro</p>
         </div>
 
         <?php if (!empty($notice)): ?>
             <div class="flash-message flash-success" style="margin-bottom: 16px;">
-                <?= h($notice) ?>
+                ✅ <?= h($notice) ?>
             </div>
         <?php endif; ?>
 
         <?php if (!empty($error)): ?>
             <div class="flash-message flash-error" style="margin-bottom: 16px;">
-                <?= h($error) ?>
+                ❌ <?= h($error) ?>
             </div>
         <?php endif; ?>
 

@@ -1,0 +1,332 @@
+﻿/* =============================================
+   HERO SECTION
+   ============================================= */
+.hero {
+    position: relative;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+    margin-top: -1px;
+    /* elimina cualquier gap entre site-header y hero */
+}
+
+/* =============================================
+   HERO â€” KEN BURNS SLIDESHOW
+   ============================================= */
+/* Keyframes zoom-in (Ken Burns efecto 1) */
+@keyframes kenBurnsZoomIn {
+    0% {
+        transform: scale(1);
+    }
+
+    100% {
+        transform: scale(1.15);
+    }
+}
+
+/* Keyframes zoom-out (Ken Burns efecto 2) */
+@keyframes kenBurnsZoomOut {
+    0% {
+        transform: scale(1.15);
+    }
+
+    100% {
+        transform: scale(1);
+    }
+}
+
+/* Keyframes crossfade entrada */
+@keyframes slideFadeIn {
+    0% {
+        opacity: 0;
+    }
+
+    15% {
+        opacity: 1;
+    }
+
+    85% {
+        opacity: 1;
+    }
+
+    100% {
+        opacity: 0;
+    }
+}
+
+.hero__slideshow {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+}
+
+/* Estado base: cada slide fuera de pantalla ARRIBA */
+.hero__slide {
+    position: absolute;
+    inset: 0;
+    transform: translateY(-100%);
+    transition: transform 1.2s cubic-bezier(0.76, 0, 0.24, 1);
+    will-change: transform;
+}
+
+/* Slide activo: en pantalla (posiciÃ³n normal) */
+.hero__slide--active {
+    transform: translateY(0%);
+}
+
+/* Slide saliendo: baja y se va por abajo */
+.hero__slide--leaving {
+    transform: translateY(100%);
+}
+
+/* La imagen con efecto Ken Burns */
+.hero__slide-img {
+    position: absolute;
+    inset: 0;
+    background-size: cover;
+    background-position: center;
+}
+
+/* Ken Burns â€” Slide 1: zoom in centro */
+.hero__slide--active.hero__slide--1 .hero__slide-img {
+    animation: kenBurnsZoomIn 8s ease-in-out forwards;
+    transform-origin: 50% 50%;
+}
+
+/* Ken Burns â€” Slide 2: zoom in desde esquina inferior derecha */
+.hero__slide--active.hero__slide--2 .hero__slide-img {
+    animation: kenBurnsZoomIn 8s ease-in-out forwards;
+    transform-origin: 80% 70%;
+}
+
+/* Ken Burns â€” Slide 3: zoom in desde esquina superior izquierda */
+.hero__slide--active.hero__slide--3 .hero__slide-img {
+    animation: kenBurnsZoomIn 8s ease-in-out forwards;
+    transform-origin: 20% 30%;
+}
+
+.hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+            rgba(27, 42, 74, 0.88) 0%,
+            rgba(27, 42, 74, 0.7) 40%,
+            rgba(27, 42, 74, 0.3) 70%,
+            rgba(27, 42, 74, 0.1) 100%);
+}
+
+.hero__container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: 80px 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    align-items: center;
+    gap: 60px;
+}
+
+.hero__content {
+    max-width: 620px;
+}
+
+.hero__subtitle {
+    display: inline-block;
+    font-size: 0.85rem;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.85);
+    letter-spacing: 1px;
+    margin-bottom: 16px;
+}
+
+.hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.8rem);
+    font-weight: 800;
+    font-style: italic;
+    color: var(--white);
+    line-height: 1.1;
+    margin-bottom: 20px;
+}
+
+.hero__description {
+    font-size: 1rem;
+    color: rgba(255, 255, 255, 0.8);
+    line-height: 1.7;
+    max-width: 520px;
+    margin-bottom: 36px;
+}
+
+.hero__actions {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    flex-wrap: wrap;
+}
+
+.hero__cta {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 14px 28px;
+    background: var(--primary-orange);
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+    box-shadow: 0 4px 20px rgba(232, 113, 42, 0.4);
+}
+
+.hero__cta:hover {
+    background: var(--primary-orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 28px rgba(232, 113, 42, 0.5);
+}
+
+.hero__cta-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 28px;
+    height: 28px;
+    background: var(--white);
+    color: var(--primary-orange);
+    border-radius: var(--radius-sm);
+    font-size: 0.7rem;
+}
+
+.hero__stats {
+    display: flex;
+    align-items: center;
+}
+
+.hero__stat {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.hero__stat-number {
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--white);
+}
+
+.hero__stat-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hero__stars {
+    display: flex;
+    gap: 2px;
+}
+
+.hero__stars i {
+    color: #F5A623;
+    font-size: 0.8rem;
+}
+
+.hero__rating-number {
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Video circular con texto giratorio */
+.hero__media {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.hero__video-wrapper {
+    position: relative;
+    width: 170px;
+    height: 170px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.hero__circular-text {
+    position: absolute;
+    inset: 0;
+    animation: rotateText 20s linear infinite;
+}
+
+.hero__circular-svg {
+    width: 100%;
+    height: 100%;
+}
+
+.hero__circular-text-path {
+    fill: rgba(255, 255, 255, 0.95);
+    font-size: 10.5px;
+    font-weight: 700;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+    font-family: var(--font-primary);
+}
+
+@keyframes rotateText {
+    from {
+        transform: rotate(0deg);
+    }
+
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+.hero__video-card {
+    position: relative;
+    width: 110px;
+    height: 110px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    transition: var(--transition);
+}
+
+.hero__video-card:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.hero__video-thumb {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.hero__play-btn {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    width: 52px;
+    height: 52px;
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--primary-blue);
+    font-size: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    transition: var(--transition);
+}
+
+.hero__play-btn:hover {
+    background: var(--primary-orange);
+    color: var(--white);
+    transform: translate(-50%, -50%) scale(1.1);
+}

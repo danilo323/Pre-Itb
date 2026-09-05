@@ -1,0 +1,40 @@
+# Archivos de configuración local y base de datos
+.env
+.env.*
+config_local.json
+admin/config.php
+config.php
+
+# Archivos de planificación del proyecto (No subir al repo)
+.gemini/
+
+# Archivos temporales de PHP / Sesiones (por si acaso)
+*.log
+*.tmp
+error_log
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+
+# Ignore all image files (any format)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.webp
+*.svg
+*.avif
+*.bmp
+*.tiff
+*.tif
+*.ico
+*.heic
+*.heif
+# Ignore image folder
+img/

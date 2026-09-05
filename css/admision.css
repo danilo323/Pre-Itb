@@ -1,0 +1,153 @@
+﻿/* =============================================
+   ADMISIÃ“N / FORMULARIO
+   ============================================= */
+.admision {
+    padding: 100px 0;
+    background: var(--primary-blue-dark);
+}
+
+.admision__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+
+.admision__content {
+    color: var(--white);
+}
+
+.admision__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-weight: 800;
+    margin-bottom: 16px;
+}
+
+.admision__description {
+    font-size: 0.95rem;
+    color: rgba(255, 255, 255, 0.75);
+    line-height: 1.8;
+    margin-bottom: 28px;
+}
+
+.admision__features {
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+}
+
+.admision__feature {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.85);
+}
+
+.admision__feature i {
+    color: var(--primary-orange);
+    font-size: 1rem;
+}
+
+/* Formulario */
+.admision__form-wrapper {
+    background: var(--white);
+    border-radius: var(--radius-xl);
+    padding: 40px;
+    box-shadow: var(--shadow-xl);
+}
+
+.admision__form-title {
+    font-size: 1.4rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+    margin-bottom: 24px;
+    text-align: center;
+}
+
+.admision__form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.admision__form-group {
+    margin-bottom: 16px;
+}
+
+.admision__form-group label {
+    display: block;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: var(--gray-700);
+    margin-bottom: 6px;
+}
+
+.admision__form-group input,
+.admision__form-group select,
+.admision__form-group textarea {
+    width: 100%;
+    padding: 12px 14px;
+    border: 1.5px solid var(--gray-300);
+    border-radius: var(--radius-sm);
+    font-size: 0.88rem;
+    font-family: var(--font-primary);
+    color: var(--gray-800);
+    transition: var(--transition);
+    background: var(--white);
+}
+
+.admision__form-group input:focus,
+.admision__form-group select:focus,
+.admision__form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    box-shadow: 0 0 0 3px rgba(232, 113, 42, 0.1);
+}
+
+.admision__form-group textarea {
+    resize: vertical;
+}
+
+.admision__form-btn {
+    width: 100%;
+    padding: 14px;
+    background: var(--primary-orange);
+    color: var(--white);
+    font-size: 0.95rem;
+    font-weight: 600;
+    border: none;
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    transition: var(--transition);
+    margin-top: 8px;
+}
+
+.admision__form-btn:hover {
+    background: var(--primary-orange-hover);
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(232, 113, 42, 0.4);
+}
+
+.admision__form-terms {
+    font-size: 0.75rem;
+    color: var(--gray-500);
+    text-align: center;
+    margin-top: 12px;
+}
+
+.admision__form-terms a {
+    color: var(--primary-orange);
+    font-weight: 500;
+}
+
+.admision__form-terms a:hover {
+    text-decoration: underline;
+}

@@ -16,25 +16,11 @@ require_once dirname(__DIR__) . '/admin/storage.php';
 function content_get(string $section, string $field, string $default = ''): string {
     $val = storage_get($section, $field, '');
     if ($val !== '') {
-        // Si es una ruta local de imagen y no existe en disco, usar fallback
-        if (is_string($val) && (str_starts_with($val, 'img/') || str_starts_with($val, 'uploads/'))) {
-            $fullPath = dirname(__DIR__) . '/' . ltrim($val, '/');
-            if (!file_exists($fullPath)) {
-                return htmlspecialchars($default, ENT_QUOTES, 'UTF-8');
-            }
-        }
         return htmlspecialchars($val, ENT_QUOTES, 'UTF-8');
     }
 
     if (!empty($_SESSION['admin_data'][$section][$field])) {
-        $sessVal = (string)$_SESSION['admin_data'][$section][$field];
-        if (str_starts_with($sessVal, 'img/') || str_starts_with($sessVal, 'uploads/')) {
-            $fullPath = dirname(__DIR__) . '/' . ltrim($sessVal, '/');
-            if (!file_exists($fullPath)) {
-                return htmlspecialchars($default, ENT_QUOTES, 'UTF-8');
-            }
-        }
-        return htmlspecialchars($sessVal, ENT_QUOTES, 'UTF-8');
+        return htmlspecialchars((string)$_SESSION['admin_data'][$section][$field], ENT_QUOTES, 'UTF-8');
     }
 
     return htmlspecialchars($default, ENT_QUOTES, 'UTF-8');
@@ -51,14 +37,6 @@ function content_get(string $section, string $field, string $default = ''): stri
 function content_raw(string $section, string $field, $default = '') {
     $val = storage_get($section, $field, '');
     if ($val !== '') {
-        // Si es una ruta local de imagen y no existe en disco, usar fallback
-        if (is_string($val) && (str_starts_with($val, 'img/') || str_starts_with($val, 'uploads/'))) {
-            $fullPath = dirname(__DIR__) . '/' . ltrim($val, '/');
-            if (!file_exists($fullPath)) {
-                return $default;
-            }
-        }
-
         // Si el valor es JSON (por ejemplo menús o repeaters), decodificarlo
         if (is_string($val) && (str_starts_with($val, '{') || str_starts_with($val, '['))) {
             $json = json_decode($val, true);
@@ -70,14 +48,7 @@ function content_raw(string $section, string $field, $default = '') {
     }
 
     if (!empty($_SESSION['admin_data'][$section][$field])) {
-        $sessVal = $_SESSION['admin_data'][$section][$field];
-        if (is_string($sessVal) && (str_starts_with($sessVal, 'img/') || str_starts_with($sessVal, 'uploads/'))) {
-            $fullPath = dirname(__DIR__) . '/' . ltrim($sessVal, '/');
-            if (!file_exists($fullPath)) {
-                return $default;
-            }
-        }
-        return $sessVal;
+        return $_SESSION['admin_data'][$section][$field];
     }
 
     return $default;
@@ -107,74 +78,63 @@ function is_visible(string $section): bool {
 }
 
 /**
- * Obtiene los items de una colección (como Equipo o Testimonios),
- * leyendo primero de MySQL para persistencia permanente.
+ * Obtiene los items de una colección (como Equipo o Testimonios).
  */
 function collection_items(string $collection_name): array {
-    // 1. Consultar en base de datos MySQL
-    $dbJson = storage_get($collection_name, 'items', '');
-    if (!empty($dbJson)) {
-        $decoded = json_decode($dbJson, true);
-        if (is_array($decoded)) {
-            return $decoded;
+    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+    
+    if (!isset($_SESSION['admin_data'][$collection_name]['items'])) {
+        if ($collection_name === 'equipo') {
+            $_SESSION['admin_data'][$collection_name]['items'] = [
+                1 => [
+                    'id' => 1, 
+                    'orden' => '1',
+                    'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
+                    'cargo' => 'Canciller', 
+                    'linkedin' => '#',
+                    'email' => '#',
+                    'foto' => 'img/autoridad-1.jpg',
+                    'mostrar_en_home' => '1', 
+                    'publicado' => '1'
+                ],
+                2 => [
+                    'id' => 2, 
+                    'orden' => '2',
+                    'nombre_completo' => 'PhD. Elena Tolozano Benites', 
+                    'cargo' => 'Rectora', 
+                    'linkedin' => '#',
+                    'email' => '#',
+                    'foto' => 'img/autoridad-2.jpg',
+                    'mostrar_en_home' => '1', 
+                    'publicado' => '1'
+                ],
+                3 => [
+                    'id' => 3, 
+                    'orden' => '3',
+                    'nombre_completo' => 'PhD. Luis Alzate Peralta', 
+                    'cargo' => 'Vicerrector Académico y de Investigación', 
+                    'linkedin' => '#',
+                    'email' => '#',
+                    'foto' => 'img/autoridad-3.jpg',
+                    'mostrar_en_home' => '1', 
+                    'publicado' => '1'
+                ],
+                4 => [
+                    'id' => 4, 
+                    'orden' => '4',
+                    'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
+                    'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
+                    'linkedin' => '#',
+                    'email' => '#',
+                    'foto' => 'img/autoridad-4.jpg',
+                    'mostrar_en_home' => '1', 
+                    'publicado' => '1'
+                ]
+            ];
+        } else {
+            $_SESSION['admin_data'][$collection_name]['items'] = [];
         }
     }
-
-    // 2. Consultar en sesión
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    if (!empty($_SESSION['admin_data'][$collection_name]['items'])) {
-        return $_SESSION['admin_data'][$collection_name]['items'];
-    }
-
-    // 3. Fallback por defecto si nunca se ha configurado en el panel
-    if ($collection_name === 'equipo') {
-        return [
-            1 => [
-                'id' => 1, 
-                'orden' => '1',
-                'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
-                'cargo' => 'Canciller', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/PHD_Roberto.jpg',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ],
-            2 => [
-                'id' => 2, 
-                'orden' => '2',
-                'nombre_completo' => 'PhD. Elena Tolozano Benites', 
-                'cargo' => 'Rectora', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/salud.jpg',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ],
-            3 => [
-                'id' => 3, 
-                'orden' => '3',
-                'nombre_completo' => 'PhD. Luis Alzate Peralta', 
-                'cargo' => 'Vicerrector Académico y de Investigación', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/student.jpg',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ],
-            4 => [
-                'id' => 4, 
-                'orden' => '4',
-                'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
-                'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/student 2.jpg',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ]
-        ];
-    }
-
-    return [];
+    
+    return $_SESSION['admin_data'][$collection_name]['items'];
 }

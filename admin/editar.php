@@ -59,33 +59,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
         $data_to_save[$key] = field_parse($field_config['type'], $raw_value, $field_config);
     }
 
-    // 3. Guardar en sesión y persistir permanentemente en MySQL
-    if (!isset($_SESSION['admin_data'][$section]['items'])) {
-        $_SESSION['admin_data'][$section]['items'] = $items;
-    }
-
+    // 3. Guardar en memoria
     if ($is_new) {
         $_SESSION['admin_data'][$section]['items'][] = $data_to_save;
     } else {
-        $found = false;
         foreach ($_SESSION['admin_data'][$section]['items'] as $idx => $itm) {
             if ($itm['id'] === (int)$id) {
                 $_SESSION['admin_data'][$section]['items'][$idx] = $data_to_save;
-                $found = true;
                 break;
             }
         }
-        if (!$found) {
-            $_SESSION['admin_data'][$section]['items'][] = $data_to_save;
-        }
     }
 
-    // Persistir en MySQL
-    require_once __DIR__ . '/storage.php';
-    $allCollectionItems = array_values($_SESSION['admin_data'][$section]['items']);
-    storage_set($section, 'items', json_encode($allCollectionItems, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-
-    flash_set($is_new ? "Registro creado exitosamente en la base de datos" : "Registro actualizado exitosamente en la base de datos");
+    flash_set($is_new ? "Registro creado exitosamente (Memoria)" : "Registro actualizado exitosamente (Memoria)");
     header("Location: coleccion.php?c=" . urlencode($section));
     exit;
 }

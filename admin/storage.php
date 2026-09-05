@@ -9,10 +9,10 @@ require_once dirname(__DIR__) . '/includes/db.php';
  *
  * @return array
  */
-function &storage_get_cache(bool $forceReload = false): array {
+function &storage_get_cache(): array {
     static $cache = null;
 
-    if ($cache === null || $forceReload) {
+    if ($cache === null) {
         $cache = [];
         try {
             $pdo = db_connect();
@@ -32,13 +32,6 @@ function &storage_get_cache(bool $forceReload = false): array {
     }
 
     return $cache;
-}
-
-/**
- * Fuerza la recarga de la caché desde la base de datos MySQL.
- */
-function storage_clear_cache(): void {
-    storage_get_cache(true);
 }
 
 /**

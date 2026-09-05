@@ -7,10 +7,8 @@ function field_image_render(string $name_path, $value, array $config): string {
     $help = isset($config['help']) ? '<small>' . htmlspecialchars($config['help'], ENT_QUOTES, 'UTF-8') . '</small>' : '';
     
     $has_image = !empty($val);
-    // Estilos de visibilidad correctos (sin conflicto)
-    $preview_display     = $has_image ? 'block' : 'none';
-    $placeholder_display = $has_image ? 'none'  : 'flex';
-    $remove_display      = $has_image ? 'inline-flex' : 'none';
+    $preview_style = $has_image ? '' : 'display: none;';
+    $placeholder_style = $has_image ? 'display: none;' : '';
     
     // Corregir la ruta de la imagen para que siempre cargue desde la raíz (/) si es relativa
     $img_src = $val;
@@ -26,29 +24,27 @@ function field_image_render(string $name_path, $value, array $config): string {
     <label>{$label}</label>
     {$help}
     
-    <div class="image-preview-wrapper image-upload-box">
-        <!-- Preview (siempre en el DOM para que el JS pueda actualizar el src) -->
-        <div class="image-preview" style="display:{$preview_display};">
-            <img src="{$img_src}" alt="Preview" style="max-width:100%;max-height:220px;object-fit:contain;border-radius:6px;border:1px solid #e2e8f0;display:block;">
-            <div class="image-current-path" style="font-size:12px;color:#64748b;margin-top:8px;">Ruta actual: {$val}</div>
+    <div class="image-preview-wrapper">
+        <!-- Preview si hay imagen -->
+        <div class="image-preview" style="{$preview_style}">
+            <img src="{$img_src}" alt="Preview">
+            <div style="font-size: 12px; color: #64748b; margin-top: 8px;">Ruta actual: {$val}</div>
         </div>
         
-        <!-- Placeholder cuando no hay imagen -->
-        <div class="image-placeholder" style="display:{$placeholder_display};flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;color:#64748b;padding:20px;min-height:100px;">
-            <i class="bi bi-image" style="font-size:32px;"></i>
-            <span>Arrastra una imagen aqui o haz clic en Seleccionar</span>
+        <!-- Placeholder si no hay imagen -->
+        <div class="image-placeholder" style="{$placeholder_style}; text-align: center; color: var(--text-muted); padding: 20px;">
+            <i class="bi bi-image" style="font-size: 24px; display: block; margin-bottom: 8px;"></i>
+            <span>Ninguna imagen seleccionada</span>
         </div>
 
-        <div class="image-actions" style="display:flex;align-items:center;gap:8px;margin-top:12px;flex-wrap:wrap;">
-            <label class="btn btn-outline" for="{$inputId}" style="cursor:pointer;">
+        <div class="image-actions">
+            <label class="btn btn-outline" for="{$inputId}" style="cursor: pointer;">
                 <i class="bi bi-folder-fill"></i> Seleccionar archivo
             </label>
-            <button type="button" class="btn btn-danger btn-remove-image" style="display:{$remove_display};" title="Eliminar imagen">
+            <button type="button" class="btn btn-danger btn-remove-image" style="{$preview_style}" title="Eliminar imagen">
                 <i class="bi bi-trash-fill"></i> Eliminar
             </button>
-            <input type="file" id="{$inputId}" name="{$name_path}_file"
-                   accept="image/jpeg,image/png,image/gif,image/webp,image/svg+xml,image/avif,image/bmp,image/tiff,image/x-icon,image/heic,image/heif,image/*"
-                   style="display:none;">
+            <input type="file" id="{$inputId}" name="{$name_path}_file" accept="image/*" style="display: none;">
             <input type="hidden" name="{$name_path}" value="{$val}">
         </div>
     </div>
@@ -74,33 +70,14 @@ function field_image_parse($raw, array $config) {
         $upload_dir = dirname(__DIR__, 2) . '/img/';
         if (!is_dir($upload_dir)) mkdir($upload_dir, 0755, true);
         
-        $ext = strtolower(pathinfo($name, PATHINFO_EXTENSION));
-        $allowed = ['jpg', 'jpeg', 'png', 'gif', 'webp', 'svg', 'avif', 'bmp', 'tiff', 'tif', 'ico', 'heic', 'heif'];
-        if (in_array($ext, $allowed)) {
-            $cleanBase = preg_replace('/[^a-zA-Z0-9_\-]/', '', pathinfo($name, PATHINFO_FILENAME));
-            if (empty($cleanBase)) $cleanBase = 'upload';
-            $new_name = time() . '_' . $cleanBase . '.' . $ext;
-            $dest     = $upload_dir . $new_name;
-            
-            if (move_uploaded_file($tmp_name, $dest)) {
-                $newRelPath = 'img/' . $new_name;
-                // Eliminar imagen anterior si fue subida por el panel
-                if (!empty($old_val) && $old_val !== $newRelPath) {
-                    require_once dirname(__DIR__) . '/storage.php';
-                    storage_delete_old_file($old_val);
-                }
-                return $newRelPath;
-            }
+        $new_name = time() . '_' . preg_replace('/[^a-zA-Z0-9.\-_]/', '', $name);
+        $dest     = $upload_dir . $new_name;
+        
+        if (move_uploaded_file($tmp_name, $dest)) {
+            return 'img/' . $new_name;
         }
     }
     
-    // Si el usuario eliminó la imagen deliberadamente
-    if ($raw === '' && !empty($old_val)) {
-        require_once dirname(__DIR__) . '/storage.php';
-        storage_delete_old_file($old_val);
-        return '';
-    }
-    
-    // Si no subieron nada nuevo, mantenemos la imagen anterior
-    return !empty($raw) ? $raw : $old_val;
+    // Si no subieron nada, mantenemos la imagen anterior
+    return $old_val;
 }

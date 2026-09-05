@@ -1,0 +1,22 @@
+﻿/* 
+   =============================================
+   MAIN STYLESHEET
+   =============================================
+*/
+
+@import url('base.css');
+@import url('header.css');
+@import url('hero.css');
+@import url('trayectoria.css');
+@import url('areas.css');
+@import url('programas.css');
+@import url('experiencia.css');
+@import url('testimonios.css');
+@import url('autoridades.css');
+@import url('servicios.css');
+@import url('admision.css');
+@import url('noticias.css');
+@import url('alianzas.css');
+@import url('footer.css');
+@import url('responsive.css');
+

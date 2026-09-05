@@ -63,19 +63,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             $item_a['orden'] = $item_b['orden'] ?? (string)($swap_index + 1);
             $item_b['orden'] = $temp_orden;
             
-            // Guardar en sesión y MySQL
+            // Guardar en sesión
             foreach ($_SESSION['admin_data'][$section]['items'] as &$sess_item) {
                 if ($sess_item['id'] === $item_a['id']) $sess_item['orden'] = $item_a['orden'];
                 if ($sess_item['id'] === $item_b['id']) $sess_item['orden'] = $item_b['orden'];
             }
             unset($sess_item);
-
-            require_once __DIR__ . '/storage.php';
-            $allCollectionItems = array_values($_SESSION['admin_data'][$section]['items']);
-            storage_set($section, 'items', json_encode($allCollectionItems, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
             
             if (session_status() === PHP_SESSION_ACTIVE) {
-                $_SESSION['flash_message'] = "Orden actualizado exitosamente en la base de datos";
+                $_SESSION['flash_message'] = "Orden actualizado exitosamente";
                 $_SESSION['flash_type'] = "success";
             }
         }
@@ -88,25 +84,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 // Manejar eliminación (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $id_to_delete = (int)$_POST['id'];
-    require_once __DIR__ . '/storage.php';
-
     // Buscar el índice del id
     foreach ($items as $idx => $item) {
         if ($item['id'] === $id_to_delete) {
-            // Eliminar foto física si fue subida por el panel
-            if (!empty($item['foto'])) {
-                storage_delete_old_file($item['foto']);
-            }
-            
             unset($_SESSION['admin_data'][$section]['items'][$idx]);
             // Reindexar arreglo para mantener orden limpio
             $_SESSION['admin_data'][$section]['items'] = array_values($_SESSION['admin_data'][$section]['items']);
             
-            // Persistir en MySQL
-            storage_set($section, 'items', json_encode($_SESSION['admin_data'][$section]['items'], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
-
             if (session_status() === PHP_SESSION_ACTIVE) {
-                $_SESSION['flash_message'] = "Registro eliminado correctamente de la base de datos";
+                $_SESSION['flash_message'] = "Registro eliminado correctamente (Memoria)";
                 $_SESSION['flash_type'] = "success";
             }
             break;
@@ -122,7 +108,7 @@ echo layout_start($title_label);
 
 <div class="collection-header">
     <div class="search-box">
-        <input type="text" id="search-table" placeholder="Buscar en la lista..." class="form-input">
+        <input type="text" id="search-table" placeholder="🔍 Buscar en la lista..." class="form-input">
     </div>
     <a href="editar.php?c=<?= urlencode($section) ?>&id=new" class="btn btn-primary">+ Nuevo Registro</a>
 </div>

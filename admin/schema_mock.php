@@ -47,7 +47,7 @@ return [
                 'logo_blanco' => [
                     'type' => 'image',
                     'label' => 'Logo Blanco (Footer)',
-                    'default' => 'img/logo.png',
+                    'default' => 'img/logo-itb-white.png',
                 ],
                 'div_redes' => [
                     'type' => 'divider',
@@ -391,8 +391,8 @@ Educación Continua",
                         ],
                         'canciller_foto' => [
                             'type' => 'image',
-                            'label' => 'Foto del Canciller',
-                            'default' => 'img/PHD_Roberto.jpg',
+                            'label' => 'Foto',
+                            'default' => 'img/canciller.jpg',
                         ],
                         'canciller_nombre' => [
                             'type' => 'text',
@@ -402,17 +402,7 @@ Educación Continua",
                         'canciller_cargo' => [
                             'type' => 'text',
                             'label' => 'Cargo',
-                            'default' => 'Canciller',
-                        ],
-                        'div_campus' => [
-                            'type' => 'divider',
-                            'label' => 'Imagen Central del Campus (Jarallax)',
-                        ],
-                        'imagen_campus' => [
-                            'type' => 'image',
-                            'label' => 'Imagen Campus (Efecto Jarallax)',
-                            'default' => 'img/estudiantes1.png',
-                            'help' => 'Imagen con efecto de desplazamiento (Jarallax) en el centro de la sección.',
+                            'default' => 'Canciller del ITB',
                         ],
                         'div_btn' => [
                             'type' => 'divider',
@@ -486,20 +476,22 @@ Educación Continua",
                             'type' => 'divider',
                             'label' => 'Área 1',
                         ],
-                        'area1_icono' => [
-                            'type' => 'image',
-                            'label' => 'Ícono Área 1 (Salud)',
-                            'default' => 'img/doctor.png',
-                        ],
                         'area1_titulo' => [
                             'type' => 'text',
                             'label' => 'Título',
-                            'default' => 'Facultad de Salud y Servicios Sociales (FASSS)',
+                            'default' => 'Salud',
                         ],
                         'area1_desc' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
-                            'default' => 'Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.',
+                            'default' => 'Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.',
+                        ],
+                        'area1_programas' => [
+                            'type' => 'textarea',
+                            'label' => 'Programas (uno por línea)',
+                            'default' => 'Enfermería
+Fisioterapia
+Laboratorio Clínico',
                         ],
                         'area1_btn' => [
                             'type' => 'text',
@@ -510,25 +502,22 @@ Educación Continua",
                             'type' => 'divider',
                             'label' => 'Área 2',
                         ],
-                        'area2_icono' => [
-                            'type' => 'image',
-                            'label' => 'Ícono Área 2 (Ciencias Empresariales)',
-                            'default' => 'img/laptop.png',
-                        ],
-                        'area2_bg' => [
-                            'type' => 'image',
-                            'label' => 'Imagen de Fondo Tarjeta 2',
-                            'default' => 'img/estudiantes1.png',
-                        ],
                         'area2_titulo' => [
                             'type' => 'text',
                             'label' => 'Título',
-                            'default' => 'Facultad de Ciencias Empresariales y Sistemas / Económicas y Empresariales (FACES)',
+                            'default' => 'Ciencias Empresariales',
                         ],
                         'area2_desc' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
-                            'default' => 'Programas de gestión, contabilidad, marketing y comercio para liderar en el sector empresarial e industrial.',
+                            'default' => 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.',
+                        ],
+                        'area2_programas' => [
+                            'type' => 'textarea',
+                            'label' => 'Programas (uno por línea)',
+                            'default' => 'Administración de Empresas
+Contabilidad
+Marketing Digital',
                         ],
                         'area2_btn' => [
                             'type' => 'text',
@@ -539,20 +528,22 @@ Educación Continua",
                             'type' => 'divider',
                             'label' => 'Área 3',
                         ],
-                        'area3_icono' => [
-                            'type' => 'image',
-                            'label' => 'Ícono Área 3 (Transporte)',
-                            'default' => 'img/coche.png',
-                        ],
                         'area3_titulo' => [
                             'type' => 'text',
                             'label' => 'Título',
-                            'default' => 'Facultad de Transporte y Vialidad (FATV)',
+                            'default' => 'Transporte',
                         ],
                         'area3_desc' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
-                            'default' => 'Formación especializada en mecánica, gestión de transporte, seguridad vial y escuela de conducción',
+                            'default' => 'Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.',
+                        ],
+                        'area3_programas' => [
+                            'type' => 'textarea',
+                            'label' => 'Programas (uno por línea)',
+                            'default' => 'Logística y Transporte
+Comercio Exterior
+Operaciones Portuarias',
                         ],
                         'area3_btn' => [
                             'type' => 'text',
