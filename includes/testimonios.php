@@ -1,51 +1,34 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('testimonios')) return; ?>
 <!-- ============================================= -->
-<!-- HISTORIAS DE ÉXITO / TESTIMONIOS              -->
+<!-- TESTIMONIOS - LO QUE DICEN NUESTROS           -->
+<!-- ESTUDIANTES                                   -->
 <!-- ============================================= -->
 <section class="testimonios" id="testimonios">
     <div class="testimonios__container">
-        <!-- Lado izquierdo: Imagen -->
-        <div class="testimonios__image">
-            <img src="<?= content_raw('testimonios', 'imagen', 'img/MariaFernanda.png') ?>" alt="<?= content_get('testimonios', 'nombre', 'Estudiante ITB') ?>">
+
+        <!-- Foto a la izquierda -->
+        <div class="testimonios__photo">
+            <img src="<?= htmlspecialchars(content_raw('testimonios', 'imagen', 'img/MariaFernanda.png'), ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(content_raw('testimonios', 'nombre', 'María Fernanda Gómez'), ENT_QUOTES, 'UTF-8') ?>">
         </div>
 
-        <!-- Lado derecho: Contenido del testimonio -->
+        <!-- Contenido a la derecha -->
         <div class="testimonios__content">
-            <span class="section-tag section-tag--light"><?= content_get('testimonios', 'etiqueta_superior', 'HISTORIAS DE ÉXITO') ?></span>
-            <h2 class="testimonios__title">
-                <?= htmlspecialchars(content_get('testimonios', 'titulo', 'Lo que dicen nuestros Graduados'), ENT_QUOTES, 'UTF-8') ?>
-            </h2>
-            
-            <div class="testimonios__slider">
-                <!-- Testimonio Activo -->
-                <div class="testimonios__slide active">
-                    <div class="testimonios__quote-icon">
-                        <i class="fas fa-quote-left"></i>
-                    </div>
-                    <p class="testimonios__text">
-                        <?= content_get('testimonios', 'cita', '"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí."') ?>
-                    </p>
-                    <div class="testimonios__author">
-                        <h4 class="testimonios__author-name"><?= content_get('testimonios', 'nombre', 'María Fernanda López') ?></h4>
-                        <span class="testimonios__author-role"><?= content_get('testimonios', 'carrera', 'Graduada en Enfermería - Promoción 2022') ?></span>
-                    </div>
-                </div>
+            <span class="testimonios__tag"><?= content_get('testimonios', 'etiqueta_superior', 'Historias de Éxito') ?></span>
+            <h2 class="testimonios__title"><?= nl2br(htmlspecialchars(content_raw('testimonios', 'titulo', 'Lo que dicen nuestros estudiantes'), ENT_QUOTES, 'UTF-8')) ?></h2>
+
+            <div class="testimonios__quote-block">
+                <span class="testimonios__quote-icon">&ldquo;</span>
+                <p class="testimonios__quote-text">
+                    <?= content_get('testimonios', 'cita', 'Gracias a la modalidad híbrida del ITB y la formación práctica en laboratorios, pude incorporarme rápidamente al sector laboral mientras terminaba mi carrera.') ?>
+                </p>
             </div>
 
-            <!-- Navegación de testimonios -->
-            <div class="testimonios__nav">
-                <button class="testimonios__nav-btn" id="testimonios-prev" aria-label="Anterior">
-                    <i class="fas fa-arrow-left"></i>
-                </button>
-                <div class="testimonios__nav-dots">
-                    <span class="testimonios__dot testimonios__dot--active"></span>
-                    <span class="testimonios__dot"></span>
-                    <span class="testimonios__dot"></span>
-                </div>
-                <button class="testimonios__nav-btn" id="testimonios-next" aria-label="Siguiente">
-                    <i class="fas fa-arrow-right"></i>
-                </button>
+            <div class="testimonios__author">
+                <!-- Se puede omitir el role si no está en el panel o extraer la primera palabra de la carrera -->
+                <p class="testimonios__author-name"><?= content_get('testimonios', 'nombre', 'María Fernanda Gómez') ?></p>
+                <p class="testimonios__author-program"><?= content_get('testimonios', 'carrera', 'Tecnología Superior en Enfermería') ?></p>
             </div>
         </div>
+
     </div>
 </section>
