@@ -247,6 +247,10 @@
     border-bottom: 1.5px solid #E7ECEF;
 }
 
+.noticias__item:last-child {
+    flex: 1;
+}
+
 .noticias__item:hover {
     background: var(--gray-50);
 }
