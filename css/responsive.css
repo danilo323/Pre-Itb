@@ -153,8 +153,10 @@
    ============================================= */
 @media (max-width: 640px) {
     :root {
-        --header-height: 60px;
+        /* En movil el logo baja a 38px y la top-bar a 36px: 74 + holgura */
+        --header-height: 78px;
         --top-bar-height: 36px;
+        --header-inset: 10px;
     }
 
     .top-bar__search-input {

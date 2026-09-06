@@ -34,6 +34,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Ruta relativa al CSS (funciona siempre) -->
     <link rel="stylesheet" href="assets/admin.css">
 </head>
@@ -42,13 +43,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <div class="login-card">
 
         <div class="login-header">
-            <h2>🎓 ITB Admin</h2>
+            <div class="login-brand-icon">
+                <i class="bi bi-mortarboard-fill"></i>
+            </div>
+            <h2>ITB Admin</h2>
             <p>Panel de Administración — Acceso Privado</p>
         </div>
 
         <?php if (!empty($error)): ?>
             <div class="flash-message flash-error">
-                ❌ <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+                <i class="bi bi-x-octagon-fill"></i>
+                <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
             </div>
         <?php endif; ?>
 
@@ -65,10 +70,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
 
             <div class="login-hint">
-                💡 Credenciales temporales: <strong>admin</strong> / <strong>1234</strong>
+                <i class="bi bi-info-circle-fill"></i>
+                Credenciales temporales: <strong>admin</strong> / <strong>1234</strong>
             </div>
 
-            <button type="submit" class="btn-block">Entrar al Panel →</button>
+            <button type="submit" class="btn-block">
+                Entrar al Panel <i class="bi bi-arrow-right"></i>
+            </button>
 
         </form>
 

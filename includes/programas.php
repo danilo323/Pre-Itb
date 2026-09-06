@@ -70,7 +70,10 @@
         </div>
 
         <div class="programas__footer">
-            <a href="#" class="btn--solid">Ver todos los programas <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span></a>
+            <a href="#" class="btn--solid">
+                <?= content_get('programas', 'btn_ver_todos', 'Ver todos los programas') ?>
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
+            </a>
         </div>
     </div>
 </section>

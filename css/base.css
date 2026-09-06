@@ -21,8 +21,18 @@
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-heading: 'Playfair Display', Georgia, serif;
     --container-max: 1280px;
-    --header-height: 105px;
+    /* Alto real de la cabecera = top-bar (40px) + navbar (logo de 80px).
+       El hero se mete por debajo de la cabecera usando esta medida. */
+    --header-height: 120px;
     --top-bar-height: 40px;
+    /* Separacion de la tarjeta de cabecera respecto a los bordes de la pantalla.
+       Gracias a ella se ve la foto del hero asomando por las esquinas. */
+    --header-inset: 24px;
+    /* Respiro interior de la cabecera. La cabecera NO se limita a
+       --container-max: se estira hasta las esquinas de la tarjeta, como en el
+       diseno de referencia. Lleva el inset sumado para que el contenido no
+       quede pegado al borde de la tarjeta blanca. */
+    --header-pad: calc(var(--header-inset) + 24px);
     --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.08);
     --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
     --shadow-lg: 0 8px 30px rgba(0, 0, 0, 0.12);
@@ -47,6 +57,9 @@
 html {
     scroll-behavior: smooth;
     font-size: 16px;
+    /* La cabecera es fija: sin esto, al saltar a un ancla (#noticias, #alianzas)
+       el titulo de la seccion quedaria escondido detras de ella. */
+    scroll-padding-top: var(--header-height);
 }
 
 body {

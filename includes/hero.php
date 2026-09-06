@@ -21,13 +21,9 @@ if (empty($slides)) {
     $slides[] = 'img/salud.jpg';
 }
 
-// 2. Formatear la URL de YouTube a modo "embed"
+// 2. Formatear la URL de YouTube a modo "embed" (helper compartido en content_helper.php)
 $raw_video_url = content_raw('hero', 'video_url', 'https://youtu.be/eTgzLxWGgS4');
-$embed_url = $raw_video_url;
-// Regex para encontrar el ID del video de youtube
-if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i', $raw_video_url, $matches)) {
-    $embed_url = 'https://www.youtube.com/embed/' . $matches[1] . '?autoplay=1';
-}
+$embed_url = youtube_embed_url($raw_video_url);
 ?>
 <!-- ============================================= -->
 <!-- HERO SECTION                                  -->
@@ -60,9 +56,9 @@ if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|y
             </p>
 
             <div class="hero__actions">
-                <a href="#" class="hero__cta" id="hero-cta">
+                <a href="#" class="btn btn--solid" id="hero-cta">
                     <?= content_get('hero', 'cta_texto', 'Explorar Programas') ?>
-                    <span class="hero__cta-icon"><i class="fas fa-arrow-up-right-from-square"></i></span>
+                    <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
 
                 <div class="hero__stats">
@@ -93,14 +89,7 @@ if (preg_match('/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|y
                         </defs>
                         <text>
                             <textPath href="#circlePath" class="hero__circular-text-path" textLength="345" lengthAdjust="spacing">
-                                <?php 
-                                    $circ = content_get('hero', 'circular_text', '• EST. 1995 • ITB INSTITUTO UNIVERSITARIO ');
-                                    // Si por error se quedó guardado el texto doble en la sesión de prueba, lo corregimos a la fuerza:
-                                    if (strpos($circ, 'EST. 1995 • ITB INSTITUTO UNIVERSITARIO • EST. 1995') !== false) {
-                                        $circ = '• EST. 1995 • ITB INSTITUTO UNIVERSITARIO ';
-                                    }
-                                    echo $circ;
-                                ?>
+                                <?= content_circular('hero', 'circular_text', "EST. 1995\nITB INSTITUTO UNIVERSITARIO") ?>
                             </textPath>
                         </text>
                     </svg>

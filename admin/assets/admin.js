@@ -146,6 +146,28 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
 
+        // Reordenar con flechas ↑ ↓.
+        // Se usa delegación para que los items clonados después también funcionen
+        // sin tener que volver a asociar eventos.
+        items.addEventListener('click', function (e) {
+            const up   = e.target.closest('.btn-move-up');
+            const down = e.target.closest('.btn-move-down');
+            if (!up && !down) return;
+
+            const item = (up || down).closest('.repeater-item');
+            if (!item) return;
+
+            if (up && item.previousElementSibling) {
+                items.insertBefore(item, item.previousElementSibling);
+            } else if (down && item.nextElementSibling) {
+                items.insertBefore(item.nextElementSibling, item);
+            } else {
+                return; // ya está en el extremo, no hay nada que mover
+            }
+
+            recalcularIndices(items);
+        });
+
         // Botón añadir nuevo item
         btnAdd.addEventListener('click', () => {
             const allItems = items.querySelectorAll('.repeater-item');

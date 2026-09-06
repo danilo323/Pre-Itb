@@ -14,6 +14,63 @@ function content_raw(string $section, string $field, $default = '') {
 }
 
 /**
+ * Arma el texto que gira alrededor de los botones circulares de video.
+ *
+ * El administrador escribe UNA FRASE POR LÍNEA, sin ningún símbolo raro:
+ *
+ *     ¿Cómo inscribirse?
+ *     Haz clic aquí
+ *
+ * y esta función las une con " • " y agrega el separador final, para que al
+ * dar la vuelta al círculo la última frase no se pegue con la primera.
+ *
+ * También acepta el formato antiguo (todo en un renglón con los • escritos a
+ * mano), así que el contenido ya guardado sigue viéndose igual.
+ */
+function content_circular(string $section, string $field, string $default = ''): string {
+    $raw = (string)content_raw($section, $field, $default);
+
+    // Separa por saltos de línea (formato nuevo) y también por • (formato viejo),
+    // así de paso se normaliza el espaciado alrededor de cada punto.
+    $partes = preg_split('/[\r\n]+|\s*•\s*/u', $raw);
+    if (!is_array($partes)) {
+        $partes = [$raw]; // por si el texto trae caracteres inválidos
+    }
+
+    $frases = [];
+    foreach ($partes as $p) {
+        $p = trim($p);
+        if ($p !== '') $frases[] = $p;
+    }
+
+    if (empty($frases)) return '';
+
+    return htmlspecialchars(implode(' • ', $frases) . ' • ', ENT_QUOTES, 'UTF-8');
+}
+
+/**
+ * Convierte una URL normal de YouTube a formato "embed", para poder
+ * reproducirla dentro del modal del sitio.
+ *
+ * Acepta las dos formas que un administrador pega normalmente:
+ *   https://youtu.be/XXXXXXXXXXX
+ *   https://www.youtube.com/watch?v=XXXXXXXXXXX
+ *
+ * Si no reconoce el formato devuelve la URL tal cual, para no romper nada.
+ */
+function youtube_embed_url(string $url): string {
+    $url = trim($url);
+    if ($url === '') return '';
+
+    $patron = '/(?:youtube\.com\/(?:[^\/]+\/.+\/|(?:v|e(?:mbed)?)\/|.*[?&]v=)|youtu\.be\/)([^"&?\/\s]{11})/i';
+    if (preg_match($patron, $url, $m)) {
+        return 'https://www.youtube.com/embed/' . $m[1] . '?autoplay=1';
+    }
+
+    return $url;
+}
+
+/**
  * Formatea un título permitiendo usar asteriscos *texto* 
  * para pintarlo con la clase text-orange.
  */

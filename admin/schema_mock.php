@@ -326,10 +326,10 @@ Educación Continua",
                             'label' => 'Lado Derecho y Fondo (Multimedia)',
                         ],
                         'circular_text' => [
-                            'type' => 'text',
-                            'label' => 'Texto circular (repite la frase)',
-                            'default' => '• EST. 1995 • ITB INSTITUTO UNIVERSITARIO ',
-                            'help' => 'Cuidado: No lo hagas muy largo (máximo 45 caracteres aprox) o las letras se amontonarán para caber en el círculo.',
+                            'type' => 'textarea',
+                            'label' => 'Texto que gira alrededor del botón',
+                            'default' => "EST. 1995\nITB INSTITUTO UNIVERSITARIO",
+                            'help' => 'Escribe UNA FRASE POR LÍNEA. Los puntitos separadores (•) se agregan solos, no los escribas. Cuidado: entre todas las frases no pases de unos 45 caracteres o las letras se amontonarán para caber en el círculo.',
                         ],
                         'video_url' => [
                             'type' => 'text',
@@ -657,22 +657,12 @@ Educación Continua",
                         ],
                         'div_img' => [
                             'type' => 'divider',
-                            'label' => 'Imagen e Indicador (Derecha)',
+                            'label' => 'Imagen (Derecha)',
                         ],
                         'imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen principal',
                             'default' => 'img/experiencia.png',
-                        ],
-                        'badge_numero' => [
-                            'type' => 'text',
-                            'label' => 'Número del indicador (ej: 115%)',
-                            'default' => '98%',
-                        ],
-                        'badge_texto' => [
-                            'type' => 'text',
-                            'label' => 'Texto del indicador',
-                            'default' => 'Satisfacción Estudiantil',
                         ],
                     ],
                 ],
@@ -755,7 +745,7 @@ Educación Continua",
                             'label' => 'Descripción',
                             'default' => 'Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.',
                         ],
-                        'btn_directorio' => [
+                        'boton_directorio' => [
                             'type' => 'text',
                             'label' => 'Botón "Ver Directorio"',
                             'default' => 'Ver Directorio',
@@ -836,59 +826,115 @@ Educación Continua",
                 'admision' => [
                     'label' => 'ADMISIÓN',
                     'fields' => [
-                        'etiqueta_superior' => [
-                            'type' => 'text',
-                            'label' => 'Etiqueta superior (badge)',
-                            'default' => 'Admisiones Abiertas',
-                            'help' => 'Texto pequeño que aparece arriba del título.',
+                        'div_textos' => [
+                            'type' => 'divider',
+                            'label' => 'Textos de la Sección',
                         ],
                         'titulo' => [
                             'type' => 'textarea',
                             'label' => 'Título de la sección',
                             'default' => 'Inicia tu proceso de admisión',
-                            'help' => 'Título principal de la sección de admisiones.',
+                            'help' => 'Título grande animado que cruza la sección de lado a lado.',
                         ],
                         'descripcion' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
-                            'default' => 'Da el primer paso hacia tu futuro profesional. Completa el formulario y un asesor académico se pondrá en contacto contigo para guiarte en todo el proceso de inscripción.',
-                            'help' => 'Texto descriptivo del proceso de admisión.',
+                            'default' => 'Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.',
+                            'help' => 'Párrafo que aparece a la izquierda del formulario.',
                         ],
-                        'feature_1' => [
-                            'type' => 'text',
-                            'label' => 'Característica 1',
-                            'default' => 'Proceso 100% en línea',
-                            'help' => 'Primera ventaja del proceso de admisión.',
+                        'div_imagen' => [
+                            'type' => 'divider',
+                            'label' => 'Imagen (Izquierda)',
                         ],
-                        'feature_2' => [
-                            'type' => 'text',
-                            'label' => 'Característica 2',
-                            'default' => 'Asesoría personalizada',
-                            'help' => 'Segunda ventaja del proceso de admisión.',
+                        'imagen_principal' => [
+                            'type' => 'image',
+                            'label' => 'Imagen principal',
+                            'default' => 'img/admision1.png',
+                            'help' => 'Fotografía que acompaña al formulario.',
                         ],
-                        'feature_3' => [
-                            'type' => 'text',
-                            'label' => 'Característica 3',
-                            'default' => 'Respuesta en 24 horas',
-                            'help' => 'Tercera ventaja del proceso de admisión.',
+                        'div_video' => [
+                            'type' => 'divider',
+                            'label' => 'Botón de Video (círculo naranja)',
                         ],
-                        'btn_enviar' => [
+                        'video_url' => [
                             'type' => 'text',
-                            'label' => 'Texto del botón Enviar',
-                            'default' => 'Enviar Solicitud',
-                            'help' => 'Texto del botón de envío del formulario de admisión.',
+                            'label' => 'Link del video de YouTube',
+                            'default' => '',
+                            'help' => 'Pega aquí el link normal de YouTube (ej: https://youtu.be/abc123 o https://www.youtube.com/watch?v=abc123). El video se abre en una ventana sobre la página. Si lo dejas vacío, el botón simplemente baja hasta el formulario.',
+                        ],
+                        'circular_text' => [
+                            'type' => 'textarea',
+                            'label' => 'Texto que gira alrededor del botón',
+                            'default' => "¿CÓMO INSCRIBIRSE?\nHAZ CLIC AQUÍ",
+                            'help' => 'Escribe UNA FRASE POR LÍNEA. Los puntitos separadores (•) se agregan solos, no los escribas. Cuidado: entre todas las frases no pases de unos 45 caracteres o las letras se amontonarán para caber en el círculo.',
+                        ],
+                        'div_form' => [
+                            'type' => 'divider',
+                            'label' => 'Formulario de Registro',
                         ],
                         'form_titulo' => [
                             'type' => 'text',
                             'label' => 'Título del Formulario',
-                            'default' => 'Solicita Información',
+                            'default' => 'Formulario de Registro',
                             'help' => 'Título que aparece arriba de los campos del formulario.',
                         ],
-                        'form_terminos' => [
+                        'form_subtitulo' => [
                             'type' => 'text',
-                            'label' => 'Texto de Términos',
-                            'default' => 'Al enviar este formulario, aceptas nuestra Política de Privacidad.',
-                            'help' => 'Texto legal o nota pequeña debajo del botón.',
+                            'label' => 'Subtítulo del Formulario',
+                            'default' => 'Los campos marcados con un asterisco (*) son obligatorios.',
+                            'help' => 'Nota pequeña debajo del título. El asterisco se pinta en naranja automáticamente.',
+                        ],
+                        'btn_enviar' => [
+                            'type' => 'text',
+                            'label' => 'Texto del botón Enviar',
+                            'default' => 'Completar registro',
+                            'help' => 'Texto del botón naranja al final del formulario.',
+                        ],
+                        'div_programas' => [
+                            'type' => 'divider',
+                            'label' => 'Opciones de "Programa o Área de Interés"',
+                        ],
+                        'lista_programas_interes' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Opción',
+                            'help' => 'Opciones de la lista desplegable "Programa o Área de Interés". Usa las flechas ↑ ↓ para cambiar el orden en que aparecen.',
+                            'subfields' => [
+                                'texto' => [
+                                    'type' => 'text',
+                                    'label' => 'Nombre de la opción',
+                                ],
+                            ],
+                            'default' => [
+                                ['texto' => 'Enfermería'],
+                                ['texto' => 'Fisioterapia'],
+                                ['texto' => 'Marketing Digital'],
+                                ['texto' => 'Contabilidad'],
+                                ['texto' => 'Logística y Transporte'],
+                                ['texto' => 'Desarrollo de Software'],
+                                ['texto' => 'Otra'],
+                            ],
+                        ],
+                        'div_modalidades' => [
+                            'type' => 'divider',
+                            'label' => 'Opciones de "Modalidad Preferida"',
+                        ],
+                        'lista_modalidades' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Modalidad',
+                            'help' => 'Opciones de la lista desplegable "Modalidad Preferida". Usa las flechas ↑ ↓ para cambiar el orden en que aparecen.',
+                            'subfields' => [
+                                'texto' => [
+                                    'type' => 'text',
+                                    'label' => 'Nombre de la modalidad',
+                                ],
+                            ],
+                            'default' => [
+                                ['texto' => 'Presencial'],
+                                ['texto' => 'Online'],
+                                ['texto' => 'Híbrida'],
+                            ],
                         ],
                     ],
                 ],
@@ -994,6 +1040,56 @@ Educación Continua",
                                     'default' => '',
                                 ],
                             ]
+                        ],
+                    ],
+                ],
+                'alianzas' => [
+                    'label' => 'ALIANZAS',
+                    'fields' => [
+                        'div_textos' => [
+                            'type' => 'divider',
+                            'label' => 'Encabezado de la Sección',
+                        ],
+                        'titulo' => [
+                            'type' => 'textarea',
+                            'label' => 'Título de la sección',
+                            'default' => 'Alianzas del ITB',
+                            'help' => 'Si pones una palabra entre asteriscos *así*, se pinta en naranja.',
+                        ],
+                        'boton_todas' => [
+                            'type' => 'text',
+                            'label' => 'Texto del botón',
+                            'default' => 'Ver Alianzas y Convenios',
+                            'help' => 'Botón que aparece a la derecha del título.',
+                        ],
+                        'div_logos' => [
+                            'type' => 'divider',
+                            'label' => 'Logos del Carrusel',
+                        ],
+                        'lista_logos' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Logo',
+                            'help' => 'Logos de las empresas aliadas. Se desplazan solos en bucle. Usa las flechas ↑ ↓ para cambiar el orden. Recomendado: logos con fondo transparente o blanco.',
+                            'subfields' => [
+                                'imagen' => [
+                                    'type' => 'image',
+                                    'label' => 'Logo',
+                                ],
+                                'nombre' => [
+                                    'type' => 'text',
+                                    'label' => 'Nombre de la empresa',
+                                    'help' => 'No se ve en la página; sirve para accesibilidad y buscadores.',
+                                ],
+                            ],
+                            'default' => [
+                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 1'],
+                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 2'],
+                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 3'],
+                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 4'],
+                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 5'],
+                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 6'],
+                            ],
                         ],
                     ],
                 ],

@@ -122,9 +122,9 @@
                 <!-- Botones CTA -->
                 <div class="navbar__cta">
                     <a href="#" class="navbar__btn navbar__btn--outline" id="btn-solicitar"><?= content_get('menu', 'cta_btn_1', 'Solicitar Información') ?></a>
-                    <a href="#" class="navbar__btn navbar__btn--solid" id="btn-matricula">
+                    <a href="#" class="navbar__btn btn btn--solid" id="btn-matricula">
                         <?= content_get('menu', 'cta_btn_2', 'Matricúlame') ?>
-                        <span class="navbar__btn-icon"><i class="fas fa-arrow-right"></i></span>
+                        <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
             </nav>

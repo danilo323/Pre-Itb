@@ -66,10 +66,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 // Manejar eliminación (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
     $id_to_delete = (int)$_POST['id'];
-    // Buscar el índice del id
-    foreach ($items as $idx => $item) {
-        if ($item['id'] === $id_to_delete) {
-            unset($_SESSION['admin_data'][$section]['items'][$idx]);
+    // Buscar el id sobre el array REAL de la sesión.
+    // OJO: no se puede usar el índice de $items, porque usort() lo reindexó
+    // desde 0 y sus posiciones ya no corresponden a las claves de la sesión.
+    foreach (($_SESSION['admin_data'][$section]['items'] ?? []) as $sess_idx => $sess_item) {
+        if ((int)($sess_item['id'] ?? 0) === $id_to_delete) {
+            unset($_SESSION['admin_data'][$section]['items'][$sess_idx]);
             // Reindexar arreglo para mantener orden limpio
             $_SESSION['admin_data'][$section]['items'] = array_values($_SESSION['admin_data'][$section]['items']);
             

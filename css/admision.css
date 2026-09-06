@@ -89,8 +89,10 @@
 
 /* Columna Centro: Texto descriptivo */
 .admision__text-wrapper {
-    flex: 1; 
+    flex: 1;
     max-width: 45%; /* Evita que el texto pase por debajo del formulario flotante */
+    min-width: 0;   /* Permite que la columna se encoja: sin esto, una palabra
+                       larga obliga a la columna a crecer y el texto se desborda */
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -101,6 +103,9 @@
     color: #ffffff;
     font-size: 1.05rem; /* Letra más grande y legible */
     line-height: 1.6;
+    /* Si el administrador escribe una palabra muy larga o pega una URL,
+       se parte y continúa abajo en vez de salirse hacia la derecha. */
+    overflow-wrap: break-word;
 }
 
 /* ---- Formulario Blanco ---- */

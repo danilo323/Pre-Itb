@@ -23,8 +23,12 @@
     font-family: var(--font-primary);
 }
 
-/* Botón superior derecho (mismo diseño que .btn--outline-servicios de Servicios) */
-.btn-noticias-todas {
+/* Botón superior derecho (mismo diseño que .btn--outline-servicios de Servicios).
+   Lo comparten dos secciones: Noticias ("Ver más Noticias y Eventos") y
+   Alianzas ("Ver Alianzas y Convenios"). Se listan los dos selectores en vez de
+   copiar el estilo, para que los dos botones nunca se desincronicen. */
+.btn-noticias-todas,
+.btn-alianzas-todas {
     display: inline-flex;
     align-items: center;
     gap: 16px;
@@ -38,13 +42,15 @@
     transition: var(--transition);
 }
 
-.btn-noticias-todas:hover {
+.btn-noticias-todas:hover,
+.btn-alianzas-todas:hover {
     background: #FF6D1C;
     color: var(--white);
 }
 
 /* Caja de flecha del botón superior: rellena por defecto, se vacía en hover (no tocar, ya está bien) */
-.btn-noticias-todas .btn__icon-right {
+.btn-noticias-todas .btn__icon-right,
+.btn-alianzas-todas .btn__icon-right {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -57,22 +63,29 @@
     transition: var(--transition);
 }
 
-.btn-noticias-todas .btn__icon-right i {
+.btn-noticias-todas .btn__icon-right i,
+.btn-alianzas-todas .btn__icon-right i {
     transform: rotate(-45deg);
     font-size: 0.85rem;
     transition: var(--transition);
 }
 
-.btn-noticias-todas:hover .btn__icon-right {
+.btn-noticias-todas:hover .btn__icon-right,
+.btn-alianzas-todas:hover .btn__icon-right {
     background-color: var(--white);
     color: #FF6D1C;
 }
 
-.btn-noticias-todas:hover .btn__icon-right i {
+.btn-noticias-todas:hover .btn__icon-right i,
+.btn-alianzas-todas:hover .btn__icon-right i {
     transform: rotate(0deg);
 }
 
-/* Caja de flecha de "Leer Más": vacía por defecto, se rellena de naranja en hover */
+/* Caja de flecha de "Leer Más": vacía por defecto, se rellena de naranja en hover.
+   El enlace .noticias__link ocupa TODO el ancho de la tarjeta (justify-content:
+   space-between), así que colgar el hover del enlace hacía que el cuadrito se
+   pintara apenas el puntero entraba en ese espacio vacío, mucho antes de llegar
+   al cuadrito. Por eso el hover se cuelga del propio cuadrito. */
 .noticias__link .btn__icon-right {
     display: flex;
     align-items: center;
@@ -101,7 +114,7 @@
     font-size: 0.8rem;
 }
 
-.noticias__link:hover .btn__icon-right {
+.noticias__link .btn__icon-right:hover {
     background-color: #FF6D1C;
     color: var(--white);
 }

@@ -23,11 +23,15 @@ function field_repeater_render(string $name_path, $value, array $config): string
         $html .= "    <div class='repeater-item' data-index='{$index}' style='border:1px solid var(--border-color); padding:16px; margin-bottom:16px; border-radius:8px; background:var(--bg-main);'>\n";
         $html .= "      <div style='display:flex; justify-content:space-between; align-items:center; margin-bottom:16px; border-bottom:1px solid var(--border-color); padding-bottom:12px;'>\n";
         $html .= "          <h4 style='margin:0; font-size:15px; color:var(--text-main);'>{$item_label} {$display_index}</h4>\n";
-        
+
         if (empty($config['fixed_items'])) {
-            $html .= "          <button type='button' class='btn-remove' style='background:transparent; border:none; color:var(--danger); cursor:pointer; font-size:14px;'>Eliminar</button>\n";
+            $html .= "          <div class='repeater-item-actions'>\n";
+            $html .= "              <button type='button' class='btn btn-sm btn-outline btn-move-up' title='Subir'><i class='bi bi-arrow-up'></i></button>\n";
+            $html .= "              <button type='button' class='btn btn-sm btn-outline btn-move-down' title='Bajar'><i class='bi bi-arrow-down'></i></button>\n";
+            $html .= "              <button type='button' class='btn-remove' style='background:transparent; border:none; color:var(--danger); cursor:pointer; font-size:14px;'>Eliminar</button>\n";
+            $html .= "          </div>\n";
         }
-        
+
         $html .= "      </div>\n";
         // Renderizar subcampos
         foreach ($subfields as $sub_key => $sub_config) {

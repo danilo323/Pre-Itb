@@ -21,30 +21,64 @@
         <!-- Grid de cards -->
         <div class="autoridades__grid">
             <?php
-            $lista_autoridades = content_raw('autoridades', 'lista_autoridades', [
-                [
-                    'nombre' => 'PhD. Roberto Tolozano Benites',
-                    'cargo' => 'Canciller',
-                    'imagen' => 'img/PHD.Roberto_tolozano.jpg'
-                ],
-                [
-                    'nombre' => 'PhD. Elena Tolozano Benites',
-                    'cargo' => 'Rectora',
-                    'imagen' => 'img/PHD.Elena_Tolozano.jpg'
-                ],
-                [
-                    'nombre' => 'PhD. Luis Alzate Peralta',
-                    'cargo' => 'Vicerrector Académico<br>y de Investigación',
-                    'imagen' => 'img/PHD.Luis_alzate.jpg'
-                ],
-                [
-                    'nombre' => 'PhD. Michelle Tolozano Lapierre',
-                    'cargo' => 'Vicerrectora de Extensión<br>y Gestión Administrativa',
-                    'imagen' => 'img/PHD.Michelle_tolozano.webp'
-                ]
-            ]);
+            // Fuente real: la colección "Equipo" del panel (CONTENIDO -> Equipo),
+            // tal como indica el aviso "INFORMACIÓN IMPORTANTE" de esa sección.
+            $equipo_items = collection_items('equipo');
 
-            foreach ((array)$lista_autoridades as $auth): 
+            // Solo personas publicadas y marcadas para aparecer en esta sección.
+            // OJO: field_bool_parse() guarda true/false reales al editar desde el
+            // panel, pero los datos de ejemplo usan '1'/'0' como texto. Se aceptan
+            // ambos formatos para no perder registros guardados desde el panel.
+            $itb_campo_activo = function ($v) {
+                return $v === null || $v === true || $v === '1' || $v === 1;
+            };
+            $lista_autoridades = array_values(array_filter($equipo_items, function ($p) use ($itb_campo_activo) {
+                return $itb_campo_activo($p['publicado'] ?? true) && $itb_campo_activo($p['mostrar_en_home'] ?? true);
+            }));
+
+            // Respetar el orden definido al arrastrar en el listado de Equipo
+            usort($lista_autoridades, function ($a, $b) {
+                return (int)($a['orden'] ?? 999) <=> (int)($b['orden'] ?? 999);
+            });
+
+            // La colección usa otros nombres de campo (nombre_completo, foto);
+            // se traducen aquí a los que ya espera esta tarjeta.
+            $lista_autoridades = array_map(function ($p) {
+                return [
+                    'nombre' => $p['nombre_completo'] ?? ($p['nombre'] ?? ''),
+                    'cargo'  => $p['cargo'] ?? '',
+                    'imagen' => $p['foto'] ?? '',
+                ];
+            }, $lista_autoridades);
+
+            // Respaldo solo si no queda nadie publicado (colección vacía),
+            // para no dejar la sección en blanco.
+            if (empty($lista_autoridades)) {
+                $lista_autoridades = [
+                    [
+                        'nombre' => 'PhD. Roberto Tolozano Benites',
+                        'cargo' => 'Canciller',
+                        'imagen' => 'img/PHD.Roberto_tolozano.jpg'
+                    ],
+                    [
+                        'nombre' => 'PhD. Elena Tolozano Benites',
+                        'cargo' => 'Rectora',
+                        'imagen' => 'img/PHD.Elena_Tolozano.jpg'
+                    ],
+                    [
+                        'nombre' => 'PhD. Luis Alzate Peralta',
+                        'cargo' => 'Vicerrector Académico<br>y de Investigación',
+                        'imagen' => 'img/PHD.Luis_alzate.jpg'
+                    ],
+                    [
+                        'nombre' => 'PhD. Michelle Tolozano Lapierre',
+                        'cargo' => 'Vicerrectora de Extensión<br>y Gestión Administrativa',
+                        'imagen' => 'img/PHD.Michelle_tolozano.webp'
+                    ]
+                ];
+            }
+
+            foreach ((array)$lista_autoridades as $auth):
                 $foto_path = trim($auth['imagen'] ?? '');
                 if (empty($foto_path)) $foto_path = 'img/placeholder_autoridad.jpg';
                 $nombre = htmlspecialchars($auth['nombre'] ?? '', ENT_QUOTES, 'UTF-8');
