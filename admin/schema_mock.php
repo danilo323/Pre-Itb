@@ -908,7 +908,7 @@ Educación Continua",
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título de la Noticia',
-                            'default' => 'Casa Abierta ITB 2025: Descubre tu vocación profesional',
+                            'default' => '¡METAMORFOSIS CREATIVA está por comenzar!',
                             'help' => 'Título principal de la noticia.',
                         ],
                         'boton_todas' => [
@@ -936,71 +936,53 @@ Educación Continua",
                         'descripcion' => [
                             'type' => 'textarea',
                             'label' => 'Descripción / Resumen',
-                            'default' => 'Visita nuestro campus y conoce de primera mano nuestras instalaciones, docentes y oferta académica en la Casa Abierta más grande del año.',
+                            'default' => 'Lo mejor del Diseño de Modas y Maquillaje...',
                             'help' => 'Resumen corto de la noticia.',
                         ],
                         'imagen' => [
                             'type' => 'image',
                             'label' => 'Imagen de la Noticia Principal',
-                            'default' => 'img/estudiantes1.png',
+                            'default' => 'img/noticia_1.png',
                             'help' => 'Imagen destacada de la noticia.',
                         ],
-                        'div_sec1' => [
+                        'div_secundarias' => [
                             'type' => 'divider',
-                            'label' => 'Noticia Secundaria 1',
+                            'label' => 'Noticias Secundarias',
                         ],
-                        'sec1_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título Noticia 1',
-                            'default' => 'Convenio internacional con universidad de España',
-                        ],
-                        'sec1_fecha' => [
-                            'type' => 'text',
-                            'label' => 'Fecha Noticia 1',
-                            'default' => '10 Sep 2025',
-                        ],
-                        'sec1_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen Noticia 1',
-                            'default' => 'img/estudiantes1.png',
-                        ],
-                        'div_sec2' => [
-                            'type' => 'divider',
-                            'label' => 'Noticia Secundaria 2',
-                        ],
-                        'sec2_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título Noticia 2',
-                            'default' => 'Graduación de la promoción 2025: más de 500 nuevos profesionales',
-                        ],
-                        'sec2_fecha' => [
-                            'type' => 'text',
-                            'label' => 'Fecha Noticia 2',
-                            'default' => '05 Sep 2025',
-                        ],
-                        'sec2_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen Noticia 2',
-                            'default' => 'img/estudiantes1.png',
-                        ],
-                        'div_sec3' => [
-                            'type' => 'divider',
-                            'label' => 'Noticia Secundaria 3',
-                        ],
-                        'sec3_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título Noticia 3',
-                            'default' => 'ITB inaugura nuevo laboratorio de simulación clínica',
-                        ],
-                        'sec3_fecha' => [
-                            'type' => 'text',
-                            'label' => 'Fecha Noticia 3',
-                            'default' => '01 Sep 2025',
-                        ],
-                        'sec3_imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen Noticia 3',
-                            'default' => 'img/estudiantes1.png',
+                        'secundarias' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Noticia Secundaria',
+                            'help' => 'Agrega las noticias secundarias que aparecerán a la derecha.',
+                            'default' => [
+                                [
+                                    'titulo' => 'Estudiantes de Diseño de Modas',
+                                    'fecha' => 'Agosto 20, 2026',
+                                    'imagen' => 'img/noticia_2.png',
+                                ],
+                                [
+                                    'titulo' => 'ITB promovió una movilidad',
+                                    'fecha' => 'Agosto 20, 2026',
+                                    'imagen' => 'img/noticia_3.png',
+                                ],
+                            ],
+                            'subfields' => [
+                                'titulo' => [
+                                    'type' => 'text',
+                                    'label' => 'Título',
+                                    'default' => '',
+                                ],
+                                'fecha' => [
+                                    'type' => 'text',
+                                    'label' => 'Fecha',
+                                    'default' => '',
+                                ],
+                                'imagen' => [
+                                    'type' => 'image',
+                                    'label' => 'Imagen',
+                                    'default' => '',
+                                ],
+                            ]
                         ],
                     ],
                 ],

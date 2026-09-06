@@ -32,6 +32,7 @@ require_once 'includes/content_helper.php';
         <?php include 'includes/servicios.php'; ?>
         <?php include 'includes/admision.php'; ?>
         <?php include 'includes/noticias.php'; ?>
+        <?php include 'includes/alianzas.php'; ?>
     </main>
 
     <?php include 'includes/footer.php'; ?>

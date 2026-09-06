@@ -4,3 +4,7 @@ Al trabajar con campos de imágenes para el panel administrativo, recuerda:
 - Las imágenes **DEBEN previsualizarse por defecto** apuntando a los archivos que ya existen en el frontend (ej. `img/enfermeria.jpg`, etc.).
 - Sin embargo, si un administrador **CAMBIA o ELIMINA** esa imagen (es decir, el campo queda vacío o apunta a una ruta inexistente), **NO debe mostrarse un error rojo ni la ruta técnica esperada**.
 - En caso de no encontrar la imagen, simplemente debe mostrarse el placeholder estándar ("Ninguna imagen seleccionada") con el diseño por defecto, sin alertas de archivo faltante.
+
+# Regla General de Desarrollo
+
+- Si tienes alguna duda sobre el código, la arquitectura o la estructura, **SIEMPRE lee la guía del panel administrativo (`.agents/rules/guia_admin.md`) y la memoria del proyecto (`.agents/rules/memoria.md`)** antes de hacer cambios.

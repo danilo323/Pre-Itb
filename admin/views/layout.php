@@ -120,7 +120,7 @@ function layout_end(): string {
         </main>
     </div> <!-- /.admin-container -->
 
-    <script src="/admin/assets/admin.js"></script>
+    <script src="/admin/assets/admin.js?v=<?= time() ?>"></script>
 </body>
 </html>
 HTML;
