@@ -905,6 +905,12 @@ Educación Continua",
                             'default' => 'Actualidad ITB',
                             'help' => 'Texto pequeño que aparece arriba del título.',
                         ],
+                        'titulo_seccion' => [
+                            'type' => 'textarea',
+                            'label' => 'Título de la Sección',
+                            'default' => 'Noticias y Eventos del ITB',
+                            'help' => 'Título principal de la sección (soporta asteriscos *texto* para color naranja).',
+                        ],
                         'titulo' => [
                             'type' => 'text',
                             'label' => 'Título de la Noticia',

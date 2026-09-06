@@ -8,7 +8,7 @@
             <div>
                 <span class="section-tag"><?= content_get('noticias', 'etiqueta_superior', 'Vida Universitaria y Actualidad') ?></span>
                 <h2 class="noticias__title">
-                    <?= content_title('noticias', 'titulo', 'Noticias y Eventos del ITB') ?>
+                    <?= content_title('noticias', 'titulo_seccion', 'Noticias y Eventos del ITB') ?>
                 </h2>
             </div>
             <a href="#" class="btn-noticias-todas" id="btn-todas-noticias">
