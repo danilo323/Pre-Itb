@@ -196,11 +196,12 @@
 }
 
 .noticias__main-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--primary-blue);
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111111;
     margin-bottom: 10px;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 .noticias__main-desc {
@@ -278,10 +279,11 @@
 }
 
 .noticias__item-title {
+    font-family: var(--font-heading);
     font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--primary-blue);
-    line-height: 1.3;
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.2;
 }
 
 /* Botón de flecha para noticias secundarias: vacío por defecto, se rellena de naranja en hover */
