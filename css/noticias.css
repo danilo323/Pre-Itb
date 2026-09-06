@@ -278,8 +278,8 @@
 }
 
 .noticias__item-title {
-    font-size: 0.92rem;
-    font-weight: 600;
+    font-size: 1.15rem;
+    font-weight: 700;
     color: var(--primary-blue);
     line-height: 1.3;
 }
