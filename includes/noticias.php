@@ -63,7 +63,6 @@
                 $i = 0;
                 foreach ($secundarias as $sec): 
                     $i++;
-                    $is_last = ($i === $total_sec); 
                     $sec_titulo = htmlspecialchars($sec['titulo'] ?? '', ENT_QUOTES, 'UTF-8');
                     $sec_fecha = htmlspecialchars($sec['fecha'] ?? '', ENT_QUOTES, 'UTF-8');
                     $sec_imagen = htmlspecialchars($sec['imagen'] ?? '', ENT_QUOTES, 'UTF-8');
@@ -81,11 +80,10 @@
                             </div>
                             <h4 class="noticias__item-title"><?= $sec_titulo ?></h4>
                         </div>
-                        <?php if ($is_last): ?>
-                        <a href="#" class="btn-arrow-square" aria-label="Leer más">
-                            <i class="fas fa-arrow-up"></i>
+                        <a href="#" class="noticias__link" style="padding-top:15px; margin-top:auto;">
+                            <span class="noticias__link-text">Leer Más <i class="fas fa-arrow-right"></i></span>
+                            <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                         </a>
-                        <?php endif; ?>
                     </div>
                 </div>
                 <?php endforeach; ?>
