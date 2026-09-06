@@ -945,6 +945,11 @@ Educación Continua",
                             'default' => 'img/noticia_1.png',
                             'help' => 'Imagen destacada de la noticia.',
                         ],
+                        'info_noticias' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>NUEVA FUNCIÓN:</strong> Las noticias secundarias ahora son dinámicas. Puedes agregar las que quieras haciendo clic en "Añadir Noticia Secundaria".',
+                        ],
                         'div_secundarias' => [
                             'type' => 'divider',
                             'label' => 'Noticias Secundarias',

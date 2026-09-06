@@ -57,7 +57,7 @@
                     ]
                 ];
                 $secundarias = content_raw('noticias', 'secundarias', $secundarias_default);
-                if (!is_array($secundarias)) $secundarias = $secundarias_default;
+                if (empty($secundarias) || !is_array($secundarias)) $secundarias = $secundarias_default;
                 
                 $total_sec = count($secundarias);
                 $i = 0;
