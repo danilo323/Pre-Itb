@@ -11,7 +11,7 @@
     margin: 0 auto;
     padding: 0 24px;
     display: flex;
-    gap: 32px;
+    gap: 80px;
     align-items: stretch;
 }
 
@@ -21,7 +21,8 @@
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: flex-start;
+    padding: 0 0 80px;
 }
 
 .servicios__title {
@@ -43,6 +44,7 @@
 /* Botón principal (Más servicios) */
 #btn-servicios-main {
     width: fit-content;
+    margin-top: auto;
 }
 
 .btn__icon-right-white {
@@ -56,6 +58,7 @@
     justify-content: center;
     font-size: 0.8rem;
     margin-left: 12px;
+    flex-shrink: 0;
 }
 .btn__icon-right-white i {
     transform: rotate(-45deg);
@@ -75,13 +78,13 @@
 
 /* Cards Simples Blancas */
 .servicios__card-simple {
+    box-sizing: border-box;
     border: 1px solid #eaeaea;
     border-radius: 12px;
-    padding: 48px 20px 24px;
+    padding: 48px 16px 80px;
     background: #ffffff;
     display: flex;
     flex-direction: column;
-    height: 100%;
     min-height: 440px;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
@@ -104,7 +107,6 @@
     color: #666666;
     line-height: 1.5;
     margin-bottom: 32px;
-    flex-grow: 1;
 }
 
 /* Botones Outline de las Cards */
@@ -120,6 +122,7 @@
     font-size: 0.85rem;
     font-weight: 600;
     margin-top: auto;
+    white-space: nowrap;
     transition: all 0.3s ease;
 }
 .btn__icon-servicios {
@@ -152,14 +155,14 @@
 
 /* Card con Imagen (Arte y Deportes) */
 .servicios__card-image {
+    box-sizing: border-box;
     position: relative;
     border-radius: 12px;
     overflow: hidden;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    padding: 48px 20px 24px;
-    height: 100%;
+    justify-content: flex-start;
+    padding: 48px 16px 80px;
     min-height: 440px;
 }
 .servicios__card-image img {
@@ -206,7 +209,15 @@
     color: #e0e0e0;
     line-height: 1.5;
     margin-bottom: 32px;
-    flex-grow: 1;
+}
+
+/* Ajuste específico para el botón de Conocer Más */
+.servicios__card-image .btn--solid {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 8px 8px 8px 16px;
+    gap: 8px;
+    margin-top: auto;
 }
 
 /* Responsive adjustments */

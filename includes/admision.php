@@ -1,88 +1,157 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('admision')) return; ?>
 <?php /* includes/admision.php */ ?>
 <!-- ============================================= -->
-<!-- FORMULARIO DE ADMISIÓN                        -->
+<!-- FORMULARIO DE ADMISIÓN / REGISTRO             -->
 <!-- ============================================= -->
 <section class="admision" id="admision">
     <div class="admision__container">
-        <!-- Lado izquierdo: Texto -->
-        <div class="admision__content">
-            <span class="section-tag"><?= content_get('admision', 'etiqueta_superior', 'Admisiones Abiertas') ?></span>
-            <h2 class="admision__title">
-                <?= content_get('admision', 'titulo', 'Inicia tu proceso de admisión') ?>
-            </h2>
-            <p class="admision__description">
-                <?= content_get('admision', 'descripcion', 'Da el primer paso hacia tu futuro profesional. Completa el formulario y un asesor académico se pondrá en contacto contigo para guiarte en todo el proceso de inscripción.') ?>
-            </p>
-            <div class="admision__features">
-                <div class="admision__feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span><?= content_get('admision', 'feature_1', 'Proceso 100% en línea') ?></span>
-                </div>
-                <div class="admision__feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span><?= content_get('admision', 'feature_2', 'Asesoría personalizada') ?></span>
-                </div>
-                <div class="admision__feature">
-                    <i class="fas fa-check-circle"></i>
-                    <span><?= content_get('admision', 'feature_3', 'Respuesta en 24 horas') ?></span>
-                </div>
-            </div>
+        
+        <!-- Lado Izquierdo: Imagen -->
+        <div class="admision__image-col">
+            <img src="<?= htmlspecialchars(content_get('admision', 'imagen_principal', 'img/admision1.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Estudiantes ITB" class="admision__img">
         </div>
 
-        <!-- Lado derecho: Formulario -->
-        <div class="admision__form-wrapper">
-            <form class="admision__form" id="admision-form" action="#" method="POST">
-                <h3 class="admision__form-title"><?= content_get('admision', 'form_titulo', 'Solicita Información') ?></h3>
+        <!-- Lado Derecho: Contenido y Formulario -->
+        <div class="admision__content-col">
+            
+            <!-- Título Animado (Marquesina Infinita) -->
+            <div class="admision__marquee-wrapper">
+                <div class="admision__marquee-track">
+                    <h2 class="admision__huge-title"><?= htmlspecialchars(content_get('admision', 'titulo', 'Inicia tu proceso de admisión'), ENT_QUOTES, 'UTF-8') ?></h2>
+                    <h2 class="admision__huge-title"><?= htmlspecialchars(content_get('admision', 'titulo', 'Inicia tu proceso de admisión'), ENT_QUOTES, 'UTF-8') ?></h2>
+                </div>
+            </div>
+            
+            <div class="admision__split">
+                <!-- Columna Centro: Texto descriptivo -->
+                <div class="admision__text-wrapper">
+                    <p class="admision__desc">
+                        <?= htmlspecialchars(content_get('admision', 'descripcion', 'Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.'), ENT_QUOTES, 'UTF-8') ?>
+                    </p>
+                    
+                    <a href="#admision-form" class="hero__video-wrapper" style="width: 140px; height: 140px; margin-top: 150px; text-decoration: none;">
+                        <!-- Texto circular giratorio -->
+                        <div class="hero__circular-text">
+                            <svg viewBox="0 0 160 160" class="hero__circular-svg">
+                                <defs>
+                                    <path id="circlePathAdmision" d="M 80,80 m -55,0 a 55,55 0 1,1 110,0 a 55,55 0 1,1 -110,0" />
+                                </defs>
+                                <text>
+                                    <textPath href="#circlePathAdmision" class="hero__circular-text-path" textLength="345" lengthAdjust="spacing" style="font-size: 11px;">
+                                        ¿CÓMO INSCRIBIRSE? • HAZ CLIC AQUÍ • 
+                                    </textPath>
+                                </text>
+                            </svg>
+                        </div>
+                        <div class="hero__video-card" style="width: 70px; height: 70px;">
+                            <div class="hero__play-btn" style="position: static; transform: none; width: 100%; height: 100%;">
+                                <i class="fas fa-play"></i>
+                            </div>
+                        </div>
+                    </a>
+                </div>
 
-                <div class="admision__form-row">
-                    <div class="admision__form-group">
-                        <label for="nombre">Nombres</label>
-                        <input type="text" id="nombre" name="nombre" placeholder="Tu nombre completo" required>
+                <!-- Columna Derecha: Formulario Blanco -->
+                <div class="admision__form-wrapper">
+                    <form class="admision__form" id="admision-form" action="#" method="POST">
+                        <h3 class="admision__form-title"><?= content_get('admision', 'form_titulo', 'Formulario de Registro') ?></h3>
+                        <p class="admision__form-subtitle">Los campos marcados con un asterisco (<span class="admision__asterisk">*</span>) son obligatorios.</p>
+
+                        <div class="admision__form-row">
+                            <div class="admision__form-group">
+                                <label for="nombre">Nombres<span class="admision__asterisk">*</span></label>
+                                <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos" required>
+                            </div>
+                            <div class="admision__form-group">
+                                <label for="apellido">Apellidos<span class="admision__asterisk">*</span></label>
+                                <input type="text" id="apellido" name="apellido" placeholder="Ej. Pérez Gómez" required>
+                            </div>
+                        </div>
+
+                        <div class="admision__form-row">
+                            <div class="admision__form-group">
+                                <label for="email">Correo Electrónico<span class="admision__asterisk">*</span></label>
+                                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                            </div>
+                            <div class="admision__form-group">
+                                <label for="telefono">Celular / WhatsApp<span class="admision__asterisk">*</span></label>
+                                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 0991234567" required>
+                            </div>
+                        </div>
+
+                        <div class="admision__form-row admision__form-row--mixed">
+                            <div class="admision__form-group">
+                                <label for="cedula">Número de Cédula<span class="admision__asterisk">*</span></label>
+                                <input type="text" id="cedula" name="cedula" placeholder="Ej. 09xxxxxxxx" required>
+                            </div>
+                            
+                            <div class="admision__form-group admision__form-group--radio">
+                                <label>Nacionalidad<span class="admision__asterisk">*</span></label>
+                                <div class="admision__radio-options">
+                                    <label><input type="radio" name="nacionalidad" value="ecuatoriano" checked> Ecuatoriano</label>
+                                    <label><input type="radio" name="nacionalidad" value="extranjero"> Extranjero</label>
+                                </div>
+                            </div>
+                            
+                            <div class="admision__form-group admision__form-group--radio">
+                                <label>Soy Bachiller<span class="admision__asterisk">*</span></label>
+                                <div class="admision__radio-options">
+                                    <label><input type="radio" name="bachiller" value="si"> Sí, soy bachiller</label>
+                                    <label><input type="radio" name="bachiller" value="no" checked> No, no soy bachiller</label>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="admision__form-group">
+                            <label for="carrera">Programa o Área de Interés<span class="admision__asterisk">*</span></label>
+                            <div class="admision__select-wrapper">
+                                <select id="carrera" name="carrera" required>
+                                    <option value="" disabled selected>Selecciona una opción</option>
+                                    <option value="enfermeria">Enfermería</option>
+                                    <option value="fisioterapia">Fisioterapia</option>
+                                    <option value="marketing">Marketing Digital</option>
+                                    <option value="contabilidad">Contabilidad</option>
+                                    <option value="logistica">Logística y Transporte</option>
+                                    <option value="software">Desarrollo de Software</option>
+                                    <option value="otro">Otra</option>
+                                </select>
+                                <i class="fas fa-chevron-down admision__select-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="admision__form-group">
+                            <label for="modalidad">Modalidad Preferida<span class="admision__asterisk">*</span></label>
+                            <div class="admision__select-wrapper">
+                                <select id="modalidad" name="modalidad" required>
+                                    <option value="" disabled selected>Selecciona la modalidad</option>
+                                    <option value="presencial">Presencial</option>
+                                    <option value="online">Online</option>
+                                    <option value="hibrida">Híbrida</option>
+                                </select>
+                                <i class="fas fa-chevron-down admision__select-icon"></i>
+                            </div>
+                        </div>
+
+                        <div class="admision__form-group">
+                            <label for="mensaje">Dudas o comentarios (opcional)</label>
+                            <textarea id="mensaje" name="mensaje" rows="3" placeholder="Escribe aquí tu duda o comentario"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn--solid admision__submit-btn">
+                            <?= content_get('admision', 'btn_enviar', 'Completar registro') ?>
+                            <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                        </button>
+                    </form>
+                    
+                    <!-- Boton flotante de noticias adjunto al formulario según diseño -->
+                    <div style="display: flex; justify-content: flex-end; margin-top: 32px;">
+                        <a href="#noticias" class="btn-noticias-todas">
+                            Ver más Noticias y Eventos
+                            <span class="btn__icon-right"><i class="fas fa-arrow-up-right"></i></span>
+                        </a>
                     </div>
-                    <div class="admision__form-group">
-                        <label for="apellido">Apellidos</label>
-                        <input type="text" id="apellido" name="apellido" placeholder="Tu apellido completo" required>
-                    </div>
                 </div>
-
-                <div class="admision__form-group">
-                    <label for="email">Correo Electrónico</label>
-                    <input type="email" id="email" name="email" placeholder="tucorreo@ejemplo.com" required>
-                </div>
-
-                <div class="admision__form-group">
-                    <label for="telefono">Teléfono</label>
-                    <input type="tel" id="telefono" name="telefono" placeholder="09XX XXX XXXX" required>
-                </div>
-
-                <div class="admision__form-group">
-                    <label for="carrera">Carrera de Interés</label>
-                    <select id="carrera" name="carrera" required>
-                        <option value="" disabled selected>Selecciona una carrera</option>
-                        <option value="enfermeria">Enfermería</option>
-                        <option value="fisioterapia">Fisioterapia</option>
-                        <option value="marketing">Marketing Digital</option>
-                        <option value="contabilidad">Contabilidad</option>
-                        <option value="logistica">Logística y Transporte</option>
-                        <option value="software">Desarrollo de Software</option>
-                        <option value="otro">Otra</option>
-                    </select>
-                </div>
-
-                <div class="admision__form-group">
-                    <label for="mensaje">Mensaje (Opcional)</label>
-                    <textarea id="mensaje" name="mensaje" rows="3" placeholder="¿Tienes alguna consulta?"></textarea>
-                </div>
-
-                <button type="submit" class="admision__form-btn" id="admision-submit">
-                    <?= content_get('admision', 'btn_enviar', 'Enviar Solicitud') ?> <i class="fas fa-paper-plane"></i>
-                </button>
-
-                <p class="admision__form-terms">
-                    <?= content_raw('admision', 'form_terminos', 'Al enviar este formulario, aceptas nuestra <a href="#">Política de Privacidad</a>.') ?>
-                </p>
-            </form>
+            </div>
         </div>
     </div>
 </section>

@@ -9,15 +9,11 @@
         <div class="autoridades__header">
             <div class="autoridades__header-left">
                 <span class="autoridades__tag"><?= content_get('autoridades', 'etiqueta_superior', 'Liderazgo Institucional') ?></span>
-                <h2 class="autoridades__title">
-                    <?= htmlspecialchars(content_get('autoridades', 'titulo', 'Nuestras Autoridades'), ENT_QUOTES, 'UTF-8') ?>
-                </h2>
-                <p class="autoridades__subtitle">
-                    <?= content_get('autoridades', 'descripcion', 'Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.') ?>
-                </p>
+                <h2 class="autoridades__title"><?= content_get('autoridades', 'titulo', 'Nuestras Autoridades') ?></h2>
+                <p class="autoridades__subtitle"><?= content_get('autoridades', 'descripcion', 'Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.') ?></p>
             </div>
             <a href="#" class="btn--outline-directorio" id="btn-directorio">
-                <?= content_get('autoridades', 'btn_directorio', 'Ver Directorio') ?>
+                <?= content_get('autoridades', 'boton_directorio', 'Ver Directorio') ?>
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
@@ -25,68 +21,54 @@
         <!-- Grid de cards -->
         <div class="autoridades__grid">
             <?php
-            $equipo = collection_items('equipo');
-            $equipo_filtrado = [];
-            foreach ($equipo as $miembro) {
-                if (!empty($miembro['mostrar_en_home']) && !empty($miembro['publicado'])) {
-                    $equipo_filtrado[] = $miembro;
-                }
-            }
+            $lista_autoridades = content_raw('autoridades', 'lista_autoridades', [
+                [
+                    'nombre' => 'PhD. Roberto Tolozano Benites',
+                    'cargo' => 'Canciller',
+                    'imagen' => 'img/PHD.Roberto_tolozano.jpg'
+                ],
+                [
+                    'nombre' => 'PhD. Elena Tolozano Benites',
+                    'cargo' => 'Rectora',
+                    'imagen' => 'img/PHD.Elena_Tolozano.jpg'
+                ],
+                [
+                    'nombre' => 'PhD. Luis Alzate Peralta',
+                    'cargo' => 'Vicerrector Académico<br>y de Investigación',
+                    'imagen' => 'img/PHD.Luis_alzate.jpg'
+                ],
+                [
+                    'nombre' => 'PhD. Michelle Tolozano Lapierre',
+                    'cargo' => 'Vicerrectora de Extensión<br>y Gestión Administrativa',
+                    'imagen' => 'img/PHD.Michelle_tolozano.webp'
+                ]
+            ]);
 
-            // Ordenar por el campo 'orden'
-            usort($equipo_filtrado, function($a, $b) {
-                $orden_a = isset($a['orden']) ? (int)$a['orden'] : 999;
-                $orden_b = isset($b['orden']) ? (int)$b['orden'] : 999;
-                return $orden_a <=> $orden_b;
-            });
-
-            $count = 0;
-            foreach ($equipo_filtrado as $miembro) {
-                $foto_path = trim($miembro['foto'] ?? '');
-                // Regla de Imagen: si está vacía, no mostramos error sino un diseño por defecto
-                
-                $nombre = htmlspecialchars($miembro['nombre_completo'] ?? '', ENT_QUOTES, 'UTF-8');
-                $cargo = nl2br(htmlspecialchars($miembro['cargo'] ?? '', ENT_QUOTES, 'UTF-8'));
-                $linkedin = htmlspecialchars($miembro['linkedin'] ?? '#', ENT_QUOTES, 'UTF-8');
-                $email = htmlspecialchars($miembro['email'] ?? '#', ENT_QUOTES, 'UTF-8');
-                
-                $count++;
+            foreach ((array)$lista_autoridades as $auth): 
+                $foto_path = trim($auth['imagen'] ?? '');
+                if (empty($foto_path)) $foto_path = 'img/placeholder_autoridad.jpg';
+                $nombre = htmlspecialchars($auth['nombre'] ?? '', ENT_QUOTES, 'UTF-8');
+                $cargo = nl2br(htmlspecialchars($auth['cargo'] ?? '', ENT_QUOTES, 'UTF-8'));
             ?>
-                <!-- Card <?= $count ?> -->
-                <div class="autoridades__card">
-                    <div class="autoridades__card-img">
-                        <?php if (!empty($foto_path)): ?>
-                            <img src="<?= htmlspecialchars($foto_path, ENT_QUOTES, 'UTF-8') ?>" alt="<?= $nombre ?>">
-                        <?php else: ?>
-                            <div style="width: 100%; height: 100%; background: #f0f0f0; display: flex; align-items: center; justify-content: center; color: #888; font-size: 0.9rem;">
-                                Ninguna imagen seleccionada
-                            </div>
-                        <?php endif; ?>
-                        <div class="autoridades__card-actions">
-                            <div class="autoridades__card-socials">
-                                <?php if (!empty($email) && $email !== '#'): ?>
-                                    <a href="<?= $email ?>" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
-                                <?php endif; ?>
-                                <?php if (!empty($linkedin) && $linkedin !== '#'): ?>
-                                    <a href="<?= $linkedin ?>" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
-                                <?php endif; ?>
-                            </div>
-                            <button class="autoridades__card-plus" aria-label="Ver perfil">
-                                <i class="fas fa-plus"></i>
-                            </button>
+            <div class="autoridades__card">
+                <div class="autoridades__card-img">
+                    <img src="<?= htmlspecialchars($foto_path, ENT_QUOTES, 'UTF-8') ?>" alt="<?= $nombre ?>">
+                    <div class="autoridades__card-actions">
+                        <div class="autoridades__card-socials">
+                            <a href="#" aria-label="Correo"><img src="img/correo-electronico.png" alt="Correo"></a>
+                            <a href="#" aria-label="Teléfono"><img src="img/telefono-fijo.png" alt="Teléfono"></a>
                         </div>
-                    </div>
-                    <div class="autoridades__card-body">
-                        <h3 class="autoridades__card-name"><?= $nombre ?></h3>
-                        <span class="autoridades__card-role"><?= $cargo ?></span>
+                        <button class="autoridades__card-plus" aria-label="Ver perfil">
+                            <i class="fas fa-plus"></i>
+                        </button>
                     </div>
                 </div>
-            <?php } ?>
-            
-            <?php if ($count === 0): ?>
-                <p style="grid-column: 1/-1; text-align: center; color: #666;">No hay autoridades agregadas en este momento.</p>
-            <?php endif; ?>
+                <div class="autoridades__card-body">
+                    <h3 class="autoridades__card-name"><?= $nombre ?></h3>
+                    <span class="autoridades__card-role"><?= $cargo ?></span>
+                </div>
+            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
-
