@@ -1,104 +1,200 @@
 <!-- ============================================= -->
-<!-- BANNER PRE-FOOTER                             -->
+<!-- BANNER CTA PRE-FOOTER                         -->
 <!-- ============================================= -->
-<div class="prefooter" id="prefooter">
-    <div class="prefooter__container">
-        <div class="prefooter__content">
-            <h3 class="prefooter__title">¿Aún no decides qué carrera estudiar?</h3>
-            <p class="prefooter__text">Te ayudamos a encontrar la carrera ideal para ti</p>
+<div class="footer-cta" id="footer-cta">
+    <div class="footer-cta__container">
+        <div class="footer-cta__left">
+            <h3 class="footer-cta__title">¿Aún no decides qué carrera estudiar?</h3>
+            <p class="footer-cta__desc">Descubre tu vocación con nuestro test guiado, visita el ITB y conoce de cerca nuestra propuesta académica o recibe asesoría personalizada para elegir el programa ideal para ti.</p>
         </div>
-        <div class="prefooter__buttons">
-            <a href="#" class="prefooter__btn">
-                <i class="fas fa-comments"></i> Chatea con nosotros
+        <div class="footer-cta__right">
+            <a href="#" class="btn--outline-card">
+                Test Vocacional
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="#" class="prefooter__btn">
-                <i class="fas fa-phone-alt"></i> Llámanos
+            <a href="#" class="btn--outline-card">
+                Vive la Experiencia ITB
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
-            <a href="#" class="prefooter__btn">
-                <i class="fas fa-map-marker-alt"></i> Visítanos
+            <a href="#" class="btn--outline-card">
+                Habla con un Asesor
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
     </div>
 </div>
 
 <!-- ============================================= -->
-<!-- FOOTER                                        -->
+<!-- SKYLINE TRANSITION                            -->
 <!-- ============================================= -->
-<footer class="footer" id="footer">
-    <div class="footer__container">
-        <div class="footer__grid">
-            <!-- Columna 1: Logo y descripción -->
-            <div class="footer__col">
-                <a href="index.php" class="footer__logo">
-                    <img src="img/logo-itb-white.png" alt="ITB Logo" class="footer__logo-img">
+<div class="footer-skyline">
+    <svg class="skyline-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
+        <!-- Capa trasera: colinas lejanas -->
+        <path class="skyline-svg__back" d="M0,220 L0,150 Q120,110 260,140 T520,120 T760,150 T1020,110 T1280,150 L1440,130 L1440,220 Z"/>
+
+        <!-- Capa frontal: edificios, rueda de la fortuna y torre -->
+        <g class="skyline-svg__front">
+            <!-- Torre con aguja (izquierda) -->
+            <rect x="70" y="80" width="16" height="120" />
+            <polygon points="62,80 94,80 78,45" />
+            <rect x="75" y="30" width="6" height="18" />
+
+            <!-- Edificios pequeños -->
+            <rect x="20" y="150" width="34" height="50" />
+            <rect x="110" y="130" width="30" height="70" />
+            <rect x="150" y="160" width="26" height="40" />
+
+            <!-- Rueda de la fortuna -->
+            <circle cx="360" cy="140" r="58" class="skyline-svg__wheel-rim" />
+            <circle cx="360" cy="140" r="7" />
+            <line x1="360" y1="82" x2="360" y2="198" />
+            <line x1="302" y1="140" x2="418" y2="140" />
+            <line x1="319" y1="99" x2="401" y2="181" />
+            <line x1="319" y1="181" x2="401" y2="99" />
+            <rect x="352" y="196" width="16" height="4" />
+
+            <!-- Edificios centrales -->
+            <rect x="460" y="120" width="34" height="80" />
+            <rect x="500" y="150" width="28" height="50" />
+            <rect x="534" y="100" width="30" height="100" />
+
+            <!-- Cúpula / templo -->
+            <rect x="640" y="150" width="70" height="50" />
+            <path d="M636,150 a39,39 0 0 1 78,0 Z" />
+            <rect x="670" y="95" width="10" height="30" />
+            <circle cx="675" cy="92" r="6" />
+
+            <!-- Edificios derecha -->
+            <rect x="760" y="140" width="30" height="60" />
+            <rect x="796" y="110" width="34" height="90" />
+            <rect x="836" y="155" width="26" height="45" />
+
+            <!-- Árboles -->
+            <g class="skyline-svg__trees">
+                <line x1="920" y1="170" x2="920" y2="200" />
+                <circle cx="920" cy="160" r="14" />
+                <line x1="960" y1="175" x2="960" y2="200" />
+                <circle cx="960" cy="166" r="11" />
+            </g>
+
+            <!-- Bloque de edificios final -->
+            <rect x="1010" y="130" width="30" height="70" />
+            <rect x="1046" y="160" width="26" height="40" />
+            <rect x="1086" y="105" width="34" height="95" />
+            <rect x="1130" y="145" width="28" height="55" />
+
+            <!-- Obelisco -->
+            <polygon points="1210,200 1226,200 1220,120 1216,120" />
+
+            <rect x="1270" y="150" width="30" height="50" />
+            <rect x="1306" y="170" width="26" height="30" />
+            <rect x="1350" y="130" width="34" height="70" />
+            <rect x="1394" y="165" width="26" height="35" />
+        </g>
+    </svg>
+</div>
+
+<!-- ============================================= -->
+<!-- MAIN FOOTER                                   -->
+<!-- ============================================= -->
+<footer class="footer-main" id="footer">
+    <div class="footer-main__container">
+        <div class="footer-main__grid">
+            
+            <!-- Columna 1: Logo y Teléfonos -->
+            <div class="footer-main__col footer-main__col--logo">
+                <a href="index.php" class="footer-main__logo-link">
+                    <img src="img/logo-itb-white.png" alt="ITB Logo" class="footer-main__logo">
                 </a>
-                <p class="footer__description">
-                    Instituto Superior Tecnológico Bolivariano de Tecnología. 
-                    Formando profesionales de excelencia desde 1995.
-                </p>
-                <div class="footer__social">
-                    <a href="#" class="footer__social-link" aria-label="Facebook"><i class="fab fa-facebook-f"></i></a>
-                    <a href="#" class="footer__social-link" aria-label="Instagram"><i class="fab fa-instagram"></i></a>
-                    <a href="#" class="footer__social-link" aria-label="Twitter"><i class="fab fa-x-twitter"></i></a>
-                    <a href="#" class="footer__social-link" aria-label="YouTube"><i class="fab fa-youtube"></i></a>
-                    <a href="#" class="footer__social-link" aria-label="LinkedIn"><i class="fab fa-linkedin-in"></i></a>
+                <div class="footer-main__contact">
+                    <div class="footer-main__contact-item">
+                        <i class="fas fa-desktop"></i>
+                        <span>PBX: (04) 500 0175 - 230 7028<br>500 2164 - 372 7040</span>
+                    </div>
+                    <div class="footer-main__contact-item">
+                        <i class="fas fa-phone-alt"></i>
+                        <span>1800 ITB-ITB: 482-482</span>
+                    </div>
                 </div>
             </div>
 
-            <!-- Columna 2: Enlaces rápidos -->
-            <div class="footer__col">
-                <h4 class="footer__heading">Enlaces Rápidos</h4>
-                <ul class="footer__list">
-                    <li><a href="#" class="footer__link">Oferta Académica</a></li>
-                    <li><a href="#" class="footer__link">Admisiones</a></li>
-                    <li><a href="#" class="footer__link">Vida Estudiantil</a></li>
-                    <li><a href="#" class="footer__link">Investigación</a></li>
-                    <li><a href="#" class="footer__link">Educación Continua</a></li>
+            <!-- Columna 2: Enlaces 1 -->
+            <div class="footer-main__col">
+                <ul class="footer-main__list">
+                    <li><a href="#">Admisiones Pregrado</a></li>
+                    <li><a href="#">Carreras y Programas</a></li>
+                    <li><a href="#">Calendario Académico</a></li>
+                    <li><a href="#">Talento Humano</a></li>
+                    <li><a href="#">Vinculación</a></li>
                 </ul>
             </div>
 
-            <!-- Columna 3: Contacto -->
-            <div class="footer__col">
-                <h4 class="footer__heading">Contacto</h4>
-                <ul class="footer__list footer__list--contact">
-                    <li>
-                        <i class="fas fa-map-marker-alt"></i>
-                        <span>Víctor Manuel Rendón 236 y Pedro Carbo, Guayaquil</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-phone"></i>
-                        <span>(04) 2-566-800</span>
-                    </li>
-                    <li>
-                        <i class="fas fa-envelope"></i>
-                        <span>info@bolivariano.edu.ec</span>
-                    </li>
+            <!-- Columna 3: Enlaces 2 -->
+            <div class="footer-main__col">
+                <ul class="footer-main__list">
+                    <li><a href="#">Noticias y Novedades ITB</a></li>
+                    <li><a href="#">Directorio General</a></li>
+                    <li><a href="#">ASOMI</a></li>
+                    <li><a href="#" class="footer-main__link-orange">CONDUCE ECUADOR</a></li>
+                    <li><a href="#">Trabaja en el ITB</a></li>
                 </ul>
             </div>
 
-            <!-- Columna 4: Horarios -->
-            <div class="footer__col">
-                <h4 class="footer__heading">Horarios de Atención</h4>
-                <ul class="footer__list">
-                    <li>Lunes a Viernes: 08:00 - 17:00</li>
-                    <li>Sábados: 08:00 - 13:00</li>
+            <!-- Columna 4: Campus -->
+            <div class="footer-main__col">
+                <ul class="footer-main__list">
+                    <li><a href="#">Campus Matriz</a></li>
+                    <li><a href="#">Campus Boyacá</a></li>
+                    <li><a href="#">Campus Naval</a></li>
+                    <li><a href="#">Campus Teresa Benites</a></li>
+                    <li><a href="#">Campus Tomás Martínez</a></li>
                 </ul>
             </div>
+
+            <!-- Columna 5: Mapa -->
+            <div class="footer-main__col footer-main__col--map">
+                <div class="footer-main__map-wrapper">
+                    <img src="img/Mapa.png" alt="Mapa de ubicación" class="footer-main__map-img">
+                </div>
+                <div class="footer-main__address-pill">
+                    Roca #101 y Pedro Carbo esq.
+                </div>
+            </div>
+
         </div>
 
-        <!-- Línea divisora y copyright -->
-        <div class="footer__bottom">
-            <p class="footer__copyright">
-                &copy; <?php echo date('Y'); ?> Instituto Superior Tecnológico Bolivariano de Tecnología. Todos los derechos reservados.
-            </p>
-            <div class="footer__bottom-links">
-                <a href="#" class="footer__bottom-link">Política de Privacidad</a>
-                <span class="footer__bottom-divider">|</span>
-                <a href="#" class="footer__bottom-link">Términos de Uso</a>
+        <!-- Redes Sociales -->
+        <div class="footer-social">
+            <span class="footer-social__text">#ITB Instituto Superior Universitario Bolivariano en</span>
+            <div class="footer-social__icons">
+                <a href="#"><i class="fab fa-youtube"></i></a>
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-google-plus-g"></i></a>
+                <a href="#"><i class="fab fa-twitter"></i></a>
+                <a href="#"><i class="fab fa-vimeo-v"></i></a>
+                <a href="#"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>
 </footer>
+
+<!-- ============================================= -->
+<!-- BOTTOM BAR                                    -->
+<!-- ============================================= -->
+<div class="footer-bottom">
+    <div class="footer-bottom__container">
+        <div class="footer-bottom__left">
+            &copy; 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS
+        </div>
+        <div class="footer-bottom__right">
+            <a href="#">POLÍTICA DE PRIVACIDAD</a> | 
+            <a href="#">TRANSPARENCIA INSTITUCIONAL</a> | 
+            <a href="#">ACCESIBILIDAD</a> | 
+            <a href="#">GESTIÓN DE COOKIES</a>
+        </div>
+    </div>
+</div>
 
 <!-- Botón Ir Arriba -->
 <div id="top-to-bottom">
