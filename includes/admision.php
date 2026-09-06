@@ -142,14 +142,7 @@
                             <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
                         </button>
                     </form>
-                    
-                    <!-- Boton flotante de noticias adjunto al formulario según diseño -->
-                    <div style="display: flex; justify-content: flex-end; margin-top: 32px;">
-                        <a href="#noticias" class="btn-noticias-todas">
-                            Ver más Noticias y Eventos
-                            <span class="btn__icon-right"><i class="fas fa-arrow-up-right"></i></span>
-                        </a>
-                    </div>
+
                 </div>
             </div>
         </div>
