@@ -35,8 +35,9 @@
 
 .areas__grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
+    grid-template-columns: repeat(auto-fit, minmax(280px, 400px));
     gap: 24px;
+    justify-content: center;
 }
 
 .areas__card {

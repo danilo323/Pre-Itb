@@ -161,8 +161,13 @@
         grid-template-columns: 1fr;
     }
 
-    .testimonios__image {
-        order: -1;
+    /* En móvil: texto primero, imagen después */
+    .testimonios__photo {
+        order: 2;
+    }
+
+    .testimonios__content {
+        order: 1;
     }
 
     .autoridades__grid {
@@ -283,7 +288,7 @@
         height: 300px;
     }
 
-    .testimonios__image img {
+    .testimonios__photo {
         height: 300px;
     }
 
