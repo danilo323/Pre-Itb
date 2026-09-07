@@ -138,7 +138,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '.areas__card, ' +
         '.programas__card, ' +
         '.experiencia__content, .experiencia__image, ' +
-        '.testimonios__image, .testimonios__content, ' +
+        '.testimonios__image, .testimonios__photo, .testimonios__content, ' +
         '.autoridades__card, ' +
         '.servicios__card, ' +
         '.admision__content, .admision__form-wrapper, ' +

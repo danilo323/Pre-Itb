@@ -69,11 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" id="password" name="password" placeholder="••••••••" required>
             </div>
 
-            <div class="login-hint">
-                <i class="bi bi-info-circle-fill"></i>
-                Credenciales temporales: <strong>admin</strong> / <strong>1234</strong>
-            </div>
-
             <button type="submit" class="btn-block">
                 Entrar al Panel <i class="bi bi-arrow-right"></i>
             </button>

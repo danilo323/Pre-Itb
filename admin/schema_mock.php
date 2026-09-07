@@ -1143,7 +1143,7 @@ return [
             'icon' => 'bi bi-people-fill',
             'type' => 'collection',
             'sortable' => true,
-            'columns' => ['nombre_completo', 'cargo'],
+            'columns' => ['foto', 'nombre_completo', 'cargo'],
             'fields' => [
                 'nombre' => [
                     'type' => 'text',

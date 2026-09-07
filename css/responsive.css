@@ -159,10 +159,16 @@
 
     .testimonios__container {
         grid-template-columns: 1fr;
+        gap: 40px;
     }
 
-    .testimonios__image {
-        order: -1;
+    .testimonios__content {
+        order: 1;
+    }
+
+    .testimonios__photo {
+        order: 2;
+        height: 420px;
     }
 
     .autoridades__grid {
@@ -283,8 +289,12 @@
         height: 300px;
     }
 
-    .testimonios__image img {
-        height: 300px;
+    .testimonios__photo {
+        height: 320px;
+    }
+
+    .testimonios__photo img {
+        height: 320px;
     }
 
     .autoridades__grid {

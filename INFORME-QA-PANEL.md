@@ -10,7 +10,7 @@ No se modificó ningún archivo del proyecto durante las pruebas.
 
 ---
 
-## ✅ Lo que funciona correctamente
+##  Lo que funciona correctamente
 
 - **Login** y protección de acceso: `singleton.php`, `coleccion.php` y `editar.php` redirigen al login sin sesión.
 - **171 campos** de texto y textarea guardan y releen bien en Ajustes, Menú, Footer y las 10 secciones de Inicio.
@@ -28,9 +28,9 @@ No se modificó ningún archivo del proyecto durante las pruebas.
 
 ---
 
-## ❌ Pendientes de arreglar
+##  Pendientes de arreglar
 
-### ~~1. GRAVE — "Eliminar" en Equipo borra el registro equivocado~~ ✅ ARREGLADO (2026-09-06)
+### ~~1. GRAVE — "Eliminar" en Equipo borra el registro equivocado~~  ARREGLADO (2026-09-06)
 
 **Archivo:** `admin/coleccion.php`
 
@@ -66,7 +66,7 @@ la regla 1 de CLAUDE.md. El arreglo sirve para cualquier colección futura, no s
 
 ---
 
-### ~~2. La sección Autoridades ignora por completo la colección Equipo~~ ✅ ARREGLADO (2026-09-06)
+### ~~2. La sección Autoridades ignora por completo la colección Equipo~~  ARREGLADO (2026-09-06)
 
 **Archivo:** `includes/autoridades.php`
 
@@ -131,7 +131,7 @@ lee `includes/footer.php`. Es un cambio **solo de schema**, respeta la regla sch
 
 ---
 
-### ~~4. Typo que deja un campo muerto~~ ✅ ARREGLADO (2026-09-06)
+### ~~4. Typo que deja un campo muerto~~  ARREGLADO (2026-09-06)
 
 El panel guardaba `autoridades.btn_directorio`, pero `includes/autoridades.php:16` leía `boton_directorio`.
 Es el botón "Ver Directorio →" que aparece junto al título de la sección "Nuestras Autoridades" — un
@@ -153,7 +153,7 @@ desajuste de nombres que sí se arregló, y no requiere ninguna acción por ahor
 
 ---
 
-### ~~5. Campos que existen en el panel pero no tienen destino en la landing~~ ✅ RESUELTO (2026-09-06)
+### ~~5. Campos que existen en el panel pero no tienen destino en la landing~~  RESUELTO (2026-09-06)
 
 Eran dos casos distintos, cada uno con su propio arreglo:
 
@@ -179,7 +179,7 @@ campos de vuelta al schema — eso es trabajo de diseño nuevo, no una correcci�
 
 ---
 
-### 6. Seguridad — 🚫 FUERA DE ALCANCE (no corresponde a este trabajo)
+### 6. Seguridad —  FUERA DE ALCANCE (no corresponde a este trabajo)
 
 **Decisión del usuario (2026-09-06):** este punto pertenece a la integración de backend/base de datos
 (SQL Server + Auth real), que según el propio `CLAUDE.md` del proyecto es un paso pendiente aparte
@@ -200,7 +200,7 @@ Queda documentado para quien retome esa integración:
 
 ---
 
-### ~~7. La sección Admisión no coincidía con el formulario real~~ ✅ RESUELTO (2026-09-06)
+### ~~7. La sección Admisión no coincidía con el formulario real~~  RESUELTO (2026-09-06)
 
 Esta sección quedó fuera de la auditoría original porque estaba a medio hacer. Al revisarla se encontró
 el mismo patrón que en el Footer (punto 3): el panel y el frontend hablaban de cosas distintas.
@@ -259,7 +259,7 @@ circular editable, el link inválido y el campo vacío.
 
 ---
 
-### ~~8. La ventana de video no aparecía + dos mejoras de usabilidad~~ ✅ RESUELTO (2026-09-06)
+### ~~8. La ventana de video no aparecía + dos mejoras de usabilidad~~  RESUELTO (2026-09-06)
 
 **8.a — GRAVE: la ventana de video nunca se abría (ni en el Hero ni en Admisión).**
 Al hacer clic en el botón circular no pasaba nada. La causa: **los estilos del modal no existían en el
@@ -300,7 +300,7 @@ columnas y la lista de campus, así que no se inventó un patrón nuevo.
 
 ---
 
-## 📌 Observaciones menores
+##  Observaciones menores
 
 - `includes/alianzas.php` se renderiza en la landing pero **no tiene ninguna entrada en el panel**.
 - Al guardar una sección se reescriben todos sus campos: si un campo se deja vacío se guarda vacío
@@ -313,11 +313,11 @@ columnas y la lista de campus, así que no se inventó un patrón nuevo.
 
 | #     | Tarea                                                                                                   | Dónde                      | Respeta schema-driven      |
 | ----- | ------------------------------------------------------------------------------------------------------- | -------------------------- | -------------------------- |
-| ~~1~~ | ~~Borrado del registro equivocado en Equipo~~ ✅ hecho                                                  | `admin/coleccion.php`      | Sí (es fix del motor)      |
-| 2     | ~~Validar CSRF + exigir login en `guardar.php`~~ 🚫 fuera de alcance — le toca a integración backend/BD | `admin/guardar.php`        | Sí (es fix del motor)      |
+| ~~1~~ | ~~Borrado del registro equivocado en Equipo~~  hecho                                                  | `admin/coleccion.php`      | Sí (es fix del motor)      |
+| 2     | ~~Validar CSRF + exigir login en `guardar.php`~~  fuera de alcance — le toca a integración backend/BD | `admin/guardar.php`        | Sí (es fix del motor)      |
 | 3     | Renombrar claves del Footer                                                                             | `admin/schema_mock.php`    | Sí, solo schema            |
-| ~~4~~ | ~~Renombrar `btn_directorio` → `boton_directorio`~~ ✅ hecho                                            | `admin/schema_mock.php`    | Sí, solo schema            |
-| ~~5~~ | ~~Conectar Autoridades a la colección Equipo~~ ✅ hecho                                                 | `includes/autoridades.php` | Tocó frontend, no el motor |
-| ~~6~~ | ~~Campos muertos de Programas/Experiencia~~ ✅ hecho                                                    | schema + `includes/programas.php` | Sí, y un cambio menor en frontend |
-| ~~7~~ | ~~Conectar la sección Admisión~~ ✅ hecho                                                               | schema + `includes/admision.php` | Sí, y un cambio menor en frontend |
+| ~~4~~ | ~~Renombrar `btn_directorio` → `boton_directorio`~~  hecho                                            | `admin/schema_mock.php`    | Sí, solo schema            |
+| ~~5~~ | ~~Conectar Autoridades a la colección Equipo~~  hecho                                                 | `includes/autoridades.php` | Tocó frontend, no el motor |
+| ~~6~~ | ~~Campos muertos de Programas/Experiencia~~  hecho                                                    | schema + `includes/programas.php` | Sí, y un cambio menor en frontend |
+| ~~7~~ | ~~Conectar la sección Admisión~~  hecho                                                               | schema + `includes/admision.php` | Sí, y un cambio menor en frontend |
 | 8     | Revisar otros usos de campos `bool` del schema (mismo problema string vs. boolean que se encontró aquí) | por ubicar                 | —                          |

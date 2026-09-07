@@ -680,10 +680,11 @@ textarea.form-control, .field-group textarea {
 }
 
 .admin-table th, .admin-table td {
-    padding: 14px 20px;
+    padding: 16px 20px;
     border-bottom: 1px solid var(--border-color);
     font-size: 14px;
     color: var(--text-main);
+    vertical-align: middle;
 }
 
 .admin-table th {
@@ -693,10 +694,25 @@ textarea.form-control, .field-group textarea {
     text-transform: uppercase;
     font-size: 12px;
     letter-spacing: 0.05em;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.admin-table tbody tr {
+    transition: background-color 0.15s ease;
 }
 
 .admin-table tbody tr:hover {
-    background: #f1f5f9;
+    background: #f8fafc;
+}
+
+.admin-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.admin-table td.actions-cell,
+td.actions-cell {
+    display: table-cell !important;
+    vertical-align: middle !important;
 }
 
 .badge {
@@ -718,9 +734,21 @@ textarea.form-control, .field-group textarea {
 }
 
 .actions-cell {
-    display: flex;
+    display: inline-flex;
     gap: 8px;
     align-items: center;
+    vertical-align: middle;
+}
+
+.btn-secondary {
+    background: transparent;
+    color: var(--primary);
+    border: 1px solid transparent;
+}
+
+.btn-secondary:hover {
+    background: rgba(234, 88, 12, 0.08);
+    color: var(--primary-hover);
 }
 
 /* ================== DASHBOARD ================== */

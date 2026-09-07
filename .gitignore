@@ -5,11 +5,21 @@ config_local.json
 
 # Archivos de planificación del proyecto (No subir al repo)
 .gemini/
+.agents/
 
 # Archivos temporales de PHP / Sesiones (por si acaso)
 *.log
 *.tmp
 error_log
+cookies.txt
+
+# Archivos de prueba / debug (no forman parte del sitio)
+test_*.php
+admin/test_*.php
+
+# Backups y documentos pesados que no son código
+*.bak
+*.pdf
 
 # OS generated files
 .DS_Store
@@ -19,3 +29,4 @@ error_log
 .Trashes
 ehthumbs.db
 Thumbs.db
+desktop.ini

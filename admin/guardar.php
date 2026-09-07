@@ -95,7 +95,7 @@ if ($config['type'] === 'page' && !empty($config['sections'])) {
     }
 }
 
-$_SESSION['flash_message'] = '✅ Cambios guardados correctamente.';
+$_SESSION['flash_message'] = 'Cambios guardados correctamente.';
 $_SESSION['flash_type']    = 'success';
 
 // Volver al singleton

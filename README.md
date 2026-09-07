@@ -9,8 +9,10 @@ Verás una salida en la terminal indicando que el servidor se inició correctame
 Paso 2: Abrir las páginas en tu navegador
 Abre Chrome, Firefox o cualquier navegador y entra a las siguientes direcciones:
 
-## a Landing Page (El trabajo de tu compañero): 👉 http://localhost:8000
+## a Landing Page (El trabajo de tu compañero): http://localhost:8000
 
-## Tu Panel de Administración (Tu singleton con los campos): 👉 http://localhost:8000/admin/singleton.php
+## Tu Panel de Administración (Tu singleton con los campos): http://localhost:8000/admin/singleton.php
 
-## Tus pruebas del motor de campos: 👉 http://localhost:8000/admin/test_motor.php
+## Tus pruebas del motor de campos: http://localhost:8000/admin/test_motor.php
+
+s

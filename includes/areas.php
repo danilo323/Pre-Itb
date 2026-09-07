@@ -64,10 +64,7 @@
                     <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                 </a>
             </div>
-            <?php 
-                $index++;
-            endforeach; 
-            ?>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>
