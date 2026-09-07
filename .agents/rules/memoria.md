@@ -8,7 +8,7 @@
 
 - **Nombre:** Instituto Superior Tecnológico Bolivariano de Tecnología (ITB) - Landing Page & Panel de Administración
 - **Repositorio Git:** `https://github.com/danilo323/Pre-Itb.git`
-- **Rama Actual:** `feat/frontend-landing`
+- **Rama Actual:** `feat/backend-storage`
 - **Tecnologías:**
   - **Frontend:** Vanilla CSS (variables HSL, glassmorphism), JS puro, HTML5 modular (inclusiones PHP en `includes/`).
   - **Backend / Panel:** PHP puro, arquitectura **schema-driven** (motor en `admin/`, sin vistas específicas por tabla).
