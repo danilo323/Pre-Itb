@@ -62,12 +62,26 @@ echo "\n\n";
 // 7. REPEATER (con subcampos)
 // -------------------------------------------------------
 echo "--- 7. REPEATER ---\n";
-$faq_config = $schema['faq']['fields'];
+$repeater_config = [
+    'type' => 'repeater',
+    'label' => 'Preguntas Frecuentes',
+    'item_label' => 'Pregunta',
+    'subfields' => [
+        'pregunta' => [
+            'type' => 'text',
+            'label' => 'Pregunta',
+        ],
+        'respuesta' => [
+            'type' => 'textarea',
+            'label' => 'Respuesta',
+        ],
+    ]
+];
 $data_faq = [
     ['pregunta' => '¿Tienen clases presenciales?', 'respuesta' => 'Sí, en modalidad híbrida.'],
     ['pregunta' => '¿Cuánto dura la carrera?', 'respuesta' => '2 años (4 semestres).']
 ];
-echo field_render('preguntas', $data_faq, $faq_config['preguntas']);
+echo field_render('preguntas', $data_faq, $repeater_config);
 echo "\n\n";
 
 // -------------------------------------------------------
