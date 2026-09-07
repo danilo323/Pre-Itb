@@ -92,36 +92,36 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
 
         <style>
             .menu-builder-wrapper {
-                background: #ffffff;
-                border: 1px solid #e2e8f0;
-                border-radius: 8px;
+                background: var(--bg-panel, #ffffff);
+                border: 1px solid var(--border-color, #e2e8f0);
+                border-radius: var(--radius, 12px);
                 margin-bottom: 30px;
-                box-shadow: 0 1px 3px rgba(0,0,0,0.02);
+                box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.02));
             }
             .menu-builder-header {
                 display: flex;
                 justify-content: space-between;
                 align-items: center;
                 padding: 16px 24px;
-                border-bottom: 1px solid #e2e8f0;
+                border-bottom: 1px solid var(--border-color, #e2e8f0);
             }
             .menu-builder-header h4 {
                 margin: 0;
                 font-size: 15px;
                 font-weight: 600;
-                color: #1e293b;
+                color: var(--primary-blue, #1e293b);
                 text-transform: uppercase;
                 letter-spacing: 0.5px;
             }
             .btn-add-menu-item {
                 background: none;
                 border: none;
-                color: #f97316; /* Orange ITB */
+                color: var(--primary, #f97316); /* Orange ITB */
                 font-size: 18px;
                 cursor: pointer;
                 transition: color 0.2s;
             }
-            .btn-add-menu-item:hover { color: #ea580c; }
+            .btn-add-menu-item:hover { color: var(--primary-hover, #ea580c); }
             .menu-builder-wrapper .field-help {
                 padding: 16px 24px 0;
                 margin: 0;
@@ -173,7 +173,7 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
             .mb-title-display {
                 flex: 1;
                 font-weight: 600;
-                color: #1e3a8a; /* Dark blue ITB */
+                color: var(--primary-blue, #1e3a8a); /* Dark blue ITB */
                 font-size: 15px;
             }
             .mb-actions {
@@ -194,8 +194,8 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
                 align-items: center;
                 justify-content: center;
             }
-            .mb-btn:hover { background: #fff7ed; color: #f97316; } /* Orange ITB */
-            .mb-btn-remove:hover { background: #fee2e2; color: #ef4444; }
+            .mb-btn:hover { background: var(--primary-light, #fff7ed); color: var(--primary, #f97316); } /* Orange ITB */
+            .mb-btn-remove:hover { background: var(--danger-light, #fee2e2); color: var(--danger, #ef4444); }
             
             .mb-edit-row {
                 display: none;
@@ -230,8 +230,8 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
             }
             .mb-input-text:focus, .mb-input-url:focus {
                 outline: none;
-                border-color: #f97316; /* Orange ITB */
-                box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+                border-color: var(--primary, #f97316); /* Orange ITB */
+                box-shadow: 0 0 0 3px var(--primary-light, rgba(249, 115, 22, 0.1));
             }
         </style>
 

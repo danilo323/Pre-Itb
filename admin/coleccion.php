@@ -151,8 +151,8 @@ echo layout_start($title_label);
     <input type="hidden" name="order_data" id="order-data-input" value="">
 </form>
 
-<div id="order-actions" style="display: none; margin-top: 24px; padding: 16px; background: #fffbe2; border: 1px solid #fde68a; border-radius: 8px;">
-    <p style="margin-bottom: 12px; font-weight: 500; color: #b45309;"><i class="bi bi-info-circle-fill"></i> Has modificado el orden de los registros. No olvides guardar.</p>
+<div id="order-actions" class="order-notice" style="display: none;">
+    <p><i class="bi bi-info-circle-fill"></i> Has modificado el orden de los registros. No olvides guardar.</p>
     <button type="button" class="btn btn-primary" onclick="submitOrder()"><i class="bi bi-floppy-fill"></i> Guardar Cambios de Orden</button>
     <button type="button" class="btn btn-outline" onclick="location.reload()">Cancelar</button>
 </div>
