@@ -14,3 +14,5 @@ Abre Chrome, Firefox o cualquier navegador y entra a las siguientes direcciones:
 ## Tu Panel de Administración (Tu singleton con los campos): 👉 http://localhost:8000/admin/singleton.php
 
 ## Tus pruebas del motor de campos: 👉 http://localhost:8000/admin/test_motor.php
+
+s
