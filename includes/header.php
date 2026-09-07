@@ -1,11 +1,11 @@
-<!-- ============================================= -->
-<!-- SITE HEADER (Tarjeta flotante sticky)         -->
-<!-- ============================================= -->
+
+
+
 <div class="site-header" id="site-header">
 
-    <!-- ============================================= -->
-    <!-- BARRA SUPERIOR (Top Bar)                      -->
-    <!-- ============================================= -->
+    
+    
+    
     <div class="top-bar">
         <div class="top-bar__container">
             <nav class="top-bar__nav">
@@ -34,24 +34,24 @@
         </div>
     </div>
 
-    <!-- ============================================= -->
-    <!-- NAVBAR PRINCIPAL                              -->
-    <!-- ============================================= -->
+    
+    
+    
     <header class="navbar" id="navbar">
         <div class="navbar__container">
-            <!-- Logo -->
+            
             <a href="index.php" class="navbar__logo">
                 <img src="img/logo.png" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
             </a>
 
-            <!-- Botón hamburguesa (Mobile) -->
+            
             <button class="navbar__toggle" id="navbar-toggle" aria-label="Abrir menú">
                 <span class="navbar__toggle-bar"></span>
                 <span class="navbar__toggle-bar"></span>
                 <span class="navbar__toggle-bar"></span>
             </button>
 
-            <!-- Menú de navegación -->
+            
             <nav class="navbar__menu" id="navbar-menu">
                 <ul class="navbar__list">
                     <li class="navbar__item navbar__item--dropdown">
@@ -74,7 +74,7 @@
                     </li>
                 </ul>
 
-                <!-- Botones CTA -->
+                
                 <div class="navbar__cta">
                     <a href="#" class="navbar__btn navbar__btn--outline" id="btn-solicitar">Solicitar Información</a>
                     <a href="#" class="navbar__btn navbar__btn--solid" id="btn-matricula">

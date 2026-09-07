@@ -1,14 +1,14 @@
-<!-- ============================================= -->
-<!-- HISTORIAS DE ÉXITO / TESTIMONIOS              -->
-<!-- ============================================= -->
+
+
+
 <section class="testimonios" id="testimonios">
     <div class="testimonios__container">
-        <!-- Lado izquierdo: Imagen -->
+        
         <div class="testimonios__image">
             <img src="img/testimonio-estudiante.jpg" alt="Estudiante ITB">
         </div>
 
-        <!-- Lado derecho: Testimonio -->
+        
         <div class="testimonios__content">
             <span class="section-tag">Historias de Éxito</span>
             <h2 class="testimonios__title">
@@ -32,7 +32,7 @@
                 </div>
             </div>
 
-            <!-- Navegación de testimonios -->
+            
             <div class="testimonios__nav">
                 <button class="testimonios__nav-btn" id="testimonios-prev" aria-label="Anterior">
                     <i class="fas fa-arrow-left"></i>

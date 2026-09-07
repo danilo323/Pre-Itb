@@ -1,6 +1,6 @@
-<!-- ============================================= -->
-<!-- PROGRAMAS DESTACADOS                          -->
-<!-- ============================================= -->
+
+
+
 <section class="programas" id="programas">
     <div class="programas__container">
         <div class="programas__header">
@@ -10,7 +10,7 @@
         </div>
 
         <div class="programas__grid">
-            <!-- Card 1 -->
+            
             <div class="programas__card">
                 <div class="programas__card-img">
                     <img src="img/enfermeria.jpg" alt="Enfermería">
@@ -25,7 +25,7 @@
                 </div>
             </div>
 
-            <!-- Card 2 -->
+            
             <div class="programas__card">
                 <div class="programas__card-img">
                     <img src="img/Mecanica.jpg" alt="Mecánica Automotriz">
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <!-- Card 3 -->
+            
             <div class="programas__card">
                 <div class="programas__card-img">
                     <img src="img/desarrollo_software.jpg" alt="Desarrollo de Software">
@@ -55,7 +55,7 @@
                 </div>
             </div>
 
-            <!-- Card 4 -->
+            
             <div class="programas__card">
                 <div class="programas__card-img">
                     <img src="img/administracion.jpg" alt="Administración">

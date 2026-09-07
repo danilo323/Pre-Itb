@@ -1,8 +1,8 @@
-<!-- ============================================= -->
-<!-- HERO SECTION                                  -->
-<!-- ============================================= -->
+
+
+
 <section class="hero" id="hero">
-    <!-- Slideshow con efecto Ken Burns -->
+    
     <div class="hero__slideshow">
         <div class="hero__slide hero__slide--1 hero__slide--active hero__slide--init">
             <div class="hero__slide-img" style="background-image: url('img/salud.jpg')"></div>
@@ -54,10 +54,10 @@
             </div>
         </div>
 
-        <!-- Círculo de video con texto giratorio -->
+        
         <div class="hero__media">
             <div class="hero__video-wrapper">
-                <!-- Texto circular giratorio -->
+                
                 <div class="hero__circular-text" id="hero-circular-text">
                     <svg viewBox="0 0 160 160" class="hero__circular-svg">
                         <defs>
@@ -70,7 +70,7 @@
                         </text>
                     </svg>
                 </div>
-                <!-- Video circular -->
+                
                 <div class="hero__video-card">
                     <button type="button" class="hero__play-btn js-video-modal-trigger"
                         id="hero-play-btn" aria-label="Reproducir video institucional" data-video-url="https://www.youtube.com/embed/eTgzLxWGgS4?autoplay=1">
@@ -81,7 +81,7 @@
         </div>
     </div>
 
-    <!-- Modal para el Video -->
+    
     <div class="hero__video-modal" id="video-modal">
         <div class="hero__video-modal-overlay" id="video-modal-overlay"></div>
         <div class="hero__video-modal-content">

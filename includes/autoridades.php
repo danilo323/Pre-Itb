@@ -1,10 +1,10 @@
-<!-- ============================================= -->
-<!-- NUESTRAS AUTORIDADES                          -->
-<!-- ============================================= -->
+
+
+
 <section class="autoridades" id="autoridades">
     <div class="autoridades__container">
 
-        <!-- Header -->
+        
         <div class="autoridades__header">
             <div class="autoridades__header-left">
                 <span class="autoridades__tag">Liderazgo Institucional</span>
@@ -17,10 +17,10 @@
             </a>
         </div>
 
-        <!-- Grid de cards -->
+        
         <div class="autoridades__grid">
 
-            <!-- Card 1: Roberto Tolozano -->
+            
             <div class="autoridades__card">
                 <div class="autoridades__card-img">
                     <img src="img/PHD.Roberto_tolozano.jpg" alt="PhD. Roberto Tolozano Benites">
@@ -40,7 +40,7 @@
                 </div>
             </div>
 
-            <!-- Card 2: Elena Tolozano -->
+            
             <div class="autoridades__card">
                 <div class="autoridades__card-img">
                     <img src="img/PHD.Elena_Tolozano.jpg" alt="PhD. Elena Tolozano Benites">
@@ -60,7 +60,7 @@
                 </div>
             </div>
 
-            <!-- Card 3: Luis Alzate -->
+            
             <div class="autoridades__card">
                 <div class="autoridades__card-img">
                     <img src="img/PHD.Luis_alzate.jpg" alt="PhD. Luis Alzate Peralta">
@@ -80,7 +80,7 @@
                 </div>
             </div>
 
-            <!-- Card 4: Michelle Tolozano -->
+            
             <div class="autoridades__card">
                 <div class="autoridades__card-img">
                     <img src="img/PHD.Michelle_tolozano.webp" alt="PhD. Michelle Tolozano Lapierre">

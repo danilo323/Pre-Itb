@@ -1,18 +1,18 @@
-<!-- ============================================= -->
-<!-- FORMULARIO DE ADMISIÓN / REGISTRO             -->
-<!-- ============================================= -->
+
+
+
 <section class="admision" id="admision">
     <div class="admision__container">
         
-        <!-- Lado Izquierdo: Imagen -->
+        
         <div class="admision__image-col">
             <img src="img/admision1.png" alt="Estudiantes ITB" class="admision__img">
         </div>
 
-        <!-- Lado Derecho: Contenido y Formulario -->
+        
         <div class="admision__content-col">
             
-            <!-- Título Animado (Marquesina Infinita) -->
+            
             <div class="admision__marquee-wrapper">
                 <div class="admision__marquee-track">
                     <h2 class="admision__huge-title">Inicia tu proceso de admisión</h2>
@@ -21,14 +21,14 @@
             </div>
             
             <div class="admision__split">
-                <!-- Columna Centro: Texto descriptivo -->
+                
                 <div class="admision__text-wrapper">
                     <p class="admision__desc">
                         Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.
                     </p>
                     
                     <a href="#admision-form" class="hero__video-wrapper" style="width: 140px; height: 140px; margin-top: 150px; text-decoration: none;">
-                        <!-- Texto circular giratorio -->
+                        
                         <div class="hero__circular-text">
                             <svg viewBox="0 0 160 160" class="hero__circular-svg">
                                 <defs>
@@ -49,7 +49,7 @@
                     </a>
                 </div>
 
-                <!-- Columna Derecha: Formulario Blanco -->
+                
                 <div class="admision__form-wrapper">
                     <form class="admision__form" id="admision-form" action="#" method="POST">
                         <h3 class="admision__form-title">Formulario de Registro</h3>
@@ -105,7 +105,7 @@
                             <div class="admision__select-wrapper">
                                 <select id="carrera" name="carrera" required>
                                     <option value="" disabled selected>Selecciona una opción</option>
-                                    <!-- options -->
+                                    
                                 </select>
                                 <i class="fas fa-chevron-down admision__select-icon"></i>
                             </div>
@@ -116,7 +116,7 @@
                             <div class="admision__select-wrapper">
                                 <select id="modalidad" name="modalidad" required>
                                     <option value="" disabled selected>Selecciona la modalidad</option>
-                                    <!-- options -->
+                                    
                                 </select>
                                 <i class="fas fa-chevron-down admision__select-icon"></i>
                             </div>

@@ -1,6 +1,6 @@
-<!-- ============================================= -->
-<!-- NOTICIAS, EVENTOS Y ALIANZAS                  -->
-<!-- ============================================= -->
+
+
+
 <section class="noticias" id="noticias">
     <div class="noticias__container">
         <div class="noticias__header">
@@ -16,7 +16,7 @@
         </div>
 
         <div class="noticias__grid">
-            <!-- Noticia principal -->
+            
             <div class="noticias__main">
                 <div class="noticias__main-img">
                     <img src="img/noticia-principal.jpg" alt="Evento principal ITB">
@@ -38,7 +38,7 @@
                 </div>
             </div>
 
-            <!-- Lista de noticias -->
+            
             <div class="noticias__list">
                 <div class="noticias__item">
                     <div class="noticias__item-img">
@@ -83,9 +83,9 @@
     </div>
 </section>
 
-<!-- ============================================= -->
-<!-- ALIANZAS                                      -->
-<!-- ============================================= -->
+
+
+
 <section class="alianzas" id="alianzas">
     <div class="alianzas__container">
         <h3 class="alianzas__title">Nuestros Aliados Estratégicos</h3>
@@ -97,7 +97,7 @@
                 <img src="img/alianza-4.png" alt="Alianza 4">
                 <img src="img/alianza-5.png" alt="Alianza 5">
                 <img src="img/alianza-6.png" alt="Alianza 6">
-                <!-- Duplicados para efecto infinito -->
+                
                 <img src="img/alianza-1.png" alt="ATE">
                 <img src="img/alianza-2.png" alt="Artefacta">
                 <img src="img/alianza-3.png" alt="Alianza 3">

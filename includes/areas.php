@@ -1,6 +1,6 @@
-<!-- ============================================= -->
-<!-- ÁREAS DE FORMACIÓN                            -->
-<!-- ============================================= -->
+
+
+
 <section class="areas" id="areas">
     <div class="areas__container">
         <div class="areas__header" style="text-align: center;">
@@ -14,7 +14,7 @@
         </div>
 
         <div class="areas__grid">
-            <!-- Card 1: Salud -->
+            
             <div class="areas__card">
                 <div class="areas__card-icon">
                     <img src="img/doctor.png" alt="Salud" class="areas__icon-img">
@@ -32,7 +32,7 @@
                 </a>
             </div>
 
-            <!-- Card 2: Ciencias Empresariales -->
+            
             <div class="areas__card areas__card--image" style="background-image: linear-gradient(rgba(26, 54, 104, 0.8), rgba(26, 54, 104, 0.8)), url('img/estudiantes1.png');">
                 <div class="areas__card-icon">
                     <img src="img/laptop.png" alt="Empresariales" class="areas__icon-img">
@@ -52,7 +52,7 @@
                 </a>
             </div>
 
-            <!-- Card 3: Transporte -->
+            
             <div class="areas__card">
                 <div class="areas__card-icon">
                     <img src="img/coche.png" alt="Transporte" class="areas__icon-img">

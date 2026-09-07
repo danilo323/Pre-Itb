@@ -1,6 +1,6 @@
-<!-- ============================================= -->
-<!-- BANNER CTA PRE-FOOTER                         -->
-<!-- ============================================= -->
+
+
+
 <div class="footer-cta" id="footer-cta">
     <div class="footer-cta__container">
         <div class="footer-cta__left">
@@ -24,27 +24,27 @@
     </div>
 </div>
 
-<!-- ============================================= -->
-<!-- SKYLINE TRANSITION                            -->
-<!-- ============================================= -->
+
+
+
 <div class="footer-skyline">
     <svg class="skyline-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
-        <!-- Capa trasera: colinas lejanas -->
+        
         <path class="skyline-svg__back" d="M0,220 L0,150 Q120,110 260,140 T520,120 T760,150 T1020,110 T1280,150 L1440,130 L1440,220 Z"/>
 
-        <!-- Capa frontal: edificios, rueda de la fortuna y torre -->
+        
         <g class="skyline-svg__front">
-            <!-- Torre con aguja (izquierda) -->
+            
             <rect x="70" y="80" width="16" height="120" />
             <polygon points="62,80 94,80 78,45" />
             <rect x="75" y="30" width="6" height="18" />
 
-            <!-- Edificios pequeños -->
+            
             <rect x="20" y="150" width="34" height="50" />
             <rect x="110" y="130" width="30" height="70" />
             <rect x="150" y="160" width="26" height="40" />
 
-            <!-- Rueda de la fortuna -->
+            
             <circle cx="360" cy="140" r="58" class="skyline-svg__wheel-rim" />
             <circle cx="360" cy="140" r="7" />
             <line x1="360" y1="82" x2="360" y2="198" />
@@ -53,23 +53,23 @@
             <line x1="319" y1="181" x2="401" y2="99" />
             <rect x="352" y="196" width="16" height="4" />
 
-            <!-- Edificios centrales -->
+            
             <rect x="460" y="120" width="34" height="80" />
             <rect x="500" y="150" width="28" height="50" />
             <rect x="534" y="100" width="30" height="100" />
 
-            <!-- Cúpula / templo -->
+            
             <rect x="640" y="150" width="70" height="50" />
             <path d="M636,150 a39,39 0 0 1 78,0 Z" />
             <rect x="670" y="95" width="10" height="30" />
             <circle cx="675" cy="92" r="6" />
 
-            <!-- Edificios derecha -->
+            
             <rect x="760" y="140" width="30" height="60" />
             <rect x="796" y="110" width="34" height="90" />
             <rect x="836" y="155" width="26" height="45" />
 
-            <!-- Árboles -->
+            
             <g class="skyline-svg__trees">
                 <line x1="920" y1="170" x2="920" y2="200" />
                 <circle cx="920" cy="160" r="14" />
@@ -77,13 +77,13 @@
                 <circle cx="960" cy="166" r="11" />
             </g>
 
-            <!-- Bloque de edificios final -->
+            
             <rect x="1010" y="130" width="30" height="70" />
             <rect x="1046" y="160" width="26" height="40" />
             <rect x="1086" y="105" width="34" height="95" />
             <rect x="1130" y="145" width="28" height="55" />
 
-            <!-- Obelisco -->
+            
             <polygon points="1210,200 1226,200 1220,120 1216,120" />
 
             <rect x="1270" y="150" width="30" height="50" />
@@ -94,14 +94,14 @@
     </svg>
 </div>
 
-<!-- ============================================= -->
-<!-- MAIN FOOTER                                   -->
-<!-- ============================================= -->
+
+
+
 <footer class="footer-main" id="footer">
     <div class="footer-main__container">
         <div class="footer-main__grid">
             
-            <!-- Columna 1: Logo y Teléfonos -->
+            
             <div class="footer-main__col footer-main__col--logo">
                 <a href="index.php" class="footer-main__logo-link">
                     <img src="img/logo-itb-white.png" alt="ITB Logo" class="footer-main__logo">
@@ -118,7 +118,7 @@
                 </div>
             </div>
 
-            <!-- Columna 2: Enlaces 1 -->
+            
             <div class="footer-main__col">
                 <ul class="footer-main__list">
                     <li><a href="#">Admisiones Pregrado</a></li>
@@ -129,7 +129,7 @@
                 </ul>
             </div>
 
-            <!-- Columna 3: Enlaces 2 -->
+            
             <div class="footer-main__col">
                 <ul class="footer-main__list">
                     <li><a href="#">Noticias y Novedades ITB</a></li>
@@ -140,7 +140,7 @@
                 </ul>
             </div>
 
-            <!-- Columna 4: Campus -->
+            
             <div class="footer-main__col">
                 <ul class="footer-main__list">
                     <li><a href="#">Campus Matriz</a></li>
@@ -151,7 +151,7 @@
                 </ul>
             </div>
 
-            <!-- Columna 5: Mapa -->
+            
             <div class="footer-main__col footer-main__col--map">
                 <div class="footer-main__map-wrapper">
                     <img src="img/Mapa.png" alt="Mapa de ubicación" class="footer-main__map-img">
@@ -163,7 +163,7 @@
 
         </div>
 
-        <!-- Redes Sociales -->
+        
         <div class="footer-social">
             <span class="footer-social__text">#ITB Instituto Superior Universitario Bolivariano en</span>
             <div class="footer-social__icons">
@@ -179,9 +179,9 @@
     </div>
 </footer>
 
-<!-- ============================================= -->
-<!-- BOTTOM BAR                                    -->
-<!-- ============================================= -->
+
+
+
 <div class="footer-bottom">
     <div class="footer-bottom__container">
         <div class="footer-bottom__left">
@@ -196,12 +196,12 @@
     </div>
 </div>
 
-<!-- Botón Ir Arriba -->
+
 <div id="top-to-bottom">
     <i class="fas fa-angles-up"></i>
 </div>
 
-<!-- Botón flotante WhatsApp -->
+
 <div class="whatsapp-float" id="whatsapp-float">
     <a href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20ITB" 
        target="_blank" 

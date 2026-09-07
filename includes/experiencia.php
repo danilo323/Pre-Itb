@@ -1,10 +1,10 @@
-<!-- ============================================= -->
-<!-- TU EXPERIENCIA ITB                            -->
-<!-- ============================================= -->
+
+
+
 <section class="experiencia" id="experiencia">
     <div class="experiencia__container">
 
-        <!-- Lado izquierdo: Texto -->
+        
         <div class="experiencia__content">
             <span class="experiencia__tag">¿Por qué elegir el ITB?</span>
             <h2 class="experiencia__title">Tu Experiencia ITB</h2>
@@ -39,7 +39,7 @@
             </a>
         </div>
 
-        <!-- Lado derecho: Imagen -->
+        
         <div class="experiencia__image">
             <img src="img/experiencia.png" alt="Graduada del ITB">
         </div>
@@ -47,19 +47,19 @@
     </div>
 </section>
 
-<!-- ============================================= -->
-<!-- TESTIMONIOS - LO QUE DICEN NUESTROS           -->
-<!-- ESTUDIANTES                                   -->
-<!-- ============================================= -->
+
+
+
+
 <section class="testimonios" id="testimonios">
     <div class="testimonios__container">
 
-        <!-- Foto a la izquierda -->
+        
         <div class="testimonios__photo">
             <img src="img/MariaFernanda.png" alt="María Fernanda Gómez">
         </div>
 
-        <!-- Contenido a la derecha -->
+        
         <div class="testimonios__content">
             <span class="testimonios__tag">Historias de Éxito</span>
             <h2 class="testimonios__title">Lo que dicen nuestros<br>estudiantes</h2>

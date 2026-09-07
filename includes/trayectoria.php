@@ -1,9 +1,9 @@
-<!-- ============================================= -->
-<!-- TRAYECTORIA Y COMPROMISO EDUCATIVO            -->
-<!-- ============================================= -->
+
+
+
 <section class="trayectoria" id="trayectoria">
     <div class="trayectoria__container">
-        <!-- Lado izquierdo: Contenido de Texto -->
+        
         <div class="trayectoria__content">
             <span class="section-tag">Trayectoria y Compromiso Educativo</span>
             <h2 class="trayectoria__title">
@@ -16,7 +16,7 @@
                 para formar profesionales listos para el mercado laboral.
             </p>
 
-            <!-- Perfil del Canciller -->
+            
             <div class="trayectoria__profile">
                 <div class="trayectoria__profile-img">
                     <img src="img/PHD_Roberto.jpg" alt="PhD. Roberto Tolozano Benites">
@@ -33,12 +33,12 @@
             </a>
         </div>
 
-        <!-- Centro: Imagen con Jarallax -->
+        
         <div class="trayectoria__image" data-jarallax data-speed="0.5" data-img-position="top">
             <img src="img/estudiantes1.png" alt="Estudiantes ITB en el campus" class="jarallax-img">
         </div>
 
-        <!-- Lado derecho: Estadísticas -->
+        
         <div class="trayectoria__stats">
             <div class="trayectoria__stat-card">
                 <div class="trayectoria__stat-icon">
