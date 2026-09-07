@@ -2,9 +2,88 @@
    SITE HEADER (Tarjeta flotante sticky)
    ============================================= */
 .site-header {
-    position: sticky;
+    /* 'fixed' y no 'sticky': con sticky la cabecera ocupa espacio en el flujo y
+       el hero empieza JUSTO debajo, asi que detras de las esquinas redondeadas
+       no habia nada que mostrar y se veian cuadradas. Con fixed la cabecera sale
+       del flujo, el hero pasa por debajo y las esquinas recortan la foto. */
+    position: fixed;
     top: 0;
+    /* La CAJA de la cabecera sigue ocupando todo el ancho de la pantalla. Es a
+       proposito: asi el logo, el menu y la barra azul se colocan exactamente en
+       la misma posicion de siempre. La tarjeta blanca separada de los bordes se
+       dibuja aparte, en el ::before de aqui abajo. */
+    left: 0;
+    right: 0;
     z-index: 1000;
+    background-color: transparent;
+
+    /* Rejilla de 2 columnas y 2 filas compartida por TODA la cabecera:
+         columna 1 = el logo          columna 2 = la franja azul y el menu
+       La columna 2 es 'auto', o sea que la marca el mas ancho de sus dos
+       inquilinos. Gracias a eso la franja azul empieza EXACTAMENTE donde
+       empieza 'Inicio', sin depender de ningun numero fijo. Es la unica forma
+       de que los dos sigan cuadrados al cambiar el ancho de la pantalla o al
+       agregar/quitar opciones del menu desde el panel. */
+    display: grid;
+    /* Columna 1 = el logo (lo justo que ocupa). Columna 2 = todo el resto, para
+       que el menu se estire y no quede ese hueco blanco enorme a la izquierda. */
+    grid-template-columns: auto 1fr;
+    /* Las filas se fijan a mano para que el alto total sea exactamente
+       --header-height, que es lo que el hero descuenta por arriba. */
+    grid-template-rows: var(--top-bar-height) calc(var(--header-height) - var(--top-bar-height));
+    padding: 0 var(--header-pad);
+}
+
+/* .navbar y .navbar__container se 'desaparecen' como cajas (sus hijos pasan a
+   ser inquilinos directos de la rejilla de arriba). Asi el logo y el menu se
+   alinean con la franja azul sin tener que reordenar el HTML. */
+.navbar,
+.navbar__container {
+    display: contents;
+}
+
+.top-bar {
+    grid-row: 1;
+    grid-column: 2;
+}
+
+/* El logo ocupa las DOS filas, asi queda centrado verticalmente respecto a toda
+   la cabecera y no colgando de la fila de abajo. */
+.navbar__logo {
+    grid-row: 1 / -1;
+    grid-column: 1;
+    /* Ensancha la columna del logo, y con ella empuja la franja azul y el menu.
+       La columna 1 es 'auto', asi que su ancho = ancho del logo + este respiro. */
+    padding-right: 40px;
+}
+
+.navbar__menu {
+    grid-row: 2;
+    grid-column: 2;
+    /* Los enlaces se van a la izquierda (junto al logo) y los botones a la
+       derecha, en vez de amontonarse todos a la derecha dejando un hueco. */
+    justify-content: space-between;
+}
+
+.navbar__toggle {
+    grid-row: 2;
+    grid-column: 2;
+    justify-self: end;
+    align-self: center;
+}
+
+/* La tarjeta blanca: es solo el FONDO, va detras del contenido y se separa de
+   los bordes para dejar ver la foto del hero por las esquinas. Se hace con un
+   ::before y no con el fondo del propio .site-header porque si se estrechara la
+   caja, todo lo de adentro se correria hacia la derecha. */
+.site-header::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: var(--header-inset);
+    right: var(--header-inset);
+    z-index: -1;
     background-color: var(--white);
     box-shadow: 0 4px 24px rgba(0, 0, 0, 0.10);
     border-bottom-left-radius: 20px;
@@ -12,15 +91,23 @@
     transition: box-shadow 0.3s ease;
 }
 
-.site-header--scrolled {
+.site-header--scrolled::before {
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.20);
+}
+
+/* Como la cabecera es 'fixed' ya no ocupa espacio, asi que <main> reserva su
+   alto. El hero se lo vuelve a restar con un margin-top negativo para poder
+   pasar por detras; si el administrador oculta el hero desde el panel, este
+   padding sigue protegiendo a la seccion que quede primera. */
+main {
+    padding-top: var(--header-height);
 }
 
 /* =============================================
    TOP BAR (azul solo a la derecha del logo)
    =============================================*/
 .top-bar {
-    background-color: var(--white);
+    background-color: transparent;
     height: var(--top-bar-height);
     display: flex;
     align-items: stretch;
@@ -29,17 +116,16 @@
 
 .top-bar__container {
     background-color: #2b5ca6;
-    /* margin-left empuja el azul a la derecha del Ã¡rea del logo */
-    margin-left: 220px;
-
+    /* Llena toda la columna 2, la misma del menu de abajo. Por eso la franja
+       azul arranca siempre justo donde arranca 'Inicio': van juntos. */
     flex: 1;
-    /* llena TODO el espacio restante hasta el borde */
     padding: 0 24px;
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
     border-bottom-left-radius: 14px;
+    border-bottom-right-radius: 14px;
 }
 
 .top-bar__nav {
@@ -50,7 +136,7 @@
 
 .top-bar__link {
     color: var(--white);
-    font-size: 0.75rem;
+    font-size: 0.82rem;
     font-weight: 500;
     padding: 6px 12px;
     border-radius: var(--radius-sm);
@@ -170,23 +256,6 @@
 /* =============================================
    NAVBAR PRINCIPAL
    ============================================= */
-.navbar {
-    background-color: transparent;
-    /* hereda el blanco del .site-header */
-
-}
-
-.navbar__container {
-    max-width: var(--container-max);
-    width: 100%;
-    margin: 0 auto;
-    padding: 0 24px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    height: 100%;
-}
-
 .navbar__logo {
     display: flex;
     align-items: center;
@@ -194,7 +263,9 @@
 }
 
 .navbar__logo-img {
-    height: 80px;
+    /* El logo abarca las dos filas (120px de alto total), asi que a 100px sigue
+       teniendo aire arriba y abajo y no obliga a crecer a la cabecera. */
+    height: 100px;
     width: auto;
 }
 
@@ -258,7 +329,7 @@
     align-items: center;
     gap: 5px;
     padding: 8px 16px;
-    font-size: 0.9rem;
+    font-size: 0.975rem;
     font-weight: 500;
     color: var(--gray-700);
     border-radius: var(--radius-sm);
@@ -322,26 +393,37 @@
 /* CTA Buttons */
 .navbar__cta {
     display: flex;
-    align-items: center;
+    /* 'stretch' y no 'center': asi el boton mas bajo (Solicitar Informacion) se
+       estira hasta el alto del mas alto (Matriculame, que mide lo que su icono
+       de 36px mas el relleno). Se emparejan solos, sin escribir un alto fijo que
+       habria que corregir a mano cada vez que cambie el tamano de la letra. */
+    align-items: stretch;
     gap: 10px;
     margin-left: 16px;
 }
 
+/* Solo la tipografia de los dos botones. La FORMA la pone .btn--solid
+   (css/base.css, el mismo boton de "Explorar Programas" del hero) en el caso de
+   Matriculame, y .navbar__btn--outline aqui abajo en el de Solicitar Informacion.
+   header.css va despues de base.css en el @import, asi que este tamano de letra
+   manda sobre el que trae .btn--solid: la tipografia del menu se mantiene. */
 .navbar__btn {
+    font-size: 0.92rem;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+/* "Solicitar Informacion": se le copia UNICAMENTE la esquina cuadrada de
+   .btn--solid (12px). Su relleno y su hover se quedan tal cual estaban. */
+.navbar__btn--outline {
     display: inline-flex;
     align-items: center;
     gap: 8px;
     padding: 10px 22px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    border-radius: var(--radius-full);
-    transition: var(--transition);
-    white-space: nowrap;
-}
-
-.navbar__btn--outline {
+    border-radius: 12px;
     color: var(--primary-orange);
     border: 2px solid var(--primary-orange);
+    transition: var(--transition);
 }
 
 .navbar__btn--outline:hover {
@@ -351,33 +433,6 @@
     box-shadow: 0 4px 12px rgba(232, 113, 42, 0.3);
 }
 
-.navbar__btn--solid {
-    background: var(--primary-orange);
-    color: var(--white);
-    border: 2px solid var(--primary-orange);
-}
-
-.navbar__btn--solid:hover {
-    background: var(--primary-orange-hover);
-    border-color: var(--primary-orange-hover);
-    transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(232, 113, 42, 0.4);
-}
-
-/* Ãcono dentro de cuadro blanco (MatricÃºlame) */
-.navbar__btn-icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 26px;
-    height: 26px;
-    background: var(--white);
-    color: var(--primary-orange);
-    border-radius: var(--radius-sm);
-    font-size: 0.7rem;
-    transition: var(--transition);
-}
-
-.navbar__btn--solid:hover .navbar__btn-icon {
-    background: rgba(255, 255, 255, 0.9);
-}
+/* Las reglas .navbar__btn--solid y .navbar__btn-icon se eliminaron: Matriculame
+   ahora usa .btn--solid, el boton compartido con el hero. Tener dos estilos para
+   el mismo boton es justo lo que hace que se desincronicen. */

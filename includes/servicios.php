@@ -1,81 +1,101 @@
-
-
-
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('servicios')) return; ?>
+<!-- ============================================= -->
+<!-- BIENESTAR ESTUDIANTIL / SERVICIOS             -->
+<!-- ============================================= -->
 <section class="servicios" id="servicios">
     <div class="servicios__container">
-
-        
+        <!-- Columna de Texto Principal -->
         <div class="servicios__intro">
-            <h2 class="servicios__title">Bienestar<br>Estudiantil</h2>
+            <h2 class="servicios__title">
+                <?= nl2br(htmlspecialchars(content_get('servicios', 'serv1_titulo', "Bienestar\nEstudiantil"), ENT_QUOTES, 'UTF-8')) ?>
+            </h2>
             <p class="servicios__desc">
-                Impulsamos tu desarrollo integral dentro y fuera del aula con beneficios
-                exclusivos para tu carrera.
+                <?= htmlspecialchars(content_get('servicios', 'serv1_desc', 'Impulsamos tu desarrollo integral dentro y fuera del aula con beneficios exclusivos para tu carrera.'), ENT_QUOTES, 'UTF-8') ?>
             </p>
             <a href="#" class="btn--solid" id="btn-servicios-main">
-                Más servicios
+                <?= htmlspecialchars(content_get('servicios', 'serv1_btn', 'Más servicios'), ENT_QUOTES, 'UTF-8') ?>
                 <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
-        
+        <!-- Tarjetas (Cards) -->
         <div class="servicios__cards">
-            
-            
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title">Campus<br>Virtual 360°</h3>
-                <p class="servicios__card-text">Conoce nuestras instalaciones, aulas y laboratorios de forma interactiva.</p>
-                <a href="#" class="btn--outline-servicios">
-                    Ver Tour
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
+            <?php
+            $lista_servicios = content_raw('servicios', 'lista_servicios', [
+                [
+                    'titulo' => "Campus Virtual",
+                    'desc' => "Plataforma educativa 24/7",
+                    'btn_texto' => "Ver Tour",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Horarios",
+                    'desc' => "Consulta tus horarios de clase",
+                    'btn_texto' => "Ver Horarios",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Servicios Digitales",
+                    'desc' => "Trámites en línea y gestión académica",
+                    'btn_texto' => "Acceder",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Podcast ITB",
+                    'desc' => "Escucha nuestro contenido educativo",
+                    'btn_texto' => "Escuchar",
+                    'imagen' => ""
+                ],
+                [
+                    'titulo' => "Arte y Deportes",
+                    'desc' => "Clubes deportivos, grupos artísticos y actividades recreativas",
+                    'btn_texto' => "Conocer Más",
+                    'imagen' => "img/bienestar_estudiantil_1.png"
+                ]
+            ]);
 
-            
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title">Horarios y<br>Clases</h3>
-                <p class="servicios__card-text">Consulta turnos presenciales, nocturnos y de fin de semana.</p>
-                <a href="#" class="btn--outline-servicios">
-                    Ver Horarios
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
+            foreach ((array)$lista_servicios as $servicio): 
+                $foto_path = trim($servicio['imagen'] ?? '');
+                if (!empty($foto_path) && !content_image_exists($foto_path)) $foto_path = 'img/placeholder_imagen.svg';
+                $titulo = nl2br(htmlspecialchars($servicio['titulo'] ?? '', ENT_QUOTES, 'UTF-8'));
+                $desc = htmlspecialchars($servicio['desc'] ?? '', ENT_QUOTES, 'UTF-8');
+                $btn_texto = htmlspecialchars($servicio['btn_texto'] ?? 'Ver más', ENT_QUOTES, 'UTF-8');
 
-            
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title">Servicios<br>Digitales</h3>
-                <p class="servicios__card-text">Accede al Aula Virtual, App Móvil y herramientas académicas.</p>
-                <a href="#" class="btn--outline-servicios">
-                    Acceder
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
-
-            
-            <div class="servicios__card-simple">
-                <h3 class="servicios__card-title">#Podcast<br>ITB</h3>
-                <p class="servicios__card-text">Historias de éxito y consejos de docentes y graduados.</p>
-                <a href="#" class="btn--outline-servicios">
-                    Escuchar
-                    <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
-                </a>
-            </div>
-
-            
-            <div class="servicios__card-image">
-                <img src="img/estudiantes1.png" alt="Arte y Deportes">
-                <div class="servicios__card-overlay"></div>
-                <div class="servicios__card-content">
-                    <h3 class="servicios__card-title-white">Arte y<br>Deportes</h3>
-                    <p class="servicios__card-text-white">Participa en grupos culturales, eventos y torneos.</p>
-                    <a href="#" class="btn--solid">
-                        Conocer Más
-                        <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                // Regla de imagen: Si NO hay imagen, usamos diseño simple. Si la hay, diseño con fondo.
+                if (empty($foto_path)): 
+            ?>
+                <!-- Tarjeta Simple (Sin Imagen) -->
+                <div class="servicios__card-simple">
+                    <h3 class="servicios__card-title"><?= $titulo ?></h3>
+                    <p class="servicios__card-text"><?= $desc ?></p>
+                    <a href="#" class="btn--outline-servicios">
+                        <?= $btn_texto ?>
+                        <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
-            </div>
+            <?php else: ?>
+                <!-- Tarjeta con Imagen de Fondo -->
+                <div class="servicios__card-image">
+                    <img src="<?= htmlspecialchars($foto_path, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(strip_tags($titulo), ENT_QUOTES, 'UTF-8') ?>">
+                    <div class="servicios__card-overlay"></div>
+                    <div class="servicios__card-content">
+                        <h3 class="servicios__card-title-white"><?= $titulo ?></h3>
+                        <p class="servicios__card-text-white"><?= $desc ?></p>
+                        <a href="#" class="btn--solid">
+                            <?= $btn_texto ?>
+                            <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                        </a>
+                    </div>
+                </div>
+            <?php 
+                endif; 
+            endforeach; 
+            ?>
 
         </div>
 
     </div>
-</section>
 
+        </div>
+    </div>
+</section>

@@ -2,7 +2,7 @@
    ALIANZAS
    ============================================= */
 .alianzas {
-    padding: 48px 0;
+    padding: 80px 0;
     background: var(--gray-50);
     overflow: hidden;
 }
@@ -13,14 +13,24 @@
     padding: 0 24px;
 }
 
+/* Cabecera: título a la izquierda y botón a la derecha,
+   con la misma disposición que la de Noticias. */
+.alianzas__header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 48px;
+    flex-wrap: wrap;
+    gap: 16px;
+}
+
+/* Misma tipografía, tamaño y color que .noticias__title */
 .alianzas__title {
-    text-align: center;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--gray-500);
-    margin-bottom: 28px;
-    text-transform: uppercase;
-    letter-spacing: 1px;
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.1;
 }
 
 .alianzas__track {
@@ -29,15 +39,20 @@
 
 .alianzas__logos {
     display: flex;
-    gap: 48px;
     align-items: center;
     animation: scrollLogos 30s linear infinite;
     width: max-content;
 }
 
 .alianzas__logos img {
-    height: 40px;
+    height: 90px;
     width: auto;
+    /* La separación va como margen de cada logo y NO como 'gap' del flex.
+       Motivo: la animación desplaza el carril exactamente un -50%, y con 'gap'
+       esa mitad no coincide con una copia completa de la lista (queda medio
+       hueco de diferencia), lo que provoca un saltito en cada vuelta. Con
+       margen, media lista mide justo lo mismo que la otra y el bucle es limpio. */
+    margin-right: 64px;
     filter: grayscale(100%);
     opacity: 0.5;
     transition: var(--transition);
@@ -55,5 +70,62 @@
 
     100% {
         transform: translateX(-50%);
+    }
+}
+
+/* En pantallas chicas los logos se achican para que no ocupen media pantalla */
+@media (max-width: 768px) {
+    .alianzas__logos img {
+        height: 60px;
+        margin-right: 40px;
+    }
+}
+
+/* ---- Segunda fila: galería de fotos ----
+   Mismo carrusel en bucle que los logos de arriba (mismo truco del carril
+   doblado), pero son fotos a color, no logos: sin escala de grises ni opacidad
+   reducida. Van SIN separación entre ellas (pegadas) y con esquinas cuadradas,
+   igual que el marco de Figma (320.1 x 309.3, "Radio de esquina: 0"). Como no
+   hay margen ni gap, el truco del carril doble sigue funcionando exactamente
+   igual: media lista = la otra mitad, sin saltos. */
+.alianzas__track--fotos {
+    margin-top: 32px;
+    /* Solo esta fila (NO la de logos) se sale del contenedor centrado de
+       --container-max y ocupa el ancho completo de la pantalla, de borde a
+       borde, para que se alcancen a ver mas fotos a la vez en la fila. Truco
+       clasico para "escapar" de un contenedor centrado sin tocarlo: se hace
+       tan ancho como el viewport (100vw) y se recentra con margenes negativos. */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.alianzas__fotos {
+    display: flex;
+    align-items: center;
+    /* Duración distinta a la de los logos para que las dos filas no queden
+       sincronizadas moviéndose en espejo. */
+    animation: scrollLogos 38s linear infinite;
+    width: max-content;
+}
+
+.alianzas__fotos img {
+    /* Medida real de Figma: 320.1 x 309.3 */
+    height: 309px;
+    width: 320px;
+    object-fit: cover;
+    border-radius: 0;
+    margin-right: 0;
+    transition: var(--transition);
+}
+
+.alianzas__fotos img:hover {
+    transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+    .alianzas__fotos img {
+        height: 155px;
+        width: 160px;
     }
 }

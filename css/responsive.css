@@ -2,8 +2,29 @@
    RESPONSIVE â€” TABLET (<=1024px)
    ============================================= */
 @media (max-width: 1024px) {
+    :root {
+        /* Cabecera mas baja: aqui el menu ya no va en linea, solo queda el logo,
+           la franja azul y la hamburguesa. */
+        --header-height: 100px;
+    }
+
     .top-bar__nav {
         display: none;
+    }
+
+    /* El buscador es lo mas ancho de la franja azul. Con el puesto, la columna 2
+       de la rejilla exige mas ancho del que tiene el movil y se desborda la
+       cabecera entera (y con ella el ancho de la pagina). */
+    .top-bar__search {
+        display: none;
+    }
+
+    .navbar__logo-img {
+        height: 70px;
+    }
+
+    .navbar__logo {
+        padding-right: 16px;
     }
 
     .navbar__toggle {
@@ -19,6 +40,10 @@
         background: var(--white);
         flex-direction: column;
         align-items: stretch;
+        /* En escritorio el menu lleva 'space-between' para repartir enlaces y
+           botones a lo ancho. Aqui, en columna, eso mandaba los botones al fondo
+           de la pantalla dejando un hueco enorme en medio. */
+        justify-content: flex-start;
         padding: 80px 24px 40px;
         box-shadow: var(--shadow-xl);
         transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
@@ -34,6 +59,9 @@
         flex-direction: column;
         gap: 0;
         width: 100%;
+        /* Heredaba 'center' de la version de escritorio y los enlaces salian
+           centrados y del ancho justo del texto, en vez de ocupar toda la fila. */
+        align-items: stretch;
     }
 
     .navbar__link {
@@ -60,15 +88,24 @@
 
     .navbar__cta {
         margin-left: 0;
-        margin-top: 16px;
+        margin-top: 24px;
         flex-direction: column;
         width: 100%;
+        gap: 12px;
     }
 
     .navbar__btn {
         width: 100%;
+    }
+
+    .navbar__btn--outline {
         justify-content: center;
         padding: 14px 24px;
+    }
+
+    .navbar__cta .btn--solid {
+        justify-content: space-between;
+        padding: 8px 8px 8px 24px;
     }
 
     /* Secciones */
@@ -84,6 +121,21 @@
     .trayectoria__container {
         grid-template-columns: 1fr;
         gap: 40px;
+    }
+
+    /* Los 60px de margen izquierdo separan las columnas en el diseno de
+       escritorio. Aqui ya no hay columnas: como ademas la imagen y las tarjetas
+       miden width:100%, ese margen las corria 60px a la derecha y las sacaba de
+       la pantalla por ese mismo lado. */
+    .trayectoria__image,
+    .trayectoria__stats {
+        margin-left: 0;
+    }
+
+    /* 3/4 de proporcion en vertical se traduce en casi 600px de alto en un
+       movil, con la foto perdida en medio de tanto espacio vacio. */
+    .trayectoria__image {
+        aspect-ratio: 4 / 3;
     }
 
 
@@ -115,6 +167,12 @@
 
     .autoridades__grid {
         grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Estaba en 'nowrap': el titulo y el boton "Ver Directorio" se peleaban por
+       el ancho en vez de pasar el boton a la linea de abajo. */
+    .autoridades__header {
+        flex-wrap: wrap;
     }
 
     .servicios__bento {
@@ -153,12 +211,11 @@
    ============================================= */
 @media (max-width: 640px) {
     :root {
-        --header-height: 60px;
+        /* 36px de franja azul + 42px de la fila de la hamburguesa. El logo (44px)
+           abarca las dos filas, asi que cabe dentro de esos 78px. */
+        --header-height: 78px;
         --top-bar-height: 36px;
-    }
-
-    .top-bar__search-input {
-        width: 70px;
+        --header-inset: 10px;
     }
 
     .navbar__menu {
@@ -166,7 +223,11 @@
     }
 
     .navbar__logo-img {
-        height: 38px;
+        height: 44px;
+    }
+
+    .navbar__logo {
+        padding-right: 10px;
     }
 
     .hero__container {
@@ -250,6 +311,21 @@
     .noticias__header {
         flex-direction: column;
         align-items: flex-start;
+    }
+
+    /* La noticia principal ponia la foto (316px fijos) al lado del texto: en un
+       movil de 440px no queda sitio para el texto. Se apilan. */
+    .noticias__main {
+        flex-direction: column;
+    }
+
+    .noticias__main-img {
+        flex: 0 0 200px;
+        margin: 20px 20px 0;
+    }
+
+    .noticias__main-body {
+        padding: 24px 20px;
     }
 
     .noticias__item {

@@ -1,73 +1,82 @@
-
-
-
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('trayectoria')) return; ?>
+<?php /* includes/trayectoria.php */ ?>
+<!-- ============================================= -->
+<!-- TRAYECTORIA Y COMPROMISO EDUCATIVO            -->
+<!-- ============================================= -->
 <section class="trayectoria" id="trayectoria">
     <div class="trayectoria__container">
-        
+        <!-- Lado izquierdo: Contenido de Texto -->
         <div class="trayectoria__content">
-            <span class="section-tag">Trayectoria y Compromiso Educativo</span>
+            <span class="section-tag"><?= content_get('trayectoria', 'etiqueta_superior', 'Trayectoria y Compromiso Educativo') ?></span>
             <h2 class="trayectoria__title">
-                Formando Líderes<br>
-                Prácticos con Visión<br>
-                del Futuro
+                <?= str_replace('\n', '<br>', content_get('trayectoria', 'titulo', "Formando Líderes\nPrácticos con Visión\ndel Futuro")) ?>
             </h2>
             <p class="trayectoria__description">
-                Con casi 3 décadas de trayectoria, impulsamos una educación superior práctica, accesible e innovadora
-                para formar profesionales listos para el mercado laboral.
+                <?= content_get('trayectoria', 'descripcion', 'Con casi 3 décadas de trayectoria, impulsamos una educación superior práctica, accesible e innovadora para formar profesionales listos para el mercado laboral.') ?>
             </p>
 
-            
+            <!-- Perfil del Canciller -->
             <div class="trayectoria__profile">
                 <div class="trayectoria__profile-img">
-                    <img src="img/PHD_Roberto.jpg" alt="PhD. Roberto Tolozano Benites">
+                    <img src="<?= content_raw('trayectoria', 'canciller_foto', 'img/icon_trayectoria.jpg') ?>" alt="<?= content_get('trayectoria', 'canciller_nombre', 'PhD. Roberto Tolozano Benites') ?>">
                 </div>
                 <div class="trayectoria__profile-info">
-                    <span class="trayectoria__profile-role">Canciller</span>
-                    <span class="trayectoria__profile-name">PhD. Roberto Tolozano Benites</span>
+                    <span class="trayectoria__profile-role"><?= content_get('trayectoria', 'canciller_cargo', 'Canciller') ?></span>
+                    <span class="trayectoria__profile-name"><?= content_get('trayectoria', 'canciller_nombre', 'PhD. Roberto Tolozano Benites') ?></span>
                 </div>
             </div>
 
             <a href="#" class="btn btn--solid" id="btn-historia">
-                Nuestra Historia
+                <?= content_get('trayectoria', 'btn_historia', 'Nuestra Historia') ?>
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
-        
+        <!-- Centro: Imagen con Jarallax -->
         <div class="trayectoria__image" data-jarallax data-speed="0.5" data-img-position="top">
-            <img src="img/estudiantes1.png" alt="Estudiantes ITB en el campus" class="jarallax-img">
+            <img src="<?= content_raw('trayectoria', 'imagen_central', 'img/trayectoria.png') ?>" alt="Estudiantes ITB en el campus" class="jarallax-img">
         </div>
 
-        
+        <!-- Lado derecho: Estadísticas -->
+        <?php
+        // Íconos por posición (0, 1, 2) — se mantienen fijos del diseño original
+        $stat_icons = ['fa-user-graduate', 'fa-users', 'fa-laptop-code'];
+        $stats = content_raw('trayectoria', 'estadisticas', [
+            ['numero' => '29+', 'texto' => 'Años de Experiencia'],
+            ['numero' => '+17,000', 'texto' => 'Estudiantes Graduados'],
+            ['numero' => '+35', 'texto' => 'Carreras Disponibles'],
+        ]);
+        ?>
         <div class="trayectoria__stats">
+            <?php foreach ((array)$stats as $i => $stat):
+                // El admin escribe el número como texto libre ("29+", "+17,000"), así
+                // que se separa aquí en prefijo/número/sufijo para que CountUp.js (ya
+                // cargado en index.php) pueda animar el conteo de 0 hasta el valor real.
+                // Sin estos data-* el bloque "9. CONTADOR ANIMADO" de main.js no
+                // encuentra nada que animar (busca '[data-count]') y el número se queda
+                // estático, que es justo lo que faltaba aquí.
+                $numero_raw = trim($stat['numero'] ?? '');
+                preg_match('/^(\D*)([\d.,]+)(.*)$/u', $numero_raw, $m);
+                $stat_prefix = $m[1] ?? '';
+                $stat_digitos = $m[2] ?? '0';
+                $stat_suffix = $m[3] ?? '';
+                $stat_miles = strpos($stat_digitos, ',') !== false;
+                $stat_valor = (int) str_replace([',', '.'], '', $stat_digitos);
+            ?>
             <div class="trayectoria__stat-card">
                 <div class="trayectoria__stat-icon">
-                    <i class="fas fa-user-graduate"></i>
+                    <i class="fas <?= $stat_icons[$i] ?? 'fa-star' ?>"></i>
                 </div>
                 <div class="trayectoria__stat-text">
-                    <span class="trayectoria__stat-number" data-count="29" data-suffix="+">29+</span>
-                    <span class="trayectoria__stat-label">Años transformando vidas<br>y formando profesionales.</span>
+                    <span class="trayectoria__stat-number"
+                        data-count="<?= $stat_valor ?>"
+                        data-prefix="<?= htmlspecialchars($stat_prefix, ENT_QUOTES, 'UTF-8') ?>"
+                        data-suffix="<?= htmlspecialchars($stat_suffix, ENT_QUOTES, 'UTF-8') ?>"
+                        <?= $stat_miles ? 'data-format="thousands"' : '' ?>><?= htmlspecialchars($numero_raw, ENT_QUOTES, 'UTF-8') ?></span>
+                    <span class="trayectoria__stat-label"><?= htmlspecialchars($stat['texto'] ?? '', ENT_QUOTES, 'UTF-8') ?></span>
                 </div>
             </div>
-            <div class="trayectoria__stat-card">
-                <div class="trayectoria__stat-icon">
-                    <i class="fas fa-users"></i>
-                </div>
-                <div class="trayectoria__stat-text">
-                    <span class="trayectoria__stat-number" data-count="17000" data-format="thousands" data-prefix="+"
-                        data-suffix="">+17,000</span>
-                    <span class="trayectoria__stat-label">Estudiantes formándose<br>con metodologías activas.</span>
-                </div>
-            </div>
-            <div class="trayectoria__stat-card">
-                <div class="trayectoria__stat-icon">
-                    <i class="fas fa-laptop-code"></i>
-                </div>
-                <div class="trayectoria__stat-text">
-                    <span class="trayectoria__stat-number" data-count="35" data-prefix="+" data-suffix="">+35</span>
-                    <span class="trayectoria__stat-label">Carreras técnicas y<br>tecnológicas disponibles.</span>
-                </div>
-            </div>
+            <?php endforeach; ?>
         </div>
     </div>
 </section>

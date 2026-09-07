@@ -213,7 +213,11 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 8. JARALLAX — Parallax en Imagen de Trayectoria
+    // 8. JARALLAX — Efecto de imagen que se desplaza al hacer scroll.
+    //    Se activa solo con el atributo data-jarallax en el HTML (Trayectoria,
+    //    Tu Experiencia ITB, Historias de Éxito, Nuestras Autoridades y el
+    //    formulario de Admisión), así que agregarlo a una seccion nueva no
+    //    necesita tocar este archivo.
     // =========================================
     if (typeof jarallax !== 'undefined') {
         jarallax(document.querySelectorAll('[data-jarallax]'), {
@@ -320,3 +324,27 @@ style.textContent = `
     .servicios__card:nth-child(6).animate-on-scroll { transition-delay: 0.25s; }
 `;
 document.head.appendChild(style);
+
+/* =============================================
+   BOTONES FLOTANTES: se apartan al llegar al pie
+   Al final de la pagina el propio pie ya tiene los telefonos, las redes y los
+   enlaces, asi que las burbujas solo tapaban contenido. Se usa
+   IntersectionObserver y no el evento 'scroll' para no recalcular posiciones en
+   cada pixel de desplazamiento.
+   ============================================= */
+document.addEventListener('DOMContentLoaded', () => {
+    const pie = document.getElementById('footer');
+    const flotantes = document.querySelectorAll('.js-floating');
+
+    if (!pie || !flotantes.length || !('IntersectionObserver' in window)) return;
+
+    const observador = new IntersectionObserver((entradas) => {
+        entradas.forEach((entrada) => {
+            flotantes.forEach((el) => {
+                el.classList.toggle('floating--oculto', entrada.isIntersecting);
+            });
+        });
+    }, { rootMargin: '0px 0px -40% 0px' });
+
+    observador.observe(pie);
+});

@@ -1,4 +1,4 @@
-﻿/* =============================================
+/* =============================================
    NOTICIAS Y EVENTOS
    ============================================= */
 .noticias {
@@ -12,6 +12,113 @@
     padding: 0 24px;
 }
 
+/* Etiqueta superior (texto simple, sin fondo tipo pastilla) */
+.noticias__header .section-tag {
+    background: transparent;
+    padding: 0;
+    text-transform: none;
+    letter-spacing: normal;
+    font-size: 0.9rem;
+    font-weight: 400;
+    font-family: var(--font-primary);
+}
+
+/* Botón superior derecho (mismo diseño que .btn--outline-servicios de Servicios).
+   Lo comparten dos secciones: Noticias ("Ver más Noticias y Eventos") y
+   Alianzas ("Ver Alianzas y Convenios"). Se listan los dos selectores en vez de
+   copiar el estilo, para que los dos botones nunca se desincronicen. */
+.btn-noticias-todas,
+.btn-alianzas-todas {
+    display: inline-flex;
+    align-items: center;
+    gap: 16px;
+    padding: 6px 6px 6px 22px;
+    border: 1.5px solid #FF6D1C;
+    border-radius: 8px;
+    color: #FF6D1C;
+    font-size: 0.95rem;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.btn-noticias-todas:hover,
+.btn-alianzas-todas:hover {
+    background: #FF6D1C;
+    color: var(--white);
+}
+
+/* Caja de flecha del botón superior: rellena por defecto, se vacía en hover (no tocar, ya está bien) */
+.btn-noticias-todas .btn__icon-right,
+.btn-alianzas-todas .btn__icon-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background-color: #FF6D1C;
+    color: var(--white);
+    border-radius: 6px;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.btn-noticias-todas .btn__icon-right i,
+.btn-alianzas-todas .btn__icon-right i {
+    transform: rotate(-45deg);
+    font-size: 0.85rem;
+    transition: var(--transition);
+}
+
+.btn-noticias-todas:hover .btn__icon-right,
+.btn-alianzas-todas:hover .btn__icon-right {
+    background-color: var(--white);
+    color: #FF6D1C;
+}
+
+.btn-noticias-todas:hover .btn__icon-right i,
+.btn-alianzas-todas:hover .btn__icon-right i {
+    transform: rotate(0deg);
+}
+
+/* Caja de flecha de "Leer Más": vacía por defecto, se rellena de naranja en hover.
+   El enlace .noticias__link ocupa TODO el ancho de la tarjeta (justify-content:
+   space-between), así que colgar el hover del enlace hacía que el cuadrito se
+   pintara apenas el puntero entraba en ese espacio vacío, mucho antes de llegar
+   al cuadrito. Por eso el hover se cuelga del propio cuadrito. */
+.noticias__link .btn__icon-right {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 38px;
+    height: 38px;
+    background-color: transparent;
+    border: 1.5px solid #FF6D1C;
+    color: #FF6D1C;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: var(--transition);
+}
+
+.noticias__link .btn__icon-right i {
+    font-size: 0.85rem;
+}
+
+.noticias__link-text {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.noticias__link-text i {
+    font-size: 0.8rem;
+}
+
+.noticias__link .btn__icon-right:hover {
+    background-color: #FF6D1C;
+    color: var(--white);
+}
+
 .noticias__header {
     display: flex;
     align-items: flex-end;
@@ -23,32 +130,39 @@
 
 .noticias__title {
     font-family: var(--font-heading);
-    font-size: clamp(2rem, 3.5vw, 2.8rem);
+    font-size: clamp(2.5rem, 4vw, 3.5rem);
     font-weight: 800;
-    color: var(--primary-blue);
+    color: #111111;
+    line-height: 1.1;
 }
 
 .noticias__grid {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1.7fr 1fr;
     gap: 28px;
 }
 
 .noticias__main {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    align-self: flex-start;
     border-radius: var(--radius-lg);
     overflow: hidden;
-    border: 1px solid var(--gray-200);
+    border: 1.5px solid #E7ECEF;
+    background: var(--white);
     transition: var(--transition);
 }
 
 .noticias__main:hover {
     box-shadow: var(--shadow-lg);
-    border-color: transparent;
 }
 
 .noticias__main-img {
     position: relative;
-    height: 260px;
+    flex: 0 0 316px;
+    margin: 25px 0 25px 25px;
+    border-radius: 9.6px;
     overflow: hidden;
 }
 
@@ -63,94 +177,100 @@
     transform: scale(1.05);
 }
 
-.noticias__badge {
-    position: absolute;
-    top: 12px;
-    left: 12px;
-    background: var(--primary-orange);
-    color: var(--white);
-    font-size: 0.7rem;
-    font-weight: 600;
-    padding: 4px 12px;
-    border-radius: var(--radius-full);
-}
-
 .noticias__main-body {
-    padding: 24px;
+    flex: 1;
+    padding: 35px 40px;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
 }
 
 .noticias__meta {
     display: flex;
-    gap: 16px;
-    margin-bottom: 10px;
-}
-
-.noticias__meta span {
-    font-size: 0.78rem;
-    color: var(--gray-500);
-    display: flex;
     align-items: center;
-    gap: 4px;
+    gap: 12px;
+    margin-bottom: 12px;
+    font-size: 0.85rem;
+    font-weight: 600;
 }
 
-.noticias__meta i {
-    color: var(--primary-orange);
-    font-size: 0.7rem;
+.meta-cat {
+    color: #FF6D1C;
+    text-transform: uppercase;
+}
+
+.meta-div {
+    color: var(--gray-400);
+    font-weight: 400;
+}
+
+.meta-date {
+    color: var(--gray-600);
 }
 
 .noticias__main-title {
-    font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--primary-blue);
+    font-family: var(--font-heading);
+    font-size: 1.4rem;
+    font-weight: 800;
+    color: #111111;
     margin-bottom: 10px;
-    line-height: 1.3;
+    line-height: 1.2;
 }
 
 .noticias__main-desc {
     font-size: 0.88rem;
     color: var(--gray-600);
     line-height: 1.6;
-    margin-bottom: 16px;
+    margin-bottom: 24px;
 }
 
 .noticias__link {
-    display: inline-flex;
+    display: flex;
     align-items: center;
-    gap: 6px;
-    font-size: 0.85rem;
+    justify-content: space-between;
+    width: 100%;
+    font-size: 0.95rem;
     font-weight: 600;
-    color: var(--primary-orange);
+    color: var(--primary-blue);
     transition: var(--transition);
-}
-
-.noticias__link:hover {
-    gap: 10px;
+    text-decoration: none;
+    margin-top: auto;
+    padding-top: 20px;
+    border-top: 1.5px solid #E7ECEF;
 }
 
 /* Lista de noticias */
 .noticias__list {
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    border: 1.5px solid #E7ECEF;
+    border-radius: var(--radius-lg);
+    background: var(--white);
+    overflow: hidden;
 }
 
 .noticias__item {
     display: flex;
-    gap: 16px;
-    padding: 16px;
-    border-radius: var(--radius-md);
-    border: 1px solid var(--gray-200);
+    gap: 20px;
+    padding: 32px;
     transition: var(--transition);
 }
 
+.noticias__item:not(:last-child) {
+    border-bottom: 1.5px solid #E7ECEF;
+}
+
+.noticias__item:last-child {
+    flex: 1;
+}
+
 .noticias__item:hover {
-    box-shadow: var(--shadow-md);
-    border-color: transparent;
+    background: var(--gray-50);
 }
 
 .noticias__item-img {
-    width: 120px;
-    height: 100px;
+    width: 140px;
+    height: 120px;
     border-radius: var(--radius-sm);
     overflow: hidden;
     flex-shrink: 0;
@@ -160,18 +280,54 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+    transition: var(--transition);
+}
+
+.noticias__item:hover .noticias__item-img img {
+    transform: scale(1.05);
 }
 
 .noticias__item-body {
     display: flex;
-    flex-direction: column;
-    justify-content: center;
+    flex-direction: row;
+    justify-content: space-between;
+    gap: 16px;
+    flex: 1;
+}
+
+.noticias__item-text {
+    flex: 1;
+    min-width: 0;
 }
 
 .noticias__item-title {
-    font-size: 0.92rem;
-    font-weight: 600;
-    color: var(--primary-blue);
-    margin-bottom: 6px;
-    line-height: 1.3;
+    font-family: var(--font-heading);
+    font-size: 1.15rem;
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.2;
+}
+
+/* Botón de flecha para noticias secundarias: vacío por defecto, se rellena de naranja en hover */
+.btn-arrow-square {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 38px;
+    height: 38px;
+    border: 1.5px solid #FF6D1C;
+    background-color: transparent;
+    border-radius: 8px;
+    color: #FF6D1C;
+    font-size: 0.85rem;
+    text-decoration: none;
+    transition: var(--transition);
+    align-self: flex-end;
+    margin-left: auto;
+}
+
+.btn-arrow-square:hover {
+    background-color: #FF6D1C;
+    color: var(--white);
 }

@@ -1,109 +1,100 @@
-
-
-
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('noticias')) return; ?>
+<!-- ============================================= -->
+<!-- NOTICIAS, EVENTOS Y ALIANZAS                  -->
+<!-- ============================================= -->
 <section class="noticias" id="noticias">
     <div class="noticias__container">
         <div class="noticias__header">
             <div>
-                <span class="section-tag">Actualidad ITB</span>
+                <span class="section-tag"><?= content_get('noticias', 'etiqueta_superior', 'Vida Universitaria y Actualidad') ?></span>
                 <h2 class="noticias__title">
-                    Noticias y <span class="text-orange">Eventos</span>
+                    <?= content_title('noticias', 'titulo_seccion', 'Noticias y Eventos del ITB') ?>
                 </h2>
             </div>
-            <a href="#" class="btn btn--outline-dark" id="btn-todas-noticias">
-                Todas las noticias <i class="fas fa-arrow-right"></i>
+            <a href="#" class="btn-noticias-todas" id="btn-todas-noticias">
+                <?= content_get('noticias', 'boton_todas', 'Ver más Noticias y Eventos') ?>
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
         <div class="noticias__grid">
-            
+            <?php
+            $main_imagen = content_raw('noticias', 'imagen', 'img/noticia_1.png');
+            if (!content_image_exists($main_imagen)) $main_imagen = 'img/placeholder_imagen.svg';
+            ?>
+            <!-- Noticia principal -->
             <div class="noticias__main">
                 <div class="noticias__main-img">
-                    <img src="img/noticia-principal.jpg" alt="Evento principal ITB">
-                    <span class="noticias__badge">Evento Destacado</span>
+                    <img src="<?= htmlspecialchars($main_imagen, ENT_QUOTES, 'UTF-8') ?>" alt="Evento principal ITB">
                 </div>
                 <div class="noticias__main-body">
                     <div class="noticias__meta">
-                        <span><i class="fas fa-calendar"></i> 15 Sep 2025</span>
-                        <span><i class="fas fa-tag"></i> Evento</span>
+                        <span class="meta-cat"><?= content_get('noticias', 'categoria', 'EVENTO') ?></span>
+                        <span class="meta-div">—</span>
+                        <span class="meta-date"><?= content_get('noticias', 'fecha', 'Agosto 20, 2026') ?></span>
                     </div>
-                    <h3 class="noticias__main-title">Casa Abierta ITB 2025: Descubre tu vocación profesional</h3>
+                    <h3 class="noticias__main-title"><?= content_get('noticias', 'titulo', '¡METAMORFOSIS CREATIVA está por comenzar!') ?></h3>
                     <p class="noticias__main-desc">
-                        Visita nuestro campus y conoce de primera mano nuestras instalaciones, 
-                        docentes y oferta académica en la Casa Abierta más grande del año.
+                        <?= content_get('noticias', 'descripcion', 'Lo mejor del Diseño de Modas y Maquillaje...') ?>
                     </p>
                     <a href="#" class="noticias__link">
-                        Leer más <i class="fas fa-arrow-right"></i>
+                        <span class="noticias__link-text">Leer Más <i class="fas fa-arrow-right"></i></span>
+                        <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
             </div>
 
-            
+            <!-- Lista de noticias -->
             <div class="noticias__list">
-                <div class="noticias__item">
-                    <div class="noticias__item-img">
-                        <img src="img/noticia-2.jpg" alt="Noticia 2">
-                    </div>
-                    <div class="noticias__item-body">
-                        <div class="noticias__meta">
-                            <span><i class="fas fa-calendar"></i> 10 Sep 2025</span>
-                        </div>
-                        <h4 class="noticias__item-title">Convenio internacional con universidad de España</h4>
-                        <a href="#" class="noticias__link">Leer más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="noticias__item">
-                    <div class="noticias__item-img">
-                        <img src="img/noticia-3.jpg" alt="Noticia 3">
-                    </div>
-                    <div class="noticias__item-body">
-                        <div class="noticias__meta">
-                            <span><i class="fas fa-calendar"></i> 05 Sep 2025</span>
-                        </div>
-                        <h4 class="noticias__item-title">Graduación de la promoción 2025: más de 500 nuevos profesionales</h4>
-                        <a href="#" class="noticias__link">Leer más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-
-                <div class="noticias__item">
-                    <div class="noticias__item-img">
-                        <img src="img/noticia-4.jpg" alt="Noticia 4">
-                    </div>
-                    <div class="noticias__item-body">
-                        <div class="noticias__meta">
-                            <span><i class="fas fa-calendar"></i> 01 Sep 2025</span>
-                        </div>
-                        <h4 class="noticias__item-title">ITB inaugura nuevo laboratorio de simulación clínica</h4>
-                        <a href="#" class="noticias__link">Leer más <i class="fas fa-arrow-right"></i></a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-</section>
-
-
-
-
-<section class="alianzas" id="alianzas">
-    <div class="alianzas__container">
-        <h3 class="alianzas__title">Nuestros Aliados Estratégicos</h3>
-        <div class="alianzas__track">
-            <div class="alianzas__logos">
-                <img src="img/alianza-1.png" alt="ATE">
-                <img src="img/alianza-2.png" alt="Artefacta">
-                <img src="img/alianza-3.png" alt="Alianza 3">
-                <img src="img/alianza-4.png" alt="Alianza 4">
-                <img src="img/alianza-5.png" alt="Alianza 5">
-                <img src="img/alianza-6.png" alt="Alianza 6">
+                <?php
+                // Obtener las noticias secundarias configuradas en el panel
+                $secundarias_default = [
+                    [
+                        'titulo' => 'Estudiantes de Diseño de Modas',
+                        'fecha' => 'Agosto 20, 2026',
+                        'imagen' => 'img/noticia_2.png',
+                    ],
+                    [
+                        'titulo' => 'ITB promovió una movilidad',
+                        'fecha' => 'Agosto 20, 2026',
+                        'imagen' => 'img/noticia_3.png',
+                    ]
+                ];
+                $secundarias = content_raw('noticias', 'secundarias', $secundarias_default);
+                if (empty($secundarias) || !is_array($secundarias)) $secundarias = $secundarias_default;
                 
-                <img src="img/alianza-1.png" alt="ATE">
-                <img src="img/alianza-2.png" alt="Artefacta">
-                <img src="img/alianza-3.png" alt="Alianza 3">
-                <img src="img/alianza-4.png" alt="Alianza 4">
-                <img src="img/alianza-5.png" alt="Alianza 5">
-                <img src="img/alianza-6.png" alt="Alianza 6">
+                $total_sec = count($secundarias);
+                $i = 0;
+                foreach ($secundarias as $sec): 
+                    $i++;
+                    $is_last = ($i === $total_sec); 
+                    $sec_titulo = htmlspecialchars($sec['titulo'] ?? '', ENT_QUOTES, 'UTF-8');
+                    $sec_fecha = htmlspecialchars($sec['fecha'] ?? '', ENT_QUOTES, 'UTF-8');
+                    $sec_imagen_raw = $sec['imagen'] ?? '';
+                    if (!content_image_exists($sec_imagen_raw)) $sec_imagen_raw = 'img/placeholder_imagen.svg';
+                    $sec_imagen = htmlspecialchars($sec_imagen_raw, ENT_QUOTES, 'UTF-8');
+                ?>
+                <div class="noticias__item">
+                    <div class="noticias__item-img">
+                        <img src="<?= $sec_imagen ?>" alt="<?= $sec_titulo ?>">
+                    </div>
+                    <div class="noticias__item-body">
+                        <div class="noticias__item-text">
+                            <div class="noticias__meta">
+                                <span class="meta-cat">NOTICIA</span>
+                                <span class="meta-div">—</span>
+                                <span class="meta-date"><?= $sec_fecha ?></span>
+                            </div>
+                            <h4 class="noticias__item-title"><?= $sec_titulo ?></h4>
+                        </div>
+                        <?php if ($is_last): ?>
+                        <a href="#" class="btn-arrow-square" aria-label="Leer más">
+                            <i class="fas fa-arrow-up"></i>
+                        </a>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <?php endforeach; ?>
             </div>
         </div>
     </div>

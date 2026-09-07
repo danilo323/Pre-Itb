@@ -91,6 +91,13 @@
 /* ---- Columna derecha: Imagen ---- */
 .experiencia__image {
     position: relative;
+    /* Jarallax necesita 'overflow: hidden' para recortar la capa que desplaza */
+    overflow: hidden;
+    /* Y necesita que el CONTENEDOR (no la img) tenga su propia altura: jarallax
+       oculta la <img> original y la reemplaza por una capa de fondo propia, asi
+       que si solo la img tenia la altura (520px, mas abajo), el div se quedaba
+       en 0 y toda la imagen desaparecia. */
+    height: 520px;
 }
 
 .experiencia__image img {

@@ -26,6 +26,13 @@
     margin-left: -30px;
     margin-top: 80px; /* Bajar la imagen para que su borde superior alinee con el texto de la derecha */
     flex-shrink: 0;
+    /* Jarallax necesita esto para posicionar y recortar su propia capa */
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    /* El CONTENEDOR necesita su propia altura (jarallax oculta la <img>
+       original, que era quien media 475px; sin esto el div colapsaba a 0). */
+    height: 475px;
 }
 
 .admision__img {
@@ -87,10 +94,41 @@
     align-items: flex-start;
 }
 
+/* ---- Boton circular de video ----
+   Estas medidas estaban escritas como style="" dentro del HTML. Al ir en linea
+   ninguna media query podia cambiarlas, y en movil ese margin-top de 150px
+   dejaba un hueco vacio enorme antes del boton. */
+.admision__video-circle {
+    width: 140px;
+    height: 140px;
+    margin-top: 150px;
+    text-decoration: none;
+}
+
+.admision__video-card {
+    width: 70px;
+    height: 70px;
+}
+
+.admision__play-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* .hero__play-btn:hover centra con translate(-50%,-50%); aqui el boton ya no
+   esta posicionado, asi que ese translate lo sacaria de sitio al pasar el raton. */
+.admision__play-btn:hover {
+    transform: scale(1.1);
+}
+
 /* Columna Centro: Texto descriptivo */
 .admision__text-wrapper {
-    flex: 1; 
+    flex: 1;
     max-width: 45%; /* Evita que el texto pase por debajo del formulario flotante */
+    min-width: 0;   /* Permite que la columna se encoja: sin esto, una palabra
+                       larga obliga a la columna a crecer y el texto se desborda */
     display: flex;
     flex-direction: column;
     gap: 24px;
@@ -101,6 +139,9 @@
     color: #ffffff;
     font-size: 1.05rem; /* Letra más grande y legible */
     line-height: 1.6;
+    /* Si el administrador escribe una palabra muy larga o pega una URL,
+       se parte y continúa abajo en vez de salirse hacia la derecha. */
+    overflow-wrap: break-word;
 }
 
 /* ---- Formulario Blanco ---- */
@@ -297,6 +338,31 @@
         width: 100%;
         margin-bottom: 0;
     }
+
+    /* El 45% existe para que el texto no se meta debajo del formulario flotante.
+       Aqui ya no hay formulario flotante (todo va en una columna), asi que si no
+       se quita, el texto se queda en una tira estrecha con medio movil vacio. */
+    .admision__text-wrapper {
+        max-width: 100%;
+        margin-top: 24px;
+    }
+
+    /* Estos margenes servian para encajar la imagen con la maqueta de escritorio;
+       en una sola columna solo descuadran. */
+    .admision__image-col {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    /* La columna pasa a 300px de alto, pero la imagen seguia con sus 475px fijos:
+       se salia por abajo y el texto de la descripcion se dibujaba encima. */
+    .admision__img {
+        height: 100%;
+    }
+
+    .admision__video-circle {
+        margin-top: 40px;
+    }
 }
 
 @media (max-width: 992px) {
@@ -312,5 +378,15 @@
 @media (max-width: 768px) {
     .admision__form-row {
         flex-direction: column;
+    }
+
+    /* En pantalla de movil, 40px de margen a cada lado se comen el contenido */
+    .admision__container {
+        padding: 0 20px;
+        gap: 32px;
+    }
+
+    .admision__form-wrapper {
+        padding: 24px 20px;
     }
 }
