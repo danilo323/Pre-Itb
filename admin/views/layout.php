@@ -2,17 +2,9 @@
 // admin/views/layout.php
 // Esqueleto principal del Panel de Administración (Versión 2.0 - Rediseño Blanco)
 
-if (session_status() !== PHP_SESSION_ACTIVE) {
-    session_start();
-}
-
+require_once __DIR__ . '/../auth.php';
 require_once __DIR__ . '/../base_url.php';
-$AB = admin_base();
-
-if (empty($_SESSION['admin_logged'])) {
-    header('Location: ' . $AB . '/login.php');
-    exit;
-}
+auth_require();
 
 require_once __DIR__ . '/../csrf.php';
 csrf_token(); // asegura que $_SESSION['csrf_token'] exista antes de renderizar formularios
