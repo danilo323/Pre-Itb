@@ -24,7 +24,8 @@ $items = collection_items($section);
 
 // Manejar POST (Crear o Actualizar)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST['action'] !== 'delete')) {
-    
+    csrf_check();
+
     // 0. Normalizar $_FILES para soportar nombres como foto[file] generados por el admin
     if (!function_exists('normalize_files_array')) {
         function normalize_files_array($files) {

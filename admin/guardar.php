@@ -3,11 +3,14 @@
 // Guarda temporalmente en $_SESSION (Versión 2.0)
 
 session_start();
+require_once __DIR__ . '/csrf.php';
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header('Location: index.php');
     exit;
 }
+
+csrf_check();
 
 $section_key = $_POST['section'] ?? '';
 $schema = require __DIR__ . '/schema_mock.php';
@@ -95,7 +98,7 @@ if ($config['type'] === 'page' && !empty($config['sections'])) {
     }
 }
 
-$_SESSION['flash_message'] = '✅ Cambios guardados correctamente.';
+$_SESSION['flash_message'] = 'Cambios guardados correctamente.';
 $_SESSION['flash_type']    = 'success';
 
 // Volver al singleton

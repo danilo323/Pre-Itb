@@ -2,10 +2,14 @@
 .env
 .env.*
 config_local.json
+admin/config.php
 
 # Archivos de planificación del proyecto (No subir al repo)
 .gemini/
 .agents/
+CLAUDE.md
+.claude/
+md/
 
 # Archivos temporales de PHP / Sesiones (por si acaso)
 *.log
@@ -13,9 +17,12 @@ config_local.json
 error_log
 cookies.txt
 
-# Archivos de prueba / debug (no forman parte del sitio)
-test_*.php
+# Archivos de prueba / debug sueltos en la raíz (no forman parte del sitio)
+/test_*.php
 admin/test_*.php
+
+# La carpeta test/ sí se sube (organizada aparte, a propósito)
+!test/
 
 # Backups y documentos pesados que no son código
 *.bak

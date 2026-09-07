@@ -11,6 +11,9 @@ if (empty($_SESSION['admin_logged'])) {
     exit;
 }
 
+require_once __DIR__ . '/../csrf.php';
+csrf_token(); // asegura que $_SESSION['csrf_token'] exista antes de renderizar formularios
+
 function layout_sidebar($current_key = ''): string {
     $schema = require __DIR__ . '/../schema_mock.php';
     
@@ -58,7 +61,13 @@ function layout_flash(): string {
     if (!empty($_SESSION['flash_message'])) {
         $msg  = htmlspecialchars($_SESSION['flash_message'], ENT_QUOTES, 'UTF-8');
         $type = $_SESSION['flash_type'] ?? 'success';
-        $html = "<div class=\"flash-message flash-{$type}\">{$msg}</div>\n";
+
+        // Icono Bootstrap Icons acorde al tipo (mismo criterio que admin/fields/alert.php)
+        $icon = 'bi-check-circle-fill';
+        if ($type === 'error') $icon = 'bi-x-octagon-fill';
+        if ($type === 'warning') $icon = 'bi-exclamation-triangle-fill';
+
+        $html = "<div class=\"flash-message flash-{$type}\"><i class=\"bi {$icon}\"></i> <span>{$msg}</span></div>\n";
         unset($_SESSION['flash_message'], $_SESSION['flash_type']);
     }
     return $html;

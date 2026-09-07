@@ -39,6 +39,7 @@ if ($is_sortable) {
 
 // Manejar Guardado de Orden (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'save_order') {
+    csrf_check();
     $order_data = json_decode($_POST['order_data'] ?? '[]', true);
     
     if (is_array($order_data) && !empty($order_data)) {
@@ -65,6 +66,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 
 // Manejar eliminación (POST)
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['action'] === 'delete') {
+    csrf_check();
     $id_to_delete = (int)$_POST['id'];
     // Buscar el id sobre el array REAL de la sesión.
     // OJO: no se puede usar el índice de $items, porque usort() lo reindexó

@@ -9,13 +9,15 @@ if (!empty($_SESSION['admin_logged'])) {
 }
 
 $error = '';
+$config = require __DIR__ . '/config.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $user = trim($_POST['username'] ?? '');
     $pass = trim($_POST['password'] ?? '');
 
-    // Credenciales temporales (Persona 3 reemplazará con hash real)
-    if ($user === 'admin' && $pass === '1234') {
+    if ($user === $config['admin_user'] && password_verify($pass, $config['admin_hash'])) {
+        // Nueva sesión al loguear: evita session fixation
+        session_regenerate_id(true);
         $_SESSION['admin_logged'] = true;
         $_SESSION['user'] = $user;
         header('Location: index.php');
@@ -67,11 +69,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <div class="field-group">
                 <label for="password">Contraseña</label>
                 <input type="password" id="password" name="password" placeholder="••••••••" required>
-            </div>
-
-            <div class="login-hint">
-                <i class="bi bi-info-circle-fill"></i>
-                Credenciales temporales: <strong>admin</strong> / <strong>1234</strong>
             </div>
 
             <button type="submit" class="btn-block">
