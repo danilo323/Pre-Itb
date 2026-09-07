@@ -2,15 +2,93 @@
 // includes/content_helper.php
 // Lee el contenido editable (Versión 2.0)
 
+require_once dirname(__DIR__) . '/admin/storage.php';
+
+/**
+ * Ruta del archivo persistente JSON (data/content.json).
+ */
+function content_storage_file(): string {
+    return storage_file();
+}
+
+/**
+ * Carga los datos almacenados en disco (con soporte de semilla).
+ */
+function content_storage_load(): array {
+    return storage_load();
+}
+
+/**
+ * Obtiene los datos vivos directamente del almacenamiento / Base de Datos MySQL.
+ * Se cachea en memoria únicamente durante la petición actual (request-scoped).
+ */
+function content_all_data(): array {
+    static $live_data = null;
+    // Si el caché fue invalidado (tras un guardado), forzar recarga
+    if ($live_data !== null && empty($GLOBALS['_content_cache_cleared'])) {
+        return $live_data;
+    }
+    unset($GLOBALS['_content_cache_cleared']);
+    $live_data = content_storage_load();
+    return $live_data;
+}
+
+/**
+ * Invalida el caché de request de content_all_data().
+ * Se debe llamar después de cualquier guardado para que las lecturas
+ * posteriores obtengan los datos actualizados.
+ */
+function content_cache_clear(): void {
+    // Resetear la variable estática trick: llamar con un valor centinela
+    // PHP no permite resetear static directamente, así que usamos una variable global.
+    $GLOBALS['_content_cache_cleared'] = true;
+}
+
+/**
+ * Guarda el array de datos permanentemente en disco y en MySQL.
+ */
+function content_storage_save(?array $data = null): bool {
+    if ($data === null) {
+        if (session_status() !== PHP_SESSION_ACTIVE) @session_start();
+        $data = $_SESSION['admin_data'] ?? [];
+    }
+    $res = storage_save($data);
+    if (session_status() === PHP_SESSION_ACTIVE) {
+        $_SESSION['admin_data'] = $data;
+    }
+    // Invalidar el caché de request para que lecturas posteriores obtengan datos frescos
+    content_cache_clear();
+    return $res;
+}
+
+/**
+ * Asegura que $_SESSION['admin_data'] esté cargado para los formularios del panel de admin.
+ */
+function content_ensure_session_loaded(bool $force_reload = false): void {
+    if (session_status() !== PHP_SESSION_ACTIVE && !headers_sent()) {
+        @session_start();
+    }
+    if ($force_reload || !isset($_SESSION['admin_data']) || empty($_SESSION['admin_data'])) {
+        $_SESSION['admin_data'] = content_storage_load();
+    }
+}
+
 function content_get(string $section, string $field, string $default = ''): string {
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    $value = $_SESSION['admin_data'][$section][$field] ?? $default;
-    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+    $data = content_all_data();
+    $value = $data[$section][$field] ?? $default;
+    return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
 }
 
 function content_raw(string $section, string $field, $default = '') {
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    return $_SESSION['admin_data'][$section][$field] ?? $default;
+    $data = content_all_data();
+    $val = $data[$section][$field] ?? null;
+    if ($val === null) {
+        return $default;
+    }
+    if (is_array($default) && !empty($default) && (!is_array($val) || empty($val))) {
+        return $default;
+    }
+    return $val;
 }
 
 /**
@@ -103,76 +181,77 @@ function content_title(string $section, string $field, string $default = ''): st
 /**
  * Verifica si la sección completa debe mostrarse en la Landing Page.
  */
+/**
+ * Verifica si la sección completa debe mostrarse en la Landing Page.
+ */
 function is_visible(string $section): bool {
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    // Si no está seteado en la sesión, por defecto asumimos visible (1)
-    $val = $_SESSION['admin_data'][$section]['_visible'] ?? '1';
-    return $val === '1';
+    $data = content_all_data();
+    $val = $data[$section]['_visible'] ?? '1';
+    return $val === '1' || $val === 1 || $val === true;
 }
 
 /**
- * Obtiene los items de una colección (como Equipo o Testimonios).
- * (Simulación: En el futuro Persona 3 conectará esto a la BD).
+ * Obtiene los items de una colección (como Equipo o Testimonios) directamente de la BD/Storage.
  */
 function collection_items(string $collection_name): array {
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+    $data = content_all_data();
     
-    if (!isset($_SESSION['admin_data'][$collection_name]['items'])) {
-        if ($collection_name === 'equipo') {
-            $_SESSION['admin_data'][$collection_name]['items'] = [
-                1 => [
-                    'id' => 1, 
-                    'orden' => '1',
-                    'nombre' => 'Roberto Tolozano Benites',
-                    'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
-                    'cargo' => 'Canciller', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_1.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ],
-                2 => [
-                    'id' => 2, 
-                    'orden' => '2',
-                    'nombre' => 'Elena Tolozano Benites',
-                    'nombre_completo' => 'PhD. Elena Tolozano Benites', 
-                    'cargo' => 'Rectora', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_2.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ],
-                3 => [
-                    'id' => 3, 
-                    'orden' => '3',
-                    'nombre' => 'Luis Alzate Peralta',
-                    'nombre_completo' => 'PhD. Luis Alzate Peralta', 
-                    'cargo' => 'Vicerrector Académico y de Investigación', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_3.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ],
-                4 => [
-                    'id' => 4, 
-                    'orden' => '4',
-                    'nombre' => 'Michelle Tolozano Lapierre',
-                    'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
-                    'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_4.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ]
-            ];
-        } else {
-            $_SESSION['admin_data'][$collection_name]['items'] = [];
-        }
+    if (isset($data[$collection_name]['items']) && is_array($data[$collection_name]['items'])) {
+        return $data[$collection_name]['items'];
+    }
+
+    if ($collection_name === 'equipo') {
+        return [
+            1 => [
+                'id' => 1, 
+                'orden' => '1',
+                'nombre' => 'Roberto Tolozano Benites',
+                'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
+                'cargo' => 'Canciller', 
+                'linkedin' => '#',
+                'email' => '#',
+                'foto' => 'img/autoridad_1.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ],
+            2 => [
+                'id' => 2, 
+                'orden' => '2',
+                'nombre' => 'Elena Tolozano Benites',
+                'nombre_completo' => 'PhD. Elena Tolozano Benites', 
+                'cargo' => 'Rectora', 
+                'linkedin' => '#',
+                'email' => '#',
+                'foto' => 'img/autoridad_2.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ],
+            3 => [
+                'id' => 3, 
+                'orden' => '3',
+                'nombre' => 'Luis Alzate Peralta',
+                'nombre_completo' => 'PhD. Luis Alzate Peralta', 
+                'cargo' => 'Vicerrector Académico y de Investigación', 
+                'linkedin' => '#',
+                'email' => '#',
+                'foto' => 'img/autoridad_3.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ],
+            4 => [
+                'id' => 4, 
+                'orden' => '4',
+                'nombre' => 'Michelle Tolozano Lapierre',
+                'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
+                'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
+                'linkedin' => '#',
+                'email' => '#',
+                'foto' => 'img/autoridad_4.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ]
+        ];
     }
     
-    return $_SESSION['admin_data'][$collection_name]['items'];
+    return [];
 }

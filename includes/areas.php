@@ -65,7 +65,6 @@
                 </a>
             </div>
             <?php 
-                $index++;
             endforeach; 
             ?>
         </div>
