@@ -1,0 +1,97 @@
+/* =============================================
+   TESTIMONIOS - LO QUE DICEN NUESTROS ESTUDIANTES
+   ============================================= */
+.testimonios {
+    padding: 80px 0 100px;
+    background: #ffffff !important;
+}
+
+.testimonios__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 420px 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* ---- Foto izquierda ---- */
+.testimonios__photo {
+    border-radius: 16px;
+    overflow: hidden;
+    height: 520px;
+    /* Jarallax posiciona su propia capa en absoluto respecto a este contenedor */
+    position: relative;
+}
+
+.testimonios__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: top center;
+    display: block;
+}
+
+/* ---- Contenido derecha ---- */
+.testimonios__tag {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    margin-bottom: 16px;
+}
+
+.testimonios__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2rem, 3.5vw, 3rem);
+    font-weight: 800;
+    color: #111111 !important;
+    line-height: 1.15;
+    margin-bottom: 40px;
+}
+
+/* Bloque de cita */
+.testimonios__quote-block {
+    margin-bottom: 36px;
+}
+
+.testimonios__quote-icon {
+    display: block;
+    font-size: 3.5rem;
+    line-height: 1;
+    color: var(--primary-orange);
+    font-family: Georgia, serif;
+    margin-bottom: 12px;
+}
+
+.testimonios__quote-text {
+    font-size: 1.25rem;
+    color: #444444 !important;
+    line-height: 1.6;
+    max-width: 650px;
+}
+
+/* Autor */
+.testimonios__author {
+    padding-top: 16px;
+}
+
+.testimonios__author-role {
+    font-size: 0.8rem;
+    color: var(--gray-500);
+    margin-bottom: 4px;
+}
+
+.testimonios__author-name {
+    font-size: 1rem;
+    font-weight: 700;
+    color: #111111;
+    margin-bottom: 4px;
+}
+
+.testimonios__author-program {
+    font-size: 0.85rem;
+    color: var(--gray-500);
+}
+

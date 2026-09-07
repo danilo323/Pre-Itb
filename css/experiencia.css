@@ -1,0 +1,111 @@
+/* =============================================
+   TU EXPERIENCIA ITB
+   ============================================= */
+.experiencia {
+    padding: 100px 0;
+    background: var(--white);
+}
+
+.experiencia__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+}
+
+/* ---- Columna izquierda ---- */
+.experiencia__tag {
+    display: block;
+    font-size: 0.9rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    margin-bottom: 16px;
+}
+
+.experiencia__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 4vw, 3.5rem);
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.1;
+    margin-bottom: 24px;
+}
+
+.experiencia__description {
+    font-size: 1rem;
+    color: var(--gray-600);
+    line-height: 1.7;
+    margin-bottom: 36px;
+    max-width: 480px;
+}
+
+/* Lista de checkmarks */
+.experiencia__list {
+    list-style: none;
+    padding: 0;
+    margin: 0 0 40px 0;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.experiencia__list-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 16px;
+}
+
+/* Círculo con check naranja */
+.experiencia__check {
+    flex-shrink: 0;
+    width: 28px;
+    height: 28px;
+    background-color: var(--primary-orange);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 2px;
+}
+
+.experiencia__check i {
+    color: #ffffff;
+    font-size: 0.75rem;
+    font-weight: 900;
+}
+
+.experiencia__list-item p {
+    font-size: 0.95rem;
+    color: #333333;
+    line-height: 1.5;
+}
+
+.experiencia__list-item strong {
+    font-weight: 700;
+    color: #111111;
+}
+
+/* ---- Columna derecha: Imagen ---- */
+.experiencia__image {
+    position: relative;
+    /* Jarallax necesita 'overflow: hidden' para recortar la capa que desplaza */
+    overflow: hidden;
+    /* Y necesita que el CONTENEDOR (no la img) tenga su propia altura: jarallax
+       oculta la <img> original y la reemplaza por una capa de fondo propia, asi
+       que si solo la img tenia la altura (520px, mas abajo), el div se quedaba
+       en 0 y toda la imagen desaparecia. */
+    height: 520px;
+}
+
+.experiencia__image img {
+    width: 100%;
+    height: 520px;
+    object-fit: cover;
+    object-position: top center;
+    border-radius: 16px;
+    display: block;
+}
+

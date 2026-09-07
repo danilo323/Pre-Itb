@@ -1,0 +1,392 @@
+/* =============================================
+   SECCIÓN ADMISIÓN / REGISTRO
+   ============================================= */
+.admision {
+    padding: 40px 0 20px;
+    /* Padding reducido para un fondo azul ligeramente más pequeño */
+    margin-bottom: 120px;
+    /* Espacio en blanco debajo para que el formulario sobresalga sin tapar la siguiente sección */
+    background-color: var(--primary-blue, #102a43);
+    position: relative;
+}
+
+.admision__container {
+    max-width: 1500px; /* Ancho máximo para empujar el formulario hasta el extremo derecho */
+    margin: 0 auto;
+    padding: 0 40px;
+    display: flex;
+    justify-content: space-between;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* ---- Columna Imagen ---- */
+.admision__image-col {
+    width: 450px;
+    margin-left: -30px;
+    margin-top: 80px; /* Bajar la imagen para que su borde superior alinee con el texto de la derecha */
+    flex-shrink: 0;
+    /* Jarallax necesita esto para posicionar y recortar su propia capa */
+    position: relative;
+    overflow: hidden;
+    border-radius: 8px;
+    /* El CONTENEDOR necesita su propia altura (jarallax oculta la <img>
+       original, que era quien media 475px; sin esto el div colapsaba a 0). */
+    height: 475px;
+}
+
+.admision__img {
+    width: 100%;
+    height: 475px;
+    object-fit: cover;
+    border-radius: 8px;
+    display: block;
+}
+
+/* ---- Columna Contenido y Formulario ---- */
+.admision__content-col {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0; /* Previene que el ancho gigante de la marquesina rompa el layout y expulse el formulario */
+}
+
+/* ---- Animación Marquesina Infinita ---- */
+.admision__marquee-wrapper {
+    overflow: hidden;
+    white-space: nowrap;
+    width: 100%;
+    margin-bottom: 24px;
+    position: relative;
+    mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+    -webkit-mask-image: linear-gradient(to right, transparent, black 5%, black 95%, transparent);
+}
+
+.admision__marquee-track {
+    display: inline-flex;
+    animation: marqueeLeftToRight 25s linear infinite;
+}
+
+@keyframes marqueeLeftToRight {
+    0% {
+        transform: translateX(-50%);
+    }
+    100% {
+        transform: translateX(0%);
+    }
+}
+
+.admision__huge-title {
+    font-family: var(--font-heading);
+    font-size: 4.2rem; /* Tamaño de letra reducido un poco a petición del usuario */
+    font-weight: 800;
+    color: #ffffff;
+    line-height: 1.1;
+    margin: 0;
+    white-space: nowrap;
+    flex-shrink: 0;
+    padding-right: 60px; /* Separación entre el final de un texto y el inicio del siguiente */
+}
+
+.admision__split {
+    display: flex;
+    gap: 60px;
+    align-items: flex-start;
+}
+
+/* ---- Boton circular de video ----
+   Estas medidas estaban escritas como style="" dentro del HTML. Al ir en linea
+   ninguna media query podia cambiarlas, y en movil ese margin-top de 150px
+   dejaba un hueco vacio enorme antes del boton. */
+.admision__video-circle {
+    width: 140px;
+    height: 140px;
+    margin-top: 150px;
+    text-decoration: none;
+}
+
+.admision__video-card {
+    width: 70px;
+    height: 70px;
+}
+
+.admision__play-btn {
+    position: static;
+    transform: none;
+    width: 100%;
+    height: 100%;
+}
+
+/* .hero__play-btn:hover centra con translate(-50%,-50%); aqui el boton ya no
+   esta posicionado, asi que ese translate lo sacaria de sitio al pasar el raton. */
+.admision__play-btn:hover {
+    transform: scale(1.1);
+}
+
+/* Columna Centro: Texto descriptivo */
+.admision__text-wrapper {
+    flex: 1;
+    max-width: 45%; /* Evita que el texto pase por debajo del formulario flotante */
+    min-width: 0;   /* Permite que la columna se encoja: sin esto, una palabra
+                       larga obliga a la columna a crecer y el texto se desborda */
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    margin-top: 90px; /* Bajar el texto descriptivo aún más */
+}
+
+.admision__desc {
+    color: #ffffff;
+    font-size: 1.05rem; /* Letra más grande y legible */
+    line-height: 1.6;
+    /* Si el administrador escribe una palabra muy larga o pega una URL,
+       se parte y continúa abajo en vez de salirse hacia la derecha. */
+    overflow-wrap: break-word;
+}
+
+/* ---- Formulario Blanco ---- */
+.admision__form-wrapper {
+    width: 450px; /* Formulario intermedio exacto a la maqueta */
+    flex-shrink: 0;
+    background-color: #ffffff;
+    border-radius: 8px; /* Bordes más cuadrados como en la maqueta */
+    padding: 30px 40px; /* Relleno proporcionado */
+    box-shadow: 0 15px 40px rgba(0, 0, 0, 0.15);
+    margin-bottom: -110px; 
+    position: relative;
+    z-index: 10;
+    margin-left: auto;
+}
+
+.admision__form-title {
+    font-family: var(--font-heading);
+    font-size: 1.6rem; /* Título acorde a la maqueta */
+    font-weight: 800;
+    color: #111111;
+    text-align: center;
+    margin-bottom: 4px;
+}
+
+.admision__form-subtitle {
+    font-size: 0.75rem;
+    color: #666666;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.admision__form-row {
+    display: flex;
+    gap: 16px; /* Campos más espaciados para respirar */
+    margin-bottom: 12px;
+}
+
+.admision__form-row--mixed {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr;
+    gap: 16px;
+}
+
+.admision__form-group {
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+    margin-bottom: 12px;
+}
+
+.admision__form-row .admision__form-group {
+    margin-bottom: 0;
+}
+
+.admision__form-group label {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: #333333;
+    margin-bottom: 4px;
+}
+
+/* Asterisco naranja */
+.admision__asterisk {
+    color: var(--primary-orange);
+    margin-left: 2px;
+}
+
+.admision__form-group input[type="text"],
+.admision__form-group input[type="email"],
+.admision__form-group input[type="tel"],
+.admision__form-group select,
+.admision__form-group textarea {
+    width: 100%;
+    padding: 10px 12px; /* Campos mantienen su forma y altura cómoda */
+    border: 1px solid #e0e0e0;
+    border-radius: 6px;
+    font-size: 0.8rem;
+    font-family: var(--font-body);
+    background-color: #fcfcfc;
+    transition: border-color 0.3s ease;
+    box-sizing: border-box;
+}
+
+.admision__form-group textarea {
+    height: 70px; /* Textarea un poco más proporcionado */
+    resize: none;
+}
+
+.admision__form-group input:focus,
+.admision__form-group select:focus,
+.admision__form-group textarea:focus {
+    outline: none;
+    border-color: var(--primary-orange);
+    background-color: #ffffff;
+}
+
+/* Radio buttons options */
+.admision__form-group--radio label {
+    font-size: 0.7rem;
+    color: #555555;
+}
+
+.admision__radio-options {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-top: 4px;
+}
+
+.admision__radio-options label {
+    display: flex;
+    align-items: flex-start;
+    gap: 6px;
+    font-weight: 400;
+    color: #444444;
+    cursor: pointer;
+    font-size: 0.7rem;
+    margin-bottom: 0;
+    line-height: 1.3;
+}
+
+.admision__radio-options input[type="radio"] {
+    accent-color: var(--primary-orange);
+    margin-top: 2px;
+}
+
+/* Custom Select */
+.admision__select-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.admision__select-wrapper select {
+    appearance: none;
+    -webkit-appearance: none;
+    width: 100%;
+}
+
+.admision__select-icon {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: #999999;
+    font-size: 0.75rem;
+    pointer-events: none;
+}
+
+.admision__submit-btn {
+    width: 100%;
+    justify-content: center;
+    padding: 14px; /* Un poco más alto para verse más premium */
+    font-size: 0.95rem;
+    font-weight: 600;
+    margin-top: 8px;
+    position: relative; /* Para anclar el icono */
+}
+
+/* Icono anclado a la derecha del botón */
+.admision__submit-btn .btn__icon-right-white {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.admision__submit-btn:hover .btn__icon-right-white i {
+    transform: rotate(0deg);
+}
+
+
+/* Responsive adjustments */
+@media (max-width: 1200px) {
+    .admision__container {
+        flex-direction: column;
+    }
+
+    .admision__image-col {
+        width: 100%;
+        height: 300px;
+    }
+
+    .admision__content-col {
+        width: 100%;
+    }
+
+    .admision__huge-title {
+        font-size: 2.5rem;
+        margin-top: 24px;
+    }
+
+    .admision__form-wrapper {
+        width: 100%;
+        margin-bottom: 0;
+    }
+
+    /* El 45% existe para que el texto no se meta debajo del formulario flotante.
+       Aqui ya no hay formulario flotante (todo va en una columna), asi que si no
+       se quita, el texto se queda en una tira estrecha con medio movil vacio. */
+    .admision__text-wrapper {
+        max-width: 100%;
+        margin-top: 24px;
+    }
+
+    /* Estos margenes servian para encajar la imagen con la maqueta de escritorio;
+       en una sola columna solo descuadran. */
+    .admision__image-col {
+        margin-left: 0;
+        margin-top: 0;
+    }
+
+    /* La columna pasa a 300px de alto, pero la imagen seguia con sus 475px fijos:
+       se salia por abajo y el texto de la descripcion se dibujaba encima. */
+    .admision__img {
+        height: 100%;
+    }
+
+    .admision__video-circle {
+        margin-top: 40px;
+    }
+}
+
+@media (max-width: 992px) {
+    .admision__split {
+        flex-direction: column;
+    }
+
+    .admision__form-row--mixed {
+        grid-template-columns: 1fr;
+    }
+}
+
+@media (max-width: 768px) {
+    .admision__form-row {
+        flex-direction: column;
+    }
+
+    /* En pantalla de movil, 40px de margen a cada lado se comen el contenido */
+    .admision__container {
+        padding: 0 20px;
+        gap: 32px;
+    }
+
+    .admision__form-wrapper {
+        padding: 24px 20px;
+    }
+}

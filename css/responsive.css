@@ -1,0 +1,361 @@
+/* =============================================
+   RESPONSIVE â€” TABLET (<=1024px)
+   ============================================= */
+@media (max-width: 1024px) {
+    :root {
+        /* Cabecera mas baja: aqui el menu ya no va en linea, solo queda el logo,
+           la franja azul y la hamburguesa. */
+        --header-height: 100px;
+    }
+
+    .top-bar__nav {
+        display: none;
+    }
+
+    /* El buscador es lo mas ancho de la franja azul. Con el puesto, la columna 2
+       de la rejilla exige mas ancho del que tiene el movil y se desborda la
+       cabecera entera (y con ella el ancho de la pagina). */
+    .top-bar__search {
+        display: none;
+    }
+
+    .navbar__logo-img {
+        height: 70px;
+    }
+
+    .navbar__logo {
+        padding-right: 16px;
+    }
+
+    .navbar__toggle {
+        display: flex;
+    }
+
+    .navbar__menu {
+        position: fixed;
+        top: 0;
+        right: -100%;
+        width: 320px;
+        height: 100vh;
+        background: var(--white);
+        flex-direction: column;
+        align-items: stretch;
+        /* En escritorio el menu lleva 'space-between' para repartir enlaces y
+           botones a lo ancho. Aqui, en columna, eso mandaba los botones al fondo
+           de la pantalla dejando un hueco enorme en medio. */
+        justify-content: flex-start;
+        padding: 80px 24px 40px;
+        box-shadow: var(--shadow-xl);
+        transition: right 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+        overflow-y: auto;
+        z-index: 1001;
+    }
+
+    .navbar__menu.active {
+        right: 0;
+    }
+
+    .navbar__list {
+        flex-direction: column;
+        gap: 0;
+        width: 100%;
+        /* Heredaba 'center' de la version de escritorio y los enlaces salian
+           centrados y del ancho justo del texto, en vez de ocupar toda la fila. */
+        align-items: stretch;
+    }
+
+    .navbar__link {
+        padding: 14px 16px;
+        font-size: 1rem;
+    }
+
+    .navbar__dropdown {
+        position: static;
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+        box-shadow: none;
+        border: none;
+        padding: 0 0 0 16px;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+
+    .navbar__item--dropdown.active .navbar__dropdown {
+        max-height: 300px;
+    }
+
+    .navbar__cta {
+        margin-left: 0;
+        margin-top: 24px;
+        flex-direction: column;
+        width: 100%;
+        gap: 12px;
+    }
+
+    .navbar__btn {
+        width: 100%;
+    }
+
+    .navbar__btn--outline {
+        justify-content: center;
+        padding: 14px 24px;
+    }
+
+    .navbar__cta .btn--solid {
+        justify-content: space-between;
+        padding: 8px 8px 8px 24px;
+    }
+
+    /* Secciones */
+    .hero__container {
+        grid-template-columns: 1fr;
+        padding: 60px 24px;
+    }
+
+    .hero__media {
+        justify-content: center;
+    }
+
+    .trayectoria__container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    /* Los 60px de margen izquierdo separan las columnas en el diseno de
+       escritorio. Aqui ya no hay columnas: como ademas la imagen y las tarjetas
+       miden width:100%, ese margen las corria 60px a la derecha y las sacaba de
+       la pantalla por ese mismo lado. */
+    .trayectoria__image,
+    .trayectoria__stats {
+        margin-left: 0;
+    }
+
+    /* 3/4 de proporcion en vertical se traduce en casi 600px de alto en un
+       movil, con la foto perdida en medio de tanto espacio vacio. */
+    .trayectoria__image {
+        aspect-ratio: 4 / 3;
+    }
+
+
+
+    .areas {
+        padding: 60px 0;
+    }
+
+    .areas__grid {
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 20px;
+    }
+
+    .programas__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .experiencia__container {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonios__container {
+        grid-template-columns: 1fr;
+    }
+
+    .testimonios__image {
+        order: -1;
+    }
+
+    .autoridades__grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    /* Estaba en 'nowrap': el titulo y el boton "Ver Directorio" se peleaban por
+       el ancho en vez de pasar el boton a la linea de abajo. */
+    .autoridades__header {
+        flex-wrap: wrap;
+    }
+
+    .servicios__bento {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .servicios__card--large {
+        grid-column: span 2;
+    }
+
+    .admision__container {
+        grid-template-columns: 1fr;
+    }
+
+    .noticias__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr 1fr;
+        gap: 32px;
+    }
+
+    .prefooter__container {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .prefooter__buttons {
+        justify-content: center;
+    }
+}
+
+/* =============================================
+   RESPONSIVE â€” MÃ“VIL (<=640px)
+   ============================================= */
+@media (max-width: 640px) {
+    :root {
+        /* 36px de franja azul + 42px de la fila de la hamburguesa. El logo (44px)
+           abarca las dos filas, asi que cabe dentro de esos 78px. */
+        --header-height: 78px;
+        --top-bar-height: 36px;
+        --header-inset: 10px;
+    }
+
+    .navbar__menu {
+        width: 100%;
+    }
+
+    .navbar__logo-img {
+        height: 44px;
+    }
+
+    .navbar__logo {
+        padding-right: 10px;
+    }
+
+    .hero__container {
+        padding: 48px 20px;
+    }
+
+    .hero__title {
+        font-size: 2rem;
+    }
+
+    .hero__description {
+        font-size: 0.9rem;
+    }
+
+    .hero__actions {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 20px;
+    }
+
+    .hero__media {
+        display: none;
+    }
+
+
+
+    .areas {
+        padding: 40px 0;
+    }
+
+    .areas__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .areas__header {
+        margin-bottom: 40px;
+    }
+
+    .areas__card {
+        padding: 20px 20px 24px;
+    }
+
+    .programas__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .programas__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .experiencia__image img {
+        height: 300px;
+    }
+
+    .testimonios__image img {
+        height: 300px;
+    }
+
+    .autoridades__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .autoridades__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    .servicios__bento {
+        grid-template-columns: 1fr;
+    }
+
+    .servicios__card--large {
+        grid-column: span 1;
+    }
+
+    .admision__form-row {
+        grid-template-columns: 1fr;
+    }
+
+    .noticias__header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    /* La noticia principal ponia la foto (316px fijos) al lado del texto: en un
+       movil de 440px no queda sitio para el texto. Se apilan. */
+    .noticias__main {
+        flex-direction: column;
+    }
+
+    .noticias__main-img {
+        flex: 0 0 200px;
+        margin: 20px 20px 0;
+    }
+
+    .noticias__main-body {
+        padding: 24px 20px;
+    }
+
+    .noticias__item {
+        flex-direction: column;
+    }
+
+    .noticias__item-img {
+        width: 100%;
+        height: 160px;
+    }
+
+    .prefooter__buttons {
+        flex-direction: column;
+        width: 100%;
+    }
+
+    .prefooter__btn {
+        justify-content: center;
+    }
+
+    .footer__grid {
+        grid-template-columns: 1fr;
+    }
+
+    .footer__bottom {
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .footer__bottom-links {
+        justify-content: center;
+    }
+}

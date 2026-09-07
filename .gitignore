@@ -1,0 +1,39 @@
+# Archivos de configuración local y base de datos
+.env
+.env.*
+config_local.json
+admin/config.php
+
+# Archivos de planificación del proyecto (No subir al repo)
+.gemini/
+.agents/
+CLAUDE.md
+.claude/
+md/
+
+# Archivos temporales de PHP / Sesiones (por si acaso)
+*.log
+*.tmp
+error_log
+cookies.txt
+
+# Archivos de prueba / debug sueltos en la raíz (no forman parte del sitio)
+/test_*.php
+admin/test_*.php
+
+# La carpeta test/ sí se sube (organizada aparte, a propósito)
+!test/
+
+# Backups y documentos pesados que no son código
+*.bak
+*.pdf
+
+# OS generated files
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Thumbs.db
+desktop.ini

@@ -1,0 +1,15 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+
+# Rutas limpias del panel de administración (equivalente a router.php en local)
+RewriteRule ^admin/?$ admin/index.php [L]
+RewriteRule ^admin/login/?$ admin/login.php [L]
+RewriteRule ^admin/logout/?$ admin/logout.php [L]
+
+# Página 404 personalizada para cualquier URL que no exista.
+# Se hace con RewriteRule (no ErrorDocument) para que funcione igual si el
+# sitio vive en la raíz del dominio o en una subcarpeta (ej. XAMPP en /itb/).
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^ admin/404.php [L]
+</IfModule>
