@@ -19,8 +19,9 @@ if (!isset($schema['items'][$section]) || $schema['items'][$section]['type'] !==
 $config = $schema['items'][$section];
 $is_new = ($id === 'new');
 
-// Leer sesión (vía helper)
+// Cargar datos en sesión (siempre sincronizado desde BD/JSON)
 require_once __DIR__ . '/../includes/content_helper.php';
+content_ensure_session_loaded();
 $items = collection_items($section);
 
 // Manejar POST (Crear o Actualizar)
@@ -72,7 +73,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
             }
         }
     } else {
-        $data_to_save['id'] = (count($items) > 0 ? max(array_column($items, 'id')) + 1 : 1);
+        require_once __DIR__ . '/storage.php';
+        // Asegurar que la estructura de la colección exista en sesión
+        if (!isset($_SESSION['admin_data'][$section])) {
+            $_SESSION['admin_data'][$section] = ['items' => []];
+        }
+        if (!isset($_SESSION['admin_data'][$section]['items'])) {
+            $_SESSION['admin_data'][$section]['items'] = [];
+        }
+        $data_to_save['id'] = storage_next_id($section, $_SESSION['admin_data']);
     }
     
     // 1. Procesar todos los campos genéricamente
@@ -96,19 +105,35 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
         $data_to_save[$key] = field_parse($field_config['type'], $raw_value, $field_config);
     }
 
-    // 3. Guardar en memoria
+    // 3. Guardar en memoria (siempre asegurar que la estructura exista)
+    if (!isset($_SESSION['admin_data'][$section])) {
+        $_SESSION['admin_data'][$section] = ['items' => []];
+    }
+    if (!isset($_SESSION['admin_data'][$section]['items'])) {
+        $_SESSION['admin_data'][$section]['items'] = [];
+    }
+
     if ($is_new) {
         $_SESSION['admin_data'][$section]['items'][] = $data_to_save;
     } else {
+        $found = false;
         foreach ($_SESSION['admin_data'][$section]['items'] as $idx => $itm) {
-            if ($itm['id'] === (int)$id) {
+            if ((int)($itm['id'] ?? 0) === (int)$id) {
                 $_SESSION['admin_data'][$section]['items'][$idx] = $data_to_save;
+                $found = true;
                 break;
             }
         }
+        // Si no estaba en sesión (sesión expirada), agregarlo
+        if (!$found) {
+            $_SESSION['admin_data'][$section]['items'][] = $data_to_save;
+        }
     }
 
-    flash_set($is_new ? "Registro creado exitosamente (Memoria)" : "Registro actualizado exitosamente (Memoria)");
+    // Guardar permanentemente en disco (data/content.json)
+    content_storage_save($_SESSION['admin_data']);
+
+    flash_set($is_new ? "Registro creado exitosamente" : "Registro actualizado exitosamente");
     header("Location: {$AB}/coleccion.php?c=" . urlencode($section));
     exit;
 }

@@ -3,6 +3,7 @@
 // Renderiza páginas y singletons (Versión 2.0)
 require_once __DIR__ . '/views/layout.php';
 require_once __DIR__ . '/fields/_loader.php';
+require_once __DIR__ . '/../includes/content_helper.php';
 
 $schema = require __DIR__ . '/schema_mock.php';
 $AB = admin_base();
@@ -20,10 +21,9 @@ if ($config['type'] === 'collection') {
     exit;
 }
 
-// Simulador de storage_get para la V2
-// Lee los datos guardados en la sesión, si no existen usa los 'default' del schema
+// Lee los datos guardados en la persistencia / sesión, si no existen usa los 'default' del schema
 function get_saved_data($sec_key, $field_key, $default) {
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+    content_ensure_session_loaded(true);
     if (isset($_SESSION['admin_data'][$sec_key][$field_key])) {
         return $_SESSION['admin_data'][$sec_key][$field_key];
     }

@@ -2,7 +2,9 @@
 // admin/guardar.php
 // Guarda temporalmente en $_SESSION (Versión 2.0)
 
-session_start();
+require_once __DIR__ . '/auth.php';
+auth_require();
+
 require_once __DIR__ . '/csrf.php';
 require_once __DIR__ . '/base_url.php';
 $AB = admin_base();
@@ -26,9 +28,7 @@ if (!isset($schema['items'][$section_key])) {
     exit;
 }
 
-if (!isset($_SESSION['admin_data'])) {
-    $_SESSION['admin_data'] = [];
-}
+content_ensure_session_loaded();
 
 // 1. Normalizar $_FILES para soportar repeaters
 function normalize_files_array($files) {
@@ -99,6 +99,9 @@ if ($config['type'] === 'page' && !empty($config['sections'])) {
         $_SESSION['admin_data'][$section_key][$fk] = field_parse($fc['type'], $raw_value, $fc);
     }
 }
+
+// Guardar permanentemente en disco (data/content.json)
+content_storage_save($_SESSION['admin_data']);
 
 $_SESSION['flash_message'] = 'Cambios guardados correctamente.';
 $_SESSION['flash_type']    = 'success';

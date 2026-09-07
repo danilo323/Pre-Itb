@@ -16,8 +16,9 @@ if (!isset($schema['items'][$section]) || $schema['items'][$section]['type'] !==
 
 $config = $schema['items'][$section];
 
-// Leer de la sesión (vía helper)
+// Leer de la sesión (vía helper, sincronizado con BD)
 require_once __DIR__ . '/../includes/content_helper.php';
+content_ensure_session_loaded();
 $items = collection_items($section);
 
 $is_sortable = !empty($config['sortable']);
@@ -59,6 +60,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             $_SESSION['flash_message'] = "Orden guardado exitosamente";
             $_SESSION['flash_type'] = "success";
         }
+        content_storage_save($_SESSION['admin_data']);
     }
     
     header("Location: {$AB}/coleccion.php?c=" . urlencode($section));
@@ -78,8 +80,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             // Reindexar arreglo para mantener orden limpio
             $_SESSION['admin_data'][$section]['items'] = array_values($_SESSION['admin_data'][$section]['items']);
             
+            content_storage_save($_SESSION['admin_data']);
             if (session_status() === PHP_SESSION_ACTIVE) {
-                $_SESSION['flash_message'] = "Registro eliminado correctamente (Memoria)";
+                $_SESSION['flash_message'] = "Registro eliminado correctamente";
                 $_SESSION['flash_type'] = "success";
             }
             break;

@@ -27,10 +27,11 @@ echo layout_start('Dashboard');
 
 <!-- Métricas Rápidas -->
 <?php
-// Calcular algunas métricas reales leyendo de $_SESSION
-$total_equipo = isset($_SESSION['admin_data']['equipo']['items']) ? count($_SESSION['admin_data']['equipo']['items']) : 0;
-$total_testimonios = isset($_SESSION['admin_data']['testimonios']['items']) ? count($_SESSION['admin_data']['testimonios']['items']) : 0;
-$total_noticias = isset($_SESSION['admin_data']['noticias']['items']) ? count($_SESSION['admin_data']['noticias']['items']) : 0;
+// Calcular métricas reales usando collection_items persistente
+require_once __DIR__ . '/../includes/content_helper.php';
+$total_equipo = count(collection_items('equipo'));
+$total_testimonios = count(collection_items('testimonios'));
+$total_noticias = count(collection_items('noticias'));
 ?>
 <div class="dash-metrics">
     <div class="dash-metric-card">
@@ -83,14 +84,7 @@ foreach ($groups as $group_key => $group_label):
                 
                 // Determinar subtítulo
                 if ($item['type'] === 'collection') {
-                    // Contar items en sesión si existen, sino 0
-                    if ($key === 'equipo') {
-                        $count = 2; // Hardcoded mock to match previous fix
-                    } elseif ($key === 'testimonios') {
-                        $count = 2; // Hardcoded mock
-                    } else {
-                        $count = isset($_SESSION['admin_data'][$key]['items']) ? count($_SESSION['admin_data'][$key]['items']) : 0;
-                    }
+                    $count = count(collection_items($key));
                     $subtitle = $count . ' item' . ($count !== 1 ? 's' : '');
                 } else {
                     $subtitle = 'Editar contenido';

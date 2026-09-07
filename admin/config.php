@@ -1,0 +1,28 @@
+<?php
+// admin/config.php
+// Configuración local del panel ITB (NUNCA subir al repositorio)
+
+return [
+    // Credenciales de acceso al panel (Demo: admin / 1234)
+    'admin_user'            => 'admin',
+    'admin_hash'            => '$2y$12$Vs2sYUVTTC9a8WNxxZXtNuysplnps6TO9Z.8j9UaeTRF4sZWYkaR.',
+    // Conexión a Base de Datos MySQL
+    'db_host'               => '127.0.0.1',
+    'db_port'               => 3306,
+    'db_name'               => 'itb_admin',
+    'db_user'               => 'root',
+    'db_pass'               => '123456789',
+
+    // Parámetros de sesión
+    'session_name'          => 'itb_admin_sess',
+    'session_timeout'       => 3600, // 1 hora de inactividad
+
+    // Protección contra fuerza bruta (Rate Limiting)
+    'login_max_attempts'    => 5,
+    'login_lockout_seconds' => 900, // 15 minutos de bloqueo
+
+    // Rutas del sistema
+    'data_path'             => __DIR__ . '/../data',
+    'uploads_path'          => __DIR__ . '/../uploads',
+    'max_upload_mb'         => 32,
+];

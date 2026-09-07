@@ -1,31 +1,63 @@
 <?php
 // admin/login.php
-session_start();
+require_once __DIR__ . '/auth.php';
+require_once __DIR__ . '/csrf.php';
 require_once __DIR__ . '/base_url.php';
+
+auth_session_start();
 $AB = admin_base();
 
-// Si ya está logueado, ir directo al panel
-if (!empty($_SESSION['admin_logged'])) {
+// Si ya está logueado y la sesión es válida, ir directo al panel
+if (!empty($_SESSION['admin_logged']) && auth_check_inactivity()) {
     header('Location: ' . $AB . '/index.php');
     exit;
 }
 
 $error = '';
-$config = require __DIR__ . '/config.php';
+$notice = '';
+
+if (isset($_GET['expired'])) {
+    $notice = 'Tu sesión ha expirado por inactividad. Por favor, ingresa nuevamente.';
+}
+
+// 1. Verificar bloqueo por Rate Limiting
+$rateLimit = auth_rate_limit_check();
+$isLocked = $rateLimit['locked'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $user = trim($_POST['username'] ?? '');
-    $pass = trim($_POST['password'] ?? '');
+    csrf_check();
 
-    if ($user === $config['admin_user'] && password_verify($pass, $config['admin_hash'])) {
-        // Nueva sesión al loguear: evita session fixation
-        session_regenerate_id(true);
-        $_SESSION['admin_logged'] = true;
-        $_SESSION['user'] = $user;
-        header('Location: ' . $AB . '/index.php');
-        exit;
+    if ($isLocked) {
+        $minutes = ceil($rateLimit['seconds_left'] / 60);
+        $error = "Demasiados intentos fallidos. Acceso bloqueado temporalmente por {$minutes} minuto(s).";
     } else {
-        $error = 'Usuario o contraseña incorrectos.';
+        $user = trim($_POST['username'] ?? '');
+        $pass = trim($_POST['password'] ?? '');
+
+        // Autenticación estricta con password_verify() (sin fallbacks en texto plano)
+        if (auth_verify_credentials($user, $pass)) {
+            // Protección contra Session Fixation
+            session_regenerate_id(true);
+            $_SESSION['admin_logged'] = true;
+            $_SESSION['user'] = $user;
+            $_SESSION['last_activity'] = time();
+
+            // Resetear contador de fallos
+            auth_rate_limit_reset();
+
+            header('Location: ' . $AB . '/index.php');
+            exit;
+        } else {
+            // Registrar intento fallido
+            auth_rate_limit_fail();
+            $newCheck = auth_rate_limit_check();
+            if ($newCheck['locked']) {
+                $minutes = ceil($newCheck['seconds_left'] / 60);
+                $error = "Has excedido el número máximo de intentos. Acceso bloqueado por {$minutes} minutos.";
+            } else {
+                $error = 'Usuario o contraseña incorrectos.';
+            }
+        }
     }
 }
 ?>
@@ -54,26 +86,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <p>Panel de Administración — Acceso Privado</p>
         </div>
 
+        <?php if (!empty($notice)): ?>
+            <div class="flash-message flash-info" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd; margin-bottom: 1.25rem;">
+                <i class="bi bi-info-circle-fill"></i>
+                <?= htmlspecialchars($notice, ENT_QUOTES, 'UTF-8') ?>
+            </div>
+        <?php endif; ?>
+
         <?php if (!empty($error)): ?>
-            <div class="flash-message flash-error">
+            <div class="flash-message flash-error" style="margin-bottom: 1.25rem;">
                 <i class="bi bi-x-octagon-fill"></i>
                 <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
             </div>
         <?php endif; ?>
 
         <form method="POST" action="" class="login-form">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
 
             <div class="field-group">
                 <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" placeholder="admin" required autofocus>
+                <input type="text" id="username" name="username" placeholder="admin" required autofocus autocomplete="username">
             </div>
 
             <div class="field-group">
                 <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" required>
+                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
             </div>
 
-            <button type="submit" class="btn-block">
+            <button type="submit" class="btn-block" <?= $isLocked ? 'disabled style="opacity:0.6; cursor:not-allowed;"' : '' ?>>
                 Entrar al Panel <i class="bi bi-arrow-right"></i>
             </button>
 
