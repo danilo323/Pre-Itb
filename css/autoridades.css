@@ -52,11 +52,20 @@
     max-width: 640px;
 }
 
-/* ---- Grid 4 columnas (forzado) ---- */
+/* ---- Grid 4 columnas ----
+   SIN !important: lo tenia, y por eso responsive.css no podia bajarlo a 2 o a 1
+   columna. En el movil las 4 tarjetas seguian ahi, no cabian, y el desbordamiento
+   se llevaba por delante el ancho de TODA la pagina. */
 .autoridades__grid {
-    display: grid !important;
-    grid-template-columns: repeat(4, 1fr) !important;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
     gap: 24px;
+}
+
+/* Sin esto, el nombre largo de una autoridad ("PhD. Roberto Tolozano Benites")
+   marca un ancho minimo a su columna y la rejilla se desborda igual. */
+.autoridades__card {
+    min-width: 0;
 }
 
 /* ---- Tarjeta ---- */

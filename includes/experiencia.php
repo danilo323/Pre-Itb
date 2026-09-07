@@ -55,8 +55,8 @@
         </div>
 
         <!-- Lado derecho: Imagen -->
-        <div class="experiencia__image">
-            <img src="<?= htmlspecialchars(content_raw('experiencia', 'imagen', 'img/experiencia.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Experiencia estudiantil ITB">
+        <div class="experiencia__image" data-jarallax data-speed="0.5" data-img-position="top">
+            <img src="<?= htmlspecialchars(content_raw('experiencia', 'imagen', 'img/experiencia.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Experiencia estudiantil ITB" class="jarallax-img">
         </div>
 
     </div>

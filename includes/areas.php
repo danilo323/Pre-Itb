@@ -29,7 +29,7 @@
                     'titulo' => "Facultad de Ciencias Empresariales\ny Sistemas / Económicas y\nEmpresariales (FACES)",
                     'descripcion' => "Programas de gestión, contabilidad, marketing y\ncomercio para liderar en el sector empresarial e\nindustrial.",
                     'icono' => 'img/laptop.png',
-                    'imagen_fondo' => 'img/estudiantes1.png',
+                    'imagen_fondo' => 'img/Areas_formacion_1.png',
                     'btn_texto' => 'Explorar programas'
                 ],
                 [

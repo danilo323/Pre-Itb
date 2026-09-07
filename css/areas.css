@@ -21,7 +21,7 @@
     font-family: var(--font-heading);
     font-size: clamp(2rem, 3.5vw, 2.8rem);
     font-weight: 800;
-    color: var(--primary-blue);
+    color: #111111;
     margin-bottom: 12px;
 }
 

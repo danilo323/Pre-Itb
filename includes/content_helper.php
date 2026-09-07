@@ -14,6 +14,23 @@ function content_raw(string $section, string $field, $default = '') {
 }
 
 /**
+ * Confirma que una ruta de imagen (relativa, tipo 'img/foo.png') tenga
+ * de verdad un archivo detrás antes de imprimirla en un <img src="">.
+ *
+ * Sin esto, si alguien borra el archivo directo desde la carpeta (no desde
+ * el panel), la ruta guardada sigue "pareciendo" válida y el navegador
+ * termina mostrando el ícono de imagen rota en medio de un carrusel o
+ * grid — un hueco feo que nadie pidió. Se usa para filtrar esos items
+ * antes de pintarlos, en vez de imprimir lo que sea que haya en el campo.
+ */
+function content_image_exists(?string $path): bool {
+    $path = trim((string)$path);
+    if ($path === '') return false;
+    if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) return true;
+    return file_exists(dirname(__DIR__) . '/' . ltrim($path, '/'));
+}
+
+/**
  * Arma el texto que gira alrededor de los botones circulares de video.
  *
  * El administrador escribe UNA FRASE POR LÍNEA, sin ningún símbolo raro:
@@ -111,7 +128,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Canciller', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/PHD_Roberto.jpg',
+                    'foto' => 'img/autoridad_1.png',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ],
@@ -123,7 +140,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Rectora', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/PHD.Elena_Tolozano.jpg',
+                    'foto' => 'img/autoridad_2.png',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ],
@@ -135,7 +152,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Vicerrector Académico y de Investigación', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/PHD.Luis_alzate.jpg',
+                    'foto' => 'img/autoridad_3.png',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ],
@@ -147,7 +164,7 @@ function collection_items(string $collection_name): array {
                     'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
                     'linkedin' => '#',
                     'email' => '#',
-                    'foto' => 'img/PHD.Michelle_tolozano.webp',
+                    'foto' => 'img/autoridad_4.png',
                     'mostrar_en_home' => '1', 
                     'publicado' => '1'
                 ]

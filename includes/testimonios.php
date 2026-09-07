@@ -7,8 +7,8 @@
     <div class="testimonios__container">
 
         <!-- Foto a la izquierda -->
-        <div class="testimonios__photo">
-            <img src="<?= htmlspecialchars(content_raw('testimonios', 'imagen', 'img/MariaFernanda.png'), ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(content_raw('testimonios', 'nombre', 'María Fernanda Gómez'), ENT_QUOTES, 'UTF-8') ?>">
+        <div class="testimonios__photo" data-jarallax data-speed="0.5" data-img-position="top">
+            <img src="<?= htmlspecialchars(content_raw('testimonios', 'imagen', 'img/MariaFernanda.png'), ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(content_raw('testimonios', 'nombre', 'María Fernanda Gómez'), ENT_QUOTES, 'UTF-8') ?>" class="jarallax-img">
         </div>
 
         <!-- Contenido a la derecha -->

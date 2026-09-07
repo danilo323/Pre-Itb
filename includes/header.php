@@ -10,7 +10,7 @@
     <div class="top-bar">
         <div class="top-bar__container">
             <nav class="top-bar__nav">
-                <a href="#" class="top-bar__link top-bar__link--active"><?= content_get('menu', 'top_link_1', 'Portal Estudiantil SGA') ?></a>
+                <a href="#" class="top-bar__link"><?= content_get('menu', 'top_link_1', 'Portal Estudiantil SGA') ?></a>
                 <a href="#" class="top-bar__link"><?= content_get('menu', 'top_link_2', 'Educación Continua') ?></a>
                 <a href="#" class="top-bar__link"><?= content_get('menu', 'top_link_3', 'Vinculación') ?></a>
                 <a href="#" class="top-bar__link"><?= content_get('menu', 'top_link_4', 'Investigación') ?></a>

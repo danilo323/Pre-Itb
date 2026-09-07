@@ -151,8 +151,7 @@
 .hero__title {
     font-family: var(--font-heading);
     font-size: clamp(2.5rem, 5vw, 3.8rem);
-    font-weight: 800;
-    font-style: italic;
+    font-weight: 700;
     color: var(--white);
     line-height: 1.1;
     margin-bottom: 20px;

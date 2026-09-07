@@ -3,23 +3,38 @@
    ============================================= */
 
 /* ---- Footer CTA (Pre-footer) ---- */
+/* .footer-cta es el celeste del cielo (mismo color que .footer-skyline); dentro
+   flota la tarjeta oscura (.footer-cta__container, fill #0B295E como la montaña
+   del frente) con esquinas redondeadas, dejando ver el celeste alrededor: arriba,
+   abajo y a los costados. Antes la tarjeta pintaba TODO el ancho del bloque del
+   mismo color que el fondo, así que no se distinguía como tarjeta. */
 .footer-cta {
-    background-color: #0d2238; /* Mismo azul del footer: bloque continuo, sin flotar */
+    background-color: #335AA0;
     position: relative;
     z-index: 10;
-    padding-top: 45px;
+    /* Sin padding-top: la tarjeta toca el filo de arriba de esta sección (no el
+       blanco de la sección anterior, que es aparte); el celeste solo se ve por
+       los costados y por abajo, y se asoma un poquito en las esquinas de arriba
+       gracias al border-radius de la tarjeta. */
+    padding: 0 24px 40px;
 }
 
 .footer-cta__container {
     max-width: 1400px;
     margin: 0 auto;
-    padding: 0 40px;
+    background-color: #0B295E;
+    /* La capa que revisamos en Figma era una "Ruta vectorial" (un contorno ya
+       aplanado a path); ahí el campo "Radio de esquina" no refleja el redondeo
+       real del trazo y por eso marcaba 0 aunque a simple vista se vea curvo.
+       Solo las esquinas de ABAJO son redondeadas (con var(--radius-lg), el mismo
+       valor que usa el resto del sitio): las de ARRIBA quedan rectas porque la
+       tarjeta toca ahí el filo blanco de la sección anterior. */
+    border-radius: 0 0 var(--radius-lg, 16px) var(--radius-lg, 16px);
+    padding: 32px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     gap: 40px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 30px;
 }
 
 .footer-cta__left {
@@ -59,45 +74,69 @@
     color: #ffffff !important;
 }
 
-/* ---- Skyline Transition ---- */
+/* ---- Skyline: transición hacia el footer ----
+   3 archivos SVG reales (svg/footer1.svg, footer2.svg, footer3.svg) en vez del
+   dibujo a mano de antes. footer1 y footer2 comparten el mismo lienzo de
+   1920x759, así que se superponen tal cual sin reajustar nada.
+
+   El contenedor .footer-skyline actúa de "mirilla": es más bajo que el dibujo
+   real (proporción 1920:320 en vez de la nativa 1920:759) y recorta con
+   overflow:hidden, dejando ver solo la franja de arriba donde están los
+   edificios. Lo que queda fuera es relleno sólido del mismo azul que el fondo
+   del footer, así que el recorte no se nota. */
 .footer-skyline {
     width: 100%;
-    background-color: #0d2238;
-    /* Continúa el mismo azul del footer */
+    aspect-ratio: 1920 / 320;
+    overflow: hidden;
+    /* Celeste del cielo detrás de las montañas (footer2.svg no cubre todo el
+       alto de la mirilla, así que por encima de los picos se ve este color). */
+    background-color: #335AA0;
+    position: relative;
     line-height: 0;
 }
 
-.skyline-svg {
+/* A la proporción NATIVA de los SVG (1920x759): a diferencia del contenedor de
+   arriba, esta sí mide lo que el dibujo realmente mide, y de ahí que sobresalga
+   por abajo del contenedor (que lo recorta). Sirve de referencia de escala
+   común para las 3 capas de abajo. */
+.footer-skyline__scene {
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 140px;
+    aspect-ratio: 1920 / 759;
+}
+
+.footer-skyline__layer {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+    height: 100%;
     display: block;
 }
 
-.skyline-svg__back {
-    fill: #1c3a5e;
-    opacity: 0.55;
-}
-
-.skyline-svg__front {
-    fill: #274a73;
-    stroke: #274a73;
-    stroke-width: 2;
-    stroke-linecap: round;
-}
-
-.skyline-svg__wheel-rim {
-    fill: none;
-    stroke-width: 6;
-}
-
-.skyline-svg__trees {
-    stroke-width: 3;
+/* Monumento (arco) que no venía incluido en footer1.svg: se ubica a mano en el
+   mayor hueco vacío que dejan los demás edificios (aprox. x=96..528 de 1920),
+   con el ancho puesto como el mismo porcentaje que ocupaba en su lienzo
+   original (140/1920) para que quede exactamente a la misma escala que sus
+   vecinos, ni más grande ni más chico. El "top" alinea su base con el piso
+   donde se apoyan los demás edificios (y≈245 de 759). */
+.footer-skyline__landmark {
+    position: absolute;
+    left: 12.6%;
+    top: 22%;
+    width: 7.3%;
+    height: auto;
 }
 
 /* ---- Main Footer ---- */
 .footer-main {
-    background-color: #0d2238;
-    /* Color azul muy oscuro del footer principal */
+    /* NO es el celeste del cielo (#335AA0): footer-main va DEBAJO de la montaña,
+       no en el cielo, así que lleva el mismo azul oscuro con el que termina la
+       montaña del frente (footer1.svg/footer2.svg, fill #0B295E) para que la
+       transición sea continua. Con el celeste aquí se notaba una costura justo
+       donde termina la mirilla del skyline y empieza este bloque. */
+    background-color: #0B295E;
     padding: 60px 0 30px;
     position: relative;
     z-index: 5;
@@ -145,6 +184,15 @@
     line-height: 1.4;
 }
 
+/* El PBX son dos lineas. Antes iban separadas con un <br> escrito dentro del
+   texto por defecto, pero content_get() escapa el HTML y el <br> se veia tal
+   cual, como texto. Ahora el salto es un salto de linea de verdad y se respeta
+   con pre-line, asi que el administrador tambien puede escribir varias lineas
+   desde el panel y funcionan. */
+.footer-main__contact-item span {
+    white-space: pre-line;
+}
+
 .footer-main__contact-item i {
     flex-shrink: 0;
     width: 32px;
@@ -157,9 +205,11 @@
     font-size: 0.9rem;
 }
 
-/* Columnas de enlaces con línea divisoria a la izquierda */
+/* Columnas de enlaces con línea divisoria a la izquierda.
+   Antes casi no se veía (opacidad 0.15): la referencia de Figma la muestra
+   sólida y bien visible, así que sube a un blanco casi opaco. */
 .footer-main__col:not(.footer-main__col--logo):not(.footer-main__col--map) {
-    border-left: 1px solid rgba(255, 255, 255, 0.15);
+    border-left: 1px solid rgba(255, 255, 255, 0.5);
     padding-left: 30px;
 }
 
@@ -181,13 +231,14 @@
 }
 
 .footer-main__list a:hover {
-    color: var(--primary-orange, #f36c21);
+    /* Color de guía que dio el usuario para el hover de estos enlaces (distinto
+       al naranja general del sitio: aquí es explícitamente #DC5B14). */
+    color: #DC5B14;
 }
 
-.footer-main__link-orange {
-    color: var(--primary-orange, #f36c21) !important;
-    font-weight: 700;
-}
+/* .footer-main__link-orange se eliminó: era la regla que pintaba "CONDUCE
+   ECUADOR" de naranja todo el tiempo, a partir de un if hardcodeado en
+   includes/footer.php. Ya no existe ese if, así que esta clase tampoco. */
 
 /* Mapa */
 .footer-main__col--map {
@@ -209,12 +260,13 @@
 }
 
 .footer-main__address-pill {
-    background-color: #2b3a4a;
+    background-color: #3A4A6B;
     color: #ffffff;
     font-size: 0.8rem;
     text-align: center;
     padding: 10px;
-    border-radius: 6px;
+    /* Rectangular, sin esquinas redondeadas (ya no es una "píldora") */
+    border-radius: 0;
     width: 100%;
 }
 
@@ -327,10 +379,24 @@
 }
 
 /* =============================================
-   FLOATING BUTTONS (WhatsApp & Scroll Top)
+   BOTONES FLOTANTES (WhatsApp y Subir)
    ============================================= */
 
-/* Botón flotante WhatsApp */
+/* Los dos comparten .js-floating para poder esconderlos a la vez al llegar al
+   pie de pagina (ver js/main.js). Alli el propio pie ya ofrece los telefonos,
+   las redes y los enlaces, asi que las burbujas solo tapaban contenido. */
+.js-floating {
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+}
+
+.js-floating.floating--oculto {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(16px);
+}
+
+/* ---- Burbuja de WhatsApp ---- */
 .whatsapp-float {
     position: fixed;
     bottom: 20px;
@@ -346,6 +412,9 @@
     text-decoration: none;
 }
 
+/* La etiqueta va PLEGADA: en reposo solo se ve el circulo verde y se despliega
+   al pasar el cursor. Antes iba siempre desplegada y en el movil ocupaba de
+   lado a lado tapando el contenido. */
 .whatsapp-float__label {
     background-color: #1a2a3a;
     color: #ffffff;
@@ -353,13 +422,27 @@
     font-weight: 700;
     font-family: var(--font-primary, sans-serif);
     text-transform: uppercase;
-    padding: 12px 35px 12px 20px;
+    white-space: nowrap;
     border-radius: 25px;
-    margin-right: -25px;
-    /* Se mete por detrás del círculo verde */
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
-    z-index: 1;
     position: relative;
+    z-index: 1;
+    max-width: 0;
+    padding: 12px 0;
+    margin-right: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: max-width 0.4s ease, padding 0.4s ease, margin-right 0.4s ease, opacity 0.25s ease;
+}
+
+/* :focus-visible ademas del hover, para quien navega con el teclado */
+.whatsapp-float:hover .whatsapp-float__label,
+.whatsapp-float__link:focus-visible .whatsapp-float__label {
+    max-width: 340px;
+    padding: 12px 35px 12px 20px;
+    /* El margen negativo mete la etiqueta por detras del circulo verde */
+    margin-right: -25px;
+    opacity: 1;
 }
 
 .whatsapp-float__icon {
@@ -382,27 +465,42 @@
     transform: scale(1.1);
 }
 
-/* Scroll To Top Button */
+/* ---- Boton Subir ---- */
 #top-to-bottom {
     position: fixed;
-    bottom: 85px;
-    right: 25px;
+    /* 20 (margen) + 50 (circulo de WhatsApp) + 14 (separacion) */
+    bottom: 84px;
+    right: 20px;
     background-color: var(--primary-orange, #f36c21);
     color: #ffffff;
-    width: 40px;
-    height: 40px;
+    /* Mismo tamano que la burbuja de WhatsApp, para que queden alineados */
+    width: 50px;
+    height: 50px;
     border-radius: 50%;
     display: flex;
     justify-content: center;
     align-items: center;
     cursor: pointer;
     z-index: 9998;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-    opacity: 0.8;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    /* Oculto de entrada. js/main.js le pone .scroll_visible al bajar 300px.
+       Esa clase no estaba definida en el CSS, asi que el boton se veia siempre,
+       incluso arriba del todo donde no sirve para nada. */
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    transform: translateY(10px);
+    transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease, background-color 0.3s ease;
 }
 
-#top-to-bottom:hover {
+#top-to-bottom.scroll_visible {
+    opacity: 0.9;
+    visibility: visible;
+    pointer-events: auto;
+    transform: translateY(0);
+}
+
+#top-to-bottom.scroll_visible:hover {
     background-color: #d15615;
     opacity: 1;
 }

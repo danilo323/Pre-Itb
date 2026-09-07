@@ -58,29 +58,29 @@
                     [
                         'nombre' => 'PhD. Roberto Tolozano Benites',
                         'cargo' => 'Canciller',
-                        'imagen' => 'img/PHD.Roberto_tolozano.jpg'
+                        'imagen' => 'img/autoridad_1.png'
                     ],
                     [
                         'nombre' => 'PhD. Elena Tolozano Benites',
                         'cargo' => 'Rectora',
-                        'imagen' => 'img/PHD.Elena_Tolozano.jpg'
+                        'imagen' => 'img/autoridad_2.png'
                     ],
                     [
                         'nombre' => 'PhD. Luis Alzate Peralta',
                         'cargo' => 'Vicerrector Académico<br>y de Investigación',
-                        'imagen' => 'img/PHD.Luis_alzate.jpg'
+                        'imagen' => 'img/autoridad_3.png'
                     ],
                     [
                         'nombre' => 'PhD. Michelle Tolozano Lapierre',
                         'cargo' => 'Vicerrectora de Extensión<br>y Gestión Administrativa',
-                        'imagen' => 'img/PHD.Michelle_tolozano.webp'
+                        'imagen' => 'img/autoridad_4.png'
                     ]
                 ];
             }
 
             foreach ((array)$lista_autoridades as $auth):
                 $foto_path = trim($auth['imagen'] ?? '');
-                if (empty($foto_path)) $foto_path = 'img/placeholder_autoridad.jpg';
+                if (!content_image_exists($foto_path)) $foto_path = 'img/placeholder_autoridad.svg';
                 $nombre = htmlspecialchars($auth['nombre'] ?? '', ENT_QUOTES, 'UTF-8');
                 $cargo = nl2br(htmlspecialchars($auth['cargo'] ?? '', ENT_QUOTES, 'UTF-8'));
             ?>

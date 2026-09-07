@@ -26,77 +26,25 @@
     </div>
 </div>
 
-<!-- ============================================= -->
-<!-- SKYLINE TRANSITION                            -->
-<!-- ============================================= -->
+<!-- =============================================
+     SKYLINE (transición hacia el footer)
+     Reemplaza al SVG dibujado a mano: ahora son 3 archivos reales que trajo
+     el usuario (svg/footer1.svg, footer2.svg, footer3.svg). Los tres comparten
+     la misma paleta de azules del footer y estaban pensados para superponerse:
+     footer2 = cordillera de fondo (capa trasera, a todo el ancho), footer1 =
+     los edificios/monumentos sueltos (capa delantera, mismo lienzo de
+     1920x759 que footer2, por eso encajan sin necesitar reposicionarlos), y
+     footer3 = un monumento (arco) que no venía incluido en el dibujo grande,
+     así que se coloca a mano en el hueco vacío que dejan los demás, a la
+     misma escala (ver .footer-skyline__landmark en css/footer.css). -->
 <div class="footer-skyline">
-    <svg class="skyline-svg" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1440 220" preserveAspectRatio="none">
-        <!-- Capa trasera: colinas lejanas -->
-        <path class="skyline-svg__back" d="M0,220 L0,150 Q120,110 260,140 T520,120 T760,150 T1020,110 T1280,150 L1440,130 L1440,220 Z"/>
-
-        <!-- Capa frontal: edificios, rueda de la fortuna y torre -->
-        <g class="skyline-svg__front">
-            <!-- Torre con aguja (izquierda) -->
-            <rect x="70" y="80" width="16" height="120" />
-            <polygon points="62,80 94,80 78,45" />
-            <rect x="75" y="30" width="6" height="18" />
-
-            <!-- Edificios pequeños -->
-            <rect x="20" y="150" width="34" height="50" />
-            <rect x="110" y="130" width="30" height="70" />
-            <rect x="150" y="160" width="26" height="40" />
-
-            <!-- Rueda de la fortuna -->
-            <circle cx="360" cy="140" r="58" class="skyline-svg__wheel-rim" />
-            <circle cx="360" cy="140" r="7" />
-            <line x1="360" y1="82" x2="360" y2="198" />
-            <line x1="302" y1="140" x2="418" y2="140" />
-            <line x1="319" y1="99" x2="401" y2="181" />
-            <line x1="319" y1="181" x2="401" y2="99" />
-            <rect x="352" y="196" width="16" height="4" />
-
-            <!-- Edificios centrales -->
-            <rect x="460" y="120" width="34" height="80" />
-            <rect x="500" y="150" width="28" height="50" />
-            <rect x="534" y="100" width="30" height="100" />
-
-            <!-- Cúpula / templo -->
-            <rect x="640" y="150" width="70" height="50" />
-            <path d="M636,150 a39,39 0 0 1 78,0 Z" />
-            <rect x="670" y="95" width="10" height="30" />
-            <circle cx="675" cy="92" r="6" />
-
-            <!-- Edificios derecha -->
-            <rect x="760" y="140" width="30" height="60" />
-            <rect x="796" y="110" width="34" height="90" />
-            <rect x="836" y="155" width="26" height="45" />
-
-            <!-- Árboles -->
-            <g class="skyline-svg__trees">
-                <line x1="920" y1="170" x2="920" y2="200" />
-                <circle cx="920" cy="160" r="14" />
-                <line x1="960" y1="175" x2="960" y2="200" />
-                <circle cx="960" cy="166" r="11" />
-            </g>
-
-            <!-- Bloque de edificios final -->
-            <rect x="1010" y="130" width="30" height="70" />
-            <rect x="1046" y="160" width="26" height="40" />
-            <rect x="1086" y="105" width="34" height="95" />
-            <rect x="1130" y="145" width="28" height="55" />
-
-            <!-- Obelisco -->
-            <polygon points="1210,200 1226,200 1220,120 1216,120" />
-
-            <rect x="1270" y="150" width="30" height="50" />
-            <rect x="1306" y="170" width="26" height="30" />
-            <rect x="1350" y="130" width="34" height="70" />
-            <rect x="1394" y="165" width="26" height="35" />
-        </g>
-    </svg>
+    <div class="footer-skyline__scene">
+        <img src="svg/footer2.svg" alt="" class="footer-skyline__layer footer-skyline__layer--back" aria-hidden="true">
+        <img src="svg/footer1.svg" alt="" class="footer-skyline__layer footer-skyline__layer--front" aria-hidden="true">
+        <img src="svg/footer3.svg" alt="" class="footer-skyline__landmark" aria-hidden="true">
+    </div>
 </div>
 
-<!-- ============================================= -->
 <!-- MAIN FOOTER                                   -->
 <!-- ============================================= -->
 <footer class="footer-main" id="footer">
@@ -106,12 +54,12 @@
             <!-- Columna 1: Logo y Teléfonos -->
             <div class="footer-main__col footer-main__col--logo">
                 <a href="index.php" class="footer-main__logo-link">
-                    <img src="<?= content_raw('ajustes', 'logo_blanco', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer-main__logo">
+                    <img src="<?= content_raw('footer', 'logo', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer-main__logo">
                 </a>
                 <div class="footer-main__contact">
                     <div class="footer-main__contact-item">
                         <i class="fas fa-desktop"></i>
-                        <span><?= content_get('footer', 'contacto_1', 'PBX: (04) 500 0175 - 230 7028<br>500 2164 - 372 7040') ?></span>
+                        <span><?= content_get('footer', 'contacto_1', "PBX: (04) 500 0175 - 230 7028\n500 2164 - 372 7040") ?></span>
                     </div>
                     <div class="footer-main__contact-item">
                         <i class="fas fa-phone-alt"></i>
@@ -136,11 +84,16 @@
             <div class="footer-main__col">
                 <ul class="footer-main__list">
                     <?php
+                    // "CONDUCE ECUADOR" ya NO se pinta de naranja a la fuerza: ese color era
+                    // solo una guía en Figma para saber qué tono usar en el :hover de TODOS
+                    // los enlaces del footer (ver .footer-main__list a:hover en footer.css).
+                    // Antes había un if comparando el texto contra "CONDUCE ECUADOR" a mano,
+                    // justo el tipo de lógica de negocio metida en un include que las reglas
+                    // del proyecto piden evitar.
                     $enlaces2 = content_raw('footer', 'enlaces_columna_2', "Noticias y Novedades ITB\nDirectorio General\nASOMI\nCONDUCE ECUADOR\nTrabaja en el ITB");
                     foreach (array_filter(array_map('trim', explode("\n", $enlaces2))) as $enlace):
-                        $class = (strtoupper($enlace) == 'CONDUCE ECUADOR') ? 'class="footer-main__link-orange"' : '';
                     ?>
-                        <li><a href="#" <?= $class ?>><?= htmlspecialchars($enlace, ENT_QUOTES, 'UTF-8') ?></a></li>
+                        <li><a href="#"><?= htmlspecialchars($enlace, ENT_QUOTES, 'UTF-8') ?></a></li>
                     <?php endforeach; ?>
                 </ul>
             </div>
@@ -191,7 +144,7 @@
 <div class="footer-bottom">
     <div class="footer-bottom__container">
         <div class="footer-bottom__left">
-            <?= content_get('footer', 'copyright', '&copy; 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS') ?>
+            <?= content_get('footer', 'copyright', '© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS') ?>
         </div>
         <div class="footer-bottom__right">
             <a href="#">POLÍTICA DE PRIVACIDAD</a> | 
@@ -203,18 +156,18 @@
 </div>
 
 <!-- Botón Ir Arriba -->
-<div id="top-to-bottom">
+<div id="top-to-bottom" class="js-floating">
     <i class="fas fa-angles-up"></i>
 </div>
 
 <!-- Botón flotante WhatsApp -->
-<div class="whatsapp-float" id="whatsapp-float">
+<div class="whatsapp-float js-floating" id="whatsapp-float">
     <a href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20ITB" 
        target="_blank" 
        class="whatsapp-float__link" 
        aria-label="Chatea con ITBChat por WhatsApp">
         <div class="whatsapp-float__label">
-            <span>¿Tienes preguntas? Pregunta a ITBChat</span>
+            <span>¿Tienes preguntas? Pregunta a ITB Chat</span>
         </div>
         <div class="whatsapp-float__icon">
             <i class="fab fa-whatsapp"></i>

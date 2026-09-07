@@ -21,6 +21,8 @@
     border-radius: 16px;
     overflow: hidden;
     height: 520px;
+    /* Jarallax posiciona su propia capa en absoluto respecto a este contenedor */
+    position: relative;
 }
 
 .testimonios__photo img {

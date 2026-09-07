@@ -44,11 +44,6 @@ return [
                     'label' => 'Logo Principal',
                     'default' => 'img/logo.png',
                 ],
-                'logo_blanco' => [
-                    'type' => 'image',
-                    'label' => 'Logo Blanco (Footer)',
-                    'default' => 'img/logo.png',
-                ],
             ],
         ],
         'menu' => [
@@ -142,18 +137,108 @@ return [
             'icon' => 'bi bi-layout-text-window-reverse',
             'type' => 'singleton',
             'fields' => [
-                'descripcion' => [
+                'div_prefooter' => [
+                    'type' => 'divider',
+                    'label' => 'Banner CTA (arriba del pie de página)',
+                ],
+                'cta_titulo' => [
+                    'type' => 'text',
+                    'label' => 'Título del banner',
+                    'default' => '¿Aún no decides qué carrera estudiar?',
+                ],
+                'cta_desc' => [
                     'type' => 'textarea',
-                    'label' => 'Lema / Descripción Institucional',
-                    'default' => 'Instituto Superior Tecnológico Bolivariano de Tecnología. Formando profesionales de excelencia desde 1995.',
+                    'label' => 'Descripción del banner',
+                    'default' => 'Descubre tu vocación con nuestro test guiado, visita el ITB y conoce de cerca nuestra propuesta académica o recibe asesoría personalizada para elegir el programa ideal para ti.',
+                ],
+                'cta_btn_1' => [
+                    'type' => 'text',
+                    'label' => 'Botón 1',
+                    'default' => 'Test Vocacional',
+                ],
+                'cta_btn_2' => [
+                    'type' => 'text',
+                    'label' => 'Botón 2',
+                    'default' => 'Vive la Experiencia ITB',
+                ],
+                'cta_btn_3' => [
+                    'type' => 'text',
+                    'label' => 'Botón 3',
+                    'default' => 'Habla con un Asesor',
+                ],
+                'div_logo' => [
+                    'type' => 'divider',
+                    'label' => 'Logo y Contacto',
+                ],
+                'logo' => [
+                    'type' => 'image',
+                    'label' => 'Logo del pie de página (fondo oscuro)',
+                    'default' => 'img/logo-itb-white.png',
+                    'help' => 'Usa la versión blanca del logo: este bloque tiene fondo azul oscuro.',
+                ],
+                'contacto_1' => [
+                    'type' => 'textarea',
+                    'label' => 'Teléfonos (línea 1 y 2)',
+                    'default' => "PBX: (04) 500 0175 - 230 7028\n500 2164 - 372 7040",
+                ],
+                'contacto_2' => [
+                    'type' => 'text',
+                    'label' => 'Teléfono gratuito',
+                    'default' => '1800 ITB-ITB: 482-482',
+                ],
+                'div_enlaces1' => [
+                    'type' => 'divider',
+                    'label' => 'Columna: Enlaces 1',
+                ],
+                'enlaces_columna_1' => [
+                    'type' => 'textarea',
+                    'label' => 'Enlaces (uno por línea)',
+                    'default' => "Admisiones Pregrado\nCarreras y Programas\nCalendario Académico\nTalento Humano\nVinculación",
+                ],
+                'div_enlaces2' => [
+                    'type' => 'divider',
+                    'label' => 'Columna: Enlaces 2',
+                ],
+                'enlaces_columna_2' => [
+                    'type' => 'textarea',
+                    'label' => 'Enlaces (uno por línea)',
+                    'default' => "Noticias y Novedades ITB\nDirectorio General\nASOMI\nCONDUCE ECUADOR\nTrabaja en el ITB",
+                ],
+                'div_campus' => [
+                    'type' => 'divider',
+                    'label' => 'Columna: Campus',
+                ],
+                'lista_campus' => [
+                    'type' => 'textarea',
+                    'label' => 'Campus (uno por línea)',
+                    'default' => "Campus Matriz\nCampus Boyacá\nCampus Naval\nCampus Teresa Benites\nCampus Tomás Martínez",
+                ],
+                'div_mapa' => [
+                    'type' => 'divider',
+                    'label' => 'Mapa',
+                ],
+                'mapa_img' => [
+                    'type' => 'image',
+                    'label' => 'Imagen del mapa',
+                    'default' => 'img/Mapa.png',
+                ],
+                'direccion_mapa' => [
+                    'type' => 'text',
+                    'label' => 'Dirección (pastilla sobre el mapa)',
+                    'default' => 'Roca #101 y Pedro Carbo esq.',
                 ],
                 'div_redes' => [
                     'type' => 'divider',
                     'label' => 'Redes Sociales',
                 ],
-                'facebook_url' => [
+                'social_texto' => [
                     'type' => 'text',
-                    'label' => 'Facebook URL',
+                    'label' => 'Texto junto a los íconos',
+                    'default' => '#ITB Instituto Superior Universitario Bolivariano en',
+                ],
+                'youtube_url' => [
+                    'type' => 'text',
+                    'label' => 'YouTube URL',
                     'default' => '#',
                 ],
                 'instagram_url' => [
@@ -161,14 +246,24 @@ return [
                     'label' => 'Instagram URL',
                     'default' => '#',
                 ],
+                'facebook_url' => [
+                    'type' => 'text',
+                    'label' => 'Facebook URL',
+                    'default' => '#',
+                ],
+                'gplus_url' => [
+                    'type' => 'text',
+                    'label' => 'Google+ URL',
+                    'default' => '#',
+                ],
                 'twitter_url' => [
                     'type' => 'text',
                     'label' => 'Twitter / X URL',
                     'default' => '#',
                 ],
-                'youtube_url' => [
+                'vimeo_url' => [
                     'type' => 'text',
-                    'label' => 'YouTube URL',
+                    'label' => 'Vimeo URL',
                     'default' => '#',
                 ],
                 'linkedin_url' => [
@@ -176,95 +271,14 @@ return [
                     'label' => 'LinkedIn URL',
                     'default' => '#',
                 ],
-                'div_contacto' => [
+                'div_bottom' => [
                     'type' => 'divider',
-                    'label' => 'Datos de Contacto',
+                    'label' => 'Barra inferior',
                 ],
-                'telefono' => [
+                'copyright' => [
                     'type' => 'text',
-                    'label' => 'Teléfono',
-                    'default' => '(04) 2-566-800',
-                ],
-                'email' => [
-                    'type' => 'text',
-                    'label' => 'Correo de Contacto',
-                    'default' => 'info@bolivariano.edu.ec',
-                ],
-                'direccion' => [
-                    'type' => 'text',
-                    'label' => 'Dirección',
-                    'default' => 'Víctor Manuel Rendón 236 y Pedro Carbo, Guayaquil',
-                ],
-                'div_horarios' => [
-                    'type' => 'divider',
-                    'label' => 'Horarios de Atención',
-                ],
-                'horario_semana' => [
-                    'type' => 'text',
-                    'label' => 'Horario (Lunes - Viernes)',
-                    'default' => 'Lunes a Viernes: 08:00 - 17:00',
-                ],
-                'horario_sabado' => [
-                    'type' => 'text',
-                    'label' => 'Horario (Sábado)',
-                    'default' => 'Sábados: 08:00 - 13:00',
-                ],
-                'div_prefooter' => [
-                    'type' => 'divider',
-                    'label' => 'Pre-footer (Banner CTA)',
-                ],
-                'prefooter_titulo' => [
-                    'type' => 'text',
-                    'label' => 'Título CTA',
-                    'default' => '¿Aún no decides qué carrera estudiar?',
-                ],
-                'prefooter_texto' => [
-                    'type' => 'text',
-                    'label' => 'Subtítulo CTA',
-                    'default' => 'Te ayudamos a encontrar la carrera ideal para ti',
-                ],
-                'prefooter_btn_1' => [
-                    'type' => 'text',
-                    'label' => 'Botón 1',
-                    'default' => 'Chatea con nosotros',
-                ],
-                'prefooter_btn_2' => [
-                    'type' => 'text',
-                    'label' => 'Botón 2',
-                    'default' => 'Llámanos',
-                ],
-                'prefooter_btn_3' => [
-                    'type' => 'text',
-                    'label' => 'Botón 3',
-                    'default' => 'Visítanos',
-                ],
-                'div_columnas' => [
-                    'type' => 'divider',
-                    'label' => 'Columnas',
-                ],
-                'col1_titulo' => [
-                    'type' => 'text',
-                    'label' => 'Título Columna 1',
-                    'default' => 'Enlaces Rápidos',
-                ],
-                'enlaces_rapidos' => [
-                    'type' => 'textarea',
-                    'label' => 'Enlaces Rápidos (uno por línea)',
-                    'default' => "Oferta Académica
-Admisiones
-Vida Estudiantil
-Investigación
-Educación Continua",
-                ],
-                'col2_titulo' => [
-                    'type' => 'text',
-                    'label' => 'Título Columna 2',
-                    'default' => 'Contacto',
-                ],
-                'col3_titulo' => [
-                    'type' => 'text',
-                    'label' => 'Título Columna 3',
-                    'default' => 'Horarios de Atención',
+                    'label' => 'Texto de copyright',
+                    'default' => '© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS',
                 ],
             ],
         ],
@@ -347,9 +361,9 @@ Educación Continua",
                             'item_label' => 'Imagen',
                             'help' => 'Agrega tantas fotos de fondo como desees. El carrusel rotará automáticamente.',
                             'default' => [
-                                ['archivo' => 'img/salud.jpg'],
-                                ['archivo' => 'img/student.jpg'],
-                                ['archivo' => 'img/student 2.jpg'],
+                                ['archivo' => 'img/hero_1.jpeg'],
+                                ['archivo' => 'img/hero_2.jpg'],
+                                ['archivo' => 'img/hero_3.jpg'],
                             ],
                             'subfields' => [
                                 'archivo' => [
@@ -392,7 +406,7 @@ Educación Continua",
                         'canciller_foto' => [
                             'type' => 'image',
                             'label' => 'Foto',
-                            'default' => 'img/PHD_Roberto.jpg',
+                            'default' => 'img/icon_trayectoria.jpg',
                         ],
                         'canciller_nombre' => [
                             'type' => 'text',
@@ -421,7 +435,7 @@ Educación Continua",
                         'imagen_central' => [
                             'type' => 'image',
                             'label' => 'Foto central de la sección',
-                            'default' => 'img/estudiantes1.png',
+                            'default' => 'img/trayectoria.png',
                             'help' => 'Foto grande del centro de la sección. Tamaño recomendado: 600x700px.',
                         ],
                         'div_stats' => [
@@ -502,7 +516,7 @@ Educación Continua",
                                     'descripcion' => 'Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.',
                                     'programas' => "Administración de Empresas\nContabilidad\nMarketing Digital",
                                     'icono' => 'img/laptop.png',
-                                    'imagen_fondo' => 'img/student 2.jpg',
+                                    'imagen_fondo' => 'img/Areas_formacion_1.png',
                                     'btn_texto' => 'Explorar programas'
                                 ],
                                 [
@@ -817,7 +831,7 @@ Educación Continua",
                                     'titulo' => "Arte y Deportes",
                                     'desc' => "Clubes deportivos, grupos artísticos y actividades recreativas",
                                     'btn_texto' => "Conocer Más",
-                                    'imagen' => "img/estudiantes1.png"
+                                    'imagen' => "img/bienestar_estudiantil_1.png"
                                 ]
                             ]
                         ],
@@ -859,7 +873,7 @@ Educación Continua",
                         'video_url' => [
                             'type' => 'text',
                             'label' => 'Link del video de YouTube',
-                            'default' => '',
+                            'default' => 'https://www.youtube.com/watch?v=_arpKGQERXM',
                             'help' => 'Pega aquí el link normal de YouTube (ej: https://youtu.be/abc123 o https://www.youtube.com/watch?v=abc123). El video se abre en una ventana sobre la página. Si lo dejas vacío, el botón simplemente baja hasta el formulario.',
                         ],
                         'circular_text' => [
@@ -1083,12 +1097,40 @@ Educación Continua",
                                 ],
                             ],
                             'default' => [
-                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 1'],
-                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 2'],
-                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 3'],
-                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 4'],
-                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 5'],
-                                ['imagen' => 'img/alianza_1.jpg', 'nombre' => 'Aliado 6'],
+                                ['imagen' => 'img/alianza_1.png', 'nombre' => 'Aliado 1'],
+                                ['imagen' => 'img/alianza_2.jpg', 'nombre' => 'Aliado 2'],
+                                ['imagen' => 'img/alianza_3.png', 'nombre' => 'Aliado 3'],
+                                ['imagen' => 'img/alianza_4.png', 'nombre' => 'Aliado 4'],
+                                ['imagen' => 'img/alianza_5.png', 'nombre' => 'Aliado 5'],
+                            ],
+                        ],
+                        'div_fotos' => [
+                            'type' => 'divider',
+                            'label' => 'Galería de Fotos (carrusel de abajo)',
+                        ],
+                        'lista_fotos' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Foto',
+                            'help' => 'Segunda fila de imágenes, debajo de los logos. Mismo carrusel en bucle que arriba. Usa las flechas ↑ ↓ para cambiar el orden.',
+                            'subfields' => [
+                                'imagen' => [
+                                    'type' => 'image',
+                                    'label' => 'Foto',
+                                ],
+                                'nombre' => [
+                                    'type' => 'text',
+                                    'label' => 'Descripción de la foto',
+                                    'help' => 'No se ve en la página; sirve para accesibilidad y buscadores.',
+                                ],
+                            ],
+                            'default' => [
+                                ['imagen' => 'img/alianza_sub1.png', 'nombre' => 'Actividad ITB 1'],
+                                ['imagen' => 'img/alianza_sub2.png', 'nombre' => 'Actividad ITB 2'],
+                                ['imagen' => 'img/alianza_sub3.png', 'nombre' => 'Actividad ITB 3'],
+                                ['imagen' => 'img/alianza_sub4.png', 'nombre' => 'Actividad ITB 4'],
+                                ['imagen' => 'img/alianza_sub5.png', 'nombre' => 'Actividad ITB 5'],
+                                ['imagen' => 'img/alianza_sub6.png', 'nombre' => 'Actividad ITB 6'],
                             ],
                         ],
                     ],

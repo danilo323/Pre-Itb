@@ -18,10 +18,14 @@
         </div>
 
         <div class="noticias__grid">
+            <?php
+            $main_imagen = content_raw('noticias', 'imagen', 'img/noticia_1.png');
+            if (!content_image_exists($main_imagen)) $main_imagen = 'img/placeholder_imagen.svg';
+            ?>
             <!-- Noticia principal -->
             <div class="noticias__main">
                 <div class="noticias__main-img">
-                    <img src="<?= content_raw('noticias', 'imagen', 'img/noticia_1.png') ?>" alt="Evento principal ITB">
+                    <img src="<?= htmlspecialchars($main_imagen, ENT_QUOTES, 'UTF-8') ?>" alt="Evento principal ITB">
                 </div>
                 <div class="noticias__main-body">
                     <div class="noticias__meta">
@@ -66,7 +70,9 @@
                     $is_last = ($i === $total_sec); 
                     $sec_titulo = htmlspecialchars($sec['titulo'] ?? '', ENT_QUOTES, 'UTF-8');
                     $sec_fecha = htmlspecialchars($sec['fecha'] ?? '', ENT_QUOTES, 'UTF-8');
-                    $sec_imagen = htmlspecialchars($sec['imagen'] ?? '', ENT_QUOTES, 'UTF-8');
+                    $sec_imagen_raw = $sec['imagen'] ?? '';
+                    if (!content_image_exists($sec_imagen_raw)) $sec_imagen_raw = 'img/placeholder_imagen.svg';
+                    $sec_imagen = htmlspecialchars($sec_imagen_raw, ENT_QUOTES, 'UTF-8');
                 ?>
                 <div class="noticias__item">
                     <div class="noticias__item-img">

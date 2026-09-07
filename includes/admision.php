@@ -4,7 +4,7 @@
 // algo que no es un link de YouTube reconocible, el botón mantiene su
 // comportamiento anterior: bajar hasta el formulario. Así un error de tipeo
 // nunca abre una ventana de video en negro.
-$admision_video_raw   = trim(content_raw('admision', 'video_url', ''));
+$admision_video_raw   = trim(content_raw('admision', 'video_url', 'https://www.youtube.com/watch?v=_arpKGQERXM'));
 $admision_video_embed = youtube_embed_url($admision_video_raw);
 $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/');
 ?>
@@ -15,8 +15,8 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
     <div class="admision__container">
         
         <!-- Lado Izquierdo: Imagen -->
-        <div class="admision__image-col">
-            <img src="<?= htmlspecialchars(content_raw('admision', 'imagen_principal', 'img/admision1.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Estudiantes ITB" class="admision__img">
+        <div class="admision__image-col" data-jarallax data-speed="0.5" data-img-position="top">
+            <img src="<?= htmlspecialchars(content_raw('admision', 'imagen_principal', 'img/admision1.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Estudiantes ITB" class="admision__img jarallax-img">
         </div>
 
         <!-- Lado Derecho: Contenido y Formulario -->
@@ -38,9 +38,9 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
                     </p>
                     
                     <a href="<?= $admision_tiene_video ? htmlspecialchars($admision_video_raw, ENT_QUOTES, 'UTF-8') : '#admision-form' ?>"
-                       class="hero__video-wrapper<?= $admision_tiene_video ? ' js-video-modal-trigger' : '' ?>"
+                       class="hero__video-wrapper admision__video-circle<?= $admision_tiene_video ? ' js-video-modal-trigger' : '' ?>"
                        <?php if ($admision_tiene_video): ?>data-video-url="<?= htmlspecialchars($admision_video_embed, ENT_QUOTES, 'UTF-8') ?>"<?php endif; ?>
-                       style="width: 140px; height: 140px; margin-top: 150px; text-decoration: none;">
+                       >
                         <!-- Texto circular giratorio -->
                         <div class="hero__circular-text">
                             <svg viewBox="0 0 160 160" class="hero__circular-svg">
@@ -54,8 +54,8 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
                                 </text>
                             </svg>
                         </div>
-                        <div class="hero__video-card" style="width: 70px; height: 70px;">
-                            <div class="hero__play-btn" style="position: static; transform: none; width: 100%; height: 100%;">
+                        <div class="hero__video-card admision__video-card">
+                            <div class="hero__play-btn admision__play-btn">
                                 <i class="fas fa-play"></i>
                             </div>
                         </div>

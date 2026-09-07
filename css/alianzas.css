@@ -80,3 +80,52 @@
         margin-right: 40px;
     }
 }
+
+/* ---- Segunda fila: galería de fotos ----
+   Mismo carrusel en bucle que los logos de arriba (mismo truco del carril
+   doblado), pero son fotos a color, no logos: sin escala de grises ni opacidad
+   reducida. Van SIN separación entre ellas (pegadas) y con esquinas cuadradas,
+   igual que el marco de Figma (320.1 x 309.3, "Radio de esquina: 0"). Como no
+   hay margen ni gap, el truco del carril doble sigue funcionando exactamente
+   igual: media lista = la otra mitad, sin saltos. */
+.alianzas__track--fotos {
+    margin-top: 32px;
+    /* Solo esta fila (NO la de logos) se sale del contenedor centrado de
+       --container-max y ocupa el ancho completo de la pantalla, de borde a
+       borde, para que se alcancen a ver mas fotos a la vez en la fila. Truco
+       clasico para "escapar" de un contenedor centrado sin tocarlo: se hace
+       tan ancho como el viewport (100vw) y se recentra con margenes negativos. */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
+}
+
+.alianzas__fotos {
+    display: flex;
+    align-items: center;
+    /* Duración distinta a la de los logos para que las dos filas no queden
+       sincronizadas moviéndose en espejo. */
+    animation: scrollLogos 38s linear infinite;
+    width: max-content;
+}
+
+.alianzas__fotos img {
+    /* Medida real de Figma: 320.1 x 309.3 */
+    height: 309px;
+    width: 320px;
+    object-fit: cover;
+    border-radius: 0;
+    margin-right: 0;
+    transition: var(--transition);
+}
+
+.alianzas__fotos img:hover {
+    transform: scale(1.04);
+}
+
+@media (max-width: 768px) {
+    .alianzas__fotos img {
+        height: 155px;
+        width: 160px;
+    }
+}

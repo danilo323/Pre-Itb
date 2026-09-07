@@ -50,12 +50,13 @@
                     'titulo' => "Arte y Deportes",
                     'desc' => "Clubes deportivos, grupos artísticos y actividades recreativas",
                     'btn_texto' => "Conocer Más",
-                    'imagen' => "img/estudiantes1.png"
+                    'imagen' => "img/bienestar_estudiantil_1.png"
                 ]
             ]);
 
             foreach ((array)$lista_servicios as $servicio): 
                 $foto_path = trim($servicio['imagen'] ?? '');
+                if (!empty($foto_path) && !content_image_exists($foto_path)) $foto_path = 'img/placeholder_imagen.svg';
                 $titulo = nl2br(htmlspecialchars($servicio['titulo'] ?? '', ENT_QUOTES, 'UTF-8'));
                 $desc = htmlspecialchars($servicio['desc'] ?? '', ENT_QUOTES, 'UTF-8');
                 $btn_texto = htmlspecialchars($servicio['btn_texto'] ?? 'Ver más', ENT_QUOTES, 'UTF-8');

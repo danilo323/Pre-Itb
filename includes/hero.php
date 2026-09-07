@@ -4,9 +4,9 @@
 
 // 1. Extraer URLs de imágenes para el slideshow
 $imagenes = content_raw('hero', 'imagenes_fondo', [
-    ['archivo' => 'img/salud.jpg'],
-    ['archivo' => 'img/student.jpg'],
-    ['archivo' => 'img/student 2.jpg']
+    ['archivo' => 'img/hero_1.jpeg'],
+    ['archivo' => 'img/hero_2.jpg'],
+    ['archivo' => 'img/hero_3.jpg']
 ]);
 $slides = [];
 if (is_array($imagenes)) {
@@ -18,7 +18,7 @@ if (is_array($imagenes)) {
 }
 // Fallback por si borraron todas
 if (empty($slides)) {
-    $slides[] = 'img/salud.jpg';
+    $slides[] = 'img/hero_1.jpeg';
 }
 
 // 2. Formatear la URL de YouTube a modo "embed" (helper compartido en content_helper.php)

@@ -47,6 +47,7 @@
             $index = 0;
             foreach ((array)$programas_list as $prog):
                 $img_src = $prog['imagen'] ?? '';
+                if (!empty($img_src) && !content_image_exists($img_src)) $img_src = 'img/placeholder_imagen.svg';
             ?>
             <div class="programas__card">
                 <div class="programas__card-img">
