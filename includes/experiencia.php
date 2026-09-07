@@ -1,12 +1,12 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('experiencia')) return; ?>
 <?php /* includes/experiencia.php */ ?>
-<!-- ============================================= -->
-<!-- TU EXPERIENCIA ITB                            -->
-<!-- ============================================= -->
+
+
+
 <section class="experiencia" id="experiencia">
     <div class="experiencia__container">
 
-        <!-- Lado izquierdo: Texto -->
+        
         <div class="experiencia__content">
             <span class="experiencia__tag"><?= content_get('experiencia', 'etiqueta_superior', '¿Por qué elegir el ITB?') ?></span>
             <h2 class="experiencia__title">
@@ -54,7 +54,7 @@
             </a>
         </div>
 
-        <!-- Lado derecho: Imagen -->
+        
         <div class="experiencia__image" data-jarallax data-speed="0.5" data-img-position="top">
             <img src="<?= htmlspecialchars(content_raw('experiencia', 'imagen', 'img/experiencia.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Experiencia estudiantil ITB" class="jarallax-img">
         </div>

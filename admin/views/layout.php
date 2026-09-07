@@ -64,7 +64,7 @@ function layout_flash(): string {
         if ($type === 'error') $icon = 'bi-x-octagon-fill';
         if ($type === 'warning') $icon = 'bi-exclamation-triangle-fill';
 
-        $html = "<div class=\"flash-message flash-{$type}\"><i class=\"bi {$icon}\"></i> <span>{$msg}</span></div>\n";
+        $html = "<div id=\"panel-flash\" class=\"flash-message flash-{$type}\"><i class=\"bi {$icon}\"></i> <span>{$msg}</span></div>\n";
         unset($_SESSION['flash_message'], $_SESSION['flash_type']);
     }
     return $html;
@@ -81,6 +81,7 @@ function layout_start(string $title = "Panel de Administración", string $curren
     $sidebar    = layout_sidebar($current_key);
     $flash      = layout_flash();
     $user       = htmlspecialchars($_SESSION['user'] ?? 'HOLA', ENT_QUOTES, 'UTF-8');
+    $time = time();
 
     return <<<HTML
 <!DOCTYPE html>
@@ -93,7 +94,7 @@ function layout_start(string $title = "Panel de Administración", string $curren
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="/admin/assets/admin.css">
+    <link rel="stylesheet" href="assets/admin.css?v={$time}">
 </head>
 <body>
     <div class="admin-topbar">
@@ -101,7 +102,7 @@ function layout_start(string $title = "Panel de Administración", string $curren
             <!-- Oculto en móvil -->
         </div>
         <div class="topbar-right">
-            <a href="/" target="_blank" class="topbar-link"><i class="bi bi-box-arrow-up-right"></i> Ver sitio</a>
+            <a href="../" target="_blank" class="topbar-link"><i class="bi bi-box-arrow-up-right"></i> Ver sitio</a>
             <span class="topbar-user"><i class="bi bi-person-fill"></i> {$user}</span>
             <a href="logout.php" class="topbar-link topbar-logout"><i class="bi bi-door-open-fill"></i> Cerrar sesión</a>
         </div>

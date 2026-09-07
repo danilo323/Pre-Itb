@@ -1,11 +1,11 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('autoridades')) return; ?>
-<!-- ============================================= -->
-<!-- NUESTRAS AUTORIDADES                          -->
-<!-- ============================================= -->
+
+
+
 <section class="autoridades" id="autoridades">
     <div class="autoridades__container">
 
-        <!-- Header -->
+        
         <div class="autoridades__header">
             <div class="autoridades__header-left">
                 <span class="autoridades__tag"><?= content_get('autoridades', 'etiqueta_superior', 'Liderazgo Institucional') ?></span>
@@ -18,7 +18,7 @@
             </a>
         </div>
 
-        <!-- Grid de cards -->
+        
         <div class="autoridades__grid">
             <?php
             // Fuente real: la colección "Equipo" del panel (CONTENIDO -> Equipo),

@@ -25,11 +25,11 @@ if (empty($slides)) {
 $raw_video_url = content_raw('hero', 'video_url', 'https://youtu.be/eTgzLxWGgS4');
 $embed_url = youtube_embed_url($raw_video_url);
 ?>
-<!-- ============================================= -->
-<!-- HERO SECTION                                  -->
-<!-- ============================================= -->
+
+
+
 <section class="hero" id="hero">
-    <!-- Slideshow con efecto Ken Burns -->
+    
     <div class="hero__slideshow">
         <?php foreach ($slides as $index => $img_path): ?>
             <?php 
@@ -79,7 +79,7 @@ $embed_url = youtube_embed_url($raw_video_url);
             </div>
         </div>
 
-        <!-- Círculo de video -->
+        
         <div class="hero__media">
             <div class="hero__video-wrapper">
                 <div class="hero__circular-text" id="hero-circular-text">
@@ -104,7 +104,7 @@ $embed_url = youtube_embed_url($raw_video_url);
         </div>
     </div>
 
-    <!-- Modal para el Video -->
+    
     <div class="hero__video-modal" id="video-modal">
         <div class="hero__video-modal-overlay" id="video-modal-overlay"></div>
         <div class="hero__video-modal-content">

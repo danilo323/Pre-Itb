@@ -54,10 +54,11 @@ echo layout_start($config['label'], $section_key);
                         <span class="order-number"><?= $i++ ?></span>
                         <span class="order-name"><?= htmlspecialchars($sub_config['label']) ?></span>
                     </div>
-                    <label class="order-visibility">
+                    <label class="bool-toggle-label">
                         <input type="hidden" name="<?= $sub_key ?>___visible" value="0">
-                        <input type="checkbox" name="<?= $sub_key ?>___visible" value="1" <?= $is_visible ? 'checked' : '' ?>>
-                        Visible
+                        <input type="checkbox" name="<?= $sub_key ?>___visible" value="1" class="bool-toggle-input" <?= $is_visible ? 'checked' : '' ?>>
+                        <span class="bool-toggle-switch"></span>
+                        <span class="bool-toggle-text">Visible</span>
                     </label>
                 </div>
                 <?php endforeach; ?>
@@ -83,7 +84,7 @@ echo layout_start($config['label'], $section_key);
 
     <?php else: ?>
         <!-- SINGLETON PLANO (Ej: Ajustes, Footer) -->
-        <div style="background:var(--bg-panel); border:1px solid var(--border-color); border-radius:8px; padding:32px;">
+        <div class="singleton-panel">
             <?php 
             foreach ($config['fields'] as $fk => $fc) {
                 $val = get_saved_data($section_key, $fk, $fc['default'] ?? '');
@@ -97,7 +98,7 @@ echo layout_start($config['label'], $section_key);
     
     <div class="form-actions">
         <a href="index.php" class="btn btn-outline">Cancelar</a>
-        <button type="submit" class="btn btn-primary"><i class="fa-solid fa-floppy-disk"></i> Guardar cambios</button>
+        <button type="submit" class="btn btn-primary"><i class="bi bi-floppy-fill"></i> Guardar cambios</button>
     </div>
 </form>
 

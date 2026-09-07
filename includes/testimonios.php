@@ -1,17 +1,17 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('testimonios')) return; ?>
-<!-- ============================================= -->
-<!-- TESTIMONIOS - LO QUE DICEN NUESTROS           -->
-<!-- ESTUDIANTES                                   -->
-<!-- ============================================= -->
+
+
+
+
 <section class="testimonios" id="testimonios">
     <div class="testimonios__container">
 
-        <!-- Foto a la izquierda -->
+        
         <div class="testimonios__photo" data-jarallax data-speed="0.5" data-img-position="top">
             <img src="<?= htmlspecialchars(content_raw('testimonios', 'imagen', 'img/MariaFernanda.png'), ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(content_raw('testimonios', 'nombre', 'María Fernanda Gómez'), ENT_QUOTES, 'UTF-8') ?>" class="jarallax-img">
         </div>
 
-        <!-- Contenido a la derecha -->
+        
         <div class="testimonios__content">
             <span class="testimonios__tag"><?= content_get('testimonios', 'etiqueta_superior', 'Historias de Éxito') ?></span>
             <h2 class="testimonios__title"><?= nl2br(htmlspecialchars(content_raw('testimonios', 'titulo', 'Lo que dicen nuestros estudiantes'), ENT_QUOTES, 'UTF-8')) ?></h2>

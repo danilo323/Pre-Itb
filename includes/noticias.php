@@ -1,7 +1,7 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('noticias')) return; ?>
-<!-- ============================================= -->
-<!-- NOTICIAS, EVENTOS Y ALIANZAS                  -->
-<!-- ============================================= -->
+
+
+
 <section class="noticias" id="noticias">
     <div class="noticias__container">
         <div class="noticias__header">
@@ -22,7 +22,7 @@
             $main_imagen = content_raw('noticias', 'imagen', 'img/noticia_1.png');
             if (!content_image_exists($main_imagen)) $main_imagen = 'img/placeholder_imagen.svg';
             ?>
-            <!-- Noticia principal -->
+            
             <div class="noticias__main">
                 <div class="noticias__main-img">
                     <img src="<?= htmlspecialchars($main_imagen, ENT_QUOTES, 'UTF-8') ?>" alt="Evento principal ITB">
@@ -44,7 +44,7 @@
                 </div>
             </div>
 
-            <!-- Lista de noticias -->
+            
             <div class="noticias__list">
                 <?php
                 // Obtener las noticias secundarias configuradas en el panel

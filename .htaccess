@@ -1,0 +1,6 @@
+<IfModule mod_rewrite.c>
+RewriteEngine On
+</IfModule>
+
+# Capturar cualquier error 404 y enviarlo a nuestra página personalizada
+ErrorDocument 404 /itb/admin/404.php

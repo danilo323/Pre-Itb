@@ -1,11 +1,11 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('trayectoria')) return; ?>
 <?php /* includes/trayectoria.php */ ?>
-<!-- ============================================= -->
-<!-- TRAYECTORIA Y COMPROMISO EDUCATIVO            -->
-<!-- ============================================= -->
+
+
+
 <section class="trayectoria" id="trayectoria">
     <div class="trayectoria__container">
-        <!-- Lado izquierdo: Contenido de Texto -->
+        
         <div class="trayectoria__content">
             <span class="section-tag"><?= content_get('trayectoria', 'etiqueta_superior', 'Trayectoria y Compromiso Educativo') ?></span>
             <h2 class="trayectoria__title">
@@ -15,7 +15,7 @@
                 <?= content_get('trayectoria', 'descripcion', 'Con casi 3 décadas de trayectoria, impulsamos una educación superior práctica, accesible e innovadora para formar profesionales listos para el mercado laboral.') ?>
             </p>
 
-            <!-- Perfil del Canciller -->
+            
             <div class="trayectoria__profile">
                 <div class="trayectoria__profile-img">
                     <img src="<?= content_raw('trayectoria', 'canciller_foto', 'img/icon_trayectoria.jpg') ?>" alt="<?= content_get('trayectoria', 'canciller_nombre', 'PhD. Roberto Tolozano Benites') ?>">
@@ -32,12 +32,12 @@
             </a>
         </div>
 
-        <!-- Centro: Imagen con Jarallax -->
+        
         <div class="trayectoria__image" data-jarallax data-speed="0.5" data-img-position="top">
             <img src="<?= content_raw('trayectoria', 'imagen_central', 'img/trayectoria.png') ?>" alt="Estudiantes ITB en el campus" class="jarallax-img">
         </div>
 
-        <!-- Lado derecho: Estadísticas -->
+        
         <?php
         // Íconos por posición (0, 1, 2) — se mantienen fijos del diseño original
         $stat_icons = ['fa-user-graduate', 'fa-users', 'fa-laptop-code'];

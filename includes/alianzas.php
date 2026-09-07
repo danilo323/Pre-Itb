@@ -28,9 +28,9 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
     return content_image_exists($f['imagen'] ?? '');
 }));
 ?>
-<!-- ============================================= -->
-<!-- ALIANZAS                                      -->
-<!-- ============================================= -->
+
+
+
 <section class="alianzas" id="alianzas">
     <div class="alianzas__container">
 

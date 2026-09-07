@@ -8,21 +8,21 @@ $admision_video_raw   = trim(content_raw('admision', 'video_url', 'https://www.y
 $admision_video_embed = youtube_embed_url($admision_video_raw);
 $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/');
 ?>
-<!-- ============================================= -->
-<!-- FORMULARIO DE ADMISIÓN / REGISTRO             -->
-<!-- ============================================= -->
+
+
+
 <section class="admision" id="admision">
     <div class="admision__container">
         
-        <!-- Lado Izquierdo: Imagen -->
+        
         <div class="admision__image-col" data-jarallax data-speed="0.5" data-img-position="top">
             <img src="<?= htmlspecialchars(content_raw('admision', 'imagen_principal', 'img/admision1.png'), ENT_QUOTES, 'UTF-8') ?>" alt="Estudiantes ITB" class="admision__img jarallax-img">
         </div>
 
-        <!-- Lado Derecho: Contenido y Formulario -->
+        
         <div class="admision__content-col">
             
-            <!-- Título Animado (Marquesina Infinita) -->
+            
             <div class="admision__marquee-wrapper">
                 <div class="admision__marquee-track">
                     <h2 class="admision__huge-title"><?= htmlspecialchars(content_get('admision', 'titulo', 'Inicia tu proceso de admisión'), ENT_QUOTES, 'UTF-8') ?></h2>
@@ -31,7 +31,7 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
             </div>
             
             <div class="admision__split">
-                <!-- Columna Centro: Texto descriptivo -->
+                
                 <div class="admision__text-wrapper">
                     <p class="admision__desc">
                         <?= htmlspecialchars(content_get('admision', 'descripcion', 'Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.'), ENT_QUOTES, 'UTF-8') ?>
@@ -41,7 +41,7 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
                        class="hero__video-wrapper admision__video-circle<?= $admision_tiene_video ? ' js-video-modal-trigger' : '' ?>"
                        <?php if ($admision_tiene_video): ?>data-video-url="<?= htmlspecialchars($admision_video_embed, ENT_QUOTES, 'UTF-8') ?>"<?php endif; ?>
                        >
-                        <!-- Texto circular giratorio -->
+                        
                         <div class="hero__circular-text">
                             <svg viewBox="0 0 160 160" class="hero__circular-svg">
                                 <defs>
@@ -62,7 +62,7 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
                     </a>
                 </div>
 
-                <!-- Columna Derecha: Formulario Blanco -->
+                
                 <div class="admision__form-wrapper">
                     <form class="admision__form" id="admision-form" action="#" method="POST">
                         <h3 class="admision__form-title"><?= content_get('admision', 'form_titulo', 'Formulario de Registro') ?></h3>

@@ -1,8 +1,8 @@
 <?php /* includes/footer.php */ ?>
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; ?>
-<!-- ============================================= -->
-<!-- BANNER CTA PRE-FOOTER                         -->
-<!-- ============================================= -->
+
+
+
 <div class="footer-cta" id="footer-cta">
     <div class="footer-cta__container">
         <div class="footer-cta__left">
@@ -26,17 +26,7 @@
     </div>
 </div>
 
-<!-- =============================================
-     SKYLINE (transición hacia el footer)
-     Reemplaza al SVG dibujado a mano: ahora son 3 archivos reales que trajo
-     el usuario (svg/footer1.svg, footer2.svg, footer3.svg). Los tres comparten
-     la misma paleta de azules del footer y estaban pensados para superponerse:
-     footer2 = cordillera de fondo (capa trasera, a todo el ancho), footer1 =
-     los edificios/monumentos sueltos (capa delantera, mismo lienzo de
-     1920x759 que footer2, por eso encajan sin necesitar reposicionarlos), y
-     footer3 = un monumento (arco) que no venía incluido en el dibujo grande,
-     así que se coloca a mano en el hueco vacío que dejan los demás, a la
-     misma escala (ver .footer-skyline__landmark en css/footer.css). -->
+
 <div class="footer-skyline">
     <div class="footer-skyline__scene">
         <img src="svg/footer2.svg" alt="" class="footer-skyline__layer footer-skyline__layer--back" aria-hidden="true">
@@ -45,13 +35,13 @@
     </div>
 </div>
 
-<!-- MAIN FOOTER                                   -->
-<!-- ============================================= -->
+
+
 <footer class="footer-main" id="footer">
     <div class="footer-main__container">
         <div class="footer-main__grid">
             
-            <!-- Columna 1: Logo y Teléfonos -->
+            
             <div class="footer-main__col footer-main__col--logo">
                 <a href="index.php" class="footer-main__logo-link">
                     <img src="<?= content_raw('footer', 'logo', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer-main__logo">
@@ -68,7 +58,7 @@
                 </div>
             </div>
 
-            <!-- Columna 2: Enlaces 1 -->
+            
             <div class="footer-main__col">
                 <ul class="footer-main__list">
                     <?php
@@ -80,7 +70,7 @@
                 </ul>
             </div>
 
-            <!-- Columna 3: Enlaces 2 -->
+            
             <div class="footer-main__col">
                 <ul class="footer-main__list">
                     <?php
@@ -98,7 +88,7 @@
                 </ul>
             </div>
 
-            <!-- Columna 4: Campus -->
+            
             <div class="footer-main__col">
                 <ul class="footer-main__list">
                     <?php
@@ -110,7 +100,7 @@
                 </ul>
             </div>
 
-            <!-- Columna 5: Mapa -->
+            
             <div class="footer-main__col footer-main__col--map">
                 <div class="footer-main__map-wrapper">
                     <img src="<?= content_raw('footer', 'mapa_img', 'img/Mapa.png') ?>" alt="Mapa de ubicación" class="footer-main__map-img">
@@ -122,7 +112,7 @@
 
         </div>
 
-        <!-- Redes Sociales -->
+        
         <div class="footer-social">
             <span class="footer-social__text"><?= content_get('footer', 'social_texto', '#ITB Instituto Superior Universitario Bolivariano en') ?></span>
             <div class="footer-social__icons">
@@ -138,9 +128,9 @@
     </div>
 </footer>
 
-<!-- ============================================= -->
-<!-- BOTTOM BAR                                    -->
-<!-- ============================================= -->
+
+
+
 <div class="footer-bottom">
     <div class="footer-bottom__container">
         <div class="footer-bottom__left">
@@ -155,12 +145,12 @@
     </div>
 </div>
 
-<!-- Botón Ir Arriba -->
+
 <div id="top-to-bottom" class="js-floating">
     <i class="fas fa-angles-up"></i>
 </div>
 
-<!-- Botón flotante WhatsApp -->
+
 <div class="whatsapp-float js-floating" id="whatsapp-float">
     <a href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20ITB" 
        target="_blank" 

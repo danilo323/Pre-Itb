@@ -1,10 +1,10 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('servicios')) return; ?>
-<!-- ============================================= -->
-<!-- BIENESTAR ESTUDIANTIL / SERVICIOS             -->
-<!-- ============================================= -->
+
+
+
 <section class="servicios" id="servicios">
     <div class="servicios__container">
-        <!-- Columna de Texto Principal -->
+        
         <div class="servicios__intro">
             <h2 class="servicios__title">
                 <?= nl2br(htmlspecialchars(content_get('servicios', 'serv1_titulo', "Bienestar\nEstudiantil"), ENT_QUOTES, 'UTF-8')) ?>
@@ -18,7 +18,7 @@
             </a>
         </div>
 
-        <!-- Tarjetas (Cards) -->
+        
         <div class="servicios__cards">
             <?php
             $lista_servicios = content_raw('servicios', 'lista_servicios', [
@@ -64,7 +64,7 @@
                 // Regla de imagen: Si NO hay imagen, usamos diseño simple. Si la hay, diseño con fondo.
                 if (empty($foto_path)): 
             ?>
-                <!-- Tarjeta Simple (Sin Imagen) -->
+                
                 <div class="servicios__card-simple">
                     <h3 class="servicios__card-title"><?= $titulo ?></h3>
                     <p class="servicios__card-text"><?= $desc ?></p>
@@ -74,7 +74,7 @@
                     </a>
                 </div>
             <?php else: ?>
-                <!-- Tarjeta con Imagen de Fondo -->
+                
                 <div class="servicios__card-image">
                     <img src="<?= htmlspecialchars($foto_path, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(strip_tags($titulo), ENT_QUOTES, 'UTF-8') ?>">
                     <div class="servicios__card-overlay"></div>

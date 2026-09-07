@@ -1,7 +1,7 @@
 <?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('programas')) return; ?>
-<!-- ============================================= -->
-<!-- PROGRAMAS DESTACADOS                          -->
-<!-- ============================================= -->
+
+
+
 <section class="programas" id="programas">
     <div class="programas__container">
         <div class="programas__header">
