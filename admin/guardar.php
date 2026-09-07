@@ -4,9 +4,11 @@
 
 session_start();
 require_once __DIR__ . '/csrf.php';
+require_once __DIR__ . '/base_url.php';
+$AB = admin_base();
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
-    header('Location: index.php');
+    header('Location: ' . $AB . '/index.php');
     exit;
 }
 
@@ -20,7 +22,7 @@ require_once __DIR__ . '/../includes/content_helper.php';
 if (!isset($schema['items'][$section_key])) {
     $_SESSION['flash_message'] = 'Sección no válida.';
     $_SESSION['flash_type']    = 'error';
-    header('Location: index.php');
+    header('Location: ' . $AB . '/index.php');
     exit;
 }
 
@@ -102,5 +104,5 @@ $_SESSION['flash_message'] = 'Cambios guardados correctamente.';
 $_SESSION['flash_type']    = 'success';
 
 // Volver al singleton
-header('Location: singleton.php?c=' . urlencode($section_key));
+header('Location: ' . $AB . '/singleton.php?c=' . urlencode($section_key));
 exit;

@@ -1245,3 +1245,294 @@ textarea.form-control, .field-group textarea {
         max-width: none;
     }
 }
+
+/* ================== UTILIDADES DE VISIBILIDAD ================== */
+.is-hidden { display: none; }
+.is-inline { display: inline; }
+
+/* ================== CAMPO: MENU BUILDER ================== */
+/* (antes vivía inline en admin/fields/menu_builder.php) */
+.menu-builder-wrapper {
+    background: var(--bg-panel, #ffffff);
+    border: 1px solid var(--border-color, #e2e8f0);
+    border-radius: var(--radius, 12px);
+    margin-bottom: 30px;
+    box-shadow: var(--shadow-sm, 0 1px 3px rgba(0,0,0,0.02));
+}
+.menu-builder-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--border-color, #e2e8f0);
+}
+.menu-builder-header h4 {
+    margin: 0;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--primary-blue, #1e293b);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.btn-add-menu-item {
+    background: none;
+    border: none;
+    color: var(--primary, #f97316); /* Orange ITB */
+    font-size: 18px;
+    cursor: pointer;
+    transition: color 0.2s;
+}
+.btn-add-menu-item:hover { color: var(--primary-hover, #ea580c); }
+.menu-builder-wrapper .field-help {
+    padding: 16px 24px 0;
+    margin: 0;
+    color: #64748b;
+    font-size: 14px;
+    line-height: 1.6;
+}
+.menu-builder-items {
+    padding: 16px 0;
+}
+.menu-builder-item {
+    border-bottom: 1px solid #f1f5f9;
+    transition: background 0.2s;
+}
+.menu-builder-item:last-child {
+    border-bottom: none;
+}
+.menu-builder-item:hover {
+    background: #f8fafc;
+}
+.mb-display-row {
+    display: flex;
+    align-items: center;
+    padding: 12px 24px;
+    min-height: 56px;
+}
+.mb-drag-handle {
+    display: flex;
+    align-items: center;
+    width: 60px;
+    color: #64748b;
+    font-size: 13px;
+    font-weight: 500;
+    transition: margin-left 0.2s ease;
+}
+.mb-indent-dash {
+    display: none;
+    color: #cbd5e1;
+    margin-right: 8px;
+    font-weight: 300;
+}
+.menu-builder-item.is-hijo .mb-drag-handle {
+    margin-left: 40px;
+    width: 100px;
+}
+.menu-builder-item.is-hijo .mb-indent-dash {
+    display: inline-block;
+}
+.mb-title-display {
+    flex: 1;
+    font-weight: 600;
+    color: var(--primary-blue, #1e3a8a); /* Dark blue ITB */
+    font-size: 15px;
+}
+.mb-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 1; /* Siempre visible */
+}
+.mb-btn {
+    background: transparent;
+    border: none;
+    color: #9ca3af;
+    cursor: pointer;
+    padding: 6px;
+    border-radius: 4px;
+    font-size: 15px;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.mb-btn:hover { background: var(--primary-light, #fff7ed); color: var(--primary, #f97316); } /* Orange ITB */
+.mb-btn-remove:hover { background: var(--danger-light, #fee2e2); color: var(--danger, #ef4444); }
+
+.mb-edit-row {
+    display: none;
+    padding: 16px 24px 16px 84px;
+    background: #f8fafc;
+    border-top: 1px dashed #e2e8f0;
+    align-items: flex-start;
+    gap: 16px;
+}
+.menu-builder-item.is-hijo .mb-edit-row {
+    padding-left: 124px;
+}
+.menu-builder-item.is-editing .mb-edit-row {
+    display: flex;
+}
+.menu-builder-item.is-editing .mb-display-row {
+    background: #f8fafc;
+}
+.mb-edit-fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+.mb-input-text, .mb-input-url {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #cbd5e1;
+    border-radius: 6px;
+    font-size: 14px;
+    background: #fff;
+}
+.mb-input-text:focus, .mb-input-url:focus {
+    outline: none;
+    border-color: var(--primary, #f97316); /* Orange ITB */
+    box-shadow: 0 0 0 3px var(--primary-light, rgba(249, 115, 22, 0.1));
+}
+
+/* ================== CAMPO: IMAGEN ================== */
+/* (antes vivía inline en admin/fields/image.php) */
+.image-preview-wrapper {
+    border: 1px dashed var(--border-color);
+    padding: 15px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    background-color: #f8fafc;
+    background-image:
+        linear-gradient(45deg, #e2e8f0 25%, transparent 25%),
+        linear-gradient(-45deg, #e2e8f0 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, #e2e8f0 75%),
+        linear-gradient(-45deg, transparent 75%, #e2e8f0 75%);
+    background-size: 20px 20px;
+    background-position: 0 0, 0 10px, 10px -10px, -10px 0px;
+}
+.image-preview {
+    text-align: center;
+}
+.image-preview img {
+    max-width: 100%;
+    max-height: 200px;
+    border-radius: 4px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+.image-placeholder {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+}
+.image-placeholder i {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 8px;
+}
+.field-image input[type="file"] {
+    display: none;
+}
+
+/* ================== CAMPO: REPEATER ================== */
+/* (antes vivía inline en admin/fields/repeater.php) */
+.repeater-help {
+    display: block;
+    margin-bottom: 12px;
+}
+.repeater-label {
+    font-size: 16px;
+    font-weight: 600;
+    margin-bottom: 4px;
+}
+.repeater-item {
+    border: 1px solid var(--border-color);
+    padding: 16px;
+    margin-bottom: 16px;
+    border-radius: 8px;
+    background: var(--bg-main);
+}
+.repeater-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 12px;
+}
+.repeater-item-title {
+    margin: 0;
+    font-size: 15px;
+    color: var(--text-main);
+}
+.btn-remove {
+    background: transparent;
+    border: none;
+    color: var(--danger);
+    cursor: pointer;
+    font-size: 14px;
+}
+.btn-add {
+    width: 100%;
+    justify-content: center;
+    border-style: dashed;
+}
+
+/* ================== CAMPO: ALERT ================== */
+/* (antes vivía inline en admin/fields/alert.php) */
+.field-alert {
+    padding: 16px;
+    border-radius: 8px;
+    margin-bottom: 24px;
+    font-size: 0.9rem;
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    border: 1px solid transparent;
+}
+.field-alert i {
+    font-size: 1.25rem;
+    line-height: 1;
+}
+.field-alert-body {
+    line-height: 1.5;
+}
+.field-alert-info {
+    background-color: var(--info-light);
+    border-color: var(--info-light);
+    color: var(--info);
+}
+.field-alert-warning {
+    background-color: var(--warning-light);
+    border-color: var(--warning-light);
+    color: var(--warning);
+}
+.field-alert-danger {
+    background-color: var(--danger-light);
+    border-color: var(--danger-light);
+    color: var(--danger);
+}
+.field-alert-success {
+    background-color: var(--success-light);
+    border-color: var(--success-light);
+    color: var(--success);
+}
+
+/* ================== CAMPO: DIVIDER ================== */
+/* (antes vivía inline en admin/fields/divider.php) */
+.field-divider {
+    margin: 24px 0 12px 0;
+    padding-bottom: 6px;
+    border-bottom: 1px solid var(--border-color);
+    color: var(--primary);
+    font-weight: 800;
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+/* ================== ERROR: TIPO DE CAMPO NO SOPORTADO ================== */
+/* (antes vivía inline en admin/fields/_loader.php) */
+.field-error {
+    color: var(--danger);
+}

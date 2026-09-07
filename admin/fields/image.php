@@ -24,42 +24,41 @@ function field_image_render(string $name_path, $value, array $config): string {
     }
 
     $show_preview = $has_image && $image_exists;
-    $preview_style = $show_preview ? '' : 'display: none;';
-    $placeholder_style = $show_preview ? 'display: none;' : '';
-    
+    $preview_hidden_class = $show_preview ? '' : ' is-hidden';
+    $placeholder_hidden_class = $show_preview ? ' is-hidden' : '';
+
     // Un ID único por si hay varios campos de imagen
     $inputId = 'file_' . md5($name_path . rand());
-    
+
     // Texto del placeholder
     $placeholder_icon = 'bi-image';
-    $placeholder_color = 'var(--text-muted)';
     $placeholder_text = "Ninguna imagen seleccionada";
 
     return <<<HTML
 <div class="form-group field-image">
     <label>{$label}</label>
     {$help}
-    
-    <div class="image-preview-wrapper" style="border: 1px dashed var(--border-color); padding: 15px; border-radius: 8px; margin-bottom: 15px; background-color: #f8fafc; background-image: linear-gradient(45deg, #e2e8f0 25%, transparent 25%), linear-gradient(-45deg, #e2e8f0 25%, transparent 25%), linear-gradient(45deg, transparent 75%, #e2e8f0 75%), linear-gradient(-45deg, transparent 75%, #e2e8f0 75%); background-size: 20px 20px; background-position: 0 0, 0 10px, 10px -10px, -10px 0px;">
+
+    <div class="image-preview-wrapper">
         <!-- Preview si hay imagen -->
-        <div class="image-preview" style="{$preview_style} text-align: center;">
-            <img src="{$img_src}" alt="Preview" style="max-width: 100%; max-height: 200px; border-radius: 4px; box-shadow: 0 2px 4px rgba(0,0,0,0.1);">
+        <div class="image-preview{$preview_hidden_class}">
+            <img src="{$img_src}" alt="Preview">
         </div>
-        
+
         <!-- Placeholder si no hay imagen o si está rota -->
-        <div class="image-placeholder" style="{$placeholder_style}; text-align: center; color: {$placeholder_color}; padding: 20px;">
-            <i class="bi {$placeholder_icon}" style="font-size: 24px; display: block; margin-bottom: 8px;"></i>
+        <div class="image-placeholder{$placeholder_hidden_class}">
+            <i class="bi {$placeholder_icon}"></i>
             <span>{$placeholder_text}</span>
         </div>
 
         <div class="image-actions">
-            <label class="btn btn-outline" for="{$inputId}" style="cursor: pointer;">
+            <label class="btn btn-outline" for="{$inputId}">
                 <i class="bi bi-folder-fill"></i> Cambiar imagen
             </label>
-            <button type="button" class="btn btn-danger btn-remove-image" style="{$preview_style}" title="Quitar imagen">
+            <button type="button" class="btn btn-danger btn-remove-image{$preview_hidden_class}" title="Quitar imagen">
                 <i class="bi bi-x-circle"></i> Quitar
             </button>
-            <input type="file" id="{$inputId}" name="{$name_path}[file]" accept="image/*" style="display: none;">
+            <input type="file" id="{$inputId}" name="{$name_path}[file]" accept="image/*" class="is-hidden">
             <input type="hidden" name="{$name_path}" value="{$val}">
         </div>
     </div>

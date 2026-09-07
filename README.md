@@ -44,23 +44,36 @@ El proyecto está dividido en dos partes independientes:
 
 ## 🚀 Cómo correr el proyecto
 
-### Paso 1: Iniciar el servidor local de PHP
+Hay dos formas de levantarlo — usa la que te resulte más cómoda, las dos funcionan igual:
+
+### Opción A: Terminal con PHP (rápida, sin instalar nada)
 
 Abre tu terminal en la carpeta del proyecto y ejecuta:
 
 ```
-php -S localhost:8000
+php -S localhost:8000 router.php
 ```
 
-Verás una salida en la terminal indicando que el servidor se inició correctamente en `http://localhost:8000`.
+El `router.php` al final es importante: habilita las rutas "limpias" del panel (`/admin`, `/admin/login`) y la página 404 personalizada en este servidor. Si lo olvidas, el sitio sigue funcionando pero esas dos cosas no. Verás una salida en la terminal indicando que el servidor se inició en `http://localhost:8000`.
+
+### Opción B: XAMPP / WAMP / Laragon (Apache)
+
+1. Copia la carpeta del proyecto dentro de `htdocs` (ej. `C:\xampp\htdocs\itb`).
+2. Prende **Apache** desde el panel de control (no hace falta MySQL).
+3. Entra por `http://localhost/itb` (o el nombre de carpeta que hayas usado) en vez de `localhost:8000`.
+
+Aquí no hace falta el `router.php` — el `.htaccess` de la raíz ya trae la misma lógica (rutas limpias + 404 personalizada) para que Apache la use directamente.
 
 ### Paso 2: Abrir las páginas en tu navegador
 
 Abre Chrome, Firefox o cualquier navegador y entra a las siguientes direcciones:
 
 - 🌐 **Landing Page**: [http://localhost:8000](http://localhost:8000)
-- 🔐 **Panel de Administración**: [http://localhost:8000/admin/singleton.php](http://localhost:8000/admin/singleton.php)
-- 🧪 **Pruebas del motor de campos**: [http://localhost:8000/admin/test_motor.php](http://localhost:8000/admin/test_motor.php)
+- 🔐 **Panel de Administración**: [http://localhost:8000/admin](http://localhost:8000/admin) — si no has iniciado sesión te manda al login; si ya la iniciaste, entras directo.
+- 🔑 **Login**: [http://localhost:8000/admin/login](http://localhost:8000/admin/login) — si ya tienes sesión abierta, te redirige solo al panel.
+- ⚙️ **Ejemplo de singleton** (Ajustes generales): [http://localhost:8000/admin/singleton.php?c=ajustes](http://localhost:8000/admin/singleton.php?c=ajustes)
+
+> En un hosting real (Apache) no hace falta el `router.php`: el `.htaccess` de la raíz ya define las mismas rutas limpias.
 
 ### Credenciales de acceso al panel (demo)
 

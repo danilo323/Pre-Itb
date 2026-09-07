@@ -6,8 +6,11 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
     session_start();
 }
 
+require_once __DIR__ . '/../base_url.php';
+$AB = admin_base();
+
 if (empty($_SESSION['admin_logged'])) {
-    header('Location: ' . dirname($_SERVER['PHP_SELF'], 1) . '/login.php');
+    header('Location: ' . $AB . '/login.php');
     exit;
 }
 
@@ -16,14 +19,15 @@ csrf_token(); // asegura que $_SESSION['csrf_token'] exista antes de renderizar 
 
 function layout_sidebar($current_key = ''): string {
     $schema = require __DIR__ . '/../schema_mock.php';
-    
+    $ab = admin_base();
+
     $html = "<div class=\"sidebar-brand\">\n";
     $html .= "    <i class=\"bi bi-mortarboard-fill\"></i>\n";
     $html .= "    <span>Configuración</span>\n";
     $html .= "</div>\n";
     $html .= "<nav class=\"sidebar-nav\">\n";
     $html .= "    <ul>\n";
-    $html .= "        <li><a href=\"index.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard</a></li>\n";
+    $html .= "        <li><a href=\"{$ab}/index.php\"><i class=\"bi bi-speedometer2\"></i> Dashboard</a></li>\n";
 
     // Agrupar items
     $groups = $schema['groups'] ?? [];
@@ -43,7 +47,7 @@ function layout_sidebar($current_key = ''): string {
             $icon  = $item['icon'] ?? 'bi bi-file-earmark-text';
             $active = ($current_key === $key) ? 'class="active"' : '';
             
-            $url = ($item['type'] === 'collection') ? "coleccion.php?c={$key}" : "singleton.php?c={$key}";
+            $url = ($item['type'] === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
             
             $html .= "        <li><a href=\"{$url}\" {$active}><i class=\"{$icon}\"></i> {$label}</a></li>\n";
         }
@@ -85,6 +89,8 @@ function layout_start(string $title = "Panel de Administración", string $curren
     $flash      = layout_flash();
     $user       = htmlspecialchars($_SESSION['user'] ?? 'HOLA', ENT_QUOTES, 'UTF-8');
     $time       = time();
+    $ab         = admin_base();
+    $sb         = site_base();
 
     return <<<HTML
 <!DOCTYPE html>
@@ -97,7 +103,7 @@ function layout_start(string $title = "Panel de Administración", string $curren
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <link rel="stylesheet" href="assets/admin.css?v={$time}">
+    <link rel="stylesheet" href="{$ab}/assets/admin.css?v={$time}">
 </head>
 <body>
     <div class="admin-topbar">
@@ -105,9 +111,9 @@ function layout_start(string $title = "Panel de Administración", string $curren
             <!-- Oculto en móvil -->
         </div>
         <div class="topbar-right">
-            <a href="../" target="_blank" class="topbar-link"><i class="bi bi-box-arrow-up-right"></i> Ver sitio</a>
+            <a href="{$sb}" target="_blank" class="topbar-link"><i class="bi bi-box-arrow-up-right"></i> Ver sitio</a>
             <span class="topbar-user"><i class="bi bi-person-fill"></i> {$user}</span>
-            <a href="logout.php" class="topbar-link topbar-logout"><i class="bi bi-door-open-fill"></i> Cerrar sesión</a>
+            <a href="{$ab}/logout.php" class="topbar-link topbar-logout"><i class="bi bi-door-open-fill"></i> Cerrar sesión</a>
         </div>
     </div>
 
@@ -125,12 +131,14 @@ HTML;
 }
 
 function layout_end(): string {
+    $ab   = admin_base();
+    $time = time();
     return <<<HTML
             </div> <!-- /.admin-content -->
         </main>
     </div> <!-- /.admin-container -->
 
-    <script src="/admin/assets/admin.js?v=<?= time() ?>"></script>
+    <script src="{$ab}/assets/admin.js?v={$time}"></script>
 </body>
 </html>
 HTML;

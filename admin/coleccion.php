@@ -4,12 +4,13 @@
 
 require_once __DIR__ . '/views/layout.php';
 $schema = require __DIR__ . '/schema_mock.php';
+$AB = admin_base();
 
 $section = $_GET['c'] ?? 'testimonios';
 
 // Validar Whitelist del schema (V2)
 if (!isset($schema['items'][$section]) || $schema['items'][$section]['type'] !== 'collection') {
-    header("Location: index.php");
+    header("Location: {$AB}/index.php");
     exit;
 }
 
@@ -60,7 +61,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
         }
     }
     
-    header("Location: coleccion.php?c=" . urlencode($section));
+    header("Location: {$AB}/coleccion.php?c=" . urlencode($section));
     exit;
 }
 
@@ -84,7 +85,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
             break;
         }
     }
-    header("Location: coleccion.php?c=" . urlencode($section));
+    header("Location: {$AB}/coleccion.php?c=" . urlencode($section));
     exit;
 }
 
@@ -96,7 +97,7 @@ echo layout_start($title_label);
     <div class="search-box">
         <input type="text" id="search-table" placeholder="🔍 Buscar en la lista..." class="form-input">
     </div>
-    <a href="editar.php?c=<?= urlencode($section) ?>&id=new" class="btn btn-primary">+ Nuevo Registro</a>
+    <a href="<?= $AB ?>/editar.php?c=<?= urlencode($section) ?>&id=new" class="btn btn-primary">+ Nuevo Registro</a>
 </div>
 
 <div class="table-container">
@@ -130,8 +131,8 @@ echo layout_start($title_label);
                         <td><?= htmlspecialchars($item[$col] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
                     <?php endforeach; ?>
                     <td class="actions-cell">
-                        <a href="editar.php?c=<?= urlencode($section) ?>&id=<?= $item['id'] ?>" class="btn btn-sm btn-secondary"><i class="bi bi-pencil-fill"></i> Editar</a>
-                        <form method="POST" action="" style="display:inline;" class="form-delete-record">
+                        <a href="<?= $AB ?>/editar.php?c=<?= urlencode($section) ?>&id=<?= $item['id'] ?>" class="btn btn-sm btn-secondary"><i class="bi bi-pencil-fill"></i> Editar</a>
+                        <form method="POST" action="" class="form-delete-record is-inline">
                             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
                             <input type="hidden" name="action" value="delete">
                             <input type="hidden" name="id" value="<?= $item['id'] ?>">
@@ -145,43 +146,18 @@ echo layout_start($title_label);
 </div>
 
 <?php if ($is_sortable): ?>
-<form id="save-order-form" method="POST" action="" style="display:none;">
+<form id="save-order-form" method="POST" action="" class="is-hidden">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
     <input type="hidden" name="action" value="save_order">
     <input type="hidden" name="order_data" id="order-data-input" value="">
 </form>
 
-<div id="order-actions" class="order-notice" style="display: none;">
+<div id="order-actions" class="order-notice is-hidden">
     <p><i class="bi bi-info-circle-fill"></i> Has modificado el orden de los registros. No olvides guardar.</p>
     <button type="button" class="btn btn-primary" onclick="submitOrder()"><i class="bi bi-floppy-fill"></i> Guardar Cambios de Orden</button>
     <button type="button" class="btn btn-outline" onclick="location.reload()">Cancelar</button>
 </div>
 
-<script>
-document.querySelectorAll('.js-move-up').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const row = this.closest('tr');
-        if (row.previousElementSibling) {
-            row.parentNode.insertBefore(row, row.previousElementSibling);
-            document.getElementById('order-actions').style.display = 'block';
-        }
-    });
-});
-document.querySelectorAll('.js-move-down').forEach(btn => {
-    btn.addEventListener('click', function() {
-        const row = this.closest('tr');
-        if (row.nextElementSibling) {
-            row.parentNode.insertBefore(row.nextElementSibling, row);
-            document.getElementById('order-actions').style.display = 'block';
-        }
-    });
-});
-function submitOrder() {
-    const ids = Array.from(document.querySelectorAll('tr[data-id]')).map(tr => tr.getAttribute('data-id'));
-    document.getElementById('order-data-input').value = JSON.stringify(ids);
-    document.getElementById('save-order-form').submit();
-}
-</script>
 <?php endif; ?>
 
 <?php

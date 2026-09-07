@@ -1,10 +1,12 @@
 <?php
 // admin/login.php
 session_start();
+require_once __DIR__ . '/base_url.php';
+$AB = admin_base();
 
 // Si ya está logueado, ir directo al panel
 if (!empty($_SESSION['admin_logged'])) {
-    header('Location: index.php');
+    header('Location: ' . $AB . '/index.php');
     exit;
 }
 
@@ -20,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         session_regenerate_id(true);
         $_SESSION['admin_logged'] = true;
         $_SESSION['user'] = $user;
-        header('Location: index.php');
+        header('Location: ' . $AB . '/index.php');
         exit;
     } else {
         $error = 'Usuario o contraseña incorrectos.';
@@ -37,8 +39,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
-    <!-- Ruta relativa al CSS (funciona siempre) -->
-    <link rel="stylesheet" href="assets/admin.css">
+    <!-- Ruta calculada dinámicamente: funciona igual en la raíz del dominio o en una subcarpeta (XAMPP) -->
+    <link rel="stylesheet" href="<?= $AB ?>/assets/admin.css">
 </head>
 <body class="login-body">
 

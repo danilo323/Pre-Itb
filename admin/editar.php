@@ -6,6 +6,7 @@ require_once __DIR__ . '/views/layout.php';
 require_once __DIR__ . '/fields/_loader.php';
 
 $schema = require __DIR__ . '/schema_mock.php';
+$AB = admin_base();
 
 $section = $_GET['c'] ?? 'testimonios';
 $id = $_GET['id'] ?? 'new';
@@ -108,7 +109,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
     }
 
     flash_set($is_new ? "Registro creado exitosamente (Memoria)" : "Registro actualizado exitosamente (Memoria)");
-    header("Location: coleccion.php?c=" . urlencode($section));
+    header("Location: {$AB}/coleccion.php?c=" . urlencode($section));
     exit;
 }
 
@@ -130,7 +131,7 @@ echo layout_start($title_label);
 
 <div class="form-container">
     <div class="form-header-bar">
-        <a href="coleccion.php?c=<?= urlencode($section) ?>" class="btn btn-secondary">← Volver al Listado</a>
+        <a href="<?= $AB ?>/coleccion.php?c=<?= urlencode($section) ?>" class="btn btn-secondary">← Volver al Listado</a>
     </div>
 
     <form method="POST" action="" class="admin-form" enctype="multipart/form-data">
@@ -145,7 +146,7 @@ echo layout_start($title_label);
 
         <div class="form-actions">
             <button type="submit" class="btn btn-primary"><i class="bi bi-floppy-fill"></i> <?= $is_new ? 'Crear Registro' : 'Guardar Cambios' ?></button>
-            <a href="coleccion.php?c=<?= urlencode($section) ?>" class="btn btn-outline">Cancelar</a>
+            <a href="<?= $AB ?>/coleccion.php?c=<?= urlencode($section) ?>" class="btn btn-outline">Cancelar</a>
         </div>
     </form>
 </div>

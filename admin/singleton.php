@@ -5,17 +5,18 @@ require_once __DIR__ . '/views/layout.php';
 require_once __DIR__ . '/fields/_loader.php';
 
 $schema = require __DIR__ . '/schema_mock.php';
+$AB = admin_base();
 $section_key = $_GET['c'] ?? '';
 
 if (!isset($schema['items'][$section_key])) {
-    header("Location: index.php");
+    header("Location: {$AB}/index.php");
     exit;
 }
 
 $config = $schema['items'][$section_key];
 
 if ($config['type'] === 'collection') {
-    header("Location: coleccion.php?c=" . urlencode($section_key));
+    header("Location: {$AB}/coleccion.php?c=" . urlencode($section_key));
     exit;
 }
 
@@ -33,7 +34,7 @@ function get_saved_data($sec_key, $field_key, $default) {
 echo layout_start($config['label'], $section_key);
 ?>
 
-<form method="POST" action="guardar.php" enctype="multipart/form-data">
+<form method="POST" action="<?= $AB ?>/guardar.php" enctype="multipart/form-data">
     <input type="hidden" name="csrf_token" value="<?= htmlspecialchars($_SESSION['csrf_token'] ?? '', ENT_QUOTES, 'UTF-8') ?>">
     <input type="hidden" name="section" value="<?= htmlspecialchars($section_key, ENT_QUOTES, 'UTF-8') ?>">
     
@@ -97,7 +98,7 @@ echo layout_start($config['label'], $section_key);
     <?php endif; ?>
     
     <div class="form-actions">
-        <a href="index.php" class="btn btn-outline">Cancelar</a>
+        <a href="<?= $AB ?>/index.php" class="btn btn-outline">Cancelar</a>
         <button type="submit" class="btn btn-primary"><i class="bi bi-floppy-fill"></i> Guardar cambios</button>
     </div>
 </form>

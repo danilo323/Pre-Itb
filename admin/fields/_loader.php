@@ -33,7 +33,7 @@ function field_render(string $name_path, $value, array $config): string {
     }
     
     // Fallback si alguien pide un tipo de campo que no has programado aún
-    return "<div style='color:red;'>Error: Tipo de campo '{$type}' no soportado.</div>";
+    return "<div class='field-error'>Error: Tipo de campo '{$type}' no soportado.</div>";
 }
 
 /**

@@ -12,19 +12,10 @@ function field_alert_render(string $name_path, $value, array $config): string {
     if ($alert_type === 'danger') $icon = 'bi-x-octagon-fill';
     if ($alert_type === 'success') $icon = 'bi-check-circle-fill';
 
-    // Colores por defecto (info)
-    $bg = '#e0f2fe';
-    $border = '#bae6fd';
-    $color = '#0369a1';
-    
-    if ($alert_type === 'warning') { $bg = '#fef3c7'; $border = '#fde68a'; $color = '#b45309'; }
-    if ($alert_type === 'danger') { $bg = '#fee2e2'; $border = '#fecaca'; $color = '#b91c1c'; }
-    if ($alert_type === 'success') { $bg = '#dcfce7'; $border = '#bbf7d0'; $color = '#15803d'; }
-
     return "
-    <div style='background-color: {$bg}; border: 1px solid {$border}; color: {$color}; padding: 16px; border-radius: 8px; margin-bottom: 24px; font-size: 0.9rem; display: flex; align-items: flex-start; gap: 12px;'>
-        <i class='bi {$icon}' style='font-size: 1.25rem; line-height: 1;'></i>
-        <div style='line-height: 1.5;'>
+    <div class='field-alert field-alert-{$alert_type}'>
+        <i class='bi {$icon}'></i>
+        <div class='field-alert-body'>
             {$label}
         </div>
     </div>";

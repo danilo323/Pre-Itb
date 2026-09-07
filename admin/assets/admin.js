@@ -89,9 +89,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 const reader = new FileReader();
                 reader.onload = e => {
                     if (img) img.src = e.target.result;
-                    if (preview) preview.style.display = 'block';
-                    if (placeholder) placeholder.style.display = 'none';
-                    if (removeBtn) removeBtn.style.display = 'inline-flex';
+                    if (preview) preview.classList.remove('is-hidden');
+                    if (placeholder) placeholder.classList.add('is-hidden');
+                    if (removeBtn) removeBtn.classList.remove('is-hidden');
                 };
                 reader.readAsDataURL(file);
             });
@@ -103,9 +103,9 @@ document.addEventListener('DOMContentLoaded', function () {
                     if (fileInput) fileInput.value = '';
                     if (hiddenInput) hiddenInput.value = '';
                     if (img) img.src = '';
-                    if (preview) preview.style.display = 'none';
-                    if (placeholder) placeholder.style.display = 'block';
-                    removeBtn.style.display = 'none';
+                    if (preview) preview.classList.add('is-hidden');
+                    if (placeholder) placeholder.classList.remove('is-hidden');
+                    removeBtn.classList.add('is-hidden');
                 });
             });
         }
@@ -193,9 +193,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
             // Limpiar preview de imagen
             newItem.querySelectorAll('.image-preview img').forEach(img => img.src = '');
-            newItem.querySelectorAll('.image-preview').forEach(div => div.style.display = 'none');
-            newItem.querySelectorAll('.image-placeholder').forEach(div => div.style.display = 'block');
-            newItem.querySelectorAll('.btn-remove-image').forEach(btn => btn.style.display = 'none');
+            newItem.querySelectorAll('.image-preview').forEach(div => div.classList.add('is-hidden'));
+            newItem.querySelectorAll('.image-placeholder').forEach(div => div.classList.remove('is-hidden'));
+            newItem.querySelectorAll('.btn-remove-image').forEach(btn => btn.classList.add('is-hidden'));
 
             // Actualizar número en el título del item
             const repeaterGroup = items.closest('.repeater-group');
@@ -235,5 +235,178 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         });
     });
+
+    // ── CAMPO: MENU BUILDER ────────────────────────────
+    // (antes vivía inline en admin/fields/menu_builder.php)
+    function initMenuBuilder(container) {
+        const itemsContainer = container.querySelector('.menu-builder-items');
+        const btnAdd = container.querySelector('.btn-add-menu-item');
+        const template = container.querySelector('.menu-builder-template');
+        if (!itemsContainer || !btnAdd || !template) return;
+
+        function updateIndices() {
+            const items = itemsContainer.querySelectorAll('.menu-builder-item');
+            items.forEach((item, index) => {
+                item.dataset.index = index;
+                item.querySelector('.mb-number').textContent = '#' + (index + 1);
+
+                // Actualizar names
+                item.querySelectorAll('input').forEach(input => {
+                    const name = input.getAttribute('name');
+                    if (name) {
+                        input.setAttribute('name', name.replace(/\[\d+\]/, '[' + index + ']'));
+                    }
+                });
+            });
+        }
+
+        function attachEvents(item) {
+            const btnLeft = item.querySelector('.mb-btn-indent-left');
+            const btnRight = item.querySelector('.mb-btn-indent-right');
+            const btnUp = item.querySelector('.mb-btn-up');
+            const btnDown = item.querySelector('.mb-btn-down');
+            const btnRemove = item.querySelector('.mb-btn-remove');
+            const btnEdit = item.querySelector('.mb-btn-edit');
+            const btnCloseEdit = item.querySelector('.mb-btn-close-edit');
+            const btnCopy = item.querySelector('.mb-btn-copy');
+            const btnAddChild = item.querySelector('.mb-btn-add-child');
+
+            const inputNivel = item.querySelector('.mb-input-nivel');
+            const inputText = item.querySelector('.mb-input-text');
+            const titleDisplay = item.querySelector('.mb-title-display');
+
+            // Sincronizar texto
+            inputText.addEventListener('input', () => {
+                titleDisplay.textContent = inputText.value || 'Nuevo Item';
+            });
+
+            // Editar
+            btnEdit.addEventListener('click', () => {
+                item.classList.toggle('is-editing');
+            });
+
+            btnCloseEdit.addEventListener('click', () => {
+                item.classList.remove('is-editing');
+            });
+
+            // Indentar
+            btnLeft.addEventListener('click', () => {
+                item.classList.remove('is-hijo');
+                inputNivel.value = 'padre';
+            });
+            btnRight.addEventListener('click', () => {
+                item.classList.add('is-hijo');
+                inputNivel.value = 'hijo';
+            });
+
+            // Reordenar
+            btnUp.addEventListener('click', () => {
+                const prev = item.previousElementSibling;
+                if (prev) {
+                    itemsContainer.insertBefore(item, prev);
+                    updateIndices();
+                }
+            });
+            btnDown.addEventListener('click', () => {
+                const next = item.nextElementSibling;
+                if (next) {
+                    itemsContainer.insertBefore(next, item);
+                    updateIndices();
+                }
+            });
+
+            // Eliminar
+            btnRemove.addEventListener('click', () => {
+                if (confirm('¿Eliminar este enlace?')) {
+                    item.remove();
+                    updateIndices();
+                }
+            });
+
+            // Duplicar
+            btnCopy.addEventListener('click', () => {
+                const clone = item.cloneNode(true);
+                clone.classList.remove('is-editing');
+                itemsContainer.insertBefore(clone, item.nextSibling);
+                attachEvents(clone);
+                updateIndices();
+            });
+
+            // Añadir hijo
+            btnAddChild.addEventListener('click', () => {
+                item.classList.remove('is-hijo'); // Asegurar que es padre
+                inputNivel.value = 'padre';
+
+                const newIndex = itemsContainer.children.length;
+                const html = template.innerHTML
+                    .replace(/{INDEX}/g, newIndex)
+                    .replace(/{NUM}/g, newIndex + 1);
+
+                const tempDiv = document.createElement('div');
+                tempDiv.innerHTML = html.trim();
+                const newItem = tempDiv.firstChild;
+
+                newItem.classList.add('is-hijo');
+                newItem.querySelector('.mb-input-nivel').value = 'hijo';
+                newItem.classList.add('is-editing');
+                newItem.querySelectorAll('input').forEach(i => i.removeAttribute('disabled'));
+
+                itemsContainer.insertBefore(newItem, item.nextSibling);
+                attachEvents(newItem);
+                updateIndices();
+            });
+        }
+
+        // Attach a los items iniciales
+        itemsContainer.querySelectorAll('.menu-builder-item').forEach(attachEvents);
+
+        // Agregar nuevo principal
+        btnAdd.addEventListener('click', () => {
+            const newIndex = itemsContainer.children.length;
+            const html = template.innerHTML
+                .replace(/{INDEX}/g, newIndex)
+                .replace(/{NUM}/g, newIndex + 1);
+
+            const tempDiv = document.createElement('div');
+            tempDiv.innerHTML = html.trim();
+            const newItem = tempDiv.firstChild;
+
+            newItem.classList.add('is-editing');
+            newItem.querySelectorAll('input').forEach(i => i.removeAttribute('disabled'));
+
+            itemsContainer.appendChild(newItem);
+            attachEvents(newItem);
+            updateIndices();
+        });
+    }
+    document.querySelectorAll('.menu-builder-wrapper').forEach(initMenuBuilder);
+
+    // ── COLECCIÓN: REORDENAR (flechas arriba/abajo) ────
+    // (antes vivía inline en admin/coleccion.php)
+    document.querySelectorAll('.js-move-up').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const row = this.closest('tr');
+            if (row.previousElementSibling) {
+                row.parentNode.insertBefore(row, row.previousElementSibling);
+                const orderActions = document.getElementById('order-actions');
+                if (orderActions) orderActions.classList.remove('is-hidden');
+            }
+        });
+    });
+    document.querySelectorAll('.js-move-down').forEach(btn => {
+        btn.addEventListener('click', function () {
+            const row = this.closest('tr');
+            if (row.nextElementSibling) {
+                row.parentNode.insertBefore(row.nextElementSibling, row);
+                const orderActions = document.getElementById('order-actions');
+                if (orderActions) orderActions.classList.remove('is-hidden');
+            }
+        });
+    });
+    window.submitOrder = function () {
+        const ids = Array.from(document.querySelectorAll('tr[data-id]')).map(tr => tr.getAttribute('data-id'));
+        document.getElementById('order-data-input').value = JSON.stringify(ids);
+        document.getElementById('save-order-form').submit();
+    };
 
 });
