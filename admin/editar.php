@@ -18,7 +18,8 @@ if (!isset($schema['items'][$section]) || $schema['items'][$section]['type'] !==
 $config = $schema['items'][$section];
 $is_new = ($id === 'new');
 
-// Leer sesión (vía helper)
+// Leer items de colección (vía helper / storage)
+require_once __DIR__ . '/storage.php';
 require_once __DIR__ . '/../includes/content_helper.php';
 $items = collection_items($section);
 
@@ -94,19 +95,29 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && (!isset($_POST['action']) || $_POST
         $data_to_save[$key] = field_parse($field_config['type'], $raw_value, $field_config);
     }
 
-    // 3. Guardar en memoria
+    // 3. Guardar en almacenamiento persistente y sincronizar memoria
     if ($is_new) {
-        $_SESSION['admin_data'][$section]['items'][] = $data_to_save;
+        $items[] = $data_to_save;
     } else {
-        foreach ($_SESSION['admin_data'][$section]['items'] as $idx => $itm) {
-            if ($itm['id'] === (int)$id) {
-                $_SESSION['admin_data'][$section]['items'][$idx] = $data_to_save;
+        $found = false;
+        foreach ($items as $idx => $itm) {
+            if ((int)($itm['id'] ?? 0) === (int)$id) {
+                $items[$idx] = $data_to_save;
+                $found = true;
                 break;
             }
         }
+        if (!$found) {
+            $items[] = $data_to_save;
+        }
     }
 
-    flash_set($is_new ? "Registro creado exitosamente (Memoria)" : "Registro actualizado exitosamente (Memoria)");
+    $clean_items = array_values($items);
+    storage_set($section, 'items', json_encode($clean_items, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES));
+    storage_clear_cache();
+    $_SESSION['admin_data'][$section]['items'] = $clean_items;
+
+    flash_set($is_new ? "Registro creado exitosamente" : "Registro actualizado exitosamente");
     header("Location: coleccion.php?c=" . urlencode($section));
     exit;
 }

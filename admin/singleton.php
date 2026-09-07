@@ -3,6 +3,7 @@
 // Renderiza páginas y singletons (Versión 2.0)
 require_once __DIR__ . '/views/layout.php';
 require_once __DIR__ . '/fields/_loader.php';
+require_once __DIR__ . '/storage.php';
 
 $schema = require __DIR__ . '/schema_mock.php';
 $section_key = $_GET['c'] ?? '';
@@ -19,12 +20,17 @@ if ($config['type'] === 'collection') {
     exit;
 }
 
-// Simulador de storage_get para la V2
-// Lee los datos guardados en la sesión, si no existen usa los 'default' del schema
+// Lee los datos guardados en la sesión o en almacenamiento persistente, si no existen usa los 'default' del schema
 function get_saved_data($sec_key, $field_key, $default) {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     if (isset($_SESSION['admin_data'][$sec_key][$field_key])) {
         return $_SESSION['admin_data'][$sec_key][$field_key];
+    }
+    if (function_exists('storage_get_raw')) {
+        $stored = storage_get_raw($sec_key, $field_key, null);
+        if ($stored !== null) {
+            return $stored;
+        }
     }
     return $default;
 }
@@ -47,7 +53,8 @@ echo layout_start($config['label'], $section_key);
                 <?php 
                 $i = 1;
                 foreach ($config['sections'] as $sub_key => $sub_config): 
-                    $is_visible = $_SESSION['admin_data'][$sub_key]['_visible'] ?? '1';
+                    $raw_vis = $_SESSION['admin_data'][$sub_key]['_visible'] ?? (function_exists('storage_get') ? storage_get($sub_key, '_visible', '1') : '1');
+                    $is_visible = ($raw_vis === '1' || $raw_vis === 1 || $raw_vis === true);
                 ?>
                 <div class="order-item">
                     <div class="order-item-left">
