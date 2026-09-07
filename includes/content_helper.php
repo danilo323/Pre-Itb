@@ -1,16 +1,25 @@
 <?php
 // includes/content_helper.php
-// Lee el contenido editable (Versión 2.0)
+// Lee el contenido editable (Versión 2.0 con persistencia MySQL/JSON)
+
+require_once dirname(__DIR__) . '/admin/storage.php';
 
 function content_get(string $section, string $field, string $default = ''): string {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    $value = $_SESSION['admin_data'][$section][$field] ?? $default;
+    if (isset($_SESSION['admin_data'][$section][$field])) {
+        $value = (string)$_SESSION['admin_data'][$section][$field];
+    } else {
+        $value = storage_get($section, $field, $default);
+    }
     return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
 }
 
 function content_raw(string $section, string $field, $default = '') {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    return $_SESSION['admin_data'][$section][$field] ?? $default;
+    if (isset($_SESSION['admin_data'][$section][$field])) {
+        return $_SESSION['admin_data'][$section][$field];
+    }
+    return storage_get_raw($section, $field, $default);
 }
 
 /**
@@ -105,74 +114,81 @@ function content_title(string $section, string $field, string $default = ''): st
  */
 function is_visible(string $section): bool {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
-    // Si no está seteado en la sesión, por defecto asumimos visible (1)
-    $val = $_SESSION['admin_data'][$section]['_visible'] ?? '1';
-    return $val === '1';
+    if (isset($_SESSION['admin_data'][$section]['_visible'])) {
+        $val = $_SESSION['admin_data'][$section]['_visible'];
+    } else {
+        $val = storage_get($section, '_visible', '1');
+    }
+    return ($val === '1' || $val === 1 || $val === true || $val === 'true');
 }
 
 /**
  * Obtiene los items de una colección (como Equipo o Testimonios).
- * (Simulación: En el futuro Persona 3 conectará esto a la BD).
  */
 function collection_items(string $collection_name): array {
     if (session_status() !== PHP_SESSION_ACTIVE) session_start();
     
-    if (!isset($_SESSION['admin_data'][$collection_name]['items'])) {
-        if ($collection_name === 'equipo') {
-            $_SESSION['admin_data'][$collection_name]['items'] = [
-                1 => [
-                    'id' => 1, 
-                    'orden' => '1',
-                    'nombre' => 'Roberto Tolozano Benites',
-                    'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
-                    'cargo' => 'Canciller', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_1.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ],
-                2 => [
-                    'id' => 2, 
-                    'orden' => '2',
-                    'nombre' => 'Elena Tolozano Benites',
-                    'nombre_completo' => 'PhD. Elena Tolozano Benites', 
-                    'cargo' => 'Rectora', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_2.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ],
-                3 => [
-                    'id' => 3, 
-                    'orden' => '3',
-                    'nombre' => 'Luis Alzate Peralta',
-                    'nombre_completo' => 'PhD. Luis Alzate Peralta', 
-                    'cargo' => 'Vicerrector Académico y de Investigación', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_3.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ],
-                4 => [
-                    'id' => 4, 
-                    'orden' => '4',
-                    'nombre' => 'Michelle Tolozano Lapierre',
-                    'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
-                    'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
-                    'linkedin' => '#',
-                    'email' => '#',
-                    'foto' => 'img/autoridad_4.png',
-                    'mostrar_en_home' => '1', 
-                    'publicado' => '1'
-                ]
-            ];
-        } else {
-            $_SESSION['admin_data'][$collection_name]['items'] = [];
-        }
+    if (isset($_SESSION['admin_data'][$collection_name]['items']) && is_array($_SESSION['admin_data'][$collection_name]['items'])) {
+        return $_SESSION['admin_data'][$collection_name]['items'];
     }
-    
-    return $_SESSION['admin_data'][$collection_name]['items'];
+
+    $stored = storage_get_raw($collection_name, 'items', null);
+    if (is_array($stored) && !empty($stored)) {
+        return array_values($stored);
+    }
+
+    if ($collection_name === 'equipo') {
+        return [
+            1 => [
+                'id' => 1, 
+                'orden' => '1',
+                'nombre' => 'Roberto Tolozano Benites',
+                'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
+                'cargo' => 'Canciller', 
+                'linkedin' => '#',
+                'email' => 'cancilleria@itb.edu.ec',
+                'foto' => 'img/autoridad_1.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ],
+            2 => [
+                'id' => 2, 
+                'orden' => '2',
+                'nombre' => 'Elena Tolozano Benites',
+                'nombre_completo' => 'PhD. Elena Tolozano Benites', 
+                'cargo' => 'Rectora', 
+                'linkedin' => '#',
+                'email' => 'rectorado@itb.edu.ec',
+                'foto' => 'img/autoridad_2.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ],
+            3 => [
+                'id' => 3, 
+                'orden' => '3',
+                'nombre' => 'Luis Alzate Peralta',
+                'nombre_completo' => 'PhD. Luis Alzate Peralta', 
+                'cargo' => 'Vicerrector Académico y de Investigación', 
+                'linkedin' => '#',
+                'email' => 'vicerrectorado@itb.edu.ec',
+                'foto' => 'img/autoridad_3.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ],
+            4 => [
+                'id' => 4, 
+                'orden' => '4',
+                'nombre' => 'Michelle Tolozano Lapierre',
+                'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
+                'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
+                'linkedin' => '#',
+                'email' => 'extension@itb.edu.ec',
+                'foto' => 'img/autoridad_4.png',
+                'mostrar_en_home' => '1', 
+                'publicado' => '1'
+            ]
+        ];
+    }
+
+    return [];
 }
