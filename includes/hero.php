@@ -79,6 +79,16 @@ $embed_url = youtube_embed_url($raw_video_url);
             </div>
         <?php endforeach; ?>
         <div class="hero__overlay"></div>
+
+        <?php if (count($slides) > 1): ?>
+            <!-- Contador del carrusel. Va aqui dentro del slideshow, no en el
+                 contenido, para que quede sobre la foto y no empuje al texto. -->
+            <div class="hero__contador carrusel-contador carrusel-contador--sobre-foto js-contador"
+                 data-total="<?= count($slides) ?>"
+                 aria-live="polite" aria-atomic="true">
+                <span class="carrusel-contador__actual">1</span>/<span><?= count($slides) ?></span>
+            </div>
+        <?php endif; ?>
     </div>
 
     <div class="hero__container">

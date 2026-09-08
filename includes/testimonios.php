@@ -93,15 +93,22 @@ $hay_varios = count($testimonios) > 1;
             </div>
 
             <?php if ($hay_varios): ?>
-                <div class="testimonios__dots" role="tablist" aria-label="Historias de éxito">
-                    <?php foreach ($testimonios as $i => $t): ?>
-                        <button type="button"
-                                class="testimonios__dot<?= $i === 0 ? ' is-active' : '' ?>"
-                                data-indice="<?= $i ?>"
-                                role="tab"
-                                aria-selected="<?= $i === 0 ? 'true' : 'false' ?>"
-                                aria-label="Historia <?= $i + 1 ?> de <?= count($testimonios) ?>"></button>
-                    <?php endforeach; ?>
+                <div class="testimonios__nav">
+                    <div class="testimonios__dots" role="tablist" aria-label="Historias de éxito">
+                        <?php foreach ($testimonios as $i => $t): ?>
+                            <button type="button"
+                                    class="testimonios__dot<?= $i === 0 ? ' is-active' : '' ?>"
+                                    data-indice="<?= $i ?>"
+                                    role="tab"
+                                    aria-selected="<?= $i === 0 ? 'true' : 'false' ?>"
+                                    aria-label="Historia <?= $i + 1 ?> de <?= count($testimonios) ?>"></button>
+                        <?php endforeach; ?>
+                    </div>
+                    <div class="testimonios__contador carrusel-contador js-contador"
+                         data-total="<?= count($testimonios) ?>"
+                         aria-live="polite" aria-atomic="true">
+                        <span class="carrusel-contador__actual">1</span>/<span><?= count($testimonios) ?></span>
+                    </div>
                 </div>
             <?php endif; ?>
         </div>

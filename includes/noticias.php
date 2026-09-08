@@ -102,6 +102,11 @@ $secundarias_visibles = 2;
                 <?php if (count($eventos) > 1): ?>
                 <!-- Puntos: además de indicar en qué evento vas, permiten saltar
                      a uno concreto sin esperar a que el carrusel dé la vuelta. -->
+                <div class="noticias__contador carrusel-contador js-contador"
+                     data-total="<?= count($eventos) ?>"
+                     aria-live="polite" aria-atomic="true">
+                    <span class="carrusel-contador__actual">1</span>/<span><?= count($eventos) ?></span>
+                </div>
                 <div class="noticias__dots" role="tablist" aria-label="Eventos">
                     <?php foreach ($eventos as $i => $ev): ?>
                         <button type="button"
@@ -117,6 +122,15 @@ $secundarias_visibles = 2;
 
             <!-- ---- NOTICIAS SECUNDARIAS: carrusel vertical ---- -->
             <div class="noticias__list js-carrusel-noticias" data-visibles="<?= $secundarias_visibles ?>">
+                <?php if (count($secundarias) > $secundarias_visibles): ?>
+                    <!-- Arranca en "2/5" porque se ven DOS noticias a la vez: el
+                         numero de la izquierda es el de la ultima visible. -->
+                    <div class="noticias__contador noticias__contador--lista carrusel-contador js-contador"
+                         data-total="<?= count($secundarias) ?>"
+                         aria-live="polite" aria-atomic="true">
+                        <span class="carrusel-contador__actual"><?= min($secundarias_visibles, count($secundarias)) ?></span>/<span><?= count($secundarias) ?></span>
+                    </div>
+                <?php endif; ?>
                 <div class="noticias__list-viewport">
                     <div class="noticias__list-track">
                         <?php foreach ($secundarias as $i => $sec):

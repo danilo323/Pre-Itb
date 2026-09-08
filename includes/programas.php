@@ -88,6 +88,13 @@ $pintar_programa = function (array $prog) {
             <?php if (!empty($rotativos)): ?>
                 <!-- Cuarta tarjeta: va pasando los programas 4, 5, 6... -->
                 <div class="programas__card programas__card--carrusel js-carrusel-programas">
+                    <?php if (count($rotativos) > 1): ?>
+                        <div class="programas__contador carrusel-contador carrusel-contador--sobre-foto js-contador"
+                             data-total="<?= count($rotativos) ?>"
+                             aria-live="polite" aria-atomic="true">
+                            <span class="carrusel-contador__actual">1</span>/<span><?= count($rotativos) ?></span>
+                        </div>
+                    <?php endif; ?>
                     <div class="programas__card-viewport">
                         <div class="programas__card-track">
                             <?php foreach ($rotativos as $i => $prog): ?>
