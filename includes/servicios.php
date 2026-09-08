@@ -61,6 +61,15 @@
                 $desc = htmlspecialchars($servicio['desc'] ?? '', ENT_QUOTES, 'UTF-8');
                 $btn_texto = htmlspecialchars($servicio['btn_texto'] ?? 'Ver más', ENT_QUOTES, 'UTF-8');
 
+                // Interruptor "Mostrar la imagen siempre" del panel. Apagado (lo normal),
+                // la tarjeta se ve blanca y la foto se revela al pasar el mouse; encendido,
+                // la foto se ve siempre. Se aceptan true y '1' porque field_bool_parse()
+                // guarda booleanos reales, pero los datos de ejemplo usan texto (igual
+                // criterio que en includes/autoridades.php).
+                $img_fija = $servicio['imagen_fija'] ?? false;
+                $img_fija = ($img_fija === true || $img_fija === '1' || $img_fija === 1);
+                $clase_card = 'servicios__card-image' . ($img_fija ? ' servicios__card-image--imagen-fija' : '');
+
                 // Regla de imagen: Si NO hay imagen, usamos diseño simple. Si la hay, diseño con fondo.
                 if (empty($foto_path)): 
             ?>
@@ -75,7 +84,7 @@
                 </div>
             <?php else: ?>
                 <!-- Tarjeta con Imagen de Fondo -->
-                <div class="servicios__card-image">
+                <div class="<?= $clase_card ?>">
                     <img src="<?= htmlspecialchars($foto_path, ENT_QUOTES, 'UTF-8') ?>" alt="<?= htmlspecialchars(strip_tags($titulo), ENT_QUOTES, 'UTF-8') ?>">
                     <div class="servicios__card-overlay"></div>
                     <div class="servicios__card-content">

@@ -64,7 +64,7 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
 
                 <!-- Columna Derecha: Formulario Blanco -->
                 <div class="admision__form-wrapper">
-                    <form class="admision__form" id="admision-form" action="#" method="POST">
+                    <form class="admision__form" id="admision-form" action="procesar_registro.php" method="POST">
                         <h3 class="admision__form-title"><?= content_get('admision', 'form_titulo', 'Formulario de Registro') ?></h3>
                         <p class="admision__form-subtitle">
                             <?php
@@ -78,29 +78,29 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
                         <div class="admision__form-row">
                             <div class="admision__form-group">
                                 <label for="nombre">Nombres<span class="admision__asterisk">*</span></label>
-                                <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos" required>
+                                <input type="text" id="nombre" name="nombre" placeholder="Ej. Juan Carlos" autocomplete="given-name" maxlength="25" required>
                             </div>
                             <div class="admision__form-group">
                                 <label for="apellido">Apellidos<span class="admision__asterisk">*</span></label>
-                                <input type="text" id="apellido" name="apellido" placeholder="Ej. Pérez Gómez" required>
+                                <input type="text" id="apellido" name="apellido" placeholder="Ej. Pérez Gómez" autocomplete="family-name" maxlength="25" required>
                             </div>
                         </div>
 
                         <div class="admision__form-row">
                             <div class="admision__form-group">
                                 <label for="email">Correo Electrónico<span class="admision__asterisk">*</span></label>
-                                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" required>
+                                <input type="email" id="email" name="email" placeholder="ejemplo@correo.com" autocomplete="email" maxlength="120" required>
                             </div>
                             <div class="admision__form-group">
                                 <label for="telefono">Celular / WhatsApp<span class="admision__asterisk">*</span></label>
-                                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 0991234567" required>
+                                <input type="tel" id="telefono" name="telefono" placeholder="Ej. 0991234567" autocomplete="tel" inputmode="tel" maxlength="20" required>
                             </div>
                         </div>
 
                         <div class="admision__form-row admision__form-row--mixed">
                             <div class="admision__form-group">
                                 <label for="cedula">Número de Cédula<span class="admision__asterisk">*</span></label>
-                                <input type="text" id="cedula" name="cedula" placeholder="Ej. 09xxxxxxxx" required>
+                                <input type="text" id="cedula" name="cedula" placeholder="Ej. 0912345678" inputmode="numeric" maxlength="20" required>
                             </div>
                             
                             <div class="admision__form-group admision__form-group--radio">
@@ -175,10 +175,20 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
 
                         <div class="admision__form-group">
                             <label for="mensaje">Dudas o comentarios (opcional)</label>
-                            <textarea id="mensaje" name="mensaje" rows="3" placeholder="Escribe aquí tu duda o comentario"></textarea>
+                            <textarea id="mensaje" name="mensaje" rows="3" maxlength="500" placeholder="Escribe aquí tu duda o comentario"></textarea>
                         </div>
 
-                        <button type="submit" class="btn--solid admision__submit-btn">
+                        <!-- Trampa anti-spam: una persona nunca ve este campo (lo
+                             esconde el CSS y lo salta el lector de pantalla), pero
+                             los robots que rellenan todo lo que encuentran sí lo
+                             completan. Si llega con algo, procesar_registro.php
+                             descarta el envío. -->
+                        <div class="admision__trampa" aria-hidden="true">
+                            <label for="website">No rellenar</label>
+                            <input type="text" id="website" name="website" tabindex="-1" autocomplete="off">
+                        </div>
+
+                        <button type="submit" id="admision-submit" class="btn--solid admision__submit-btn">
                             <?= content_get('admision', 'btn_enviar', 'Completar registro') ?>
                             <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
                         </button>

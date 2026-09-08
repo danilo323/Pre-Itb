@@ -98,26 +98,114 @@
                 </ul>
             </div>
 
+            <?php
+            // ---- Campus y mapa ----
+            // Antes el mapa era una imagen fija (img/Mapa.png) y la lista de
+            // campus era texto suelto que no llevaba a ningún sitio. Ahora cada
+            // campus trae su dirección desde el panel y, al pulsarlo, el mapa de
+            // al lado se mueve hasta él.
+            $campus_default = [
+                ['nombre' => 'Campus Matriz', 'direccion' => 'Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador', 'mapa_url' => ''],
+            ];
+            $campus_list = content_raw('footer', 'lista_campus', $campus_default);
+
+            // Compatibilidad hacia atrás: hasta ahora esto era un textarea con un
+            // campus por línea. Si alguien abre el sitio con esos datos todavía
+            // sin migrar, se convierten al vuelo para no dejar la columna vacía.
+            if (is_string($campus_list)) {
+                $campus_list = array_map(function ($linea) {
+                    return ['nombre' => trim($linea), 'direccion' => '', 'mapa_url' => ''];
+                }, array_filter(array_map('trim', explode("\n", $campus_list))));
+            }
+            if (empty($campus_list) || !is_array($campus_list)) $campus_list = $campus_default;
+
+            // Un campus sin nombre es un item a medio llenar en el panel.
+            $campus_list = array_values(array_filter((array)$campus_list, function ($c) {
+                return is_array($c) && trim($c['nombre'] ?? '') !== '';
+            }));
+
+            // Texto que se le añade al nombre del campus cuando todavía no tiene
+            // dirección propia, para que el mapa sepa por dónde buscarlo. Sin
+            // esto, "Campus Naval" a secas puede llevar a cualquier parte del
+            // mundo; con esto, la búsqueda queda acotada a la institución.
+            $contexto_mapa = trim((string)content_raw(
+                'footer', 'mapa_contexto', 'Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador'
+            ));
+
+            // Lo que se le pide al mapa para cada campus. Por orden de precisión:
+            //   1. la dirección escrita en el panel (lo más exacto),
+            //   2. si no hay, el nombre del campus + el contexto de arriba.
+            // Así TODOS los campus se pueden pulsar desde el primer momento,
+            // aunque al administrador todavía le falte escribir direcciones.
+            $busqueda_mapa = function (array $c) use ($contexto_mapa): string {
+                $dir = trim($c['direccion'] ?? '');
+                if ($dir !== '') return $dir;
+                $nombre = trim($c['nombre'] ?? '');
+                return $contexto_mapa !== '' ? $nombre . ', ' . $contexto_mapa : $nombre;
+            };
+
+            $url_mapa = function (array $c) use ($busqueda_mapa): string {
+                // Un enlace propio pegado desde Google Maps manda sobre todo lo demás.
+                $propia = trim($c['mapa_url'] ?? '');
+                if ($propia !== '') return $propia;
+                $consulta = $busqueda_mapa($c);
+                if ($consulta === '') return '';
+                // Formato de inserción de Google Maps que no necesita clave de API.
+                return 'https://www.google.com/maps?q=' . rawurlencode($consulta) . '&output=embed';
+            };
+
+            // Lo que se lee en la pastilla de debajo del mapa: la dirección si la
+            // hay y, si no, el nombre del campus (no la consulta de búsqueda
+            // completa, que incluye el contexto y quedaría redundante).
+            $texto_pastilla = function (array $c): string {
+                $dir = trim($c['direccion'] ?? '');
+                return $dir !== '' ? $dir : trim($c['nombre'] ?? '');
+            };
+
+            // El mapa arranca en el primer campus de la lista.
+            $campus_inicial = null;
+            foreach ($campus_list as $c) {
+                if ($url_mapa($c) !== '') { $campus_inicial = $c; break; }
+            }
+            ?>
+
             <!-- Columna 4: Campus -->
             <div class="footer-main__col">
-                <ul class="footer-main__list">
-                    <?php
-                    $campus_list = content_raw('footer', 'lista_campus', "Campus Matriz\nCampus Boyacá\nCampus Naval\nCampus Teresa Benites\nCampus Tomás Martínez");
-                    foreach (array_filter(array_map('trim', explode("\n", $campus_list))) as $campus):
+                <ul class="footer-main__list footer-main__campus-list">
+                    <?php foreach ($campus_list as $c):
+                        $nombre = htmlspecialchars(trim($c['nombre']), ENT_QUOTES, 'UTF-8');
+                        $dir    = htmlspecialchars($texto_pastilla($c), ENT_QUOTES, 'UTF-8');
+                        $url    = htmlspecialchars($url_mapa($c), ENT_QUOTES, 'UTF-8');
+                        $activo = ($campus_inicial !== null && $c === $campus_inicial);
                     ?>
-                        <li><a href="#"><?= htmlspecialchars($campus, ENT_QUOTES, 'UTF-8') ?></a></li>
+                        <li>
+                            <button type="button"
+                                    class="footer-main__campus-btn js-campus<?= $activo ? ' is-active' : '' ?>"
+                                    data-mapa="<?= $url ?>"
+                                    data-direccion="<?= $dir ?>"
+                                    aria-pressed="<?= $activo ? 'true' : 'false' ?>"><?= $nombre ?></button>
+                        </li>
                     <?php endforeach; ?>
                 </ul>
             </div>
 
             <!-- Columna 5: Mapa -->
             <div class="footer-main__col footer-main__col--map">
-                <div class="footer-main__map-wrapper">
-                    <img src="<?= content_raw('footer', 'mapa_img', 'img/Mapa.png') ?>" alt="Mapa de ubicación" class="footer-main__map-img">
-                </div>
-                <div class="footer-main__address-pill">
-                    <?= content_get('footer', 'direccion_mapa', 'Roca #101 y Pedro Carbo esq.') ?>
-                </div>
+                <?php if ($campus_inicial !== null): ?>
+                    <div class="footer-main__map-wrapper">
+                        <iframe
+                            id="footer-map"
+                            class="footer-main__map-frame"
+                            src="<?= htmlspecialchars($url_mapa($campus_inicial), ENT_QUOTES, 'UTF-8') ?>"
+                            title="Mapa de ubicación de los campus del ITB"
+                            loading="lazy"
+                            referrerpolicy="no-referrer-when-downgrade"
+                            allowfullscreen></iframe>
+                    </div>
+                    <div class="footer-main__address-pill" id="footer-map-direccion">
+                        <?= htmlspecialchars($texto_pastilla($campus_inicial), ENT_QUOTES, 'UTF-8') ?>
+                    </div>
+                <?php endif; ?>
             </div>
 
         </div>

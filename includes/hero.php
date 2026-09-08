@@ -2,23 +2,62 @@
 <?php
 // includes/hero.php
 
-// 1. Extraer URLs de imágenes para el slideshow
+// 1. Fotos de la portada, con su marca de "imagen fija" (Inicio → Hero).
 $imagenes = content_raw('hero', 'imagenes_fondo', [
     ['archivo' => 'img/hero_1.jpeg'],
     ['archivo' => 'img/hero_2.jpg'],
     ['archivo' => 'img/hero_3.jpg']
 ]);
+
+// field_bool_parse() guarda booleanos de verdad, pero los datos de ejemplo y
+// los guardados a mano usan '1'/'0' como texto. Se aceptan ambos (mismo
+// criterio que en includes/autoridades.php e includes/servicios.php).
+$hero_encendido = function ($v) {
+    return $v === true || $v === 1 || $v === '1';
+};
+
 $slides = [];
 if (is_array($imagenes)) {
     foreach ($imagenes as $img) {
         if (!empty($img['archivo'])) {
-            $slides[] = $img['archivo'];
+            $slides[] = [
+                'archivo' => $img['archivo'],
+                'estatica' => $hero_encendido($img['estatica'] ?? false),
+            ];
         }
     }
 }
 // Fallback por si borraron todas
 if (empty($slides)) {
-    $slides[] = 'img/hero_1.jpeg';
+    $slides[] = ['archivo' => 'img/hero_1.jpeg', 'estatica' => false];
+}
+
+// 2. Elegir el modo de la portada.
+//
+// En el panel, "Animaciones y efectos" y el "Imagen fija" de cada foto forman
+// un grupo exclusivo: siempre hay exactamente uno encendido. Aquí no se confía
+// en que eso se cumpla —los datos pueden venir de una versión anterior, o
+// editados a mano—, así que se vuelve a decidir a partir de lo que haya:
+//
+//   - Si alguna foto está marcada como fija, gana ella: portada quieta con esa
+//     foto y nada más (las otras ni se descargan).
+//   - Si no hay ninguna marcada, manda el interruptor de animaciones, que por
+//     defecto está encendido para no cambiarle el sitio a nadie.
+//   - Con una sola foto no hay nada que rotar, así que la portada se comporta
+//     como fija aunque las animaciones estén encendidas.
+$animaciones = $hero_encendido(content_raw('hero', 'animaciones', true));
+
+$indice_fija = null;
+foreach ($slides as $i => $s) {
+    if ($s['estatica']) { $indice_fija = $i; break; }
+}
+
+$hero_estatico = ($indice_fija !== null) || !$animaciones || count($slides) === 1;
+
+if ($hero_estatico) {
+    // Solo se pinta la foto elegida. Si el interruptor está apagado pero nadie
+    // marcó cuál, se usa la primera.
+    $slides = [$slides[$indice_fija ?? 0]];
 }
 
 // 2. Formatear la URL de YouTube a modo "embed" (helper compartido en content_helper.php)
@@ -29,15 +68,14 @@ $embed_url = youtube_embed_url($raw_video_url);
 <!-- HERO SECTION                                  -->
 <!-- ============================================= -->
 <section class="hero" id="hero">
-    <!-- Slideshow con efecto Ken Burns -->
-    <div class="hero__slideshow">
-        <?php foreach ($slides as $index => $img_path): ?>
-            <?php 
-                $class_num = $index + 1;
+    <!-- Slideshow con efecto Ken Burns (o foto fija, si solo hay una) -->
+    <div class="hero__slideshow<?= $hero_estatico ? ' hero__slideshow--estatica' : '' ?>">
+        <?php foreach ($slides as $index => $slide): ?>
+            <?php
                 $active_class = $index === 0 ? 'hero__slide--active hero__slide--init' : '';
             ?>
-            <div class="hero__slide hero__slide--<?= $class_num ?> <?= $active_class ?>">
-                <div class="hero__slide-img" style="background-image: url('<?= htmlspecialchars($img_path, ENT_QUOTES, 'UTF-8') ?>')"></div>
+            <div class="hero__slide <?= $active_class ?>">
+                <div class="hero__slide-img" style="background-image: url('<?= htmlspecialchars($slide['archivo'], ENT_QUOTES, 'UTF-8') ?>')"></div>
             </div>
         <?php endforeach; ?>
         <div class="hero__overlay"></div>
