@@ -978,6 +978,10 @@ textarea.form-control, .field-group textarea {
     font-size: 13.5px;
     color: var(--text-body);
     white-space: nowrap;
+    /* Sin esto las celdas se alinean por la LINEA BASE del texto (el valor por
+       defecto). En cuanto una celda de la fila ocupa dos lineas -por ejemplo el
+       nombre con "Bachiller" debajo- el resto de la fila queda escalonado. */
+    vertical-align: middle;
 }
 
 .admin-table th {
@@ -1020,11 +1024,28 @@ textarea.form-control, .field-group textarea {
     color: #92600a;
 }
 
+/* OJO: aqui habia 'display: flex'. Un <td> en flex deja de comportarse como
+   celda de tabla: se sale de la rejilla de la fila y su contenido flota a una
+   altura distinta a la de las demas columnas. Por eso el boton "Eliminar"
+   aparecia desalineado respecto al texto de su propia fila.
+   La celda vuelve a ser celda, y los botones se colocan en linea. */
 .actions-cell {
-    display: flex;
-    gap: 8px;
-    align-items: center;
     white-space: nowrap;
+    vertical-align: middle;
+}
+
+/* Va con .admin-table delante para ganarle a '.is-inline { display: inline }',
+   que se declara mas abajo en este mismo archivo y con la misma especificidad
+   dejaria los botones apoyados en la linea base. */
+.admin-table .actions-cell > * {
+    display: inline-flex;
+    align-items: center;
+    vertical-align: middle;
+}
+
+/* Separacion entre botones, que antes daba el 'gap' del flex. */
+.admin-table .actions-cell > * + * {
+    margin-left: 8px;
 }
 
 /* ================== DASHBOARD ================== */

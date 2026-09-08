@@ -409,4 +409,91 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('save-order-form').submit();
     };
 
+    // ── INTERRUPTORES EN GRUPO EXCLUSIVO ────────────────
+    // Varios interruptores (admin/fields/bool.php) pueden declarar en el schema
+    // que pertenecen al mismo 'exclusive_group'. Entonces dejan de ser
+    // independientes y pasan a comportarse como una sola elección: siempre hay
+    // EXACTAMENTE UNO encendido.
+    //
+    //   - Al encender uno, los demás del grupo se apagan solos.
+    //   - Si se apaga el único que quedaba encendido, se enciende el que lleve
+    //     'exclusive_default' (data-exclusivo-defecto) para que el grupo nunca
+    //     se quede en blanco.
+    //
+    // Este motor no sabe qué significan los interruptores ni a qué sección
+    // pertenecen: solo lee el grupo del data-attribute. Quién forma cada grupo
+    // se decide en el schema.
+
+    function interruptoresDe(grupo) {
+        return Array.from(document.querySelectorAll(
+            '.bool-toggle-input[data-exclusivo="' + grupo + '"]'
+        ));
+    }
+
+    function normalizarGrupo(grupo) {
+        const todos = interruptoresDe(grupo);
+        if (!todos.length) return;
+
+        const encendidos = todos.filter(i => i.checked);
+
+        if (encendidos.length === 0) {
+            // Nadie encendido: se enciende el de reserva. Si el schema no marcó
+            // ninguno, se usa el primero para no dejar el grupo vacío.
+            const reserva = todos.find(i => i.dataset.exclusivoDefecto === '1') || todos[0];
+            reserva.checked = true;
+            return;
+        }
+
+        if (encendidos.length > 1) {
+            // Puede pasar al cargar, si los datos guardados venían inconsistentes
+            // (por ejemplo, de antes de que existiera el grupo). Se respeta el
+            // último que tocó el usuario si lo hay, y si no, el primero.
+            const gana = encendidos.find(i => i === ultimoTocado) || encendidos[0];
+            encendidos.forEach(i => { if (i !== gana) i.checked = false; });
+        }
+    }
+
+    let ultimoTocado = null;
+
+    document.addEventListener('change', function (e) {
+        const control = e.target;
+        if (!control.classList || !control.classList.contains('bool-toggle-input')) return;
+        const grupo = control.dataset.exclusivo;
+        if (!grupo) return;
+
+        ultimoTocado = control;
+
+        if (control.checked) {
+            interruptoresDe(grupo).forEach(otro => {
+                if (otro !== control) otro.checked = false;
+            });
+        } else {
+            // Se acaba de apagar: si no queda ninguno, entra el de reserva.
+            normalizarGrupo(grupo);
+        }
+    });
+
+    // Los interruptores pueden aparecer o desaparecer al añadir o eliminar
+    // items de un repeater. Si se borra justo el que estaba encendido, el grupo
+    // se quedaría sin ninguno, así que se vuelve a normalizar tras cada cambio
+    // del DOM. Se agrupa con un temporizador porque una sola acción (clonar un
+    // item) dispara muchas mutaciones seguidas.
+    const gruposEnPagina = Array.from(
+        new Set(Array.from(document.querySelectorAll('[data-exclusivo]'))
+            .map(i => i.dataset.exclusivo))
+    );
+
+    if (gruposEnPagina.length) {
+        gruposEnPagina.forEach(normalizarGrupo);
+
+        let esperaMutaciones = null;
+        const observador = new MutationObserver(() => {
+            clearTimeout(esperaMutaciones);
+            esperaMutaciones = setTimeout(() => {
+                gruposEnPagina.forEach(normalizarGrupo);
+            }, 50);
+        });
+        observador.observe(document.body, { childList: true, subtree: true });
+    }
+
 });
