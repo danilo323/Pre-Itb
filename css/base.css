@@ -211,3 +211,47 @@ button {
     transform: rotate(0deg);
     /* Rota la flecha para que apunte a la derecha */
 }
+
+
+/* =============================================
+   CONTADOR DE CARRUSEL  ("2/5")
+   =============================================
+   Lo comparten las cinco secciones que tienen carrusel (portada, eventos,
+   noticias secundarias, programas y testimonios), por eso vive aqui y no en el
+   CSS de una seccion concreta. Cada seccion solo decide DONDE colocarlo.
+
+   El numero de la izquierda es el del ultimo item que se esta viendo: con un
+   item a la vez es la posicion actual (1/4, 2/4...) y con dos a la vez arranca
+   en 2/5, que es lo que se pidio. */
+.carrusel-contador {
+    display: inline-flex;
+    align-items: center;
+    gap: 2px;
+    font-family: var(--font-primary);
+    font-size: 0.78rem;
+    font-weight: 600;
+    line-height: 1;
+    color: var(--gray-600);
+    font-variant-numeric: tabular-nums;
+    /* tabular-nums: todas las cifras ocupan lo mismo, asi el contador no se
+       ensancha ni se encoge al pasar de 9 a 10 y no empuja lo que tenga al lado. */
+    white-space: nowrap;
+    user-select: none;
+}
+
+.carrusel-contador__actual {
+    color: var(--primary-orange);
+}
+
+/* Variante sobre foto o fondo oscuro: pastilla translucida para que se lea. */
+.carrusel-contador--sobre-foto {
+    background: rgba(17, 17, 17, 0.55);
+    color: rgba(255, 255, 255, 0.85);
+    padding: 5px 10px;
+    border-radius: var(--radius-full);
+    backdrop-filter: blur(4px);
+}
+
+.carrusel-contador--sobre-foto .carrusel-contador__actual {
+    color: #ffffff;
+}

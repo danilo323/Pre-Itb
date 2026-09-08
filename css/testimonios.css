@@ -76,11 +76,20 @@
     flex-direction: column;
 }
 
-/* ---- Puntos indicadores ---- */
+/* ---- Navegación del carrusel: puntos a la izquierda, contador a la derecha ---- */
+.testimonios__nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-top: 28px;
+    max-width: 650px;
+    width: 100%;
+}
+
 .testimonios__dots {
     display: flex;
+    align-items: center;
     gap: 8px;
-    margin-top: 28px;
 }
 
 .testimonios__dot {
@@ -99,11 +108,14 @@
 }
 
 .testimonios__dot.is-active {
-    /* Se ensancha ademas de cambiar de color, para que se distinga sin depender
-       solo del color. */
+    /* Se ensancha además de cambiar de color para mayor visibilidad */
     width: 22px;
     border-radius: 4px;
     background: var(--primary-orange);
+}
+
+.testimonios__contador {
+    margin: 0;
 }
 
 /* ---- Contenido derecha ---- */
@@ -167,4 +179,5 @@
     font-size: 0.85rem;
     color: var(--gray-500);
 }
+
 

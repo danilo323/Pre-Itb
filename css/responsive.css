@@ -319,14 +319,28 @@
     }
 
     /* La noticia principal ponia la foto (316px fijos) al lado del texto: en un
-       movil de 440px no queda sitio para el texto. Se apilan. */
-    .noticias__main {
+       movil de 440px no queda sitio para el texto. Se apilan.
+       OJO: la regla apuntaba a .noticias__main, que dejo de ser el contenedor
+       flex cuando esa tarjeta paso a ser un carrusel. Quien pone la foto al lado
+       del texto es ahora .noticias__evento (cada diapositiva), asi que es ahi
+       donde hay que apilar; con el selector viejo el movil se habia quedado con
+       la foto y el texto peleandose el ancho. */
+    .noticias__evento {
         flex-direction: column;
     }
 
     .noticias__main-img {
         flex: 0 0 200px;
         margin: 20px 20px 0;
+    }
+
+    /* Apilada, la imagen ya no es una columna de 316px: ocupa todo el ancho
+       menos sus margenes. Los puntos se estiran igual para seguir centrados
+       debajo de ella. */
+    .noticias__dots {
+        left: 20px;
+        right: 20px;
+        width: auto;
     }
 
     .noticias__main-body {

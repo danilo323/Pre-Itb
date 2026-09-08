@@ -434,3 +434,12 @@
     width: 100%;
     height: 100%;
 }
+
+/* Contador del carrusel de la portada: esquina inferior derecha, sobre la foto
+   y por encima del velo oscuro (.hero__overlay es z-index 1). */
+.hero__contador {
+    position: absolute;
+    right: calc(var(--header-inset, 24px) + 24px);
+    bottom: 28px;
+    z-index: 2;
+}

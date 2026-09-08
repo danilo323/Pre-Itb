@@ -108,7 +108,18 @@
 /* La tarjeta grande ya no coloca ella misma la imagen y el texto: ahora es solo
    el marco del carrusel. Quien hace la fila imagen+texto es cada .noticias__evento. */
 .noticias__main {
+    /* Medidas de la columna de la imagen. Estan aqui como variables porque las
+       usan DOS reglas: la propia imagen y los puntos del carrusel, que tienen
+       que quedar centrados justo debajo de ella. Con los numeros escritos dos
+       veces, cambiar el ancho de la imagen descolocaba los puntos. */
+    --noticia-img-ancho: 316px;
+    --noticia-img-margen: 25px;
     position: relative;
+    /* Banda libre al pie de la tarjeta donde viven los puntos y el contador.
+       Antes no existia: los puntos iban en absoluto sobre los 25px de margen de
+       la imagen y acababan pegados a su borde inferior (medido: puntos en 380,
+       imagen terminando en 381). Con esta banda quedan claramente DEBAJO. */
+    padding-bottom: 26px;
     align-self: flex-start;
     border-radius: var(--radius-lg);
     overflow: hidden;
@@ -145,8 +156,14 @@
 /* Puntos indicadores */
 .noticias__dots {
     position: absolute;
-    left: 50px;
-    bottom: 18px;
+    /* Ocupan exactamente la columna de la imagen y centran su contenido, asi
+       los puntos quedan alineados con el centro de la foto y no pegados a la
+       izquierda como antes (iban con un 'left: 50px' fijo). */
+    left: var(--noticia-img-margen);
+    width: var(--noticia-img-ancho);
+    justify-content: center;
+    /* Dentro de la banda de abajo, no sobre la imagen. */
+    bottom: 9px;
     display: flex;
     gap: 8px;
     z-index: 2;
@@ -181,8 +198,8 @@
 
 .noticias__main-img {
     position: relative;
-    flex: 0 0 316px;
-    margin: 25px 0 25px 25px;
+    flex: 0 0 var(--noticia-img-ancho);
+    margin: var(--noticia-img-margen) 0 var(--noticia-img-margen) var(--noticia-img-margen);
     border-radius: 9.6px;
     overflow: hidden;
 }
@@ -280,8 +297,28 @@
     transition: background-color 0.3s ease;
 }
 
-.noticias__item:not(:last-child) {
-    border-bottom: 1.5px solid #E7ECEF;
+/* Las noticias ya NO llevan borde propio. El separador lo pinta el marco (ver
+   .noticias__list-viewport::after de mas abajo).
+   Motivo: con el borde en cada noticia, el de la ultima visible caia justo en
+   el filo inferior del marco y se veia como una raya suelta encima del
+   contador. Pintandolo desde el marco solo aparece ENTRE las dos noticias que
+   se ven, nunca en los bordes. */
+.noticias__list-viewport {
+    position: relative;
+}
+
+.noticias__list-viewport::after {
+    content: '';
+    position: absolute;
+    /* El alto de una fila lo mide js/main.js y lo escribe en esta variable, asi
+       la raya cae siempre justo en la union de las dos noticias visibles. */
+    top: var(--noticia-alto-fila, 184px);
+    left: 32px;
+    right: 32px;
+    height: 1.5px;
+    background: #E7ECEF;
+    pointer-events: none;
+    z-index: 1;
 }
 
 .noticias__item:hover {
@@ -332,4 +369,36 @@
     -webkit-line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
+}
+
+/* ---- Contadores ---- */
+/* Eventos: en la misma linea de los puntos, pegado al borde derecho de la
+   tarjeta para no taparlos cuando son muchos. */
+.noticias__contador {
+    position: absolute;
+    right: 40px;
+    /* A la misma altura que los puntos, en la banda inferior. */
+    bottom: 7px;
+    z-index: 2;
+}
+
+/* Noticias secundarias: no hay puntos ahi, asi que el contador flota sobre la
+   lista. Va ABAJO a la derecha y no arriba: los titulos de cada noticia empiezan
+   en la parte alta de su fila, asi que arriba tapaba el titulo de la primera;
+   la mitad de abajo de la ultima fila visible suele estar libre.
+   Fondo blanco semitransparente por si pasa una foto por debajo al rotar. */
+.noticias__contador--lista {
+    position: absolute;
+    top: auto;
+    bottom: 12px;
+    right: 14px;
+    background: rgba(255, 255, 255, 0.92);
+    padding: 5px 10px;
+    border-radius: var(--radius-full);
+    border: 1px solid #E7ECEF;
+}
+
+/* La tarjeta de la lista necesita ser el punto de referencia del contador. */
+.noticias__list {
+    position: relative;
 }

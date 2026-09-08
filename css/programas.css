@@ -244,3 +244,12 @@
        intenta evitar llegar a esto empujando el alto de la fila. */
     overflow: hidden;
 }
+
+/* Contador de la cuarta tarjeta. Va por ENCIMA del marco del carrusel
+   (que esta en absoluto e inset:0), de ahi el z-index. */
+.programas__contador {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    z-index: 2;
+}
