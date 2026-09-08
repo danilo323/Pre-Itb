@@ -16,7 +16,7 @@
        blanco de la sección anterior, que es aparte); el celeste solo se ve por
        los costados y por abajo, y se asoma un poquito en las esquinas de arriba
        gracias al border-radius de la tarjeta. */
-    padding: 0 24px 40px;
+    padding: 0 24px 12px;
 }
 
 .footer-cta__container {
@@ -86,7 +86,16 @@
    del footer, así que el recorte no se nota. */
 .footer-skyline {
     width: 100%;
-    aspect-ratio: 1920 / 320;
+    /* Era 1920/320. Medido pixel a pixel sobre el render: de los 235px que
+       median la banda, el dibujo solo ocupaba de y=27 a y=222. Es decir, 27px
+       de cielo liso arriba y 13px de azul liso abajo (este ultimo del mismo
+       #0B295E que el fondo del pie, o sea invisible). Puro hueco entre la
+       tarjeta CTA y las columnas.
+       Se recortan 22 de arriba y 10 de abajo -de los 27 y 13 disponibles-,
+       dejando unos pixeles de aire para no rozar la aguja del monumento mas
+       alto. La escena se sube lo mismo (ver .footer-skyline__scene) para que
+       los edificios queden a la misma altura de siempre respecto al pie. */
+    aspect-ratio: 1920 / 148;
     overflow: hidden;
     /* Celeste del cielo detrás de las montañas (footer2.svg no cubre todo el
        alto de la mirilla, así que por encima de los picos se ve este color). */
@@ -101,10 +110,21 @@
    común para las 3 capas de abajo. */
 .footer-skyline__scene {
     position: absolute;
-    top: 0;
+    /* Sube el dibujo los mismos 22px que se le quitaron por arriba a la
+       mirilla, para que los edificios queden a la misma altura respecto al pie
+       que antes. Se expresa en % del ALTO de la mirilla; como mirilla y escena
+       se calculan las dos a partir del ancho, la proporcion se mantiene igual
+       en cualquier pantalla. */
+    top: -6.5%;
     left: 0;
     width: 100%;
-    aspect-ratio: 1920 / 759;
+    /* La proporcion NATIVA del dibujo es 1920/759. Aqui se achata a la mitad
+       (1920/380) a proposito: los SVG llevan width y height al 100% de esta
+       caja, asi que al bajarle el alto los edificios se comprimen en vertical
+       y la franja entera ocupa la mitad de espacio. Es la unica forma de
+       encogerla sin recortar las torres, porque el dibujo tiene que seguir
+       cubriendo TODO el ancho de la pantalla. */
+    aspect-ratio: 1920 / 380;
 }
 
 .footer-skyline__layer {
@@ -137,7 +157,9 @@
        transición sea continua. Con el celeste aquí se notaba una costura justo
        donde termina la mirilla del skyline y empieza este bloque. */
     background-color: #0B295E;
-    padding: 60px 0 30px;
+    /* Arriba eran 60px: sumados al vacio del skyline dejaban un hueco enorme
+       entre la tarjeta CTA y las columnas. */
+    padding: 16px 0 30px;
     position: relative;
     z-index: 5;
     margin-top: -2px;
@@ -253,11 +275,50 @@
     overflow: hidden;
 }
 
-.footer-main__map-img {
+/* El mapa ya no es una imagen: es un mapa de verdad que cambia de sitio al
+   pulsar un campus de la columna de al lado. */
+.footer-main__map-frame {
     width: 100%;
-    height: auto;
+    /* Mismo alto que tenia la imagen que habia antes, para que la columna no
+       cambie de tamano. El iframe no se adapta solo, hay que darselo. */
+    height: 190px;
     display: block;
+    border: 0;
 }
+
+/* ---- Campus pulsables ----
+   Los que tienen direccion se pintan como <button>; los que no, como <span>.
+   Los dos comparten esta base para que la lista se vea pareja: el usuario no
+   tiene por que notar que unos son botones y otros no. */
+.footer-main__campus-btn {
+    display: inline;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: #ffffff;
+    font-family: inherit;
+    font-size: 0.85rem;
+    text-align: left;
+    transition: color 0.3s ease;
+}
+
+button.footer-main__campus-btn {
+    cursor: pointer;
+}
+
+button.footer-main__campus-btn:hover {
+    color: #DC5B14;
+}
+
+/* El campus que se esta viendo en el mapa. Ademas del color lleva un subrayado:
+   asi se distingue tambien sin depender del color. */
+.footer-main__campus-btn.is-active {
+    color: #DC5B14;
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 4px;
+}
+
 
 .footer-main__address-pill {
     background-color: #3A4A6B;

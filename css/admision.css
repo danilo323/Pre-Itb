@@ -239,6 +239,59 @@
     background-color: #ffffff;
 }
 
+/* ---- Estado de error de validacion ----
+   La clase .is-invalid la pone y la quita js/main.js sobre el
+   .admision__form-group, y el <p class="admision__form-error"> con el mensaje
+   se inserta al final de ese mismo grupo. */
+.admision__form-group.is-invalid input[type="text"],
+.admision__form-group.is-invalid input[type="email"],
+.admision__form-group.is-invalid input[type="tel"],
+.admision__form-group.is-invalid select,
+.admision__form-group.is-invalid textarea {
+    border-color: #d93025;
+    background-color: #fff8f8;
+}
+
+/* El foco naranja normal taparia el rojo: mientras el campo siga mal, el borde
+   se queda rojo aunque el usuario este escribiendo dentro. */
+.admision__form-group.is-invalid input:focus,
+.admision__form-group.is-invalid select:focus,
+.admision__form-group.is-invalid textarea:focus {
+    border-color: #d93025;
+    box-shadow: 0 0 0 3px rgba(217, 48, 37, 0.12);
+}
+
+/* Los radios no tienen borde propio que pintar, asi que ahi el aviso es la
+   etiqueta del grupo puesta en rojo. */
+.admision__form-group--radio.is-invalid > label {
+    color: #d93025;
+}
+
+.admision__form-error {
+    display: flex;
+    align-items: flex-start;
+    gap: 5px;
+    margin-top: 5px;
+    font-size: 0.68rem;
+    line-height: 1.35;
+    font-weight: 500;
+    color: #d93025;
+}
+
+/* Icono de aviso como SVG embebido, no como caracter ni como icono de fuente:
+   asi no depende de que Font Awesome haya cargado ni de que la tipografia
+   tenga el glifo. */
+.admision__form-error::before {
+    content: '';
+    width: 12px;
+    height: 12px;
+    margin-top: 1px;
+    flex-shrink: 0;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Ccircle cx='8' cy='8' r='7' fill='%23d93025'/%3E%3Crect x='7.2' y='3.4' width='1.6' height='5.8' rx='.8' fill='%23fff'/%3E%3Ccircle cx='8' cy='11.8' r='1' fill='%23fff'/%3E%3C/svg%3E");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+
 /* Radio buttons options */
 .admision__form-group--radio label {
     font-size: 0.7rem;
@@ -389,4 +442,16 @@
     .admision__form-wrapper {
         padding: 24px 20px;
     }
+}
+
+
+/* Campo trampa anti-spam: fuera de la vista pero sin 'display:none', porque
+   algunos robots ignoran los campos ocultos con esa propiedad y este tiene que
+   parecerles un campo normal. */
+.admision__trampa {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
 }

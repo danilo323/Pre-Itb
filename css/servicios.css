@@ -153,7 +153,8 @@
     transform: rotate(0deg);
 }
 
-/* Card con Imagen (Arte y Deportes) */
+/* Card con Imagen (Campus Virtual, Horarios, Servicios Digitales, Podcast,
+   Arte y Deportes... cualquier servicio que traiga foto desde el panel) */
 .servicios__card-image {
     box-sizing: border-box;
     position: relative;
@@ -164,6 +165,12 @@
     justify-content: flex-start;
     padding: 48px 16px 80px;
     min-height: 440px;
+    /* Estado de reposo: la misma tarjeta blanca de .servicios__card-simple,
+       que es lo que se ve mientras la foto esta oculta. El borde hace falta
+       para que la tarjeta se recorte contra el fondo blanco de la seccion. */
+    background-color: #ffffff;
+    border: 1px solid #eaeaea;
+    transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .servicios__card-image img {
     position: absolute;
@@ -177,6 +184,87 @@
 }
 .servicios__card-image:hover img {
     transform: scale(1.05);
+}
+
+/* ---- La foto se revela solo al pasar el mouse ----
+   En reposo la tarjeta se ve blanca con el texto oscuro; al entrar el puntero
+   entran a la vez la foto, el degradado y el texto en blanco. Los tres van
+   juntos a proposito: el degradado es lo unico que hace legible el texto
+   blanco sobre la foto, asi que revelar uno sin el otro deja un estado
+   intermedio ilegible.
+
+   Se envuelve en @media (hover: hover) porque en pantallas tactiles no hay
+   puntero que pueda "entrar": ahi las tarjetas se quedan con su foto visible
+   como siempre, en vez de no revelarla nunca. */
+@media (hover: hover) {
+    .servicios__card-image img,
+    .servicios__card-image .servicios__card-overlay {
+        opacity: 0;
+        transition: opacity 0.45s ease, transform 0.5s ease;
+    }
+    .servicios__card-image .servicios__card-title-white {
+        color: #111111;
+        transition: color 0.45s ease;
+    }
+    .servicios__card-image .servicios__card-text-white {
+        color: #666666;
+        transition: color 0.45s ease;
+    }
+
+    /* :focus-within cubre a quien navega con teclado: al llegar el Tab al
+       enlace de la tarjeta, la foto se revela igual que con el mouse. */
+    .servicios__card-image:hover img,
+    .servicios__card-image:hover .servicios__card-overlay,
+    .servicios__card-image:focus-within img,
+    .servicios__card-image:focus-within .servicios__card-overlay {
+        opacity: 1;
+    }
+    .servicios__card-image:hover .servicios__card-title-white,
+    .servicios__card-image:focus-within .servicios__card-title-white {
+        color: #ffffff;
+    }
+    .servicios__card-image:hover .servicios__card-text-white,
+    .servicios__card-image:focus-within .servicios__card-text-white {
+        color: #e0e0e0;
+    }
+    .servicios__card-image:hover {
+        border-color: transparent;
+    }
+    .servicios__card-image:focus-within img {
+        transform: scale(1.05);
+    }
+
+    /* ---- Excepcion: "Mostrar la imagen siempre" ----
+       Las tarjetas con ese interruptor encendido en el panel (hoy, Arte y
+       Deportes) se quedan como estaban antes: foto y degradado visibles de
+       entrada y texto siempre en blanco. Basta con devolverles el estado de
+       reposo al valor de hover; no hacen falta :not() en las reglas de
+       arriba porque ambos estados coinciden. */
+    .servicios__card-image--imagen-fija img,
+    .servicios__card-image--imagen-fija .servicios__card-overlay {
+        opacity: 1;
+    }
+    .servicios__card-image--imagen-fija .servicios__card-title-white {
+        color: #ffffff;
+    }
+    .servicios__card-image--imagen-fija .servicios__card-text-white {
+        color: #e0e0e0;
+    }
+    .servicios__card-image--imagen-fija {
+        border-color: transparent;
+    }
+}
+
+/* Si el sistema pide reducir el movimiento, se respeta: la foto sigue
+   apareciendo al pasar el mouse, pero sin el zoom. */
+@media (hover: hover) and (prefers-reduced-motion: reduce) {
+    .servicios__card-image img {
+        transition: opacity 0.2s ease;
+    }
+    .servicios__card-image:hover img,
+    .servicios__card-image:focus-within img {
+        transform: none;
+    }
 }
 .servicios__card-overlay {
     position: absolute;

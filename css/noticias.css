@@ -81,43 +81,6 @@
     transform: rotate(0deg);
 }
 
-/* Caja de flecha de "Leer Más": vacía por defecto, se rellena de naranja en hover.
-   El enlace .noticias__link ocupa TODO el ancho de la tarjeta (justify-content:
-   space-between), así que colgar el hover del enlace hacía que el cuadrito se
-   pintara apenas el puntero entraba en ese espacio vacío, mucho antes de llegar
-   al cuadrito. Por eso el hover se cuelga del propio cuadrito. */
-.noticias__link .btn__icon-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    background-color: transparent;
-    border: 1.5px solid #FF6D1C;
-    color: #FF6D1C;
-    border-radius: 8px;
-    flex-shrink: 0;
-    transition: var(--transition);
-}
-
-.noticias__link .btn__icon-right i {
-    font-size: 0.85rem;
-}
-
-.noticias__link-text {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-}
-
-.noticias__link-text i {
-    font-size: 0.8rem;
-}
-
-.noticias__link .btn__icon-right:hover {
-    background-color: #FF6D1C;
-    color: var(--white);
-}
 
 .noticias__header {
     display: flex;
@@ -142,16 +105,74 @@
     gap: 28px;
 }
 
+/* La tarjeta grande ya no coloca ella misma la imagen y el texto: ahora es solo
+   el marco del carrusel. Quien hace la fila imagen+texto es cada .noticias__evento. */
 .noticias__main {
-    display: flex;
-    flex-direction: row;
-    align-items: stretch;
+    position: relative;
     align-self: flex-start;
     border-radius: var(--radius-lg);
     overflow: hidden;
     border: 1.5px solid #E7ECEF;
     background: var(--white);
     transition: var(--transition);
+}
+
+/* ---- Carrusel horizontal de EVENTOS ---- */
+.noticias__main-viewport {
+    overflow: hidden;
+}
+
+.noticias__main-track {
+    display: flex;
+    /* align-items: stretch hace que TODAS las diapositivas midan lo mismo que la
+       mas alta. Sin eso la tarjeta cambiaria de altura en cada evento y la fila
+       de la rejilla daria un salto en cada paso. */
+    align-items: stretch;
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
+.noticias__evento {
+    /* 0 0 100%: cada evento ocupa exactamente el ancho visible, ni se encoge ni
+       se estira, aunque haya diez en el carril. */
+    flex: 0 0 100%;
+    min-width: 0;
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+}
+
+/* Puntos indicadores */
+.noticias__dots {
+    position: absolute;
+    left: 50px;
+    bottom: 18px;
+    display: flex;
+    gap: 8px;
+    z-index: 2;
+}
+
+.noticias__dot {
+    width: 8px;
+    height: 8px;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #D3DBE0;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.noticias__dot:hover {
+    background: #FFB27F;
+}
+
+.noticias__dot.is-active {
+    /* Se ensancha en vez de solo cambiar de color: asi se distingue tambien sin
+       depender del color (daltonismo). */
+    width: 22px;
+    border-radius: 4px;
+    background: #FF6D1C;
 }
 
 .noticias__main:hover {
@@ -173,7 +194,7 @@
     transition: var(--transition);
 }
 
-.noticias__main:hover .noticias__main-img img {
+.noticias__evento:hover .noticias__main-img img {
     transform: scale(1.05);
 }
 
@@ -224,44 +245,43 @@
     margin-bottom: 24px;
 }
 
-.noticias__link {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 100%;
-    font-size: 0.95rem;
-    font-weight: 600;
-    color: var(--primary-blue);
-    transition: var(--transition);
-    text-decoration: none;
-    margin-top: auto;
-    padding-top: 20px;
-    border-top: 1.5px solid #E7ECEF;
-}
 
-/* Lista de noticias */
+/* ---- Carrusel vertical de NOTICIAS SECUNDARIAS ---- */
 .noticias__list {
-    display: flex;
-    flex-direction: column;
     border: 1.5px solid #E7ECEF;
     border-radius: var(--radius-lg);
     background: var(--white);
     overflow: hidden;
 }
 
+.noticias__list-viewport {
+    overflow: hidden;
+    /* El alto real (el de N noticias exactas) lo calcula y lo escribe el JS al
+       cargar y al cambiar el ancho de la ventana. Este es solo el valor de
+       arranque, por si el JS no llega: se ven las dos primeras y ya. */
+    height: calc(var(--noticia-alto, 184px) * var(--noticias-visibles, 2));
+}
+
+.noticias__list-track {
+    transition: transform 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    will-change: transform;
+}
+
 .noticias__item {
     display: flex;
     gap: 20px;
     padding: 32px;
-    transition: var(--transition);
+    box-sizing: border-box;
+    /* Alto fijo e igual para todas. Es lo que permite que el bucle sea exacto:
+       avanzar un paso = subir el carril justo el alto de una noticia. Con altos
+       variables (un titulo de dos lineas frente a uno de una) el carrusel se
+       iria desalineando en cada vuelta. */
+    height: var(--noticia-alto, 184px);
+    transition: background-color 0.3s ease;
 }
 
 .noticias__item:not(:last-child) {
     border-bottom: 1.5px solid #E7ECEF;
-}
-
-.noticias__item:last-child {
-    flex: 1;
 }
 
 .noticias__item:hover {
@@ -306,28 +326,10 @@
     font-weight: 800;
     color: #111111;
     line-height: 1.2;
-}
-
-/* Botón de flecha para noticias secundarias: vacío por defecto, se rellena de naranja en hover */
-.btn-arrow-square {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 38px;
-    height: 38px;
-    border: 1.5px solid #FF6D1C;
-    background-color: transparent;
-    border-radius: 8px;
-    color: #FF6D1C;
-    font-size: 0.85rem;
-    text-decoration: none;
-    transition: var(--transition);
-    align-self: flex-end;
-    margin-left: auto;
-}
-
-.btn-arrow-square:hover {
-    background-color: #FF6D1C;
-    color: var(--white);
+    /* Se recorta a dos lineas para que un titulo largo no desborde el alto fijo
+       de la noticia y descuadre el carrusel. */
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
 }

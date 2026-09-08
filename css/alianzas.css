@@ -35,6 +35,16 @@
 
 .alianzas__track {
     overflow: hidden;
+    /* Las dos filas (logos y fotos) se salen del contenedor centrado de
+       --container-max y ocupan el ancho completo de la pantalla, de borde a
+       borde, para que se alcancen a ver mas piezas a la vez. Truco clasico
+       para "escapar" de un contenedor centrado sin tocarlo: se hace tan ancho
+       como el viewport (100vw) y se recentra con margenes negativos.
+       El overflow: hidden de .alianzas es lo que evita que ese 100vw genere
+       barra de scroll horizontal en la pagina. */
+    width: 100vw;
+    margin-left: calc(50% - 50vw);
+    margin-right: calc(50% - 50vw);
 }
 
 .alianzas__logos {
@@ -89,16 +99,11 @@
    hay margen ni gap, el truco del carril doble sigue funcionando exactamente
    igual: media lista = la otra mitad, sin saltos. */
 .alianzas__track--fotos {
+    /* El ancho completo lo hereda de .alianzas__track; aqui solo queda la
+       separacion respecto a la fila de logos de arriba. */
     margin-top: 32px;
-    /* Solo esta fila (NO la de logos) se sale del contenedor centrado de
-       --container-max y ocupa el ancho completo de la pantalla, de borde a
-       borde, para que se alcancen a ver mas fotos a la vez en la fila. Truco
-       clasico para "escapar" de un contenedor centrado sin tocarlo: se hace
-       tan ancho como el viewport (100vw) y se recentra con margenes negativos. */
-    width: 100vw;
-    margin-left: calc(50% - 50vw);
-    margin-right: calc(50% - 50vw);
 }
+
 
 .alianzas__fotos {
     display: flex;
@@ -127,5 +132,38 @@
     .alianzas__fotos img {
         height: 155px;
         width: 160px;
+    }
+}
+
+
+/* ---- Las dos filas solo avanzan mientras el mouse esta encima ----
+   En reposo el carril queda congelado; al entrar el puntero la animacion sigue
+   DESDE DONDE SE QUEDO (animation-play-state no la reinicia), asi que no hay
+   saltos ni al entrar ni al salir.
+
+   El :hover va sobre .alianzas__track y no sobre el carril: el carril mide
+   mucho mas que la pantalla y ademas se desplaza, asi que su area de hover
+   seria erratica; la pista, en cambio, es la banda fija que el usuario ve.
+   Cada fila responde a su propia pista, de modo que pasar por los logos no
+   arranca tambien la fila de fotos.
+
+   Envuelto en @media (hover: hover) porque en pantallas tactiles no hay
+   puntero que pueda "entrar": ahi los carruseles siguen girando solos, en vez
+   de quedarse congelados para siempre.
+
+   OJO CON EL ORDEN: este bloque tiene que ir al FINAL del archivo, despues de
+   .alianzas__logos y .alianzas__fotos. Las dos usan el atajo 'animation:', que
+   reescribe animation-play-state a su valor inicial (running). Como tienen la
+   misma especificidad que las reglas de aqui, si este bloque fuera antes, el
+   atajo de mas abajo lo pisaria y la fila de fotos no llegaria a pausarse. */
+@media (hover: hover) {
+    .alianzas__logos,
+    .alianzas__fotos {
+        animation-play-state: paused;
+    }
+
+    .alianzas__track:hover .alianzas__logos,
+    .alianzas__track:hover .alianzas__fotos {
+        animation-play-state: running;
     }
 }

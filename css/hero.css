@@ -94,22 +94,66 @@
     background-position: center;
 }
 
-/* Ken Burns â€” Slide 1: zoom in centro */
-.hero__slide--active.hero__slide--1 .hero__slide-img {
+/* ---- MODO CARRUSEL: dos o mas fotos ----
+   Ken Burns para CUALQUIER foto activa. Antes estaban escritas a mano solo las
+   reglas de la 1, la 2 y la 3, asi que a partir de la CUARTA foto que el
+   administrador agregara desde el panel la imagen entraba completamente
+   quieta. Con :nth-child el efecto vale para todas, sean las que sean. */
+.hero__slideshow:not(.hero__slideshow--estatica) .hero__slide--active .hero__slide-img {
     animation: kenBurnsZoomIn 8s ease-in-out forwards;
     transform-origin: 50% 50%;
 }
 
-/* Ken Burns â€” Slide 2: zoom in desde esquina inferior derecha */
-.hero__slide--active.hero__slide--2 .hero__slide-img {
-    animation: kenBurnsZoomIn 8s ease-in-out forwards;
+/* El punto desde el que se acerca va rotando entre tres posiciones (centro,
+   esquina inferior derecha y esquina superior izquierda) para que dos fotos
+   seguidas no repitan exactamente el mismo movimiento. El .hero__overlay es el
+   ultimo hijo del slideshow, va despues de todas las fotos, asi que no altera
+   la cuenta de :nth-child. */
+.hero__slideshow:not(.hero__slideshow--estatica) .hero__slide--active:nth-child(3n + 2) .hero__slide-img {
     transform-origin: 80% 70%;
 }
 
-/* Ken Burns â€” Slide 3: zoom in desde esquina superior izquierda */
-.hero__slide--active.hero__slide--3 .hero__slide-img {
-    animation: kenBurnsZoomIn 8s ease-in-out forwards;
+.hero__slideshow:not(.hero__slideshow--estatica) .hero__slide--active:nth-child(3n + 3) .hero__slide-img {
     transform-origin: 20% 30%;
+}
+
+/* ---- MODO FOTO FIJA: una sola foto ----
+   Sin carrusel no hay nada que deslizar, asi que se apaga el desplazamiento
+   vertical de .hero__slide (si no, la foto podria quedarse esperando una
+   transicion que nunca llega). */
+.hero__slideshow--estatica .hero__slide {
+    transform: none;
+    transition: none;
+}
+
+/* El unico efecto permitido en este modo: un zoom lento y discreto.
+   No se reutiliza kenBurnsZoomIn porque ese llega a 1.15 en 8s y se queda ahi
+   congelado para siempre ('forwards'); en una portada fija eso se nota como un
+   fallo. Este va y vuelve entre 1 y 1.08, muy despacio, y no termina nunca.
+
+   Los tres selectores encadenados suben la especificidad por encima de la
+   regla del Ken Burns de arriba, para que gane sin depender del orden. */
+.hero__slideshow--estatica .hero__slide.hero__slide--active .hero__slide-img {
+    animation: heroZoomSuave 20s ease-in-out infinite alternate;
+    transform-origin: 50% 50%;
+}
+
+@keyframes heroZoomSuave {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(1.08);
+    }
+}
+
+/* Si el sistema pide reducir el movimiento, la portada fija se queda
+   completamente quieta: en este modo el zoom es un adorno, no informacion. */
+@media (prefers-reduced-motion: reduce) {
+    .hero__slideshow--estatica .hero__slide.hero__slide--active .hero__slide-img {
+        animation: none;
+    }
 }
 
 .hero__overlay {
