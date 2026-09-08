@@ -140,7 +140,7 @@
         "imagenes_fondo": [
             {
                 "archivo": "img/hero_1.jpeg",
-                "estatica": true
+                "estatica": false
             },
             {
                 "archivo": "img/hero_2.jpg",
@@ -159,7 +159,7 @@
         "imagen_2": "img/student.jpg",
         "imagen_3": "img/student 2.jpg",
         "imagen_video_thumb": "img/hero-video-thumb.jpg",
-        "animaciones": false,
+        "animaciones": true,
         "info_portada": null
     },
     "trayectoria": {
