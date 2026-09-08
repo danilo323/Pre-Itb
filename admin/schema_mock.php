@@ -206,26 +206,48 @@ return [
                 ],
                 'div_campus' => [
                     'type' => 'divider',
-                    'label' => 'Columna: Campus',
+                    'label' => 'Columna: Campus y Mapa',
+                ],
+                'info_campus' => [
+                    'type' => 'alert',
+                    'alert_type' => 'warning',
+                    'label' => '<strong>EL MAPA YA NO ES UNA IMAGEN.</strong> Ahora es un mapa de verdad: al hacer clic en un campus del pie de página, el mapa se mueve hasta él y debajo aparece su dirección.<br><strong>Todos los campus se pueden pulsar</strong> desde el primer momento. Si uno no tiene dirección escrita, el mapa lo busca por su nombre usando el texto de "Texto de apoyo" de más abajo, así que el pin puede caer aproximado: <u>escribe la dirección para que sea exacto</u>.',
                 ],
                 'lista_campus' => [
-                    'type' => 'textarea',
-                    'label' => 'Campus (uno por línea)',
-                    'default' => "Campus Matriz\nCampus Boyacá\nCampus Naval\nCampus Teresa Benites\nCampus Tomás Martínez",
+                    'type' => 'repeater',
+                    'label' => 'Campus',
+                    'item_label' => 'Campus',
+                    'help' => 'El primero de la lista es el que se muestra en el mapa al abrir la página.',
+                    'default' => [
+                        ['nombre' => 'Campus Matriz', 'direccion' => 'Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador', 'mapa_url' => ''],
+                        ['nombre' => 'Campus Boyacá', 'direccion' => '', 'mapa_url' => ''],
+                        ['nombre' => 'Campus Naval', 'direccion' => '', 'mapa_url' => ''],
+                        ['nombre' => 'Campus Teresa Benites', 'direccion' => '', 'mapa_url' => ''],
+                        ['nombre' => 'Campus Tomás Martínez', 'direccion' => '', 'mapa_url' => ''],
+                    ],
+                    'subfields' => [
+                        'nombre' => [
+                            'type' => 'text',
+                            'label' => 'Nombre del campus',
+                            'help' => 'Es el texto que se ve en la lista del pie de página.',
+                        ],
+                        'direccion' => [
+                            'type' => 'text',
+                            'label' => 'Dirección',
+                            'help' => 'Se muestra debajo del mapa y es lo que se busca para ubicar el pin. Escríbela completa (calle, ciudad y país) para que el mapa acierte, ej: "Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador".',
+                        ],
+                        'mapa_url' => [
+                            'type' => 'text',
+                            'label' => 'Enlace del mapa (opcional)',
+                            'help' => 'Déjalo vacío y el mapa se ubica solo con la dirección de arriba. Rellénalo solo si el pin cae mal: entra en Google Maps, busca el sitio, pulsa Compartir → Insertar un mapa y pega aquí la dirección que aparece dentro de src="...".',
+                        ],
+                    ],
                 ],
-                'div_mapa' => [
-                    'type' => 'divider',
-                    'label' => 'Mapa',
-                ],
-                'mapa_img' => [
-                    'type' => 'image',
-                    'label' => 'Imagen del mapa',
-                    'default' => 'img/Mapa.png',
-                ],
-                'direccion_mapa' => [
+                'mapa_contexto' => [
                     'type' => 'text',
-                    'label' => 'Dirección (pastilla sobre el mapa)',
-                    'default' => 'Roca #101 y Pedro Carbo esq.',
+                    'label' => 'Texto de apoyo para buscar en el mapa',
+                    'default' => 'Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador',
+                    'help' => 'Solo se usa en los campus que aún no tienen dirección: el mapa busca "nombre del campus" + este texto. Sirve para que la búsqueda no se vaya a otra ciudad o a otro país.',
                 ],
                 'div_redes' => [
                     'type' => 'divider',
@@ -355,22 +377,48 @@ return [
                             'type' => 'divider',
                             'label' => 'Galería de Imágenes de Fondo',
                         ],
+                        'info_portada' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>CÓMO SE COMPORTA LA PORTADA:</strong> enciende <em>Animaciones y efectos</em> para que las fotos roten con su acercamiento, o enciende <em>Imagen fija</em> en UNA de las fotos para que la portada se quede quieta mostrando solo esa. Es una cosa o la otra: al encender un interruptor, los demás se apagan solos.',
+                        ],
+                        // Interruptor maestro. Junto con el 'estatica' de cada foto
+                        // forma el grupo exclusivo 'hero_modo': siempre hay
+                        // exactamente uno encendido. Este es el que se enciende
+                        // solo cuando el usuario apaga todos los demás
+                        // ('exclusive_default'), que es justo la regla pedida:
+                        // si ninguna foto está marcada como fija, hay animación.
+                        'animaciones' => [
+                            'type' => 'bool',
+                            'label' => 'Animaciones y efectos',
+                            'default' => true,
+                            'exclusive_group' => 'hero_modo',
+                            'exclusive_default' => true,
+                            'help' => 'Encendido: las fotos rotan con deslizamiento y acercamiento. Apagado: la portada se queda fija en la foto que marques abajo. Con una sola foto cargada no hay nada que rotar, así que se ve fija de todas formas.',
+                        ],
                         'imagenes_fondo' => [
                             'type' => 'repeater',
                             'label' => '',
                             'item_label' => 'Imagen',
-                            'help' => 'Agrega tantas fotos de fondo como desees. El carrusel rotará automáticamente.',
+                            'help' => 'Agrega tantas fotos de fondo como desees. Con las animaciones encendidas el carrusel las rota automáticamente.',
                             'default' => [
-                                ['archivo' => 'img/hero_1.jpeg'],
-                                ['archivo' => 'img/hero_2.jpg'],
-                                ['archivo' => 'img/hero_3.jpg'],
+                                ['archivo' => 'img/hero_1.jpeg', 'estatica' => false],
+                                ['archivo' => 'img/hero_2.jpg',  'estatica' => false],
+                                ['archivo' => 'img/hero_3.jpg',  'estatica' => false],
                             ],
                             'subfields' => [
                                 'archivo' => [
                                     'type' => 'image',
                                     'label' => 'Foto de Fondo',
                                     'help' => 'Tamaño recomendado: 1920x1080px',
-                                ]
+                                ],
+                                'estatica' => [
+                                    'type' => 'bool',
+                                    'label' => 'Imagen fija',
+                                    'default' => false,
+                                    'exclusive_group' => 'hero_modo',
+                                    'help' => 'Enciéndelo para que la portada se quede quieta en esta foto. Solo una foto puede estar marcada.',
+                                ],
                             ]
                         ],
 
@@ -558,11 +606,20 @@ return [
                             'label' => 'Botón "Ver todos"',
                             'default' => 'Ver todos los programas',
                         ],
+                        'info_programas' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>CÓMO SE MUESTRAN:</strong> la sección enseña siempre <strong>cuatro tarjetas</strong>. Los tres primeros programas ocupan una tarjeta fija cada uno; el <strong>cuarto y todos los que agregues después comparten la última tarjeta</strong>, que los va pasando sola de arriba hacia abajo. Agrega los que quieras con "Añadir Programa": la rejilla no crece, crece la cuarta tarjeta por dentro.',
+                        ],
                         'lista_programas' => [
                             'type' => 'repeater',
                             'label' => 'Lista de Programas',
                             'item_label' => 'Programa',
-                            'fixed_items' => true,
+                            // Antes venía con 'fixed_items' => true, que esconde los
+                            // botones de añadir, eliminar y reordenar: la lista era
+                            // intocable. Se quita para poder agregar programas, que
+                            // es justo lo que alimenta el carrusel de la 4a tarjeta.
+                            'help' => 'El orden manda: los tres primeros van en tarjetas fijas y del cuarto en adelante rotan juntos en la última.',
                             'subfields' => [
                                 'imagen' => ['type' => 'image', 'label' => 'Imagen'],
                                 'modalidad' => ['type' => 'text', 'label' => 'Modalidad', 'help' => 'Ej: Presencial, Híbrido, En línea'],
@@ -699,36 +756,54 @@ return [
                         ],
                         'div_testimonio' => [
                             'type' => 'divider',
-                            'label' => 'Testimonio Principal',
+                            'label' => 'Historias de Éxito',
                         ],
-                        'imagen' => [
-                            'type' => 'image',
-                            'label' => 'Foto del Graduado',
-                            'default' => 'img/MariaFernanda.png',
-                            'help' => 'Foto que aparece a la izquierda.',
+                        'info_testimonios' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>SE MUESTRA UNO A LA VEZ</strong> y van pasando solos de izquierda a derecha; los puntos de abajo permiten saltar a uno concreto. Agrega los que quieras con "Añadir Historia". Si solo dejas uno, la sección se queda quieta.',
                         ],
-                        'cita' => [
-                            'type' => 'textarea',
-                            'label' => 'Testimonio',
-                            'default' => '"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí."',
-                            'help' => 'Texto del testimonio. Máx. 3-4 oraciones.',
-                        ],
-                        'rol' => [
-                            'type' => 'text',
-                            'label' => 'Rol o Título',
-                            'default' => 'Graduada',
-                        ],
-                        'nombre' => [
-                            'type' => 'text',
-                            'label' => 'Nombre del Graduado',
-                            'default' => 'María Fernanda López',
-                            'help' => 'Nombre que aparece bajo el testimonio.',
-                        ],
-                        'carrera' => [
-                            'type' => 'text',
-                            'label' => 'Carrera y Promoción',
-                            'default' => 'Graduada en Enfermería - Promoción 2022',
-                            'help' => 'Aparece al final, bajo el nombre.',
+                        'lista_testimonios' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Historia',
+                            'help' => 'El primero de la lista es el que se ve al abrir la página.',
+                            'default' => [
+                                [
+                                    'imagen'  => 'img/MariaFernanda.png',
+                                    'cita'    => '"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí."',
+                                    'rol'     => 'Graduada',
+                                    'nombre'  => 'María Fernanda López',
+                                    'carrera' => 'Graduada en Enfermería - Promoción 2022',
+                                ],
+                            ],
+                            'subfields' => [
+                                'imagen' => [
+                                    'type' => 'image',
+                                    'label' => 'Foto del Graduado',
+                                    'help' => 'Aparece a la izquierda. Vertical, mínimo 420x520px.',
+                                ],
+                                'cita' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Testimonio',
+                                    'help' => 'Texto del testimonio. Máx. 3-4 oraciones.',
+                                ],
+                                'rol' => [
+                                    'type' => 'text',
+                                    'label' => 'Rol o Título',
+                                    'default' => 'Graduado',
+                                ],
+                                'nombre' => [
+                                    'type' => 'text',
+                                    'label' => 'Nombre del Graduado',
+                                    'help' => 'Nombre que aparece bajo el testimonio.',
+                                ],
+                                'carrera' => [
+                                    'type' => 'text',
+                                    'label' => 'Carrera y Promoción',
+                                    'help' => 'Aparece al final, bajo el nombre.',
+                                ],
+                            ],
                         ],
                     ],
                 ],
@@ -800,7 +875,12 @@ return [
                                 'titulo' => ['type' => 'text', 'label' => 'Título', 'required' => true],
                                 'desc' => ['type' => 'textarea', 'label' => 'Descripción', 'required' => true],
                                 'btn_texto' => ['type' => 'text', 'label' => 'Texto del Botón (ej: Ver Tour, Acceder)'],
-                                'imagen' => ['type' => 'image', 'label' => 'Imagen de Fondo (Opcional)']
+                                'imagen' => ['type' => 'image', 'label' => 'Imagen de Fondo (Opcional)'],
+                                'imagen_fija' => [
+                                    'type' => 'bool',
+                                    'label' => 'Mostrar la imagen siempre',
+                                    'help' => 'Apagado: la tarjeta se ve blanca y la foto solo aparece al pasar el mouse. Encendido: la foto se ve siempre, sin efecto.'
+                                ]
                             ],
                             'default' => [
                                 [
@@ -831,7 +911,8 @@ return [
                                     'titulo' => "Arte y Deportes",
                                     'desc' => "Clubes deportivos, grupos artísticos y actividades recreativas",
                                     'btn_texto' => "Conocer Más",
-                                    'imagen' => "img/bienestar_estudiantil_1.png"
+                                    'imagen' => "img/bienestar_estudiantil_1.png",
+                                    'imagen_fija' => '1'
                                 ]
                             ]
                         ],
@@ -971,50 +1052,69 @@ return [
                             'default' => 'Noticias y Eventos del ITB',
                             'help' => 'Título principal de la sección (soporta asteriscos *texto* para color naranja).',
                         ],
-                        'titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título de la Noticia',
-                            'default' => '¡METAMORFOSIS CREATIVA está por comenzar!',
-                            'help' => 'Título principal de la noticia.',
-                        ],
                         'boton_todas' => [
                             'type' => 'text',
                             'label' => 'Botón "Todas las noticias"',
                             'default' => 'Todas las noticias',
                             'help' => 'Texto del botón superior derecho.',
                         ],
-                        'div_noticia' => [
+                        'div_eventos' => [
                             'type' => 'divider',
-                            'label' => 'Noticia Destacada Principal',
+                            'label' => 'Eventos',
                         ],
-                        'categoria' => [
-                            'type' => 'text',
-                            'label' => 'Categoría',
-                            'default' => 'Evento',
-                            'help' => 'Categoría que se muestra como badge (ej: Evento, Académico).',
+                        'info_eventos' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>EVENTOS:</strong> Ocupan la tarjeta grande de la izquierda. Se muestra uno a la vez y van pasando solos <strong>de izquierda a derecha</strong>. Agrega los que quieras con "Añadir Evento"; el orden es el que definas aquí con las flechas ↑ ↓.',
                         ],
-                        'fecha' => [
-                            'type' => 'text',
-                            'label' => 'Fecha de publicación',
-                            'default' => '15 Sep 2025',
-                            'help' => 'Fecha de publicación (ej: 15 Sep 2025).',
-                        ],
-                        'descripcion' => [
-                            'type' => 'textarea',
-                            'label' => 'Descripción / Resumen',
-                            'default' => 'Lo mejor del Diseño de Modas y Maquillaje...',
-                            'help' => 'Resumen corto de la noticia.',
-                        ],
-                        'imagen' => [
-                            'type' => 'image',
-                            'label' => 'Imagen de la Noticia Principal',
-                            'default' => 'img/noticia_1.png',
-                            'help' => 'Imagen destacada de la noticia.',
+                        'eventos' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Evento',
+                            'help' => 'Cada evento es una diapositiva de la tarjeta grande.',
+                            'default' => [
+                                [
+                                    'categoria' => 'Evento',
+                                    'fecha' => '15 Sep 2025',
+                                    'titulo' => '¡METAMORFOSIS CREATIVA está por comenzar!',
+                                    'descripcion' => 'Lo mejor del Diseño de Modas y Maquillaje...',
+                                    'imagen' => 'img/noticia_1.png',
+                                ],
+                            ],
+                            'subfields' => [
+                                'categoria' => [
+                                    'type' => 'text',
+                                    'label' => 'Categoría',
+                                    'default' => 'Evento',
+                                    'help' => 'Badge naranja de arriba (ej: Evento, Académico).',
+                                ],
+                                'fecha' => [
+                                    'type' => 'text',
+                                    'label' => 'Fecha',
+                                    'default' => '',
+                                    'help' => 'Ej: 15 Sep 2025.',
+                                ],
+                                'titulo' => [
+                                    'type' => 'text',
+                                    'label' => 'Título',
+                                    'default' => '',
+                                ],
+                                'descripcion' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Descripción / Resumen',
+                                    'default' => '',
+                                ],
+                                'imagen' => [
+                                    'type' => 'image',
+                                    'label' => 'Imagen',
+                                    'default' => '',
+                                ],
+                            ],
                         ],
                         'info_noticias' => [
                             'type' => 'alert',
                             'alert_type' => 'info',
-                            'label' => '<strong>NUEVA FUNCIÓN:</strong> Las noticias secundarias ahora son dinámicas. Puedes agregar las que quieras haciendo clic en "Añadir Noticia Secundaria".',
+                            'label' => '<strong>NOTICIAS SECUNDARIAS:</strong> Ocupan la tarjeta de la derecha. Se ven <strong>dos a la vez</strong> y avanzan <strong>de arriba hacia abajo</strong>: entra una nueva por arriba y sale la de abajo. Agrega las que quieras con "Añadir Noticia Secundaria".',
                         ],
                         'div_secundarias' => [
                             'type' => 'divider',
@@ -1136,6 +1236,18 @@ return [
                     ],
                 ],
             ],
+        ],
+        // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
+        // así que en vez de 'fields' declara la pantalla que lo atiende con
+        // 'url'. El menú lateral y el escritorio ya saben leer esa clave, así
+        // que agregar otra sección especial no obliga a tocar el motor.
+        'registros' => [
+            'label' => 'Registros del formulario',
+            'group' => 'contenido',
+            'icon' => 'bi bi-inbox-fill',
+            'type' => 'custom',
+            'url' => 'registros.php',
+            'subtitulo' => 'Ver y descargar en CSV',
         ],
         'equipo' => [
             'label' => 'Equipo',

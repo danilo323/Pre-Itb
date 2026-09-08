@@ -79,11 +79,19 @@ foreach ($groups as $group_key => $group_label):
         
         <div class="dash-grid">
             <?php foreach ($items_by_group[$group_key] as $key => $item): 
-                $url = ($item['type'] === 'collection') ? "coleccion.php?c={$key}" : "singleton.php?c={$key}";
+                // Igual que en el menu lateral: si el schema trae su propia
+                // pagina ('url'), se usa esa.
+                if (!empty($item['url'])) {
+                    $url = ltrim($item['url'], '/');
+                } else {
+                    $url = ($item['type'] === 'collection') ? "coleccion.php?c={$key}" : "singleton.php?c={$key}";
+                }
                 $icon = $item['icon'] ?? 'bi bi-file-earmark-text';
                 
                 // Determinar subtítulo
-                if ($item['type'] === 'collection') {
+                if (!empty($item['subtitulo'])) {
+                    $subtitle = $item['subtitulo'];
+                } elseif ($item['type'] === 'collection') {
                     $count = count(collection_items($key));
                     $subtitle = $count . ' item' . ($count !== 1 ? 's' : '');
                 } else {

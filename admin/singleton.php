@@ -21,6 +21,13 @@ if ($config['type'] === 'collection') {
     exit;
 }
 
+// Los items con pagina propia (p. ej. Registros del formulario) no tienen
+// campos que renderizar aqui: se manda a la suya y listo.
+if (!empty($config['url'])) {
+    header('Location: ' . $AB . '/' . ltrim($config['url'], '/'));
+    exit;
+}
+
 // Lee los datos guardados en la persistencia / sesión, si no existen usa los 'default' del schema
 function get_saved_data($sec_key, $field_key, $default) {
     content_ensure_session_loaded(true);
