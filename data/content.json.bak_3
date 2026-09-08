@@ -3,7 +3,7 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/c48403c4d0469e278870965fe69ccb34.png",
+        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
         "div_seo": "",
         "div_logos": ""
     },
@@ -15,7 +15,7 @@
                 "nivel": "padre"
             },
             {
-                "texto": "Nuestra Institución",
+                "texto": "Nuestra Institución 1",
                 "url": "#",
                 "nivel": "padre"
             },
@@ -66,7 +66,10 @@
         "top_link_4": "Investigación",
         "top_link_5": "UNIEBEC",
         "cta_btn_1": "Solicitar Información",
-        "cta_btn_2": "Matricúlame"
+        "cta_btn_2": "Matricúlame",
+        "div_main": "",
+        "div_top": "",
+        "div_cta": ""
     },
     "footer": {
         "cta_titulo": "¿Aún no decides qué carrera estudiar?",
@@ -77,11 +80,35 @@
         "logo": "img/e2792d46ea30367a4cc3b44a53ac5771.png",
         "contacto_1": "PBX: (04) 500 0175 - 230 7028\r\n500 2164 - 372 7040",
         "contacto_2": "1800 ITB-ITB: 482-482",
-        "enlaces_columna_1": "Admisiones Pregrado\r\nCarreras y Programas\r\nCalendario Académico\r\nTalento Humano\r\nVinculación",
-        "enlaces_columna_2": "Noticias y Novedades ITB\r\nDirectorio General\r\nASOMI\r\nCONDUCE ECUADOR\r\nTrabaja en el ITB",
-        "lista_campus": "Campus Matriz\r\nCampus Boyacá\r\nCampus Naval\r\nCampus Teresa Benites\r\nCampus Tomás Martínez",
-        "mapa_img": "img/Mapa.png",
-        "direccion_mapa": "Roca #101 y Pedro Carbo esq.",
+        "enlaces_columna_1": "Admiciones\r\nPreg\r\nCambio\r\nCambio 2",
+        "enlaces_columna_2": "Noticias\r\nNovedades\r\nCambio1\r\nCambio2",
+        "lista_campus": [
+            {
+                "nombre": "Campus Matriz",
+                "direccion": "Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador",
+                "mapa_url": ""
+            },
+            {
+                "nombre": "Campus Boyacá",
+                "direccion": "",
+                "mapa_url": ""
+            },
+            {
+                "nombre": "Campus Naval",
+                "direccion": "",
+                "mapa_url": ""
+            },
+            {
+                "nombre": "Campus Teresa Benites",
+                "direccion": "",
+                "mapa_url": ""
+            },
+            {
+                "nombre": "Campus Tomas Martínez",
+                "direccion": "",
+                "mapa_url": ""
+            }
+        ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
         "youtube_url": "#",
         "instagram_url": "#",
@@ -112,23 +139,28 @@
         "video_url": "https://youtu.be/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B",
         "imagenes_fondo": [
             {
-                "archivo": "img/hero_1.jpeg"
+                "archivo": "img/hero_1.jpeg",
+                "estatica": false
             },
             {
-                "archivo": "img/hero_2.jpg"
+                "archivo": "img/hero_2.jpg",
+                "estatica": false
             },
             {
-                "archivo": "img/hero_3.jpg"
+                "archivo": "img/hero_3.jpg",
+                "estatica": false
             }
         ],
-        "div_left": "",
-        "div_stats": "",
-        "div_right": "",
-        "div_galeria": "",
+        "div_left": null,
+        "div_stats": null,
+        "div_right": null,
+        "div_galeria": null,
         "imagen_1": "img/salud.jpg",
         "imagen_2": "img/student.jpg",
         "imagen_3": "img/student 2.jpg",
-        "imagen_video_thumb": "img/hero-video-thumb.jpg"
+        "imagen_video_thumb": "img/hero-video-thumb.jpg",
+        "animaciones": true,
+        "info_portada": null
     },
     "trayectoria": {
         "_visible": "1",
@@ -154,11 +186,11 @@
                 "texto": "Carreras Disponibles"
             }
         ],
-        "div_global": "",
-        "div_perfil": "",
-        "div_btn": "",
-        "div_imagen": "",
-        "div_stats": "",
+        "div_global": null,
+        "div_perfil": null,
+        "div_btn": null,
+        "div_imagen": null,
+        "div_stats": null,
         "imagen_campus": "img/estudiantes1.png",
         "stat_anios": "29+",
         "stat_anios_label": "Años de Experiencia",
@@ -178,7 +210,7 @@
                 "descripcion": "Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.",
                 "programas": "Enfermería\r\nFisioterapia\r\nLaboratorio Clínico",
                 "icono": "img/doctor.png",
-                "imagen_fondo": "",
+                "imagen_fondo": "img/5fae5bd59953701d849a178aab7cc772.jpg",
                 "btn_texto": "Explorar programas"
             },
             {
@@ -194,11 +226,11 @@
                 "descripcion": "Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.",
                 "programas": "Logística y Transporte\r\nComercio Exterior\r\nOperaciones Portuarias",
                 "icono": "img/coche.png",
-                "imagen_fondo": "",
+                "imagen_fondo": "img/21b4145fb1708d4b3d4696596ea1b287.jpg",
                 "btn_texto": "Explorar programas"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "area1_icono": "img/doctor.png",
         "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
         "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
@@ -221,7 +253,7 @@
         "btn_ver_todos": "Ver todos los programas",
         "lista_programas": [
             {
-                "imagen": "img/18a7e94f99b68ceebb406aca22f38dec.jpg",
+                "imagen": "img/10386d1246de0db082c29c5ab5820439.jpg",
                 "modalidad": "Presencial",
                 "area": "Salud",
                 "titulo": "Tecnología Superior en Enfermería",
@@ -251,9 +283,33 @@
                 "titulo": "Tecnología Superior en Desarrollo de Software",
                 "duracion": "5 Semestres",
                 "sede": "Guayaquil"
+            },
+            {
+                "imagen": "img/programa_gastronomia.jpg",
+                "modalidad": "Presencial",
+                "area": "",
+                "titulo": "Tecnología Superior en Gastronomía",
+                "duracion": "5 Niveles",
+                "sede": ""
+            },
+            {
+                "imagen": "img/programa_contabilidad.jpg",
+                "modalidad": "Presencial",
+                "area": "",
+                "titulo": "Tecnología Superior en Contabilidad",
+                "duracion": "5 Niveles",
+                "sede": ""
+            },
+            {
+                "imagen": "img/programa_diseno_grafico.jpg",
+                "modalidad": "Presencial",
+                "area": "",
+                "titulo": "Técnico Superior en Diseño Gráfico",
+                "duracion": "2 Niveles",
+                "sede": ""
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "prog1_imagen": "img/enfermeria.jpg",
         "prog1_modalidad": "Presencial",
         "prog1_area": "Salud",
@@ -277,7 +333,8 @@
         "prog4_area": "Tecnología",
         "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
         "prog4_duracion": "5 Semestres",
-        "prog4_sede": "Guayaquil"
+        "prog4_sede": "Guayaquil",
+        "info_programas": null
     },
     "experiencia": {
         "_visible": "1",
@@ -304,9 +361,9 @@
         ],
         "btn_texto": "Más beneficios",
         "imagen": "img/experiencia.png",
-        "div_header": "",
-        "div_btn": "",
-        "div_img": "",
+        "div_header": null,
+        "div_btn": null,
+        "div_img": null,
         "caract1_titulo": "Servicios Médicos",
         "caract1_desc": "Atención médica y odontológica gratuita para estudiantes.",
         "caract2_titulo": "Becas y Financiamiento",
@@ -322,13 +379,39 @@
         "_visible": "1",
         "etiqueta_superior": "HISTORIAS DE ÉXITO",
         "titulo": "Lo que dicen nuestros Graduados",
-        "imagen": "img/MariaFernanda.png",
-        "cita": "\"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí.\"",
-        "rol": "Graduada",
-        "nombre": "María Fernanda López",
-        "carrera": "Graduada en Enfermería - Promoción 2022",
-        "div_global": "",
-        "div_testimonio": ""
+        "div_global": null,
+        "div_testimonio": null,
+        "lista_testimonios": [
+            {
+                "imagen": "img/MariaFernanda.png",
+                "cita": "\"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí.\"",
+                "rol": "Graduada",
+                "nombre": "María Fernanda López",
+                "carrera": "Graduada en Enfermería - Promoción 2022"
+            },
+            {
+                "imagen": "img/8a568c0257127dd19236f871a537a0bd.jpg",
+                "cita": "\"La formación práctica y los proyectos reales que desarrollamos en clase me permitieron llegar a mi primera entrevista con un portafolio sólido. Hoy trabajo en el área que elegí desde el primer semestre.\"",
+                "rol": "Graduado",
+                "nombre": "Juan Perez Goya",
+                "carrera": "Graduado en Desarrollo de Software"
+            },
+            {
+                "imagen": "img/38f08960fc8ca02a6b4061c526c46759.jpg",
+                "cita": "\"Lo que más valoro del ITB es la cercanía de los docentes: siempre hubo alguien dispuesto a resolver una duda o revisar un proyecto. Esa guía marcó la diferencia en mi formación.\"",
+                "rol": "Graduada",
+                "nombre": "Elena Fernandez Macias",
+                "carrera": "Graduada en Marketing Digital"
+            },
+            {
+                "imagen": "img/85dc8355286c1581b342d9b4220b5de6.jpg",
+                "cita": "\"Estudiar y trabajar al mismo tiempo era mi mayor preocupación. Los horarios flexibles me permitieron avanzar sin dejar mi empleo, y hoy aplico a diario lo que aprendí en los talleres.\"",
+                "rol": "Graduado",
+                "nombre": "Francisco Arias Morales",
+                "carrera": "Graduado en Gastronomía"
+            }
+        ],
+        "info_testimonios": null
     },
     "autoridades": {
         "_visible": "1",
@@ -336,8 +419,8 @@
         "titulo": "Nuestras Autoridades",
         "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "boton_directorio": "Ver Directorio",
-        "info_gestion": "",
-        "div_global": "",
+        "info_gestion": null,
+        "div_global": null,
         "btn_directorio": "Ver Directorio",
         "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
@@ -371,35 +454,40 @@
                 "titulo": "Campus Virtual",
                 "desc": "Plataforma educativa 24/7",
                 "btn_texto": "Ver Tour",
-                "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg"
+                "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
+                "imagen_fija": false
             },
             {
                 "titulo": "Horarios",
                 "desc": "Consulta tus horarios de clase",
                 "btn_texto": "Ver Horarios",
-                "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg"
+                "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
+                "imagen_fija": false
             },
             {
                 "titulo": "Servicios Digitales",
                 "desc": "Trámites en línea y gestión académica",
                 "btn_texto": "Acceder",
-                "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg"
+                "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
+                "imagen_fija": false
             },
             {
                 "titulo": "Podcast ITB",
                 "desc": "Escucha nuestro contenido educativo",
                 "btn_texto": "Escuchar",
-                "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg"
+                "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg",
+                "imagen_fija": false
             },
             {
                 "titulo": "Arte y Deportes",
                 "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
                 "btn_texto": "Conocer Más",
-                "imagen": "img/bienestar_estudiantil_1.png"
+                "imagen": "img/bienestar_estudiantil_1.png",
+                "imagen_fija": true
             }
         ],
-        "div_serv1": "",
-        "div_servicios_lista": "",
+        "div_serv1": null,
+        "div_servicios_lista": null,
         "etiqueta_superior": "Servicios Institucionales",
         "titulo": "Todo lo que necesitas en  *un solo lugar*",
         "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
@@ -463,12 +551,12 @@
                 "texto": "Híbrida"
             }
         ],
-        "div_textos": "",
-        "div_imagen": "",
-        "div_video": "",
-        "div_form": "",
-        "div_programas": "",
-        "div_modalidades": "",
+        "div_textos": null,
+        "div_imagen": null,
+        "div_video": null,
+        "div_form": null,
+        "div_programas": null,
+        "div_modalidades": null,
         "etiqueta_superior": "Admisiones Abiertas",
         "feature_1": "Proceso 100% en línea",
         "feature_2": "Asesoría personalizada",
@@ -495,12 +583,27 @@
                 "titulo": "ITB promovió una movilidad",
                 "fecha": "Agosto 20, 2026",
                 "imagen": "img/noticia_3.png"
+            },
+            {
+                "titulo": "ITB transforma el ComicCon en una experiencia de aprendizaje",
+                "fecha": "Agosto 31, 2026",
+                "imagen": "img/ff4728ec07d83ad63f3412a6ee3ec0a6.jpg"
+            },
+            {
+                "titulo": "ITB recibe importante reconocimiento por su aportación en programas de formación juvenil",
+                "fecha": "Agosto 28, 2026",
+                "imagen": "img/166a6aba1ac9c52c78994ef657b1f8ac.jpg"
+            },
+            {
+                "titulo": "ITB desarrolló conferencia magistral sobre dirección escénica en la era digital",
+                "fecha": "Agosto 24, 2026",
+                "imagen": "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "div_noticia": "",
-        "info_noticias": "",
-        "div_secundarias": "",
+        "info_noticias": null,
+        "div_secundarias": null,
         "sec1_titulo": "Convenio internacional con universidad de España",
         "sec1_fecha": "10 Sep 2025",
         "sec1_imagen": "img/noticia-2.jpg",
@@ -509,7 +612,39 @@
         "sec2_imagen": "img/noticia-3.jpg",
         "sec3_titulo": "ITB inaugura nuevo laboratorio de simulación clínica",
         "sec3_fecha": "01 Sep 2025",
-        "sec3_imagen": "img/noticia-4.jpg"
+        "sec3_imagen": "img/noticia-4.jpg",
+        "eventos": [
+            {
+                "categoria": "Evento",
+                "fecha": "15 Sep 2025",
+                "titulo": "¡METAMORFOSIS CREATIVA está por comenzar!",
+                "descripcion": "Lo mejor del Diseño de Modas y Maquillaje...",
+                "imagen": "img/noticia_1.png"
+            },
+            {
+                "categoria": "Evento",
+                "fecha": "12 Agt 2026",
+                "titulo": "Estudiantes de Marketing Digital y Redes Sociales presentan proyectos novedosos en Elevator Pitch",
+                "descripcion": "Una jornada académica que reunió a 21 mini agencias conformadas por estudiantes de la carrera Técnico Superior en Marketing Digital y Redes Sociales, quienes presentaron propuestas estratégicas y creativas para diferentes marcas y negocios.",
+                "imagen": "img/7706394bfe67bfced3f1464e086011eb.jpg"
+            },
+            {
+                "categoria": "Noticia",
+                "fecha": "18 Ago.",
+                "titulo": "ITB promovió una movilidad responsable durante la jornada “Guayaquil Camina Seguro”",
+                "descripcion": "Una jornada orientada a fortalecer la educación y concienciación sobre la importancia de una movilidad segura, sostenible e incluyente.",
+                "imagen": "img/noticia_camina_seguro.jpeg"
+            },
+            {
+                "categoria": "Noticia",
+                "fecha": "14 Ago.",
+                "titulo": "ITB presentó proyectos de investigación e innovación aplicada en la Feria Agroazucar",
+                "descripcion": "Cuatro proyectos desarrollados desde las facultades FACES y FATV se presentaron en la Feria Agroazucar.",
+                "imagen": "img/noticia_feria_agroazucar.jpeg"
+            }
+        ],
+        "div_eventos": null,
+        "info_eventos": null
     },
     "alianzas": {
         "_visible": "1",
@@ -517,7 +652,7 @@
         "boton_todas": "Ver Alianzas y Convenios",
         "lista_logos": [
             {
-                "imagen": "img/990f817a94c3f10a0e1e308fdb13819f.png",
+                "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
                 "nombre": "Aliado 1"
             },
             {
@@ -563,9 +698,9 @@
                 "nombre": "Actividad ITB 6"
             }
         ],
-        "div_textos": "",
-        "div_logos": "",
-        "div_fotos": ""
+        "div_textos": null,
+        "div_logos": null,
+        "div_fotos": null
     },
     "equipo": {
         "items": [
@@ -613,7 +748,7 @@
                 "cargo": "Vicerrectora de Extensión y Gestión Administrativa",
                 "linkedin": "#",
                 "email": "extension@itb.edu.ec",
-                "foto": "img/78f5d76db7f75b8106bb79e7782a35eb.jpg",
+                "foto": "img/41222399c1dda86559946d5b6aa993df.png",
                 "mostrar_en_home": true,
                 "publicado": true
             }

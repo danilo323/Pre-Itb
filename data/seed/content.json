@@ -273,31 +273,36 @@
                 "titulo": "Campus Virtual",
                 "desc": "Plataforma educativa 24/7",
                 "btn_texto": "Ver Tour",
-                "imagen": "img/1788766941_1769701597_cb1e1f715857ff22c7fe.jpeg"
+                "imagen": "img/1788766941_1769701597_cb1e1f715857ff22c7fe.jpeg",
+                "imagen_fija": "0"
             },
             {
                 "titulo": "Horarios",
                 "desc": "Consulta tus horarios de clase",
                 "btn_texto": "Ver Horarios",
-                "imagen": "img/1788766941_asdasd.jpg"
+                "imagen": "img/1788766941_asdasd.jpg",
+                "imagen_fija": "0"
             },
             {
                 "titulo": "Servicios Digitales",
                 "desc": "Trámites en línea y gestión académica",
                 "btn_texto": "Acceder",
-                "imagen": "img/1788766941_1720017362_dbe7fc57cd0d7d9ab805.jpg"
+                "imagen": "img/1788766941_1720017362_dbe7fc57cd0d7d9ab805.jpg",
+                "imagen_fija": "0"
             },
             {
                 "titulo": "Podcast ITB",
                 "desc": "Escucha nuestro contenido educativo",
                 "btn_texto": "Escuchar",
-                "imagen": "img/1788766941_tecnicoenfer.jpg"
+                "imagen": "img/1788766941_tecnicoenfer.jpg",
+                "imagen_fija": "0"
             },
             {
                 "titulo": "Arte y Deportes",
                 "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
                 "btn_texto": "Conocer Más",
-                "imagen": "img/bienestar_estudiantil_1.png"
+                "imagen": "img/bienestar_estudiantil_1.png",
+                "imagen_fija": "1"
             }
         ]
     },
