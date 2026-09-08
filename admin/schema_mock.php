@@ -912,7 +912,7 @@ return [
                                     'desc' => "Clubes deportivos, grupos artísticos y actividades recreativas",
                                     'btn_texto' => "Conocer Más",
                                     'imagen' => "img/bienestar_estudiantil_1.png",
-                                    'imagen_fija' => '1'
+                                    'imagen_fija' => '0'
                                 ]
                             ]
                         ],
