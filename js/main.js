@@ -5,6 +5,27 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // =========================================
+    // CONTADOR DE CARRUSEL  ("2/5")
+    // =========================================
+    // Lo usan los cinco carruseles de la página. El numerador es el número del
+    // ÚLTIMO item que se está viendo:
+    //   - con uno a la vez es la posición actual (1/4, 2/4...);
+    //   - con dos a la vez (noticias secundarias) arranca en 2/5, porque las que
+    //     se ven son la 1 y la 2.
+    // 'raiz' es el contenedor del carrusel; si no tiene contador, no hace nada.
+    const actualizarContador = (raiz, indice, total, visibles) => {
+        if (!raiz) return;
+        const contador = raiz.querySelector('.js-contador');
+        if (!contador) return;
+        const cuantas = visibles || 1;
+        // +1 porque el índice empieza en 0, y +(visibles-1) para llegar al
+        // último visible. El módulo lo devuelve al rango 1..total al dar la vuelta.
+        const ultimo = ((indice + cuantas - 1) % total) + 1;
+        const celda = contador.querySelector('.carrusel-contador__actual');
+        if (celda) celda.textContent = ultimo;
+    };
+
+    // =========================================
     // 0. HERO SLIDESHOW — Ken Burns Effect
     // =========================================
     const slides = document.querySelectorAll('.hero__slide');
@@ -23,6 +44,8 @@ document.addEventListener('DOMContentLoaded', () => {
             const outgoing = slides[current];
             current = nextIndex % slides.length;
             const incoming = slides[current];
+
+            actualizarContador(document.querySelector('.hero__slideshow'), current, slides.length, 1);
 
             // Slide saliente: sube y sale por arriba
             outgoing.classList.add('hero__slide--leaving');
@@ -597,6 +620,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     p.classList.toggle('is-active', i === actual);
                     p.setAttribute('aria-selected', i === actual ? 'true' : 'false');
                 });
+                actualizarContador(carruselEventos, actual, eventos.length, 1);
             };
 
             const arrancar = () => {
@@ -676,11 +700,20 @@ document.addEventListener('DOMContentLoaded', () => {
                     void carril.offsetHeight; // fuerza el reflujo antes de devolver la transición
                     carril.style.transition = '';
                 }
+                // 'paso' cuenta desde los clones que van delante, así que hay que
+                // restarles: paso === visibles significa "estoy en la primera de
+                // verdad", o sea índice 0.
+                const indice = ((paso - visibles) % originales.length + originales.length) % originales.length;
+                actualizarContador(carruselNoticias, indice, originales.length, visibles);
             };
 
             const medir = () => {
                 alto = originales[0].getBoundingClientRect().height;
                 marco.style.height = (alto * visibles) + 'px';
+                // El separador entre las dos noticias visibles lo pinta el CSS
+                // con ::after sobre el marco, y necesita saber a que altura va.
+                // Se publica aqui porque el alto de fila solo se conoce midiendo.
+                marco.style.setProperty('--noticia-alto-fila', alto + 'px');
                 // Recolocar el carril con el alto nuevo, si no queda descuadrado
                 // tras un cambio de tamaño de ventana.
                 colocar(false);
@@ -774,6 +807,11 @@ document.addEventListener('DOMContentLoaded', () => {
                     void carril.offsetHeight;
                     carril.style.transition = '';
                 }
+                // Con clon delante 'paso' arranca en 1 para el programa 0; sin
+                // clon (un solo programa) arranca en 0. 'rota' dice cuál es.
+                const desfase = rota ? 1 : 0;
+                const indice = ((paso - desfase) % originales.length + originales.length) % originales.length;
+                actualizarContador(carruselProgramas, indice, originales.length, 1);
             };
 
             const medir = () => {
@@ -922,6 +960,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     p.classList.toggle('is-active', i === actualTest);
                     p.setAttribute('aria-selected', i === actualTest ? 'true' : 'false');
                 });
+                actualizarContador(carruselTestimonios, actualTest, fotos.length, 1);
             };
 
             const arrancarTest = () => {
