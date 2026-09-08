@@ -39,7 +39,15 @@ function layout_sidebar($current_key = ''): string {
             $icon  = $item['icon'] ?? 'bi bi-file-earmark-text';
             $active = ($current_key === $key) ? 'class="active"' : '';
             
-            $url = ($item['type'] === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
+            // Un item puede traer su propia pagina en el schema ('url'). Sirve
+            // para secciones que no son ni una coleccion ni un singleton de
+            // campos, como Registros del formulario. Sin esto habria que
+            // escribir aqui el nombre de cada pagina especial a mano.
+            if (!empty($item['url'])) {
+                $url = $ab . '/' . ltrim($item['url'], '/');
+            } else {
+                $url = ($item['type'] === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
+            }
             
             $html .= "        <li><a href=\"{$url}\" {$active}><i class=\"{$icon}\"></i> {$label}</a></li>\n";
         }
