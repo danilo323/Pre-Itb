@@ -10,9 +10,24 @@
     "menu": {
         "items_menu": [
             {
-                "texto": "Inicio",
-                "url": "#",
+                "texto": "Instituto",
+                "url": "",
                 "nivel": "padre"
+            },
+            {
+                "texto": "Sobre Nosotros",
+                "url": "sobre-nosotros.php",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "Himno e Identidad",
+                "url": "",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "Transparencia / Leyes",
+                "url": "",
+                "nivel": "hijo"
             },
             {
                 "texto": "Nuestra Institución 1",
@@ -140,7 +155,7 @@
         "imagenes_fondo": [
             {
                 "archivo": "img/hero_1.jpeg",
-                "estatica": false
+                "estatica": true
             },
             {
                 "archivo": "img/hero_2.jpg",
@@ -159,7 +174,7 @@
         "imagen_2": "img/student.jpg",
         "imagen_3": "img/student 2.jpg",
         "imagen_video_thumb": "img/hero-video-thumb.jpg",
-        "animaciones": "1",
+        "animaciones": "",
         "info_portada": ""
     },
     "trayectoria": {
@@ -751,6 +766,85 @@
                 "foto": "img/41222399c1dda86559946d5b6aa993df.png",
                 "mostrar_en_home": true,
                 "publicado": true
+            }
+        ]
+    },
+    "sobre_intro": {
+        "_visible": "1",
+        "info_compartido": "",
+        "div_textos": "",
+        "etiqueta_superior": "Trayectoria y Compromiso Educativo",
+        "titulo": "Formando Líderes Prácticos con Visión de Futuro",
+        "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
+        "div_cita": "",
+        "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
+        "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
+        "div_imagen": "",
+        "imagen": "img/trayectoria.png"
+    },
+    "sobre_mision": {
+        "_visible": "1",
+        "titulo": "Nuestra misión",
+        "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
+        "puntos": [
+            {
+                "texto": "Autonomía de pensamiento y liderazgo."
+            },
+            {
+                "texto": "Aliado estratégico de empresas e instituciones."
+            },
+            {
+                "texto": "Formación práctica orientada al desarrollo económico y social."
+            }
+        ],
+        "imagen": "img/experiencia.png"
+    },
+    "sobre_vision": {
+        "_visible": "1",
+        "titulo": "Nuestra visión",
+        "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+        "puntos": [
+            {
+                "texto": "Liderazgo en educación tecnológica universitaria."
+            },
+            {
+                "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+            },
+            {
+                "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+            }
+        ],
+        "imagen": "img/bienestar_estudiantil_1.png"
+    },
+    "sobre_valores": {
+        "_visible": "1",
+        "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
+        "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
+        "items": [
+            {
+                "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                "titulo": "Cogobierno",
+                "descripcion": "Participación y gestión democrática"
+            },
+            {
+                "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                "titulo": "Igualdad",
+                "descripcion": "Oportunidades sin discriminación"
+            },
+            {
+                "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                "titulo": "Calidad",
+                "descripcion": "Excelencia en educación superior"
+            },
+            {
+                "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                "titulo": "Pertinencia",
+                "descripcion": "Programas alineados a la sociedad"
+            },
+            {
+                "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                "titulo": "Integralidad",
+                "descripcion": "Formación académica y humana"
             }
         ]
     }

@@ -75,7 +75,7 @@ return [
                     ],
                     'default' => [
                         ['texto' => 'Instituto', 'url' => '#', 'nivel' => 'padre'],
-                        ['texto' => 'Sobre Nosotros', 'url' => '#', 'nivel' => 'hijo'],
+                        ['texto' => 'Sobre Nosotros', 'url' => 'sobre-nosotros.php', 'nivel' => 'hijo'],
                         ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
                         ['texto' => 'Transparencia / Leyes', 'url' => '#', 'nivel' => 'hijo'],
                         ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
@@ -1234,12 +1234,300 @@ return [
                 ],
             ],
         ],
+        // PÁGINA "SOBRE NOSOTROS" (archivo público: /sobre-nosotros.php).
+        // Es 'page' (y no 'singleton') porque tiene varias secciones: así el
+        // motor pinta un acordeón por sección y el interruptor "Visible" de
+        // cada una, igual que en Inicio. Cada clave de 'sections' es la clave
+        // con la que esa sección se guarda dentro de data/content.json.
+        //
+        // La portada, el carrusel de alianzas y las autoridades de esta página
+        // son LOS MISMOS de Inicio (comparten contenido a propósito), por eso
+        // no se repiten aquí: se editan desde Inicio y el cambio se ve en las
+        // dos páginas.
         'sobre_nosotros' => [
             'label' => 'Sobre Nosotros',
             'group' => 'paginas',
             'icon' => 'bi bi-info-circle-fill',
-            'type' => 'singleton',
-            'fields' => [],
+            'type' => 'page',
+            'sections' => [
+
+                // ---------------------------------------------------------
+                // 1. PRESENTACIÓN (textos y tarjeta de cita a la izquierda,
+                //    imagen a la derecha)
+                // ---------------------------------------------------------
+                'sobre_intro' => [
+                    'label' => 'SECCIÓN 1: PRESENTACIÓN',
+                    'fields' => [
+                        'info_compartido' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>OJO:</strong> la <em>Portada</em>, el carrusel de <em>Alianzas</em> y las <em>Autoridades</em> que se ven en esta página son los mismos de <em>Inicio</em>. Para cambiarlos entra a <strong>Páginas → Inicio</strong>: lo que edites ahí se actualiza en las dos páginas.',
+                        ],
+                        'div_textos' => [
+                            'type' => 'divider',
+                            'label' => 'Lado Izquierdo (Textos)',
+                        ],
+                        'etiqueta_superior' => [
+                            'type' => 'text',
+                            'label' => 'Etiqueta superior (texto pequeño)',
+                            'default' => 'Trayectoria y Compromiso Educativo',
+                            'help' => 'Texto chico que indica de qué sección se trata, encima del título.',
+                        ],
+                        'titulo' => [
+                            'type' => 'textarea',
+                            'label' => 'Título principal',
+                            'default' => 'Formando Líderes Prácticos con Visión de Futuro',
+                            'help' => 'Título grande. Si quieres partirlo en varias líneas, dale Enter donde quieras el corte.',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Texto de presentación',
+                            'default' => "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\n\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
+                            'help' => 'Deja una línea en blanco entre párrafo y párrafo para separarlos.',
+                        ],
+                        'div_cita' => [
+                            'type' => 'divider',
+                            'label' => 'Tarjeta de Cita (debajo del texto)',
+                        ],
+                        'cita_texto' => [
+                            'type' => 'textarea',
+                            'label' => 'Frase de la tarjeta (letra mediana)',
+                            'default' => 'Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.',
+                        ],
+                        'cita_autor' => [
+                            'type' => 'text',
+                            'label' => 'Autor de la frase (letra pequeña)',
+                            'default' => 'PhD. Elena Tolozano Benites, Rectora',
+                        ],
+                        'div_imagen' => [
+                            'type' => 'divider',
+                            'label' => 'Lado Derecho (Imagen)',
+                        ],
+                        'imagen' => [
+                            'type' => 'image',
+                            'label' => 'Imagen de la sección',
+                            'default' => 'img/trayectoria.png',
+                            'help' => 'Se muestra a la derecha del texto. Tamaño recomendado: 800x1000px (vertical).',
+                        ],
+                    ],
+                ],
+
+                // ---------------------------------------------------------
+                // 2. NUESTRA MISIÓN (tarjeta: imagen izquierda, texto derecha)
+                // ---------------------------------------------------------
+                'sobre_mision' => [
+                    'label' => 'SECCIÓN 2: NUESTRA MISIÓN',
+                    'fields' => [
+                        'titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título de la sección',
+                            'default' => 'Nuestra misión',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Texto principal',
+                            'default' => 'Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.',
+                        ],
+                        'puntos' => [
+                            'type' => 'repeater',
+                            'label' => 'Puntos con visto (✓)',
+                            'item_label' => 'Punto',
+                            'help' => 'Cada punto sale con su visto naranja. Puedes agregar, reordenar o eliminar los que quieras.',
+                            'default' => [
+                                ['texto' => 'Autonomía de pensamiento y liderazgo.'],
+                                ['texto' => 'Aliado estratégico de empresas e instituciones.'],
+                                ['texto' => 'Formación práctica orientada al desarrollo económico y social.'],
+                            ],
+                            'subfields' => [
+                                'texto' => [
+                                    'type' => 'text',
+                                    'label' => 'Texto del punto',
+                                ],
+                            ],
+                        ],
+                        'imagen' => [
+                            'type' => 'image',
+                            'label' => 'Imagen (lado izquierdo)',
+                            'default' => 'img/experiencia.png',
+                            'help' => 'Tamaño recomendado: 900x700px (horizontal).',
+                        ],
+                    ],
+                ],
+
+                // ---------------------------------------------------------
+                // 3. NUESTRA VISIÓN (la misma tarjeta de la misión, pero con
+                //    la imagen del lado derecho)
+                // ---------------------------------------------------------
+                'sobre_vision' => [
+                    'label' => 'SECCIÓN 3: NUESTRA VISIÓN',
+                    'fields' => [
+                        'titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título de la sección',
+                            'default' => 'Nuestra visión',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Texto principal',
+                            'default' => 'Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.',
+                        ],
+                        'puntos' => [
+                            'type' => 'repeater',
+                            'label' => 'Puntos con visto (✓)',
+                            'item_label' => 'Punto',
+                            'help' => 'Cada punto sale con su visto naranja. Puedes agregar, reordenar o eliminar los que quieras.',
+                            'default' => [
+                                ['texto' => 'Liderazgo en educación tecnológica universitaria.'],
+                                ['texto' => 'Alianzas e integración con instituciones nacionales e internacionales.'],
+                                ['texto' => 'Transferencia tecnológica e innovación para el aprendizaje continuo.'],
+                            ],
+                            'subfields' => [
+                                'texto' => [
+                                    'type' => 'text',
+                                    'label' => 'Texto del punto',
+                                ],
+                            ],
+                        ],
+                        'imagen' => [
+                            'type' => 'image',
+                            'label' => 'Imagen (lado derecho)',
+                            'default' => 'img/bienestar_estudiantil_1.png',
+                            'help' => 'Tamaño recomendado: 900x700px (horizontal).',
+                        ],
+                    ],
+                ],
+
+                // ---------------------------------------------------------
+                // 4. PRINCIPIOS Y VALORES (título centrado + columnas con una
+                //    imagen pequeña arriba de cada subtítulo)
+                // ---------------------------------------------------------
+                'sobre_valores' => [
+                    'label' => 'SECCIÓN 4: PRINCIPIOS Y VALORES',
+                    'fields' => [
+                        'etiqueta_superior' => [
+                            'type' => 'text',
+                            'label' => 'Etiqueta superior (texto pequeño)',
+                            'default' => 'NUESTROS PRINCIPIOS Y VALORES',
+                        ],
+                        'titulo' => [
+                            'type' => 'textarea',
+                            'label' => 'Título centrado (grande)',
+                            'default' => 'Los pilares que guían la excelencia académica y humana en el ITB.',
+                            'help' => 'Si quieres partirlo en varias líneas, dale Enter donde quieras el corte.',
+                        ],
+                        'items' => [
+                            'type' => 'repeater',
+                            'label' => 'Principios',
+                            'item_label' => 'Principio',
+                            'help' => 'Cada principio lleva su imagen pequeña arriba, su subtítulo y una breve información. Todo sale centrado.',
+                            'default' => [
+                                ['icono' => 'img/placeholder_imagen.svg', 'titulo' => 'Cogobierno',   'descripcion' => 'Participación y gestión democrática'],
+                                ['icono' => 'img/placeholder_imagen.svg', 'titulo' => 'Igualdad',     'descripcion' => 'Oportunidades sin discriminación'],
+                                ['icono' => 'img/placeholder_imagen.svg', 'titulo' => 'Calidad',      'descripcion' => 'Excelencia en educación superior'],
+                                ['icono' => 'img/placeholder_imagen.svg', 'titulo' => 'Pertinencia',  'descripcion' => 'Programas alineados a la sociedad'],
+                                ['icono' => 'img/placeholder_imagen.svg', 'titulo' => 'Integralidad', 'descripcion' => 'Formación académica y humana'],
+                            ],
+                            'subfields' => [
+                                'icono' => [
+                                    'type' => 'image',
+                                    'label' => 'Imagen pequeña',
+                                    'help' => 'Ícono o imagen chica. Tamaño recomendado: 120x120px.',
+                                ],
+                                'titulo' => [
+                                    'type' => 'text',
+                                    'label' => 'Subtítulo',
+                                ],
+                                'descripcion' => [
+                                    'type' => 'text',
+                                    'label' => 'Breve información',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
+
+                // ---------------------------------------------------------
+                // 5. CO GOBIERNO (representantes + tarjeta de la estructura
+                //    orgánica). Va debajo de "Nuestras Autoridades".
+                // ---------------------------------------------------------
+                'sobre_cogobierno' => [
+                    'label' => 'SECCIÓN 5: CO GOBIERNO',
+                    'fields' => [
+                        'titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título',
+                            'default' => 'Co Gobierno',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Texto debajo del título',
+                            'default' => 'Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB',
+                        ],
+                        'miembros' => [
+                            'type' => 'repeater',
+                            'label' => 'Representantes',
+                            'item_label' => 'Representante',
+                            'help' => 'Cada uno sale con su foto, su nombre y su cargo. Puedes agregar, reordenar o eliminar los que quieras.',
+                            'default' => [
+                                ['foto' => 'img/placeholder_autoridad.svg', 'nombre' => 'Obst. Lenny Mariscal San Martín', 'cargo' => 'Representante de Docentes'],
+                                ['foto' => 'img/placeholder_autoridad.svg', 'nombre' => 'Ing. Marcos Escaleras Gómez', 'cargo' => 'Representante de Trabajadores'],
+                            ],
+                            'subfields' => [
+                                'foto' => [
+                                    'type' => 'image',
+                                    'label' => 'Foto',
+                                    'help' => 'Foto vertical. Tamaño recomendado: 600x750px.',
+                                ],
+                                'nombre' => [
+                                    'type' => 'text',
+                                    'label' => 'Nombre',
+                                ],
+                                'cargo' => [
+                                    'type' => 'text',
+                                    'label' => 'Cargo',
+                                ],
+                            ],
+                        ],
+                        'div_estructura' => [
+                            'type' => 'divider',
+                            'label' => 'Tarjeta de Estructura Orgánica (lado derecho)',
+                        ],
+                        'card_imagen' => [
+                            'type' => 'image',
+                            'label' => 'Foto de fondo de la tarjeta',
+                            'default' => 'img/trayectoria.png',
+                            'help' => 'Se ve detrás del azul de la tarjeta. Tamaño recomendado: 1200x1000px.',
+                        ],
+                        'card_icono' => [
+                            'type' => 'image',
+                            'label' => 'Ícono de la tarjeta (opcional)',
+                            'default' => '',
+                            'help' => 'Si lo dejas vacío se usa el ícono de organigrama del sistema. Tamaño recomendado: 120x120px, en blanco y con fondo transparente.',
+                        ],
+                        'card_titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título de la tarjeta',
+                            'default' => 'Estructura Orgánica',
+                        ],
+                        'card_descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Texto de la tarjeta',
+                            'default' => 'Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.',
+                        ],
+                        'card_boton' => [
+                            'type' => 'text',
+                            'label' => 'Texto del botón',
+                            'default' => 'Ver Organigrama',
+                        ],
+                        'card_boton_url' => [
+                            'type' => 'text',
+                            'label' => 'Enlace del botón',
+                            'default' => '#',
+                            'help' => 'A dónde lleva el botón. Por ejemplo: organigrama.php',
+                        ],
+                    ],
+                ],
+            ],
         ],
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
         // así que en vez de 'fields' declara la pantalla que lo atiende con

@@ -60,7 +60,7 @@
                     if (empty($items_menu) || !is_array($items_menu)) {
                         $items_menu = [
                             ['texto' => 'Instituto', 'url' => '#', 'nivel' => 'padre'],
-                            ['texto' => 'Sobre Nosotros', 'url' => '#', 'nivel' => 'hijo'],
+                            ['texto' => 'Sobre Nosotros', 'url' => 'sobre-nosotros.php', 'nivel' => 'hijo'],
                             ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
                             ['texto' => 'Transparencia / Leyes', 'url' => '#', 'nivel' => 'hijo'],
                             ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
@@ -78,7 +78,11 @@
                         if ($nivel === 'hijo') continue;
                         
                         $texto = htmlspecialchars($item['texto'] ?? '', ENT_QUOTES, 'UTF-8');
-                        $url = htmlspecialchars($item['url'] ?? '#', ENT_QUOTES, 'UTF-8');
+                        $raw_url = trim($item['url'] ?? '');
+                        if ($raw_url === '' && mb_strtolower(trim($item['texto'] ?? '')) === 'sobre nosotros') {
+                            $raw_url = 'sobre-nosotros.php';
+                        }
+                        $url = htmlspecialchars($raw_url !== '' ? $raw_url : '#', ENT_QUOTES, 'UTF-8');
                         
                         // Buscar si los siguientes elementos son hijos de este padre
                         $children = [];
@@ -97,7 +101,11 @@
                             echo '<ul class="navbar__dropdown">';
                             foreach ($children as $child) {
                                 $c_texto = htmlspecialchars($child['texto'] ?? '', ENT_QUOTES, 'UTF-8');
-                                $c_url = htmlspecialchars($child['url'] ?? '#', ENT_QUOTES, 'UTF-8');
+                                $c_raw_url = trim($child['url'] ?? '');
+                                if ($c_raw_url === '' && mb_strtolower(trim($child['texto'] ?? '')) === 'sobre nosotros') {
+                                    $c_raw_url = 'sobre-nosotros.php';
+                                }
+                                $c_url = htmlspecialchars($c_raw_url !== '' ? $c_raw_url : '#', ENT_QUOTES, 'UTF-8');
                                 if ($c_texto) {
                                     echo '<li><a href="' . $c_url . '" class="navbar__dropdown-link">' . $c_texto . '</a></li>';
                                 }

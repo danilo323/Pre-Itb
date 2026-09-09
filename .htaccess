@@ -5,6 +5,7 @@ RewriteEngine On
 RewriteRule ^admin/?$ admin/index.php [L]
 RewriteRule ^admin/login/?$ admin/login.php [L]
 RewriteRule ^admin/logout/?$ admin/logout.php [L]
+RewriteRule ^sobre-nosotros/?$ sobre-nosotros.php [L]
 
 # Página 404 personalizada para cualquier URL que no exista.
 # Se hace con RewriteRule (no ErrorDocument) para que funcione igual si el

@@ -9,9 +9,10 @@ $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
 $path = rtrim($path, '/');
 
 $routes = [
-    '/admin'       => __DIR__ . '/admin/index.php',
-    '/admin/login' => __DIR__ . '/admin/login.php',
-    '/admin/logout' => __DIR__ . '/admin/logout.php',
+    '/admin'          => __DIR__ . '/admin/index.php',
+    '/admin/login'    => __DIR__ . '/admin/login.php',
+    '/admin/logout'   => __DIR__ . '/admin/logout.php',
+    '/sobre-nosotros' => __DIR__ . '/sobre-nosotros.php',
 ];
 
 if (isset($routes[$path])) {

@@ -34,6 +34,9 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
 <section class="alianzas" id="alianzas">
     <div class="alianzas__container">
 
+        <?php /* El titulo y el boton se saltan cuando quien incluye esta
+                 seccion pide solo el carrusel (lo hace sobre-nosotros.php). */ ?>
+        <?php if (empty($alianzas_solo_carrusel)): ?>
         <div class="alianzas__header">
             <h2 class="alianzas__title">
                 <?= content_title('alianzas', 'titulo', 'Alianzas del ITB') ?>
@@ -43,6 +46,7 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
+        <?php endif; ?>
 
         <?php if (!empty($alianzas_logos)): ?>
         <div class="alianzas__track">
