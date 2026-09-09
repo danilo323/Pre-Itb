@@ -18,6 +18,7 @@ require_once 'includes/content_helper.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jarallax/2.1.4/jarallax.min.css">
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/sobre-nosotros.css">
+    <link rel="stylesheet" href="css/pagina-interna.css">
 </head>
 
 <body class="page-sobre-nosotros">
@@ -32,6 +33,7 @@ require_once 'includes/content_helper.php';
         <?php include 'includes/autoridades.php'; ?>
         <?php include 'includes/sobre-cogobierno.php'; ?>
         <?php include 'includes/nosotros_himno.php'; ?>
+        <?php include 'includes/transparencia.php'; ?>
         <?php
         $alianzas_solo_carrusel = true;
         include 'includes/alianzas.php';
@@ -44,6 +46,7 @@ require_once 'includes/content_helper.php';
     <script src="https://cdn.jsdelivr.net/npm/countup.js@2.8.0/dist/countUp.umd.js"></script>
     <script src="js/main.js"></script>
     <script src="js/sobre-nosotros.js"></script>
+    <script src="js/pagina-interna.js"></script>
 
 </body>
 
