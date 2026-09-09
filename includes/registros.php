@@ -205,13 +205,17 @@ function registros_validar(array $post): array {
     // Letras (con tildes y ñ) unidas por un solo espacio, apóstrofo o guion.
     $RE_NOMBRE = '/^[A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+(?:[ \'\-][A-Za-zÁÉÍÓÚÜÑáéíóúüñ]+)*$/u';
 
+    $mb_len = function($s) {
+        return function_exists('mb_strlen') ? mb_strlen($s) : strlen($s);
+    };
+
     foreach (['nombre' => 'tus nombres', 'apellido' => 'tus apellidos'] as $campo => $etiqueta) {
         $val = $v($campo);
         if ($val === '') {
             $errores[$campo] = "Escribe $etiqueta.";
-        } elseif (mb_strlen($val) < 2) {
+        } elseif ($mb_len($val) < 2) {
             $errores[$campo] = 'Debe tener al menos 2 letras.';
-        } elseif (mb_strlen($val) > REGISTROS_MAX_NOMBRE) {
+        } elseif ($mb_len($val) > REGISTROS_MAX_NOMBRE) {
             $errores[$campo] = 'No puede superar los ' . REGISTROS_MAX_NOMBRE . ' caracteres.';
         } elseif (!preg_match($RE_NOMBRE, $val)) {
             $errores[$campo] = 'Solo se permiten letras, espacios, apóstrofos y guiones.';
@@ -221,7 +225,7 @@ function registros_validar(array $post): array {
     $email = $v('email');
     if ($email === '') {
         $errores['email'] = 'Escribe tu correo electrónico.';
-    } elseif (mb_strlen($email) > 120) {
+    } elseif ($mb_len($email) > 120) {
         $errores['email'] = 'El correo es demasiado largo.';
     } elseif (!preg_match('/^[^\s@]+@[^\s@]+\.[A-Za-z]{2,}$/', $email)) {
         $errores['email'] = 'El correo no tiene un formato válido (ejemplo@correo.com).';
@@ -301,7 +305,7 @@ function registros_validar(array $post): array {
     }
 
     $mensaje = $v('mensaje');
-    if (mb_strlen($mensaje) > 500) {
+    if ($mb_len($mensaje) > 500) {
         $errores['mensaje'] = 'El comentario no puede superar los 500 caracteres.';
     }
 

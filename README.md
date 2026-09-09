@@ -54,7 +54,7 @@ Abre tu terminal en la carpeta del proyecto y ejecuta:
 php -S localhost:8000 router.php
 ```
 
-El `router.php` al final es importante: habilita las rutas "limpias" del panel (`/admin`, `/admin/login`) y la página 404 personalizada en este servidor. Si lo olvidas, el sitio sigue funcionando pero esas dos cosas no. Verás una salida en la terminal indicando que el servidor se inició en `http://localhost:8000`.
+El `router.php` al final es importante: habilita las rutas "limpias" del panel (`/admin`, `/admin/login`) y la página 404 personalizada en este servidor. Si lo olvidas, el sitio sigue funcionando pero esas dos cosas no. Verás una salida en la terminal indicando que el servidor se inició en `http://localhost:8000`
 
 ### Opción B: XAMPP / WAMP / Laragon (Apache)
 
