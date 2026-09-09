@@ -1,911 +1,911 @@
 {
-    "ajustes": {
-        "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
-        "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
-        "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/1904c9f49a6e95930bb07a0fa3ba79ad.jpeg",
-        "div_seo": null,
-        "div_logos": null
-    },
-    "menu": {
-        "items_menu": [
-            {
-                "texto": "Instituto",
-                "url": "#",
-                "nivel": "padre"
-            },
-            {
-                "texto": "Sobre Nosotros",
-                "url": "nosotros.php",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "Himno e Identidad",
-                "url": "nosotros.php#himno",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "Transparencia / Leyes",
-                "url": "transparencia-leyes.php",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "Oferta Académica",
-                "url": "#",
-                "nivel": "padre"
-            },
-            {
-                "texto": "Vida Estudiantil",
-                "url": "#",
-                "nivel": "padre"
-            },
-            {
-                "texto": "Admisiones",
-                "url": "#",
-                "nivel": "padre"
-            }
-        ],
-        "top_link_1": "Portal Estudiantil SGA",
-        "top_link_2": "Educación Continua",
-        "top_link_3": "Vinculación",
-        "top_link_4": "Investigación",
-        "top_link_5": "UNIEBEC",
-        "cta_btn_1": "Solicitar Información",
-        "cta_btn_2": "Matricúlame",
-        "div_main": "",
-        "div_top": "",
-        "div_cta": ""
-    },
-    "footer": {
-        "cta_titulo": "¿Aún no decides qué carrera estudiar?",
-        "cta_desc": "Descubre tu vocación con nuestro test guiado, visita el ITB y conoce de cerca nuestra propuesta académica o recibe asesoría personalizada para elegir el programa ideal para ti.",
-        "cta_btn_1": "Test Vocacional",
-        "cta_btn_2": "Vive la Experiencia ITB",
-        "cta_btn_3": "Habla con un Asesor",
-        "logo": "img/e2792d46ea30367a4cc3b44a53ac5771.png",
-        "contacto_1": "PBX: (04) 500 0175 - 230 7028\r\n500 2164 - 372 7040",
-        "contacto_2": "1800 ITB-ITB: 482-482",
-        "enlaces_columna_1": "Admiciones\r\nPreg\r\nCambio\r\nCambio 2",
-        "enlaces_columna_2": "Noticias\r\nNovedades\r\nCambio1\r\nCambio2",
-        "lista_campus": [
-            {
-                "nombre": "Campus Matriz",
-                "direccion": "Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador",
-                "mapa_url": ""
-            },
-            {
-                "nombre": "Campus Boyacá",
-                "direccion": "",
-                "mapa_url": ""
-            },
-            {
-                "nombre": "Campus Naval",
-                "direccion": "",
-                "mapa_url": ""
-            },
-            {
-                "nombre": "Campus Teresa Benites",
-                "direccion": "",
-                "mapa_url": ""
-            },
-            {
-                "nombre": "Campus Tomas Martínez",
-                "direccion": "",
-                "mapa_url": ""
-            }
-        ],
-        "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
-        "youtube_url": "#",
-        "instagram_url": "#",
-        "facebook_url": "#",
-        "gplus_url": "#",
-        "twitter_url": "#",
-        "vimeo_url": "#",
-        "linkedin_url": "#",
-        "copyright": "© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
-        "div_prefooter": "",
-        "div_logo": "",
-        "div_enlaces1": "",
-        "div_enlaces2": "",
-        "div_campus": "",
-        "div_mapa": "",
-        "div_redes": "",
-        "div_bottom": ""
-    },
-    "hero": {
-        "_visible": "1",
-        "subtitulo": "Educación Superior de la Gran Excelencia",
-        "titulo": "Construye tu Futuro, Lidera el Mañana",
-        "descripcion": "Bienvenida al ITB. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación para ayudarte a alcanzar el éxito laboral.",
-        "cta_texto": "Explorar Programas",
-        "stat_numero": "+20K Estudiantes Graduados",
-        "rating": "4.9",
-        "circular_text": "EST. 1995ITB INSTITUTO UNIVERSITARIO",
-        "video_url": "https://youtu.be/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B",
-        "imagenes_fondo": [
-            {
-                "archivo": "img/hero_1.jpeg",
-                "estatica": false
-            },
-            {
-                "archivo": "img/hero_2.jpg",
-                "estatica": false
-            },
-            {
-                "archivo": "img/hero_3.jpg",
-                "estatica": false
-            }
-        ],
-        "div_left": null,
-        "div_stats": null,
-        "div_right": null,
-        "div_galeria": null,
-        "imagen_1": "img/salud.jpg",
-        "imagen_2": "img/student.jpg",
-        "imagen_3": "img/student 2.jpg",
-        "imagen_video_thumb": "img/hero-video-thumb.jpg",
-        "animaciones": true,
-        "info_portada": null
-    },
-    "trayectoria": {
-        "_visible": "1",
-        "etiqueta_superior": "NUESTRA TRAYECTORIA",
-        "titulo": "Trayectoria y Compromiso con la Educación",
-        "descripcion": "Desde 1995, el Instituto Superior Tecnológico Bolivariano de Tecnología ha formado profesionales con una educación integral basada en valores, innovación y excelencia académica. Nuestro compromiso es transformar vidas a través del conocimiento.",
-        "canciller_foto": "img/icon_trayectoria.jpg",
-        "canciller_nombre": "PhD. Roberto Tolozano Benites",
-        "canciller_cargo": "Canciller del ITB",
-        "btn_historia": "Nuestra Historia",
-        "imagen_central": "img/dd95b82bdbfb76c87fa32641f8c2cf0f.png",
-        "estadisticas": [
-            {
-                "numero": "29+",
-                "texto": "Años de Experiencia"
-            },
-            {
-                "numero": "+17,000",
-                "texto": "Estudiantes Graduados"
-            },
-            {
-                "numero": "+35",
-                "texto": "Carreras Disponibles"
-            }
-        ],
-        "div_global": null,
-        "div_perfil": null,
-        "div_btn": null,
-        "div_imagen": null,
-        "div_stats": null,
-        "imagen_campus": "img/estudiantes1.png",
-        "stat_anios": "29+",
-        "stat_anios_label": "Años de Experiencia",
-        "stat_graduados": "+17,000",
-        "stat_graduados_label": "Estudiantes Graduados",
-        "stat_carreras": "+35",
-        "stat_carreras_label": "Carreras Disponibles"
-    },
-    "areas": {
-        "_visible": "1",
-        "etiqueta_superior": "Áreas de Conocimiento",
-        "titulo": "Nuestras Áreas de Formación",
-        "descripcion": "Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional",
-        "lista_areas": [
-            {
-                "titulo": "Salud",
-                "descripcion": "Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.",
-                "programas": "Enfermería\r\nFisioterapia\r\nLaboratorio Clínico",
-                "icono": "img/doctor.png",
-                "imagen_fondo": "img/5fae5bd59953701d849a178aab7cc772.jpg",
-                "btn_texto": "Explorar programas"
-            },
-            {
-                "titulo": "Ciencias Empresariales",
-                "descripcion": "Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.",
-                "programas": "Administración de Empresas\r\nContabilidad\r\nMarketing Digital",
-                "icono": "img/laptop.png",
-                "imagen_fondo": "img/Areas_formacion_1.png",
-                "btn_texto": "Explorar programas"
-            },
-            {
-                "titulo": "Transporte",
-                "descripcion": "Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.",
-                "programas": "Logística y Transporte\r\nComercio Exterior\r\nOperaciones Portuarias",
-                "icono": "img/coche.png",
-                "imagen_fondo": "img/21b4145fb1708d4b3d4696596ea1b287.jpg",
-                "btn_texto": "Explorar programas"
-            }
-        ],
-        "div_global": null,
-        "area1_icono": "img/doctor.png",
-        "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
-        "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
-        "area1_btn": "Explorar programas",
-        "area2_icono": "img/laptop.png",
-        "area2_bg": "img/estudiantes1.png",
-        "area2_titulo": "Facultad de Ciencias Empresarialesy Sistemas / Económicas yEmpresariales (FACES)",
-        "area2_desc": "Programas de gestión, contabilidad, marketing y comercio para liderar en el sector empresarial e industrial.",
-        "area2_btn": "Explorar programas",
-        "area3_icono": "img/coche.png",
-        "area3_titulo": "Facultad de Transportey Vialidad (FATV)",
-        "area3_desc": "Formación especializada en mecánica, gestión de transporte, seguridad vial y escuela de conducción",
-        "area3_btn": "Explorar programas"
-    },
-    "programas": {
-        "_visible": "1",
-        "etiqueta_superior": "Oferta Académica",
-        "titulo": "Programas Destacados",
-        "descripcion": "Descubre nuestros programas tecnológicos de mayor demanda laboral, diseñados para insertarte rápidamente en el mercado de trabajo.",
-        "btn_ver_todos": "Ver todos los programas",
-        "lista_programas": [
-            {
-                "imagen": "img/10386d1246de0db082c29c5ab5820439.jpg",
-                "modalidad": "Presencial",
-                "area": "Salud",
-                "titulo": "Tecnología Superior en Enfermería",
-                "duracion": "5 Semestres",
-                "sede": "Guayaquil"
-            },
-            {
-                "imagen": "img/Mecanica.jpg",
-                "modalidad": "Presencial",
-                "area": "Ciencias Empresariales",
-                "titulo": "Tecnología Superior en Marketing Digital",
-                "duracion": "5 Semestres",
-                "sede": "Guayaquil"
-            },
-            {
-                "imagen": "img/desarrollo_software.jpg",
-                "modalidad": "Presencial",
-                "area": "Transporte",
-                "titulo": "Tecnología Superior en Logística y Transporte",
-                "duracion": "5 Semestres",
-                "sede": "Guayaquil"
-            },
-            {
-                "imagen": "img/administracion.jpg",
-                "modalidad": "Híbrido",
-                "area": "Tecnología",
-                "titulo": "Tecnología Superior en Desarrollo de Software",
-                "duracion": "5 Semestres",
-                "sede": "Guayaquil"
-            },
-            {
-                "imagen": "img/programa_gastronomia.jpg",
-                "modalidad": "Presencial",
-                "area": "",
-                "titulo": "Tecnología Superior en Gastronomía",
-                "duracion": "5 Niveles",
-                "sede": ""
-            },
-            {
-                "imagen": "img/programa_contabilidad.jpg",
-                "modalidad": "Presencial",
-                "area": "",
-                "titulo": "Tecnología Superior en Contabilidad",
-                "duracion": "5 Niveles",
-                "sede": ""
-            },
-            {
-                "imagen": "img/programa_diseno_grafico.jpg",
-                "modalidad": "Presencial",
-                "area": "",
-                "titulo": "Técnico Superior en Diseño Gráfico",
-                "duracion": "2 Niveles",
-                "sede": ""
-            }
-        ],
-        "div_global": null,
-        "prog1_imagen": "img/enfermeria.jpg",
-        "prog1_modalidad": "Presencial",
-        "prog1_area": "Salud",
-        "prog1_titulo": "Tecnología Superior en Enfermería",
-        "prog1_duracion": "5 Semestres",
-        "prog1_sede": "Guayaquil",
-        "prog2_imagen": "img/Mecanica.jpg",
-        "prog2_modalidad": "Presencial",
-        "prog2_area": "Ciencias Empresariales",
-        "prog2_titulo": "Tecnología Superior en Marketing Digital",
-        "prog2_duracion": "5 Semestres",
-        "prog2_sede": "Guayaquil",
-        "prog3_imagen": "img/desarrollo_software.jpg",
-        "prog3_modalidad": "Presencial",
-        "prog3_area": "Transporte",
-        "prog3_titulo": "Tecnología Superior en Logística y Transporte",
-        "prog3_duracion": "5 Semestres",
-        "prog3_sede": "Guayaquil",
-        "prog4_imagen": "img/administracion.jpg",
-        "prog4_modalidad": "Híbrido",
-        "prog4_area": "Tecnología",
-        "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
-        "prog4_duracion": "5 Semestres",
-        "prog4_sede": "Guayaquil",
-        "info_programas": null
-    },
-    "experiencia": {
-        "_visible": "1",
-        "etiqueta_superior": "Vida Estudiantil",
-        "titulo": "Tu Experiencia ITB",
-        "descripcion": "Más allá de lo académico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseñados para tu bienestar.",
-        "lista_caracteristicas": [
-            {
-                "titulo": "Servicios Médicos",
-                "descripcion": "Atención médica y odontológica gratuita para estudiantes."
-            },
-            {
-                "titulo": "Becas y Financiamiento",
-                "descripcion": "Programas de becas por excelencia académica y apoyo financiero."
-            },
-            {
-                "titulo": "Laboratorios Modernos",
-                "descripcion": "Tecnología de punta en todos nuestros laboratorios especializados."
-            },
-            {
-                "titulo": "Bolsa de Empleo",
-                "descripcion": "Conexión directa con empresas aliadas para tus prácticas y primer empleo."
-            }
-        ],
-        "btn_texto": "Más beneficios",
-        "imagen": "img/experiencia.png",
-        "div_header": null,
-        "div_btn": null,
-        "div_img": null,
-        "caract1_titulo": "Servicios Médicos",
-        "caract1_desc": "Atención médica y odontológica gratuita para estudiantes.",
-        "caract2_titulo": "Becas y Financiamiento",
-        "caract2_desc": "Programas de becas por excelencia académica y apoyo financiero.",
-        "caract3_titulo": "Laboratorios Modernos",
-        "caract3_desc": "Tecnología de punta en todos nuestros laboratorios especializados.",
-        "caract4_titulo": "Bolsa de Empleo",
-        "caract4_desc": "Conexión directa con empresas aliadas para tus prácticas y primer empleo.",
-        "badge_numero": "98%",
-        "badge_texto": "Satisfacción Estudiantil"
-    },
-    "testimonios": {
-        "_visible": "1",
-        "etiqueta_superior": "HISTORIAS DE ÉXITO",
-        "titulo": "Lo que dicen nuestros Graduados",
-        "div_global": null,
-        "div_testimonio": null,
-        "lista_testimonios": [
-            {
-                "imagen": "img/MariaFernanda.png",
-                "cita": "\"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí.\"",
-                "rol": "Graduada",
-                "nombre": "María Fernanda López",
-                "carrera": "Graduada en Enfermería - Promoción 2022"
-            },
-            {
-                "imagen": "img/8a568c0257127dd19236f871a537a0bd.jpg",
-                "cita": "\"La formación práctica y los proyectos reales que desarrollamos en clase me permitieron llegar a mi primera entrevista con un portafolio sólido. Hoy trabajo en el área que elegí desde el primer semestre.\"",
-                "rol": "Graduado",
-                "nombre": "Juan Perez Goya",
-                "carrera": "Graduado en Desarrollo de Software"
-            },
-            {
-                "imagen": "img/38f08960fc8ca02a6b4061c526c46759.jpg",
-                "cita": "\"Lo que más valoro del ITB es la cercanía de los docentes: siempre hubo alguien dispuesto a resolver una duda o revisar un proyecto. Esa guía marcó la diferencia en mi formación.\"",
-                "rol": "Graduada",
-                "nombre": "Elena Fernandez Macias",
-                "carrera": "Graduada en Marketing Digital"
-            },
-            {
-                "imagen": "img/85dc8355286c1581b342d9b4220b5de6.jpg",
-                "cita": "\"Estudiar y trabajar al mismo tiempo era mi mayor preocupación. Los horarios flexibles me permitieron avanzar sin dejar mi empleo, y hoy aplico a diario lo que aprendí en los talleres.\"",
-                "rol": "Graduado",
-                "nombre": "Francisco Arias Morales",
-                "carrera": "Graduado en Gastronomía"
-            }
-        ],
-        "info_testimonios": null
-    },
-    "autoridades": {
-        "_visible": "1",
-        "etiqueta_superior": "Nuestro Equipo",
-        "titulo": "Nuestras Autoridades",
-        "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-        "boton_directorio": "Ver Directorio",
-        "info_gestion": null,
-        "div_global": null,
-        "btn_directorio": "Ver Directorio",
-        "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-        "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
-        "aut1_nombre": "PhD. Roberto Tolozano Benites",
-        "aut1_cargo": "Canciller",
-        "aut1_email": "#",
-        "aut1_telf": "#",
-        "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
-        "aut2_nombre": "PhD. Elena Tolozano Benites",
-        "aut2_cargo": "Rectora",
-        "aut2_email": "#",
-        "aut2_telf": "#",
-        "aut3_foto": "img/PHD.Luis_alzate.jpg",
-        "aut3_nombre": "PhD. Luis Alzate Peralta",
-        "aut3_cargo": "Vicerrector Académico y de Investigación",
-        "aut3_email": "#",
-        "aut3_telf": "#",
-        "aut4_foto": "img/PHD.Michelle_tolozano.webp",
-        "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
-        "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
-        "aut4_email": "#",
-        "aut4_telf": "#"
-    },
-    "servicios": {
-        "_visible": "1",
-        "serv1_titulo": "Bienestar Estudiantil",
-        "serv1_desc": "Servicios médicos, psicológicos y odontológicos gratuitos",
-        "serv1_btn": "Más servicios",
-        "lista_servicios": [
-            {
-                "titulo": "Campus Virtual",
-                "desc": "Plataforma educativa 24/7",
-                "btn_texto": "Ver Tour",
-                "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
-                "imagen_fija": false
-            },
-            {
-                "titulo": "Horarios",
-                "desc": "Consulta tus horarios de clase",
-                "btn_texto": "Ver Horarios",
-                "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
-                "imagen_fija": false
-            },
-            {
-                "titulo": "Servicios Digitales",
-                "desc": "Trámites en línea y gestión académica",
-                "btn_texto": "Acceder",
-                "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
-                "imagen_fija": false
-            },
-            {
-                "titulo": "Podcast ITB",
-                "desc": "Escucha nuestro contenido educativo",
-                "btn_texto": "Escuchar",
-                "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg",
-                "imagen_fija": false
-            },
-            {
-                "titulo": "Arte y Deportes",
-                "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
-                "btn_texto": "Conocer Más",
-                "imagen": "img/bienestar_estudiantil_1.png",
-                "imagen_fija": false
-            }
-        ],
-        "div_serv1": null,
-        "div_servicios_lista": null,
-        "etiqueta_superior": "Servicios Institucionales",
-        "titulo": "Todo lo que necesitas en  *un solo lugar*",
-        "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
-        "serv2_titulo": "Campus Virtual",
-        "serv2_desc": "Plataforma educativa 24/7",
-        "serv2_imagen": "img/servicio-campus.jpg",
-        "serv3_titulo": "Horarios",
-        "serv3_desc": "Consulta tus horarios de clase",
-        "serv3_imagen": "img/salud.jpg",
-        "serv4_titulo": "Servicios Digitales",
-        "serv4_desc": "Trámites en línea y gestión académica",
-        "serv4_imagen": "img/salud.jpg",
-        "serv5_titulo": "Podcast ITB",
-        "serv5_desc": "Escucha nuestro contenido educativo",
-        "serv5_imagen": "img/salud.jpg",
-        "serv6_titulo": "Arte y Deportes",
-        "serv6_desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
-        "serv6_imagen": "img/estudiantes1.png"
-    },
-    "admision": {
-        "_visible": "1",
-        "titulo": "Inicia tu proceso de admisión",
-        "descripcion": "Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.",
-        "imagen_principal": "img/admision1.png",
-        "video_url": "https://www.youtube.com/watch?v=_arpKGQERXM",
-        "circular_text": "¿CÓMO INSCRIBIRSE?\r\nHAZ CLIC AQUÍ",
-        "form_titulo": "Formulario de Registro",
-        "form_subtitulo": "Los campos marcados con un asterisco (*) son obligatorios.",
-        "btn_enviar": "Completar registro",
-        "lista_programas_interes": [
-            {
-                "texto": "Enfermería"
-            },
-            {
-                "texto": "Fisioterapia"
-            },
-            {
-                "texto": "Marketing Digital"
-            },
-            {
-                "texto": "Contabilidad"
-            },
-            {
-                "texto": "Logística y Transporte"
-            },
-            {
-                "texto": "Desarrollo de Software"
-            },
-            {
-                "texto": "Otra"
-            }
-        ],
-        "lista_modalidades": [
-            {
-                "texto": "Presencial"
-            },
-            {
-                "texto": "Online"
-            },
-            {
-                "texto": "Híbrida"
-            }
-        ],
-        "div_textos": null,
-        "div_imagen": null,
-        "div_video": null,
-        "div_form": null,
-        "div_programas": null,
-        "div_modalidades": null,
-        "etiqueta_superior": "Admisiones Abiertas",
-        "feature_1": "Proceso 100% en línea",
-        "feature_2": "Asesoría personalizada",
-        "feature_3": "Respuesta en 24 horas",
-        "form_terminos": "Al enviar este formulario, aceptas nuestra Política de Privacidad."
-    },
-    "noticias": {
-        "_visible": "1",
-        "etiqueta_superior": "Actualidad ITB",
-        "titulo_seccion": "Noticias y Eventos del ITB",
-        "titulo": "¡METAMORFOSIS CREATIVA está por comenzar!",
-        "boton_todas": "Todas las noticias",
-        "categoria": "Evento",
-        "fecha": "15 Sep 2025",
-        "descripcion": "Lo mejor del Diseño de Modas y Maquillaje...",
-        "imagen": "img/noticia_1.png",
-        "secundarias": [
-            {
-                "titulo": "Estudiantes de Diseño de Modas",
-                "fecha": "Agosto 20, 2026",
-                "imagen": "img/noticia_2.png"
-            },
-            {
-                "titulo": "ITB promovió una movilidad",
-                "fecha": "Agosto 20, 2026",
-                "imagen": "img/noticia_3.png"
-            },
-            {
-                "titulo": "ITB transforma el ComicCon en una experiencia de aprendizaje",
-                "fecha": "Agosto 31, 2026",
-                "imagen": "img/ff4728ec07d83ad63f3412a6ee3ec0a6.jpg"
-            },
-            {
-                "titulo": "ITB recibe importante reconocimiento por su aportación en programas de formación juvenil",
-                "fecha": "Agosto 28, 2026",
-                "imagen": "img/166a6aba1ac9c52c78994ef657b1f8ac.jpg"
-            },
-            {
-                "titulo": "ITB desarrolló conferencia magistral sobre dirección escénica en la era digital",
-                "fecha": "Agosto 24, 2026",
-                "imagen": "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
-            }
-        ],
-        "div_global": null,
-        "div_noticia": "",
-        "info_noticias": null,
-        "div_secundarias": null,
-        "sec1_titulo": "Convenio internacional con universidad de España",
-        "sec1_fecha": "10 Sep 2025",
-        "sec1_imagen": "img/noticia-2.jpg",
-        "sec2_titulo": "Graduación de la promoción 2025: más de 500 nuevos profesionales",
-        "sec2_fecha": "05 Sep 2025",
-        "sec2_imagen": "img/noticia-3.jpg",
-        "sec3_titulo": "ITB inaugura nuevo laboratorio de simulación clínica",
-        "sec3_fecha": "01 Sep 2025",
-        "sec3_imagen": "img/noticia-4.jpg",
-        "eventos": [
-            {
-                "categoria": "Evento",
-                "fecha": "15 Sep 2025",
-                "titulo": "¡METAMORFOSIS CREATIVA está por comenzar!",
-                "descripcion": "Lo mejor del Diseño de Modas y Maquillaje...",
-                "imagen": "img/noticia_1.png"
-            },
-            {
-                "categoria": "Evento",
-                "fecha": "12 Agt 2026",
-                "titulo": "Estudiantes de Marketing Digital y Redes Sociales presentan proyectos novedosos en Elevator Pitch",
-                "descripcion": "Una jornada académica que reunió a 21 mini agencias conformadas por estudiantes de la carrera Técnico Superior en Marketing Digital y Redes Sociales, quienes presentaron propuestas estratégicas y creativas para diferentes marcas y negocios.",
-                "imagen": "img/7706394bfe67bfced3f1464e086011eb.jpg"
-            },
-            {
-                "categoria": "Noticia",
-                "fecha": "18 Ago.",
-                "titulo": "ITB promovió una movilidad responsable durante la jornada “Guayaquil Camina Seguro”",
-                "descripcion": "Una jornada orientada a fortalecer la educación y concienciación sobre la importancia de una movilidad segura, sostenible e incluyente.",
-                "imagen": "img/noticia_camina_seguro.jpeg"
-            },
-            {
-                "categoria": "Noticia",
-                "fecha": "14 Ago.",
-                "titulo": "ITB presentó proyectos de investigación e innovación aplicada en la Feria Agroazucar",
-                "descripcion": "Cuatro proyectos desarrollados desde las facultades FACES y FATV se presentaron en la Feria Agroazucar.",
-                "imagen": "img/noticia_feria_agroazucar.jpeg"
-            }
-        ],
-        "div_eventos": null,
-        "info_eventos": null
-    },
-    "alianzas": {
-        "_visible": "1",
-        "titulo": "Alianzas del ITB",
-        "boton_todas": "Ver Alianzas y Convenios",
-        "lista_logos": [
-            {
-                "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
-                "nombre": "Aliado 1"
-            },
-            {
-                "imagen": "img/alianza_2.jpg",
-                "nombre": "Aliado 2"
-            },
-            {
-                "imagen": "img/alianza_3.png",
-                "nombre": "Aliado 3"
-            },
-            {
-                "imagen": "img/alianza_4.png",
-                "nombre": "Aliado 4"
-            },
-            {
-                "imagen": "img/alianza_5.png",
-                "nombre": "Aliado 5"
-            }
-        ],
-        "lista_fotos": [
-            {
-                "imagen": "img/alianza_sub1.png",
-                "nombre": "Actividad ITB 1"
-            },
-            {
-                "imagen": "img/alianza_sub2.png",
-                "nombre": "Actividad ITB 2"
-            },
-            {
-                "imagen": "img/alianza_sub3.png",
-                "nombre": "Actividad ITB 3"
-            },
-            {
-                "imagen": "img/alianza_sub4.png",
-                "nombre": "Actividad ITB 4"
-            },
-            {
-                "imagen": "img/alianza_sub5.png",
-                "nombre": "Actividad ITB 5"
-            },
-            {
-                "imagen": "img/alianza_sub6.png",
-                "nombre": "Actividad ITB 6"
-            }
-        ],
-        "div_textos": null,
-        "div_logos": null,
-        "div_fotos": null
-    },
-    "equipo": {
-        "items": [
-            {
-                "id": 1,
-                "orden": "1",
-                "nombre": "Roberto Tolozano Benites",
-                "nombre_completo": "PhD. Roberto Tolozano Benites",
-                "cargo": "Canciller",
-                "linkedin": "#",
-                "email": "cancilleria@itb.edu.ec",
-                "foto": "img/6035a72c5b8f82761090e417ffe86b7e.png",
-                "mostrar_en_home": true,
-                "publicado": true
-            },
-            {
-                "id": 2,
-                "orden": "2",
-                "nombre": "Elena Tolozano Benites",
-                "nombre_completo": "PhD. Elena Tolozano Benites",
-                "cargo": "Rectora",
-                "linkedin": "#",
-                "email": "rectorado@itb.edu.ec",
-                "foto": "img/14fc241f3e76d7c3c8ca2652aacee5e1.png",
-                "mostrar_en_home": true,
-                "publicado": true
-            },
-            {
-                "id": 3,
-                "orden": "3",
-                "nombre": "Luis Alzate Peralta",
-                "nombre_completo": "PhD. Luis Alzate Peralta",
-                "cargo": "Vicerrector Académico y de Investigación",
-                "linkedin": "#",
-                "email": "vicerrectorado@itb.edu.ec",
-                "foto": "img/9deb8b0d70dc44ffa388327dfc21e321.png",
-                "mostrar_en_home": true,
-                "publicado": true
-            },
-            {
-                "id": 4,
-                "orden": "4",
-                "nombre": "Michelle Tolozano Lapierre",
-                "nombre_completo": "PhD. Michelle Tolozano Lapierre",
-                "cargo": "Vicerrectora de Extensión y Gestión Administrativa",
-                "linkedin": "#",
-                "email": "extension@itb.edu.ec",
-                "foto": "img/41222399c1dda86559946d5b6aa993df.png",
-                "mostrar_en_home": true,
-                "publicado": true
-            }
-        ]
-    },
-    "documentos_transparencia": {
-        "items": [
-            {
-                "id": 1,
-                "orden": "1",
-                "categoria": "info_financiera",
-                "nombre": "Presupuesto Anual Institucional",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "1.8MB"
-            },
-            {
-                "id": 2,
-                "orden": "2",
-                "categoria": "info_financiera",
-                "nombre": "Balance General y Balance Comprobación",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "2.4MB"
-            },
-            {
-                "id": 3,
-                "orden": "3",
-                "categoria": "info_financiera",
-                "nombre": "Balances Auditados",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "4.1MB"
-            },
-            {
-                "id": 4,
-                "orden": "4",
-                "categoria": "info_financiera",
-                "nombre": "Aranceles y Costos de Oferta Académica",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "950KB"
-            },
-            {
-                "id": 5,
-                "orden": "5",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Plan Estratégico de Desarrollo Institucional (PEDI)",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "4.5MB"
-            },
-            {
-                "id": 6,
-                "orden": "6",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Plan Operativo Anual (POA)",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "2.1MB"
-            },
-            {
-                "id": 7,
-                "orden": "7",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Plan Operativo Anual (POA)",
-                "anio": "2024",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "1.9MB"
-            },
-            {
-                "id": 8,
-                "orden": "8",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Certificado de Cumplimiento Tributario",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "1.2MB"
-            },
-            {
-                "id": 9,
-                "orden": "9",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Certificado de Obligaciones Patronales",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "980KB"
-            },
-            {
-                "id": 10,
-                "orden": "10",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Informe de Rendición de Cuentas Institucional",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "3.8KB"
-            },
-            {
-                "id": 11,
-                "orden": "11",
-                "categoria": "talento_humano",
-                "nombre": "Distributivo de Personal",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "1.5MB"
-            },
-            {
-                "id": 12,
-                "orden": "12",
-                "categoria": "talento_humano",
-                "nombre": "Escala Remunerativa del Personal",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "820KB"
-            },
-            {
-                "id": 13,
-                "orden": "13",
-                "categoria": "talento_humano",
-                "nombre": "Manual de Funciones y Competencias",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "2.2MB"
-            },
-            {
-                "id": 14,
-                "orden": "14",
-                "categoria": "remuneracion_mensual",
-                "nombre": "Remuneración Mensual - Enero",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "610KB"
-            },
-            {
-                "id": 15,
-                "orden": "15",
-                "categoria": "remuneracion_mensual",
-                "nombre": "Remuneración Mensual - Febrero",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "605KB"
-            },
-            {
-                "id": 16,
-                "orden": "16",
-                "categoria": "remuneracion_mensual",
-                "nombre": "Remuneración Mensual - Marzo",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "615KB"
-            }
-        ]
-    },
-    "_meta": {
-        "documentos_transparencia": {
-            "last_id": 16
-        }
-    }
+    "ajustes":  {
+                    "site_name":  "ITB - Instituto Superior TecnolÃ³gico Bolivariano de TecnologÃ­a",
+                    "description":  "Instituto Superior TecnolÃ³gico Bolivariano de TecnologÃ­a - EducaciÃ³n Superior de Excelencia. Formamos profesionales de alto nivel con educaciÃ³n prÃ¡ctica, tecnologÃ­a e innovaciÃ³n.",
+                    "keywords":  "educaciÃ³n, instituto, guayaquil, carreras, tecnologÃ­a, bolivariano, itb",
+                    "logo_principal":  "img/1904c9f49a6e95930bb07a0fa3ba79ad.jpeg",
+                    "div_seo":  null,
+                    "div_logos":  null
+                },
+    "menu":  {
+                 "items_menu":  [
+                                    {
+                                        "texto":  "Instituto",
+                                        "url":  "#",
+                                        "nivel":  "padre"
+                                    },
+                                    {
+                                        "texto":  "Sobre Nosotros",
+                                        "url":  "#",
+                                        "nivel":  "hijo"
+                                    },
+                                    {
+                                        "texto":  "Himno e Identidad",
+                                        "url":  "#",
+                                        "nivel":  "hijo"
+                                    },
+                                    {
+                                        "texto":  "Transparencia / Leyes",
+                                        "url":  "transparencia-leyes.php",
+                                        "nivel":  "hijo"
+                                    },
+                                    {
+                                        "texto":  "Oferta AcadÃ©mica",
+                                        "url":  "#",
+                                        "nivel":  "padre"
+                                    },
+                                    {
+                                        "texto":  "Vida Estudiantil",
+                                        "url":  "#",
+                                        "nivel":  "padre"
+                                    },
+                                    {
+                                        "texto":  "Admisiones",
+                                        "url":  "#",
+                                        "nivel":  "padre"
+                                    }
+                                ],
+                 "top_link_1":  "Portal Estudiantil SGA",
+                 "top_link_2":  "EducaciÃ³n Continua",
+                 "top_link_3":  "VinculaciÃ³n",
+                 "top_link_4":  "InvestigaciÃ³n",
+                 "top_link_5":  "UNIEBEC",
+                 "cta_btn_1":  "Solicitar InformaciÃ³n",
+                 "cta_btn_2":  "MatricÃºlame",
+                 "div_main":  "",
+                 "div_top":  "",
+                 "div_cta":  ""
+             },
+    "footer":  {
+                   "cta_titulo":  "Â¿AÃºn no decides quÃ© carrera estudiar?",
+                   "cta_desc":  "Descubre tu vocaciÃ³n con nuestro test guiado, visita el ITB y conoce de cerca nuestra propuesta acadÃ©mica o recibe asesorÃ­a personalizada para elegir el programa ideal para ti.",
+                   "cta_btn_1":  "Test Vocacional",
+                   "cta_btn_2":  "Vive la Experiencia ITB",
+                   "cta_btn_3":  "Habla con un Asesor",
+                   "logo":  "img/e2792d46ea30367a4cc3b44a53ac5771.png",
+                   "contacto_1":  "PBX: (04) 500 0175 - 230 7028\r\n500 2164 - 372 7040",
+                   "contacto_2":  "1800 ITB-ITB: 482-482",
+                   "enlaces_columna_1":  "Admiciones\r\nPreg\r\nCambio\r\nCambio 2",
+                   "enlaces_columna_2":  "Noticias\r\nNovedades\r\nCambio1\r\nCambio2",
+                   "lista_campus":  [
+                                        {
+                                            "nombre":  "Campus Matriz",
+                                            "direccion":  "Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador",
+                                            "mapa_url":  ""
+                                        },
+                                        {
+                                            "nombre":  "Campus BoyacÃ¡",
+                                            "direccion":  "",
+                                            "mapa_url":  ""
+                                        },
+                                        {
+                                            "nombre":  "Campus Naval",
+                                            "direccion":  "",
+                                            "mapa_url":  ""
+                                        },
+                                        {
+                                            "nombre":  "Campus Teresa Benites",
+                                            "direccion":  "",
+                                            "mapa_url":  ""
+                                        },
+                                        {
+                                            "nombre":  "Campus Tomas MartÃ­nez",
+                                            "direccion":  "",
+                                            "mapa_url":  ""
+                                        }
+                                    ],
+                   "social_texto":  "#ITB Instituto Superior Universitario Bolivariano en",
+                   "youtube_url":  "#",
+                   "instagram_url":  "#",
+                   "facebook_url":  "#",
+                   "gplus_url":  "#",
+                   "twitter_url":  "#",
+                   "vimeo_url":  "#",
+                   "linkedin_url":  "#",
+                   "copyright":  "Â© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
+                   "div_prefooter":  "",
+                   "div_logo":  "",
+                   "div_enlaces1":  "",
+                   "div_enlaces2":  "",
+                   "div_campus":  "",
+                   "div_mapa":  "",
+                   "div_redes":  "",
+                   "div_bottom":  ""
+               },
+    "hero":  {
+                 "_visible":  "1",
+                 "subtitulo":  "EducaciÃ³n Superior de la Gran Excelencia",
+                 "titulo":  "Construye tu Futuro, Lidera el MaÃ±ana",
+                 "descripcion":  "Bienvenida al ITB. Formamos profesionales de alto nivel con educaciÃ³n prÃ¡ctica, tecnologÃ­a e innovaciÃ³n para ayudarte a alcanzar el Ã©xito laboral.",
+                 "cta_texto":  "Explorar Programas",
+                 "stat_numero":  "+20K Estudiantes Graduados",
+                 "rating":  "4.9",
+                 "circular_text":  "EST. 1995ITB INSTITUTO UNIVERSITARIO",
+                 "video_url":  "https://youtu.be/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B",
+                 "imagenes_fondo":  [
+                                        {
+                                            "archivo":  "img/hero_1.jpeg",
+                                            "estatica":  false
+                                        },
+                                        {
+                                            "archivo":  "img/hero_2.jpg",
+                                            "estatica":  false
+                                        },
+                                        {
+                                            "archivo":  "img/hero_3.jpg",
+                                            "estatica":  false
+                                        }
+                                    ],
+                 "div_left":  null,
+                 "div_stats":  null,
+                 "div_right":  null,
+                 "div_galeria":  null,
+                 "imagen_1":  "img/salud.jpg",
+                 "imagen_2":  "img/student.jpg",
+                 "imagen_3":  "img/student 2.jpg",
+                 "imagen_video_thumb":  "img/hero-video-thumb.jpg",
+                 "animaciones":  true,
+                 "info_portada":  null
+             },
+    "trayectoria":  {
+                        "_visible":  "1",
+                        "etiqueta_superior":  "NUESTRA TRAYECTORIA",
+                        "titulo":  "Trayectoria y Compromiso con la EducaciÃ³n",
+                        "descripcion":  "Desde 1995, el Instituto Superior TecnolÃ³gico Bolivariano de TecnologÃ­a ha formado profesionales con una educaciÃ³n integral basada en valores, innovaciÃ³n y excelencia acadÃ©mica. Nuestro compromiso es transformar vidas a travÃ©s del conocimiento.",
+                        "canciller_foto":  "img/icon_trayectoria.jpg",
+                        "canciller_nombre":  "PhD. Roberto Tolozano Benites",
+                        "canciller_cargo":  "Canciller del ITB",
+                        "btn_historia":  "Nuestra Historia",
+                        "imagen_central":  "img/dd95b82bdbfb76c87fa32641f8c2cf0f.png",
+                        "estadisticas":  [
+                                             {
+                                                 "numero":  "29+",
+                                                 "texto":  "AÃ±os de Experiencia"
+                                             },
+                                             {
+                                                 "numero":  "+17,000",
+                                                 "texto":  "Estudiantes Graduados"
+                                             },
+                                             {
+                                                 "numero":  "+35",
+                                                 "texto":  "Carreras Disponibles"
+                                             }
+                                         ],
+                        "div_global":  null,
+                        "div_perfil":  null,
+                        "div_btn":  null,
+                        "div_imagen":  null,
+                        "div_stats":  null,
+                        "imagen_campus":  "img/estudiantes1.png",
+                        "stat_anios":  "29+",
+                        "stat_anios_label":  "AÃ±os de Experiencia",
+                        "stat_graduados":  "+17,000",
+                        "stat_graduados_label":  "Estudiantes Graduados",
+                        "stat_carreras":  "+35",
+                        "stat_carreras_label":  "Carreras Disponibles"
+                    },
+    "areas":  {
+                  "_visible":  "1",
+                  "etiqueta_superior":  "Ãreas de Conocimiento",
+                  "titulo":  "Nuestras Ãreas de FormaciÃ³n",
+                  "descripcion":  "Descubre las Ã¡reas de estudio que ofrecemos para tu desarrollo profesional",
+                  "lista_areas":  [
+                                      {
+                                          "titulo":  "Salud",
+                                          "descripcion":  "FormaciÃ³n integral en ciencias de la salud con laboratorios especializados y prÃ¡cticas clÃ­nicas reales.",
+                                          "programas":  "EnfermerÃ­a\r\nFisioterapia\r\nLaboratorio ClÃ­nico",
+                                          "icono":  "img/doctor.png",
+                                          "imagen_fondo":  "img/5fae5bd59953701d849a178aab7cc772.jpg",
+                                          "btn_texto":  "Explorar programas"
+                                      },
+                                      {
+                                          "titulo":  "Ciencias Empresariales",
+                                          "descripcion":  "Desarrolla habilidades de liderazgo, gestiÃ³n y emprendimiento con enfoque prÃ¡ctico y global.",
+                                          "programas":  "AdministraciÃ³n de Empresas\r\nContabilidad\r\nMarketing Digital",
+                                          "icono":  "img/laptop.png",
+                                          "imagen_fondo":  "img/Areas_formacion_1.png",
+                                          "btn_texto":  "Explorar programas"
+                                      },
+                                      {
+                                          "titulo":  "Transporte",
+                                          "descripcion":  "EspecialÃ­zate en logÃ­stica y transporte marÃ­timo, terrestre y multimodal con certificaciones internacionales.",
+                                          "programas":  "LogÃ­stica y Transporte\r\nComercio Exterior\r\nOperaciones Portuarias",
+                                          "icono":  "img/coche.png",
+                                          "imagen_fondo":  "img/21b4145fb1708d4b3d4696596ea1b287.jpg",
+                                          "btn_texto":  "Explorar programas"
+                                      }
+                                  ],
+                  "div_global":  null,
+                  "area1_icono":  "img/doctor.png",
+                  "area1_titulo":  "Facultad de Saludy Servicios Sociales (FASSS)",
+                  "area1_desc":  "Carreras tÃ©cnicas y tecnolÃ³gicas enfocadas en el cuidado de la salud, enfermerÃ­a, rehabilitaciÃ³n y bienestar comunitario.",
+                  "area1_btn":  "Explorar programas",
+                  "area2_icono":  "img/laptop.png",
+                  "area2_bg":  "img/estudiantes1.png",
+                  "area2_titulo":  "Facultad de Ciencias Empresarialesy Sistemas / EconÃ³micas yEmpresariales (FACES)",
+                  "area2_desc":  "Programas de gestiÃ³n, contabilidad, marketing y comercio para liderar en el sector empresarial e industrial.",
+                  "area2_btn":  "Explorar programas",
+                  "area3_icono":  "img/coche.png",
+                  "area3_titulo":  "Facultad de Transportey Vialidad (FATV)",
+                  "area3_desc":  "FormaciÃ³n especializada en mecÃ¡nica, gestiÃ³n de transporte, seguridad vial y escuela de conducciÃ³n",
+                  "area3_btn":  "Explorar programas"
+              },
+    "programas":  {
+                      "_visible":  "1",
+                      "etiqueta_superior":  "Oferta AcadÃ©mica",
+                      "titulo":  "Programas Destacados",
+                      "descripcion":  "Descubre nuestros programas tecnolÃ³gicos de mayor demanda laboral, diseÃ±ados para insertarte rÃ¡pidamente en el mercado de trabajo.",
+                      "btn_ver_todos":  "Ver todos los programas",
+                      "lista_programas":  [
+                                              {
+                                                  "imagen":  "img/10386d1246de0db082c29c5ab5820439.jpg",
+                                                  "modalidad":  "Presencial",
+                                                  "area":  "Salud",
+                                                  "titulo":  "TecnologÃ­a Superior en EnfermerÃ­a",
+                                                  "duracion":  "5 Semestres",
+                                                  "sede":  "Guayaquil"
+                                              },
+                                              {
+                                                  "imagen":  "img/Mecanica.jpg",
+                                                  "modalidad":  "Presencial",
+                                                  "area":  "Ciencias Empresariales",
+                                                  "titulo":  "TecnologÃ­a Superior en Marketing Digital",
+                                                  "duracion":  "5 Semestres",
+                                                  "sede":  "Guayaquil"
+                                              },
+                                              {
+                                                  "imagen":  "img/desarrollo_software.jpg",
+                                                  "modalidad":  "Presencial",
+                                                  "area":  "Transporte",
+                                                  "titulo":  "TecnologÃ­a Superior en LogÃ­stica y Transporte",
+                                                  "duracion":  "5 Semestres",
+                                                  "sede":  "Guayaquil"
+                                              },
+                                              {
+                                                  "imagen":  "img/administracion.jpg",
+                                                  "modalidad":  "HÃ­brido",
+                                                  "area":  "TecnologÃ­a",
+                                                  "titulo":  "TecnologÃ­a Superior en Desarrollo de Software",
+                                                  "duracion":  "5 Semestres",
+                                                  "sede":  "Guayaquil"
+                                              },
+                                              {
+                                                  "imagen":  "img/programa_gastronomia.jpg",
+                                                  "modalidad":  "Presencial",
+                                                  "area":  "",
+                                                  "titulo":  "TecnologÃ­a Superior en GastronomÃ­a",
+                                                  "duracion":  "5 Niveles",
+                                                  "sede":  ""
+                                              },
+                                              {
+                                                  "imagen":  "img/programa_contabilidad.jpg",
+                                                  "modalidad":  "Presencial",
+                                                  "area":  "",
+                                                  "titulo":  "TecnologÃ­a Superior en Contabilidad",
+                                                  "duracion":  "5 Niveles",
+                                                  "sede":  ""
+                                              },
+                                              {
+                                                  "imagen":  "img/programa_diseno_grafico.jpg",
+                                                  "modalidad":  "Presencial",
+                                                  "area":  "",
+                                                  "titulo":  "TÃ©cnico Superior en DiseÃ±o GrÃ¡fico",
+                                                  "duracion":  "2 Niveles",
+                                                  "sede":  ""
+                                              }
+                                          ],
+                      "div_global":  null,
+                      "prog1_imagen":  "img/enfermeria.jpg",
+                      "prog1_modalidad":  "Presencial",
+                      "prog1_area":  "Salud",
+                      "prog1_titulo":  "TecnologÃ­a Superior en EnfermerÃ­a",
+                      "prog1_duracion":  "5 Semestres",
+                      "prog1_sede":  "Guayaquil",
+                      "prog2_imagen":  "img/Mecanica.jpg",
+                      "prog2_modalidad":  "Presencial",
+                      "prog2_area":  "Ciencias Empresariales",
+                      "prog2_titulo":  "TecnologÃ­a Superior en Marketing Digital",
+                      "prog2_duracion":  "5 Semestres",
+                      "prog2_sede":  "Guayaquil",
+                      "prog3_imagen":  "img/desarrollo_software.jpg",
+                      "prog3_modalidad":  "Presencial",
+                      "prog3_area":  "Transporte",
+                      "prog3_titulo":  "TecnologÃ­a Superior en LogÃ­stica y Transporte",
+                      "prog3_duracion":  "5 Semestres",
+                      "prog3_sede":  "Guayaquil",
+                      "prog4_imagen":  "img/administracion.jpg",
+                      "prog4_modalidad":  "HÃ­brido",
+                      "prog4_area":  "TecnologÃ­a",
+                      "prog4_titulo":  "TecnologÃ­a Superior en Desarrollo de Software",
+                      "prog4_duracion":  "5 Semestres",
+                      "prog4_sede":  "Guayaquil",
+                      "info_programas":  null
+                  },
+    "experiencia":  {
+                        "_visible":  "1",
+                        "etiqueta_superior":  "Vida Estudiantil",
+                        "titulo":  "Tu Experiencia ITB",
+                        "descripcion":  "MÃ¡s allÃ¡ de lo acadÃ©mico, el ITB te ofrece una experiencia universitaria completa con servicios y beneficios diseÃ±ados para tu bienestar.",
+                        "lista_caracteristicas":  [
+                                                      {
+                                                          "titulo":  "Servicios MÃ©dicos",
+                                                          "descripcion":  "AtenciÃ³n mÃ©dica y odontolÃ³gica gratuita para estudiantes."
+                                                      },
+                                                      {
+                                                          "titulo":  "Becas y Financiamiento",
+                                                          "descripcion":  "Programas de becas por excelencia acadÃ©mica y apoyo financiero."
+                                                      },
+                                                      {
+                                                          "titulo":  "Laboratorios Modernos",
+                                                          "descripcion":  "TecnologÃ­a de punta en todos nuestros laboratorios especializados."
+                                                      },
+                                                      {
+                                                          "titulo":  "Bolsa de Empleo",
+                                                          "descripcion":  "ConexiÃ³n directa con empresas aliadas para tus prÃ¡cticas y primer empleo."
+                                                      }
+                                                  ],
+                        "btn_texto":  "MÃ¡s beneficios",
+                        "imagen":  "img/experiencia.png",
+                        "div_header":  null,
+                        "div_btn":  null,
+                        "div_img":  null,
+                        "caract1_titulo":  "Servicios MÃ©dicos",
+                        "caract1_desc":  "AtenciÃ³n mÃ©dica y odontolÃ³gica gratuita para estudiantes.",
+                        "caract2_titulo":  "Becas y Financiamiento",
+                        "caract2_desc":  "Programas de becas por excelencia acadÃ©mica y apoyo financiero.",
+                        "caract3_titulo":  "Laboratorios Modernos",
+                        "caract3_desc":  "TecnologÃ­a de punta en todos nuestros laboratorios especializados.",
+                        "caract4_titulo":  "Bolsa de Empleo",
+                        "caract4_desc":  "ConexiÃ³n directa con empresas aliadas para tus prÃ¡cticas y primer empleo.",
+                        "badge_numero":  "98%",
+                        "badge_texto":  "SatisfacciÃ³n Estudiantil"
+                    },
+    "testimonios":  {
+                        "_visible":  "1",
+                        "etiqueta_superior":  "HISTORIAS DE Ã‰XITO",
+                        "titulo":  "Lo que dicen nuestros Graduados",
+                        "div_global":  null,
+                        "div_testimonio":  null,
+                        "lista_testimonios":  [
+                                                  {
+                                                      "imagen":  "img/MariaFernanda.png",
+                                                      "cita":  "\"El ITB me brindÃ³ las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque prÃ¡ctico marcaron la diferencia en mi formaciÃ³n profesional. Hoy lidero un equipo de trabajo gracias a la preparaciÃ³n que recibÃ­.\"",
+                                                      "rol":  "Graduada",
+                                                      "nombre":  "MarÃ­a Fernanda LÃ³pez",
+                                                      "carrera":  "Graduada en EnfermerÃ­a - PromociÃ³n 2022"
+                                                  },
+                                                  {
+                                                      "imagen":  "img/8a568c0257127dd19236f871a537a0bd.jpg",
+                                                      "cita":  "\"La formaciÃ³n prÃ¡ctica y los proyectos reales que desarrollamos en clase me permitieron llegar a mi primera entrevista con un portafolio sÃ³lido. Hoy trabajo en el Ã¡rea que elegÃ­ desde el primer semestre.\"",
+                                                      "rol":  "Graduado",
+                                                      "nombre":  "Juan Perez Goya",
+                                                      "carrera":  "Graduado en Desarrollo de Software"
+                                                  },
+                                                  {
+                                                      "imagen":  "img/38f08960fc8ca02a6b4061c526c46759.jpg",
+                                                      "cita":  "\"Lo que mÃ¡s valoro del ITB es la cercanÃ­a de los docentes: siempre hubo alguien dispuesto a resolver una duda o revisar un proyecto. Esa guÃ­a marcÃ³ la diferencia en mi formaciÃ³n.\"",
+                                                      "rol":  "Graduada",
+                                                      "nombre":  "Elena Fernandez Macias",
+                                                      "carrera":  "Graduada en Marketing Digital"
+                                                  },
+                                                  {
+                                                      "imagen":  "img/85dc8355286c1581b342d9b4220b5de6.jpg",
+                                                      "cita":  "\"Estudiar y trabajar al mismo tiempo era mi mayor preocupaciÃ³n. Los horarios flexibles me permitieron avanzar sin dejar mi empleo, y hoy aplico a diario lo que aprendÃ­ en los talleres.\"",
+                                                      "rol":  "Graduado",
+                                                      "nombre":  "Francisco Arias Morales",
+                                                      "carrera":  "Graduado en GastronomÃ­a"
+                                                  }
+                                              ],
+                        "info_testimonios":  null
+                    },
+    "autoridades":  {
+                        "_visible":  "1",
+                        "etiqueta_superior":  "Nuestro Equipo",
+                        "titulo":  "Nuestras Autoridades",
+                        "descripcion":  "Profesionales comprometidos con la excelencia acadÃ©mica, la innovaciÃ³n educativa y la gestiÃ³n transparente de nuestra comunidad universitaria.",
+                        "boton_directorio":  "Ver Directorio",
+                        "info_gestion":  null,
+                        "div_global":  null,
+                        "btn_directorio":  "Ver Directorio",
+                        "subtitulo":  "Profesionales comprometidos con la excelencia acadÃ©mica, la innovaciÃ³n educativa y la gestiÃ³n transparente de nuestra comunidad universitaria.",
+                        "aut1_foto":  "img/PHD.Roberto_tolozano.jpg",
+                        "aut1_nombre":  "PhD. Roberto Tolozano Benites",
+                        "aut1_cargo":  "Canciller",
+                        "aut1_email":  "#",
+                        "aut1_telf":  "#",
+                        "aut2_foto":  "img/PHD.Elena_Tolozano.jpg",
+                        "aut2_nombre":  "PhD. Elena Tolozano Benites",
+                        "aut2_cargo":  "Rectora",
+                        "aut2_email":  "#",
+                        "aut2_telf":  "#",
+                        "aut3_foto":  "img/PHD.Luis_alzate.jpg",
+                        "aut3_nombre":  "PhD. Luis Alzate Peralta",
+                        "aut3_cargo":  "Vicerrector AcadÃ©mico y de InvestigaciÃ³n",
+                        "aut3_email":  "#",
+                        "aut3_telf":  "#",
+                        "aut4_foto":  "img/PHD.Michelle_tolozano.webp",
+                        "aut4_nombre":  "PhD. Michelle Tolozano Lapierre",
+                        "aut4_cargo":  "Vicerrectora de ExtensiÃ³n y GestiÃ³n Administrativa",
+                        "aut4_email":  "#",
+                        "aut4_telf":  "#"
+                    },
+    "servicios":  {
+                      "_visible":  "1",
+                      "serv1_titulo":  "Bienestar Estudiantil",
+                      "serv1_desc":  "Servicios mÃ©dicos, psicolÃ³gicos y odontolÃ³gicos gratuitos",
+                      "serv1_btn":  "MÃ¡s servicios",
+                      "lista_servicios":  [
+                                              {
+                                                  "titulo":  "Campus Virtual",
+                                                  "desc":  "Plataforma educativa 24/7",
+                                                  "btn_texto":  "Ver Tour",
+                                                  "imagen":  "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
+                                                  "imagen_fija":  false
+                                              },
+                                              {
+                                                  "titulo":  "Horarios",
+                                                  "desc":  "Consulta tus horarios de clase",
+                                                  "btn_texto":  "Ver Horarios",
+                                                  "imagen":  "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
+                                                  "imagen_fija":  false
+                                              },
+                                              {
+                                                  "titulo":  "Servicios Digitales",
+                                                  "desc":  "TrÃ¡mites en lÃ­nea y gestiÃ³n acadÃ©mica",
+                                                  "btn_texto":  "Acceder",
+                                                  "imagen":  "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
+                                                  "imagen_fija":  false
+                                              },
+                                              {
+                                                  "titulo":  "Podcast ITB",
+                                                  "desc":  "Escucha nuestro contenido educativo",
+                                                  "btn_texto":  "Escuchar",
+                                                  "imagen":  "img/374cb3f7202a851bf5bde99ec099e541.jpg",
+                                                  "imagen_fija":  false
+                                              },
+                                              {
+                                                  "titulo":  "Arte y Deportes",
+                                                  "desc":  "Clubes deportivos, grupos artÃ­sticos y actividades recreativas",
+                                                  "btn_texto":  "Conocer MÃ¡s",
+                                                  "imagen":  "img/bienestar_estudiantil_1.png",
+                                                  "imagen_fija":  false
+                                              }
+                                          ],
+                      "div_serv1":  null,
+                      "div_servicios_lista":  null,
+                      "etiqueta_superior":  "Servicios Institucionales",
+                      "titulo":  "Todo lo que necesitas en  *un solo lugar*",
+                      "serv1_imagen":  "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
+                      "serv2_titulo":  "Campus Virtual",
+                      "serv2_desc":  "Plataforma educativa 24/7",
+                      "serv2_imagen":  "img/servicio-campus.jpg",
+                      "serv3_titulo":  "Horarios",
+                      "serv3_desc":  "Consulta tus horarios de clase",
+                      "serv3_imagen":  "img/salud.jpg",
+                      "serv4_titulo":  "Servicios Digitales",
+                      "serv4_desc":  "TrÃ¡mites en lÃ­nea y gestiÃ³n acadÃ©mica",
+                      "serv4_imagen":  "img/salud.jpg",
+                      "serv5_titulo":  "Podcast ITB",
+                      "serv5_desc":  "Escucha nuestro contenido educativo",
+                      "serv5_imagen":  "img/salud.jpg",
+                      "serv6_titulo":  "Arte y Deportes",
+                      "serv6_desc":  "Clubes deportivos, grupos artÃ­sticos y actividades recreativas",
+                      "serv6_imagen":  "img/estudiantes1.png"
+                  },
+    "admision":  {
+                     "_visible":  "1",
+                     "titulo":  "Inicia tu proceso de admisiÃ³n",
+                     "descripcion":  "Da el primer paso hacia tu futuro profesional. DÃ©janos tus datos y un asesor acadÃ©mico se contactarÃ¡ contigo para guiarte en la elecciÃ³n de tu carrera, becas y opciones de financiamiento.",
+                     "imagen_principal":  "img/admision1.png",
+                     "video_url":  "https://www.youtube.com/watch?v=_arpKGQERXM",
+                     "circular_text":  "Â¿CÃ“MO INSCRIBIRSE?\r\nHAZ CLIC AQUÃ",
+                     "form_titulo":  "Formulario de Registro",
+                     "form_subtitulo":  "Los campos marcados con un asterisco (*) son obligatorios.",
+                     "btn_enviar":  "Completar registro",
+                     "lista_programas_interes":  [
+                                                     {
+                                                         "texto":  "EnfermerÃ­a"
+                                                     },
+                                                     {
+                                                         "texto":  "Fisioterapia"
+                                                     },
+                                                     {
+                                                         "texto":  "Marketing Digital"
+                                                     },
+                                                     {
+                                                         "texto":  "Contabilidad"
+                                                     },
+                                                     {
+                                                         "texto":  "LogÃ­stica y Transporte"
+                                                     },
+                                                     {
+                                                         "texto":  "Desarrollo de Software"
+                                                     },
+                                                     {
+                                                         "texto":  "Otra"
+                                                     }
+                                                 ],
+                     "lista_modalidades":  [
+                                               {
+                                                   "texto":  "Presencial"
+                                               },
+                                               {
+                                                   "texto":  "Online"
+                                               },
+                                               {
+                                                   "texto":  "HÃ­brida"
+                                               }
+                                           ],
+                     "div_textos":  null,
+                     "div_imagen":  null,
+                     "div_video":  null,
+                     "div_form":  null,
+                     "div_programas":  null,
+                     "div_modalidades":  null,
+                     "etiqueta_superior":  "Admisiones Abiertas",
+                     "feature_1":  "Proceso 100% en lÃ­nea",
+                     "feature_2":  "AsesorÃ­a personalizada",
+                     "feature_3":  "Respuesta en 24 horas",
+                     "form_terminos":  "Al enviar este formulario, aceptas nuestra PolÃ­tica de Privacidad."
+                 },
+    "noticias":  {
+                     "_visible":  "1",
+                     "etiqueta_superior":  "Actualidad ITB",
+                     "titulo_seccion":  "Noticias y Eventos del ITB",
+                     "titulo":  "Â¡METAMORFOSIS CREATIVA estÃ¡ por comenzar!",
+                     "boton_todas":  "Todas las noticias",
+                     "categoria":  "Evento",
+                     "fecha":  "15 Sep 2025",
+                     "descripcion":  "Lo mejor del DiseÃ±o de Modas y Maquillaje...",
+                     "imagen":  "img/noticia_1.png",
+                     "secundarias":  [
+                                         {
+                                             "titulo":  "Estudiantes de DiseÃ±o de Modas",
+                                             "fecha":  "Agosto 20, 2026",
+                                             "imagen":  "img/noticia_2.png"
+                                         },
+                                         {
+                                             "titulo":  "ITB promoviÃ³ una movilidad",
+                                             "fecha":  "Agosto 20, 2026",
+                                             "imagen":  "img/noticia_3.png"
+                                         },
+                                         {
+                                             "titulo":  "ITB transforma el ComicCon en una experiencia de aprendizaje",
+                                             "fecha":  "Agosto 31, 2026",
+                                             "imagen":  "img/ff4728ec07d83ad63f3412a6ee3ec0a6.jpg"
+                                         },
+                                         {
+                                             "titulo":  "ITB recibe importante reconocimiento por su aportaciÃ³n en programas de formaciÃ³n juvenil",
+                                             "fecha":  "Agosto 28, 2026",
+                                             "imagen":  "img/166a6aba1ac9c52c78994ef657b1f8ac.jpg"
+                                         },
+                                         {
+                                             "titulo":  "ITB desarrollÃ³ conferencia magistral sobre direcciÃ³n escÃ©nica en la era digital",
+                                             "fecha":  "Agosto 24, 2026",
+                                             "imagen":  "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
+                                         }
+                                     ],
+                     "div_global":  null,
+                     "div_noticia":  "",
+                     "info_noticias":  null,
+                     "div_secundarias":  null,
+                     "sec1_titulo":  "Convenio internacional con universidad de EspaÃ±a",
+                     "sec1_fecha":  "10 Sep 2025",
+                     "sec1_imagen":  "img/noticia-2.jpg",
+                     "sec2_titulo":  "GraduaciÃ³n de la promociÃ³n 2025: mÃ¡s de 500 nuevos profesionales",
+                     "sec2_fecha":  "05 Sep 2025",
+                     "sec2_imagen":  "img/noticia-3.jpg",
+                     "sec3_titulo":  "ITB inaugura nuevo laboratorio de simulaciÃ³n clÃ­nica",
+                     "sec3_fecha":  "01 Sep 2025",
+                     "sec3_imagen":  "img/noticia-4.jpg",
+                     "eventos":  [
+                                     {
+                                         "categoria":  "Evento",
+                                         "fecha":  "15 Sep 2025",
+                                         "titulo":  "Â¡METAMORFOSIS CREATIVA estÃ¡ por comenzar!",
+                                         "descripcion":  "Lo mejor del DiseÃ±o de Modas y Maquillaje...",
+                                         "imagen":  "img/noticia_1.png"
+                                     },
+                                     {
+                                         "categoria":  "Evento",
+                                         "fecha":  "12 Agt 2026",
+                                         "titulo":  "Estudiantes de Marketing Digital y Redes Sociales presentan proyectos novedosos en Elevator Pitch",
+                                         "descripcion":  "Una jornada acadÃ©mica que reuniÃ³ a 21 mini agencias conformadas por estudiantes de la carrera TÃ©cnico Superior en Marketing Digital y Redes Sociales, quienes presentaron propuestas estratÃ©gicas y creativas para diferentes marcas y negocios.",
+                                         "imagen":  "img/7706394bfe67bfced3f1464e086011eb.jpg"
+                                     },
+                                     {
+                                         "categoria":  "Noticia",
+                                         "fecha":  "18 Ago.",
+                                         "titulo":  "ITB promoviÃ³ una movilidad responsable durante la jornada â€œGuayaquil Camina Seguroâ€",
+                                         "descripcion":  "Una jornada orientada a fortalecer la educaciÃ³n y concienciaciÃ³n sobre la importancia de una movilidad segura, sostenible e incluyente.",
+                                         "imagen":  "img/noticia_camina_seguro.jpeg"
+                                     },
+                                     {
+                                         "categoria":  "Noticia",
+                                         "fecha":  "14 Ago.",
+                                         "titulo":  "ITB presentÃ³ proyectos de investigaciÃ³n e innovaciÃ³n aplicada en la Feria Agroazucar",
+                                         "descripcion":  "Cuatro proyectos desarrollados desde las facultades FACES y FATV se presentaron en la Feria Agroazucar.",
+                                         "imagen":  "img/noticia_feria_agroazucar.jpeg"
+                                     }
+                                 ],
+                     "div_eventos":  null,
+                     "info_eventos":  null
+                 },
+    "alianzas":  {
+                     "_visible":  "1",
+                     "titulo":  "Alianzas del ITB",
+                     "boton_todas":  "Ver Alianzas y Convenios",
+                     "lista_logos":  [
+                                         {
+                                             "imagen":  "img/aecd83a071c09531ceea048d412d09e6.png",
+                                             "nombre":  "Aliado 1"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_2.jpg",
+                                             "nombre":  "Aliado 2"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_3.png",
+                                             "nombre":  "Aliado 3"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_4.png",
+                                             "nombre":  "Aliado 4"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_5.png",
+                                             "nombre":  "Aliado 5"
+                                         }
+                                     ],
+                     "lista_fotos":  [
+                                         {
+                                             "imagen":  "img/alianza_sub1.png",
+                                             "nombre":  "Actividad ITB 1"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_sub2.png",
+                                             "nombre":  "Actividad ITB 2"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_sub3.png",
+                                             "nombre":  "Actividad ITB 3"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_sub4.png",
+                                             "nombre":  "Actividad ITB 4"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_sub5.png",
+                                             "nombre":  "Actividad ITB 5"
+                                         },
+                                         {
+                                             "imagen":  "img/alianza_sub6.png",
+                                             "nombre":  "Actividad ITB 6"
+                                         }
+                                     ],
+                     "div_textos":  null,
+                     "div_logos":  null,
+                     "div_fotos":  null
+                 },
+    "equipo":  {
+                   "items":  [
+                                 {
+                                     "id":  1,
+                                     "orden":  "1",
+                                     "nombre":  "Roberto Tolozano Benites",
+                                     "nombre_completo":  "PhD. Roberto Tolozano Benites",
+                                     "cargo":  "Canciller",
+                                     "linkedin":  "#",
+                                     "email":  "cancilleria@itb.edu.ec",
+                                     "foto":  "img/6035a72c5b8f82761090e417ffe86b7e.png",
+                                     "mostrar_en_home":  true,
+                                     "publicado":  true
+                                 },
+                                 {
+                                     "id":  2,
+                                     "orden":  "2",
+                                     "nombre":  "Elena Tolozano Benites",
+                                     "nombre_completo":  "PhD. Elena Tolozano Benites",
+                                     "cargo":  "Rectora",
+                                     "linkedin":  "#",
+                                     "email":  "rectorado@itb.edu.ec",
+                                     "foto":  "img/14fc241f3e76d7c3c8ca2652aacee5e1.png",
+                                     "mostrar_en_home":  true,
+                                     "publicado":  true
+                                 },
+                                 {
+                                     "id":  3,
+                                     "orden":  "3",
+                                     "nombre":  "Luis Alzate Peralta",
+                                     "nombre_completo":  "PhD. Luis Alzate Peralta",
+                                     "cargo":  "Vicerrector AcadÃ©mico y de InvestigaciÃ³n",
+                                     "linkedin":  "#",
+                                     "email":  "vicerrectorado@itb.edu.ec",
+                                     "foto":  "img/9deb8b0d70dc44ffa388327dfc21e321.png",
+                                     "mostrar_en_home":  true,
+                                     "publicado":  true
+                                 },
+                                 {
+                                     "id":  4,
+                                     "orden":  "4",
+                                     "nombre":  "Michelle Tolozano Lapierre",
+                                     "nombre_completo":  "PhD. Michelle Tolozano Lapierre",
+                                     "cargo":  "Vicerrectora de ExtensiÃ³n y GestiÃ³n Administrativa",
+                                     "linkedin":  "#",
+                                     "email":  "extension@itb.edu.ec",
+                                     "foto":  "img/41222399c1dda86559946d5b6aa993df.png",
+                                     "mostrar_en_home":  true,
+                                     "publicado":  true
+                                 }
+                             ]
+               },
+    "documentos_transparencia":  {
+                                     "items":  [
+                                                   {
+                                                       "id":  1,
+                                                       "orden":  "1",
+                                                       "categoria":  "info_financiera",
+                                                       "nombre":  "Presupuesto Anual Institucional",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "1.8MB"
+                                                   },
+                                                   {
+                                                       "id":  2,
+                                                       "orden":  "2",
+                                                       "categoria":  "info_financiera",
+                                                       "nombre":  "Balance General y Balance Comprobación",
+                                                       "anio":  "2025",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "2.4MB"
+                                                   },
+                                                   {
+                                                       "id":  3,
+                                                       "orden":  "3",
+                                                       "categoria":  "info_financiera",
+                                                       "nombre":  "Balances Auditados",
+                                                       "anio":  "2025",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "4.1MB"
+                                                   },
+                                                   {
+                                                       "id":  4,
+                                                       "orden":  "4",
+                                                       "categoria":  "info_financiera",
+                                                       "nombre":  "Aranceles y Costos de Oferta Académica",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "950KB"
+                                                   },
+                                                   {
+                                                       "id":  5,
+                                                       "orden":  "5",
+                                                       "categoria":  "rendicion_cuentas",
+                                                       "nombre":  "Plan Estratégico de Desarrollo Institucional (PEDI)",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "4.5MB"
+                                                   },
+                                                   {
+                                                       "id":  6,
+                                                       "orden":  "6",
+                                                       "categoria":  "rendicion_cuentas",
+                                                       "nombre":  "Plan Operativo Anual (POA)",
+                                                       "anio":  "2025",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "2.1MB"
+                                                   },
+                                                   {
+                                                       "id":  7,
+                                                       "orden":  "7",
+                                                       "categoria":  "rendicion_cuentas",
+                                                       "nombre":  "Plan Operativo Anual (POA)",
+                                                       "anio":  "2024",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "1.9MB"
+                                                   },
+                                                   {
+                                                       "id":  8,
+                                                       "orden":  "8",
+                                                       "categoria":  "rendicion_cuentas",
+                                                       "nombre":  "Certificado de Cumplimiento Tributario",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "1.2MB"
+                                                   },
+                                                   {
+                                                       "id":  9,
+                                                       "orden":  "9",
+                                                       "categoria":  "rendicion_cuentas",
+                                                       "nombre":  "Certificado de Obligaciones Patronales",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "980KB"
+                                                   },
+                                                   {
+                                                       "id":  10,
+                                                       "orden":  "10",
+                                                       "categoria":  "rendicion_cuentas",
+                                                       "nombre":  "Informe de Rendición de Cuentas Institucional",
+                                                       "anio":  "2025",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "3.8KB"
+                                                   },
+                                                   {
+                                                       "id":  11,
+                                                       "orden":  "11",
+                                                       "categoria":  "talento_humano",
+                                                       "nombre":  "Distributivo de Personal",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "1.5MB"
+                                                   },
+                                                   {
+                                                       "id":  12,
+                                                       "orden":  "12",
+                                                       "categoria":  "talento_humano",
+                                                       "nombre":  "Escala Remunerativa del Personal",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "820KB"
+                                                   },
+                                                   {
+                                                       "id":  13,
+                                                       "orden":  "13",
+                                                       "categoria":  "talento_humano",
+                                                       "nombre":  "Manual de Funciones y Competencias",
+                                                       "anio":  "2025",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "2.2MB"
+                                                   },
+                                                   {
+                                                       "id":  14,
+                                                       "orden":  "14",
+                                                       "categoria":  "remuneracion_mensual",
+                                                       "nombre":  "Remuneración Mensual - Enero",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "610KB"
+                                                   },
+                                                   {
+                                                       "id":  15,
+                                                       "orden":  "15",
+                                                       "categoria":  "remuneracion_mensual",
+                                                       "nombre":  "Remuneración Mensual - Febrero",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "605KB"
+                                                   },
+                                                   {
+                                                       "id":  16,
+                                                       "orden":  "16",
+                                                       "categoria":  "remuneracion_mensual",
+                                                       "nombre":  "Remuneración Mensual - Marzo",
+                                                       "anio":  "2026",
+                                                       "archivo":  "",
+                                                       "publicado":  true,
+                                                       "tamano":  "615KB"
+                                                   }
+                                               ]
+                                 },
+    "_meta":  {
+                  "documentos_transparencia":  {
+                                                   "last_id":  16
+                                               }
+              }
 }

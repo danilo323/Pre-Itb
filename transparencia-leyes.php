@@ -1,6 +1,3 @@
-Exit code: 0
-Wall time: 1 seconds
-Output:
 <?php
 /* transparencia-leyes.php
    Página interna "Transparencia / Leyes" del menú Instituto.
@@ -67,15 +64,14 @@ $page_hero_img = htmlspecialchars($hero_imgs[0]['archivo'] ?? 'img/hero_1.jpeg',
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=Playfair+Display:ital,wght@0,700;0,800;0,900;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/pagina-interna.css">
+    <link rel="stylesheet" href="css/pagina-interna.css?v=<?= filemtime(__DIR__ . '/css/pagina-interna.css') ?>">
 </head>
 <body>
 
     <?php include 'includes/header.php'; ?>
 
     <main>
-        <section class="page-hero" style="background-image: url('<?= $page_hero_img ?>')">
-            <div class="page-hero__overlay"></div>
+        <section class="page-hero" style="background-image: linear-gradient(105deg, rgba(15, 34, 67, 0.92) 0%, rgba(26, 59, 112, 0.82) 55%, rgba(26, 59, 112, 0.55) 100%), url('<?= $page_hero_img ?>')">
             <div class="page-hero__container">
                 <h1 class="page-hero__title">Cumplimiento Legal y Acceso a la Información</h1>
                 <nav class="page-hero__breadcrumb">
@@ -114,7 +110,7 @@ $page_hero_img = htmlspecialchars($hero_imgs[0]['archivo'] ?? 'img/hero_1.jpeg',
                 <div class="acc-list" id="doc-accordion">
                     <?php foreach ($doc_categorias as $cat_key => $cat_label): $docs = $por_categoria[$cat_key]; ?>
                         <div class="acc-item">
-                            <button type="button" class="acc-item__header">
+                            <button type="button" class="acc-item__header" aria-expanded="false">
                                 <span><?= htmlspecialchars($cat_label, ENT_QUOTES, 'UTF-8') ?></span>
                                 <i class="fas fa-chevron-down acc-item__icon"></i>
                             </button>
@@ -165,7 +161,7 @@ $page_hero_img = htmlspecialchars($hero_imgs[0]['archivo'] ?? 'img/hero_1.jpeg',
     <?php include 'includes/footer.php'; ?>
 
     <script src="js/main.js"></script>
-    <script src="js/pagina-interna.js"></script>
+    <script src="js/pagina-interna.js?v=<?= filemtime(__DIR__ . '/js/pagina-interna.js') ?>"></script>
 
 </body>
 </html>
