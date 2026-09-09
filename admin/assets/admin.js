@@ -11,15 +11,15 @@ document.addEventListener('DOMContentLoaded', function () {
         if (!modal) {
             modal = document.createElement('div');
             modal.id = 'admin-confirm-modal';
-            modal.style.cssText = 'position:fixed; top:0; left:0; width:100%; height:100%; background:rgba(15,23,42,0.6); z-index:9999; display:flex; align-items:center; justify-content:center; opacity:0; transition:opacity 0.2s;';
+            modal.className = 'admin-confirm-overlay';
             modal.innerHTML = `
-                <div style="background:var(--bg-panel); width:90%; max-width:400px; border-radius:var(--radius); padding:24px; box-shadow:var(--shadow); transform:scale(0.95); transition:transform 0.2s;">
-                    <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px;">
-                        <i class="bi bi-exclamation-triangle-fill" style="color:var(--primary); font-size:24px;"></i>
-                        <h3 style="margin:0; font-size:16px; color:var(--text-main);">Confirmar acción</h3>
+                <div class="admin-confirm-box">
+                    <div class="admin-confirm-head">
+                        <i class="bi bi-exclamation-triangle-fill"></i>
+                        <h3>Confirmar acción</h3>
                     </div>
-                    <p id="admin-confirm-msg" style="color:var(--text-muted); margin-bottom:24px; font-size:14px; line-height:1.5;"></p>
-                    <div style="display:flex; justify-content:flex-end; gap:12px;">
+                    <p id="admin-confirm-msg" class="admin-confirm-msg"></p>
+                    <div class="admin-confirm-actions">
                         <button type="button" id="admin-confirm-cancel" class="btn btn-outline">Cancelar</button>
                         <button type="button" id="admin-confirm-ok" class="btn btn-primary">Sí, eliminar</button>
                     </div>
@@ -33,16 +33,14 @@ document.addEventListener('DOMContentLoaded', function () {
         const btnOk = document.getElementById('admin-confirm-ok');
 
         msgEl.textContent = message;
-        modal.style.display = 'flex';
+        modal.classList.remove('is-hidden');
         setTimeout(() => {
-            modal.style.opacity = '1';
-            modal.querySelector('div').style.transform = 'scale(1)';
+            modal.classList.add('is-visible');
         }, 10);
 
         const close = () => {
-            modal.style.opacity = '0';
-            modal.querySelector('div').style.transform = 'scale(0.95)';
-            setTimeout(() => { modal.style.display = 'none'; }, 200);
+            modal.classList.remove('is-visible');
+            setTimeout(() => { modal.classList.add('is-hidden'); }, 200);
         };
 
         btnCancel.onclick = close;

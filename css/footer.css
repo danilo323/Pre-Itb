@@ -4,12 +4,12 @@
 
 /* ---- Footer CTA (Pre-footer) ---- */
 /* .footer-cta es el celeste del cielo (mismo color que .footer-skyline); dentro
-   flota la tarjeta oscura (.footer-cta__container, fill #0B295E como la montaña
+   flota la tarjeta oscura (.footer-cta__container, mismo azul que la montaña
    del frente) con esquinas redondeadas, dejando ver el celeste alrededor: arriba,
    abajo y a los costados. Antes la tarjeta pintaba TODO el ancho del bloque del
    mismo color que el fondo, así que no se distinguía como tarjeta. */
 .footer-cta {
-    background-color: #335AA0;
+    background-color: var(--primary-blue);
     position: relative;
     z-index: 10;
     /* Sin padding-top: la tarjeta toca el filo de arriba de esta sección (no el
@@ -22,7 +22,7 @@
 .footer-cta__container {
     max-width: 1400px;
     margin: 0 auto;
-    background-color: #0B295E;
+    background-color: var(--primary-blue-dark);
     /* La capa que revisamos en Figma era una "Ruta vectorial" (un contorno ya
        aplanado a path); ahí el campo "Radio de esquina" no refleja el redondeo
        real del trazo y por eso marcaba 0 aunque a simple vista se vea curvo.
@@ -89,7 +89,7 @@
     /* Era 1920/320. Medido pixel a pixel sobre el render: de los 235px que
        median la banda, el dibujo solo ocupaba de y=27 a y=222. Es decir, 27px
        de cielo liso arriba y 13px de azul liso abajo (este ultimo del mismo
-       #0B295E que el fondo del pie, o sea invisible). Puro hueco entre la
+       azul que el fondo del pie, --primary-blue-dark, o sea invisible). Puro hueco entre la
        tarjeta CTA y las columnas.
        Se recortan 22 de arriba y 10 de abajo -de los 27 y 13 disponibles-,
        dejando unos pixeles de aire para no rozar la aguja del monumento mas
@@ -99,7 +99,7 @@
     overflow: hidden;
     /* Celeste del cielo detrás de las montañas (footer2.svg no cubre todo el
        alto de la mirilla, así que por encima de los picos se ve este color). */
-    background-color: #335AA0;
+    background-color: var(--primary-blue);
     position: relative;
     line-height: 0;
 }
@@ -151,12 +151,12 @@
 
 /* ---- Main Footer ---- */
 .footer-main {
-    /* NO es el celeste del cielo (#335AA0): footer-main va DEBAJO de la montaña,
+    /* NO es el celeste del cielo (var(--primary-blue)): footer-main va DEBAJO de la montaña,
        no en el cielo, así que lleva el mismo azul oscuro con el que termina la
-       montaña del frente (footer1.svg/footer2.svg, fill #0B295E) para que la
+       montaña del frente (footer1.svg/footer2.svg, fill var(--primary-blue-dark)) para que la
        transición sea continua. Con el celeste aquí se notaba una costura justo
        donde termina la mirilla del skyline y empieza este bloque. */
-    background-color: #0B295E;
+    background-color: var(--primary-blue-dark);
     /* Arriba eran 60px: sumados al vacio del skyline dejaban un hueco enorme
        entre la tarjeta CTA y las columnas. */
     padding: 16px 0 30px;
@@ -253,9 +253,7 @@
 }
 
 .footer-main__list a:hover {
-    /* Color de guía que dio el usuario para el hover de estos enlaces (distinto
-       al naranja general del sitio: aquí es explícitamente #DC5B14). */
-    color: #DC5B14;
+    color: var(--primary-orange);
 }
 
 /* .footer-main__link-orange se eliminó: era la regla que pintaba "CONDUCE
@@ -307,13 +305,13 @@ button.footer-main__campus-btn {
 }
 
 button.footer-main__campus-btn:hover {
-    color: #DC5B14;
+    color: var(--primary-orange);
 }
 
 /* El campus que se esta viendo en el mapa. Ademas del color lleva un subrayado:
    asi se distingue tambien sin depender del color. */
 .footer-main__campus-btn.is-active {
-    color: #DC5B14;
+    color: var(--primary-orange);
     font-weight: 600;
     text-decoration: underline;
     text-underline-offset: 4px;
@@ -358,12 +356,12 @@ button.footer-main__campus-btn:hover {
 }
 
 .footer-social__icons a:hover {
-    color: var(--primary-orange, #f36c21);
+    color: var(--primary-orange, #F15A24);
 }
 
 /* ---- Bottom Bar ---- */
 .footer-bottom {
-    background-color: var(--primary-orange, #f36c21);
+    background-color: var(--primary-orange, #F15A24);
     padding: 15px 0;
 }
 
@@ -532,7 +530,7 @@ button.footer-main__campus-btn:hover {
     /* 20 (margen) + 50 (circulo de WhatsApp) + 14 (separacion) */
     bottom: 84px;
     right: 20px;
-    background-color: var(--primary-orange, #f36c21);
+    background-color: var(--primary-orange, #F15A24);
     color: #ffffff;
     /* Mismo tamano que la burbuja de WhatsApp, para que queden alineados */
     width: 50px;
@@ -562,6 +560,6 @@ button.footer-main__campus-btn:hover {
 }
 
 #top-to-bottom.scroll_visible:hover {
-    background-color: #d15615;
+    background-color: var(--primary-orange-hover);
     opacity: 1;
 }

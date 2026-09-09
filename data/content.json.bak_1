@@ -3,44 +3,29 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
-        "div_seo": "",
-        "div_logos": ""
+        "logo_principal": "img/f274c66b1aec7712086aa35a6742af68.jpg",
+        "div_seo": null,
+        "div_logos": null
     },
     "menu": {
         "items_menu": [
             {
-                "texto": "Inicio",
+                "texto": "Instituto",
                 "url": "#",
                 "nivel": "padre"
             },
             {
-                "texto": "Nuestra Institución 1",
-                "url": "#",
-                "nivel": "padre"
-            },
-            {
-                "texto": "Quienes Somos",
+                "texto": "Sobre Nosotros",
                 "url": "#",
                 "nivel": "hijo"
             },
             {
-                "texto": "Misión y Visión",
+                "texto": "Himno e Identidad",
                 "url": "#",
                 "nivel": "hijo"
             },
             {
-                "texto": "Valores Institucionales",
-                "url": "#",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "Autoridades",
-                "url": "#",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "Preguntas Frecuentes",
+                "texto": "Transparencia / Leyes",
                 "url": "#",
                 "nivel": "hijo"
             },
@@ -129,7 +114,7 @@
     },
     "hero": {
         "_visible": "1",
-        "subtitulo": "Educación Superior de Excelencia",
+        "subtitulo": "Educación Superior de la Gran Excelencia",
         "titulo": "Construye tu Futuro, Lidera el Mañana",
         "descripcion": "Bienvenida al ITB. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación para ayudarte a alcanzar el éxito laboral.",
         "cta_texto": "Explorar Programas",
@@ -483,7 +468,7 @@
                 "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
                 "btn_texto": "Conocer Más",
                 "imagen": "img/bienestar_estudiantil_1.png",
-                "imagen_fija": true
+                "imagen_fija": false
             }
         ],
         "div_serv1": null,

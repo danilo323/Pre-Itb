@@ -74,13 +74,10 @@ return [
                         ]
                     ],
                     'default' => [
-                        ['texto' => 'Inicio', 'url' => '#', 'nivel' => 'padre'],
-                        ['texto' => 'Nuestra Institución', 'url' => '#', 'nivel' => 'padre'],
-                        ['texto' => 'Quienes Somos', 'url' => '#', 'nivel' => 'hijo'],
-                        ['texto' => 'Misión y Visión', 'url' => '#', 'nivel' => 'hijo'],
-                        ['texto' => 'Valores Institucionales', 'url' => '#', 'nivel' => 'hijo'],
-                        ['texto' => 'Autoridades', 'url' => '#', 'nivel' => 'hijo'],
-                        ['texto' => 'Preguntas Frecuentes', 'url' => '#', 'nivel' => 'hijo'],
+                        ['texto' => 'Instituto', 'url' => '#', 'nivel' => 'padre'],
+                        ['texto' => 'Sobre Nosotros', 'url' => '#', 'nivel' => 'hijo'],
+                        ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
+                        ['texto' => 'Transparencia / Leyes', 'url' => '#', 'nivel' => 'hijo'],
                         ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
                         ['texto' => 'Vida Estudiantil', 'url' => '#', 'nivel' => 'padre'],
                         ['texto' => 'Admisiones', 'url' => '#', 'nivel' => 'padre'],
@@ -1236,6 +1233,13 @@ return [
                     ],
                 ],
             ],
+        ],
+        'sobre_nosotros' => [
+            'label' => 'Sobre Nosotros',
+            'group' => 'paginas',
+            'icon' => 'bi bi-info-circle-fill',
+            'type' => 'singleton',
+            'fields' => [],
         ],
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
         // así que en vez de 'fields' declara la pantalla que lo atiende con

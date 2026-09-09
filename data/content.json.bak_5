@@ -144,11 +144,11 @@
             },
             {
                 "archivo": "img/hero_2.jpg",
-                "estatica": true
+                "estatica": false
             },
             {
                 "archivo": "img/hero_3.jpg",
-                "estatica": false
+                "estatica": true
             }
         ],
         "div_left": null,
@@ -390,24 +390,24 @@
                 "carrera": "Graduada en Enfermería - Promoción 2022"
             },
             {
-                "imagen": "",
+                "imagen": "img/8a568c0257127dd19236f871a537a0bd.jpg",
                 "cita": "\"La formación práctica y los proyectos reales que desarrollamos en clase me permitieron llegar a mi primera entrevista con un portafolio sólido. Hoy trabajo en el área que elegí desde el primer semestre.\"",
                 "rol": "Graduado",
-                "nombre": "EJEMPLO — reemplazar por un graduado real",
+                "nombre": "Juan Perez Goya",
                 "carrera": "Graduado en Desarrollo de Software"
             },
             {
-                "imagen": "",
+                "imagen": "img/38f08960fc8ca02a6b4061c526c46759.jpg",
                 "cita": "\"Lo que más valoro del ITB es la cercanía de los docentes: siempre hubo alguien dispuesto a resolver una duda o revisar un proyecto. Esa guía marcó la diferencia en mi formación.\"",
                 "rol": "Graduada",
-                "nombre": "EJEMPLO — reemplazar por un graduado real",
+                "nombre": "Elena Fernandez Macias",
                 "carrera": "Graduada en Marketing Digital"
             },
             {
-                "imagen": "",
+                "imagen": "img/85dc8355286c1581b342d9b4220b5de6.jpg",
                 "cita": "\"Estudiar y trabajar al mismo tiempo era mi mayor preocupación. Los horarios flexibles me permitieron avanzar sin dejar mi empleo, y hoy aplico a diario lo que aprendí en los talleres.\"",
                 "rol": "Graduado",
-                "nombre": "EJEMPLO — reemplazar por un graduado real",
+                "nombre": "Francisco Arias Morales",
                 "carrera": "Graduado en Gastronomía"
             }
         ],

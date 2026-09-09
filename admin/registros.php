@@ -107,7 +107,7 @@ echo layout_start('Registros del formulario', 'registros');
                         <td>
                             <?= htmlspecialchars(trim(($r['nombre'] ?? '') . ' ' . ($r['apellido'] ?? '')), ENT_QUOTES, 'UTF-8') ?>
                             <?php if (($r['bachiller'] ?? '') === 'si'): ?>
-                                <br><small style="color:#6C757D;">Bachiller</small>
+                                <br><small class="text-muted-tag">Bachiller</small>
                             <?php endif; ?>
                         </td>
                         <td><?= htmlspecialchars($r['email'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
@@ -115,7 +115,7 @@ echo layout_start('Registros del formulario', 'registros');
                         <td>
                             <?= htmlspecialchars($r['cedula'] ?? '', ENT_QUOTES, 'UTF-8') ?>
                             <?php if (($r['nacionalidad'] ?? '') === 'extranjero'): ?>
-                                <br><small style="color:#6C757D;">Extranjero</small>
+                                <br><small class="text-muted-tag">Extranjero</small>
                             <?php endif; ?>
                         </td>
                         <td><?= htmlspecialchars($r['carrera'] ?? '', ENT_QUOTES, 'UTF-8') ?></td>
@@ -131,7 +131,7 @@ echo layout_start('Registros del formulario', 'registros');
                     </tr>
                     <?php if (trim($r['mensaje'] ?? '') !== ''): ?>
                         <tr>
-                            <td colspan="9" style="background:#FAFBFC; color:#495057; font-size:0.85rem;">
+                            <td colspan="9" class="comment-row-cell">
                                 <strong>Comentario:</strong>
                                 <?= nl2br(htmlspecialchars($r['mensaje'], ENT_QUOTES, 'UTF-8')) ?>
                             </td>

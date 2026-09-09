@@ -124,7 +124,7 @@
     align-items: center;
     gap: 12px;
     padding: 6px 6px 6px 16px;
-    border: 1px solid rgba(232, 113, 42, 0.5);
+    border: 1px solid rgba(241, 90, 36, 0.5);
     border-radius: 8px;
     font-size: 0.85rem;
     color: var(--primary-orange);
@@ -145,7 +145,7 @@
     left: 0;
     width: 0%;
     height: 100%;
-    background-color: #ff6b2b;
+    background-color: var(--primary-orange);
     z-index: -1;
     transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     border-radius: 6px;
