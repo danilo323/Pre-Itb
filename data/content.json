@@ -3,9 +3,9 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
-        "div_seo": "",
-        "div_logos": ""
+        "logo_principal": "img/1904c9f49a6e95930bb07a0fa3ba79ad.jpeg",
+        "div_seo": null,
+        "div_logos": null
     },
     "menu": {
         "items_menu": [
@@ -114,7 +114,7 @@
     },
     "hero": {
         "_visible": "1",
-        "subtitulo": "Educación Superior de Excelencia",
+        "subtitulo": "Educación Superior de la Gran Excelencia",
         "titulo": "Construye tu Futuro, Lidera el Mañana",
         "descripcion": "Bienvenida al ITB. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación para ayudarte a alcanzar el éxito laboral.",
         "cta_texto": "Explorar Programas",
@@ -136,16 +136,16 @@
                 "estatica": false
             }
         ],
-        "div_left": "",
-        "div_stats": "",
-        "div_right": "",
-        "div_galeria": "",
+        "div_left": null,
+        "div_stats": null,
+        "div_right": null,
+        "div_galeria": null,
         "imagen_1": "img/salud.jpg",
         "imagen_2": "img/student.jpg",
         "imagen_3": "img/student 2.jpg",
         "imagen_video_thumb": "img/hero-video-thumb.jpg",
-        "animaciones": "1",
-        "info_portada": ""
+        "animaciones": true,
+        "info_portada": null
     },
     "trayectoria": {
         "_visible": "1",
@@ -171,11 +171,11 @@
                 "texto": "Carreras Disponibles"
             }
         ],
-        "div_global": "",
-        "div_perfil": "",
-        "div_btn": "",
-        "div_imagen": "",
-        "div_stats": "",
+        "div_global": null,
+        "div_perfil": null,
+        "div_btn": null,
+        "div_imagen": null,
+        "div_stats": null,
         "imagen_campus": "img/estudiantes1.png",
         "stat_anios": "29+",
         "stat_anios_label": "Años de Experiencia",
@@ -215,7 +215,7 @@
                 "btn_texto": "Explorar programas"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "area1_icono": "img/doctor.png",
         "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
         "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
@@ -294,7 +294,7 @@
                 "sede": ""
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "prog1_imagen": "img/enfermeria.jpg",
         "prog1_modalidad": "Presencial",
         "prog1_area": "Salud",
@@ -319,7 +319,7 @@
         "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
         "prog4_duracion": "5 Semestres",
         "prog4_sede": "Guayaquil",
-        "info_programas": ""
+        "info_programas": null
     },
     "experiencia": {
         "_visible": "1",
@@ -346,9 +346,9 @@
         ],
         "btn_texto": "Más beneficios",
         "imagen": "img/experiencia.png",
-        "div_header": "",
-        "div_btn": "",
-        "div_img": "",
+        "div_header": null,
+        "div_btn": null,
+        "div_img": null,
         "caract1_titulo": "Servicios Médicos",
         "caract1_desc": "Atención médica y odontológica gratuita para estudiantes.",
         "caract2_titulo": "Becas y Financiamiento",
@@ -364,8 +364,8 @@
         "_visible": "1",
         "etiqueta_superior": "HISTORIAS DE ÉXITO",
         "titulo": "Lo que dicen nuestros Graduados",
-        "div_global": "",
-        "div_testimonio": "",
+        "div_global": null,
+        "div_testimonio": null,
         "lista_testimonios": [
             {
                 "imagen": "img/MariaFernanda.png",
@@ -396,7 +396,7 @@
                 "carrera": "Graduado en Gastronomía"
             }
         ],
-        "info_testimonios": ""
+        "info_testimonios": null
     },
     "autoridades": {
         "_visible": "1",
@@ -404,8 +404,8 @@
         "titulo": "Nuestras Autoridades",
         "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "boton_directorio": "Ver Directorio",
-        "info_gestion": "",
-        "div_global": "",
+        "info_gestion": null,
+        "div_global": null,
         "btn_directorio": "Ver Directorio",
         "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
@@ -471,8 +471,8 @@
                 "imagen_fija": false
             }
         ],
-        "div_serv1": "",
-        "div_servicios_lista": "",
+        "div_serv1": null,
+        "div_servicios_lista": null,
         "etiqueta_superior": "Servicios Institucionales",
         "titulo": "Todo lo que necesitas en  *un solo lugar*",
         "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
@@ -536,12 +536,12 @@
                 "texto": "Híbrida"
             }
         ],
-        "div_textos": "",
-        "div_imagen": "",
-        "div_video": "",
-        "div_form": "",
-        "div_programas": "",
-        "div_modalidades": "",
+        "div_textos": null,
+        "div_imagen": null,
+        "div_video": null,
+        "div_form": null,
+        "div_programas": null,
+        "div_modalidades": null,
         "etiqueta_superior": "Admisiones Abiertas",
         "feature_1": "Proceso 100% en línea",
         "feature_2": "Asesoría personalizada",
@@ -585,10 +585,10 @@
                 "imagen": "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "div_noticia": "",
-        "info_noticias": "",
-        "div_secundarias": "",
+        "info_noticias": null,
+        "div_secundarias": null,
         "sec1_titulo": "Convenio internacional con universidad de España",
         "sec1_fecha": "10 Sep 2025",
         "sec1_imagen": "img/noticia-2.jpg",
@@ -628,8 +628,8 @@
                 "imagen": "img/noticia_feria_agroazucar.jpeg"
             }
         ],
-        "div_eventos": "",
-        "info_eventos": ""
+        "div_eventos": null,
+        "info_eventos": null
     },
     "alianzas": {
         "_visible": "1",
@@ -683,9 +683,9 @@
                 "nombre": "Actividad ITB 6"
             }
         ],
-        "div_textos": "",
-        "div_logos": "",
-        "div_fotos": ""
+        "div_textos": null,
+        "div_logos": null,
+        "div_fotos": null
     },
     "equipo": {
         "items": [

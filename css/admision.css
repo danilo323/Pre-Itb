@@ -416,13 +416,18 @@
     .admision__video-circle {
         margin-top: 40px;
     }
-}
 
-@media (max-width: 992px) {
+    /* El formulario pasa a width:100% en este mismo breakpoint, pero .admision__split
+       seguía en fila hasta los 992px: entre 992 y 1200px el formulario "al 100%"
+       aplastaba la columna de texto a casi 0px (el texto se partía letra por letra
+       y el botón circular del video quedaba deformado). Ambos cambios deben
+       activarse juntos. */
     .admision__split {
         flex-direction: column;
     }
+}
 
+@media (max-width: 992px) {
     .admision__form-row--mixed {
         grid-template-columns: 1fr;
     }

@@ -114,10 +114,8 @@ h1, h2, h3, h4 {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    background: rgba(255, 255, 255, 0.9);
-    backdrop-filter: blur(14px);
-    -webkit-backdrop-filter: blur(14px);
-    border-bottom: 1px solid var(--border-color);
+    background: var(--primary-blue);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
     height: 64px;
     padding: 0 32px;
     position: sticky;
@@ -132,7 +130,7 @@ h1, h2, h3, h4 {
 }
 
 .topbar-link, .topbar-user {
-    color: var(--text-muted);
+    color: #c3ccdf;
     font-weight: 600;
     font-size: 13.5px;
     display: flex;
@@ -144,8 +142,8 @@ h1, h2, h3, h4 {
 }
 
 .topbar-user {
-    color: var(--text-main);
-    background: var(--bg-subtle);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .topbar-user i {
@@ -153,13 +151,13 @@ h1, h2, h3, h4 {
 }
 
 .topbar-link:hover {
-    color: var(--primary);
-    background: var(--primary-light);
+    color: #ffffff;
+    background: rgba(255, 255, 255, 0.08);
 }
 
 .topbar-logout:hover {
-    color: var(--danger) !important;
-    background: var(--danger-light);
+    color: #ff6b6b !important;
+    background: rgba(224, 57, 62, 0.18);
 }
 
 .admin-container {
@@ -829,6 +827,83 @@ textarea.form-control, .field-group textarea {
     background: var(--warning-light);
     color: #92600a;
     border: 1px solid #fbe2b3;
+}
+.flash-info {
+    background: var(--info-light);
+    color: var(--info);
+    border: 1px solid #bae6fd;
+}
+.login-form .btn-block.is-locked {
+    opacity: 0.6;
+    cursor: not-allowed;
+}
+
+/* ================== REGISTROS ================== */
+.text-muted-tag {
+    color: var(--text-muted);
+}
+.comment-row-cell {
+    background: #FAFBFC;
+    color: var(--text-main);
+    font-size: 0.85rem;
+}
+
+/* ================== CONFIRM MODAL ================== */
+.admin-confirm-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(15, 23, 42, 0.6);
+    z-index: 9999;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    transition: opacity 0.2s;
+}
+.admin-confirm-overlay.is-visible {
+    opacity: 1;
+}
+.admin-confirm-box {
+    background: var(--bg-panel);
+    width: 90%;
+    max-width: 400px;
+    border-radius: var(--radius);
+    padding: 24px;
+    box-shadow: var(--shadow);
+    transform: scale(0.95);
+    transition: transform 0.2s;
+}
+.admin-confirm-overlay.is-visible .admin-confirm-box {
+    transform: scale(1);
+}
+.admin-confirm-head {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+}
+.admin-confirm-head i {
+    color: var(--primary);
+    font-size: 24px;
+}
+.admin-confirm-head h3 {
+    margin: 0;
+    font-size: 16px;
+    color: var(--text-main);
+}
+.admin-confirm-msg {
+    color: var(--text-muted);
+    margin-bottom: 24px;
+    font-size: 14px;
+    line-height: 1.5;
+}
+.admin-confirm-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 12px;
 }
 
 /* ================== LOGIN ================== */

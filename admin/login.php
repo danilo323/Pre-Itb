@@ -87,14 +87,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </div>
 
         <?php if (!empty($notice)): ?>
-            <div class="flash-message flash-info" style="background: #e0f2fe; color: #0369a1; border-color: #bae6fd; margin-bottom: 1.25rem;">
+            <div class="flash-message flash-info">
                 <i class="bi bi-info-circle-fill"></i>
                 <?= htmlspecialchars($notice, ENT_QUOTES, 'UTF-8') ?>
             </div>
         <?php endif; ?>
 
         <?php if (!empty($error)): ?>
-            <div class="flash-message flash-error" style="margin-bottom: 1.25rem;">
+            <div class="flash-message flash-error">
                 <i class="bi bi-x-octagon-fill"></i>
                 <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
             </div>
@@ -113,7 +113,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
             </div>
 
-            <button type="submit" class="btn-block" <?= $isLocked ? 'disabled style="opacity:0.6; cursor:not-allowed;"' : '' ?>>
+            <button type="submit" class="btn-block <?= $isLocked ? 'is-locked' : '' ?>" <?= $isLocked ? 'disabled' : '' ?>>
                 Entrar al Panel <i class="bi bi-arrow-right"></i>
             </button>
 
