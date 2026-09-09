@@ -1,0 +1,153 @@
+/* =============================================
+   NOSOTROS: HIMNO (Música y Letra)
+   ============================================= */
+
+.himno {
+    padding: 80px 24px;
+    background-color: var(--white);
+    display: flex;
+    justify-content: center;
+}
+
+.himno__container {
+    max-width: var(--container-max);
+    width: 100%;
+}
+
+.himno__header {
+    text-align: center;
+    max-width: 800px;
+    margin: 0 auto 60px;
+}
+
+.himno__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.5rem, 5vw, 3.5rem);
+    color: var(--gray-800);
+    margin-bottom: 24px;
+    font-weight: 700;
+}
+
+.himno__description {
+    font-size: 1.125rem;
+    color: var(--gray-800);
+    font-weight: 600; /* Texto en negrita según solicitud */
+    line-height: 1.6;
+}
+
+.himno__card {
+    background-color: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-xl);
+    box-shadow: var(--shadow-sm);
+    padding: 48px;
+    display: grid;
+    grid-template-columns: 1fr 1.5fr; /* Foto mucho más ancha según el diseño */
+    gap: 60px;
+    align-items: stretch;
+}
+
+.himno__content {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.himno__author {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    margin-bottom: 40px;
+}
+
+.himno__lyrics {
+    display: grid;
+    gap: 32px;
+    margin-bottom: 48px;
+    flex-grow: 1;
+}
+
+.himno__stanza-title {
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    margin-bottom: 12px;
+}
+
+.himno__stanza-text {
+    font-size: 0.95rem;
+    color: var(--gray-600);
+    line-height: 1.6;
+    margin: 0;
+    padding-left: 16px; /* Texto indentado más a la derecha */
+}
+
+.himno__actions {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    margin-top: auto;
+    width: 100%;
+}
+
+.himno__audio-player {
+    flex: 1;
+    min-width: 0; /* Sin esto, el reproductor nativo pide su ancho natural (~300px) y se desborda sobre la imagen en vez de encogerse */
+}
+
+.himno__audio-player audio {
+    width: 100%;
+    height: 48px;
+    outline: none;
+    border-radius: var(--radius-full);
+}
+
+.himno__image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    height: 100%;
+    min-height: 500px;
+    position: relative;
+    background-color: var(--gray-100);
+}
+
+.himno__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.himno__footer {
+    grid-column: 2 / 3;
+    text-align: center;
+    margin-top: 16px;
+    font-size: 0.8rem;
+    color: var(--gray-500);
+}
+
+@media (max-width: 992px) {
+    .himno__card {
+        grid-template-columns: 1fr;
+        padding: 32px;
+    }
+    
+    .himno__image {
+        min-height: 400px;
+        order: -1; /* Foto arriba en movil */
+    }
+    
+    .himno__actions {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .himno__footer {
+        grid-column: 1 / -1;
+    }
+}
