@@ -160,10 +160,10 @@
     position: absolute;
     inset: 0;
     background: linear-gradient(105deg,
-            rgba(27, 42, 74, 0.88) 0%,
-            rgba(27, 42, 74, 0.7) 40%,
-            rgba(27, 42, 74, 0.3) 70%,
-            rgba(27, 42, 74, 0.1) 100%);
+            rgba(26, 59, 112, 0.88) 0%,
+            rgba(26, 59, 112, 0.7) 40%,
+            rgba(26, 59, 112, 0.3) 70%,
+            rgba(26, 59, 112, 0.1) 100%);
 }
 
 .hero__container {

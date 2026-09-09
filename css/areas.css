@@ -1,5 +1,5 @@
 /* =============================================
-   ÃREAS DE FORMACIÃ“N
+   AREAS DE FORMACIÓN
    ============================================= */
 .areas {
     padding: 100px 0;
@@ -7,7 +7,8 @@
 }
 
 .areas__container {
-    max-width: 1350px; /* Aumentado para que las tarjetas sean más anchas a los lados */
+    max-width: 1350px;
+    /* Aumentado para que las tarjetas sean más anchas a los lados */
     margin: 0 auto;
     padding: 0 24px;
 }
@@ -28,7 +29,8 @@
 .areas__subtitle {
     font-size: 1rem;
     color: var(--gray-600);
-    max-width: 100%; /* Cambiado para que NUNCA se vaya para abajo (wrap) si hay espacio */
+    max-width: 100%;
+    /* Cambiado para que NUNCA se vaya para abajo (wrap) si hay espacio */
     margin: 0 auto;
     line-height: 1.5;
 }
@@ -42,7 +44,8 @@
 
 .areas__card {
     background: var(--primary-blue);
-    border-radius: 8px; /* Reducido para que las esquinas no sean tan redondeadas */
+    border-radius: 8px;
+    /* Reducido para que las esquinas no sean tan redondeadas */
     padding: 24px 28px 36px;
     color: var(--white);
     display: flex;
@@ -59,7 +62,7 @@
 
 .areas__card:hover {
     transform: translateY(-6px);
-    box-shadow: 0 12px 40px rgba(27, 42, 74, 0.3);
+    box-shadow: 0 12px 40px rgba(26, 59, 112, 0.3);
 }
 
 
@@ -74,7 +77,8 @@
     width: 48px;
     height: 48px;
     object-fit: contain;
-    filter: brightness(0) invert(1); /* Fuerza a que los iconos sean totalmente blancos */
+    filter: brightness(0) invert(1);
+    /* Fuerza a que los iconos sean totalmente blancos */
 }
 
 .areas__card-title {
@@ -90,12 +94,14 @@
     color: rgba(255, 255, 255, 0.85);
     line-height: 1.5;
     margin-bottom: 24px;
-    flex-grow: 1; /* Permite que la descripciÃ³n empuje el botÃ³n hacia abajo si no hay lista */
+    flex-grow: 1;
+    /* Permite que la descripciÃ³n empuje el botÃ³n hacia abajo si no hay lista */
 }
 
 .areas__card .btn--solid {
     margin-top: auto;
-    align-self: center; /* Centra el botÃ³n horizontalmente */
+    align-self: center;
+    /* Centra el botÃ³n horizontalmente */
 }
 
 .areas__card-list {

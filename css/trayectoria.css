@@ -103,14 +103,14 @@
 
 .trayectoria__stat-card {
     /* Antes era 'linear-gradient(135deg, #1a3668, #22252c)': azul muy oscuro
-       que terminaba en casi negro. Ahora usa el celeste que ya esta en la
-       paleta del sitio (#335AA0 es el mismo azul del cielo del pie de pagina),
-       degradado hacia un tono algo mas profundo para que las tarjetas no
-       queden planas.
+       que terminaba en casi negro. Ahora usa el azul que ya esta en la
+       paleta del sitio (var(--primary-blue) es el mismo azul del cielo del
+       pie de pagina), degradado hacia --primary-blue-dark para que las
+       tarjetas no queden planas.
        Se queda en este rango a proposito: con un azul mas claro el texto
        blanco de los numeros dejaria de leerse (por debajo de 4.5:1). Asi el
        contraste es 6.75:1 y no hay que tocar ningun color de texto. */
-    background: linear-gradient(135deg, #335AA0, #2A4A85);
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark));
     border-radius: var(--radius-md);
     padding: 28px 24px;
     display: flex;
@@ -124,7 +124,7 @@
     transform: translateY(-3px);
     /* Sombra un poco mas marcada: la de antes estaba pensada para una tarjeta
        casi negra y sobre el azul nuevo apenas se notaba. */
-    box-shadow: 0 8px 25px rgba(51, 90, 160, 0.45);
+    box-shadow: 0 8px 25px rgba(26, 59, 112, 0.45);
 }
 
 .trayectoria__stat-card:nth-child(2) {
@@ -140,7 +140,7 @@
 .trayectoria__stat-icon {
     width: 48px;
     height: 48px;
-    background: #F57C00;
+    background: var(--primary-orange);
     border-radius: var(--radius-sm);
     display: flex;
     align-items: center;

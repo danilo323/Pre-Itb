@@ -10,37 +10,22 @@
     "menu": {
         "items_menu": [
             {
-                "texto": "Inicio",
+                "texto": "Instituto",
                 "url": "#",
                 "nivel": "padre"
             },
             {
-                "texto": "Nuestra Institución 1",
-                "url": "#",
-                "nivel": "padre"
-            },
-            {
-                "texto": "Quienes Somos",
+                "texto": "Sobre Nosotros",
                 "url": "#",
                 "nivel": "hijo"
             },
             {
-                "texto": "Misión y Visión",
+                "texto": "Himno e Identidad",
                 "url": "#",
                 "nivel": "hijo"
             },
             {
-                "texto": "Valores Institucionales",
-                "url": "#",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "Autoridades",
-                "url": "#",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "Preguntas Frecuentes",
+                "texto": "Transparencia / Leyes",
                 "url": "#",
                 "nivel": "hijo"
             },

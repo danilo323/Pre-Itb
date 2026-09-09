@@ -127,7 +127,7 @@ main {
 }
 
 .top-bar__container {
-    background-color: #2b5ca6;
+    background-color: var(--primary-blue);
     /* Llena toda la columna 2, la misma del menu de abajo. Por eso la franja
        azul arranca siempre justo donde arranca 'Inicio': van juntos, sin
        depender de ningun numero fijo, aunque se agreguen o quiten opciones
@@ -161,7 +161,7 @@ main {
 .top-bar__link:hover,
 .top-bar__link--active {
     color: var(--white);
-    background-color: #1a4282;
+    background-color: var(--primary-blue-dark);
 }
 
 .top-bar__actions {
@@ -190,7 +190,7 @@ main {
 }
 
 .top-bar__search-icon-left {
-    color: #2b5ca6;
+    color: var(--primary-blue);
     padding-left: 10px;
     font-size: 0.75rem;
 }
@@ -207,7 +207,7 @@ main {
 }
 
 .top-bar__search--light .top-bar__search-input {
-    color: #2b5ca6;
+    color: var(--primary-blue);
 }
 
 .top-bar__search-input::placeholder {
@@ -222,7 +222,7 @@ main {
 }
 
 .top-bar__search--light .top-bar__search-btn {
-    color: #2b5ca6;
+    color: var(--primary-blue);
 }
 
 .top-bar__search-btn:hover {
@@ -259,12 +259,13 @@ main {
     display: flex;
     align-items: center;
     gap: 4px;
-    background: #1a4282;
+    background: var(--primary-blue-dark);
     transition: var(--transition-fast);
 }
 
 .top-bar__lang-btn:hover {
-    background: #143265;
+    /* Variante mas oscura de --primary-blue-dark, solo para este hover */
+    background: #0D1D39;
 }
 
 /* =============================================
@@ -444,7 +445,7 @@ main {
     background: var(--primary-orange);
     color: var(--white);
     transform: translateY(-1px);
-    box-shadow: 0 4px 12px rgba(232, 113, 42, 0.3);
+    box-shadow: 0 4px 12px rgba(241, 90, 36, 0.3);
 }
 
 /* Las reglas .navbar__btn--solid y .navbar__btn-icon se eliminaron: Matriculame

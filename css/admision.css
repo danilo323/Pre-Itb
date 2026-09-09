@@ -6,7 +6,7 @@
     /* Padding reducido para un fondo azul ligeramente más pequeño */
     margin-bottom: 120px;
     /* Espacio en blanco debajo para que el formulario sobresalga sin tapar la siguiente sección */
-    background-color: var(--primary-blue, #102a43);
+    background-color: var(--primary-blue, #1A3B70);
     position: relative;
 }
 

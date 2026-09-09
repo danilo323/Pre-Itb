@@ -2,21 +2,28 @@
    VARIABLES Y RESET
    ============================================= */
 :root {
-    --primary-blue: #1B2A4A;
-    --primary-blue-dark: #111D35;
-    --primary-orange: #E8712A;
-    --primary-orange-hover: #D4631F;
-    --primary-orange-light: rgba(232, 113, 42, 0.1);
+    /* Paleta institucional ITB */
+    --primary-blue: #1A3B70;
+    /* Azul Marino Institucional */
+    --primary-blue-dark: #0F2243;
+    /* Azul Medianoche (fondo oscuro / footer) */
+    --primary-orange: #F15A24;
+    /* Naranja Vibrante (acento / CTA) */
+    --primary-orange-hover: #D94E1D;
+    --primary-orange-light: rgba(241, 90, 36, 0.1);
     --white: #FFFFFF;
-    --gray-50: #F8F9FA;
+    --gray-50: #F4F6F9;
+    /* Gris Hielo (fondo secundario / cards) */
     --gray-100: #F1F3F5;
     --gray-200: #E9ECEF;
     --gray-300: #DEE2E6;
     --gray-400: #ADB5BD;
-    --gray-500: #6C757D;
+    --gray-500: #6B7280;
+    /* Gris Medio (texto secundario) */
     --gray-600: #495057;
     --gray-700: #343A40;
-    --gray-800: #212529;
+    --gray-800: #1F242E;
+    /* Gris Carbón (texto principal) */
     --black: #000000;
     --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
     --font-heading: 'Playfair Display', Georgia, serif;
@@ -116,7 +123,7 @@ button {
 
 .section-tag--light {
     color: var(--primary-orange);
-    background: rgba(232, 113, 42, 0.15);
+    background: rgba(241, 90, 36, 0.15);
 }
 
 /* Botones globales */
@@ -142,7 +149,7 @@ button {
     background: var(--primary-blue);
     color: var(--white);
     transform: translateY(-2px);
-    box-shadow: 0 4px 15px rgba(27, 42, 74, 0.3);
+    box-shadow: 0 4px 15px rgba(26, 59, 112, 0.3);
 }
 
 .btn--solid {
