@@ -114,36 +114,6 @@ document.addEventListener('DOMContentLoaded', function () {
         initImageField(group);
     });
 
-    // ── Campo de archivo PDF (reutiliza el mismo patrón que imagen) ──
-    function initFileField(group) {
-        const fileInput   = group.querySelector('input[type="file"]');
-        const hiddenInput = group.querySelector('input[type="hidden"]');
-        const currentBox  = group.querySelector('.file-current');
-        const removeBtn   = group.querySelector('.btn-remove-file');
-
-        if (fileInput) {
-            fileInput.addEventListener('change', function () {
-                const file = this.files[0];
-                if (!file || !currentBox) return;
-                currentBox.innerHTML = '<span class="file-current-link"><i class="bi bi-file-earmark-pdf-fill"></i> ' + file.name + '</span>';
-            });
-        }
-
-        if (removeBtn) {
-            removeBtn.addEventListener('click', function () {
-                window.customConfirm('¿Estás seguro de que deseas quitar este archivo?', () => {
-                    if (fileInput) fileInput.value = '';
-                    if (hiddenInput) hiddenInput.value = '';
-                    if (currentBox) currentBox.innerHTML = '<span class="file-placeholder"><i class="bi bi-file-earmark"></i> Ningún archivo seleccionado</span>';
-                });
-            });
-        }
-    }
-
-    document.querySelectorAll('.field-file').forEach(group => {
-        initFileField(group);
-    });
-
     // ── REPEATER — añadir y eliminar ────────────────────
     function recalcularIndices(container) {
         const repeaterGroup = container.closest('.repeater-group');

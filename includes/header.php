@@ -62,7 +62,7 @@
                             ['texto' => 'Instituto', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Sobre Nosotros', 'url' => '#', 'nivel' => 'hijo'],
                             ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
-                            ['texto' => 'Transparencia / Leyes', 'url' => 'transparencia-leyes.php', 'nivel' => 'hijo'],
+                            ['texto' => 'Transparencia / Leyes', 'url' => '#', 'nivel' => 'hijo'],
                             ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Vida Estudiantil', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Admisiones', 'url' => '#', 'nivel' => 'padre'],
