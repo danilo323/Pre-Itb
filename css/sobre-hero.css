@@ -1,0 +1,118 @@
+/* =============================================
+   SOBRE NOSOTROS — PORTADA (BANNER)
+   =============================================
+   Portada de la página interior: foto de fondo, título centrado y la ruta
+   de navegación. Nada más — sin botón, ni estrellas, ni texto giratorio,
+   ni botón de video (eso es solo del hero del Inicio).
+
+   El FONDO reutiliza .hero__slideshow / .hero__slide de css/hero.css, así
+   que aquí solo se define la caja del banner y el contenido de encima.
+*/
+
+.sobre-hero {
+    position: relative;
+    /* Más bajo que el hero del Inicio: es un encabezado de página, no una
+       portada que se coma la pantalla. */
+    min-height: 420px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    /* Igual que .hero: anula el espacio que <main> reserva para la cabecera
+       fija, para que la foto llegue hasta arriba del todo, y lo devuelve como
+       padding propio para que el texto no quede debajo del menú. */
+    margin-top: calc(-1 * var(--header-height));
+    padding-top: var(--header-height);
+    text-align: center;
+}
+
+/* El velo del Inicio es un degradado en diagonal, pensado para texto pegado a
+   la izquierda. Aquí el texto va centrado, así que el oscurecido tiene que ser
+   parejo, o el título se lee bien de un lado y mal del otro. */
+.sobre-hero .hero__overlay {
+    background: linear-gradient(180deg,
+            rgba(15, 34, 67, 0.55) 0%,
+            rgba(15, 34, 67, 0.45) 45%,
+            rgba(15, 34, 67, 0.7) 100%);
+}
+
+.sobre-hero__container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-max);
+    width: 100%;
+    margin: 0 auto;
+    padding: 72px 24px;
+}
+
+.sobre-hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.4rem, 5vw, 4rem);
+    font-weight: 700;
+    line-height: 1.1;
+    color: var(--white);
+    margin: 0;
+    text-shadow: 0 2px 18px rgba(15, 34, 67, 0.45);
+}
+
+/* ---- Ruta de navegación (Inicio > Sobre Nosotros) ---- */
+.sobre-hero__ruta {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 10px;
+    margin-top: 20px;
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    font-weight: 600;
+}
+
+.sobre-hero__ruta-link {
+    color: var(--white);
+    text-decoration: none;
+    transition: var(--transition-fast);
+}
+
+.sobre-hero__ruta-link:hover,
+.sobre-hero__ruta-link:focus-visible {
+    color: var(--primary-orange);
+}
+
+.sobre-hero__ruta-sep {
+    font-size: 0.7rem;
+    color: rgba(255, 255, 255, 0.65);
+}
+
+/* La página actual no es un enlace: se marca en naranja para cerrar la ruta. */
+.sobre-hero__ruta-actual {
+    color: var(--primary-orange);
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 1024px) {
+    .sobre-hero {
+        min-height: 360px;
+    }
+
+    .sobre-hero__container {
+        padding: 56px 24px;
+    }
+}
+
+@media (max-width: 640px) {
+    .sobre-hero {
+        min-height: 300px;
+    }
+
+    .sobre-hero__container {
+        padding: 40px 20px;
+    }
+
+    .sobre-hero__ruta {
+        font-size: 0.85rem;
+        gap: 8px;
+    }
+}

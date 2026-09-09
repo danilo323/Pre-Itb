@@ -1,0 +1,299 @@
+/* =============================================
+   5. CO GOBIERNO
+   ============================================= */
+.page-sobre-nosotros .sobre-cogob {
+    padding: 90px 0;
+    background: var(--white);
+}
+
+.page-sobre-nosotros .sobre-cogob__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1fr 1.05fr;
+    gap: 40px;
+    align-items: center;
+}
+
+.page-sobre-nosotros .sobre-cogob__title {
+    font-family: var(--font-primary);
+    font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.1;
+    letter-spacing: -1px;
+    margin-bottom: 12px;
+}
+
+.page-sobre-nosotros .sobre-cogob__desc {
+    font-family: var(--font-primary);
+    font-size: 0.92rem;
+    color: #4b5563;
+    line-height: 1.6;
+    max-width: 500px;
+    margin-bottom: 30px;
+}
+
+.page-sobre-nosotros .sobre-cogob__grid {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 22px;
+    max-width: 520px;
+}
+
+.page-sobre-nosotros .sobre-cogob__card {
+    display: flex;
+    flex-direction: column;
+}
+
+.page-sobre-nosotros .sobre-cogob__photo {
+    position: relative;
+    aspect-ratio: 4 / 5;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.page-sobre-nosotros .sobre-cogob__photo img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Botón "+" sobre la esquina inferior derecha de la foto */
+.page-sobre-nosotros .sobre-cogob__plus {
+    position: absolute;
+    right: 12px;
+    bottom: 12px;
+    width: 34px;
+    height: 34px;
+    border-radius: 50%;
+    background: var(--white);
+    color: #111111;
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.18);
+    transition: var(--transition);
+    border: none;
+    cursor: pointer;
+}
+
+.page-sobre-nosotros .sobre-cogob__plus:hover {
+    background: var(--primary-orange);
+    color: var(--white);
+}
+
+.page-sobre-nosotros .sobre-cogob__name {
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #111111;
+    text-align: center;
+    line-height: 1.35;
+    margin: 20px 0 14px;
+}
+
+.page-sobre-nosotros .sobre-cogob__role {
+    display: block;
+    margin-top: auto;
+    font-family: var(--font-primary);
+    font-size: 0.88rem;
+    color: var(--gray-500);
+    text-align: center;
+    line-height: 1.4;
+}
+
+/* Tarjeta de la estructura orgánica */
+.page-sobre-nosotros .sobre-cogob__banner {
+    position: relative;
+    min-height: 420px;
+    border-radius: 10px;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 48px 40px;
+    background-color: var(--primary-blue-dark);
+    background-size: cover;
+    background-position: center;
+}
+
+.page-sobre-nosotros .sobre-cogob__banner::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(180deg, rgba(26, 59, 112, 0.86), rgba(15, 34, 67, 0.94));
+}
+
+.page-sobre-nosotros .sobre-cogob__banner-content {
+    position: relative;
+    z-index: 1;
+    max-width: 460px;
+}
+
+.page-sobre-nosotros .sobre-cogob__banner-icon {
+    font-size: 2.7rem;
+    color: var(--white);
+    line-height: 1;
+    margin-bottom: 20px;
+}
+
+.page-sobre-nosotros .sobre-cogob__banner-icon img {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    margin: 0 auto;
+    display: block;
+}
+
+.page-sobre-nosotros .sobre-cogob__banner-title {
+    font-family: var(--font-primary);
+    font-size: clamp(1.8rem, 2.8vw, 2.3rem);
+    font-weight: 800;
+    color: var(--white);
+    line-height: 1.15;
+    letter-spacing: -0.5px;
+    margin-bottom: 14px;
+}
+
+.page-sobre-nosotros .sobre-cogob__banner-text {
+    font-family: var(--font-primary);
+    font-size: 0.92rem;
+    color: rgba(255, 255, 255, 0.88);
+    line-height: 1.6;
+    margin-bottom: 26px;
+}
+
+.page-sobre-nosotros .sobre-cogob__banner-content .btn--solid {
+    margin: 0 auto;
+}
+
+/* Modal interactivo de perfil de representante */
+.cogob-modal-overlay {
+    position: fixed;
+    inset: 0;
+    background: rgba(10, 20, 40, 0.65);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    z-index: 9999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.25s ease, visibility 0.25s ease;
+}
+
+.cogob-modal-overlay.is-active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.cogob-modal {
+    background: #ffffff;
+    border-radius: 16px;
+    max-width: 440px;
+    width: 100%;
+    padding: 32px 28px;
+    text-align: center;
+    position: relative;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+    transform: scale(0.92);
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.cogob-modal-overlay.is-active .cogob-modal {
+    transform: scale(1);
+}
+
+.cogob-modal__close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: none;
+    background: #f1f5f9;
+    color: #475569;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.cogob-modal__close:hover {
+    background: var(--primary-orange);
+    color: #ffffff;
+}
+
+.cogob-modal__photo {
+    width: 120px;
+    height: 150px;
+    border-radius: 12px;
+    object-fit: cover;
+    margin: 0 auto 16px;
+    display: block;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+}
+
+.cogob-modal__name {
+    font-family: var(--font-primary);
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: #111827;
+    margin-bottom: 6px;
+}
+
+.cogob-modal__role {
+    display: inline-block;
+    color: var(--primary-orange);
+    font-weight: 600;
+    font-size: 0.9rem;
+    margin-bottom: 12px;
+}
+
+.cogob-modal__badge {
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    padding: 10px 14px;
+    font-size: 0.85rem;
+    color: #64748b;
+    margin-top: 10px;
+}
+
+/* =============================================
+   RESPONSIVE - CO GOBIERNO
+   ============================================= */
+@media (max-width: 992px) {
+    .page-sobre-nosotros .sobre-cogob__container {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .page-sobre-nosotros .sobre-cogob__desc {
+        max-width: none;
+    }
+
+    .page-sobre-nosotros .sobre-cogob__grid {
+        max-width: 560px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-sobre-nosotros .sobre-cogob {
+        padding: 50px 0 60px;
+    }
+
+    .page-sobre-nosotros .sobre-cogob__banner {
+        min-height: 340px;
+        padding: 40px 24px;
+    }
+}

@@ -1,0 +1,117 @@
+/* =============================================
+   4. PRINCIPIOS Y VALORES
+   ============================================= */
+.page-sobre-nosotros .sobre-valores {
+    padding: 70px 0 100px;
+    background: var(--white);
+}
+
+.page-sobre-nosotros .sobre-valores__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.page-sobre-nosotros .sobre-valores__header {
+    text-align: center;
+    margin-bottom: 56px;
+}
+
+.page-sobre-nosotros .sobre-valores__header .section-tag {
+    display: inline-block;
+    color: var(--primary-orange);
+    font-size: 0.8rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    margin-bottom: 16px;
+    background: transparent;
+    padding: 0;
+    font-family: var(--font-primary);
+}
+
+.page-sobre-nosotros .sobre-valores__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.1rem, 3.3vw, 2.85rem);
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.25;
+    max-width: 900px;
+    margin: 0 auto;
+    letter-spacing: -0.5px;
+}
+
+.page-sobre-nosotros .sobre-valores__grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 24px;
+    align-items: start;
+}
+
+.page-sobre-nosotros .sobre-valores__item {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.page-sobre-nosotros .sobre-valores__icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.page-sobre-nosotros .sobre-valores__icon img {
+    width: 52px;
+    height: 52px;
+    object-fit: contain;
+    display: block;
+}
+
+.page-sobre-nosotros .sobre-valores__item-title {
+    font-family: var(--font-primary);
+    font-size: 1.15rem;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 6px;
+}
+
+.page-sobre-nosotros .sobre-valores__item-text {
+    font-family: var(--font-primary);
+    font-size: 0.82rem;
+    color: #64748b;
+    line-height: 1.45;
+    max-width: 185px;
+    margin: 0 auto;
+}
+
+/* =============================================
+   RESPONSIVE - PRINCIPIOS Y VALORES
+   ============================================= */
+@media (max-width: 992px) {
+    .page-sobre-nosotros .sobre-valores__grid {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px 24px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-sobre-nosotros .sobre-valores {
+        padding: 50px 0 60px;
+    }
+
+    .page-sobre-nosotros .sobre-valores__grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 32px 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .page-sobre-nosotros .sobre-valores__grid {
+        grid-template-columns: 1fr;
+        gap: 28px;
+    }
+}

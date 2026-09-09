@@ -773,18 +773,18 @@
         "_visible": "1",
         "info_compartido": null,
         "div_textos": null,
-        "etiqueta_superior": "Sobre Nosotros",
+        "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
         "div_cita": null,
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
         "div_imagen": null,
-        "imagen": "img/trayectoria.png"
+        "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
         "_visible": "1",
-        "titulo": "Nuestra Misión",
+        "titulo": "Nuestra misión",
         "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
         "puntos": [
             {
@@ -797,28 +797,28 @@
                 "texto": "Formación práctica orientada al desarrollo económico y social."
             }
         ],
-        "imagen": "img/experiencia.png"
+        "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
     },
     "sobre_vision": {
         "_visible": "1",
-        "titulo": "Nuestra Visión",
-        "descripcion": "Ser la institución de educación superior tecnológica referente del país, reconocida por la calidad de su oferta académica y por su aporte al desarrollo de la sociedad.",
+        "titulo": "Nuestra visión",
+        "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
         "puntos": [
             {
-                "texto": "Innovación tecnológica al servicio del aprendizaje."
+                "texto": "Liderazgo en educación tecnológica universitaria."
             },
             {
-                "texto": "Vinculación permanente con el sector productivo."
+                "texto": "Alianzas e integración con instituciones nacionales e internacionales."
             },
             {
-                "texto": "Profesionales listos para transformar su entorno."
+                "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
             }
         ],
         "imagen": "img/bienestar_estudiantil_1.png"
     },
     "sobre_valores": {
         "_visible": "1",
-        "etiqueta_superior": "Nuestros Principios y Valores",
+        "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
         "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
         "items": [
             {
@@ -847,5 +847,29 @@
                 "descripcion": "Formación académica y humana"
             }
         ]
+    },
+    "sobre_cogobierno": {
+        "_visible": "1",
+        "titulo": "Co Gobierno",
+        "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+        "miembros": [
+            {
+                "foto": "img/placeholder_autoridad.svg",
+                "nombre": "Obst. Lenny Mariscal San Martín",
+                "cargo": "Representante de Docentes"
+            },
+            {
+                "foto": "img/placeholder_autoridad.svg",
+                "nombre": "Ing. Marcos Escaleras Gómez",
+                "cargo": "Representante de Trabajadores"
+            }
+        ],
+        "div_estructura": null,
+        "card_imagen": "img/trayectoria.png",
+        "card_icono": "",
+        "card_titulo": "Estructura Orgánica",
+        "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+        "card_boton": "Ver Organigrama",
+        "card_boton_url": "#"
     }
 }

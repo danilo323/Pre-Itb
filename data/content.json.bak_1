@@ -780,7 +780,7 @@
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
         "div_imagen": null,
-        "imagen": "img/trayectoria.png"
+        "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
         "_visible": "1",
@@ -797,7 +797,7 @@
                 "texto": "Formación práctica orientada al desarrollo económico y social."
             }
         ],
-        "imagen": "img/experiencia.png"
+        "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
     },
     "sobre_vision": {
         "_visible": "1",
@@ -814,7 +814,7 @@
                 "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
             }
         ],
-        "imagen": "img/bienestar_estudiantil_1.png"
+        "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
     },
     "sobre_valores": {
         "_visible": "1",
@@ -854,22 +854,46 @@
         "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
         "miembros": [
             {
-                "foto": "img/placeholder_autoridad.svg",
+                "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
                 "nombre": "Obst. Lenny Mariscal San Martín",
                 "cargo": "Representante de Docentes"
             },
             {
-                "foto": "img/placeholder_autoridad.svg",
+                "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
                 "nombre": "Ing. Marcos Escaleras Gómez",
                 "cargo": "Representante de Trabajadores"
             }
         ],
         "div_estructura": null,
-        "card_imagen": "img/trayectoria.png",
+        "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
-        "card_titulo": "Estructura Orgánica PRUEBA",
+        "card_titulo": "Estructura Orgánica",
         "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
         "card_boton": "Ver Organigrama",
         "card_boton_url": "#"
+    },
+    "sobre_hero": {
+        "_visible": "1",
+        "info_propia": null,
+        "div_left": null,
+        "subtitulo": "Conoce al ITB",
+        "titulo": "Casi 3 Décadas Formando Profesionales",
+        "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+        "cta_texto": "Conoce Nuestra Historia",
+        "div_stats": null,
+        "stat_numero": "Fundado en 1996",
+        "rating": "4.9",
+        "div_right": null,
+        "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+        "video_url": "https://youtu.be/eTgzLxWGgS4",
+        "div_galeria": null,
+        "info_portada": null,
+        "animaciones": false,
+        "imagenes_fondo": [
+            {
+                "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                "estatica": true
+            }
+        ]
     }
 }

@@ -1252,6 +1252,90 @@ return [
             'sections' => [
 
                 // ---------------------------------------------------------
+                // 0. PORTADA PROPIA DE LA PÁGINA
+                //
+                //    Mismos campos que la portada del Inicio, pero guardados
+                //    en su propia sección ('sobre_hero'), así cada página se
+                //    edita por separado. Se pinta con includes/sobre-hero.php,
+                //    donde están repetidos estos mismos 'default'.
+                // ---------------------------------------------------------
+                'sobre_hero' => [
+                    'label' => 'HERO (PORTADA)',
+                    'fields' => [
+                        'info_propia' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>ESTA PORTADA ES SOLO DE SOBRE NOSOTROS.</strong> Lo que cambies aquí no toca la portada del Inicio: son dos portadas independientes. Esta es un banner simple: la foto de fondo, el título y la ruta de navegación. No lleva botón, ni estrellas, ni texto giratorio, ni botón de video.',
+                        ],
+                        'div_textos' => [
+                            'type' => 'divider',
+                            'label' => 'Textos del Banner',
+                        ],
+                        'titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título de la página',
+                            'default' => 'Sobre nosotros',
+                            'help' => 'Texto grande centrado sobre la foto.',
+                        ],
+                        'ruta_inicio' => [
+                            'type' => 'text',
+                            'label' => 'Ruta: primer enlace',
+                            'default' => 'Inicio',
+                            'help' => 'Primera parte de la ruta de navegación. Siempre lleva a la página de inicio.',
+                        ],
+                        'ruta_actual' => [
+                            'type' => 'text',
+                            'label' => 'Ruta: página actual',
+                            'default' => 'Sobre Nosotros',
+                            'help' => 'Segunda parte de la ruta, la que va en naranja. Queda así: Inicio > Sobre Nosotros.',
+                        ],
+                        'div_galeria' => [
+                            'type' => 'divider',
+                            'label' => 'Imagen de Fondo',
+                        ],
+                        'info_portada' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>CÓMO SE COMPORTA EL FONDO:</strong> con una sola foto el banner se queda quieto. Si cargas varias, enciende <em>Animaciones y efectos</em> para que roten con su acercamiento, o enciende <em>Imagen fija</em> en UNA de ellas para que se quede quieto en esa. Es una cosa o la otra: al encender un interruptor, los demás se apagan solos.',
+                        ],
+                        // Mismo mecanismo que la portada del Inicio, pero con
+                        // su propio nombre de grupo exclusivo, para que las dos
+                        // portadas nunca se pisen entre sí.
+                        'animaciones' => [
+                            'type' => 'bool',
+                            'label' => 'Animaciones y efectos',
+                            'default' => true,
+                            'exclusive_group' => 'sobre_hero_modo',
+                            'exclusive_default' => true,
+                            'help' => 'Encendido: las fotos rotan con deslizamiento y acercamiento. Apagado: el fondo se queda fijo en la foto que marques abajo. Con una sola foto cargada no hay nada que rotar, así que se ve fija de todas formas.',
+                        ],
+                        'imagenes_fondo' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Imagen',
+                            'help' => 'Con una sola foto basta. Si agregas más, se rotan como carrusel cuando las animaciones están encendidas.',
+                            'default' => [
+                                ['archivo' => 'img/hero_2.jpg', 'estatica' => false],
+                            ],
+                            'subfields' => [
+                                'archivo' => [
+                                    'type' => 'image',
+                                    'label' => 'Foto de Fondo',
+                                    'help' => 'Tamaño recomendado: 1920x600px (apaisada).',
+                                ],
+                                'estatica' => [
+                                    'type' => 'bool',
+                                    'label' => 'Imagen fija',
+                                    'default' => false,
+                                    'exclusive_group' => 'sobre_hero_modo',
+                                    'help' => 'Enciéndelo para que el fondo se quede quieto en esta foto. Solo una foto puede estar marcada.',
+                                ],
+                            ]
+                        ],
+                    ],
+                ],
+
+                // ---------------------------------------------------------
                 // 1. PRESENTACIÓN (textos y tarjeta de cita a la izquierda,
                 //    imagen a la derecha)
                 // ---------------------------------------------------------
@@ -1261,7 +1345,7 @@ return [
                         'info_compartido' => [
                             'type' => 'alert',
                             'alert_type' => 'info',
-                            'label' => '<strong>OJO:</strong> la <em>Portada</em>, el carrusel de <em>Alianzas</em> y las <em>Autoridades</em> que se ven en esta página son los mismos de <em>Inicio</em>. Para cambiarlos entra a <strong>Páginas → Inicio</strong>: lo que edites ahí se actualiza en las dos páginas.',
+                            'label' => '<strong>OJO:</strong> el carrusel de <em>Alianzas</em> y las <em>Autoridades</em> que se ven en esta página son los mismos de <em>Inicio</em>. Para cambiarlos entra a <strong>Páginas → Inicio</strong>: lo que edites ahí se actualiza en las dos páginas. La <em>Portada</em>, en cambio, es propia de esta página: se edita aquí mismo, en <strong>HERO (PORTADA)</strong>.',
                         ],
                         'div_textos' => [
                             'type' => 'divider',

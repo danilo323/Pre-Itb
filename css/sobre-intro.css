@@ -1,0 +1,175 @@
+/* =============================================
+   1. PRESENTACIÓN (TRAYECTORIA Y COMPROMISO)
+   ============================================= */
+.page-sobre-nosotros .sobre-intro {
+    padding: 80px 0 60px;
+    background: var(--white);
+}
+
+.page-sobre-nosotros .sobre-intro__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+    display: grid;
+    grid-template-columns: 1.12fr 1fr;
+    gap: 64px;
+    align-items: center;
+}
+
+.page-sobre-nosotros .sobre-intro__content .section-tag {
+    display: inline-block;
+    color: var(--primary-orange);
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-transform: capitalize;
+    margin-bottom: 14px;
+    background: transparent;
+    padding: 0;
+    letter-spacing: normal;
+    font-family: var(--font-primary);
+}
+
+.page-sobre-nosotros .sobre-intro__title {
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 3.6vw, 3rem);
+    font-weight: 800;
+    color: #111111;
+    line-height: 1.16;
+    margin-bottom: 22px;
+    letter-spacing: -0.5px;
+}
+
+.page-sobre-nosotros .sobre-intro__text p {
+    font-size: 0.95rem;
+    color: #4b5563;
+    line-height: 1.7;
+    margin-bottom: 16px;
+    font-family: var(--font-primary);
+}
+
+.page-sobre-nosotros .sobre-intro__text p:last-child {
+    margin-bottom: 0;
+}
+
+/* Tarjeta de cita (debajo del texto) */
+.page-sobre-nosotros .tarjeta-cita {
+    background-color: #f8fafc;
+    padding: 24px 28px;
+    border-radius: 12px;
+    color: #1e293b;
+    margin-top: 30px;
+    border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.page-sobre-nosotros .tarjeta-cita__texto {
+    font-family: var(--font-primary);
+    font-size: 1.05rem;
+    line-height: 1.55;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 10px;
+}
+
+.page-sobre-nosotros .tarjeta-cita__autor {
+    display: block;
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    color: #64748b;
+    font-weight: 500;
+}
+
+/* Lado derecho: Imagen con tarjeta flotante */
+.page-sobre-nosotros .sobre-intro__image-wrapper {
+    position: relative;
+    width: 100%;
+}
+
+.page-sobre-nosotros .sobre-intro__image {
+    width: 100%;
+    aspect-ratio: 4 / 4.7;
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
+}
+
+.page-sobre-nosotros .sobre-intro__image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+/* Tarjeta flotante en la esquina inferior izquierda */
+.page-sobre-nosotros .sobre-intro__badge {
+    position: absolute;
+    bottom: 24px;
+    left: 24px;
+    background: #ffffff;
+    padding: 18px 22px;
+    border-radius: 14px;
+    box-shadow: 0 12px 32px rgba(0, 0, 0, 0.16);
+    z-index: 2;
+    min-width: 220px;
+}
+
+.page-sobre-nosotros .sobre-intro__badge-tag {
+    display: block;
+    font-size: 0.7rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    letter-spacing: 0.6px;
+    margin-bottom: 4px;
+    text-transform: uppercase;
+    font-family: var(--font-primary);
+}
+
+.page-sobre-nosotros .sobre-intro__badge-title {
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: #1e293b;
+    line-height: 1.3;
+    margin-bottom: 6px;
+}
+
+.page-sobre-nosotros .sobre-intro__badge-rating {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-primary);
+}
+
+.page-sobre-nosotros .sobre-intro__badge-stars {
+    display: flex;
+    gap: 3px;
+    color: #f59e0b;
+    font-size: 0.8rem;
+}
+
+.page-sobre-nosotros .sobre-intro__badge-score {
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: #1e293b;
+}
+
+/* =============================================
+   RESPONSIVE - PRESENTACIÓN
+   ============================================= */
+@media (max-width: 992px) {
+    .page-sobre-nosotros .sobre-intro__container {
+        grid-template-columns: 1fr;
+        gap: 36px;
+    }
+}
+
+@media (max-width: 768px) {
+    .page-sobre-nosotros .sobre-intro {
+        padding: 50px 0 36px;
+    }
+
+    .page-sobre-nosotros .sobre-intro__badge {
+        bottom: 16px;
+        left: 16px;
+        padding: 14px 18px;
+    }
+}
