@@ -495,3 +495,36 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
 });
+
+// Estado visual del campo PDF. El archivo se sube al guardar el formulario.
+document.addEventListener('DOMContentLoaded', function () {
+    document.querySelectorAll('.field-file').forEach(function (field) {
+        const input = field.querySelector('input[type="file"]');
+        const hidden = field.querySelector('input[type="hidden"]');
+        const name = field.querySelector('.file-summary-name');
+        const meta = field.querySelector('.file-summary-meta');
+        const link = field.querySelector('.file-preview-link');
+        const remove = field.querySelector('.btn-remove-file');
+        const label = field.querySelector('.file-select-label');
+        if (!input || !hidden || !name || !meta || !remove) return;
+
+        input.addEventListener('change', function () {
+            const selected = input.files[0];
+            if (!selected) return;
+            name.textContent = selected.name;
+            meta.textContent = 'PDF · ' + (selected.size / 1024 / 1024).toFixed(selected.size >= 1048576 ? 1 : 2) + ' MB · Se guardará al confirmar';
+            if (link) link.remove();
+            remove.disabled = false;
+            if (label) label.textContent = 'Reemplazar PDF';
+        });
+        remove.addEventListener('click', function () {
+            input.value = '';
+            hidden.value = '';
+            name.textContent = 'Ningún PDF seleccionado';
+            meta.textContent = 'PDF · hasta 32 MB';
+            if (link) link.remove();
+            remove.disabled = true;
+            if (label) label.textContent = 'Seleccionar PDF';
+        });
+    });
+});

@@ -8,6 +8,8 @@ require_once __DIR__ . '/text.php';
 require_once __DIR__ . '/textarea.php';
 require_once __DIR__ . '/repeater.php';
 require_once __DIR__ . '/image.php';
+require_once __DIR__ . '/file.php';
+require_once __DIR__ . '/audio.php';
 require_once __DIR__ . '/bool.php';
 require_once __DIR__ . '/select.php';
 require_once __DIR__ . '/date.php';

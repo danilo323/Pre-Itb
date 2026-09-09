@@ -1,0 +1,275 @@
+Exit code: 0
+Wall time: 1 seconds
+Output:
+/* =============================================
+   PÁGINA INTERNA — Cabecera con foto + acordeón
+   (usado por transparencia-leyes.php y futuras
+   páginas internas de "Instituto")
+   ============================================= */
+
+/* ---- Hero de página interna ---- */
+.page-hero {
+    position: relative;
+    margin-top: calc(-1 * var(--header-height));
+    padding-top: calc(var(--header-height) + 90px);
+    padding-bottom: 70px;
+    background-size: cover;
+    background-position: center;
+    color: var(--white);
+}
+
+.page-hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(105deg,
+            rgba(15, 34, 67, 0.92) 0%,
+            rgba(26, 59, 112, 0.82) 55%,
+            rgba(26, 59, 112, 0.55) 100%);
+}
+
+.page-hero__container {
+    position: relative;
+    z-index: 1;
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.page-hero__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3.2vw, 2.7rem);
+    font-weight: 700;
+    max-width: 900px;
+    margin-bottom: 16px;
+}
+
+.page-hero__breadcrumb {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.75);
+}
+
+.page-hero__breadcrumb a {
+    color: rgba(255, 255, 255, 0.75);
+    transition: var(--transition-fast);
+}
+
+.page-hero__breadcrumb a:hover {
+    color: var(--white);
+}
+
+.page-hero__breadcrumb .is-active {
+    color: var(--white);
+    font-weight: 600;
+}
+
+/* ---- Sección de contenido ---- */
+.transparencia {
+    padding: 80px 0;
+    background: var(--white);
+}
+
+.transparencia__container {
+    max-width: 950px;
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+.transparencia__title {
+    font-family: var(--font-heading);
+    font-size: clamp(1.8rem, 3vw, 2.4rem);
+    font-weight: 700;
+    color: var(--gray-800);
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.transparencia__desc {
+    color: var(--gray-500);
+    text-align: center;
+    font-size: 1rem;
+    line-height: 1.7;
+    max-width: 780px;
+    margin: 0 auto 48px;
+}
+
+/* ---- Barra de búsqueda + filtro de año ---- */
+.transparencia__toolbar {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.transparencia__search-group {
+    flex: 1;
+    display: flex;
+    align-items: stretch;
+    height: 52px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    overflow: hidden;
+    transition: var(--transition-fast);
+}
+
+.transparencia__search-group:focus-within {
+    border-color: var(--primary-orange);
+}
+
+.transparencia__search-input {
+    flex: 1;
+    border: none;
+    background: none;
+    padding: 0 18px;
+    outline: none;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: var(--gray-800);
+}
+
+.transparencia__search-btn {
+    flex-shrink: 0;
+    width: 52px;
+    border: none;
+    background: #8B96A8;
+    color: var(--gray-800);
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: var(--transition-fast);
+}
+
+.transparencia__search-btn:hover {
+    background: #78849A;
+}
+
+.transparencia__year-filter {
+    height: 52px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    background: var(--gray-50);
+    padding: 0 16px;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: var(--gray-800);
+    cursor: pointer;
+}
+
+/* ---- Acordeón ---- */
+.acc-item {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    margin-bottom: 16px;
+    overflow: hidden;
+    background: var(--white);
+}
+
+.acc-item__header {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 18px 22px;
+    background: var(--gray-50);
+    border: none;
+    text-align: left;
+    font-family: var(--font-primary);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.acc-item__header:hover {
+    background: var(--primary-orange-light);
+}
+
+.acc-item__icon {
+    color: var(--gray-500);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.acc-item.is-open .acc-item__icon {
+    transform: rotate(180deg);
+    color: var(--primary-orange);
+}
+
+.acc-item__body {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.35s ease;
+}
+
+.acc-item.is-open .acc-item__body {
+    max-height: 2000px;
+}
+
+.acc-item__empty {
+    padding: 20px 22px;
+    color: var(--gray-500);
+    font-size: 0.9rem;
+}
+
+/* ---- Tabla de documentos ---- */
+.acc-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.acc-table th {
+    text-align: left;
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    color: var(--gray-500);
+    padding: 14px 22px;
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.acc-table td {
+    padding: 14px 22px;
+    font-size: 0.88rem;
+    color: var(--gray-800);
+    border-bottom: 1px solid var(--gray-100);
+    vertical-align: middle;
+}
+
+.acc-table tr:last-child td {
+    border-bottom: none;
+}
+
+.acc-table__row.is-filtered-out {
+    display: none;
+}
+
+/* Botón "Descargar PDF": mismo componente .btn--solid del resto del sitio,
+   solo más chico para que quepa cómodo dentro de la fila de la tabla. */
+.acc-table .btn--solid {
+    padding: 6px 6px 6px 16px;
+    font-size: 0.8rem;
+    white-space: nowrap;
+}
+
+.acc-table .btn--solid .btn__icon-right {
+    width: 28px;
+    height: 28px;
+    font-size: 0.75rem;
+}
+
+@media (max-width: 768px) {
+    .transparencia__toolbar {
+        flex-direction: column;
+    }
+
+    .acc-table {
+        display: block;
+        overflow-x: auto;
+    }
+}
+

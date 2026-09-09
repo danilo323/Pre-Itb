@@ -8,21 +8,30 @@ function field_file_render(string $name_path, $value, array $config): string {
     $help = isset($config['help']) ? '<small>' . htmlspecialchars($config['help'], ENT_QUOTES, 'UTF-8') . '</small>' : '';
     $accept = htmlspecialchars($config['accept'] ?? '.pdf,.doc,.docx', ENT_QUOTES, 'UTF-8');
 
+    $config_sys = file_exists(__DIR__ . '/../config.php') ? (require __DIR__ . '/../config.php') : [];
+    $max_mb = (int)($config_sys['max_upload_mb'] ?? 32);
+
     $has_file = !empty($value);
+    $physical_path = $has_file ? dirname(__DIR__, 2) . '/' . ltrim($value, '/') : '';
+    $file_exists = $has_file && (strpos($value, 'http') === 0 || file_exists($physical_path));
 
-    $file_exists = true;
-    if ($has_file && strpos($value, 'http') !== 0) {
-        $physical_path = dirname(__DIR__, 2) . '/' . ltrim($value, '/');
-        if (!file_exists($physical_path)) {
-            $file_exists = false;
-        }
+    if ($file_exists) {
+        $ext = strtoupper(pathinfo($value, PATHINFO_EXTENSION));
+        $size_mb = (strpos($value, 'http') !== 0 && file_exists($physical_path))
+            ? round(filesize($physical_path) / 1048576, 1)
+            : null;
+        $name_text = htmlspecialchars(basename($value), ENT_QUOTES, 'UTF-8');
+        $meta_text = $size_mb !== null ? "{$ext} · {$size_mb} MB" : $ext;
+        $preview_link = '<a href="' . $val . '" target="_blank" rel="noopener" class="file-preview-link">Ver archivo actual</a>';
+        $select_label = 'Reemplazar PDF';
+        $remove_disabled = '';
+    } else {
+        $name_text = 'Ningún PDF seleccionado';
+        $meta_text = "PDF · hasta {$max_mb} MB";
+        $preview_link = '';
+        $select_label = 'Seleccionar PDF';
+        $remove_disabled = 'disabled';
     }
-
-    $show_preview = $has_file && $file_exists;
-    $preview_hidden_class = $show_preview ? '' : ' is-hidden';
-    $placeholder_hidden_class = $show_preview ? ' is-hidden' : '';
-    $file_name = $show_preview ? htmlspecialchars(basename($value), ENT_QUOTES, 'UTF-8') : '';
-    $file_href = $show_preview ? $val : '#';
 
     $inputId = 'file_' . md5($name_path . rand());
 
@@ -31,22 +40,16 @@ function field_file_render(string $name_path, $value, array $config): string {
     <label>{$label}</label>
     {$help}
 
-    <div class="file-preview-wrapper">
-        <div class="file-preview{$preview_hidden_class}">
-            <i class="bi bi-file-earmark-pdf-fill"></i>
-            <a href="{$file_href}" target="_blank" rel="noopener" class="file-preview-name">{$file_name}</a>
+    <div class="file-upload-card">
+        <div class="file-upload-icon"><i class="bi bi-file-earmark-pdf-fill"></i></div>
+        <div class="file-summary">
+            <span class="file-summary-name">{$name_text}</span>
+            <span class="file-summary-meta">{$meta_text}</span>
+            {$preview_link}
         </div>
-
-        <div class="file-placeholder{$placeholder_hidden_class}">
-            <i class="bi bi-file-earmark"></i>
-            <span>Ningún archivo seleccionado</span>
-        </div>
-
         <div class="file-actions">
-            <label class="btn btn-outline" for="{$inputId}">
-                <i class="bi bi-folder-fill"></i> Cambiar archivo
-            </label>
-            <button type="button" class="btn btn-danger btn-remove-file{$preview_hidden_class}" title="Quitar archivo">
+            <label class="btn btn-outline file-select-label" for="{$inputId}">{$select_label}</label>
+            <button type="button" class="btn btn-danger btn-remove-file" {$remove_disabled}>
                 <i class="bi bi-x-circle"></i> Quitar
             </button>
             <input type="file" id="{$inputId}" name="{$name_path}[file]" accept="{$accept}" class="is-hidden">
