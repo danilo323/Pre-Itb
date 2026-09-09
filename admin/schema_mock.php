@@ -77,7 +77,7 @@ return [
                         ['texto' => 'Instituto', 'url' => '#', 'nivel' => 'padre'],
                         ['texto' => 'Sobre Nosotros', 'url' => '#', 'nivel' => 'hijo'],
                         ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
-                        ['texto' => 'Transparencia / Leyes', 'url' => '#', 'nivel' => 'hijo'],
+                        ['texto' => 'Transparencia / Leyes', 'url' => 'transparencia-leyes.php', 'nivel' => 'hijo'],
                         ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
                         ['texto' => 'Vida Estudiantil', 'url' => '#', 'nivel' => 'padre'],
                         ['texto' => 'Admisiones', 'url' => '#', 'nivel' => 'padre'],
@@ -1253,7 +1253,51 @@ return [
             'group' => 'paginas',
             'icon' => 'bi bi-bank2',
             'type' => 'singleton',
-            'fields' => [],
+            'fields' => [
+                'div_texto' => [
+                    'type' => 'divider',
+                    'label' => 'Textos de la página',
+                ],
+                'titulo' => [
+                    'type' => 'text',
+                    'label' => 'Título',
+                    'default' => 'Transparencia e Información Pública',
+                ],
+                'descripcion' => [
+                    'type' => 'textarea',
+                    'label' => 'Descripción',
+                    'default' => 'En cumplimiento con las disposiciones legales y el principio de rendición de cuentas, el ITB pone a disposición de la ciudadanía la información institucional, financiera y administrativa.',
+                ],
+                'buscador_placeholder' => [
+                    'type' => 'text',
+                    'label' => 'Texto de ejemplo del buscador',
+                    'default' => 'Buscar documento, resolución o presupuesto...',
+                ],
+                'div_secciones' => [
+                    'type' => 'divider',
+                    'label' => 'Nombres de las secciones (acordeones)',
+                ],
+                'cat_info_financiera' => [
+                    'type' => 'text',
+                    'label' => 'Nombre de la sección 1',
+                    'default' => 'Información Financiera y Presupuestaria',
+                ],
+                'cat_rendicion_cuentas' => [
+                    'type' => 'text',
+                    'label' => 'Nombre de la sección 2',
+                    'default' => 'Rendición de Cuentas y Gestión',
+                ],
+                'cat_talento_humano' => [
+                    'type' => 'text',
+                    'label' => 'Nombre de la sección 3',
+                    'default' => 'Talento Humano',
+                ],
+                'cat_remuneracion_mensual' => [
+                    'type' => 'text',
+                    'label' => 'Nombre de la sección 4',
+                    'default' => 'Remuneración Mensual',
+                ],
+            ],
         ],
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
         // así que en vez de 'fields' declara la pantalla que lo atiende con
@@ -1311,6 +1355,55 @@ return [
                     'type' => 'bool',
                     'label' => 'Mostrar en Home',
                     'default' => false,
+                ],
+                'publicado' => [
+                    'type' => 'bool',
+                    'label' => 'Publicado',
+                    'default' => true,
+                ],
+            ],
+        ],
+        'documentos_transparencia' => [
+            'label' => 'Documentos de Transparencia',
+            'group' => 'contenido',
+            'icon' => 'bi bi-file-earmark-pdf-fill',
+            'type' => 'collection',
+            'sortable' => true,
+            'columns' => ['nombre', 'categoria'],
+            'fields' => [
+                'categoria' => [
+                    'type' => 'select',
+                    'label' => 'Sección *',
+                    'help' => 'En qué acordeón de la página de Transparencia / Leyes aparece este documento.',
+                    'required' => true,
+                    'options' => [
+                        'info_financiera' => 'Información Financiera y Presupuestaria',
+                        'rendicion_cuentas' => 'Rendición de Cuentas y Gestión',
+                        'talento_humano' => 'Talento Humano',
+                        'remuneracion_mensual' => 'Remuneración Mensual',
+                    ],
+                ],
+                'nombre' => [
+                    'type' => 'text',
+                    'label' => 'Nombre del documento *',
+                    'help' => 'Ej: Presupuesto Anual Institucional',
+                    'required' => true,
+                ],
+                'anio' => [
+                    'type' => 'text',
+                    'label' => 'Año *',
+                    'help' => 'Ej: 2026',
+                    'required' => true,
+                ],
+                'archivo' => [
+                    'type' => 'file',
+                    'label' => 'Archivo PDF',
+                    'help' => 'En cuanto subas el PDF, su tamaño real reemplaza automáticamente al de "Tamaño (provisional)".',
+                ],
+                'tamano' => [
+                    'type' => 'text',
+                    'label' => 'Tamaño (provisional)',
+                    'help' => 'Solo se usa mientras no hayas subido el PDF real arriba. Ej: 1.8MB',
                 ],
                 'publicado' => [
                     'type' => 'bool',

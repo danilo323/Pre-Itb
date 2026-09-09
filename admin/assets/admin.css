@@ -759,6 +759,43 @@ textarea.form-control, .field-group textarea {
     justify-content: center;
 }
 
+/* File Preview (PDFs) */
+.file-preview-wrapper {
+    margin-top: 12px;
+    border: 1px dashed var(--border-color-strong);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-subtle);
+    transition: border-color 0.2s;
+}
+.file-preview-wrapper:hover {
+    border-color: var(--primary);
+}
+.file-current-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: var(--primary);
+    font-weight: 600;
+    text-decoration: none;
+}
+.file-placeholder {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    opacity: 0.6;
+}
+.file-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
 /* Repeater */
 .repeater-item {
     background: #fff;

@@ -26,7 +26,7 @@
             },
             {
                 "texto": "Transparencia / Leyes",
-                "url": "#",
+                "url": "transparencia-leyes.php",
                 "nivel": "hijo"
             },
             {
@@ -738,5 +738,174 @@
                 "publicado": true
             }
         ]
+    },
+    "documentos_transparencia": {
+        "items": [
+            {
+                "id": 1,
+                "orden": "1",
+                "categoria": "info_financiera",
+                "nombre": "Presupuesto Anual Institucional",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "1.8MB",
+                "publicado": true
+            },
+            {
+                "id": 2,
+                "orden": "2",
+                "categoria": "info_financiera",
+                "nombre": "Balance General y Balance Comprobación",
+                "anio": "2025",
+                "archivo": "",
+                "tamano": "2.4MB",
+                "publicado": true
+            },
+            {
+                "id": 3,
+                "orden": "3",
+                "categoria": "info_financiera",
+                "nombre": "Balances Auditados",
+                "anio": "2025",
+                "archivo": "",
+                "tamano": "4.1MB",
+                "publicado": true
+            },
+            {
+                "id": 4,
+                "orden": "4",
+                "categoria": "info_financiera",
+                "nombre": "Aranceles y Costos de Oferta Académica",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "950KB",
+                "publicado": true
+            },
+            {
+                "id": 5,
+                "orden": "5",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Plan Estratégico de Desarrollo Institucional (PEDI)",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "4.5MB",
+                "publicado": true
+            },
+            {
+                "id": 6,
+                "orden": "6",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Plan Operativo Anual (POA)",
+                "anio": "2025",
+                "archivo": "",
+                "tamano": "2.1MB",
+                "publicado": true
+            },
+            {
+                "id": 7,
+                "orden": "7",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Plan Operativo Anual (POA)",
+                "anio": "2024",
+                "archivo": "",
+                "tamano": "1.9MB",
+                "publicado": true
+            },
+            {
+                "id": 8,
+                "orden": "8",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Certificado de Cumplimiento Tributario",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "1.2MB",
+                "publicado": true
+            },
+            {
+                "id": 9,
+                "orden": "9",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Certificado de Obligaciones Patronales",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "980KB",
+                "publicado": true
+            },
+            {
+                "id": 10,
+                "orden": "10",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Informe de Rendición de Cuentas Institucional",
+                "anio": "2025",
+                "archivo": "",
+                "tamano": "3.8KB",
+                "publicado": true
+            },
+            {
+                "id": 11,
+                "orden": "11",
+                "categoria": "talento_humano",
+                "nombre": "Distributivo de Personal",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "1.5MB",
+                "publicado": true
+            },
+            {
+                "id": 12,
+                "orden": "12",
+                "categoria": "talento_humano",
+                "nombre": "Escala Remunerativa del Personal",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "820KB",
+                "publicado": true
+            },
+            {
+                "id": 13,
+                "orden": "13",
+                "categoria": "talento_humano",
+                "nombre": "Manual de Funciones y Competencias",
+                "anio": "2025",
+                "archivo": "",
+                "tamano": "2.2MB",
+                "publicado": true
+            },
+            {
+                "id": 14,
+                "orden": "14",
+                "categoria": "remuneracion_mensual",
+                "nombre": "Remuneración Mensual - Enero",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "610KB",
+                "publicado": true
+            },
+            {
+                "id": 15,
+                "orden": "15",
+                "categoria": "remuneracion_mensual",
+                "nombre": "Remuneración Mensual - Febrero",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "605KB",
+                "publicado": true
+            },
+            {
+                "id": 16,
+                "orden": "16",
+                "categoria": "remuneracion_mensual",
+                "nombre": "Remuneración Mensual - Marzo",
+                "anio": "2026",
+                "archivo": "",
+                "tamano": "615KB",
+                "publicado": true
+            }
+        ]
+    },
+    "_meta": {
+        "documentos_transparencia": {
+            "last_id": 16
+        }
     }
 }
