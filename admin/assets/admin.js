@@ -114,6 +114,63 @@ document.addEventListener('DOMContentLoaded', function () {
         initImageField(group);
     });
 
+    // ── Preview de audio (mismo patrón que el de imagen) ─
+    // admin/fields/audio.php genera la misma estructura que image.php pero con
+    // sus propias clases, así que necesita su propio inicializador.
+    function initAudioField(group) {
+        const fileInput   = group.querySelector('input[type="file"]');
+        const hiddenInput = group.querySelector('input[type="hidden"]');
+        const box         = group.querySelector('.audio-preview-wrapper');
+        const preview     = box ? box.querySelector('.audio-preview') : null;
+        const audio       = preview ? preview.querySelector('audio') : null;
+        const placeholder = box ? box.querySelector('.audio-placeholder') : null;
+        const removeBtn   = box ? box.querySelector('.btn-remove-audio') : null;
+
+        if (fileInput) {
+            fileInput.addEventListener('change', function () {
+                const file = this.files[0];
+                if (!file) return;
+                // Un audio pesa demasiado para leerlo entero como data URL (lo
+                // que hace el campo de imagen), así que se escucha por
+                // referencia al archivo local, sin cargarlo en memoria.
+                if (audio) {
+                    if (audio.dataset.objectUrl) URL.revokeObjectURL(audio.dataset.objectUrl);
+                    const url = URL.createObjectURL(file);
+                    audio.dataset.objectUrl = url;
+                    audio.src = url;
+                }
+                if (preview) preview.classList.remove('is-hidden');
+                if (placeholder) placeholder.classList.add('is-hidden');
+                if (removeBtn) removeBtn.classList.remove('is-hidden');
+            });
+        }
+
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function () {
+                window.customConfirm('¿Estás seguro de que deseas quitar este audio?', () => {
+                    if (fileInput) fileInput.value = '';
+                    if (hiddenInput) hiddenInput.value = '';
+                    if (audio) {
+                        audio.pause();
+                        if (audio.dataset.objectUrl) {
+                            URL.revokeObjectURL(audio.dataset.objectUrl);
+                            delete audio.dataset.objectUrl;
+                        }
+                        audio.removeAttribute('src');
+                        audio.load();
+                    }
+                    if (preview) preview.classList.add('is-hidden');
+                    if (placeholder) placeholder.classList.remove('is-hidden');
+                    removeBtn.classList.add('is-hidden');
+                });
+            });
+        }
+    }
+
+    document.querySelectorAll('.field-audio').forEach(group => {
+        initAudioField(group);
+    });
+
     // ── REPEATER — añadir y eliminar ────────────────────
     function recalcularIndices(container) {
         const repeaterGroup = container.closest('.repeater-group');

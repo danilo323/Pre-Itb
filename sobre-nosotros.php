@@ -31,6 +31,7 @@ require_once 'includes/content_helper.php';
         <?php include 'includes/sobre-valores.php'; ?>
         <?php include 'includes/autoridades.php'; ?>
         <?php include 'includes/sobre-cogobierno.php'; ?>
+        <?php include 'includes/nosotros_himno.php'; ?>
         <?php
         $alianzas_solo_carrusel = true;
         include 'includes/alianzas.php';

@@ -771,15 +771,15 @@
     },
     "sobre_intro": {
         "_visible": "1",
-        "info_compartido": "",
-        "div_textos": "",
+        "info_compartido": null,
+        "div_textos": null,
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-        "div_cita": "",
+        "div_cita": null,
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": "",
+        "div_imagen": null,
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
@@ -864,7 +864,7 @@
                 "cargo": "Representante de Trabajadores"
             }
         ],
-        "div_estructura": "",
+        "div_estructura": null,
         "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
@@ -874,11 +874,21 @@
     },
     "sobre_hero": {
         "_visible": "1",
-        "info_propia": "",
+        "info_propia": null,
+        "div_left": "",
+        "subtitulo": "Conoce al ITB",
         "titulo": "Sobre nosotros",
-        "div_galeria": "",
-        "info_portada": "",
-        "animaciones": "",
+        "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+        "cta_texto": "Conoce Nuestra Historia",
+        "div_stats": "",
+        "stat_numero": "Fundado en 1996",
+        "rating": "4.9",
+        "div_right": "",
+        "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+        "video_url": "https://youtu.be/eTgzLxWGgS4",
+        "div_galeria": null,
+        "info_portada": null,
+        "animaciones": false,
         "imagenes_fondo": [
             {
                 "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
@@ -886,6 +896,23 @@
             }
         ],
         "ruta_inicio": "Inicio",
-        "ruta_actual": "Sobre Nosotros"
+        "ruta_actual": "Sobre Nosotros",
+        "div_textos": null
+    },
+    "himno": {
+        "_visible": "1",
+        "div_textos": null,
+        "titulo": "Música y letra",
+        "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+        "div_letra": null,
+        "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+        "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+        "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+        "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+        "div_multimedia": null,
+        "audio": "audio/himnoitb.mp3",
+        "btn_descargar": "Descargar música",
+        "imagen": "img/Himno_Estudiante_itb.jpg",
+        "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
     }
 }

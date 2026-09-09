@@ -1611,6 +1611,91 @@ return [
                         ],
                     ],
                 ],
+
+                // ---------------------------------------------------------
+                // 6. MÚSICA Y LETRA (HIMNO). Va debajo de "Co Gobierno".
+                //
+                //    La sección la pinta includes/nosotros_himno.php y lee de
+                //    la sección 'himno', que es como se llama la clave en
+                //    data/content.json. El nombre no se cambia a 'sobre_himno'
+                //    a propósito: así el archivo sigue siendo el mismo que en
+                //    la rama feat/identidad-institucional y las dos ramas no
+                //    chocan cuando se junten.
+                // ---------------------------------------------------------
+                'himno' => [
+                    'label' => 'SECCIÓN 6: MÚSICA Y LETRA (HIMNO)',
+                    'fields' => [
+                        'div_textos' => [
+                            'type' => 'divider',
+                            'label' => 'Encabezado de la Sección',
+                        ],
+                        'titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título',
+                            'default' => 'Música y letra',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Texto debajo del título',
+                            'default' => 'Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.',
+                        ],
+                        'div_letra' => [
+                            'type' => 'divider',
+                            'label' => 'Letra del Himno',
+                        ],
+                        'autor' => [
+                            'type' => 'textarea',
+                            'label' => 'Autor',
+                            'default' => "Dr. Narcilo Natan\nVillavicencio Maldonado",
+                            'help' => 'Sale precedido de "Autor:". Dale Enter para partirlo en dos líneas.',
+                        ],
+                        'coro' => [
+                            'type' => 'textarea',
+                            'label' => 'Coro',
+                            'default' => '',
+                            'help' => 'Escribe la letra tal cual quieres que se vea: los saltos de línea se respetan.',
+                        ],
+                        'estrofa1' => [
+                            'type' => 'textarea',
+                            'label' => 'Estrofa I',
+                            'default' => '',
+                            'help' => 'Los saltos de línea se respetan.',
+                        ],
+                        'estrofa2' => [
+                            'type' => 'textarea',
+                            'label' => 'Estrofa II',
+                            'default' => '',
+                            'help' => 'Los saltos de línea se respetan.',
+                        ],
+                        'div_multimedia' => [
+                            'type' => 'divider',
+                            'label' => 'Audio e Imagen',
+                        ],
+                        'audio' => [
+                            'type' => 'audio',
+                            'label' => 'Audio del himno',
+                            'default' => 'audio/himnoitb.mp3',
+                            'help' => 'Se escucha en el reproductor de la tarjeta. Formatos: mp3, ogg, wav, m4a.',
+                        ],
+                        'btn_descargar' => [
+                            'type' => 'text',
+                            'label' => 'Texto del botón de descarga',
+                            'default' => 'Descargar música',
+                            'help' => 'El botón descarga el mismo audio de arriba.',
+                        ],
+                        'imagen' => [
+                            'type' => 'image',
+                            'label' => 'Imagen (lado derecho)',
+                            'default' => 'img/Himno_Estudiante_itb.jpg',
+                            'help' => 'Foto del coro. Tamaño recomendado: 800x1000px (vertical).',
+                        ],
+                        'nota_legal' => [
+                            'type' => 'textarea',
+                            'label' => 'Nota al pie de la tarjeta',
+                            'default' => "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\nsin el permiso del coro de ITB.",
+                        ],
+                    ],
+                ],
             ],
         ],
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,

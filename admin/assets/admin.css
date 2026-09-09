@@ -1530,6 +1530,51 @@ textarea.form-control, .field-group textarea {
     display: none;
 }
 
+/* ================== CAMPO: AUDIO ================== */
+/* Mismas cajas que el campo de imagen, para que los dos se vean igual. */
+.audio-preview-wrapper {
+    margin-top: 12px;
+    border: 1px dashed var(--border-color-strong);
+    border-radius: var(--radius-sm);
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 14px;
+    background: var(--bg-subtle);
+    transition: border-color 0.2s;
+}
+.audio-preview-wrapper:hover {
+    border-color: var(--primary);
+}
+.audio-preview {
+    width: 100%;
+    text-align: center;
+}
+.audio-preview audio {
+    width: 100%;
+    max-width: 420px;
+}
+.audio-placeholder {
+    text-align: center;
+    color: var(--text-muted);
+    padding: 20px;
+}
+.audio-placeholder i {
+    font-size: 24px;
+    display: block;
+    margin-bottom: 8px;
+}
+.audio-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.field-audio input[type="file"] {
+    display: none;
+}
+
 /* ================== CAMPO: REPEATER ================== */
 /* (antes vivía inline en admin/fields/repeater.php) */
 .repeater-help {
