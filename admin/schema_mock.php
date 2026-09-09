@@ -1241,20 +1241,6 @@ return [
             'type' => 'singleton',
             'fields' => [],
         ],
-        'himno_identidad' => [
-            'label' => 'Himno e Identidad',
-            'group' => 'paginas',
-            'icon' => 'bi bi-flag-fill',
-            'type' => 'singleton',
-            'fields' => [],
-        ],
-        'transparencia_leyes' => [
-            'label' => 'Transparencia / Leyes',
-            'group' => 'paginas',
-            'icon' => 'bi bi-bank2',
-            'type' => 'singleton',
-            'fields' => [],
-        ],
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
         // así que en vez de 'fields' declara la pantalla que lo atiende con
         // 'url'. El menú lateral y el escritorio ya saben leer esa clave, así
