@@ -90,13 +90,17 @@ if (!function_exists('transparencia_filesize')) {
                                         $anio = $doc['anio'] ?? '';
                                         $tiene_archivo = !empty($archivo) && file_exists(__DIR__ . '/../' . ltrim($archivo, '/'));
                                         $href = $tiene_archivo ? htmlspecialchars($archivo, ENT_QUOTES, 'UTF-8') : '#';
+                                        // Nombre legible para el archivo descargado, en vez del hash aleatorio
+                                        // con el que se guarda internamente en docs/.
+                                        $nombre_descarga = trim(preg_replace('/[\\/:*?"<>|]+/', '', $nombre));
+                                        $descarga_attr = $tiene_archivo ? 'download="' . htmlspecialchars($nombre_descarga !== '' ? $nombre_descarga . '.pdf' : basename($archivo), ENT_QUOTES, 'UTF-8') . '"' : '';
                                     ?>
                                         <tr class="acc-table__row" data-nombre="<?= htmlspecialchars(mb_strtolower($nombre), ENT_QUOTES, 'UTF-8') ?>" data-anio="<?= htmlspecialchars($anio, ENT_QUOTES, 'UTF-8') ?>">
                                             <td><?= htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') ?></td>
                                             <td><?= htmlspecialchars($anio, ENT_QUOTES, 'UTF-8') ?></td>
                                             <td><?= htmlspecialchars(transparencia_filesize($archivo, $doc['tamano'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>
                                             <td>
-                                                <a href="<?= $href ?>" class="btn btn--solid" <?= $tiene_archivo ? 'target="_blank" rel="noopener"' : '' ?>>
+                                                <a href="<?= $href ?>" class="btn btn--solid" <?= $descarga_attr ?>>
                                                     Descargar PDF
                                                     <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                                                 </a>

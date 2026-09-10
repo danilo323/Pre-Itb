@@ -72,12 +72,12 @@
             </div>
 
             <!-- Columna Derecha: Imagen del Coro -->
-            <div class="himno__image">
+            <div class="himno__image" data-jarallax data-speed="0.5" data-img-position="top">
                 <?php
                 $himno_img = content_raw('himno', 'imagen', 'img/Himno_Estudiante_itb.jpg');
                 $himno_img = content_image_exists($himno_img) ? $himno_img : 'https://via.placeholder.com/800x1000/F4F6F9/1A3B70?text=Espacio+para+foto';
                 ?>
-                <img src="<?= htmlspecialchars($himno_img, ENT_QUOTES, 'UTF-8') ?>" alt="Coro del ITB">
+                <img src="<?= htmlspecialchars($himno_img, ENT_QUOTES, 'UTF-8') ?>" alt="Coro del ITB" class="jarallax-img">
             </div>
 
             <!-- Footer de la Tarjeta -->

@@ -7,6 +7,15 @@
     overflow: hidden;
 }
 
+/* Variante "solo carrusel" (sobre-nosotros.php): sin título ni logos, el
+   relleno de 80px y el fondo gris de arriba quedaban como una franja vacía
+   y fea antes del carrusel de fotos. Se acorta el espacio y se quita el
+   fondo para que pase directo de la sección de arriba a las fotos. */
+.alianzas--solo-carrusel {
+    padding-top: 24px;
+    background: transparent;
+}
+
 .alianzas__container {
     max-width: var(--container-max);
     margin: 0 auto;
@@ -33,7 +42,14 @@
     line-height: 1.1;
 }
 
-.alianzas__track {
+/* .alianzas__logos-track (logos) y .alianzas__fotos-track (fotos) son dos
+   pistas completamente independientes, sin ninguna clase en común: cada una
+   define su propio ancho completo de pantalla por separado. Antes compartian
+   la clase base ".alianzas__track", lo que las acoplaba como si fueran la
+   misma pieza; ahora cada una es su propio bloque, con el mismo resultado
+   visual de siempre. */
+.alianzas__logos-track,
+.alianzas__fotos-track {
     overflow: hidden;
     /* Las dos filas (logos y fotos) se salen del contenedor centrado de
        --container-max y ocupan el ancho completo de la pantalla, de borde a
@@ -98,9 +114,10 @@
    igual que el marco de Figma (320.1 x 309.3, "Radio de esquina: 0"). Como no
    hay margen ni gap, el truco del carril doble sigue funcionando exactamente
    igual: media lista = la otra mitad, sin saltos. */
-.alianzas__track--fotos {
-    /* El ancho completo lo hereda de .alianzas__track; aqui solo queda la
-       separacion respecto a la fila de logos de arriba. */
+/* La separacion de 32px solo aplica cuando el carrusel de fotos va DESPUES
+   del de logos. En sobre-nosotros.php (solo carrusel, sin logos) la fila de
+   fotos queda primera y no necesita ese espacio extra. */
+.alianzas__logos-track + .alianzas__fotos-track {
     margin-top: 32px;
 }
 
@@ -141,11 +158,11 @@
    DESDE DONDE SE QUEDO (animation-play-state no la reinicia), asi que no hay
    saltos ni al entrar ni al salir.
 
-   El :hover va sobre .alianzas__track y no sobre el carril: el carril mide
-   mucho mas que la pantalla y ademas se desplaza, asi que su area de hover
-   seria erratica; la pista, en cambio, es la banda fija que el usuario ve.
-   Cada fila responde a su propia pista, de modo que pasar por los logos no
-   arranca tambien la fila de fotos.
+   El :hover va sobre cada pista (.alianzas__logos-track / .alianzas__fotos-track)
+   y no sobre el carril: el carril mide mucho mas que la pantalla y ademas se
+   desplaza, asi que su area de hover seria erratica; la pista, en cambio, es
+   la banda fija que el usuario ve. Cada fila responde a su propia pista, de
+   modo que pasar por los logos no arranca tambien la fila de fotos.
 
    Envuelto en @media (hover: hover) porque en pantallas tactiles no hay
    puntero que pueda "entrar": ahi los carruseles siguen girando solos, en vez
@@ -162,8 +179,8 @@
         animation-play-state: paused;
     }
 
-    .alianzas__track:hover .alianzas__logos,
-    .alianzas__track:hover .alianzas__fotos {
+    .alianzas__logos-track:hover .alianzas__logos,
+    .alianzas__fotos-track:hover .alianzas__fotos {
         animation-play-state: running;
     }
 }

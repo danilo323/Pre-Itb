@@ -914,5 +914,185 @@
         "btn_descargar": "Descargar música",
         "imagen": "img/Himno_Estudiante_itb.jpg",
         "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+    },
+    "transparencia_leyes": {
+        "div_texto": null,
+        "titulo": "Transparencia e Información Pública",
+        "descripcion": "En cumplimiento con las disposiciones legales y el principio de rendición de cuentas, el ITB pone a disposición de la ciudadanía la información institucional, financiera y administrativa.",
+        "buscador_placeholder": "Buscar documento, resolución o presupuesto...",
+        "div_secciones": null,
+        "cat_info_financiera": "Información Financiera",
+        "cat_rendicion_cuentas": "Rendición de Cuentas y Gestión",
+        "cat_talento_humano": "Talento Humano",
+        "cat_remuneracion_mensual": "Remuneración Mensual"
+    },
+    "documentos_transparencia": {
+        "items": [
+            {
+                "id": 1,
+                "orden": "1",
+                "categoria": "info_financiera",
+                "nombre": "Presupuesto Anual Institucional",
+                "anio": "2026",
+                "archivo": "docs/0108dc987b041479b25c3f90970e6a93.pdf",
+                "publicado": true,
+                "tamano": "1.8MB"
+            },
+            {
+                "id": 2,
+                "orden": "2",
+                "categoria": "info_financiera",
+                "nombre": "Balance General y Balance Comprobación",
+                "anio": "2025",
+                "archivo": "docs/1d3d932d28e7d27c335fa7b68e0189dd.pdf",
+                "publicado": true,
+                "tamano": "2.4MB"
+            },
+            {
+                "id": 3,
+                "orden": "3",
+                "categoria": "info_financiera",
+                "nombre": "Balances Auditados",
+                "anio": "2025",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "4.1MB"
+            },
+            {
+                "id": 4,
+                "orden": "4",
+                "categoria": "info_financiera",
+                "nombre": "Aranceles y Costos de Oferta Académica",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "950KB"
+            },
+            {
+                "id": 5,
+                "orden": "5",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Plan Estratégico de Desarrollo Institucional (PEDI)",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "4.5MB"
+            },
+            {
+                "id": 6,
+                "orden": "6",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Plan Operativo Anual (POA)",
+                "anio": "2025",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "2.1MB"
+            },
+            {
+                "id": 7,
+                "orden": "7",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Plan Operativo Anual (POA)",
+                "anio": "2024",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "1.9MB"
+            },
+            {
+                "id": 8,
+                "orden": "8",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Certificado de Cumplimiento Tributario",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "1.2MB"
+            },
+            {
+                "id": 9,
+                "orden": "9",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Certificado de Obligaciones Patronales",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "980KB"
+            },
+            {
+                "id": 10,
+                "orden": "10",
+                "categoria": "rendicion_cuentas",
+                "nombre": "Informe de Rendición de Cuentas Institucional",
+                "anio": "2025",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "3.8KB"
+            },
+            {
+                "id": 11,
+                "orden": "11",
+                "categoria": "talento_humano",
+                "nombre": "Distributivo de Personal",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "1.5MB"
+            },
+            {
+                "id": 12,
+                "orden": "12",
+                "categoria": "talento_humano",
+                "nombre": "Escala Remunerativa del Personal",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "820KB"
+            },
+            {
+                "id": 13,
+                "orden": "13",
+                "categoria": "talento_humano",
+                "nombre": "Manual de Funciones y Competencias",
+                "anio": "2025",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "2.2MB"
+            },
+            {
+                "id": 14,
+                "orden": "14",
+                "categoria": "remuneracion_mensual",
+                "nombre": "Remuneración Mensual - Enero",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "610KB"
+            },
+            {
+                "id": 15,
+                "orden": "15",
+                "categoria": "remuneracion_mensual",
+                "nombre": "Remuneración Mensual - Febrero",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "605KB"
+            },
+            {
+                "id": 16,
+                "orden": "16",
+                "categoria": "remuneracion_mensual",
+                "nombre": "Remuneración Mensual - Marzo",
+                "anio": "2026",
+                "archivo": "",
+                "publicado": true,
+                "tamano": "615KB"
+            }
+        ]
+    },
+    "_meta": {
+        "documentos_transparencia": {
+            "last_id": 16
+        }
     }
 }
