@@ -22,9 +22,10 @@ $mision_desc   = content_get('sobre_mision', 'descripcion', 'Somos una Instituci
 <!-- 2. NUESTRA MISIÓN                             -->
 <!-- ============================================= -->
 <article class="sobre-mv__card" id="nuestra-mision">
-    <div class="sobre-mv__image">
+    <div class="sobre-mv__image" data-jarallax data-speed="0.5" data-img-position="top">
         <img src="<?= htmlspecialchars($mision_imagen, ENT_QUOTES, 'UTF-8') ?>"
-            alt="<?= htmlspecialchars($mision_titulo, ENT_QUOTES, 'UTF-8') ?> - ITB">
+            alt="<?= htmlspecialchars($mision_titulo, ENT_QUOTES, 'UTF-8') ?> - ITB"
+            class="jarallax-img">
     </div>
 
     <div class="sobre-mv__body">

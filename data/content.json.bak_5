@@ -814,7 +814,7 @@
                 "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
             }
         ],
-        "imagen": "img/bienestar_estudiantil_1.png"
+        "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
     },
     "sobre_valores": {
         "_visible": "1",
@@ -854,12 +854,12 @@
         "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
         "miembros": [
             {
-                "foto": "img/placeholder_autoridad.svg",
+                "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
                 "nombre": "Obst. Lenny Mariscal San Martín",
                 "cargo": "Representante de Docentes"
             },
             {
-                "foto": "img/placeholder_autoridad.svg",
+                "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
                 "nombre": "Ing. Marcos Escaleras Gómez",
                 "cargo": "Representante de Trabajadores"
             }

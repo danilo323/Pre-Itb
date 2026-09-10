@@ -41,15 +41,30 @@
                         </div>
                     <?php endforeach; ?>
                 </div>
+            </div>
 
+            <!-- Columna Derecha: Imagen del Coro -->
+            <div class="himno__image" data-jarallax data-speed="0.5" data-img-position="top">
                 <?php
-                // El audio se usa dos veces: en el reproductor y en el boton de
-                // descarga, asi que se lee una sola vez aqui arriba.
-                $himno_audio = content_raw('himno', 'audio', 'audio/himnoitb.mp3');
-                $himno_audio_ok = content_image_exists($himno_audio);
+                $himno_img = content_raw('himno', 'imagen', 'img/Himno_Estudiante_itb.jpg');
+                $himno_img = content_image_exists($himno_img) ? $himno_img : 'https://via.placeholder.com/800x1000/F4F6F9/1A3B70?text=Espacio+para+foto';
                 ?>
-                <div class="himno__actions">
-                    <?php if ($himno_audio_ok): ?>
+                <img src="<?= htmlspecialchars($himno_img, ENT_QUOTES, 'UTF-8') ?>" alt="Coro del ITB" class="jarallax-img">
+            </div>
+
+            <?php
+            // El audio se usa dos veces: en el reproductor y en el boton de
+            // descarga, asi que se lee una sola vez aqui arriba.
+            $himno_audio = content_raw('himno', 'audio', 'audio/himnoitb.mp3');
+            $himno_audio_ok = content_image_exists($himno_audio);
+            ?>
+            <!-- Barra inferior: reproductor+botón (bajo el texto) y nota legal
+                 (bajo la imagen). Va fuera de las 2 columnas de arriba para que
+                 quede exactamente al nivel de la imagen, no "colgando" del
+                 texto (que casi siempre mide menos que la foto). -->
+            <div class="himno__bottom-bar">
+                <?php if ($himno_audio_ok): ?>
+                    <div class="himno__actions">
                         <div class="himno__audio-player">
                             <!-- Reproductor de audio nativo, sin JS -->
                             <audio controls>
@@ -67,22 +82,12 @@
                             <?= content_get('himno', 'btn_descargar', 'Descargar música') ?>
                             <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                         </a>
-                    <?php endif; ?>
+                    </div>
+                <?php endif; ?>
+
+                <div class="himno__footer">
+                    <?= nl2br(htmlspecialchars(content_raw('himno', 'nota_legal', "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\nsin el permiso del coro de ITB."), ENT_QUOTES, 'UTF-8')) ?>
                 </div>
-            </div>
-
-            <!-- Columna Derecha: Imagen del Coro -->
-            <div class="himno__image" data-jarallax data-speed="0.5" data-img-position="top">
-                <?php
-                $himno_img = content_raw('himno', 'imagen', 'img/Himno_Estudiante_itb.jpg');
-                $himno_img = content_image_exists($himno_img) ? $himno_img : 'https://via.placeholder.com/800x1000/F4F6F9/1A3B70?text=Espacio+para+foto';
-                ?>
-                <img src="<?= htmlspecialchars($himno_img, ENT_QUOTES, 'UTF-8') ?>" alt="Coro del ITB" class="jarallax-img">
-            </div>
-
-            <!-- Footer de la Tarjeta -->
-            <div class="himno__footer">
-                <?= nl2br(htmlspecialchars(content_raw('himno', 'nota_legal', "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\nsin el permiso del coro de ITB."), ENT_QUOTES, 'UTF-8')) ?>
             </div>
         </div> <!-- Fin de himno__card -->
 

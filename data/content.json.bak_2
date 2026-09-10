@@ -771,15 +771,15 @@
     },
     "sobre_intro": {
         "_visible": "1",
-        "info_compartido": null,
-        "div_textos": null,
+        "info_compartido": "",
+        "div_textos": "",
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-        "div_cita": null,
+        "div_cita": "",
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": null,
+        "div_imagen": "",
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
@@ -864,7 +864,7 @@
                 "cargo": "Representante de Trabajadores"
             }
         ],
-        "div_estructura": null,
+        "div_estructura": "",
         "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
@@ -874,26 +874,18 @@
     },
     "sobre_hero": {
         "_visible": "1",
-        "info_propia": null,
-        "div_left": null,
-        "subtitulo": "Conoce al ITB",
-        "titulo": "Casi 3 Décadas Formando Profesionales",
-        "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
-        "cta_texto": "Conoce Nuestra Historia",
-        "div_stats": null,
-        "stat_numero": "Fundado en 1996",
-        "rating": "4.9",
-        "div_right": null,
-        "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
-        "video_url": "https://youtu.be/eTgzLxWGgS4",
-        "div_galeria": null,
-        "info_portada": null,
-        "animaciones": false,
+        "info_propia": "",
+        "titulo": "Sobre nosotros",
+        "div_galeria": "",
+        "info_portada": "",
+        "animaciones": "",
         "imagenes_fondo": [
             {
                 "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
                 "estatica": true
             }
-        ]
+        ],
+        "ruta_inicio": "Inicio",
+        "ruta_actual": "Sobre Nosotros"
     }
 }
