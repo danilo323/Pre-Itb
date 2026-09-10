@@ -29,27 +29,51 @@ function layout_sidebar($current_key = ''): string {
         $items_by_group[$group][$key] = $item;
     }
 
+    // Cargar páginas personalizadas creadas por el admin
+    require_once __DIR__ . '/../storage.php';
+    $saved_data = storage_load();
+    $paginas_creadas = $saved_data['_paginas_creadas'] ?? [];
+
     foreach ($groups as $group_key => $group_label) {
-        if (empty($items_by_group[$group_key])) continue;
+        $has_items = !empty($items_by_group[$group_key]);
+        $is_paginas_group = ($group_key === 'paginas');
+
+        if (!$has_items && !$is_paginas_group) continue;
         
         $html .= "        <li class=\"sidebar-section-label\">" . htmlspecialchars($group_label) . "</li>\n";
         
-        foreach ($items_by_group[$group_key] as $key => $item) {
-            $label = htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8');
-            $icon  = $item['icon'] ?? 'bi bi-file-earmark-text';
-            $active = ($current_key === $key) ? 'class="active"' : '';
-            
-            // Un item puede traer su propia pagina en el schema ('url'). Sirve
-            // para secciones que no son ni una coleccion ni un singleton de
-            // campos, como Registros del formulario. Sin esto habria que
-            // escribir aqui el nombre de cada pagina especial a mano.
-            if (!empty($item['url'])) {
-                $url = $ab . '/' . ltrim($item['url'], '/');
-            } else {
-                $url = ($item['type'] === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
+        // Renderizar items estáticos del schema
+        if ($has_items) {
+            foreach ($items_by_group[$group_key] as $key => $item) {
+                $label = htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8');
+                $icon  = $item['icon'] ?? 'bi bi-file-earmark-text';
+                $active = ($current_key === $key) ? 'class="active"' : '';
+                
+                if (!empty($item['url'])) {
+                    $url = $ab . '/' . ltrim($item['url'], '/');
+                } else {
+                    $url = ($item['type'] === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
+                }
+                
+                $html .= "        <li><a href=\"{$url}\" {$active}><i class=\"{$icon}\"></i> {$label}</a></li>\n";
             }
-            
-            $html .= "        <li><a href=\"{$url}\" {$active}><i class=\"{$icon}\"></i> {$label}</a></li>\n";
+        }
+
+        // Si es el grupo de PÁGINAS, inyectar páginas creadas dinámicamente y el botón "Crear Página"
+        if ($is_paginas_group) {
+            foreach ($paginas_creadas as $p_id => $p_data) {
+                $p_label = htmlspecialchars($p_data['nombre'] ?? 'Página Sin Título', ENT_QUOTES, 'UTF-8');
+                $p_icon  = htmlspecialchars($p_data['icon'] ?? 'bi bi-file-earmark-text', ENT_QUOTES, 'UTF-8');
+                $p_key   = 'custom_' . $p_id;
+                $active  = ($current_key === $p_key) ? 'class="active"' : '';
+                $p_url   = "{$ab}/pagina_custom.php?id=" . urlencode($p_id);
+
+                $html .= "        <li><a href=\"{$p_url}\" {$active}><i class=\"{$p_icon}\"></i> {$p_label}</a></li>\n";
+            }
+
+            // Elemento especial FIJO: Crear Página (ubicado siempre al final de PÁGINAS)
+            $btn_active = ($current_key === 'paginas_crear') ? 'class="active"' : '';
+            $html .= "        <li><a href=\"{$ab}/pagina_custom.php\" {$btn_active}><i class=\"bi bi-plus-circle-fill\" style=\"color: #F15A24;\"></i> <strong>Crear página</strong></a></li>\n";
         }
     }
 

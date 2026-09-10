@@ -73,6 +73,11 @@
                 "texto": "Admisiones",
                 "url": "#",
                 "nivel": "padre"
+            },
+            {
+                "texto": "Configuración principal",
+                "url": "configuracion-principal.php",
+                "nivel": "padre"
             }
         ],
         "top_link_1": "Portal Estudiantil SGA",
@@ -1093,6 +1098,23 @@
     "_meta": {
         "documentos_transparencia": {
             "last_id": 16
+        }
+    },
+    "_paginas_creadas": {
+        "pg_d018d6e79e8c": {
+            "id": "pg_d018d6e79e8c",
+            "nombre": "Configuración principal",
+            "slug": "configuracion-principal",
+            "icon": "bi bi-file-earmark-text",
+            "menu_pos": "padre",
+            "secciones": [
+                "sobre_hero",
+                "autoridades",
+                "programas",
+                "hero",
+                "alianzas"
+            ],
+            "updated_at": "2026-09-10 16:53:21"
         }
     }
 }
