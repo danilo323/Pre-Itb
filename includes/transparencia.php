@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // includes/transparencia.php
 $doc_categorias = [
     'info_financiera'      => content_get('transparencia_leyes', 'cat_info_financiera', 'Información Financiera y Presupuestaria'),
@@ -95,7 +95,7 @@ if (!function_exists('transparencia_filesize')) {
                                         $nombre_descarga = trim(preg_replace('/[\\/:*?"<>|]+/', '', $nombre));
                                         $descarga_attr = $tiene_archivo ? 'download="' . htmlspecialchars($nombre_descarga !== '' ? $nombre_descarga . '.pdf' : basename($archivo), ENT_QUOTES, 'UTF-8') . '"' : '';
                                     ?>
-                                        <tr class="acc-table__row" data-nombre="<?= htmlspecialchars(mb_strtolower($nombre), ENT_QUOTES, 'UTF-8') ?>" data-anio="<?= htmlspecialchars($anio, ENT_QUOTES, 'UTF-8') ?>">
+                                        <tr class="acc-table__row" data-nombre="<?= htmlspecialchars(function_exists('mb_strtolower') ? mb_strtolower($nombre, 'UTF-8') : strtolower($nombre), ENT_QUOTES, 'UTF-8') ?>" data-anio="<?= htmlspecialchars($anio, ENT_QUOTES, 'UTF-8') ?>">
                                             <td><?= htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') ?></td>
                                             <td><?= htmlspecialchars($anio, ENT_QUOTES, 'UTF-8') ?></td>
                                             <td><?= htmlspecialchars(transparencia_filesize($archivo, $doc['tamano'] ?? ''), ENT_QUOTES, 'UTF-8') ?></td>

@@ -1,4 +1,9 @@
-/* Transparencia / Leyes: acordeones, búsqueda y filtro anual. */
+/* =============================================
+   PAGINA-INTERNA.JS — Lógica Específica
+   PROPÓSITO: Este script SOLO se carga en las páginas internas (como Transparencia/Leyes).
+   Se separa del main.js para no sobrecargar las demás páginas con código que no necesitan (Escalabilidad).
+   Maneja: Acordeones, búsqueda y filtro anual de documentos.
+   ============================================= */
 document.addEventListener('DOMContentLoaded', function () {
     const accordion = document.getElementById('doc-accordion');
     if (!accordion) return;

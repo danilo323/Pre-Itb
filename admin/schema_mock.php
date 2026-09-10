@@ -1817,5 +1817,38 @@ return [
                 'publicado' => ['type' => 'bool', 'label' => 'Publicado', 'default' => true],
             ],
         ],
+        'demo_iconos' => [
+            'label' => 'Ejemplo Selección Íconos',
+            'group' => 'globales',
+            'icon' => 'bi bi-star-fill',
+            'type' => 'singleton',
+            'fields' => [
+                'icono_seccion' => [
+                    'type' => 'select',
+                    'label' => 'Ícono de la Sección',
+                    'help' => 'Selecciona el ícono que representará este apartado.',
+                    'default' => 'bi bi-mortarboard-fill',
+                    'options' => [
+                        ''                              => '-- Ninguno --',
+                        'bi bi-speedometer2'            => '⏱️ Dashboard / Resumen',
+                        'bi bi-mortarboard-fill'        => '🎓 Birrete / Institución',
+                        'bi bi-file-earmark-text'       => '📄 Documento / Archivo',
+                        'bi bi-person-fill'             => '👤 Usuario / Autoridad',
+                        'bi bi-book'                    => '📖 Biblioteca / Estudio',
+                        'bi bi-journal-bookmark'        => '📓 Cursos / Mallas Curriculares',
+                        'bi bi-building'                => '🏛️ Campus / Sedes',
+                        'bi bi-award'                   => '🏅 Certificaciones / Títulos',
+                        'bi bi-people-fill'             => '👥 Comunidad Estudiantil',
+                        'bi bi-laptop'                  => '💻 Campus Virtual / En línea',
+                        'bi bi-calendar-event'          => '📅 Calendario Académico',
+                        'bi bi-cash-coin'               => '💰 Aranceles / Pagos',
+                        'bi bi-briefcase'               => '💼 Prácticas / Bolsa de Empleo',
+                        'bi bi-globe-americas'          => '🌎 Movilidad Internacional',
+                        'bi bi-megaphone'               => '📢 Noticias / Comunicados',
+                        'bi bi-hospital'                => '🏥 Facultad de Salud / Bienestar'
+                    ]
+                ],
+            ],
+        ],
     ],
 ];

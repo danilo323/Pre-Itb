@@ -1,5 +1,7 @@
 /* =============================================
-   MAIN.JS — Landing Page ITB
+   MAIN.JS — Lógica Global del Sitio
+   PROPÓSITO: Este es el script base que se carga en TODAS las páginas.
+   Maneja funcionalidades globales como el Navbar, Footer, Carruseles principales y el Hero.
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {
