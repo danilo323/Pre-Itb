@@ -1,7 +1,6 @@
 <?php
 // Selector visual de coordenadas para los campus del pie de página.
 function field_map_picker_render(string $name_path, $value, array $config): string {
-    static $assets_printed = false;
     $label = htmlspecialchars($config['label'] ?? 'Ubicación en el mapa', ENT_QUOTES, 'UTF-8');
     $help = htmlspecialchars($config['help'] ?? 'Busca una dirección o haz clic en el mapa para colocar el pin.', ENT_QUOTES, 'UTF-8');
     $lat = is_array($value) && isset($value['lat']) && is_numeric($value['lat']) ? (float)$value['lat'] : -2.170998;
@@ -10,29 +9,26 @@ function field_map_picker_render(string $name_path, $value, array $config): stri
     $id = 'map_picker_' . md5($name_path . random_int(1, PHP_INT_MAX));
     $input_id = $id . '_value';
     $search_id = $id . '_search';
-    $assets = '';
-    if (!$assets_printed) {
-        $assets_printed = true;
-        $assets = '<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"><script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>';
-    }
     $json = $has_point ? json_encode(['lat' => $lat, 'lng' => $lng]) : '';
     $safe_json = htmlspecialchars($json ?: '', ENT_QUOTES, 'UTF-8');
+    $point_state = $has_point ? '1' : '0';
+    // Se conservan para compatibilidad con el bloque legado comentado abajo.
     $lat_js = json_encode($lat);
     $lng_js = json_encode($lng);
     $has_point_js = $has_point ? 'true' : 'false';
 
     return <<<HTML
-{$assets}
-<div class="form-group field-map-picker">
+<div class="form-group field-map-picker js-map-picker" data-lat="{$lat}" data-lng="{$lng}" data-has-point="{$point_state}">
     <label>{$label}</label><small>{$help}</small>
-    <div style="display:flex;gap:8px;margin:8px 0;">
-        <input id="{$search_id}" type="text" class="form-control" placeholder="Buscar dirección o lugar">
-        <button type="button" class="btn btn-outline" data-map-search="{$id}">Buscar</button>
+    <div class="field-map-picker__search">
+        <input id="{$search_id}" type="text" class="form-control js-map-picker-search" placeholder="Buscar dirección o lugar">
+        <button type="button" class="btn btn-outline js-map-picker-search-button">Buscar</button>
     </div>
-    <div id="{$id}" style="height:280px;border:1px solid #D1D5DB;border-radius:8px;"></div>
-    <small id="{$id}_status" style="display:block;margin-top:7px;color:#4B5563;">Haz clic en el mapa para fijar la ubicación.</small>
-    <input id="{$input_id}" type="hidden" name="{$name_path}" value="{$safe_json}">
+    <div id="{$id}" class="field-map-picker__map"></div>
+    <small id="{$id}_status" class="field-map-picker__status">Haz clic en el mapa para fijar la ubicación.</small>
+    <input id="{$input_id}" class="js-map-picker-value" type="hidden" name="{$name_path}" value="{$safe_json}">
 </div>
+<!-- JavaScript moved to admin/assets/map_picker.js.
 <script>
 (function () {
     var map = L.map('{$id}').setView([{$lat_js}, {$lng_js}], {$has_point_js} ? 16 : 13);
@@ -64,6 +60,7 @@ function field_map_picker_render(string $name_path, $value, array $config): stri
     });
 }());
 </script>
+-->
 HTML;
 }
 
