@@ -78,23 +78,62 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // =========================================
-    // 1. NAVBAR — Menú Hamburguesa (Mobile)
+    // 1. NAVBAR — Menú Hamburguesa & Cajón Móvil
     // =========================================
     const navbarToggle = document.getElementById('navbar-toggle');
     const navbarMenu = document.getElementById('navbar-menu');
+    const navbarBackdrop = document.getElementById('navbar-backdrop');
+    const navbarClose = document.getElementById('navbar-close');
+    const isMobileNav = () => window.matchMedia('(max-width: 1150px)').matches;
+
+    const openMenu = () => {
+        if (!navbarMenu) return;
+        navbarMenu.classList.add('active');
+        if (navbarToggle) navbarToggle.classList.add('active');
+        if (navbarBackdrop) navbarBackdrop.classList.add('active');
+        document.body.classList.add('menu-open');
+        document.body.style.overflow = 'hidden';
+    };
+
+    const closeMenu = () => {
+        if (!navbarMenu) return;
+        navbarMenu.classList.remove('active');
+        if (navbarToggle) navbarToggle.classList.remove('active');
+        if (navbarBackdrop) navbarBackdrop.classList.remove('active');
+        document.body.classList.remove('menu-open');
+        document.body.style.overflow = '';
+    };
 
     if (navbarToggle && navbarMenu) {
-        navbarToggle.addEventListener('click', () => {
-            navbarToggle.classList.toggle('active');
-            navbarMenu.classList.toggle('active');
-            document.body.style.overflow = navbarMenu.classList.contains('active') ? 'hidden' : '';
+        navbarToggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            if (navbarMenu.classList.contains('active')) {
+                closeMenu();
+            } else {
+                openMenu();
+            }
         });
 
+        if (navbarClose) {
+            navbarClose.addEventListener('click', (e) => {
+                e.stopPropagation();
+                closeMenu();
+            });
+        }
+
+        if (navbarBackdrop) {
+            navbarBackdrop.addEventListener('click', closeMenu);
+        }
+
         document.addEventListener('click', (e) => {
-            if (!navbarMenu.contains(e.target) && !navbarToggle.contains(e.target)) {
-                navbarToggle.classList.remove('active');
-                navbarMenu.classList.remove('active');
-                document.body.style.overflow = '';
+            if (navbarMenu.classList.contains('active') && !navbarMenu.contains(e.target) && !navbarToggle.contains(e.target)) {
+                closeMenu();
+            }
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape' && navbarMenu.classList.contains('active')) {
+                closeMenu();
             }
         });
     }
@@ -106,15 +145,17 @@ document.addEventListener('DOMContentLoaded', () => {
 
     dropdownItems.forEach(item => {
         const link = item.querySelector('.navbar__link');
-        link.addEventListener('click', (e) => {
-            if (window.innerWidth <= 1024) {
-                e.preventDefault();
-                item.classList.toggle('active');
-                dropdownItems.forEach(other => {
-                    if (other !== item) other.classList.remove('active');
-                });
-            }
-        });
+        if (link) {
+            link.addEventListener('click', (e) => {
+                if (isMobileNav()) {
+                    e.preventDefault();
+                    item.classList.toggle('active');
+                    dropdownItems.forEach(other => {
+                        if (other !== item) other.classList.remove('active');
+                    });
+                }
+            });
+        }
     });
 
     // =========================================
@@ -132,10 +173,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // 4. CERRAR MENÚ al redimensionar ventana
     // =========================================
     window.addEventListener('resize', () => {
-        if (window.innerWidth > 1024) {
-            if (navbarToggle) navbarToggle.classList.remove('active');
-            if (navbarMenu) navbarMenu.classList.remove('active');
-            document.body.style.overflow = '';
+        if (!isMobileNav()) {
+            closeMenu();
             dropdownItems.forEach(item => item.classList.remove('active'));
         }
     });

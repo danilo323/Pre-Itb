@@ -1,4 +1,4 @@
-﻿/* =============================================
+/* =============================================
    SITE HEADER (Tarjeta flotante sticky)
    ============================================= */
 .site-header {
@@ -25,13 +25,15 @@
        de que los dos sigan cuadrados al cambiar el ancho de la pantalla o al
        agregar/quitar opciones del menu desde el panel. */
     display: grid;
-    /* Columna 1 = el logo (lo justo que ocupa). Columna 2 = todo el resto, para
-       que el menu se estire y no quede ese hueco blanco enorme a la izquierda. */
-    grid-template-columns: auto 1fr;
+    /* Columna 1 = el logo. Columna 2 = minmax(0, 1fr) para que los elementos hijos
+       respeten el ancho de la pantalla y no fuercen desbordamiento horizontal. */
+    grid-template-columns: auto minmax(0, 1fr);
     /* Las filas se fijan a mano para que el alto total sea exactamente
        --header-height, que es lo que el hero descuenta por arriba. */
     grid-template-rows: var(--top-bar-height) calc(var(--header-height) - var(--top-bar-height));
     padding: 0 var(--header-pad);
+    box-sizing: border-box;
+    max-width: 100vw;
 }
 
 /* .navbar y .navbar__container se 'desaparecen' como cajas (sus hijos pasan a
@@ -45,6 +47,7 @@
 .top-bar {
     grid-row: 1;
     grid-column: 2;
+    min-width: 0;
 }
 
 /* El logo ocupa las DOS filas, asi queda centrado verticalmente respecto a toda
@@ -53,8 +56,8 @@
     grid-row: 1 / -1;
     grid-column: 1;
     /* Ensancha la columna del logo, y con ella empuja la franja azul y el menu.
-       La columna 1 es 'auto', asi que su ancho = ancho del logo + este respiro. */
-    padding-right: 40px;
+       Fluido y adaptable para que no empuje en exceso en pantallas intermedias. */
+    padding-right: clamp(16px, 2.2vw, 36px);
 }
 
 .navbar__menu {
@@ -63,6 +66,7 @@
     /* Los enlaces se van a la izquierda (junto al logo) y los botones a la
        derecha, en vez de amontonarse todos a la derecha dejando un hueco. */
     justify-content: space-between;
+    min-width: 0;
 }
 
 .navbar__toggle {
@@ -133,26 +137,28 @@ main {
        depender de ningun numero fijo, aunque se agreguen o quiten opciones
        del menu desde el panel o cambie el ancho del logo. */
     flex: 1;
-    padding: 0 24px;
+    padding: 0 clamp(12px, 1.6vw, 24px);
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 12px;
+    gap: clamp(8px, 1vw, 14px);
     border-bottom-left-radius: 14px;
     border-bottom-right-radius: 14px;
+    min-width: 0;
 }
 
 .top-bar__nav {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: clamp(2px, 0.3vw, 4px);
+    min-width: 0;
 }
 
 .top-bar__link {
     color: var(--white);
-    font-size: 0.82rem;
+    font-size: clamp(0.74rem, 0.78vw, 0.82rem);
     font-weight: 500;
-    padding: 6px 12px;
+    padding: 5px clamp(6px, 0.7vw, 12px);
     border-radius: var(--radius-sm);
     transition: var(--transition-fast);
     white-space: nowrap;
@@ -167,7 +173,8 @@ main {
 .top-bar__actions {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: clamp(5px, 0.6vw, 8px);
+    flex-shrink: 0;
 }
 
 .top-bar__search {
@@ -191,7 +198,7 @@ main {
 
 .top-bar__search-icon-left {
     color: var(--primary-blue);
-    padding-left: 10px;
+    padding-left: clamp(6px, 0.7vw, 10px);
     font-size: 0.75rem;
 }
 
@@ -201,8 +208,8 @@ main {
     outline: none;
     color: var(--white);
     font-size: 0.75rem;
-    padding: 4px 10px;
-    width: 100px;
+    padding: 4px clamp(6px, 0.6vw, 10px);
+    width: clamp(70px, 6.5vw, 110px);
     font-family: var(--font-primary);
 }
 
@@ -278,10 +285,10 @@ main {
 }
 
 .navbar__logo-img {
-    /* El logo abarca las dos filas (120px de alto total), asi que a 100px sigue
-       teniendo aire arriba y abajo y no obliga a crecer a la cabecera. */
-    height: 100px;
+    /* Altura adaptable para encajar perfectamente tanto en pantallas grandes como medianas */
+    height: clamp(75px, 5.8vw, 95px);
     width: auto;
+    object-fit: contain;
 }
 
 /* Hamburguesa */
@@ -290,11 +297,13 @@ main {
     flex-direction: column;
     justify-content: center;
     gap: 5px;
-    width: 36px;
-    height: 36px;
+    width: 38px;
+    height: 38px;
     padding: 6px;
     border-radius: var(--radius-sm);
     z-index: 1002;
+    background: transparent;
+    cursor: pointer;
 }
 
 .navbar__toggle:hover {
@@ -322,29 +331,40 @@ main {
     transform: rotate(-45deg) translate(5px, -5px);
 }
 
-/* MenÃº */
+/* Elementos exclusivos del cajón móvil (ocultos en escritorio) */
+.navbar__mobile-header,
+.navbar__mobile-quicklinks,
+.navbar__backdrop {
+    display: none;
+}
+
+/* Menú */
 .navbar__menu {
     display: flex;
     align-items: center;
-    gap: 8px;
+    gap: clamp(4px, 0.8vw, 10px);
+    min-width: 0;
 }
 
 .navbar__list {
     display: flex;
     align-items: center;
-    gap: 4px;
+    gap: clamp(1px, 0.3vw, 4px);
+    min-width: 0;
+    flex-shrink: 1;
 }
 
 .navbar__item {
     position: relative;
+    flex-shrink: 0;
 }
 
 .navbar__link {
     display: flex;
     align-items: center;
-    gap: 5px;
-    padding: 8px 16px;
-    font-size: 0.975rem;
+    gap: 4px;
+    padding: 7px clamp(7px, 0.75vw, 14px);
+    font-size: clamp(0.85rem, 0.88vw, 0.95rem);
     font-weight: 500;
     color: var(--gray-700);
     border-radius: var(--radius-sm);
@@ -358,7 +378,7 @@ main {
 }
 
 .navbar__dropdown-icon {
-    font-size: 0.65rem;
+    font-size: 0.62rem;
     transition: var(--transition);
 }
 
@@ -408,33 +428,23 @@ main {
 /* CTA Buttons */
 .navbar__cta {
     display: flex;
-    /* 'stretch' y no 'center': asi el boton mas bajo (Solicitar Informacion) se
-       estira hasta el alto del mas alto (Matriculame, que mide lo que su icono
-       de 36px mas el relleno). Se emparejan solos, sin escribir un alto fijo que
-       habria que corregir a mano cada vez que cambie el tamano de la letra. */
     align-items: stretch;
-    gap: 10px;
-    margin-left: 16px;
+    gap: clamp(6px, 0.7vw, 10px);
+    margin-left: clamp(6px, 1vw, 14px);
+    flex-shrink: 0;
 }
 
-/* Solo la tipografia de los dos botones. La FORMA la pone .btn--solid
-   (css/base.css, el mismo boton de "Explorar Programas" del hero) en el caso de
-   Matriculame, y .navbar__btn--outline aqui abajo en el de Solicitar Informacion.
-   header.css va despues de base.css en el @import, asi que este tamano de letra
-   manda sobre el que trae .btn--solid: la tipografia del menu se mantiene. */
 .navbar__btn {
-    font-size: 0.92rem;
+    font-size: clamp(0.82rem, 0.86vw, 0.92rem);
     font-weight: 600;
     white-space: nowrap;
 }
 
-/* "Solicitar Informacion": se le copia UNICAMENTE la esquina cuadrada de
-   .btn--solid (12px). Su relleno y su hover se quedan tal cual estaban. */
 .navbar__btn--outline {
     display: inline-flex;
     align-items: center;
-    gap: 8px;
-    padding: 10px 22px;
+    gap: 6px;
+    padding: 8px clamp(10px, 1.1vw, 20px);
     border-radius: 12px;
     color: var(--primary-orange);
     border: 2px solid var(--primary-orange);

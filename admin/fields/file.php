@@ -89,11 +89,16 @@ function field_file_parse($raw, array $config) {
             'application/msword',
             'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
         ];
-        $finfo = finfo_open(FILEINFO_MIME_TYPE);
-        $mime = $finfo ? finfo_file($finfo, $tmp_name) : false;
-        if ($finfo) finfo_close($finfo);
+        $mime = false;
+        if (function_exists('finfo_open')) {
+            $finfo = finfo_open(FILEINFO_MIME_TYPE);
+            $mime = $finfo ? finfo_file($finfo, $tmp_name) : false;
+            if ($finfo) finfo_close($finfo);
+        } elseif (function_exists('mime_content_type')) {
+            $mime = @mime_content_type($tmp_name);
+        }
 
-        if (!$mime || !in_array($mime, $allowed_mimes, true)) {
+        if ($mime !== false && !in_array($mime, $allowed_mimes, true)) {
             $_SESSION['flash_message'] = "Tipo de archivo inválido ({$mime}). El archivo no parece ser un documento válido.";
             $_SESSION['flash_type'] = 'error';
             return $old_val;

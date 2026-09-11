@@ -54,6 +54,14 @@
 
             <!-- Menú de navegación -->
             <nav class="navbar__menu" id="navbar-menu">
+                <!-- Encabezado exclusivo del cajón móvil -->
+                <div class="navbar__mobile-header">
+                    <span class="navbar__mobile-title">Menú Institucional</span>
+                    <button class="navbar__mobile-close" id="navbar-close" aria-label="Cerrar menú">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+
                 <ul class="navbar__list">
                     <?php
                     $items_menu = content_raw('menu', 'items_menu', []);
@@ -124,6 +132,18 @@
                     ?>
                 </ul>
 
+                <!-- Accesos rápidos para móviles (Enlaces de la barra superior) -->
+                <div class="navbar__mobile-quicklinks">
+                    <span class="navbar__mobile-section-title">Portales y Enlaces</span>
+                    <div class="navbar__mobile-quicklinks-grid">
+                        <a href="#" class="navbar__mobile-quicklink"><i class="fas fa-user-graduate"></i> <?= content_get('menu', 'top_link_1', 'Portal Estudiantil SGA') ?></a>
+                        <a href="#" class="navbar__mobile-quicklink"><i class="fas fa-graduation-cap"></i> <?= content_get('menu', 'top_link_2', 'Educación Continua') ?></a>
+                        <a href="#" class="navbar__mobile-quicklink"><i class="fas fa-handshake"></i> <?= content_get('menu', 'top_link_3', 'Vinculación') ?></a>
+                        <a href="#" class="navbar__mobile-quicklink"><i class="fas fa-flask"></i> <?= content_get('menu', 'top_link_4', 'Investigación') ?></a>
+                        <a href="#" class="navbar__mobile-quicklink"><i class="fas fa-network-wired"></i> <?= content_get('menu', 'top_link_5', 'UNIEBEC') ?></a>
+                    </div>
+                </div>
+
                 <!-- Botones CTA -->
                 <div class="navbar__cta">
                     <a href="#" class="navbar__btn navbar__btn--outline" id="btn-solicitar"><?= content_get('menu', 'cta_btn_1', 'Solicitar Información') ?></a>
@@ -135,4 +155,6 @@
             </nav>
         </div>
     </header>
+    <!-- Fondo oscuro difuminado al abrir menú móvil -->
+    <div class="navbar__backdrop" id="navbar-backdrop"></div>
 </div>
