@@ -4,6 +4,7 @@
    cuyos hover solo amplían o reproducen contenido.
    ============================================= */
 @media (hover: hover) {
+
     :is(.btn, .btn-back, .navbar__btn, .top-bar__icon-btn, .top-bar__lang-btn,
         .top-bar__search-btn, .navbar__toggle, .navbar__mobile-close,
         .navbar__mobile-quicklink, .transparencia__search-btn,
@@ -38,4 +39,7 @@
     .btn--solid:hover::before {
         transform: translateX(-101%) !important;
     }
+
+    /* Variante del botón de matrícula: replica la animación de
+       "Ver Directorio" en vez de la cortina oscura de .btn--solid. */
 }

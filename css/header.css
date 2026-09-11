@@ -461,3 +461,6 @@ main {
 /* Las reglas .navbar__btn--solid y .navbar__btn-icon se eliminaron: Matriculame
    ahora usa .btn--solid, el boton compartido con el hero. Tener dos estilos para
    el mismo boton es justo lo que hace que se desincronicen. */
+
+/* "Matricúlate" conserva la estructura compartida de .btn--solid, pero usa
+   el mismo relleno naranja progresivo del botón "Ver Directorio". */

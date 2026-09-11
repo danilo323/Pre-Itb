@@ -1121,6 +1121,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
         const terminarArrastreAlianzas = (evento) => {
             if (!arrastreAlianzas || evento.pointerId !== arrastreAlianzas.id) return;
+            // Si hubo un arrastre, se ignora solamente el clic sintético que
+            // viene inmediatamente después de soltar. Un clic normal siempre
+            // puede abrir la imagen ampliada.
             ignorarClickAlianzas = arrastreAlianzas.movio;
             pistaFotosMarcoAlianzas.classList.remove('is-dragging');
             if (pistaFotosMarcoAlianzas.hasPointerCapture(evento.pointerId)) {

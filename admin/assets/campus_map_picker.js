@@ -18,8 +18,9 @@
 
         document.querySelectorAll('.js-campus-map-picker').forEach(function (container) {
         var mapEl       = container.querySelector('.js-campus-map');
-        var searchInput = container.querySelector('.js-campus-search');
-        var searchBtn   = container.querySelector('.js-campus-search-btn');
+        // La ubicación se asigna exclusivamente con un clic sobre el mapa.
+        var searchInput = null;
+        var searchBtn   = null;
         var statusEl    = container.querySelector('.js-campus-status');
         var hiddenInput = container.querySelector('.js-campus-locations-value');
         var activeBox   = container.querySelector('.js-campus-active');
@@ -60,27 +61,40 @@
         /* ── 2. Inyectar botones "Seleccionar" en el repeater ───────────── */
         function injectSelectButtons() {
             campuses.forEach(function (c) {
-                if (c.element.querySelector('.js-campus-select-btn')) return;
                 var header = c.element.querySelector('.repeater-item-header');
                 if (!header) return;
                 var title = header.querySelector('.repeater-item-title');
                 if (!title) return;
 
-                var btn = document.createElement('button');
-                btn.type = 'button';
-                btn.className = 'btn btn-sm js-campus-select-btn';
+                var btn = c.element.querySelector('.js-campus-select-btn');
+                if (!btn) {
+                    btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'btn btn-sm js-campus-select-btn';
+                    title.appendChild(btn);
+                }
                 btn.dataset.index = c.index;
                 btn.innerHTML = '<i class="bi bi-geo-alt-fill"></i> Seleccionar';
 
                 // Indicador de ubicación guardada
-                var dot = document.createElement('span');
-                dot.className = 'cmp-repeater-dot' + (locations[c.index] ? ' has-location' : '');
+                var dot = c.element.querySelector('.cmp-repeater-dot');
+                if (!dot) {
+                    dot = document.createElement('span');
+                    dot.className = 'cmp-repeater-dot';
+                    title.insertBefore(dot, btn);
+                }
+                dot.classList.toggle('has-location', !!locations[c.index]);
                 dot.title = locations[c.index] ? 'Ubicación definida' : 'Sin ubicación';
 
-                title.appendChild(dot);
-                title.appendChild(btn);
-
-                btn.addEventListener('click', function () { selectCampus(c.index); });
+                // Se usa una propiedad del elemento y no data-* porque los
+                // repeaters se clonan: el atributo se copiaría, pero el evento
+                // no, dejando el botón del campus nuevo sin funcionar.
+                if (!btn._campusMapBound) {
+                    btn.addEventListener('click', function () {
+                        selectCampus(Number(btn.dataset.index));
+                    });
+                    btn._campusMapBound = true;
+                }
             });
         }
 
@@ -169,7 +183,7 @@
             activeName.textContent = c.nombre;
 
             // Actualizar botones del repeater
-            document.querySelectorAll('.js-campus-select-btn').forEach(function (b) {
+            repeaterGroup.querySelectorAll('.js-campus-select-btn').forEach(function (b) {
                 b.classList.toggle('is-active', Number(b.dataset.index) === idx);
                 if (Number(b.dataset.index) === idx) {
                     b.innerHTML = '<i class="bi bi-check-lg"></i> Editando';
@@ -194,7 +208,7 @@
             selectedIndex = -1;
             activeBox.hidden = true;
             clearMarkers();
-            document.querySelectorAll('.js-campus-select-btn').forEach(function (b) {
+            repeaterGroup.querySelectorAll('.js-campus-select-btn').forEach(function (b) {
                 b.classList.remove('is-active');
                 b.innerHTML = '<i class="bi bi-geo-alt-fill"></i> Seleccionar';
             });
@@ -241,7 +255,7 @@
         });
 
         /* ── 7. Búsqueda ────────────────────────────────────────────────── */
-        searchBtn.addEventListener('click', function () {
+        if (searchBtn && searchInput) searchBtn.addEventListener('click', function () {
             var query = searchInput.value.trim();
             if (!query) return;
             statusEl.textContent = 'Buscando ubicación…';
@@ -263,7 +277,7 @@
                 })
                 .catch(function () { statusEl.textContent = 'No se pudo buscar.'; });
         });
-        searchInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); searchBtn.click(); } });
+        if (searchBtn && searchInput) searchInput.addEventListener('keydown', function (e) { if (e.key === 'Enter') { e.preventDefault(); searchBtn.click(); } });
 
         /* ── 8. Sincronizar al enviar el formulario ─────────────────────── */
         function syncHiddenInput() {
@@ -275,7 +289,7 @@
             form.addEventListener('submit', function () {
                 syncHiddenInput();
                 campuses.forEach(function (c) {
-                    var ubicInput = document.querySelector(
+                    var ubicInput = repeaterGroup && repeaterGroup.querySelector(
                         'input[name="' + namePath + '[' + c.index + '][ubicacion]"]'
                     );
                     if (ubicInput && locations[c.index]) {
@@ -289,7 +303,22 @@
 
         /* ── 9. Re-leer campus si cambia el repeater ────────────────────── */
         if (repeaterGroup) {
-            var observer = new MutationObserver(function () {
+            var observer = new MutationObserver(function (mutations) {
+                // Los botones y sus iconos también cambian el DOM. Solo se
+                // vuelve a leer el repeater cuando realmente se añadió,
+                // eliminó o reordenó un campus; de otro modo la selección se
+                // perdería justo al pulsar "Seleccionar".
+                var changed = mutations.some(function (mutation) {
+                    var nodes = Array.prototype.slice.call(mutation.addedNodes)
+                        .concat(Array.prototype.slice.call(mutation.removedNodes));
+                    return nodes.some(function (node) {
+                        return node.nodeType === 1 && (
+                            node.classList.contains('repeater-item') ||
+                            node.querySelector('.repeater-item')
+                        );
+                    });
+                });
+                if (!changed) return;
                 campuses = readCampusesFromRepeater();
                 locations = {};
                 campuses.forEach(function (c) {

@@ -16,10 +16,6 @@ function field_campus_map_picker_render(string $name_path, $value, array $config
         <span class="cmp-active__name js-campus-active-name"></span>
         <button type="button" class="btn btn-sm btn-outline js-campus-deselect">Cancelar selección</button>
     </div>
-    <div class="cmp-search">
-        <input type="text" class="form-control js-campus-search" placeholder="Buscar dirección o lugar">
-        <button type="button" class="btn btn-outline js-campus-search-btn">Buscar</button>
-    </div>
     <div class="cmp-map js-campus-map"></div>
     <small class="cmp-status js-campus-status">Selecciona un campus y haz clic en el mapa para fijar su pin. El pin no se arrastra.</small>
     <input class="js-campus-locations-value" type="hidden" name="{$name_path}" value="{$safe}">

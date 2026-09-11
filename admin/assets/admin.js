@@ -258,6 +258,9 @@ document.addEventListener('DOMContentLoaded', function () {
                 if (i.type === 'checkbox' || i.type === 'radio') i.checked = false;
                 else if (i.type !== 'hidden') i.value = '';
             });
+            // Un campus nuevo no debe heredar la coordenada del campus que se
+            // usó como plantilla del repeater.
+            newItem.querySelectorAll('.js-map-picker-value').forEach(i => i.value = '');
             newItem.querySelectorAll('.field-image input[type="hidden"]').forEach(i => i.value = '');
             newItem.querySelectorAll('textarea').forEach(t => t.value = '');
 

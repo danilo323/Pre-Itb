@@ -3,9 +3,9 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/2bd3f59e1bcedca3d9925dda85c0fe61.jpeg",
-        "div_seo": null,
-        "div_logos": null
+        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
+        "div_seo": "",
+        "div_logos": ""
     },
     "menu": {
         "items_menu": [
@@ -32,11 +32,6 @@
             {
                 "texto": "Transparencia / Leyes",
                 "url": "",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "otro",
-                "url": "otro.php",
                 "nivel": "hijo"
             },
             {
@@ -75,11 +70,6 @@
                 "nivel": "padre"
             },
             {
-                "texto": "prueba02",
-                "url": "prueba02.php",
-                "nivel": "hijo"
-            },
-            {
                 "texto": "academia",
                 "url": "academia.php",
                 "nivel": "hijo"
@@ -93,11 +83,6 @@
                 "texto": "Admisiones",
                 "url": "#",
                 "nivel": "padre"
-            },
-            {
-                "texto": "prueba3",
-                "url": "prueba3.php",
-                "nivel": "hijo"
             },
             {
                 "texto": "prueba1",
@@ -133,8 +118,8 @@
                 "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.1795736210915,
-                    "lng": -79.913514039078
+                    "lat": -2.13507514962801,
+                    "lng": -79.91103172302248
                 }
             },
             {
@@ -142,15 +127,18 @@
                 "direccion": "",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.195354959337,
-                    "lng": -79.93447765845
+                    "lat": -2.1997559074937,
+                    "lng": -79.898543357849
                 }
             },
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.1594339489859835,
+                    "lng": -79.89686965942383
+                }
             },
             {
                 "nombre": "Campus Teresa Benites",
@@ -186,12 +174,16 @@
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
         "campus_locations": [
             {
-                "lat": -2.1795736210915,
-                "lng": -79.913514039078
+                "lat": -2.13507514962801,
+                "lng": -79.91103172302248
             },
             {
-                "lat": -2.195354959337,
-                "lng": -79.93447765845
+                "lat": -2.1997559074937,
+                "lng": -79.898543357849
+            },
+            {
+                "lat": -2.1594339489859835,
+                "lng": -79.89686965942383
             }
         ]
     },
@@ -824,15 +816,15 @@
     },
     "sobre_intro": {
         "_visible": "1",
-        "info_compartido": null,
-        "div_textos": null,
+        "info_compartido": "",
+        "div_textos": "",
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-        "div_cita": null,
+        "div_cita": "",
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": null,
+        "div_imagen": "",
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
@@ -917,7 +909,7 @@
                 "cargo": "Representante de Trabajadores"
             }
         ],
-        "div_estructura": null,
+        "div_estructura": "",
         "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
@@ -927,10 +919,10 @@
     },
     "sobre_hero": {
         "_visible": "1",
-        "info_propia": null,
+        "info_propia": "",
         "div_left": "",
         "subtitulo": "Conoce al ITB",
-        "titulo": "Sobre nosotros eeeeeeeeeeeeeeeeeeeeeeeeee",
+        "titulo": "Sobre nosotros",
         "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
         "cta_texto": "Conoce Nuestra Historia",
         "div_stats": "",
@@ -939,9 +931,9 @@
         "div_right": "",
         "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
         "video_url": "https://youtu.be/eTgzLxWGgS4",
-        "div_galeria": null,
-        "info_portada": null,
-        "animaciones": false,
+        "div_galeria": "",
+        "info_portada": "",
+        "animaciones": "",
         "imagenes_fondo": [
             {
                 "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
@@ -950,19 +942,19 @@
         ],
         "ruta_inicio": "Inicio",
         "ruta_actual": "Sobre Nosotros",
-        "div_textos": null
+        "div_textos": ""
     },
     "himno": {
         "_visible": "1",
-        "div_textos": null,
+        "div_textos": "",
         "titulo": "Música y letra",
         "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
-        "div_letra": null,
+        "div_letra": "",
         "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
         "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
         "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
         "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
-        "div_multimedia": null,
+        "div_multimedia": "",
         "audio": "audio/himnoitb.mp3",
         "btn_descargar": "Descargar música",
         "imagen": "img/Himno_Estudiante_itb.jpg",
@@ -1264,10 +1256,8 @@
             "slug": "otro",
             "icon": "bi bi-briefcase-fill",
             "menu_pos": "hijo:Instituto",
-            "menu_before": "otro",
             "secciones": [
                 "sobre_hero",
-                "presentacion",
                 "mision_vision",
                 "valores",
                 "autoridades",
@@ -1332,19 +1322,6 @@
                     "ruta_inicio": "Inicio",
                     "ruta_actual": "Sobre Nosotros",
                     "div_textos": ""
-                },
-                "sobre_intro": {
-                    "_visible": "1",
-                    "info_compartido": "",
-                    "div_textos": "",
-                    "etiqueta_superior": "Trayectoria y Compromiso Educativo",
-                    "titulo": "Formando Líderes Prácticos con Visión de Futuro",
-                    "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-                    "div_cita": "",
-                    "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
-                    "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-                    "div_imagen": "",
-                    "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
                 },
                 "sobre_mision": {
                     "_visible": "1",
@@ -1453,7 +1430,7 @@
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
-            "updated_at": "2026-09-11 15:49:51"
+            "updated_at": "2026-09-11 06:04:45"
         },
         "pg_344b6c0b7ef3": {
             "id": "pg_344b6c0b7ef3",
@@ -1612,379 +1589,6 @@
                 }
             },
             "updated_at": "2026-09-11 06:13:18"
-        },
-        "pg_57e474efe933": {
-            "id": "pg_57e474efe933",
-            "nombre": "prueba02",
-            "slug": "prueba02",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "hijo:Oferta Académica",
-            "menu_before": "academia",
-            "secciones": [
-                "mision_vision"
-            ],
-            "contenido": {
-                "sobre_mision": {
-                    "_visible": "1",
-                    "titulo": "Nuestra misión",
-                    "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
-                    "puntos": [
-                        {
-                            "texto": "Autonomía de pensamiento y liderazgo.k"
-                        },
-                        {
-                            "texto": "Aliado estratégico de empresas e instituciones."
-                        },
-                        {
-                            "texto": "Formación práctica orientada al desarrollo económico y social."
-                        }
-                    ],
-                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
-                },
-                "sobre_vision": {
-                    "_visible": "1",
-                    "titulo": "Nuestra visión",
-                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
-                    "puntos": [
-                        {
-                            "texto": "Liderazgo en educación tecnológica universitaria."
-                        },
-                        {
-                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
-                        },
-                        {
-                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
-                        }
-                    ],
-                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
-                }
-            },
-            "updated_at": "2026-09-11 15:50:46"
-        },
-        "pg_ad08170609a8": {
-            "id": "pg_ad08170609a8",
-            "nombre": "prueba3",
-            "slug": "prueba3",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "hijo:Admisiones",
-            "menu_before": "",
-            "secciones": [
-                "mision_vision",
-                "cogobierno",
-                "programas",
-                "servicios",
-                "noticias"
-            ],
-            "contenido": {
-                "programas": {
-                    "_visible": "1",
-                    "etiqueta_superior": "Oferta Académica",
-                    "titulo": "Programas Destacados",
-                    "descripcion": "Descubre nuestros programas tecnológicos de mayor demanda laboral, diseñados para insertarte rápidamente en el mercado de trabajo. wrwe rwerwe",
-                    "btn_ver_todos": "Ver todos los programas",
-                    "lista_programas": [
-                        {
-                            "imagen": "img/10386d1246de0db082c29c5ab5820439.jpg",
-                            "modalidad": "Presencial",
-                            "area": "Salud",
-                            "titulo": "Tecnología Superior en Enfermería",
-                            "duracion": "5 Semestres",
-                            "sede": "Guayaquil"
-                        },
-                        {
-                            "imagen": "img/Mecanica.jpg",
-                            "modalidad": "Presencial",
-                            "area": "Ciencias Empresariales",
-                            "titulo": "Tecnología Superior en Marketing Digital",
-                            "duracion": "5 Semestres",
-                            "sede": "Guayaquil"
-                        },
-                        {
-                            "imagen": "img/desarrollo_software.jpg",
-                            "modalidad": "Presencial",
-                            "area": "Transporte",
-                            "titulo": "Tecnología Superior en Logística y Transporte",
-                            "duracion": "5 Semestres",
-                            "sede": "Guayaquil"
-                        },
-                        {
-                            "imagen": "img/3fb65228b15d2f577cb9bd9bc22d7b8a.jpg",
-                            "modalidad": "prueba -.,[]¨*¨°!\"\"$\"#%#$&\\~`^",
-                            "area": "Tecnología",
-                            "titulo": "Tecnología Superior en Desarrollo de Software",
-                            "duracion": "5 Semestres",
-                            "sede": "Guayaquil"
-                        },
-                        {
-                            "imagen": "img/programa_gastronomia.jpg",
-                            "modalidad": "Presencial",
-                            "area": "",
-                            "titulo": "Tecnología Superior en Gastronomía",
-                            "duracion": "5 Niveles",
-                            "sede": ""
-                        },
-                        {
-                            "imagen": "img/programa_contabilidad.jpg",
-                            "modalidad": "Presencial",
-                            "area": "",
-                            "titulo": "Tecnología Superior en Contabilidad",
-                            "duracion": "5 Niveles",
-                            "sede": ""
-                        },
-                        {
-                            "imagen": "img/programa_diseno_grafico.jpg",
-                            "modalidad": "Presencial",
-                            "area": "",
-                            "titulo": "Técnico Superior en Diseño Gráfico",
-                            "duracion": "2 Niveles",
-                            "sede": ""
-                        }
-                    ],
-                    "div_global": "",
-                    "prog1_imagen": "img/enfermeria.jpg",
-                    "prog1_modalidad": "Presencial",
-                    "prog1_area": "Salud",
-                    "prog1_titulo": "Tecnología Superior en Enfermería",
-                    "prog1_duracion": "5 Semestres",
-                    "prog1_sede": "Guayaquil",
-                    "prog2_imagen": "img/Mecanica.jpg",
-                    "prog2_modalidad": "Presencial",
-                    "prog2_area": "Ciencias Empresariales",
-                    "prog2_titulo": "Tecnología Superior en Marketing Digital",
-                    "prog2_duracion": "5 Semestres",
-                    "prog2_sede": "Guayaquil",
-                    "prog3_imagen": "img/desarrollo_software.jpg",
-                    "prog3_modalidad": "Presencial",
-                    "prog3_area": "Transporte",
-                    "prog3_titulo": "Tecnología Superior en Logística y Transporte",
-                    "prog3_duracion": "5 Semestres",
-                    "prog3_sede": "Guayaquil",
-                    "prog4_imagen": "img/administracion.jpg",
-                    "prog4_modalidad": "Híbrido",
-                    "prog4_area": "Tecnología",
-                    "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
-                    "prog4_duracion": "5 Semestres",
-                    "prog4_sede": "Guayaquil",
-                    "info_programas": ""
-                },
-                "servicios": {
-                    "_visible": "1",
-                    "serv1_titulo": "Bienestar Estudiantil",
-                    "serv1_desc": "Servicios médicos, psicológicos y odontológicos gratuitos",
-                    "serv1_btn": "Más servicios",
-                    "lista_servicios": [
-                        {
-                            "titulo": "Campus Virtual",
-                            "desc": "Plataforma educativa 24/7",
-                            "btn_texto": "Ver Tour",
-                            "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
-                            "imagen_fija": false
-                        },
-                        {
-                            "titulo": "Horarios",
-                            "desc": "Consulta tus horarios de clase",
-                            "btn_texto": "Ver Horarios",
-                            "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
-                            "imagen_fija": false
-                        },
-                        {
-                            "titulo": "Servicios Digitales",
-                            "desc": "Trámites en línea y gestión académica",
-                            "btn_texto": "Acceder",
-                            "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
-                            "imagen_fija": false
-                        },
-                        {
-                            "titulo": "Podcast ITB",
-                            "desc": "Escucha nuestro contenido educativo",
-                            "btn_texto": "Escuchar",
-                            "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg",
-                            "imagen_fija": false
-                        },
-                        {
-                            "titulo": "Arte y Deportes",
-                            "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
-                            "btn_texto": "Conocer Más",
-                            "imagen": "img/bienestar_estudiantil_1.png",
-                            "imagen_fija": false
-                        }
-                    ],
-                    "div_serv1": "",
-                    "div_servicios_lista": "",
-                    "etiqueta_superior": "Servicios Institucionales",
-                    "titulo": "Todo lo que necesitas en  *un solo lugar*",
-                    "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
-                    "serv2_titulo": "Campus Virtual",
-                    "serv2_desc": "Plataforma educativa 24/7",
-                    "serv2_imagen": "img/servicio-campus.jpg",
-                    "serv3_titulo": "Horarios",
-                    "serv3_desc": "Consulta tus horarios de clase",
-                    "serv3_imagen": "img/salud.jpg",
-                    "serv4_titulo": "Servicios Digitales",
-                    "serv4_desc": "Trámites en línea y gestión académica",
-                    "serv4_imagen": "img/salud.jpg",
-                    "serv5_titulo": "Podcast ITB",
-                    "serv5_desc": "Escucha nuestro contenido educativo",
-                    "serv5_imagen": "img/salud.jpg",
-                    "serv6_titulo": "Arte y Deportes",
-                    "serv6_desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
-                    "serv6_imagen": "img/estudiantes1.png"
-                },
-                "noticias": {
-                    "_visible": "1",
-                    "etiqueta_superior": "Actualidad ITB",
-                    "titulo_seccion": "Noticias y Eventos del ITB",
-                    "titulo": "¡METAMORFOSIS CREATIVA está por comenzar!",
-                    "boton_todas": "Todas las noticias",
-                    "categoria": "Evento",
-                    "fecha": "15 Sep 2025",
-                    "descripcion": "Lo mejor del Diseño de Modas y Maquillaje...",
-                    "imagen": "img/noticia_1.png",
-                    "secundarias": [
-                        {
-                            "titulo": "Estudiantes de Diseño de Modas",
-                            "fecha": "Agosto 20, 2026",
-                            "imagen": "img/noticia_2.png"
-                        },
-                        {
-                            "titulo": "ITB promovió una movilidad",
-                            "fecha": "Agosto 20, 2026",
-                            "imagen": "img/noticia_3.png"
-                        },
-                        {
-                            "titulo": "ITB transforma el ComicCon en una experiencia de aprendizaje",
-                            "fecha": "Agosto 31, 2026",
-                            "imagen": "img/ff4728ec07d83ad63f3412a6ee3ec0a6.jpg"
-                        },
-                        {
-                            "titulo": "ITB recibe importante reconocimiento por su aportación en programas de formación juvenil",
-                            "fecha": "Agosto 28, 2026",
-                            "imagen": "img/166a6aba1ac9c52c78994ef657b1f8ac.jpg"
-                        },
-                        {
-                            "titulo": "ITB desarrolló conferencia magistral sobre dirección escénica en la era digital",
-                            "fecha": "Agosto 24, 2026",
-                            "imagen": "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
-                        }
-                    ],
-                    "div_global": "",
-                    "div_noticia": "",
-                    "info_noticias": "",
-                    "div_secundarias": "",
-                    "sec1_titulo": "Convenio internacional con universidad de España",
-                    "sec1_fecha": "10 Sep 2025",
-                    "sec1_imagen": "img/noticia-2.jpg",
-                    "sec2_titulo": "Graduación de la promoción 2025: más de 500 nuevos profesionales",
-                    "sec2_fecha": "05 Sep 2025",
-                    "sec2_imagen": "img/noticia-3.jpg",
-                    "sec3_titulo": "ITB inaugura nuevo laboratorio de simulación clínica",
-                    "sec3_fecha": "01 Sep 2025",
-                    "sec3_imagen": "img/noticia-4.jpg",
-                    "eventos": [
-                        {
-                            "categoria": "Evento",
-                            "fecha": "15 Sep 2025",
-                            "titulo": "¡METAMORFOSIS CREATIVA está por comenzar!",
-                            "descripcion": "Lo mejor del Diseño de Modas y Maquillaje...",
-                            "imagen": "img/noticia_1.png"
-                        },
-                        {
-                            "categoria": "Evento",
-                            "fecha": "12 Agt 2026",
-                            "titulo": "Estudiantes de Marketing Digital y Redes Sociales presentan proyectos novedosos en Elevator Pitch",
-                            "descripcion": "Una jornada académica que reunió a 21 mini agencias conformadas por estudiantes de la carrera Técnico Superior en Marketing Digital y Redes Sociales, quienes presentaron propuestas estratégicas y creativas para diferentes marcas y negocios.",
-                            "imagen": "img/7706394bfe67bfced3f1464e086011eb.jpg"
-                        },
-                        {
-                            "categoria": "Noticia",
-                            "fecha": "18 Ago.",
-                            "titulo": "ITB promovió una movilidad responsable durante la jornada “Guayaquil Camina Seguro”",
-                            "descripcion": "Una jornada orientada a fortalecer la educación y concienciación sobre la importancia de una movilidad segura, sostenible e incluyente.",
-                            "imagen": "img/noticia_camina_seguro.jpeg"
-                        },
-                        {
-                            "categoria": "Noticia",
-                            "fecha": "14 Ago.",
-                            "titulo": "ITB presentó proyectos de investigación e innovación aplicada en la Feria Agroazucar",
-                            "descripcion": "Cuatro proyectos desarrollados desde las facultades FACES y FATV se presentaron en la Feria Agroazucar.",
-                            "imagen": "img/noticia_feria_agroazucar.jpeg"
-                        }
-                    ],
-                    "div_eventos": "",
-                    "info_eventos": ""
-                },
-                "sobre_mision": {
-                    "_visible": "1",
-                    "titulo": "Nuestra misión",
-                    "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
-                    "puntos": [
-                        {
-                            "texto": "Autonomía de pensamiento y liderazgo."
-                        },
-                        {
-                            "texto": "Aliado estratégico de empresas e instituciones."
-                        },
-                        {
-                            "texto": "Formación práctica orientada al desarrollo económico y social."
-                        }
-                    ],
-                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
-                },
-                "sobre_vision": {
-                    "_visible": "1",
-                    "titulo": "Nuestra visión",
-                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
-                    "puntos": [
-                        {
-                            "texto": "Liderazgo en educación tecnológica universitaria."
-                        },
-                        {
-                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
-                        },
-                        {
-                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
-                        }
-                    ],
-                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
-                },
-                "sobre_cogobierno": {
-                    "_visible": "1",
-                    "titulo": "Co Gobierno",
-                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
-                    "miembros": [
-                        {
-                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
-                            "nombre": "Obst. Lenny Mariscal San Martín",
-                            "cargo": "Representante de Docentes"
-                        },
-                        {
-                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
-                            "nombre": "Ing. Marcos Escaleras Gómez",
-                            "cargo": "Representante de Trabajadores"
-                        }
-                    ],
-                    "div_estructura": "",
-                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
-                    "card_icono": "",
-                    "card_titulo": "Estructura Orgánica",
-                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
-                    "card_boton": "Ver Organigrama",
-                    "card_boton_url": "#"
-                }
-            },
-            "updated_at": "2026-09-11 16:29:40"
         }
-    },
-    "transparencia_leyes": {
-        "_visible": "1",
-        "div_texto": null,
-        "titulo": "Transparencia e Información Pública",
-        "descripcion": "En cumplimiento con las disposiciones legales y el principio de rendición de cuentas, el ITB pone a disposición de la ciudadanía la información institucional, financiera y administrativa.",
-        "buscador_placeholder": "Buscar documento, resolución o presupuesto...",
-        "div_secciones": null,
-        "cat_info_financiera": "Información Financiera y Presupuestaria",
-        "cat_rendicion_cuentas": "Rendición de Cuentas y Gestión",
-        "cat_talento_humano": "Talento Humano",
-        "cat_remuneracion_mensual": "Remuneración Mensual"
     }
 }
