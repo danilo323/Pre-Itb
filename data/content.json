@@ -1166,7 +1166,7 @@
                     "video_url": "https://youtu.be/eTgzLxWGgS4",
                     "div_galeria": "",
                     "info_portada": "",
-                    "animaciones": "",
+                    "animaciones": false,
                     "imagenes_fondo": [
                         {
                             "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
@@ -1180,7 +1180,7 @@
                 "sobre_mision": {
                     "_visible": "1",
                     "titulo": "Nuestra misión",
-                    "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
+                    "descripcion": "......................",
                     "puntos": [
                         {
                             "texto": "Autonomía de pensamiento y liderazgo."
@@ -1192,7 +1192,7 @@
                             "texto": "Formación práctica orientada al desarrollo económico y social."
                         }
                     ],
-                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+                    "imagen": "img/213759381a126bbbc7a538f7475284fa.jpg"
                 },
                 "sobre_vision": {
                     "_visible": "1",
@@ -1228,7 +1228,7 @@
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
-            "updated_at": "2026-09-11 05:26:26"
+            "updated_at": "2026-09-11 06:23:41"
         },
         "pg_bd2ced35f8b7": {
             "id": "pg_bd2ced35f8b7",

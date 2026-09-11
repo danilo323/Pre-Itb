@@ -88,13 +88,19 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
 
         // Al crear una página, sus secciones nacen con una copia de los textos,
-        // imágenes y demás valores actuales. Al editarla no se pisan los cambios
-        // que el administrador haya hecho en su contenido propio.
+        // imágenes y demás valores actuales. Desmarcar una sección solo la oculta:
+        // su contenido se conserva para recuperarlo intacto al marcarla de nuevo.
         $previous_content = $data['_paginas_creadas'][$id]['contenido'] ?? [];
         $new_content = pagina_custom_snapshot($data, $secciones);
         foreach ($previous_content as $section => $values) {
-            if (isset($new_content[$section]) && is_array($values)) {
-                $new_content[$section] = array_replace($new_content[$section], $values);
+            if (is_array($values)) {
+                if (isset($new_content[$section]) && is_array($new_content[$section])) {
+                    $new_content[$section] = array_replace($new_content[$section], $values);
+                } else {
+                    // Sección actualmente oculta: mantenerla fuera de la lista
+                    // pública, pero no borrar los textos, imágenes ni archivos.
+                    $new_content[$section] = $values;
+                }
             }
         }
 
