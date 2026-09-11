@@ -63,6 +63,24 @@
     margin-right: calc(50% - 50vw);
 }
 
+.alianzas__fotos-track {
+    touch-action: pan-y;
+    cursor: grab;
+}
+
+.alianzas__fotos-track.is-dragging {
+    cursor: grabbing;
+    user-select: none;
+}
+
+.alianzas__fotos-track.is-dragging .alianzas__fotos {
+    animation: none;
+}
+
+.alianzas__fotos-track.is-paused .alianzas__fotos {
+    animation-play-state: paused;
+}
+
 .alianzas__logos {
     display: flex;
     align-items: center;
@@ -145,6 +163,64 @@
     transform: scale(1.04);
 }
 
+.alianzas__fotos .js-alianzas-foto {
+    cursor: zoom-in;
+    -webkit-user-drag: none;
+    user-select: none;
+}
+
+.alianzas__modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background: rgba(0, 0, 0, 0.86);
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 180ms ease, visibility 180ms ease;
+}
+
+.alianzas__modal.is-open {
+    opacity: 1;
+    visibility: visible;
+}
+
+.alianzas__modal-image {
+    display: block;
+    max-width: min(1100px, 92vw);
+    max-height: 88vh;
+    width: auto;
+    height: auto;
+    object-fit: contain;
+}
+
+.alianzas__modal-close {
+    position: absolute;
+    top: 16px;
+    right: 24px;
+    width: 44px;
+    height: 44px;
+    border: 0;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.16);
+    color: #fff;
+    font-size: 2rem;
+    line-height: 1;
+    cursor: pointer;
+}
+
+.alianzas__modal-close:hover,
+.alianzas__modal-close:focus-visible {
+    background: rgba(255, 255, 255, 0.32);
+}
+
+body.alianzas-modal-open {
+    overflow: hidden;
+}
+
 @media (max-width: 768px) {
     .alianzas__fotos img {
         height: 155px;
@@ -152,35 +228,24 @@
     }
 }
 
-
-/* ---- Las dos filas solo avanzan mientras el mouse esta encima ----
-   En reposo el carril queda congelado; al entrar el puntero la animacion sigue
-   DESDE DONDE SE QUEDO (animation-play-state no la reinicia), asi que no hay
-   saltos ni al entrar ni al salir.
-
-   El :hover va sobre cada pista (.alianzas__logos-track / .alianzas__fotos-track)
-   y no sobre el carril: el carril mide mucho mas que la pantalla y ademas se
-   desplaza, asi que su area de hover seria erratica; la pista, en cambio, es
-   la banda fija que el usuario ve. Cada fila responde a su propia pista, de
-   modo que pasar por los logos no arranca tambien la fila de fotos.
-
-   Envuelto en @media (hover: hover) porque en pantallas tactiles no hay
-   puntero que pueda "entrar": ahi los carruseles siguen girando solos, en vez
-   de quedarse congelados para siempre.
-
-   OJO CON EL ORDEN: este bloque tiene que ir al FINAL del archivo, despues de
-   .alianzas__logos y .alianzas__fotos. Las dos usan el atajo 'animation:', que
-   reescribe animation-play-state a su valor inicial (running). Como tienen la
-   misma especificidad que las reglas de aqui, si este bloque fuera antes, el
-   atajo de mas abajo lo pisaria y la fila de fotos no llegaria a pausarse. */
+/* La galería avanza solo mientras el cursor está sobre ella. Al arrastrar o
+   abrir una foto, las clases de interacción conservan la pausa. */
 @media (hover: hover) {
-    .alianzas__logos,
     .alianzas__fotos {
         animation-play-state: paused;
     }
 
-    .alianzas__logos-track:hover .alianzas__logos,
     .alianzas__fotos-track:hover .alianzas__fotos {
         animation-play-state: running;
     }
+
+    .alianzas__fotos-track.is-paused .alianzas__fotos {
+        animation-play-state: paused;
+    }
 }
+
+/* Se usa un frame para reiniciar la animación desde la posición soltada. */
+.alianzas__fotos-track.is-restarting .alianzas__fotos {
+    animation: none;
+}
+

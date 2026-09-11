@@ -1057,6 +1057,133 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     }
 
+    // =========================================
+    // 15. GALERÍA DE ALIANZAS — Vista ampliada
+    // =========================================
+    const modalAlianzas = document.getElementById('alianzas-modal');
+    const imagenModalAlianzas = modalAlianzas?.querySelector('.alianzas__modal-image');
+    const cerrarModalAlianzas = modalAlianzas?.querySelector('.alianzas__modal-close');
+    const pistaFotosAlianzas = document.querySelector('.alianzas__fotos');
+    const pistaFotosMarcoAlianzas = document.querySelector('.alianzas__fotos-track');
+    let disparadorModalAlianzas = null;
+    let arrastreAlianzas = null;
+    let ignorarClickAlianzas = false;
+
+    const abrirModalAlianzas = (imagen) => {
+        if (!modalAlianzas || !imagenModalAlianzas) return;
+        disparadorModalAlianzas = imagen;
+        imagenModalAlianzas.src = imagen.currentSrc || imagen.src;
+        imagenModalAlianzas.alt = imagen.alt;
+        modalAlianzas.classList.add('is-open');
+        modalAlianzas.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('alianzas-modal-open');
+        pistaFotosMarcoAlianzas?.classList.add('is-paused');
+        cerrarModalAlianzas?.focus();
+    };
+
+    const cerrarVistaAlianzas = () => {
+        if (!modalAlianzas) return;
+        modalAlianzas.classList.remove('is-open');
+        modalAlianzas.setAttribute('aria-hidden', 'true');
+        document.body.classList.remove('alianzas-modal-open');
+        pistaFotosMarcoAlianzas?.classList.remove('is-paused');
+        disparadorModalAlianzas?.focus();
+    };
+
+    if (pistaFotosAlianzas && pistaFotosMarcoAlianzas) {
+        const obtenerDesplazamiento = () => {
+            const transformacion = window.getComputedStyle(pistaFotosAlianzas).transform;
+            if (!transformacion || transformacion === 'none') return 0;
+            // El sexto valor de matrix() es el desplazamiento horizontal. Se
+            // evita depender de una API extra para que funcione también en
+            // navegadores que no exponen DOMMatrixReadOnly.
+            const valores = transformacion.match(/matrix\(([^)]+)\)/);
+            return valores ? parseFloat(valores[1].split(',')[4]) || 0 : 0;
+        };
+
+        pistaFotosMarcoAlianzas.addEventListener('pointerdown', (evento) => {
+            if (evento.button !== undefined && evento.button !== 0) return;
+            const inicio = obtenerDesplazamiento();
+            arrastreAlianzas = { id: evento.pointerId, x: evento.clientX, inicio, movio: false };
+            pistaFotosAlianzas.style.animation = 'none';
+            pistaFotosAlianzas.style.transform = `translateX(${inicio}px)`;
+            pistaFotosMarcoAlianzas.classList.add('is-dragging');
+            pistaFotosMarcoAlianzas.setPointerCapture(evento.pointerId);
+        });
+
+        pistaFotosMarcoAlianzas.addEventListener('pointermove', (evento) => {
+            if (!arrastreAlianzas || evento.pointerId !== arrastreAlianzas.id) return;
+            evento.preventDefault();
+            const distancia = evento.clientX - arrastreAlianzas.x;
+            if (Math.abs(distancia) > 5) arrastreAlianzas.movio = true;
+            pistaFotosAlianzas.style.transform = `translateX(${arrastreAlianzas.inicio + distancia}px)`;
+        });
+
+        const terminarArrastreAlianzas = (evento) => {
+            if (!arrastreAlianzas || evento.pointerId !== arrastreAlianzas.id) return;
+            ignorarClickAlianzas = arrastreAlianzas.movio;
+            pistaFotosMarcoAlianzas.classList.remove('is-dragging');
+            if (pistaFotosMarcoAlianzas.hasPointerCapture(evento.pointerId)) {
+                pistaFotosMarcoAlianzas.releasePointerCapture(evento.pointerId);
+            }
+
+            // El carril contiene dos copias seguidas de las fotos. Se calcula
+            // cuánto se avanzó dentro de una sola copia y se reinicia la
+            // animación con ese mismo punto como inicio: así al soltar no salta
+            // al comienzo y conserva el movimiento automático.
+            const anchoBucle = pistaFotosAlianzas.scrollWidth / 2;
+            const posicion = obtenerDesplazamiento();
+            if (anchoBucle > 0) {
+                const avance = ((-posicion % anchoBucle) + anchoBucle) % anchoBucle;
+                // Se reinicia el reloj de la animación con un retraso negativo.
+                // Cambiar solo el delay conservaría el reloj original del
+                // carrusel y haría que volviera a una posición incorrecta.
+                pistaFotosMarcoAlianzas.classList.add('is-restarting');
+                pistaFotosAlianzas.style.transform = '';
+                pistaFotosAlianzas.style.animation = '';
+                void pistaFotosAlianzas.offsetWidth;
+                pistaFotosAlianzas.style.animationDelay = `-${(avance / anchoBucle) * 38}s`;
+                requestAnimationFrame(() => {
+                    pistaFotosMarcoAlianzas.classList.remove('is-restarting');
+                });
+            } else {
+                pistaFotosAlianzas.style.animation = '';
+            }
+            arrastreAlianzas = null;
+        };
+
+        pistaFotosMarcoAlianzas.addEventListener('pointerup', terminarArrastreAlianzas);
+        pistaFotosMarcoAlianzas.addEventListener('pointercancel', terminarArrastreAlianzas);
+        pistaFotosMarcoAlianzas.addEventListener('dragstart', (evento) => evento.preventDefault());
+    }
+
+    document.querySelectorAll('.js-alianzas-foto').forEach((imagen) => {
+        imagen.addEventListener('click', (evento) => {
+            if (ignorarClickAlianzas) {
+                evento.preventDefault();
+                ignorarClickAlianzas = false;
+                return;
+            }
+            abrirModalAlianzas(imagen);
+        });
+        imagen.addEventListener('keydown', (evento) => {
+            if (evento.key === 'Enter' || evento.key === ' ') {
+                evento.preventDefault();
+                abrirModalAlianzas(imagen);
+            }
+        });
+    });
+
+    cerrarModalAlianzas?.addEventListener('click', cerrarVistaAlianzas);
+    modalAlianzas?.addEventListener('click', (evento) => {
+        if (evento.target === modalAlianzas) cerrarVistaAlianzas();
+    });
+    document.addEventListener('keydown', (evento) => {
+        if (evento.key === 'Escape' && modalAlianzas?.classList.contains('is-open')) {
+            cerrarVistaAlianzas();
+        }
+    });
+
 });
 
 /* =============================================

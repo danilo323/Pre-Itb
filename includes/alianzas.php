@@ -82,7 +82,11 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
                         $src = htmlspecialchars(trim($foto['imagen']), ENT_QUOTES, 'UTF-8');
                         $alt = htmlspecialchars(trim($foto['nombre'] ?? ''), ENT_QUOTES, 'UTF-8');
                 ?>
-                    <img src="<?= $src ?>" alt="<?= $alt ?>" <?= $vuelta === 1 ? 'aria-hidden="true"' : '' ?>>
+                    <img src="<?= $src ?>" alt="<?= $alt ?>" class="js-alianzas-foto"
+                         role="button" tabindex="<?= $vuelta === 0 ? '0' : '-1' ?>"
+                         draggable="false"
+                         <?= $vuelta === 1 ? 'aria-hidden="true"' : '' ?>
+                         aria-label="Ampliar imagen: <?= $alt ?>">
                 <?php
                     endforeach;
                 endfor;
@@ -90,6 +94,11 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
             </div>
         </div>
         <?php endif; ?>
+
+        <div class="alianzas__modal" id="alianzas-modal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Imagen ampliada">
+            <button type="button" class="alianzas__modal-close" aria-label="Cerrar imagen ampliada">&times;</button>
+            <img class="alianzas__modal-image" src="" alt="">
+        </div>
 
     </div>
 </section>
