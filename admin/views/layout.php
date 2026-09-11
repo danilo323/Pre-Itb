@@ -108,6 +108,7 @@ function flash_set(string $message, string $type = 'success'): void {
 }
 
 function layout_start(string $title = "Panel de Administración", string $current_key = ''): string {
+    global $admin_page_css;
     $safe_title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
     $sidebar    = layout_sidebar($current_key);
     $flash      = layout_flash();
@@ -115,6 +116,12 @@ function layout_start(string $title = "Panel de Administración", string $curren
     $time       = time();
     $ab         = admin_base();
     $sb         = site_base();
+    $extra_css = '';
+    foreach ((array)($admin_page_css ?? []) as $asset) {
+        $href = preg_match('#^https?://#', $asset) ? $asset : "{$ab}/assets/" . ltrim($asset, '/');
+        $version = preg_match('#^https?://#', $asset) ? '' : "?v={$time}";
+        $extra_css .= "    <link rel=\"stylesheet\" href=\"{$href}{$version}\">\n";
+    }
 
     return <<<HTML
 <!DOCTYPE html>
@@ -128,7 +135,7 @@ function layout_start(string $title = "Panel de Administración", string $curren
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{$ab}/assets/admin.css?v={$time}">
-</head>
+{$extra_css}</head>
 <body>
     <div class="admin-topbar">
         <div class="topbar-left">
@@ -155,15 +162,22 @@ HTML;
 }
 
 function layout_end(): string {
+    global $admin_page_js;
     $ab   = admin_base();
     $time = time();
+    $extra_js = '';
+    foreach ((array)($admin_page_js ?? []) as $asset) {
+        $src = preg_match('#^https?://#', $asset) ? $asset : "{$ab}/assets/" . ltrim($asset, '/');
+        $version = preg_match('#^https?://#', $asset) ? '' : "?v={$time}";
+        $extra_js .= "    <script src=\"{$src}{$version}\"></script>\n";
+    }
     return <<<HTML
             </div> <!-- /.admin-content -->
         </main>
     </div> <!-- /.admin-container -->
 
     <script src="{$ab}/assets/admin.js?v={$time}"></script>
-</body>
+{$extra_js}</body>
 </html>
 HTML;
 }

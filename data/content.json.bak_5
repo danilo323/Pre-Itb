@@ -15,6 +15,11 @@
                 "nivel": "padre"
             },
             {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Sobre Nosotros",
                 "url": "sobre-nosotros.php",
                 "nivel": "hijo"
@@ -88,6 +93,11 @@
                 "texto": "Admisiones",
                 "url": "#",
                 "nivel": "padre"
+            },
+            {
+                "texto": "prueba1",
+                "url": "prueba1.php",
+                "nivel": "padre"
             }
         ],
         "top_link_1": "Portal Estudiantil SGA",
@@ -134,17 +144,20 @@
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Teresa Benites",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             }
         ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
@@ -796,15 +809,15 @@
     },
     "sobre_intro": {
         "_visible": "1",
-        "info_compartido": null,
-        "div_textos": null,
+        "info_compartido": "",
+        "div_textos": "",
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-        "div_cita": null,
+        "div_cita": "",
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": null,
+        "div_imagen": "",
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {

@@ -15,6 +15,11 @@
                 "nivel": "padre"
             },
             {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Sobre Nosotros",
                 "url": "sobre-nosotros.php",
                 "nivel": "hijo"
@@ -144,17 +149,20 @@
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Teresa Benites",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             }
         ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
@@ -910,7 +918,17 @@
     "sobre_hero": {
         "_visible": "1",
         "info_propia": "",
+        "div_left": "",
+        "subtitulo": "Conoce al ITB",
         "titulo": "Sobre nosotros",
+        "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+        "cta_texto": "Conoce Nuestra Historia",
+        "div_stats": "",
+        "stat_numero": "Fundado en 1996",
+        "rating": "4.9",
+        "div_right": "",
+        "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+        "video_url": "https://youtu.be/eTgzLxWGgS4",
         "div_galeria": "",
         "info_portada": "",
         "animaciones": "",

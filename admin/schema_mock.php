@@ -216,11 +216,11 @@ return [
                     'item_label' => 'Campus',
                     'help' => 'El primero de la lista es el que se muestra en el mapa al abrir la página.',
                     'default' => [
-                        ['nombre' => 'Campus Matriz', 'direccion' => 'Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador', 'mapa_url' => ''],
-                        ['nombre' => 'Campus Boyacá', 'direccion' => '', 'mapa_url' => ''],
-                        ['nombre' => 'Campus Naval', 'direccion' => '', 'mapa_url' => ''],
-                        ['nombre' => 'Campus Teresa Benites', 'direccion' => '', 'mapa_url' => ''],
-                        ['nombre' => 'Campus Tomás Martínez', 'direccion' => '', 'mapa_url' => ''],
+                        ['nombre' => 'Campus Matriz', 'direccion' => 'Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador', 'mapa_url' => '', 'ubicacion' => []],
+                        ['nombre' => 'Campus Boyacá', 'direccion' => '', 'mapa_url' => '', 'ubicacion' => []],
+                        ['nombre' => 'Campus Naval', 'direccion' => '', 'mapa_url' => '', 'ubicacion' => []],
+                        ['nombre' => 'Campus Teresa Benites', 'direccion' => '', 'mapa_url' => '', 'ubicacion' => []],
+                        ['nombre' => 'Campus Tomás Martínez', 'direccion' => '', 'mapa_url' => '', 'ubicacion' => []],
                     ],
                     'subfields' => [
                         'nombre' => [
@@ -237,6 +237,11 @@ return [
                             'type' => 'text',
                             'label' => 'Enlace del mapa (opcional)',
                             'help' => 'Déjalo vacío y el mapa se ubica solo con la dirección de arriba. Rellénalo solo si el pin cae mal: entra en Google Maps, busca el sitio, pulsa Compartir → Insertar un mapa y pega aquí la dirección que aparece dentro de src="...".',
+                        ],
+                        'ubicacion' => [
+                            'type' => 'map_picker',
+                            'label' => 'Señalar ubicación exacta',
+                            'help' => 'Busca el lugar o haz clic en el mapa para poner el pin. Esta ubicación tiene prioridad en el footer.',
                         ],
                     ],
                 ],

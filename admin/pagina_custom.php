@@ -35,8 +35,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($data['_paginas_creadas'][$id]);
             // Quitar del menú navegable público
             _pagina_custom_remove_from_menu($data, $pg['slug'] ?? '');
-            storage_save($data);
-            flash_set("Página '{$pg['nombre']}' eliminada.", 'success');
+            $json_saved = storage_save($data);
+            // storage_save solo actualiza/inserta en MySQL. Si no retiramos esta
+            // fila, storage_load la vuelve a leer y la página reaparece.
+            $db_deleted = storage_delete_field('_paginas_creadas', $id);
+            if ($json_saved && $db_deleted) {
+                flash_set("Página '{$pg['nombre']}' eliminada.", 'success');
+            } else {
+                flash_set('No se pudo completar la eliminación en el almacenamiento.', 'error');
+            }
         } else {
             flash_set('No se encontró la página.', 'error');
         }
@@ -142,6 +149,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             _pagina_custom_remove_from_menu($data, $old_slug);
         }
 
+        // Al crear una página, sus secciones nacen con una copia de los textos,
+        // imágenes y demás valores actuales. Desmarcar una sección solo la oculta:
+        // su contenido se conserva para recuperarlo intacto al marcarla de nuevo.
+        $previous_content = $data['_paginas_creadas'][$id]['contenido'] ?? [];
+        $new_content = pagina_custom_snapshot($data, $secciones);
+        foreach ($previous_content as $section => $values) {
+            if (is_array($values)) {
+                if (isset($new_content[$section]) && is_array($new_content[$section])) {
+                    $new_content[$section] = array_replace($new_content[$section], $values);
+                } else {
+                    // Sección actualmente oculta: mantenerla fuera de la lista
+                    // pública, pero no borrar los textos, imágenes ni archivos.
+                    $new_content[$section] = $values;
+                }
+            }
+        }
+
         $data['_paginas_creadas'][$id] = [
             'id' => $id,
             'nombre' => $nombre,
@@ -153,7 +177,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         ];
 
         // Sincronizar en el menú navegable público
-        _pagina_custom_sync_menu($data, $nombre, $slug . '.php', $menu_pos);
+        _pagina_custom_sync_menu($data, $nombre, $slug . '.php', $menu_pos, $menu_before);
 
         if (storage_save($data)) {
             flash_set("Página '{$nombre}' guardada en /{$slug}.", 'success');
@@ -205,14 +229,19 @@ function _pagina_custom_sync_menu(array &$data, string $nombre, string $url, str
 
     if (strpos($menu_pos, 'hijo:') === 0) {
         $parent_text = substr($menu_pos, 5);
-        $new = [];
-        $inserted = false;
-        foreach ($items as $it) {
-            $new[] = $it;
-            if (!$inserted && ($it['nivel'] ?? '') === 'padre' && ($it['texto'] ?? '') === $parent_text) {
-                $new[] = ['texto' => $nombre, 'url' => $url, 'nivel' => 'hijo'];
-                $inserted = true;
+        $insert_at = count($items);
+        foreach ($items as $index => $item) {
+            if (($item['nivel'] ?? '') !== 'padre' || ($item['texto'] ?? '') !== $parent_text)
+                continue;
+            $insert_at = $index + 1;
+            for ($cursor = $index + 1; $cursor < count($items) && ($items[$cursor]['nivel'] ?? '') !== 'padre'; $cursor++) {
+                if ($menu_before !== '' && ($items[$cursor]['texto'] ?? '') === $menu_before) {
+                    $insert_at = $cursor;
+                    break 2;
+                }
+                $insert_at = $cursor + 1;
             }
+            break;
         }
         if (!$inserted)
             $new[] = ['texto' => $nombre, 'url' => $url, 'nivel' => 'hijo'];
@@ -238,6 +267,8 @@ $secs_selected = $pg['secciones'] ?? [];
 
 $page_title = $is_editing ? "Editar: {$nombre}" : 'Crear nueva página';
 $current_key = $is_editing ? "custom_{$id}" : 'paginas_crear';
+$admin_page_css = ['pagina_custom.css'];
+$admin_page_js = ['pagina_custom.js'];
 
 // Menús padre disponibles del sitio público
 $public_items = $saved_data['menu']['items_menu'] ?? [
@@ -380,7 +411,8 @@ echo layout_start($page_title, $current_key);
                     <select name="menu_pos" class="form-control">
                         <option value="none" <?= $menu_pos === 'none' ? 'selected' : '' ?>>-- No agregar al menú público --
                         </option>
-                        <option value="padre" <?= $menu_pos === 'padre' ? 'selected' : '' ?>>Menú Principal (Padre)</option>
+                        <option value="padre" <?= $menu_pos === 'padre' ? 'selected' : '' ?>>Menú Principal (Padre)
+                        </option>
                         <optgroup label="── Submenú (Hijo) de...">
                             <?php foreach ($padres as $p):
                                 $val = 'hijo:' . ($p['texto'] ?? ''); ?>
@@ -390,6 +422,55 @@ echo layout_start($page_title, $current_key);
                             <?php endforeach; ?>
                         </optgroup>
                     </select>
+                    <input type="hidden" name="menu_before" id="menu_before"
+                        value="<?= htmlspecialchars($menu_before, ENT_QUOTES, 'UTF-8') ?>">
+                    <p style="margin:0 0 10px;color:#6B7280;font-size:.82rem;">Selecciona dónde aparecerá esta página.
+                        Las opciones con sangría se añaden dentro del menú principal escogido.</p>
+                    <div class="page-menu-placement" id="page-menu-placement">
+                        <button type="button" class="page-menu-placement__choice" data-menu-pos="none"><i
+                                class="bi bi-eye-slash"></i><span><strong>No mostrar en el menú</strong><small>Solo
+                                    estará disponible mediante su URL.</small></span></button>
+                        <button type="button" class="page-menu-placement__choice" data-menu-pos="padre"><i
+                                class="bi bi-list"></i><span><strong>Agregar como opción
+                                    principal</strong><small>Quedará al nivel de Instituto, Oferta Académica y
+                                    Admisiones.</small></span></button>
+                        <div class="page-menu-placement__parents">
+                            <div class="page-menu-placement__title"><i class="bi bi-diagram-3"></i> Agregar dentro de un
+                                menú principal</div>
+                            <?php $current_parent = '';
+                            foreach ($public_items as $item):
+                                $nivel = $item['nivel'] ?? 'padre';
+                                $texto = trim($item['texto'] ?? '');
+                                if ($texto === '')
+                                    continue;
+                                if ($nivel === 'padre'):
+                                    $current_parent = $texto;
+                                    $val = 'hijo:' . $texto; ?>
+                                    <details class="page-menu-placement__parent-row"
+                                        data-menu-pos="<?= htmlspecialchars($val, ENT_QUOTES, 'UTF-8') ?>">
+                                        <summary class="page-menu-placement__parent"><span
+                                                class="page-menu-placement__number">#</span><strong><?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?></strong><span
+                                                class="page-menu-placement__action"><i class="bi bi-plus-lg"></i> Añadir
+                                                aquí</span></summary>
+                                        <div class="page-menu-placement__children"
+                                            data-parent="<?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?>"></div>
+                                    </details>
+                                <?php else: ?>
+                                    <div class="page-menu-placement__existing-child"
+                                        data-parent="<?= htmlspecialchars($current_parent, ENT_QUOTES, 'UTF-8') ?>"
+                                        data-child="<?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?>"><i
+                                            class="bi bi-arrow-return-right"></i><span><?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?></span><span
+                                            class="page-menu-placement__row-actions"><button type="button"
+                                                class="js-menu-position" data-direction="before"
+                                                title="Colocar la página antes"><i class="bi bi-chevron-up"></i></button><button
+                                                type="button" class="js-menu-position" data-direction="after"
+                                                title="Colocar la página después"><i
+                                                    class="bi bi-chevron-down"></i></button></span></div>
+                                <?php endif; endforeach; ?>
+                        </div>
+                        <div class="page-menu-placement__new-page" id="menu-new-page-preview" hidden><i
+                                class="bi bi-arrow-return-right"></i><span>Nueva página</span></div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -527,6 +608,7 @@ echo layout_start($page_title, $current_key);
     </div>
 </div>
 
+<!-- Recursos movidos a admin/assets/pagina_custom.css y pagina_custom.js.
 <style>
     .icon-option-card:hover {
         border-color: #F15A24 !important;
@@ -617,5 +699,6 @@ echo layout_start($page_title, $current_key);
         });
     }());
 </script>
+-->
 
 <?php echo layout_end(); ?>

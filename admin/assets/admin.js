@@ -60,6 +60,21 @@ document.addEventListener('DOMContentLoaded', function () {
         });
     });
 
+    // Páginas personalizadas: se usa un listener en lugar de JavaScript inline.
+    // Así los nombres con comillas o caracteres especiales nunca rompen el botón.
+    document.querySelectorAll('.js-delete-page').forEach(btn => {
+        btn.addEventListener('click', function (event) {
+            event.preventDefault();
+            const form = this.closest('form');
+            if (!form) return;
+            const name = this.dataset.pageName || 'esta página';
+            window.customConfirm(
+                '¿Eliminar la página "' + name + '" permanentemente? Esta acción no se puede deshacer.',
+                () => form.submit()
+            );
+        });
+    });
+
     // ── Auto-cerrar flash message ───────────────────────
     const flash = document.getElementById('panel-flash');
     if (flash) {

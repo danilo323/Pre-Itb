@@ -41,13 +41,19 @@ if ($cogob_url === '') $cogob_url = '#';
                         <div class="sobre-cogob__photo">
                             <img src="<?= htmlspecialchars($miembro_foto, ENT_QUOTES, 'UTF-8') ?>"
                                 alt="<?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?>">
-                            <button type="button" class="sobre-cogob__plus"
-                                aria-label="Ver perfil de <?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?>"
-                                data-nombre="<?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?>"
-                                data-cargo="<?= htmlspecialchars($miembro_cargo, ENT_QUOTES, 'UTF-8') ?>"
-                                data-foto="<?= htmlspecialchars($miembro_foto, ENT_QUOTES, 'UTF-8') ?>">
-                                <i class="fas fa-plus" aria-hidden="true"></i>
-                            </button>
+                            <div class="sobre-cogob__actions">
+                                <div class="sobre-cogob__socials">
+                                    <a href="#" aria-label="Correo de <?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?>"><img src="img/correo-electronico.png" alt=""></a>
+                                    <a href="#" aria-label="Teléfono de <?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?>"><img src="img/telefono-fijo.png" alt=""></a>
+                                </div>
+                                <button type="button" class="sobre-cogob__plus"
+                                    aria-label="Ver perfil de <?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?>"
+                                    data-nombre="<?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?>"
+                                    data-cargo="<?= htmlspecialchars($miembro_cargo, ENT_QUOTES, 'UTF-8') ?>"
+                                    data-foto="<?= htmlspecialchars($miembro_foto, ENT_QUOTES, 'UTF-8') ?>">
+                                    <i class="fas fa-plus" aria-hidden="true"></i>
+                                </button>
+                            </div>
                         </div>
                         <h3 class="sobre-cogob__name"><?= htmlspecialchars($miembro_nombre, ENT_QUOTES, 'UTF-8') ?></h3>
                         <span class="sobre-cogob__role"><?= htmlspecialchars($miembro_cargo, ENT_QUOTES, 'UTF-8') ?></span>

@@ -1,0 +1,6 @@
+body { margin:0; padding:0; display:flex; flex-direction:column; align-items:center; justify-content:center; min-height:100vh; background:#fff; font-family:'Inter',sans-serif; text-align:center; }
+.error-code { font-family:'Playfair Display',serif; font-size:15rem; font-weight:700; color:#E8712A; margin:0; line-height:1; }
+.error-title { font-family:'Playfair Display',serif; font-size:3rem; font-weight:700; color:#000; margin:10px 0 20px; }
+.error-desc { font-size:1.1rem; color:#6c757d; margin-bottom:40px; }
+.btn-back { display:inline-block; background:#E8712A; color:#fff; font-weight:600; font-size:1rem; padding:15px 40px; border-radius:12px; text-decoration:none; transition:background .3s ease; }
+.btn-back:hover { background:#D4631F; }

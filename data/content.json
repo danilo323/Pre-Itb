@@ -3,9 +3,9 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/86bd730e3c751b6077e79b348d92653e.jpeg",
-        "div_seo": null,
-        "div_logos": null
+        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
+        "div_seo": "",
+        "div_logos": ""
     },
     "menu": {
         "items_menu": [
@@ -13,6 +13,11 @@
                 "texto": "Instituto",
                 "url": "",
                 "nivel": "padre"
+            },
+            {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
             },
             {
                 "texto": "Sobre Nosotros",
@@ -144,17 +149,20 @@
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Teresa Benites",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             }
         ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
@@ -806,15 +814,15 @@
     },
     "sobre_intro": {
         "_visible": "1",
-        "info_compartido": null,
-        "div_textos": null,
+        "info_compartido": "",
+        "div_textos": "",
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-        "div_cita": null,
+        "div_cita": "",
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": null,
+        "div_imagen": "",
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
@@ -899,7 +907,7 @@
                 "cargo": "Representante de Trabajadores"
             }
         ],
-        "div_estructura": null,
+        "div_estructura": "",
         "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
@@ -909,7 +917,7 @@
     },
     "sobre_hero": {
         "_visible": "1",
-        "info_propia": null,
+        "info_propia": "",
         "div_left": "",
         "subtitulo": "Conoce al ITB",
         "titulo": "Sobre nosotros",
@@ -921,9 +929,9 @@
         "div_right": "",
         "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
         "video_url": "https://youtu.be/eTgzLxWGgS4",
-        "div_galeria": null,
-        "info_portada": null,
-        "animaciones": false,
+        "div_galeria": "",
+        "info_portada": "",
+        "animaciones": "",
         "imagenes_fondo": [
             {
                 "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
@@ -932,19 +940,19 @@
         ],
         "ruta_inicio": "Inicio",
         "ruta_actual": "Sobre Nosotros",
-        "div_textos": null
+        "div_textos": ""
     },
     "himno": {
         "_visible": "1",
-        "div_textos": null,
+        "div_textos": "",
         "titulo": "Música y letra",
         "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
-        "div_letra": null,
+        "div_letra": "",
         "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
         "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
         "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
         "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
-        "div_multimedia": null,
+        "div_multimedia": "",
         "audio": "audio/himnoitb.mp3",
         "btn_descargar": "Descargar música",
         "imagen": "img/Himno_Estudiante_itb.jpg",

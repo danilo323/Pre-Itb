@@ -30,6 +30,16 @@ function content_all_data(): array {
     }
     unset($GLOBALS['_content_cache_cleared']);
     $live_data = content_storage_load();
+    // Una página personalizada puede llevar su propia copia de las secciones
+    // heredadas. Se superpone solo durante el renderizado de esa página.
+    $custom_content = $GLOBALS['CURRENT_DYNAMIC_PAGE']['contenido'] ?? null;
+    if (is_array($custom_content)) {
+        foreach ($custom_content as $section => $values) {
+            if (is_array($values)) {
+                $live_data[$section] = array_replace($live_data[$section] ?? [], $values);
+            }
+        }
+    }
     return $live_data;
 }
 
