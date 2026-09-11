@@ -15,6 +15,11 @@
                 "nivel": "padre"
             },
             {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Sobre Nosotros",
                 "url": "sobre-nosotros.php",
                 "nivel": "hijo"
@@ -63,6 +68,11 @@
                 "texto": "Oferta Académica",
                 "url": "#",
                 "nivel": "padre"
+            },
+            {
+                "texto": "academia",
+                "url": "academia.php",
+                "nivel": "hijo"
             },
             {
                 "texto": "Vida Estudiantil",
@@ -930,21 +940,115 @@
         "imagen": "img/Himno_Estudiante_itb.jpg",
         "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
     },
-    "_paginas_creadas": {
-        "pg_67733c093467": {
-            "id": "pg_67733c093467",
-            "nombre": "prueba",
-            "slug": "prueba",
-            "icon": "bi bi-people-fill",
-            "menu_pos": "hijo:Nuestra Institución 1",
-            "secciones": [
-                "sobre_hero",
-                "autoridades",
-                "sobre_cogobierno",
-                "alianzas"
-            ],
-            "updated_at": "2026-09-11 03:36:05"
+    "custom_pg_67733c093467": {
+        "sobre_hero": {
+            "_visible": "1",
+            "info_propia": null,
+            "div_textos": null,
+            "titulo": "Sobre nosotros",
+            "ruta_inicio": "Inicio",
+            "ruta_actual": "Sobre Nosotros",
+            "div_galeria": null,
+            "info_portada": null,
+            "animaciones": true,
+            "imagenes_fondo": [
+                {
+                    "archivo": "img/hero_2.jpg",
+                    "estatica": false
+                }
+            ]
         },
+        "autoridades": {
+            "_visible": "1",
+            "info_gestion": null,
+            "div_global": null,
+            "etiqueta_superior": "Nuestro Equipo",
+            "titulo": "Nuestras Autoridades",
+            "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+            "boton_directorio": "Ver Directorio"
+        },
+        "sobre_cogobierno": {
+            "_visible": "1",
+            "titulo": "Co Gobierno",
+            "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+            "miembros": [
+                {
+                    "foto": "img/c8bf4f7424e8fead2cf318d36aa90cb7.jpg",
+                    "nombre": "Obst. Lenny Mariscal San Martín",
+                    "cargo": "Representante de Docentes"
+                },
+                {
+                    "foto": "img/b32dd35f80c29eeecc0b1a17c0536fe0.jpg",
+                    "nombre": "Ing. Marcos Escaleras Gómez",
+                    "cargo": "Representante de Trabajadores"
+                }
+            ],
+            "div_estructura": null,
+            "card_imagen": "img/11ad0e374a18c1084f2eb8e891901c54.jpg",
+            "card_icono": "",
+            "card_titulo": "Estructura Orgánica",
+            "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+            "card_boton": "Ver Organigrama",
+            "card_boton_url": "#"
+        },
+        "alianzas": {
+            "_visible": "1",
+            "div_textos": null,
+            "titulo": "Alianzas del ITB",
+            "boton_todas": "Ver Alianzas y Convenios",
+            "div_logos": null,
+            "lista_logos": [
+                {
+                    "imagen": "img/alianza_1.png",
+                    "nombre": "Aliado 1"
+                },
+                {
+                    "imagen": "img/alianza_2.jpg",
+                    "nombre": "Aliado 2"
+                },
+                {
+                    "imagen": "img/alianza_3.png",
+                    "nombre": "Aliado 3"
+                },
+                {
+                    "imagen": "img/alianza_4.png",
+                    "nombre": "Aliado 4"
+                },
+                {
+                    "imagen": "img/alianza_5.png",
+                    "nombre": "Aliado 5"
+                }
+            ],
+            "div_fotos": null,
+            "lista_fotos": [
+                {
+                    "imagen": "img/alianza_sub1.png",
+                    "nombre": "Actividad ITB 1"
+                },
+                {
+                    "imagen": "img/alianza_sub2.png",
+                    "nombre": "Actividad ITB 2"
+                },
+                {
+                    "imagen": "img/alianza_sub3.png",
+                    "nombre": "Actividad ITB 3"
+                },
+                {
+                    "imagen": "img/alianza_sub4.png",
+                    "nombre": "Actividad ITB 4"
+                },
+                {
+                    "imagen": "img/alianza_sub5.png",
+                    "nombre": "Actividad ITB 5"
+                },
+                {
+                    "imagen": "img/alianza_sub6.png",
+                    "nombre": "Actividad ITB 6"
+                }
+            ]
+        }
+    },
+    "_paginas_creadas": {
         "pg_7716650bace6": {
             "id": "pg_7716650bace6",
             "nombre": "prueba1",
@@ -1134,7 +1238,10 @@
             "menu_pos": "hijo:Instituto",
             "secciones": [
                 "sobre_hero",
+                "mision_vision",
+                "valores",
                 "autoridades",
+                "cogobierno",
                 "himno"
             ],
             "contenido": {
@@ -1196,6 +1303,96 @@
                     "ruta_actual": "Sobre Nosotros",
                     "div_textos": ""
                 },
+                "sobre_mision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra misión",
+                    "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
+                    "puntos": [
+                        {
+                            "texto": "Autonomía de pensamiento y liderazgo."
+                        },
+                        {
+                            "texto": "Aliado estratégico de empresas e instituciones."
+                        },
+                        {
+                            "texto": "Formación práctica orientada al desarrollo económico y social."
+                        }
+                    ],
+                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+                },
+                "sobre_vision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra visión",
+                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+                    "puntos": [
+                        {
+                            "texto": "Liderazgo en educación tecnológica universitaria."
+                        },
+                        {
+                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+                        },
+                        {
+                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+                        }
+                    ],
+                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                },
+                "sobre_valores": {
+                    "_visible": "1",
+                    "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
+                    "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
+                    "items": [
+                        {
+                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "titulo": "Cogobierno",
+                            "descripcion": "Participación y gestión democrática"
+                        },
+                        {
+                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "titulo": "Igualdad",
+                            "descripcion": "Oportunidades sin discriminación"
+                        },
+                        {
+                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "titulo": "Calidad",
+                            "descripcion": "Excelencia en educación superior"
+                        },
+                        {
+                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "titulo": "Pertinencia",
+                            "descripcion": "Programas alineados a la sociedad"
+                        },
+                        {
+                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "titulo": "Integralidad",
+                            "descripcion": "Formación académica y humana"
+                        }
+                    ]
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
                 "himno": {
                     "_visible": "1",
                     "div_textos": "",
@@ -1213,115 +1410,165 @@
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
-            "updated_at": "2026-09-11 05:28:18"
-        }
-    },
-    "custom_pg_67733c093467": {
-        "sobre_hero": {
-            "_visible": "1",
-            "info_propia": null,
-            "div_textos": null,
-            "titulo": "Sobre nosotros",
-            "ruta_inicio": "Inicio",
-            "ruta_actual": "Sobre Nosotros",
-            "div_galeria": null,
-            "info_portada": null,
-            "animaciones": true,
-            "imagenes_fondo": [
-                {
-                    "archivo": "img/hero_2.jpg",
-                    "estatica": false
-                }
-            ]
+            "updated_at": "2026-09-11 06:04:45"
         },
-        "autoridades": {
-            "_visible": "1",
-            "info_gestion": null,
-            "div_global": null,
-            "etiqueta_superior": "Nuestro Equipo",
-            "titulo": "Nuestras Autoridades",
-            "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-            "boton_directorio": "Ver Directorio"
-        },
-        "sobre_cogobierno": {
-            "_visible": "1",
-            "titulo": "Co Gobierno",
-            "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
-            "miembros": [
-                {
-                    "foto": "img/c8bf4f7424e8fead2cf318d36aa90cb7.jpg",
-                    "nombre": "Obst. Lenny Mariscal San Martín",
-                    "cargo": "Representante de Docentes"
-                },
-                {
-                    "foto": "img/b32dd35f80c29eeecc0b1a17c0536fe0.jpg",
-                    "nombre": "Ing. Marcos Escaleras Gómez",
-                    "cargo": "Representante de Trabajadores"
-                }
+        "pg_344b6c0b7ef3": {
+            "id": "pg_344b6c0b7ef3",
+            "nombre": "academia",
+            "slug": "academia",
+            "icon": "bi bi-mortarboard-fill",
+            "menu_pos": "hijo:Oferta Académica",
+            "secciones": [
+                "cogobierno",
+                "servicios",
+                "alianzas"
             ],
-            "div_estructura": null,
-            "card_imagen": "img/11ad0e374a18c1084f2eb8e891901c54.jpg",
-            "card_icono": "",
-            "card_titulo": "Estructura Orgánica",
-            "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
-            "card_boton": "Ver Organigrama",
-            "card_boton_url": "#"
-        },
-        "alianzas": {
-            "_visible": "1",
-            "div_textos": null,
-            "titulo": "Alianzas del ITB",
-            "boton_todas": "Ver Alianzas y Convenios",
-            "div_logos": null,
-            "lista_logos": [
-                {
-                    "imagen": "img/alianza_1.png",
-                    "nombre": "Aliado 1"
+            "contenido": {
+                "servicios": {
+                    "_visible": "1",
+                    "serv1_titulo": "Bienestar Estudiantil",
+                    "serv1_desc": "Servicios médicos, psicológicos y odontológicos gratuitos",
+                    "serv1_btn": "Más servicios",
+                    "lista_servicios": [
+                        {
+                            "titulo": "Campus Virtual",
+                            "desc": "Plataforma educativa 24/7",
+                            "btn_texto": "Ver Tour",
+                            "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Horarios",
+                            "desc": "Consulta tus horarios de clase",
+                            "btn_texto": "Ver Horarios",
+                            "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Servicios Digitales",
+                            "desc": "Trámites en línea y gestión académica",
+                            "btn_texto": "Acceder",
+                            "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Podcast ITB",
+                            "desc": "Escucha nuestro contenido educativo",
+                            "btn_texto": "Escuchar",
+                            "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Arte y Deportes",
+                            "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
+                            "btn_texto": "Conocer Más",
+                            "imagen": "img/bienestar_estudiantil_1.png",
+                            "imagen_fija": false
+                        }
+                    ],
+                    "div_serv1": "",
+                    "div_servicios_lista": "",
+                    "etiqueta_superior": "Servicios Institucionales",
+                    "titulo": "Todo lo que necesitas en  *un solo lugar*",
+                    "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
+                    "serv2_titulo": "Campus Virtual",
+                    "serv2_desc": "Plataforma educativa 24/7",
+                    "serv2_imagen": "img/servicio-campus.jpg",
+                    "serv3_titulo": "Horarios",
+                    "serv3_desc": "Consulta tus horarios de clase",
+                    "serv3_imagen": "img/salud.jpg",
+                    "serv4_titulo": "Servicios Digitales",
+                    "serv4_desc": "Trámites en línea y gestión académica",
+                    "serv4_imagen": "img/salud.jpg",
+                    "serv5_titulo": "Podcast ITB",
+                    "serv5_desc": "Escucha nuestro contenido educativo",
+                    "serv5_imagen": "img/salud.jpg",
+                    "serv6_titulo": "Arte y Deportes",
+                    "serv6_desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
+                    "serv6_imagen": "img/estudiantes1.png"
                 },
-                {
-                    "imagen": "img/alianza_2.jpg",
-                    "nombre": "Aliado 2"
+                "alianzas": {
+                    "_visible": "1",
+                    "titulo": "Alianzas del ITB",
+                    "boton_todas": "Ver Alianzas y Convenios",
+                    "lista_logos": [
+                        {
+                            "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
+                            "nombre": "Aliado 1"
+                        },
+                        {
+                            "imagen": "img/alianza_2.jpg",
+                            "nombre": "Aliado 2"
+                        },
+                        {
+                            "imagen": "img/alianza_3.png",
+                            "nombre": "Aliado 3"
+                        },
+                        {
+                            "imagen": "img/alianza_4.png",
+                            "nombre": "Aliado 4"
+                        },
+                        {
+                            "imagen": "img/alianza_5.png",
+                            "nombre": "Aliado 5"
+                        }
+                    ],
+                    "lista_fotos": [
+                        {
+                            "imagen": "img/alianza_sub1.png",
+                            "nombre": "Actividad ITB 1"
+                        },
+                        {
+                            "imagen": "img/alianza_sub2.png",
+                            "nombre": "Actividad ITB 2"
+                        },
+                        {
+                            "imagen": "img/alianza_sub3.png",
+                            "nombre": "Actividad ITB 3"
+                        },
+                        {
+                            "imagen": "img/alianza_sub4.png",
+                            "nombre": "Actividad ITB 4"
+                        },
+                        {
+                            "imagen": "img/alianza_sub5.png",
+                            "nombre": "Actividad ITB 5"
+                        },
+                        {
+                            "imagen": "img/alianza_sub6.png",
+                            "nombre": "Actividad ITB 6"
+                        }
+                    ],
+                    "div_textos": "",
+                    "div_logos": "",
+                    "div_fotos": ""
                 },
-                {
-                    "imagen": "img/alianza_3.png",
-                    "nombre": "Aliado 3"
-                },
-                {
-                    "imagen": "img/alianza_4.png",
-                    "nombre": "Aliado 4"
-                },
-                {
-                    "imagen": "img/alianza_5.png",
-                    "nombre": "Aliado 5"
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
                 }
-            ],
-            "div_fotos": null,
-            "lista_fotos": [
-                {
-                    "imagen": "img/alianza_sub1.png",
-                    "nombre": "Actividad ITB 1"
-                },
-                {
-                    "imagen": "img/alianza_sub2.png",
-                    "nombre": "Actividad ITB 2"
-                },
-                {
-                    "imagen": "img/alianza_sub3.png",
-                    "nombre": "Actividad ITB 3"
-                },
-                {
-                    "imagen": "img/alianza_sub4.png",
-                    "nombre": "Actividad ITB 4"
-                },
-                {
-                    "imagen": "img/alianza_sub5.png",
-                    "nombre": "Actividad ITB 5"
-                },
-                {
-                    "imagen": "img/alianza_sub6.png",
-                    "nombre": "Actividad ITB 6"
-                }
-            ]
+            },
+            "updated_at": "2026-09-11 06:13:18"
         }
     }
 }

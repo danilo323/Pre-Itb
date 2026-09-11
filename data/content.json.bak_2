@@ -151,15 +151,15 @@
         "vimeo_url": "#",
         "linkedin_url": "#",
         "copyright": "© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
-        "div_prefooter": null,
-        "div_logo": null,
-        "div_enlaces1": null,
-        "div_enlaces2": null,
-        "div_campus": null,
+        "div_prefooter": "",
+        "div_logo": "",
+        "div_enlaces1": "",
+        "div_enlaces2": "",
+        "div_campus": "",
         "div_mapa": "",
-        "div_redes": null,
-        "div_bottom": null,
-        "info_campus": null,
+        "div_redes": "",
+        "div_bottom": "",
+        "info_campus": "",
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador"
     },
     "hero": {
@@ -936,22 +936,6 @@
         "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
     },
     "_paginas_creadas": {
-        "pg_be4e6f7727fc": {
-            "id": "pg_be4e6f7727fc",
-            "nombre": "NOmbre01",
-            "slug": "nombre01",
-            "icon": "bi bi-mortarboard-fill",
-            "menu_pos": "padre",
-            "secciones": [
-                "sobre_hero",
-                "mision_vision",
-                "servicios",
-                "noticias",
-                "admision",
-                "alianzas"
-            ],
-            "updated_at": "2026-09-11 01:35:54"
-        },
         "pg_67733c093467": {
             "id": "pg_67733c093467",
             "nombre": "prueba",
@@ -1155,7 +1139,10 @@
             "menu_pos": "hijo:Instituto",
             "secciones": [
                 "sobre_hero",
+                "mision_vision",
+                "valores",
                 "autoridades",
+                "cogobierno",
                 "himno"
             ],
             "contenido": {
@@ -1217,6 +1204,96 @@
                     "ruta_actual": "Sobre Nosotros",
                     "div_textos": ""
                 },
+                "sobre_mision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra misión",
+                    "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
+                    "puntos": [
+                        {
+                            "texto": "Autonomía de pensamiento y liderazgo."
+                        },
+                        {
+                            "texto": "Aliado estratégico de empresas e instituciones."
+                        },
+                        {
+                            "texto": "Formación práctica orientada al desarrollo económico y social."
+                        }
+                    ],
+                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+                },
+                "sobre_vision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra visión",
+                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+                    "puntos": [
+                        {
+                            "texto": "Liderazgo en educación tecnológica universitaria."
+                        },
+                        {
+                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+                        },
+                        {
+                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+                        }
+                    ],
+                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                },
+                "sobre_valores": {
+                    "_visible": "1",
+                    "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
+                    "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
+                    "items": [
+                        {
+                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "titulo": "Cogobierno",
+                            "descripcion": "Participación y gestión democrática"
+                        },
+                        {
+                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "titulo": "Igualdad",
+                            "descripcion": "Oportunidades sin discriminación"
+                        },
+                        {
+                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "titulo": "Calidad",
+                            "descripcion": "Excelencia en educación superior"
+                        },
+                        {
+                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "titulo": "Pertinencia",
+                            "descripcion": "Programas alineados a la sociedad"
+                        },
+                        {
+                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "titulo": "Integralidad",
+                            "descripcion": "Formación académica y humana"
+                        }
+                    ]
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
                 "himno": {
                     "_visible": "1",
                     "div_textos": "",
@@ -1234,7 +1311,7 @@
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
-            "updated_at": "2026-09-11 05:28:18"
+            "updated_at": "2026-09-11 06:04:45"
         }
     },
     "custom_pg_67733c093467": {

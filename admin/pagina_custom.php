@@ -229,10 +229,13 @@ $bi_icons = [
 $secciones_disponibles = [
     'Sobre Nosotros' => [
         'sobre_hero'    => ['icon' => 'bi-image-fill',          'label' => 'Portada (Banner Sobre Nosotros)'],
+        'presentacion'  => ['icon' => 'bi-card-text',           'label' => 'Presentación institucional'],
         'mision_vision' => ['icon' => 'bi-bullseye',            'label' => 'Misión y Visión'],
         'valores'       => ['icon' => 'bi-heart-fill',          'label' => 'Nuestros Valores'],
         'autoridades'   => ['icon' => 'bi-people-fill',         'label' => 'Nuestras Autoridades'],
+        'cogobierno'    => ['icon' => 'bi-diagram-3-fill',      'label' => 'Co Gobierno'],
         'himno'         => ['icon' => 'bi-music-note-beamed',   'label' => 'Himno e Identidad Institucional'],
+        'transparencia' => ['icon' => 'bi-file-earmark-pdf-fill','label' => 'Transparencia y Leyes'],
     ],
     'Oferta Académica' => [
         'areas'     => ['icon' => 'bi-grid-3x3-gap-fill', 'label' => 'Áreas de Formación'],
@@ -242,7 +245,6 @@ $secciones_disponibles = [
     'Otras Secciones' => [
         'hero'          => ['icon' => 'bi-play-circle-fill',      'label' => 'Portada Principal (Hero con video)'],
         'noticias'      => ['icon' => 'bi-newspaper',             'label' => 'Noticias y Eventos'],
-        'transparencia' => ['icon' => 'bi-file-earmark-pdf-fill', 'label' => 'Leyes y PDFs descargables'],
         'admision'      => ['icon' => 'bi-send-fill',             'label' => 'Formulario de Admisión'],
         'alianzas'      => ['icon' => 'bi-diagram-3-fill',        'label' => 'Alianzas y Convenios'],
     ],
@@ -322,7 +324,7 @@ echo layout_start($page_title, $current_key);
                 <!-- UBICACIÓN EN MENÚ PÚBLICO -->
                 <div class="form-group">
                     <label class="field-label">Posición en el Menú Navegable del Sitio</label>
-                    <select name="menu_pos" class="form-control">
+                    <select name="menu_pos" id="menu_pos_select" class="form-control" style="display:none;">
                         <option value="none" <?= $menu_pos==='none'?'selected':'' ?>>-- No agregar al menú público --</option>
                         <option value="padre" <?= $menu_pos==='padre'?'selected':'' ?>>Menú Principal (Padre)</option>
                         <optgroup label="── Submenú (Hijo) de...">
@@ -333,6 +335,17 @@ echo layout_start($page_title, $current_key);
                             <?php endforeach; ?>
                         </optgroup>
                     </select>
+                    <p style="margin:0 0 10px;color:#6B7280;font-size:.82rem;">Selecciona dónde aparecerá esta página. Las opciones con sangría se añaden dentro del menú principal escogido.</p>
+                    <div class="page-menu-placement" id="page-menu-placement">
+                        <button type="button" class="page-menu-placement__choice" data-menu-pos="none"><i class="bi bi-eye-slash"></i><span><strong>No mostrar en el menú</strong><small>Solo estará disponible mediante su URL.</small></span></button>
+                        <button type="button" class="page-menu-placement__choice" data-menu-pos="padre"><i class="bi bi-list"></i><span><strong>Agregar como opción principal</strong><small>Quedará al nivel de Instituto, Oferta Académica y Admisiones.</small></span></button>
+                        <div class="page-menu-placement__parents">
+                            <div class="page-menu-placement__title"><i class="bi bi-diagram-3"></i> Agregar dentro de un menú principal</div>
+                            <?php foreach ($public_items as $item): $nivel = $item['nivel'] ?? 'padre'; $texto = trim($item['texto'] ?? ''); if ($texto === '') continue; if ($nivel === 'padre'): $val = 'hijo:' . $texto; ?>
+                                <button type="button" class="page-menu-placement__parent" data-menu-pos="<?= htmlspecialchars($val, ENT_QUOTES, 'UTF-8') ?>"><span class="page-menu-placement__number">#</span><strong><?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?></strong><span class="page-menu-placement__action"><i class="bi bi-plus-lg"></i> Añadir aquí</span></button>
+                            <?php else: ?><div class="page-menu-placement__existing-child"><i class="bi bi-arrow-return-right"></i><?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?></div><?php endif; endforeach; ?>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -414,6 +427,11 @@ echo layout_start($page_title, $current_key);
 .icon-option-card:hover { border-color: #F15A24 !important; background: #FFF5F2 !important; transform: translateY(-2px); }
 .sec-label:hover  { background: #F0F4FF; border-color: #CBD5E1 !important; }
 .sec-label.is-checked { background: #FFF5F2 !important; border-color: #F15A24 !important; }
+.page-menu-placement { border:1px solid #DCE3ED;border-radius:10px;background:#fff;overflow:hidden; }
+.page-menu-placement__choice,.page-menu-placement__parent { width:100%;border:0;border-bottom:1px solid #E9EEF5;background:#fff;display:flex;align-items:center;gap:10px;padding:11px 14px;text-align:left;cursor:pointer;font:inherit;color:#1F242E;transition:background .15s,box-shadow .15s; }
+.page-menu-placement__choice:hover,.page-menu-placement__parent:hover { background:#F6F9FF; }.page-menu-placement__choice.is-selected,.page-menu-placement__parent.is-selected { background:#FFF5F2;box-shadow:inset 3px 0 #F15A24; }
+.page-menu-placement__choice>i { font-size:1.1rem;color:#1A3B70; }.page-menu-placement__choice span { display:grid;gap:2px; }.page-menu-placement small { color:#6B7280;font-size:.76rem;font-weight:400; }
+.page-menu-placement__parents { background:#FAFBFD;padding-bottom:5px; }.page-menu-placement__title { padding:12px 14px 8px;font-size:.8rem;font-weight:700;color:#1A3B70;text-transform:uppercase;letter-spacing:.04em; }.page-menu-placement__parent { width:calc(100% - 16px);margin:0 8px 4px;border:1px solid #E5EAF1;border-radius:6px; }.page-menu-placement__number { color:#94A3B8;font-size:.8rem; }.page-menu-placement__action { margin-left:auto;font-size:.76rem;color:#F15A24;font-weight:700;white-space:nowrap; }.page-menu-placement__existing-child { padding:3px 28px 7px 43px;color:#718096;font-size:.78rem;display:flex;gap:7px;align-items:center; }
 </style>
 <script>
 // Auto-slug desde el nombre
@@ -428,6 +446,21 @@ document.getElementById('input_nombre').addEventListener('input', function () {
 document.getElementById('input_slug').addEventListener('input', function () {
     this.dataset.manual = '1';
 });
+// Selector visual de ubicación: conserva el campo original para el guardado.
+(function () {
+    const select = document.getElementById('menu_pos_select');
+    const panel = document.getElementById('page-menu-placement');
+    if (!select || !panel) return;
+    const mark = function () {
+        panel.querySelectorAll('[data-menu-pos]').forEach(function (button) {
+            button.classList.toggle('is-selected', button.dataset.menuPos === select.value);
+        });
+    };
+    panel.querySelectorAll('[data-menu-pos]').forEach(function (button) {
+        button.addEventListener('click', function () { select.value = this.dataset.menuPos; mark(); });
+    });
+    mark();
+}());
 
 function openIconModal()  { document.getElementById('iconModal').style.display = 'flex'; }
 function closeIconModal() { document.getElementById('iconModal').style.display = 'none'; }

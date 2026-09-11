@@ -4,9 +4,11 @@
 function pagina_custom_sources(array $secciones): array {
     $mapa = [
         'hero' => ['hero'], 'sobre_hero' => ['sobre_hero'],
+        'presentacion' => ['sobre_intro'],
         'mision_vision' => ['sobre_mision', 'sobre_vision'],
         'valores' => ['sobre_valores'], 'autoridades' => ['autoridades'],
-        'himno' => ['himno'], 'areas' => ['areas'], 'programas' => ['programas'],
+        'cogobierno' => ['sobre_cogobierno'], 'himno' => ['himno'],
+        'areas' => ['areas'], 'programas' => ['programas'],
         'servicios' => ['servicios'], 'noticias' => ['noticias'],
         'transparencia' => ['transparencia_leyes'], 'admision' => ['admision'],
         'alianzas' => ['alianzas'],

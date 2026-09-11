@@ -49,9 +49,11 @@ $secciones     = $target_page['secciones'] ?? [];
 $mapa_secciones = [
     'hero'          => __DIR__ . '/includes/hero.php',
     'sobre_hero'    => __DIR__ . '/includes/sobre-hero.php',
+    'presentacion'  => __DIR__ . '/includes/sobre-intro.php',
     'mision_vision' => __DIR__ . '/includes/sobre-mision-vision.php',
     'valores'       => __DIR__ . '/includes/sobre-valores.php',
     'autoridades'   => __DIR__ . '/includes/autoridades.php',
+    'cogobierno'    => __DIR__ . '/includes/sobre-cogobierno.php',
     'himno'         => __DIR__ . '/includes/nosotros_himno.php',
     'areas'         => __DIR__ . '/includes/areas.php',
     'programas'     => __DIR__ . '/includes/programas.php',
@@ -79,7 +81,8 @@ $mapa_secciones = [
     <link rel="stylesheet" href="css/sobre-nosotros.css">
     <link rel="stylesheet" href="css/pagina-interna.css">
 </head>
-<body class="page-dinamica">
+<!-- page-sobre-nosotros activa los estilos modulares de las secciones heredadas. -->
+<body class="page-dinamica page-sobre-nosotros">
 
     <?php include __DIR__ . '/includes/header.php'; ?>
 
