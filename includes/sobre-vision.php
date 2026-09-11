@@ -22,9 +22,10 @@ $vision_desc   = content_get('sobre_vision', 'descripcion', 'Ser una institució
 <!-- 3. NUESTRA VISIÓN                             -->
 <!-- ============================================= -->
 <article class="sobre-mv__card sobre-mv__card--invertida" id="nuestra-vision">
-    <div class="sobre-mv__image">
+    <div class="sobre-mv__image" data-jarallax data-speed="0.5" data-img-position="top">
         <img src="<?= htmlspecialchars($vision_imagen, ENT_QUOTES, 'UTF-8') ?>"
-            alt="<?= htmlspecialchars($vision_titulo, ENT_QUOTES, 'UTF-8') ?> - ITB">
+            alt="<?= htmlspecialchars($vision_titulo, ENT_QUOTES, 'UTF-8') ?> - ITB"
+            class="jarallax-img">
     </div>
 
     <div class="sobre-mv__body">

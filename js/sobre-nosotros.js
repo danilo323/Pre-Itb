@@ -1,6 +1,8 @@
 /* =============================================
-   SOBRE-NOSOTROS.JS — ITB
-   Lógica interactiva para la página Sobre Nosotros
+   SOBRE-NOSOTROS.JS — Lógica Específica
+   PROPÓSITO: Este script SOLO se carga en la página "Sobre Nosotros" (sobre-nosotros.php).
+   Tenerlo separado de main.js garantiza que la memoria y red no se desperdicien en otras páginas (Buena práctica de Escalabilidad).
+   Maneja: Modales de Co-Gobierno, Animaciones de Scroll Reveal y micro-interacciones.
    ============================================= */
 
 document.addEventListener('DOMContentLoaded', () => {

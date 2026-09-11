@@ -62,7 +62,7 @@
                             ['texto' => 'Instituto', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Sobre Nosotros', 'url' => 'sobre-nosotros.php', 'nivel' => 'hijo'],
                             ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
-                            ['texto' => 'Transparencia / Leyes', 'url' => '#', 'nivel' => 'hijo'],
+                            ['texto' => 'Transparencia / Leyes', 'url' => 'transparencia-leyes.php', 'nivel' => 'hijo'],
                             ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Vida Estudiantil', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Admisiones', 'url' => '#', 'nivel' => 'padre'],
@@ -79,7 +79,7 @@
                         
                         $texto = htmlspecialchars($item['texto'] ?? '', ENT_QUOTES, 'UTF-8');
                         $raw_url = trim($item['url'] ?? '');
-                        if ($raw_url === '' && mb_strtolower(trim($item['texto'] ?? '')) === 'sobre nosotros') {
+                        if ($raw_url === '' && (function_exists('mb_strtolower') ? mb_strtolower(trim($item['texto'] ?? '')) : strtolower(trim($item['texto'] ?? ''))) === 'sobre nosotros') {
                             $raw_url = 'sobre-nosotros.php';
                         }
                         $url = htmlspecialchars($raw_url !== '' ? $raw_url : '#', ENT_QUOTES, 'UTF-8');
@@ -102,7 +102,7 @@
                             foreach ($children as $child) {
                                 $c_texto = htmlspecialchars($child['texto'] ?? '', ENT_QUOTES, 'UTF-8');
                                 $c_raw_url = trim($child['url'] ?? '');
-                                if ($c_raw_url === '' && mb_strtolower(trim($child['texto'] ?? '')) === 'sobre nosotros') {
+                                if ($c_raw_url === '' && (function_exists('mb_strtolower') ? mb_strtolower(trim($child['texto'] ?? '')) : strtolower(trim($child['texto'] ?? ''))) === 'sobre nosotros') {
                                     $c_raw_url = 'sobre-nosotros.php';
                                 }
                                 $c_url = htmlspecialchars($c_raw_url !== '' ? $c_raw_url : '#', ENT_QUOTES, 'UTF-8');

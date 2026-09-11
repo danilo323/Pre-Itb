@@ -7,9 +7,12 @@ RewriteRule ^admin/login/?$ admin/login.php [L]
 RewriteRule ^admin/logout/?$ admin/logout.php [L]
 RewriteRule ^sobre-nosotros/?$ sobre-nosotros.php [L]
 
+# Redirección amigable para páginas dinámicas personalizadas
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteRule ^([a-zA-Z0-9\-]+)/?$ pagina_dinamica.php?route=$1 [QSA,L]
+
 # Página 404 personalizada para cualquier URL que no exista.
-# Se hace con RewriteRule (no ErrorDocument) para que funcione igual si el
-# sitio vive en la raíz del dominio o en una subcarpeta (ej. XAMPP en /itb/).
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ admin/404.php [L]

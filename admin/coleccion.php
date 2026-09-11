@@ -98,7 +98,7 @@ echo layout_start($title_label);
 
 <div class="collection-header">
     <div class="search-box">
-        <input type="text" id="search-table" placeholder="🔍 Buscar en la lista..." class="form-input">
+        <input type="text" id="search-table" placeholder="Buscar en la lista..." class="form-input">
     </div>
     <a href="<?= $AB ?>/editar.php?c=<?= urlencode($section) ?>&id=new" class="btn btn-primary">+ Nuevo Registro</a>
 </div>

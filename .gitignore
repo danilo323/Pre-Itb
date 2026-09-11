@@ -28,6 +28,10 @@ admin/test_*.php
 *.bak
 *.pdf
 
+# Excepcion: los PDF de docs/ SI se suben (son el contenido real de la pagina
+# de Transparencia / Leyes, no un backup ni un documento suelto de prueba).
+!docs/*.pdf
+
 # OS generated files
 .DS_Store
 .DS_Store?

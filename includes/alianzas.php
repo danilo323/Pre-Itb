@@ -31,7 +31,7 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
 <!-- ============================================= -->
 <!-- ALIANZAS                                      -->
 <!-- ============================================= -->
-<section class="alianzas" id="alianzas">
+<section class="alianzas<?= empty($alianzas_solo_carrusel) ? '' : ' alianzas--solo-carrusel' ?>" id="alianzas">
     <div class="alianzas__container">
 
         <?php /* El titulo y el boton se saltan cuando quien incluye esta
@@ -48,8 +48,11 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
         </div>
         <?php endif; ?>
 
-        <?php if (!empty($alianzas_logos)): ?>
-        <div class="alianzas__track">
+        <?php /* Cuando piden "solo carrusel" (sobre-nosotros.php), va nada más
+                 el carrusel de fotos: los logos de aliados se quedan solo en
+                 la portada. */ ?>
+        <?php if (empty($alianzas_solo_carrusel) && !empty($alianzas_logos)): ?>
+        <div class="alianzas__logos-track">
             <div class="alianzas__logos">
                 <?php
                 // La lista se pinta dos veces seguidas: la animación desplaza el
@@ -70,7 +73,7 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
         <?php endif; ?>
 
         <?php if (!empty($alianzas_fotos)): ?>
-        <div class="alianzas__track alianzas__track--fotos">
+        <div class="alianzas__fotos-track">
             <div class="alianzas__fotos">
                 <?php
                 // Mismo truco del carril doble que la fila de logos de arriba.

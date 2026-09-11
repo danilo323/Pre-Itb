@@ -51,9 +51,10 @@ if ($autor_cita && !str_starts_with(trim($autor_cita), '—') && !str_starts_wit
 
         <!-- Lado derecho: imagen con tarjeta flotante de trayectoria -->
         <div class="sobre-intro__image-wrapper">
-            <div class="sobre-intro__image">
+            <div class="sobre-intro__image" data-jarallax data-speed="0.5" data-img-position="top">
                 <img src="<?= htmlspecialchars($intro_imagen, ENT_QUOTES, 'UTF-8') ?>"
-                    alt="<?= content_get('sobre_intro', 'etiqueta_superior', 'Trayectoria y Compromiso Educativo') ?> - ITB">
+                    alt="<?= content_get('sobre_intro', 'etiqueta_superior', 'Trayectoria y Compromiso Educativo') ?> - ITB"
+                    class="jarallax-img">
             </div>
             <div class="sobre-intro__badge">
                 <span class="sobre-intro__badge-tag">DESDE 1996</span>

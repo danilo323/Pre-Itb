@@ -17,21 +17,20 @@
 }
 
 .page-sobre-nosotros .sobre-cogob__title {
-    font-family: var(--font-primary);
-    font-size: clamp(2.1rem, 3.4vw, 2.9rem);
+    font-family: var(--font-heading);
+    font-size: clamp(2.2rem, 4vw, 3.2rem);
     font-weight: 800;
     color: #111111;
     line-height: 1.1;
-    letter-spacing: -1px;
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .page-sobre-nosotros .sobre-cogob__desc {
     font-family: var(--font-primary);
-    font-size: 0.92rem;
-    color: #4b5563;
+    font-size: 0.95rem;
+    color: var(--gray-600);
     line-height: 1.6;
-    max-width: 500px;
+    max-width: 640px;
     margin-bottom: 30px;
 }
 
@@ -59,6 +58,11 @@
     height: 100%;
     object-fit: cover;
     display: block;
+    transition: transform 0.4s ease;
+}
+
+.page-sobre-nosotros .sobre-cogob__photo:hover:not(:has(.sobre-cogob__plus:hover)) img {
+    transform: scale(1.07);
 }
 
 /* Botón "+" sobre la esquina inferior derecha de la foto */
