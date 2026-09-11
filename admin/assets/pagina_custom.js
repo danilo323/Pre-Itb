@@ -22,7 +22,15 @@ document.addEventListener('DOMContentLoaded', function () {
         const updateOrder = function () {
             const parent = select.value.indexOf('hijo:') === 0 ? select.value.slice(5) : '';
             panel.querySelectorAll('.page-menu-placement__parent-row').forEach(row => row.classList.toggle('is-selected', row.dataset.menuPos === select.value));
-            if (!parent) return;
+            if (select.value === 'padre') {
+                preview.hidden = false;
+                preview.classList.add('is-main-menu-item');
+                panel.querySelector('.page-menu-placement__parents').appendChild(preview);
+                before.value = '';
+                return;
+            }
+            preview.classList.remove('is-main-menu-item');
+            if (!parent) { preview.hidden = true; return; }
             const parentRow = Array.from(panel.querySelectorAll('.page-menu-placement__parent-row')).find(row => row.dataset.menuPos === select.value);
             children = parentRow ? Array.from(parentRow.querySelectorAll('.page-menu-placement__existing-child')) : [];
             position = before.value ? Math.max(0, children.findIndex(child => child.dataset.child === before.value)) : 0;
@@ -35,6 +43,12 @@ document.addEventListener('DOMContentLoaded', function () {
             before.value = position < children.length ? children[position].dataset.child : '';
         };
         const mark = () => panel.querySelectorAll('[data-menu-pos]').forEach(button => button.classList.toggle('is-selected', button.dataset.menuPos === select.value));
+        panel.querySelectorAll('.page-menu-placement__choice[data-menu-pos]').forEach(button => button.addEventListener('click', function () {
+            select.value = this.dataset.menuPos;
+            before.value = '';
+            mark();
+            updateOrder();
+        }));
         panel.querySelectorAll('.page-menu-placement__parent').forEach(button => button.addEventListener('click', function () { const row = this.closest('.page-menu-placement__parent-row'); select.value = row.dataset.menuPos; before.value = ''; mark(); updateOrder(); }));
         panel.querySelectorAll('.js-menu-position').forEach(button => button.addEventListener('click', function (event) {
             event.stopPropagation();
