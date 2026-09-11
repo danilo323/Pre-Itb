@@ -38,6 +38,10 @@ if (!$target_page) {
     exit;
 }
 
+// También se usa cuando la página se abre por ?route= o ?p (sin router.php).
+// content_helper.php la lee para aplicar la copia de contenido de esta página.
+$GLOBALS['CURRENT_DYNAMIC_PAGE'] = $target_page;
+
 $nombre_pagina = htmlspecialchars($target_page['nombre'] ?? 'Página Institucional', ENT_QUOTES, 'UTF-8');
 $secciones     = $target_page['secciones'] ?? [];
 

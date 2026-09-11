@@ -9,6 +9,7 @@
 require_once __DIR__ . '/views/layout.php';
 require_once __DIR__ . '/storage.php';
 require_once __DIR__ . '/csrf.php';
+require_once __DIR__ . '/pagina_custom_helpers.php';
 
 $ab = admin_base();
 
@@ -79,6 +80,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             _pagina_custom_remove_from_menu($data, $old_slug);
         }
 
+        // Al crear una página, sus secciones nacen con una copia de los textos,
+        // imágenes y demás valores actuales. Al editarla no se pisan los cambios
+        // que el administrador haya hecho en su contenido propio.
+        $previous_content = $data['_paginas_creadas'][$id]['contenido'] ?? [];
+        $new_content = pagina_custom_snapshot($data, $secciones);
+        foreach ($previous_content as $section => $values) {
+            if (isset($new_content[$section]) && is_array($values)) {
+                $new_content[$section] = array_replace($new_content[$section], $values);
+            }
+        }
+
         $data['_paginas_creadas'][$id] = [
             'id'         => $id,
             'nombre'     => $nombre,
@@ -86,6 +98,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'icon'       => $icon,
             'menu_pos'   => $menu_pos,
             'secciones'  => $secciones,
+            'contenido'  => $new_content,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -245,6 +258,9 @@ echo layout_start($page_title, $current_key);
             </p>
         </div>
         <?php if ($is_editing): ?>
+        <a class="btn btn-primary" href="<?= $ab ?>/pagina_custom_contenido.php?id=<?= urlencode($id) ?>" style="display:flex;align-items:center;gap:6px;margin-left:auto;margin-right:10px;">
+            <i class="bi bi-pencil-square"></i> Administrar contenido
+        </a>
         <form method="POST" id="form-delete-pagina">
             <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <input type="hidden" name="action" value="delete">
