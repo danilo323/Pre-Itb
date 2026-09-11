@@ -5,7 +5,7 @@
 // no un archivo por entidad. Toda la funcionalidad de "crear página" vive aquí.
 // GET ?id=pg_xxx → editar. Sin id → crear nueva.
 // POST action=delete → eliminar. POST action=save → guardar config. POST action=save_content → guardar contenido.
-
+//
 require_once __DIR__ . '/views/layout.php';
 require_once __DIR__ . '/storage.php';
 require_once __DIR__ . '/csrf.php';
