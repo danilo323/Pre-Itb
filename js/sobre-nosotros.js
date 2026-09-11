@@ -85,11 +85,15 @@ document.addEventListener('DOMContentLoaded', () => {
     // 2. SCROLL REVEAL SUAVE PARA SECCIONES
     // =========================================
     const initScrollAnimations = () => {
-        if (!('IntersectionObserver' in window)) return;
-
         const animTargets = document.querySelectorAll(
             '.sobre-intro__content, .sobre-intro__image-wrapper, .sobre-mv__card, .sobre-valores__item, .sobre-cogob__card, .sobre-cogob__banner'
         );
+
+        // En navegadores sin soporte, el contenido debe seguir siendo visible.
+        if (!('IntersectionObserver' in window)) {
+            animTargets.forEach(el => el.classList.add('is-visible'));
+            return;
+        }
 
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {

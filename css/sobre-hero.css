@@ -11,9 +11,8 @@
 
 .sobre-hero {
     position: relative;
-    /* Más bajo que el hero del Inicio: es un encabezado de página, no una
-       portada que se coma la pantalla. */
-    min-height: 420px;
+    /* Mismas medidas que el hero de la página principal (Inicio) */
+    min-height: 100vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -42,7 +41,7 @@
     max-width: var(--container-max);
     width: 100%;
     margin: 0 auto;
-    padding: 72px 24px;
+    padding: 80px 24px;
 }
 
 .sobre-hero__title {
@@ -90,25 +89,25 @@
 }
 
 /* =============================================
-   RESPONSIVE
+   RESPONSIVE — Mismas medidas que .hero
    ============================================= */
 @media (max-width: 1024px) {
     .sobre-hero {
-        min-height: 360px;
+        min-height: 100vh;
     }
 
     .sobre-hero__container {
-        padding: 56px 24px;
+        padding: 60px 24px;
     }
 }
 
-@media (max-width: 640px) {
+@media (max-width: 768px) {
     .sobre-hero {
-        min-height: 300px;
+        min-height: 82vh;
     }
 
     .sobre-hero__container {
-        padding: 40px 20px;
+        padding: 48px 20px;
     }
 
     .sobre-hero__ruta {

@@ -3,9 +3,9 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
-        "div_seo": "",
-        "div_logos": ""
+        "logo_principal": "img/2bd3f59e1bcedca3d9925dda85c0fe61.jpeg",
+        "div_seo": null,
+        "div_logos": null
     },
     "menu": {
         "items_menu": [
@@ -133,8 +133,8 @@
                 "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.1652119482141234,
-                    "lng": -79.9361750966462
+                    "lat": -2.1795736210915,
+                    "lng": -79.913514039078
                 }
             },
             {
@@ -142,8 +142,8 @@
                 "direccion": "",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.1997559074937,
-                    "lng": -79.898543357849
+                    "lat": -2.195354959337,
+                    "lng": -79.93447765845
                 }
             },
             {
@@ -183,7 +183,17 @@
         "div_redes": null,
         "div_bottom": null,
         "info_campus": null,
-        "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador"
+        "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
+        "campus_locations": [
+            {
+                "lat": -2.1795736210915,
+                "lng": -79.913514039078
+            },
+            {
+                "lat": -2.195354959337,
+                "lng": -79.93447765845
+            }
+        ]
     },
     "hero": {
         "_visible": "1",
@@ -814,15 +824,15 @@
     },
     "sobre_intro": {
         "_visible": "1",
-        "info_compartido": "",
-        "div_textos": "",
+        "info_compartido": null,
+        "div_textos": null,
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-        "div_cita": "",
+        "div_cita": null,
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": "",
+        "div_imagen": null,
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
@@ -907,7 +917,7 @@
                 "cargo": "Representante de Trabajadores"
             }
         ],
-        "div_estructura": "",
+        "div_estructura": null,
         "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
@@ -917,7 +927,7 @@
     },
     "sobre_hero": {
         "_visible": "1",
-        "info_propia": "",
+        "info_propia": null,
         "div_left": "",
         "subtitulo": "Conoce al ITB",
         "titulo": "Sobre nosotros",
@@ -929,9 +939,9 @@
         "div_right": "",
         "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
         "video_url": "https://youtu.be/eTgzLxWGgS4",
-        "div_galeria": "",
-        "info_portada": "",
-        "animaciones": "",
+        "div_galeria": null,
+        "info_portada": null,
+        "animaciones": false,
         "imagenes_fondo": [
             {
                 "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
@@ -940,19 +950,19 @@
         ],
         "ruta_inicio": "Inicio",
         "ruta_actual": "Sobre Nosotros",
-        "div_textos": ""
+        "div_textos": null
     },
     "himno": {
         "_visible": "1",
-        "div_textos": "",
+        "div_textos": null,
         "titulo": "Música y letra",
         "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
-        "div_letra": "",
+        "div_letra": null,
         "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
         "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
         "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
         "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
-        "div_multimedia": "",
+        "div_multimedia": null,
         "audio": "audio/himnoitb.mp3",
         "btn_descargar": "Descargar música",
         "imagen": "img/Himno_Estudiante_itb.jpg",
@@ -1698,8 +1708,8 @@
                             "sede": "Guayaquil"
                         },
                         {
-                            "imagen": "img/administracion.jpg",
-                            "modalidad": "Híbrido",
+                            "imagen": "img/3fb65228b15d2f577cb9bd9bc22d7b8a.jpg",
+                            "modalidad": "prueba -.,[]¨*¨°!\"\"$\"#%#$&\\~`^",
                             "area": "Tecnología",
                             "titulo": "Tecnología Superior en Desarrollo de Software",
                             "duracion": "5 Semestres",
@@ -1964,5 +1974,17 @@
             },
             "updated_at": "2026-09-11 16:29:40"
         }
+    },
+    "transparencia_leyes": {
+        "_visible": "1",
+        "div_texto": null,
+        "titulo": "Transparencia e Información Pública",
+        "descripcion": "En cumplimiento con las disposiciones legales y el principio de rendición de cuentas, el ITB pone a disposición de la ciudadanía la información institucional, financiera y administrativa.",
+        "buscador_placeholder": "Buscar documento, resolución o presupuesto...",
+        "div_secciones": null,
+        "cat_info_financiera": "Información Financiera y Presupuestaria",
+        "cat_rendicion_cuentas": "Rendición de Cuentas y Gestión",
+        "cat_talento_humano": "Talento Humano",
+        "cat_remuneracion_mensual": "Remuneración Mensual"
     }
 }

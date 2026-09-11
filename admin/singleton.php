@@ -17,8 +17,8 @@ if (!isset($schema['items'][$section_key])) {
 $config = $schema['items'][$section_key];
 
 if ($section_key === 'footer') {
-    $admin_page_css = ['https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', 'map_picker.css'];
-    $admin_page_js  = ['https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', 'map_picker.js'];
+    $admin_page_css = ['https://unpkg.com/leaflet@1.9.4/dist/leaflet.css', 'map_picker.css', 'campus_map_picker.css'];
+    $admin_page_js  = ['https://unpkg.com/leaflet@1.9.4/dist/leaflet.js', 'map_picker.js', 'campus_map_picker.js'];
 }
 
 if ($config['type'] === 'collection') {

@@ -17,6 +17,7 @@ require_once __DIR__ . '/divider.php';
 require_once __DIR__ . '/alert.php';
 require_once __DIR__ . '/menu_builder.php';
 require_once __DIR__ . '/map_picker.php';
+require_once __DIR__ . '/campus_map_picker.php';
 
 /**
  * Renderiza el HTML de un campo específico basándose en su tipo.

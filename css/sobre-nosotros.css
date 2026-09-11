@@ -11,3 +11,24 @@
 @import url('sobre-valores.css');
 @import url('sobre-cogobierno.css');
 @import url('nosotros_himno.css');
+@import url('hover-theme.css');
+
+/* Secciones 5 a 8: una cadencia vertical más compacta en esta página, sin
+   modificar el espacio interno de sus tarjetas, formularios o acordeones. */
+.page-sobre-nosotros .autoridades,
+.page-sobre-nosotros .sobre-cogob,
+.page-sobre-nosotros .himno,
+.page-sobre-nosotros .transparencia {
+    padding-top: 48px;
+    padding-bottom: 48px;
+}
+
+@media (max-width: 768px) {
+    .page-sobre-nosotros .autoridades,
+    .page-sobre-nosotros .sobre-cogob,
+    .page-sobre-nosotros .himno,
+    .page-sobre-nosotros .transparencia {
+        padding-top: 32px;
+        padding-bottom: 32px;
+    }
+}

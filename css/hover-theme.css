@@ -1,0 +1,41 @@
+/* =============================================
+   PALETA ÚNICA PARA HOVERS INTERACTIVOS
+   Fondo naranja ITB + texto blanco. Se dejan fuera las fotos y carruseles,
+   cuyos hover solo amplían o reproducen contenido.
+   ============================================= */
+@media (hover: hover) {
+    :is(.btn, .btn-back, .navbar__btn, .top-bar__icon-btn, .top-bar__lang-btn,
+        .top-bar__search-btn, .navbar__toggle, .navbar__mobile-close,
+        .navbar__mobile-quicklink, .transparencia__search-btn,
+        .acc-item__header, .footer-main__campus-btn, #top-to-bottom.scroll_visible):hover {
+        background-color: var(--primary-orange, #F15A24) !important;
+        border-color: var(--primary-orange, #F15A24) !important;
+        color: #ffffff !important;
+    }
+
+    :is(.navbar__link, .navbar__dropdown-link, .top-bar__link,
+        .footer-main__list a, .footer-social__icons a,
+        .footer-bottom__right a, .sobre-hero__ruta-link):hover {
+        background-color: var(--primary-orange, #F15A24);
+        color: #ffffff !important;
+    }
+
+    /* Tarjetas que actualmente ya tienen un estado visual al pasar el mouse. */
+    :is(.areas__card, .programas__card, .servicios__card-simple,
+        .noticias__main, .noticias__item, .trayectoria__stat-card):hover {
+        background-color: var(--primary-orange, #F15A24);
+        border-color: var(--primary-orange, #F15A24);
+        color: #ffffff;
+    }
+
+    :is(.areas__card, .programas__card, .servicios__card-simple,
+        .noticias__main, .noticias__item, .trayectoria__stat-card):hover :is(h1, h2, h3, h4, p, span, a, i) {
+        color: #ffffff !important;
+    }
+
+    /* Los botones sólidos ya son naranjas; se evita que su capa oscura cubra
+       la paleta solicitada durante el hover. */
+    .btn--solid:hover::before {
+        transform: translateX(-101%) !important;
+    }
+}

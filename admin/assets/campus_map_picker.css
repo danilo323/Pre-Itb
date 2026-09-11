@@ -1,0 +1,120 @@
+/* campus_map_picker.css — Mapa unificado de campus */
+
+/* ── Ocultar mapas individuales del repeater ── */
+.repeater-item .field-map-picker {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    pointer-events: none;
+}
+
+/* ── Botón "Seleccionar" dentro del repeater ── */
+.repeater-item-title {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+.js-campus-select-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 3px 10px;
+    font-size: .75rem;
+    border-radius: 6px;
+    border: 1.5px solid #D1D5DB;
+    background: #F9FAFB;
+    color: #374151;
+    cursor: pointer;
+    transition: all .15s;
+    white-space: nowrap;
+    margin-left: auto;
+}
+.js-campus-select-btn:hover {
+    border-color: #F15A24;
+    background: #FFF5F2;
+    color: #F15A24;
+}
+.js-campus-select-btn.is-active {
+    border-color: #22C55E;
+    background: #ECFDF5;
+    color: #166534;
+    font-weight: 600;
+}
+
+/* ── Dot indicador de ubicación en el repeater ── */
+.cmp-repeater-dot {
+    display: inline-block;
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: #D1D5DB;
+    flex-shrink: 0;
+    transition: background .15s;
+}
+.cmp-repeater-dot.has-location {
+    background: #22C55E;
+    box-shadow: 0 0 0 2px rgba(34,197,94,.25);
+}
+
+/* ── Barra de campus activo ── */
+.cmp-active {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 14px;
+    margin: 10px 0;
+    background: #ECFDF5;
+    border: 1.5px solid #22C55E;
+    border-radius: 8px;
+    font-size: .88rem;
+}
+.cmp-active[hidden] {
+    display: none;
+}
+.cmp-active__label {
+    color: #6B7280;
+}
+.cmp-active__name {
+    font-weight: 700;
+    color: #166534;
+}
+
+/* ── Buscador ── */
+.cmp-search {
+    display: flex;
+    gap: 8px;
+    margin-bottom: 10px;
+}
+
+/* ── Mapa ── */
+.cmp-map {
+    height: 350px;
+    border: 1px solid #D1D5DB;
+    border-radius: 8px;
+}
+
+/* Nombre del campus activo, mostrado encima del pin del mapa. */
+.cmp-campus-marker-label {
+    border: 0;
+    border-radius: 5px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, .22);
+    color: #17365D;
+    font-size: .78rem;
+    font-weight: 700;
+    padding: 5px 8px;
+    white-space: nowrap;
+}
+.cmp-campus-marker-label::before {
+    display: none;
+}
+
+/* ── Estado ── */
+.cmp-status {
+    display: block;
+    margin-top: 7px;
+    color: #4B5563;
+    font-size: .85rem;
+}

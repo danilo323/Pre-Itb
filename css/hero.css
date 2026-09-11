@@ -5,7 +5,7 @@
     position: relative;
     /* Antes 100vh: la foto se comia la pantalla entera. En el diseno de
        referencia el hero es mas bajo y ya se alcanza a ver la seccion siguiente. */
-    min-height: 82vh;
+    min-height: 92vh;
     display: flex;
     align-items: center;
     overflow: hidden;
@@ -421,7 +421,8 @@
 
 .hero__video-modal-iframe-wrapper {
     position: relative;
-    padding-bottom: 56.25%; /* Proporción 16:9 */
+    padding-bottom: 56.25%;
+    /* Proporción 16:9 */
     height: 0;
     border-radius: var(--radius-md);
     overflow: hidden;

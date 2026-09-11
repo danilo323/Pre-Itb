@@ -16,6 +16,28 @@
     align-items: center;
 }
 
+/* Entrada de la primera sección al aparecer en pantalla. El observador de
+   js/sobre-nosotros.js añade .is-visible cuando el bloque entra al viewport. */
+.page-sobre-nosotros .sobre-intro__content,
+.page-sobre-nosotros .sobre-intro__image-wrapper {
+    opacity: 0;
+    transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+
+.page-sobre-nosotros .sobre-intro__content {
+    transform: translateY(36px);
+}
+
+.page-sobre-nosotros .sobre-intro__image-wrapper {
+    transform: translateY(36px);
+    transition-delay: 0.12s;
+}
+.page-sobre-nosotros .sobre-intro__content.is-visible,
+.page-sobre-nosotros .sobre-intro__image-wrapper.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
 .page-sobre-nosotros .sobre-intro__content .section-tag {
     display: inline-block;
     color: var(--primary-orange);
@@ -171,5 +193,14 @@
         bottom: 16px;
         left: 16px;
         padding: 14px 18px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-sobre-nosotros .sobre-intro__content,
+    .page-sobre-nosotros .sobre-intro__image-wrapper {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

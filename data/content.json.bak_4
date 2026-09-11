@@ -3,9 +3,9 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
-        "div_seo": "",
-        "div_logos": ""
+        "logo_principal": "img/2bd3f59e1bcedca3d9925dda85c0fe61.jpeg",
+        "div_seo": null,
+        "div_logos": null
     },
     "menu": {
         "items_menu": [
@@ -95,6 +95,11 @@
                 "nivel": "padre"
             },
             {
+                "texto": "prueba3",
+                "url": "prueba3.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "prueba1",
                 "url": "prueba1.php",
                 "nivel": "padre"
@@ -128,8 +133,8 @@
                 "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.1652119482141234,
-                    "lng": -79.9361750966462
+                    "lat": -2.1795736210915,
+                    "lng": -79.913514039078
                 }
             },
             {
@@ -137,8 +142,8 @@
                 "direccion": "",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.1997559074937,
-                    "lng": -79.898543357849
+                    "lat": -2.195354959337,
+                    "lng": -79.93447765845
                 }
             },
             {
@@ -178,7 +183,17 @@
         "div_redes": null,
         "div_bottom": null,
         "info_campus": null,
-        "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador"
+        "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
+        "campus_locations": [
+            {
+                "lat": -2.1795736210915,
+                "lng": -79.913514039078
+            },
+            {
+                "lat": -2.195354959337,
+                "lng": -79.93447765845
+            }
+        ]
     },
     "hero": {
         "_visible": "1",
@@ -1651,7 +1666,7 @@
             "nombre": "prueba3",
             "slug": "prueba3",
             "icon": "bi bi-file-earmark-text",
-            "menu_pos": "none",
+            "menu_pos": "hijo:Admisiones",
             "menu_before": "",
             "secciones": [
                 "mision_vision",
@@ -1693,8 +1708,8 @@
                             "sede": "Guayaquil"
                         },
                         {
-                            "imagen": "img/administracion.jpg",
-                            "modalidad": "Híbrido",
+                            "imagen": "img/3fb65228b15d2f577cb9bd9bc22d7b8a.jpg",
+                            "modalidad": "prueba -.,[]¨*¨°!\"\"$\"#%#$&\\~`^",
                             "area": "Tecnología",
                             "titulo": "Tecnología Superior en Desarrollo de Software",
                             "duracion": "5 Semestres",
@@ -1957,7 +1972,7 @@
                     "card_boton_url": "#"
                 }
             },
-            "updated_at": "2026-09-11 16:29:15"
+            "updated_at": "2026-09-11 16:29:40"
         }
     }
 }

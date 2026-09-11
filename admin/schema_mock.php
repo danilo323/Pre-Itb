@@ -245,6 +245,11 @@ return [
                         ],
                     ],
                 ],
+                'campus_locations' => [
+                    'type' => 'campus_map_picker',
+                    'label' => 'Ubicación de Campus en el Mapa',
+                    'help' => 'Selecciona un campus de la lista y haz clic en el mapa para fijar su ubicación exacta. El nombre del campus aparece sobre el pin; para cambiarlo, vuelve a hacer clic en el punto deseado.',
+                ],
                 'mapa_contexto' => [
                     'type' => 'text',
                     'label' => 'Texto de apoyo para buscar en el mapa',

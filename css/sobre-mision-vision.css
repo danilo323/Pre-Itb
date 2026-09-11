@@ -32,6 +32,23 @@
     grid-template-columns: 1.12fr 1fr;
 }
 
+/* Entrada de las tarjetas: Misión llega desde la derecha y Visión desde la
+   izquierda. js/sobre-nosotros.js activa .is-visible al entrar en pantalla. */
+.page-sobre-nosotros .sobre-mv__card {
+    opacity: 0;
+    transform: translateX(48px);
+    transition: opacity 0.65s ease-out, transform 0.65s ease-out;
+}
+
+.page-sobre-nosotros .sobre-mv__card--invertida {
+    transform: translateX(-48px);
+}
+
+.page-sobre-nosotros .sobre-mv__card.is-visible {
+    opacity: 1;
+    transform: translateX(0);
+}
+
 /* Visión: la imagen se va al lado derecho sin tocar el HTML. */
 .page-sobre-nosotros .sobre-mv__card--invertida .sobre-mv__image {
     order: 2;
@@ -183,5 +200,14 @@
 
     .page-sobre-nosotros .sobre-mv__body {
         padding: 24px 22px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    .page-sobre-nosotros .sobre-mv__card,
+    .page-sobre-nosotros .sobre-mv__card--invertida {
+        opacity: 1;
+        transform: none;
+        transition: none;
     }
 }

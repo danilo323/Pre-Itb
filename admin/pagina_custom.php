@@ -173,6 +173,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'icon' => $icon,
             'menu_pos' => $menu_pos,
             'secciones' => $secciones,
+            // Mantener la copia editable de cada sección heredada al guardar la
+            // configuración. Así, al volver a Crear página, las casillas siguen
+            // representando las secciones heredadas de esta página y no se
+            // pierde el contenido que ya se editó.
+            'contenido' => $new_content,
             'updated_at' => date('Y-m-d H:i:s'),
         ];
 
@@ -310,9 +315,11 @@ $bi_icons = [
 $secciones_disponibles = [
     'Sobre Nosotros' => [
         'sobre_hero' => ['icon' => 'bi-image-fill', 'label' => 'Portada (Banner Sobre Nosotros)'],
+        'presentacion' => ['icon' => 'bi-chat-square-quote-fill', 'label' => 'Presentación y Trayectoria'],
         'mision_vision' => ['icon' => 'bi-bullseye', 'label' => 'Misión y Visión'],
         'valores' => ['icon' => 'bi-heart-fill', 'label' => 'Nuestros Valores'],
         'autoridades' => ['icon' => 'bi-people-fill', 'label' => 'Nuestras Autoridades'],
+        'cogobierno' => ['icon' => 'bi-diagram-3-fill', 'label' => 'Cogobierno'],
         'himno' => ['icon' => 'bi-music-note-beamed', 'label' => 'Himno e Identidad Institucional'],
     ],
     'Oferta Académica' => [
@@ -328,6 +335,40 @@ $secciones_disponibles = [
         'alianzas' => ['icon' => 'bi-diagram-3-fill', 'label' => 'Alianzas y Convenios'],
     ],
 ];
+
+// Las páginas creadas también son fuentes de secciones heredables. Se toma su
+// lista ya guardada para que las páginas viejas y las que se creen en adelante
+// aparezcan aquí automáticamente, bajo el nombre de su propia página.
+$catalogo_por_seccion = [];
+foreach ($secciones_disponibles as $grupo_items) {
+    foreach ($grupo_items as $clave => $info) {
+        $catalogo_por_seccion[$clave] = $info;
+    }
+}
+
+foreach ($paginas as $pagina_id => $pagina) {
+    $nombre_grupo = trim((string)($pagina['nombre'] ?? ''));
+    $secciones_pagina = array_values(array_unique(array_filter((array)($pagina['secciones'] ?? []))));
+    if ($nombre_grupo === '' || empty($secciones_pagina)) continue;
+
+    $items_pagina = [];
+    foreach ($secciones_pagina as $seccion) {
+        // Solo se ofrecen secciones que el motor de páginas dinámicas sabe
+        // renderizar. El metadato conserva el mismo texto e ícono del catálogo.
+        if (isset($catalogo_por_seccion[$seccion])) {
+            $items_pagina[$seccion] = $catalogo_por_seccion[$seccion];
+        }
+    }
+    if (empty($items_pagina)) continue;
+
+    // Si dos páginas recibieran el mismo nombre, se conserva ambas sin que una
+    // reemplace a la otra en el catálogo visual.
+    $nombre_visible = $nombre_grupo;
+    if (isset($secciones_disponibles[$nombre_visible])) {
+        $nombre_visible .= ' (' . substr((string)$pagina_id, -4) . ')';
+    }
+    $secciones_disponibles[$nombre_visible] = $items_pagina;
+}
 
 echo layout_start($page_title, $current_key);
 ?>
