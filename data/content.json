@@ -110,28 +110,36 @@
         "lista_campus": [
             {
                 "nombre": "Campus Matriz",
-                "direccion": "Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador",
-                "mapa_url": ""
+                "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Boyacá",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.199755907493674,
+                    "lng": -79.89854335784914
+                }
             },
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Teresa Benites",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": []
             }
         ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
@@ -143,14 +151,16 @@
         "vimeo_url": "#",
         "linkedin_url": "#",
         "copyright": "© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
-        "div_prefooter": "",
-        "div_logo": "",
-        "div_enlaces1": "",
-        "div_enlaces2": "",
-        "div_campus": "",
+        "div_prefooter": null,
+        "div_logo": null,
+        "div_enlaces1": null,
+        "div_enlaces2": null,
+        "div_campus": null,
         "div_mapa": "",
-        "div_redes": "",
-        "div_bottom": ""
+        "div_redes": null,
+        "div_bottom": null,
+        "info_campus": null,
+        "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador"
     },
     "hero": {
         "_visible": "1",

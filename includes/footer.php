@@ -105,7 +105,7 @@
             // campus trae su dirección desde el panel y, al pulsarlo, el mapa de
             // al lado se mueve hasta él.
             $campus_default = [
-                ['nombre' => 'Campus Matriz', 'direccion' => 'Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador', 'mapa_url' => ''],
+                ['nombre' => 'Campus Matriz', 'direccion' => 'Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador', 'mapa_url' => '', 'ubicacion' => []],
             ];
             $campus_list = content_raw('footer', 'lista_campus', $campus_default);
 
@@ -145,6 +145,11 @@
             };
 
             $url_mapa = function (array $c) use ($busqueda_mapa): string {
+                $ubicacion = $c['ubicacion'] ?? [];
+                if (is_array($ubicacion) && isset($ubicacion['lat'], $ubicacion['lng'])
+                    && is_numeric($ubicacion['lat']) && is_numeric($ubicacion['lng'])) {
+                    return 'https://www.google.com/maps?q=' . rawurlencode($ubicacion['lat'] . ',' . $ubicacion['lng']) . '&z=17&output=embed';
+                }
                 // Un enlace propio pegado desde Google Maps manda sobre todo lo demás.
                 $propia = trim($c['mapa_url'] ?? '');
                 if ($propia !== '') return $propia;
