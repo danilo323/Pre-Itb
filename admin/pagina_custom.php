@@ -34,8 +34,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             unset($data['_paginas_creadas'][$id]);
             // Quitar del menú navegable público
             _pagina_custom_remove_from_menu($data, $pg['slug'] ?? '');
-            storage_save($data);
-            flash_set("Página '{$pg['nombre']}' eliminada.", 'success');
+            $json_saved = storage_save($data);
+            // storage_save solo actualiza/inserta en MySQL. Si no retiramos esta
+            // fila, storage_load la vuelve a leer y la página reaparece.
+            $db_deleted = storage_delete_field('_paginas_creadas', $id);
+            if ($json_saved && $db_deleted) {
+                flash_set("Página '{$pg['nombre']}' eliminada.", 'success');
+            } else {
+                flash_set('No se pudo completar la eliminación en el almacenamiento.', 'error');
+            }
         } else {
             flash_set('No se encontró la página.', 'error');
         }
@@ -265,9 +272,9 @@ echo layout_start($page_title, $current_key);
             <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
             <input type="hidden" name="action" value="delete">
             <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
-            <button type="button" class="btn btn-danger"
-                    style="display:flex;align-items:center;gap:6px;"
-                    onclick="customConfirm('¿Eliminar la página &quot;<?= htmlspecialchars(addslashes($nombre)) ?>&quot; permanentemente? Esta acción no se puede deshacer.', function(){ document.getElementById('form-delete-pagina').submit(); })">
+            <button type="submit" class="btn btn-danger js-delete-page"
+                    data-page-name="<?= htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') ?>"
+                    style="display:flex;align-items:center;gap:6px;">
                 <i class="bi bi-trash-fill"></i> Eliminar página
             </button>
         </form>

@@ -171,6 +171,24 @@ function storage_save(array $data): bool {
 }
 
 /**
+ * Borra un campo concreto de la persistencia MySQL.
+ * storage_save hace UPSERT de los datos presentes, por lo que las eliminaciones
+ * de colecciones necesitan retirar explícitamente su fila antigua de la BD.
+ */
+function storage_delete_field(string $section, string $fieldKey): bool {
+    $pdo = db();
+    if (!$pdo) return true; // El JSON ya es la fuente de respaldo local.
+
+    try {
+        $stmt = $pdo->prepare('DELETE FROM site_content WHERE section = ? AND field_key = ?');
+        return $stmt->execute([$section, $fieldKey]);
+    } catch (Exception $e) {
+        error_log('Error deleting from MySQL site_content: ' . $e->getMessage());
+        return false;
+    }
+}
+
+/**
  * Calcula un ID autoincremental para una colección que NUNCA reutiliza IDs borrados.
  */
 function storage_next_id(string $collection, array &$data): int {

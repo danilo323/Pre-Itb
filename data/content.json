@@ -15,11 +15,6 @@
                 "nivel": "padre"
             },
             {
-                "texto": "otro",
-                "url": "otro.php",
-                "nivel": "hijo"
-            },
-            {
                 "texto": "Sobre Nosotros",
                 "url": "sobre-nosotros.php",
                 "nivel": "hijo"
@@ -151,15 +146,15 @@
         "vimeo_url": "#",
         "linkedin_url": "#",
         "copyright": "© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
-        "div_prefooter": null,
-        "div_logo": null,
-        "div_enlaces1": null,
-        "div_enlaces2": null,
-        "div_campus": null,
+        "div_prefooter": "",
+        "div_logo": "",
+        "div_enlaces1": "",
+        "div_enlaces2": "",
+        "div_campus": "",
         "div_mapa": "",
-        "div_redes": null,
-        "div_bottom": null,
-        "info_campus": null,
+        "div_redes": "",
+        "div_bottom": "",
+        "info_campus": "",
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador"
     },
     "hero": {
@@ -936,22 +931,6 @@
         "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
     },
     "_paginas_creadas": {
-        "pg_be4e6f7727fc": {
-            "id": "pg_be4e6f7727fc",
-            "nombre": "NOmbre01",
-            "slug": "nombre01",
-            "icon": "bi bi-mortarboard-fill",
-            "menu_pos": "padre",
-            "secciones": [
-                "sobre_hero",
-                "mision_vision",
-                "servicios",
-                "noticias",
-                "admision",
-                "alianzas"
-            ],
-            "updated_at": "2026-09-11 01:35:54"
-        },
         "pg_67733c093467": {
             "id": "pg_67733c093467",
             "nombre": "prueba",
