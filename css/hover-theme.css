@@ -5,7 +5,7 @@
    ============================================= */
 @media (hover: hover) {
 
-    :is(.btn, .btn-back, .navbar__btn, .top-bar__icon-btn, .top-bar__lang-btn,
+    :is(.btn:not(.btn--solid), .btn-back, .navbar__btn:not(.btn--solid), .top-bar__icon-btn, .top-bar__lang-btn,
         .top-bar__search-btn, .navbar__toggle, .navbar__mobile-close,
         .navbar__mobile-quicklink, .transparencia__search-btn,
         .acc-item__header, .footer-main__campus-btn, #top-to-bottom.scroll_visible):hover {
@@ -34,12 +34,5 @@
         color: #ffffff !important;
     }
 
-    /* Los botones sólidos ya son naranjas; se evita que su capa oscura cubra
-       la paleta solicitada durante el hover. */
-    .btn--solid:hover::before {
-        transform: translateX(-101%) !important;
-    }
-
-    /* Variante del botón de matrícula: replica la animación de
-       "Ver Directorio" en vez de la cortina oscura de .btn--solid. */
+    /* Los botones sólidos conservan la cortina definida en base.css. */
 }
