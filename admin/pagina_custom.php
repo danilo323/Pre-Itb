@@ -251,7 +251,7 @@ echo layout_start($page_title, $current_key);
             <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
             <button type="button" class="btn btn-danger"
                     style="display:flex;align-items:center;gap:6px;"
-                    onclick="customConfirm('¿Eliminar la página &quot;<?= htmlspecialchars(addslashes($nombre)) ?>&quot; permanentemente? Esta acción no se puede deshacer.', function(){ document.getElementById(\'form-delete-pagina\').submit(); })">
+                    onclick="customConfirm('¿Eliminar la página &quot;<?= htmlspecialchars(addslashes($nombre)) ?>&quot; permanentemente? Esta acción no se puede deshacer.', function(){ document.getElementById('form-delete-pagina').submit(); })">
                 <i class="bi bi-trash-fill"></i> Eliminar página
             </button>
         </form>

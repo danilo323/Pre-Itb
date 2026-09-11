@@ -3,9 +3,9 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/86bd730e3c751b6077e79b348d92653e.jpeg",
-        "div_seo": null,
-        "div_logos": null
+        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
+        "div_seo": "",
+        "div_logos": ""
     },
     "menu": {
         "items_menu": [
@@ -72,11 +72,6 @@
             {
                 "texto": "Admisiones",
                 "url": "#",
-                "nivel": "padre"
-            },
-            {
-                "texto": "Configuración principal",
-                "url": "configuracion-principal.php",
                 "nivel": "padre"
             }
         ],
@@ -776,15 +771,15 @@
     },
     "sobre_intro": {
         "_visible": "1",
-        "info_compartido": null,
-        "div_textos": null,
+        "info_compartido": "",
+        "div_textos": "",
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
-        "div_cita": null,
+        "div_cita": "",
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": null,
+        "div_imagen": "",
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
@@ -869,7 +864,7 @@
                 "cargo": "Representante de Trabajadores"
             }
         ],
-        "div_estructura": null,
+        "div_estructura": "",
         "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
@@ -879,7 +874,7 @@
     },
     "sobre_hero": {
         "_visible": "1",
-        "info_propia": null,
+        "info_propia": "",
         "div_left": "",
         "subtitulo": "Conoce al ITB",
         "titulo": "Sobre nosotros",
@@ -891,9 +886,9 @@
         "div_right": "",
         "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
         "video_url": "https://youtu.be/eTgzLxWGgS4",
-        "div_galeria": null,
-        "info_portada": null,
-        "animaciones": false,
+        "div_galeria": "",
+        "info_portada": "",
+        "animaciones": "",
         "imagenes_fondo": [
             {
                 "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
@@ -902,219 +897,146 @@
         ],
         "ruta_inicio": "Inicio",
         "ruta_actual": "Sobre Nosotros",
-        "div_textos": null
+        "div_textos": ""
     },
     "himno": {
         "_visible": "1",
-        "div_textos": null,
+        "div_textos": "",
         "titulo": "Música y letra",
         "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
-        "div_letra": null,
+        "div_letra": "",
         "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
         "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
         "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
         "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
-        "div_multimedia": null,
+        "div_multimedia": "",
         "audio": "audio/himnoitb.mp3",
         "btn_descargar": "Descargar música",
         "imagen": "img/Himno_Estudiante_itb.jpg",
         "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
     },
-    "transparencia_leyes": {
-        "div_texto": null,
-        "titulo": "Transparencia e Información Pública",
-        "descripcion": "En cumplimiento con las disposiciones legales y el principio de rendición de cuentas, el ITB pone a disposición de la ciudadanía la información institucional, financiera y administrativa.",
-        "buscador_placeholder": "Buscar documento, resolución o presupuesto...",
-        "div_secciones": null,
-        "cat_info_financiera": "Información Financiera",
-        "cat_rendicion_cuentas": "Rendición de Cuentas y Gestión",
-        "cat_talento_humano": "Talento Humano",
-        "cat_remuneracion_mensual": "Remuneración Mensual"
-    },
-    "documentos_transparencia": {
-        "items": [
-            {
-                "id": 1,
-                "orden": "1",
-                "categoria": "info_financiera",
-                "nombre": "Presupuesto Anual Institucional",
-                "anio": "2026",
-                "archivo": "docs/0108dc987b041479b25c3f90970e6a93.pdf",
-                "publicado": true,
-                "tamano": "1.8MB"
-            },
-            {
-                "id": 2,
-                "orden": "2",
-                "categoria": "info_financiera",
-                "nombre": "Balance General y Balance Comprobación",
-                "anio": "2025",
-                "archivo": "docs/1d3d932d28e7d27c335fa7b68e0189dd.pdf",
-                "publicado": true,
-                "tamano": "2.4MB"
-            },
-            {
-                "id": 3,
-                "orden": "3",
-                "categoria": "info_financiera",
-                "nombre": "Balances Auditados",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "4.1MB"
-            },
-            {
-                "id": 4,
-                "orden": "4",
-                "categoria": "info_financiera",
-                "nombre": "Aranceles y Costos de Oferta Académica",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "950KB"
-            },
-            {
-                "id": 5,
-                "orden": "5",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Plan Estratégico de Desarrollo Institucional (PEDI)",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "4.5MB"
-            },
-            {
-                "id": 6,
-                "orden": "6",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Plan Operativo Anual (POA)",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "2.1MB"
-            },
-            {
-                "id": 7,
-                "orden": "7",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Plan Operativo Anual (POA)",
-                "anio": "2024",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "1.9MB"
-            },
-            {
-                "id": 8,
-                "orden": "8",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Certificado de Cumplimiento Tributario",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "1.2MB"
-            },
-            {
-                "id": 9,
-                "orden": "9",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Certificado de Obligaciones Patronales",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "980KB"
-            },
-            {
-                "id": 10,
-                "orden": "10",
-                "categoria": "rendicion_cuentas",
-                "nombre": "Informe de Rendición de Cuentas Institucional",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "3.8KB"
-            },
-            {
-                "id": 11,
-                "orden": "11",
-                "categoria": "talento_humano",
-                "nombre": "Distributivo de Personal",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "1.5MB"
-            },
-            {
-                "id": 12,
-                "orden": "12",
-                "categoria": "talento_humano",
-                "nombre": "Escala Remunerativa del Personal",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "820KB"
-            },
-            {
-                "id": 13,
-                "orden": "13",
-                "categoria": "talento_humano",
-                "nombre": "Manual de Funciones y Competencias",
-                "anio": "2025",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "2.2MB"
-            },
-            {
-                "id": 14,
-                "orden": "14",
-                "categoria": "remuneracion_mensual",
-                "nombre": "Remuneración Mensual - Enero",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "610KB"
-            },
-            {
-                "id": 15,
-                "orden": "15",
-                "categoria": "remuneracion_mensual",
-                "nombre": "Remuneración Mensual - Febrero",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "605KB"
-            },
-            {
-                "id": 16,
-                "orden": "16",
-                "categoria": "remuneracion_mensual",
-                "nombre": "Remuneración Mensual - Marzo",
-                "anio": "2026",
-                "archivo": "",
-                "publicado": true,
-                "tamano": "615KB"
-            }
-        ]
-    },
-    "_meta": {
-        "documentos_transparencia": {
-            "last_id": 16
-        }
-    },
     "_paginas_creadas": {
-        "pg_d018d6e79e8c": {
-            "id": "pg_d018d6e79e8c",
-            "nombre": "Configuración principal",
-            "slug": "configuracion-principal",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "padre",
+        "pg_67733c093467": {
+            "id": "pg_67733c093467",
+            "nombre": "prueba",
+            "slug": "prueba",
+            "icon": "bi bi-people-fill",
+            "menu_pos": "hijo:Nuestra Institución 1",
             "secciones": [
                 "sobre_hero",
                 "autoridades",
-                "programas",
-                "hero",
+                "sobre_cogobierno",
                 "alianzas"
             ],
-            "updated_at": "2026-09-10 16:53:21"
+            "updated_at": "2026-09-11 03:36:05"
+        }
+    },
+    "custom_pg_67733c093467": {
+        "sobre_hero": {
+            "_visible": "1",
+            "info_propia": null,
+            "div_textos": null,
+            "titulo": "Sobre nosotros",
+            "ruta_inicio": "Inicio",
+            "ruta_actual": "Sobre Nosotros",
+            "div_galeria": null,
+            "info_portada": null,
+            "animaciones": true,
+            "imagenes_fondo": [
+                {
+                    "archivo": "img/hero_2.jpg",
+                    "estatica": false
+                }
+            ]
+        },
+        "autoridades": {
+            "_visible": "1",
+            "info_gestion": null,
+            "div_global": null,
+            "etiqueta_superior": "Nuestro Equipo",
+            "titulo": "Nuestras Autoridades",
+            "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+            "boton_directorio": "Ver Directorio"
+        },
+        "sobre_cogobierno": {
+            "_visible": "1",
+            "titulo": "Co Gobierno",
+            "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+            "miembros": [
+                {
+                    "foto": "img/c8bf4f7424e8fead2cf318d36aa90cb7.jpg",
+                    "nombre": "Obst. Lenny Mariscal San Martín",
+                    "cargo": "Representante de Docentes"
+                },
+                {
+                    "foto": "img/b32dd35f80c29eeecc0b1a17c0536fe0.jpg",
+                    "nombre": "Ing. Marcos Escaleras Gómez",
+                    "cargo": "Representante de Trabajadores"
+                }
+            ],
+            "div_estructura": null,
+            "card_imagen": "img/11ad0e374a18c1084f2eb8e891901c54.jpg",
+            "card_icono": "",
+            "card_titulo": "Estructura Orgánica",
+            "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+            "card_boton": "Ver Organigrama",
+            "card_boton_url": "#"
+        },
+        "alianzas": {
+            "_visible": "1",
+            "div_textos": null,
+            "titulo": "Alianzas del ITB",
+            "boton_todas": "Ver Alianzas y Convenios",
+            "div_logos": null,
+            "lista_logos": [
+                {
+                    "imagen": "img/alianza_1.png",
+                    "nombre": "Aliado 1"
+                },
+                {
+                    "imagen": "img/alianza_2.jpg",
+                    "nombre": "Aliado 2"
+                },
+                {
+                    "imagen": "img/alianza_3.png",
+                    "nombre": "Aliado 3"
+                },
+                {
+                    "imagen": "img/alianza_4.png",
+                    "nombre": "Aliado 4"
+                },
+                {
+                    "imagen": "img/alianza_5.png",
+                    "nombre": "Aliado 5"
+                }
+            ],
+            "div_fotos": null,
+            "lista_fotos": [
+                {
+                    "imagen": "img/alianza_sub1.png",
+                    "nombre": "Actividad ITB 1"
+                },
+                {
+                    "imagen": "img/alianza_sub2.png",
+                    "nombre": "Actividad ITB 2"
+                },
+                {
+                    "imagen": "img/alianza_sub3.png",
+                    "nombre": "Actividad ITB 3"
+                },
+                {
+                    "imagen": "img/alianza_sub4.png",
+                    "nombre": "Actividad ITB 4"
+                },
+                {
+                    "imagen": "img/alianza_sub5.png",
+                    "nombre": "Actividad ITB 5"
+                },
+                {
+                    "imagen": "img/alianza_sub6.png",
+                    "nombre": "Actividad ITB 6"
+                }
+            ]
         }
     }
 }

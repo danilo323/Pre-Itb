@@ -871,5 +871,29 @@
         "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
         "card_boton": "Ver Organigrama",
         "card_boton_url": "#"
+    },
+    "sobre_hero": {
+        "_visible": "1",
+        "info_propia": null,
+        "div_left": null,
+        "subtitulo": "Conoce al ITB",
+        "titulo": "Casi 3 Décadas Formando Profesionales",
+        "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+        "cta_texto": "Conoce Nuestra Historia",
+        "div_stats": null,
+        "stat_numero": "Fundado en 1996",
+        "rating": "4.9",
+        "div_right": null,
+        "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+        "video_url": "https://youtu.be/eTgzLxWGgS4",
+        "div_galeria": null,
+        "info_portada": null,
+        "animaciones": false,
+        "imagenes_fondo": [
+            {
+                "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                "estatica": true
+            }
+        ]
     }
 }
