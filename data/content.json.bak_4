@@ -1842,26 +1842,6 @@
                 }
             },
             "updated_at": "2026-09-12 01:15:55"
-        },
-        "pg_11a4ee9f9a43": {
-            "id": "pg_11a4ee9f9a43",
-            "nombre": "Heredera",
-            "slug": "heredera",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "none",
-            "menu_before": "",
-            "secciones": [
-                "pg_9cf49ed28e29:valores"
-            ],
-            "contenido": {
-                "sobre_valores": {
-                    "_visible": "1",
-                    "etiqueta_superior": "",
-                    "titulo": "TITULO-DE-LA-FUENTE-777",
-                    "items": []
-                }
-            },
-            "updated_at": "2026-09-12 01:16:13"
         }
     }
 }

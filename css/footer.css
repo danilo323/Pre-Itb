@@ -86,24 +86,25 @@
    del footer, así que el recorte no se nota. */
 .footer-skyline {
     width: 100%;
-    /* Era 1920/320. Medido pixel a pixel sobre el render: de los 235px que
-       median la banda, el dibujo solo ocupaba de y=27 a y=222. Es decir, 27px
-       de cielo liso arriba y 13px de azul liso abajo (este ultimo del mismo
-       azul que el fondo del pie, --primary-blue-dark, o sea invisible). Puro hueco entre la
-       tarjeta CTA y las columnas.
-       Se recortan 22 de arriba y 10 de abajo -de los 27 y 13 disponibles-,
-       dejando unos pixeles de aire para no rozar la aguja del monumento mas
-       alto. La escena se sube lo mismo (ver .footer-skyline__scene) para que
-       los edificios queden a la misma altura de siempre respecto al pie. */
-    aspect-ratio: 1920 / 148;
+    /* Alto de la banda, en proporcion al ancho de la pantalla. Empezo siendo
+       1920/148 (7,7%), cuando la franja solo hacia de costura entre la tarjeta
+       CTA y las columnas. Ahora CIERRA el pie y ese alto la dejaba como un hilo.
+       1920/285 son el 14,8% del ancho -en una pantalla de 1600, 237px-, que es
+       justo lo que mide el dibujo desde el cielo hasta la linea del suelo a sus
+       proporciones reales, mas un dedo de aire por abajo. */
+    aspect-ratio: 1920 / 285;
     overflow: hidden;
-    /* El cielo de detrás de las montañas (footer2.svg no cubre todo el alto de
-       la mirilla, así que por encima de los picos se ve este fondo). Ahora que
-       la franja cierra el pie en vez de abrirlo, arranca EXACTAMENTE del mismo
-       azul oscuro del pie para que no haya ninguna costura donde empieza, y va
-       aclarando hacia el celeste de siempre a la altura de los edificios, que
-       es donde hace falta el contraste para que se recorten. */
-    background-image: linear-gradient(to bottom,
+    /* El cielo: arranca del mismo azul del pie (para que no se vea ninguna
+       costura donde empieza la franja) y va aclarando hacia abajo, que es donde
+       hace falta contraste para que las siluetas se recorten.
+       OJO: aqui habia ademas una tira oscura pegada al borde de abajo, para
+       tapar que la base de los edificios no llegaba a los lados. Ya no hace
+       falta: aquello pasaba porque la caja del dibujo era mas ancha de lo que
+       pide su proporcion y el navegador lo centraba dejando aire a los lados
+       (los SVG mantienen su relacion de aspecto, no se estiran). Con la caja a
+       la proporcion real del dibujo, este llega de borde a borde solo. */
+    background-image:
+        linear-gradient(to bottom,
             var(--primary-blue-dark) 0%,
             var(--primary-blue-dark) 18%,
             var(--primary-blue) 72%);
@@ -121,21 +122,22 @@
    común para las 3 capas de abajo. */
 .footer-skyline__scene {
     position: absolute;
-    /* Sube el dibujo los mismos 22px que se le quitaron por arriba a la
-       mirilla, para que los edificios queden a la misma altura respecto al pie
-       que antes. Se expresa en % del ALTO de la mirilla; como mirilla y escena
-       se calculan las dos a partir del ancho, la proporcion se mantiene igual
-       en cualquier pantalla. */
-    top: -6.5%;
+    /* El dibujo se recorta un pelin por arriba para quitarle el cielo vacio
+       que trae de fabrica, sin llegar a rozar la aguja del monumento mas alto.
+       Va en % del alto de la mirilla y, como mirilla y escena se calculan las
+       dos a partir del ancho, la proporcion aguanta igual en cualquier
+       pantalla. */
+    top: -3%;
     left: 0;
     width: 100%;
-    /* La proporcion NATIVA del dibujo es 1920/759. Aqui se achata a la mitad
-       (1920/380) a proposito: los SVG llevan width y height al 100% de esta
-       caja, asi que al bajarle el alto los edificios se comprimen en vertical
-       y la franja entera ocupa la mitad de espacio. Es la unica forma de
-       encogerla sin recortar las torres, porque el dibujo tiene que seguir
-       cubriendo TODO el ancho de la pantalla. */
-    aspect-ratio: 1920 / 380;
+    /* Proporcion REAL del dibujo. Antes se achataba a proposito (1920/380
+       primero, 1920/520 despues): los SVG llevan width y height al 100% de esta
+       caja, asi que bajarle el alto comprime los edificios en vertical y la
+       franja ocupa menos. El problema es que eso deforma los monumentos -la
+       catedral y la noria salian chatas- y se notaba. Ahora van sin achatar: lo
+       que recorta la franja es la mirilla de arriba, que se queda con la parte
+       del dibujo que va del cielo al suelo y tira el resto. */
+    aspect-ratio: 1920 / 759;
 }
 
 .footer-skyline__layer {
@@ -431,6 +433,59 @@ button.footer-main__campus-btn:hover {
 
 .footer-bottom__right a:hover {
     text-decoration: underline;
+}
+
+/* ---- Responsive de la franja ----
+   El dibujo mide 1920 de ancho y aqui va siempre a pantalla completa, asi que
+   en un movil de 400px cada monumento queda reducido a una mota. En pantallas
+   estrechas la escena se amplia por encima del ancho de la pantalla y se
+   recentra: se pierden los extremos del dibujo (que son cielo y montana), pero
+   los edificios se ven del mismo tamano que en un ordenador. */
+/* El alto de la banda va atado al zoom: el suelo donde se apoyan los edificios
+   cae al 32% del alto del dibujo, asi que la banda mide ese suelo mas un poco
+   de aire. Si se sube el zoom sin subir el alto, la franja corta los edificios;
+   si se sube el alto sin mas, queda un pegote de cielo vacio debajo. */
+@media (max-width: 900px) {
+    .footer-skyline {
+        aspect-ratio: 1920 / 345;
+    }
+
+    .footer-skyline__scene {
+        width: 120%;
+        left: -8%;
+        aspect-ratio: 1920 / 759;
+    }
+}
+
+@media (max-width: 600px) {
+    .footer-skyline {
+        aspect-ratio: 1920 / 420;
+    }
+
+    .footer-skyline__scene {
+        /* Mas zoom: aqui se pierden los extremos del dibujo (el arco de la
+           izquierda y los arboles de la derecha), pero lo que queda -torre,
+           noria y catedral- se reconoce, que es justo lo contrario de la
+           miniatura ilegible de antes. */
+        width: 145%;
+        left: -22%;
+        aspect-ratio: 1920 / 759;
+    }
+}
+
+/* Moviles de verdad (un iPhone ronda los 390px): a pantalla completa el dibujo
+   entero cabria en poco mas de un dedo de alto. Se acerca hasta quedarse con el
+   tercio central -la torre, la noria y la catedral- a un tamano que se lee. */
+@media (max-width: 430px) {
+    .footer-skyline {
+        aspect-ratio: 1920 / 545;
+    }
+
+    .footer-skyline__scene {
+        width: 190%;
+        left: -45%;
+        aspect-ratio: 1920 / 759;
+    }
 }
 
 /* ---- Responsive ---- */
