@@ -190,10 +190,18 @@
 
 .alianzas__modal-image {
     display: block;
-    max-width: min(1100px, 92vw);
-    max-height: 88vh;
-    width: auto;
-    height: auto;
+    /* Las fotos del carrusel miden ~320x310 de origen, justo lo que ocupa la
+       miniatura. Antes esto era max-width/max-height: un tope NUNCA agranda una
+       imagen, solo la encoge si se pasa, asi que la vista ampliada salia del
+       mismo tamano que la miniatura y no se notaba que se hubiera abierto nada.
+       Ahora se le da una caja grande y la foto la llena: object-fit: contain la
+       escala hasta donde quepa, sin deformarla y sin recortar nada, y de paso
+       centra lo que sobre (la caja no se ve, el fondo es negro).
+       El tope de 960px es a proposito: son unos 3 aumentos sobre el original y
+       por encima de ahi la foto se empasta. Para verlas con mas detalle hay que
+       subirlas mas grandes desde el panel, que admite hasta 1920px de ancho. */
+    width: min(960px, 92vw);
+    height: min(86vh, 960px);
     object-fit: contain;
 }
 
