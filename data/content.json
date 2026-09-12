@@ -3,9 +3,9 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
-        "div_seo": "",
-        "div_logos": ""
+        "logo_principal": "img/28e06eb6813749e8f759a54e8e8ca62a.jpg",
+        "div_seo": null,
+        "div_logos": null
     },
     "menu": {
         "items_menu": [
@@ -154,8 +154,8 @@
                 "direccion": "",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.1686595281013683,
-                    "lng": -79.8369598388672
+                    "lat": -2.169049509943826,
+                    "lng": -79.82616662979127
                 }
             }
         ],
@@ -168,15 +168,15 @@
         "vimeo_url": "#",
         "linkedin_url": "#",
         "copyright": "© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
-        "div_prefooter": null,
-        "div_logo": null,
-        "div_enlaces1": null,
-        "div_enlaces2": null,
-        "div_campus": null,
+        "div_prefooter": "",
+        "div_logo": "",
+        "div_enlaces1": "",
+        "div_enlaces2": "",
+        "div_campus": "",
         "div_mapa": "",
-        "div_redes": null,
-        "div_bottom": null,
-        "info_campus": null,
+        "div_redes": "",
+        "div_bottom": "",
+        "info_campus": "",
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
         "campus_locations": [
             {
@@ -196,8 +196,8 @@
                 "lng": -79.89086151123048
             },
             {
-                "lat": -2.1686595281013683,
-                "lng": -79.8369598388672
+                "lat": -2.169049509943826,
+                "lng": -79.82616662979127
             }
         ]
     },

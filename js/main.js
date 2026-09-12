@@ -1068,6 +1068,10 @@ document.addEventListener('DOMContentLoaded', () => {
     let disparadorModalAlianzas = null;
     let arrastreAlianzas = null;
     let ignorarClickAlianzas = false;
+    // Que foto habia bajo el cursor al empezar la pulsacion. Se guarda aqui
+    // porque el carril sigue moviendose: al llegar el clic, la imagen que esta
+    // debajo del cursor ya puede ser la de al lado.
+    let fotoPulsadaAlianzas = null;
 
     const abrirModalAlianzas = (imagen) => {
         if (!modalAlianzas || !imagenModalAlianzas) return;
@@ -1076,6 +1080,11 @@ document.addEventListener('DOMContentLoaded', () => {
         imagenModalAlianzas.alt = imagen.alt;
         modalAlianzas.classList.add('is-open');
         modalAlianzas.setAttribute('aria-hidden', 'false');
+        // Bloquear el scroll del fondo hace desaparecer la barra lateral y la
+        // pagina entera se corre unos pixeles. Se compensa con un relleno del
+        // ancho exacto que ocupaba la barra, asi no se nota ningun salto.
+        const anchoBarra = window.innerWidth - document.documentElement.clientWidth;
+        if (anchoBarra > 0) document.body.style.paddingRight = anchoBarra + 'px';
         document.body.classList.add('alianzas-modal-open');
         pistaFotosMarcoAlianzas?.classList.add('is-paused');
         cerrarModalAlianzas?.focus();
@@ -1086,8 +1095,11 @@ document.addEventListener('DOMContentLoaded', () => {
         modalAlianzas.classList.remove('is-open');
         modalAlianzas.setAttribute('aria-hidden', 'true');
         document.body.classList.remove('alianzas-modal-open');
+        document.body.style.paddingRight = '';
         pistaFotosMarcoAlianzas?.classList.remove('is-paused');
-        disparadorModalAlianzas?.focus();
+        // preventScroll: la foto sigue donde estaba, no hace falta que el
+        // navegador reposicione la pagina para devolverle el foco.
+        disparadorModalAlianzas?.focus({ preventScroll: true });
     };
 
     if (pistaFotosAlianzas && pistaFotosMarcoAlianzas) {
@@ -1102,6 +1114,14 @@ document.addEventListener('DOMContentLoaded', () => {
         };
 
         pistaFotosMarcoAlianzas.addEventListener('pointerdown', (evento) => {
+            // La foto se anota ANTES de descartar los botones que no son el
+            // izquierdo: asi nunca queda apuntada una foto vieja de una
+            // pulsacion anterior.
+            fotoPulsadaAlianzas = evento.target?.closest?.('.js-alianzas-foto') || null;
+            // Cada pulsacion nueva empieza limpia: si un arrastre anterior
+            // termino fuera del carrusel, su clic sintetico nunca llego y la
+            // bandera se habria quedado encendida, comiendose este clic bueno.
+            ignorarClickAlianzas = false;
             if (evento.button !== undefined && evento.button !== 0) return;
             const inicio = obtenerDesplazamiento();
             arrastreAlianzas = { id: evento.pointerId, x: evento.clientX, inicio, movio: false };
@@ -1160,15 +1180,34 @@ document.addEventListener('DOMContentLoaded', () => {
         pistaFotosMarcoAlianzas.addEventListener('dragstart', (evento) => evento.preventDefault());
     }
 
+    // El clic se escucha en la PISTA, no en cada imagen. Durante el arrastre se
+    // captura el puntero sobre la pista (setPointerCapture) y, mientras hay
+    // captura, el navegador dirige tambien los eventos de raton de
+    // compatibilidad -el click incluido- al elemento que capturo. Con el
+    // listener puesto en cada <img> ese click no llegaba nunca y la foto no se
+    // ampliaba con el raton (con el teclado si, por eso pasaba desapercibido).
+    const fotoDelClicAlianzas = (evento) => {
+        // 1. La foto anotada al pulsar: es la que el usuario realmente eligio.
+        if (fotoPulsadaAlianzas) return fotoPulsadaAlianzas;
+        // 2. Clic que si llego a la imagen (sin captura de puntero de por medio).
+        const directa = evento.target?.closest?.('.js-alianzas-foto');
+        if (directa) return directa;
+        // 3. Ultimo recurso: mirar que hay debajo del cursor.
+        return document.elementFromPoint(evento.clientX, evento.clientY)?.closest('.js-alianzas-foto') || null;
+    };
+
+    pistaFotosMarcoAlianzas?.addEventListener('click', (evento) => {
+        const imagen = fotoDelClicAlianzas(evento);
+        fotoPulsadaAlianzas = null;
+        // Se ignora solo el clic sintetico que viene justo despues de arrastrar.
+        if (ignorarClickAlianzas) {
+            ignorarClickAlianzas = false;
+            return;
+        }
+        if (imagen) abrirModalAlianzas(imagen);
+    });
+
     document.querySelectorAll('.js-alianzas-foto').forEach((imagen) => {
-        imagen.addEventListener('click', (evento) => {
-            if (ignorarClickAlianzas) {
-                evento.preventDefault();
-                ignorarClickAlianzas = false;
-                return;
-            }
-            abrirModalAlianzas(imagen);
-        });
         imagen.addEventListener('keydown', (evento) => {
             if (evento.key === 'Enter' || evento.key === ' ') {
                 evento.preventDefault();
@@ -1182,8 +1221,17 @@ document.addEventListener('DOMContentLoaded', () => {
         if (evento.target === modalAlianzas) cerrarVistaAlianzas();
     });
     document.addEventListener('keydown', (evento) => {
-        if (evento.key === 'Escape' && modalAlianzas?.classList.contains('is-open')) {
+        if (!modalAlianzas?.classList.contains('is-open')) return;
+        if (evento.key === 'Escape') {
             cerrarVistaAlianzas();
+            return;
+        }
+        // El unico sitio donde se puede estar con la vista ampliada abierta es
+        // el boton de cerrar: sin esto, el tabulador se va a los enlaces del
+        // fondo, que estan tapados y no se ven.
+        if (evento.key === 'Tab') {
+            evento.preventDefault();
+            cerrarModalAlianzas?.focus();
         }
     });
 

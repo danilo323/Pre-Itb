@@ -104,6 +104,10 @@
     /* Centra el botÃ³n horizontalmente */
 }
 
+.areas__card:hover .btn--solid .btn__icon-right i {
+    color: var(--primary-orange) !important;
+}
+
 .areas__card-list {
     margin-bottom: 24px;
     flex-grow: 1;

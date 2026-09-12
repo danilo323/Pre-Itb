@@ -135,13 +135,19 @@
                 "nombre": "Campus Naval",
                 "direccion": "",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.1594339489859835,
+                    "lng": -79.89686965942383
+                }
             },
             {
                 "nombre": "Campus Teresa Benites",
                 "direccion": "",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.170857362600965,
+                    "lng": -79.89086151123048
+                }
             },
             {
                 "nombre": "Campus Tomas Martínez",
@@ -177,6 +183,14 @@
             {
                 "lat": -2.1997559074937,
                 "lng": -79.898543357849
+            },
+            {
+                "lat": -2.1594339489859835,
+                "lng": -79.89686965942383
+            },
+            {
+                "lat": -2.170857362600965,
+                "lng": -79.89086151123048
             }
         ]
     },

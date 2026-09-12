@@ -196,11 +196,11 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .page-sobre-nosotros .sobre-intro__content,
-    .page-sobre-nosotros .sobre-intro__image-wrapper {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-}
+/* OJO: aqui habia un bloque @media (prefers-reduced-motion: reduce) que dejaba
+   la presentacion (trayectoria) y su imagen sin animacion de entrada.
+   Se quito a proposito, por el mismo motivo ya documentado en js/main.js para
+   los carruseles: Windows trae desactivadas las animaciones en muchisimos
+   equipos (Configuracion -> Accesibilidad -> Efectos visuales), y en esos
+   navegadores esta seccion aparecia de golpe, sin ninguno de los efectos
+   disenados. Tampoco es una animacion agresiva: una entrada corta, de una sola
+   vez, sin parpadeos ni bucles. */

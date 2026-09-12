@@ -107,7 +107,15 @@ document.addEventListener('DOMContentLoaded', () => {
             rootMargin: '0px 0px -40px 0px'
         });
 
-        animTargets.forEach(el => observer.observe(el));
+        // Esperar dos cuadros asegura que el navegador pinte primero el estado
+        // inicial (opacidad 0 + desplazamiento). Sin esta pausa, al cargar la
+        // página el observador podía añadir is-visible antes del primer pintado
+        // y el contenido aparecía directamente en su posición final.
+        requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+                animTargets.forEach(el => observer.observe(el));
+            });
+        });
     };
 
     // =========================================

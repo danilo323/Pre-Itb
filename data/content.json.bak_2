@@ -144,13 +144,19 @@
                 "nombre": "Campus Teresa Benites",
                 "direccion": "",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.170857362600965,
+                    "lng": -79.89086151123048
+                }
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.1686595281013683,
+                    "lng": -79.8369598388672
+                }
             }
         ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
@@ -184,6 +190,14 @@
             {
                 "lat": -2.1594339489859835,
                 "lng": -79.89686965942383
+            },
+            {
+                "lat": -2.170857362600965,
+                "lng": -79.89086151123048
+            },
+            {
+                "lat": -2.1686595281013683,
+                "lng": -79.8369598388672
             }
         ]
     },

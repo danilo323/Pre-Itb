@@ -153,7 +153,10 @@
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.169049509943826,
+                    "lng": -79.82616662979127
+                }
             }
         ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
@@ -191,6 +194,10 @@
             {
                 "lat": -2.170857362600965,
                 "lng": -79.89086151123048
+            },
+            {
+                "lat": -2.169049509943826,
+                "lng": -79.82616662979127
             }
         ]
     },

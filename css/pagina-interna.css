@@ -174,10 +174,6 @@
     transition: var(--transition-fast);
 }
 
-.acc-item__header:hover {
-    background: var(--primary-orange-light);
-}
-
 .acc-item__icon {
     color: var(--gray-500);
     transition: transform 0.3s ease;

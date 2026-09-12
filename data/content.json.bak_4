@@ -117,7 +117,10 @@
                 "nombre": "Campus Matriz",
                 "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.13507514962801,
+                    "lng": -79.91103172302248
+                }
             },
             {
                 "nombre": "Campus Boyacá",
@@ -132,7 +135,10 @@
                 "nombre": "Campus Naval",
                 "direccion": "",
                 "mapa_url": "",
-                "ubicacion": []
+                "ubicacion": {
+                    "lat": -2.1594339489859835,
+                    "lng": -79.89686965942383
+                }
             },
             {
                 "nombre": "Campus Teresa Benites",
@@ -166,12 +172,20 @@
         "div_bottom": null,
         "info_campus": null,
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
-        "campus_locations": {
-            "1": {
+        "campus_locations": [
+            {
+                "lat": -2.13507514962801,
+                "lng": -79.91103172302248
+            },
+            {
                 "lat": -2.1997559074937,
                 "lng": -79.898543357849
+            },
+            {
+                "lat": -2.1594339489859835,
+                "lng": -79.89686965942383
             }
-        }
+        ]
     },
     "hero": {
         "_visible": "1",

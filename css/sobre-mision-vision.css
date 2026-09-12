@@ -40,10 +40,6 @@
     transition: opacity 0.65s ease-out, transform 0.65s ease-out;
 }
 
-.page-sobre-nosotros .sobre-mv__card--invertida {
-    transform: translateX(-48px);
-}
-
 .page-sobre-nosotros .sobre-mv__card.is-visible {
     opacity: 1;
     transform: translateX(0);
@@ -203,11 +199,11 @@
     }
 }
 
-@media (prefers-reduced-motion: reduce) {
-    .page-sobre-nosotros .sobre-mv__card,
-    .page-sobre-nosotros .sobre-mv__card--invertida {
-        opacity: 1;
-        transform: none;
-        transition: none;
-    }
-}
+/* OJO: aqui habia un bloque @media (prefers-reduced-motion: reduce) que dejaba
+   las tarjetas de mision y vision sin animacion de entrada.
+   Se quito a proposito, por el mismo motivo ya documentado en js/main.js para
+   los carruseles: Windows trae desactivadas las animaciones en muchisimos
+   equipos (Configuracion -> Accesibilidad -> Efectos visuales), y en esos
+   navegadores esta seccion aparecia de golpe, sin ninguno de los efectos
+   disenados. Tampoco es una animacion agresiva: una entrada corta, de una sola
+   vez, sin parpadeos ni bucles. */
