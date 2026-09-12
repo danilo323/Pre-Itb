@@ -3,7 +3,7 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/e400be445aa3612aaf6978467bd42e2a.png",
+        "logo_principal": "img/28e06eb6813749e8f759a54e8e8ca62a.jpg",
         "div_seo": "",
         "div_logos": ""
     },
@@ -27,6 +27,16 @@
             {
                 "texto": "Transparencia / Leyes",
                 "url": "",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "prueba9",
+                "url": "prueba9.php",
                 "nivel": "hijo"
             },
             {
@@ -65,13 +75,33 @@
                 "nivel": "padre"
             },
             {
+                "texto": "academia",
+                "url": "academia.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Vida Estudiantil",
                 "url": "#",
                 "nivel": "padre"
             },
             {
+                "texto": "prueba 10",
+                "url": "prueba-10.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Admisiones",
                 "url": "#",
+                "nivel": "padre"
+            },
+            {
+                "texto": "prueba 03",
+                "url": "prueba-03.php",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "prueba1",
+                "url": "prueba1.php",
                 "nivel": "padre"
             }
         ],
@@ -100,28 +130,48 @@
         "lista_campus": [
             {
                 "nombre": "Campus Matriz",
-                "direccion": "Roca #101 y Pedro Carbo esq., Guayaquil, Ecuador",
-                "mapa_url": ""
+                "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.13507514962801,
+                    "lng": -79.91103172302248
+                }
             },
             {
                 "nombre": "Campus Boyacá",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.1997559074937,
+                    "lng": -79.898543357849
+                }
             },
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.1594339489859835,
+                    "lng": -79.89686965942383
+                }
             },
             {
                 "nombre": "Campus Teresa Benites",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.170857362600965,
+                    "lng": -79.89086151123048
+                }
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
-                "mapa_url": ""
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.169049509943826,
+                    "lng": -79.82616662979127
+                }
             }
         ],
         "social_texto": "#ITB Instituto Superior Universitario Bolivariano en",
@@ -140,7 +190,31 @@
         "div_campus": "",
         "div_mapa": "",
         "div_redes": "",
-        "div_bottom": ""
+        "div_bottom": "",
+        "info_campus": "",
+        "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
+        "campus_locations": [
+            {
+                "lat": -2.13507514962801,
+                "lng": -79.91103172302248
+            },
+            {
+                "lat": -2.1997559074937,
+                "lng": -79.898543357849
+            },
+            {
+                "lat": -2.1594339489859835,
+                "lng": -79.89686965942383
+            },
+            {
+                "lat": -2.170857362600965,
+                "lng": -79.89086151123048
+            },
+            {
+                "lat": -2.169049509943826,
+                "lng": -79.82616662979127
+            }
+        ]
     },
     "hero": {
         "_visible": "1",
@@ -875,7 +949,17 @@
     "sobre_hero": {
         "_visible": "1",
         "info_propia": "",
+        "div_left": "",
+        "subtitulo": "Conoce al ITB",
         "titulo": "Sobre nosotros",
+        "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+        "cta_texto": "Conoce Nuestra Historia",
+        "div_stats": "",
+        "stat_numero": "Fundado en 1996",
+        "rating": "4.9",
+        "div_right": "",
+        "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+        "video_url": "https://youtu.be/eTgzLxWGgS4",
         "div_galeria": "",
         "info_portada": "",
         "animaciones": "",
@@ -886,6 +970,975 @@
             }
         ],
         "ruta_inicio": "Inicio",
-        "ruta_actual": "Sobre Nosotros"
+        "ruta_actual": "Sobre Nosotros",
+        "div_textos": ""
+    },
+    "himno": {
+        "_visible": "1",
+        "div_textos": "",
+        "titulo": "Música y letra",
+        "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+        "div_letra": "",
+        "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+        "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+        "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+        "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+        "div_multimedia": "",
+        "audio": "audio/himnoitb.mp3",
+        "btn_descargar": "Descargar música",
+        "imagen": "img/Himno_Estudiante_itb.jpg",
+        "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+    },
+    "custom_pg_67733c093467": {
+        "sobre_hero": {
+            "_visible": "1",
+            "info_propia": null,
+            "div_textos": null,
+            "titulo": "Sobre nosotros",
+            "ruta_inicio": "Inicio",
+            "ruta_actual": "Sobre Nosotros",
+            "div_galeria": null,
+            "info_portada": null,
+            "animaciones": true,
+            "imagenes_fondo": [
+                {
+                    "archivo": "img/hero_2.jpg",
+                    "estatica": false
+                }
+            ]
+        },
+        "autoridades": {
+            "_visible": "1",
+            "info_gestion": null,
+            "div_global": null,
+            "etiqueta_superior": "Nuestro Equipo",
+            "titulo": "Nuestras Autoridades",
+            "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+            "boton_directorio": "Ver Directorio"
+        },
+        "sobre_cogobierno": {
+            "_visible": "1",
+            "titulo": "Co Gobierno",
+            "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+            "miembros": [
+                {
+                    "foto": "img/c8bf4f7424e8fead2cf318d36aa90cb7.jpg",
+                    "nombre": "Obst. Lenny Mariscal San Martín",
+                    "cargo": "Representante de Docentes"
+                },
+                {
+                    "foto": "img/b32dd35f80c29eeecc0b1a17c0536fe0.jpg",
+                    "nombre": "Ing. Marcos Escaleras Gómez",
+                    "cargo": "Representante de Trabajadores"
+                }
+            ],
+            "div_estructura": null,
+            "card_imagen": "img/11ad0e374a18c1084f2eb8e891901c54.jpg",
+            "card_icono": "",
+            "card_titulo": "Estructura Orgánica",
+            "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+            "card_boton": "Ver Organigrama",
+            "card_boton_url": "#"
+        },
+        "alianzas": {
+            "_visible": "1",
+            "div_textos": null,
+            "titulo": "Alianzas del ITB",
+            "boton_todas": "Ver Alianzas y Convenios",
+            "div_logos": null,
+            "lista_logos": [
+                {
+                    "imagen": "img/alianza_1.png",
+                    "nombre": "Aliado 1"
+                },
+                {
+                    "imagen": "img/alianza_2.jpg",
+                    "nombre": "Aliado 2"
+                },
+                {
+                    "imagen": "img/alianza_3.png",
+                    "nombre": "Aliado 3"
+                },
+                {
+                    "imagen": "img/alianza_4.png",
+                    "nombre": "Aliado 4"
+                },
+                {
+                    "imagen": "img/alianza_5.png",
+                    "nombre": "Aliado 5"
+                }
+            ],
+            "div_fotos": null,
+            "lista_fotos": [
+                {
+                    "imagen": "img/alianza_sub1.png",
+                    "nombre": "Actividad ITB 1"
+                },
+                {
+                    "imagen": "img/alianza_sub2.png",
+                    "nombre": "Actividad ITB 2"
+                },
+                {
+                    "imagen": "img/alianza_sub3.png",
+                    "nombre": "Actividad ITB 3"
+                },
+                {
+                    "imagen": "img/alianza_sub4.png",
+                    "nombre": "Actividad ITB 4"
+                },
+                {
+                    "imagen": "img/alianza_sub5.png",
+                    "nombre": "Actividad ITB 5"
+                },
+                {
+                    "imagen": "img/alianza_sub6.png",
+                    "nombre": "Actividad ITB 6"
+                }
+            ]
+        }
+    },
+    "_paginas_creadas": {
+        "pg_7716650bace6": {
+            "id": "pg_7716650bace6",
+            "nombre": "prueba1",
+            "slug": "prueba1",
+            "icon": "bi bi-award-fill",
+            "menu_pos": "padre",
+            "secciones": [
+                "sobre_hero",
+                "mision_vision",
+                "autoridades",
+                "himno",
+                "alianzas"
+            ],
+            "contenido": {
+                "autoridades": {
+                    "_visible": "1",
+                    "etiqueta_superior": "Nuestro Equipo",
+                    "titulo": "Nuestras Autoridades",
+                    "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+                    "boton_directorio": "Ver Directorio",
+                    "info_gestion": "",
+                    "div_global": "",
+                    "btn_directorio": "Ver Directorio",
+                    "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+                    "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
+                    "aut1_nombre": "PhD. Roberto Tolozano Benites",
+                    "aut1_cargo": "Canciller",
+                    "aut1_email": "#",
+                    "aut1_telf": "#",
+                    "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
+                    "aut2_nombre": "PhD. Elena Tolozano Benites",
+                    "aut2_cargo": "Rectora",
+                    "aut2_email": "#",
+                    "aut2_telf": "#",
+                    "aut3_foto": "img/PHD.Luis_alzate.jpg",
+                    "aut3_nombre": "PhD. Luis Alzate Peralta",
+                    "aut3_cargo": "Vicerrector Académico y de Investigación",
+                    "aut3_email": "#",
+                    "aut3_telf": "#",
+                    "aut4_foto": "img/PHD.Michelle_tolozano.webp",
+                    "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
+                    "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
+                    "aut4_email": "#",
+                    "aut4_telf": "#"
+                },
+                "alianzas": {
+                    "_visible": "1",
+                    "titulo": "Alianzas del ITB",
+                    "boton_todas": "Ver Alianzas y Convenios",
+                    "lista_logos": [
+                        {
+                            "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
+                            "nombre": "Aliado 1"
+                        },
+                        {
+                            "imagen": "img/alianza_2.jpg",
+                            "nombre": "Aliado 2"
+                        },
+                        {
+                            "imagen": "img/alianza_3.png",
+                            "nombre": "Aliado 3"
+                        },
+                        {
+                            "imagen": "img/alianza_4.png",
+                            "nombre": "Aliado 4"
+                        },
+                        {
+                            "imagen": "img/alianza_5.png",
+                            "nombre": "Aliado 5"
+                        }
+                    ],
+                    "lista_fotos": [
+                        {
+                            "imagen": "img/alianza_sub1.png",
+                            "nombre": "Actividad ITB 1"
+                        },
+                        {
+                            "imagen": "img/alianza_sub2.png",
+                            "nombre": "Actividad ITB 2"
+                        },
+                        {
+                            "imagen": "img/alianza_sub3.png",
+                            "nombre": "Actividad ITB 3"
+                        },
+                        {
+                            "imagen": "img/alianza_sub4.png",
+                            "nombre": "Actividad ITB 4"
+                        },
+                        {
+                            "imagen": "img/alianza_sub5.png",
+                            "nombre": "Actividad ITB 5"
+                        },
+                        {
+                            "imagen": "img/alianza_sub6.png",
+                            "nombre": "Actividad ITB 6"
+                        }
+                    ],
+                    "div_textos": "",
+                    "div_logos": "",
+                    "div_fotos": ""
+                },
+                "sobre_hero": {
+                    "_visible": "1",
+                    "info_propia": "",
+                    "div_left": "",
+                    "subtitulo": "Conoce al ITB",
+                    "titulo": "Sobre nosotros",
+                    "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+                    "cta_texto": "Conoce Nuestra Historia",
+                    "div_stats": "",
+                    "stat_numero": "Fundado en 1996",
+                    "rating": "4.9",
+                    "div_right": "",
+                    "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+                    "video_url": "https://youtu.be/eTgzLxWGgS4",
+                    "div_galeria": "",
+                    "info_portada": "",
+                    "animaciones": false,
+                    "imagenes_fondo": [
+                        {
+                            "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                            "estatica": true
+                        }
+                    ],
+                    "ruta_inicio": "Inicio",
+                    "ruta_actual": "Sobre Nosotros",
+                    "div_textos": ""
+                },
+                "sobre_mision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra misión",
+                    "descripcion": "......................",
+                    "puntos": [
+                        {
+                            "texto": "Autonomía de pensamiento y liderazgo."
+                        },
+                        {
+                            "texto": "Aliado estratégico de empresas e instituciones."
+                        },
+                        {
+                            "texto": "Formación práctica orientada al desarrollo económico y social."
+                        }
+                    ],
+                    "imagen": "img/213759381a126bbbc7a538f7475284fa.jpg"
+                },
+                "sobre_vision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra visión",
+                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+                    "puntos": [
+                        {
+                            "texto": "Liderazgo en educación tecnológica universitaria."
+                        },
+                        {
+                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+                        },
+                        {
+                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+                        }
+                    ],
+                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                },
+                "himno": {
+                    "_visible": "1",
+                    "div_textos": "",
+                    "titulo": "Música y letra",
+                    "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+                    "div_letra": "",
+                    "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+                    "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+                    "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+                    "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+                    "div_multimedia": "",
+                    "audio": "audio/himnoitb.mp3",
+                    "btn_descargar": "Descargar música",
+                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+                }
+            },
+            "updated_at": "2026-09-11 06:23:41"
+        },
+        "pg_bd2ced35f8b7": {
+            "id": "pg_bd2ced35f8b7",
+            "nombre": "otro",
+            "slug": "otro",
+            "icon": "bi bi-briefcase-fill",
+            "menu_pos": "hijo:Instituto",
+            "secciones": [
+                "sobre_hero",
+                "mision_vision",
+                "valores",
+                "autoridades",
+                "cogobierno",
+                "himno"
+            ],
+            "contenido": {
+                "autoridades": {
+                    "_visible": "1",
+                    "etiqueta_superior": "Nuestro Equipo",
+                    "titulo": "Nuestras Autoridades",
+                    "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+                    "boton_directorio": "Ver Directorio",
+                    "info_gestion": "",
+                    "div_global": "",
+                    "btn_directorio": "Ver Directorio",
+                    "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+                    "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
+                    "aut1_nombre": "PhD. Roberto Tolozano Benites",
+                    "aut1_cargo": "Canciller",
+                    "aut1_email": "#",
+                    "aut1_telf": "#",
+                    "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
+                    "aut2_nombre": "PhD. Elena Tolozano Benites",
+                    "aut2_cargo": "Rectora",
+                    "aut2_email": "#",
+                    "aut2_telf": "#",
+                    "aut3_foto": "img/PHD.Luis_alzate.jpg",
+                    "aut3_nombre": "PhD. Luis Alzate Peralta",
+                    "aut3_cargo": "Vicerrector Académico y de Investigación",
+                    "aut3_email": "#",
+                    "aut3_telf": "#",
+                    "aut4_foto": "img/PHD.Michelle_tolozano.webp",
+                    "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
+                    "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
+                    "aut4_email": "#",
+                    "aut4_telf": "#"
+                },
+                "sobre_hero": {
+                    "_visible": "1",
+                    "info_propia": "",
+                    "div_left": "",
+                    "subtitulo": "Conoce al ITB",
+                    "titulo": "Sobre nosotros",
+                    "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+                    "cta_texto": "Conoce Nuestra Historia",
+                    "div_stats": "",
+                    "stat_numero": "Fundado en 1996",
+                    "rating": "4.9",
+                    "div_right": "",
+                    "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+                    "video_url": "https://youtu.be/eTgzLxWGgS4",
+                    "div_galeria": "",
+                    "info_portada": "",
+                    "animaciones": "",
+                    "imagenes_fondo": [
+                        {
+                            "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                            "estatica": true
+                        }
+                    ],
+                    "ruta_inicio": "Inicio",
+                    "ruta_actual": "Sobre Nosotros",
+                    "div_textos": ""
+                },
+                "sobre_mision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra misión",
+                    "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
+                    "puntos": [
+                        {
+                            "texto": "Autonomía de pensamiento y liderazgo."
+                        },
+                        {
+                            "texto": "Aliado estratégico de empresas e instituciones."
+                        },
+                        {
+                            "texto": "Formación práctica orientada al desarrollo económico y social."
+                        }
+                    ],
+                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+                },
+                "sobre_vision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra visión",
+                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+                    "puntos": [
+                        {
+                            "texto": "Liderazgo en educación tecnológica universitaria."
+                        },
+                        {
+                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+                        },
+                        {
+                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+                        }
+                    ],
+                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                },
+                "sobre_valores": {
+                    "_visible": "1",
+                    "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
+                    "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
+                    "items": [
+                        {
+                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "titulo": "Cogobierno",
+                            "descripcion": "Participación y gestión democrática"
+                        },
+                        {
+                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "titulo": "Igualdad",
+                            "descripcion": "Oportunidades sin discriminación"
+                        },
+                        {
+                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "titulo": "Calidad",
+                            "descripcion": "Excelencia en educación superior"
+                        },
+                        {
+                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "titulo": "Pertinencia",
+                            "descripcion": "Programas alineados a la sociedad"
+                        },
+                        {
+                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "titulo": "Integralidad",
+                            "descripcion": "Formación académica y humana"
+                        }
+                    ]
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
+                "himno": {
+                    "_visible": "1",
+                    "div_textos": "",
+                    "titulo": "Música y letra",
+                    "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+                    "div_letra": "",
+                    "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+                    "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+                    "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+                    "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+                    "div_multimedia": "",
+                    "audio": "audio/himnoitb.mp3",
+                    "btn_descargar": "Descargar música",
+                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+                }
+            },
+            "updated_at": "2026-09-11 06:04:45"
+        },
+        "pg_344b6c0b7ef3": {
+            "id": "pg_344b6c0b7ef3",
+            "nombre": "academia",
+            "slug": "academia",
+            "icon": "bi bi-mortarboard-fill",
+            "menu_pos": "hijo:Oferta Académica",
+            "secciones": [
+                "cogobierno",
+                "servicios",
+                "alianzas"
+            ],
+            "contenido": {
+                "servicios": {
+                    "_visible": "1",
+                    "serv1_titulo": "Bienestar Estudiantil",
+                    "serv1_desc": "Servicios médicos, psicológicos y odontológicos gratuitos",
+                    "serv1_btn": "Más servicios",
+                    "lista_servicios": [
+                        {
+                            "titulo": "Campus Virtual",
+                            "desc": "Plataforma educativa 24/7",
+                            "btn_texto": "Ver Tour",
+                            "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Horarios",
+                            "desc": "Consulta tus horarios de clase",
+                            "btn_texto": "Ver Horarios",
+                            "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Servicios Digitales",
+                            "desc": "Trámites en línea y gestión académica",
+                            "btn_texto": "Acceder",
+                            "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Podcast ITB",
+                            "desc": "Escucha nuestro contenido educativo",
+                            "btn_texto": "Escuchar",
+                            "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg",
+                            "imagen_fija": false
+                        },
+                        {
+                            "titulo": "Arte y Deportes",
+                            "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
+                            "btn_texto": "Conocer Más",
+                            "imagen": "img/bienestar_estudiantil_1.png",
+                            "imagen_fija": false
+                        }
+                    ],
+                    "div_serv1": "",
+                    "div_servicios_lista": "",
+                    "etiqueta_superior": "Servicios Institucionales",
+                    "titulo": "Todo lo que necesitas en  *un solo lugar*",
+                    "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
+                    "serv2_titulo": "Campus Virtual",
+                    "serv2_desc": "Plataforma educativa 24/7",
+                    "serv2_imagen": "img/servicio-campus.jpg",
+                    "serv3_titulo": "Horarios",
+                    "serv3_desc": "Consulta tus horarios de clase",
+                    "serv3_imagen": "img/salud.jpg",
+                    "serv4_titulo": "Servicios Digitales",
+                    "serv4_desc": "Trámites en línea y gestión académica",
+                    "serv4_imagen": "img/salud.jpg",
+                    "serv5_titulo": "Podcast ITB",
+                    "serv5_desc": "Escucha nuestro contenido educativo",
+                    "serv5_imagen": "img/salud.jpg",
+                    "serv6_titulo": "Arte y Deportes",
+                    "serv6_desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
+                    "serv6_imagen": "img/estudiantes1.png"
+                },
+                "alianzas": {
+                    "_visible": "1",
+                    "titulo": "Alianzas del ITB",
+                    "boton_todas": "Ver Alianzas y Convenios",
+                    "lista_logos": [
+                        {
+                            "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
+                            "nombre": "Aliado 1"
+                        },
+                        {
+                            "imagen": "img/alianza_2.jpg",
+                            "nombre": "Aliado 2"
+                        },
+                        {
+                            "imagen": "img/alianza_3.png",
+                            "nombre": "Aliado 3"
+                        },
+                        {
+                            "imagen": "img/alianza_4.png",
+                            "nombre": "Aliado 4"
+                        },
+                        {
+                            "imagen": "img/alianza_5.png",
+                            "nombre": "Aliado 5"
+                        }
+                    ],
+                    "lista_fotos": [
+                        {
+                            "imagen": "img/alianza_sub1.png",
+                            "nombre": "Actividad ITB 1"
+                        },
+                        {
+                            "imagen": "img/alianza_sub2.png",
+                            "nombre": "Actividad ITB 2"
+                        },
+                        {
+                            "imagen": "img/alianza_sub3.png",
+                            "nombre": "Actividad ITB 3"
+                        },
+                        {
+                            "imagen": "img/alianza_sub4.png",
+                            "nombre": "Actividad ITB 4"
+                        },
+                        {
+                            "imagen": "img/alianza_sub5.png",
+                            "nombre": "Actividad ITB 5"
+                        },
+                        {
+                            "imagen": "img/alianza_sub6.png",
+                            "nombre": "Actividad ITB 6"
+                        }
+                    ],
+                    "div_textos": "",
+                    "div_logos": "",
+                    "div_fotos": ""
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                }
+            },
+            "updated_at": "2026-09-11 06:13:18"
+        },
+        "pg_25d477632949": {
+            "id": "pg_25d477632949",
+            "nombre": "prueba9",
+            "slug": "prueba9",
+            "icon": "bi bi-file-earmark-text",
+            "menu_pos": "hijo:Instituto",
+            "secciones": [
+                "valores",
+                "autoridades",
+                "himno",
+                "cogobierno"
+            ],
+            "contenido": {
+                "autoridades": {
+                    "_visible": "1",
+                    "etiqueta_superior": "Nuestro Equipo",
+                    "titulo": "Nuestras Autoridades",
+                    "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+                    "boton_directorio": "Ver Directorio",
+                    "info_gestion": "",
+                    "div_global": "",
+                    "btn_directorio": "Ver Directorio",
+                    "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
+                    "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
+                    "aut1_nombre": "PhD. Roberto Tolozano Benites",
+                    "aut1_cargo": "Canciller",
+                    "aut1_email": "#",
+                    "aut1_telf": "#",
+                    "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
+                    "aut2_nombre": "PhD. Elena Tolozano Benites",
+                    "aut2_cargo": "Rectora",
+                    "aut2_email": "#",
+                    "aut2_telf": "#",
+                    "aut3_foto": "img/PHD.Luis_alzate.jpg",
+                    "aut3_nombre": "PhD. Luis Alzate Peralta",
+                    "aut3_cargo": "Vicerrector Académico y de Investigación",
+                    "aut3_email": "#",
+                    "aut3_telf": "#",
+                    "aut4_foto": "img/PHD.Michelle_tolozano.webp",
+                    "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
+                    "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
+                    "aut4_email": "#",
+                    "aut4_telf": "#"
+                },
+                "sobre_valores": {
+                    "_visible": "1",
+                    "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
+                    "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
+                    "items": [
+                        {
+                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "titulo": "Cogobierno",
+                            "descripcion": "Participación y gestión democrática"
+                        },
+                        {
+                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "titulo": "Igualdad",
+                            "descripcion": "Oportunidades sin discriminación"
+                        },
+                        {
+                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "titulo": "Calidad",
+                            "descripcion": "Excelencia en educación superior"
+                        },
+                        {
+                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "titulo": "Pertinencia",
+                            "descripcion": "Programas alineados a la sociedad"
+                        },
+                        {
+                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "titulo": "Integralidad",
+                            "descripcion": "Formación académica y humana"
+                        }
+                    ]
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
+                "himno": {
+                    "_visible": "1",
+                    "div_textos": "",
+                    "titulo": "Música y letra",
+                    "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+                    "div_letra": "",
+                    "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+                    "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+                    "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+                    "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+                    "div_multimedia": "",
+                    "audio": "audio/himnoitb.mp3",
+                    "btn_descargar": "Descargar música",
+                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+                }
+            },
+            "updated_at": "2026-09-12 00:35:10"
+        },
+        "pg_85f4857b7ca5": {
+            "id": "pg_85f4857b7ca5",
+            "nombre": "prueba 10",
+            "slug": "prueba-10",
+            "icon": "bi bi-file-earmark-text",
+            "menu_pos": "hijo:Vida Estudiantil",
+            "menu_before": "",
+            "secciones": [
+                "mision_vision",
+                "cogobierno",
+                "himno"
+            ],
+            "contenido": {
+                "sobre_mision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra misión",
+                    "descripcion": "Somos una Institución de Educación Superior comprometida con la excelencia académica y la formación de profesionales tecnológicos innovadores.",
+                    "puntos": [
+                        {
+                            "texto": "Autonomía de pensamiento y liderazgo."
+                        },
+                        {
+                            "texto": "Aliado estratégico de empresas e instituciones."
+                        },
+                        {
+                            "texto": "Formación práctica orientada al desarrollo económico y social."
+                        }
+                    ],
+                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+                },
+                "sobre_vision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra visión",
+                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+                    "puntos": [
+                        {
+                            "texto": "Liderazgo en educación tecnológica universitaria."
+                        },
+                        {
+                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+                        },
+                        {
+                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+                        }
+                    ],
+                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
+                "himno": {
+                    "_visible": "1",
+                    "div_textos": "",
+                    "titulo": "Música y letra",
+                    "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+                    "div_letra": "",
+                    "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+                    "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+                    "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+                    "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+                    "div_multimedia": "",
+                    "audio": "audio/himnoitb.mp3",
+                    "btn_descargar": "Descargar música",
+                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+                }
+            },
+            "updated_at": "2026-09-12 01:05:14"
+        },
+        "pg_2336c72c2336": {
+            "id": "pg_2336c72c2336",
+            "nombre": "prueba 03",
+            "slug": "prueba-03",
+            "icon": "bi bi-file-earmark-text",
+            "menu_pos": "hijo:Admisiones",
+            "menu_before": "",
+            "secciones": [
+                "pg_7716650bace6:himno",
+                "pg_344b6c0b7ef3:alianzas",
+                "pg_85f4857b7ca5:cogobierno"
+            ],
+            "contenido": {
+                "alianzas": {
+                    "_visible": "1",
+                    "titulo": "Alianzas del ITB",
+                    "boton_todas": "Ver Alianzas y Convenios",
+                    "lista_logos": [
+                        {
+                            "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
+                            "nombre": "Aliado 1"
+                        },
+                        {
+                            "imagen": "img/alianza_2.jpg",
+                            "nombre": "Aliado 2"
+                        },
+                        {
+                            "imagen": "img/alianza_3.png",
+                            "nombre": "Aliado 3"
+                        },
+                        {
+                            "imagen": "img/alianza_4.png",
+                            "nombre": "Aliado 4"
+                        },
+                        {
+                            "imagen": "img/alianza_5.png",
+                            "nombre": "Aliado 5"
+                        }
+                    ],
+                    "lista_fotos": [
+                        {
+                            "imagen": "img/alianza_sub1.png",
+                            "nombre": "Actividad ITB 1"
+                        },
+                        {
+                            "imagen": "img/alianza_sub2.png",
+                            "nombre": "Actividad ITB 2"
+                        },
+                        {
+                            "imagen": "img/alianza_sub3.png",
+                            "nombre": "Actividad ITB 3"
+                        },
+                        {
+                            "imagen": "img/alianza_sub4.png",
+                            "nombre": "Actividad ITB 4"
+                        },
+                        {
+                            "imagen": "img/alianza_sub5.png",
+                            "nombre": "Actividad ITB 5"
+                        },
+                        {
+                            "imagen": "img/alianza_sub6.png",
+                            "nombre": "Actividad ITB 6"
+                        }
+                    ],
+                    "div_textos": "",
+                    "div_logos": "",
+                    "div_fotos": ""
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
+                "himno": {
+                    "_visible": "1",
+                    "div_textos": "",
+                    "titulo": "Música y letra",
+                    "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+                    "div_letra": "",
+                    "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+                    "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+                    "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+                    "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+                    "div_multimedia": "",
+                    "audio": "audio/himnoitb.mp3",
+                    "btn_descargar": "Descargar música",
+                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+                }
+            },
+            "updated_at": "2026-09-12 01:19:44"
+        }
     }
 }

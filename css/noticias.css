@@ -23,64 +23,6 @@
     font-family: var(--font-primary);
 }
 
-/* Botón superior derecho (mismo diseño que .btn--outline-servicios de Servicios).
-   Lo comparten dos secciones: Noticias ("Ver más Noticias y Eventos") y
-   Alianzas ("Ver Alianzas y Convenios"). Se listan los dos selectores en vez de
-   copiar el estilo, para que los dos botones nunca se desincronicen. */
-.btn-noticias-todas,
-.btn-alianzas-todas {
-    display: inline-flex;
-    align-items: center;
-    gap: 16px;
-    padding: 6px 6px 6px 22px;
-    border: 1.5px solid var(--primary-orange);
-    border-radius: 8px;
-    color: var(--primary-orange);
-    font-size: 0.95rem;
-    font-weight: 600;
-    text-decoration: none;
-    transition: var(--transition);
-}
-
-.btn-noticias-todas:hover,
-.btn-alianzas-todas:hover {
-    background: var(--primary-orange);
-    color: var(--white);
-}
-
-/* Caja de flecha del botón superior: rellena por defecto, se vacía en hover (no tocar, ya está bien) */
-.btn-noticias-todas .btn__icon-right,
-.btn-alianzas-todas .btn__icon-right {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 38px;
-    height: 38px;
-    background-color: var(--primary-orange);
-    color: var(--white);
-    border-radius: 6px;
-    flex-shrink: 0;
-    transition: var(--transition);
-}
-
-.btn-noticias-todas .btn__icon-right i,
-.btn-alianzas-todas .btn__icon-right i {
-    transform: rotate(-45deg);
-    font-size: 0.85rem;
-    transition: var(--transition);
-}
-
-.btn-noticias-todas:hover .btn__icon-right,
-.btn-alianzas-todas:hover .btn__icon-right {
-    background-color: var(--white);
-    color: var(--primary-orange);
-}
-
-.btn-noticias-todas:hover .btn__icon-right i,
-.btn-alianzas-todas:hover .btn__icon-right i {
-    transform: rotate(0deg);
-}
-
 
 .noticias__header {
     display: flex;

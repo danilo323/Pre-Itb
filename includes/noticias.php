@@ -59,7 +59,7 @@ $secundarias_visibles = 2;
                     <?= content_title('noticias', 'titulo_seccion', 'Noticias y Eventos del ITB') ?>
                 </h2>
             </div>
-            <a href="#" class="btn-noticias-todas" id="btn-todas-noticias">
+            <a href="#" class="btn--solid" id="btn-todas-noticias">
                 <?= content_get('noticias', 'boton_todas', 'Ver más Noticias y Eventos') ?>
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>

@@ -41,7 +41,7 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
             <h2 class="alianzas__title">
                 <?= content_title('alianzas', 'titulo', 'Alianzas del ITB') ?>
             </h2>
-            <a href="#" class="btn-alianzas-todas" id="btn-todas-alianzas">
+            <a href="#" class="btn--solid" id="btn-todas-alianzas">
                 <?= content_get('alianzas', 'boton_todas', 'Ver Alianzas y Convenios') ?>
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
