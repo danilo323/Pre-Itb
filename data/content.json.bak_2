@@ -133,8 +133,8 @@
                 "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.13507514962801,
-                    "lng": -79.91103172302248
+                    "lat": -2.136876341726589,
+                    "lng": -79.88777160644533
                 }
             },
             {
@@ -183,20 +183,20 @@
         "vimeo_url": "#",
         "linkedin_url": "#",
         "copyright": "© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
-        "div_prefooter": "",
-        "div_logo": "",
-        "div_enlaces1": "",
-        "div_enlaces2": "",
-        "div_campus": "",
+        "div_prefooter": null,
+        "div_logo": null,
+        "div_enlaces1": null,
+        "div_enlaces2": null,
+        "div_campus": null,
         "div_mapa": "",
-        "div_redes": "",
-        "div_bottom": "",
-        "info_campus": "",
+        "div_redes": null,
+        "div_bottom": null,
+        "info_campus": null,
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
         "campus_locations": [
             {
-                "lat": -2.13507514962801,
-                "lng": -79.91103172302248
+                "lat": -2.136876341726589,
+                "lng": -79.88777160644533
             },
             {
                 "lat": -2.1997559074937,
@@ -1940,5 +1940,18 @@
             },
             "updated_at": "2026-09-12 01:19:44"
         }
+    },
+    "documentos_transparencia": {
+        "items": [
+            {
+                "id": 1,
+                "categoria": "info_financiera",
+                "nombre": "prueba",
+                "anio": "2026",
+                "archivo": "docs/80198af8937d360be1f0443003c625b5.pdf",
+                "tamano": "",
+                "publicado": true
+            }
+        ]
     }
 }

@@ -183,15 +183,15 @@
         "vimeo_url": "#",
         "linkedin_url": "#",
         "copyright": "© 2026 TIC - ITB | TODOS LOS DERECHOS RESERVADOS",
-        "div_prefooter": null,
-        "div_logo": null,
-        "div_enlaces1": null,
-        "div_enlaces2": null,
-        "div_campus": null,
+        "div_prefooter": "",
+        "div_logo": "",
+        "div_enlaces1": "",
+        "div_enlaces2": "",
+        "div_campus": "",
         "div_mapa": "",
-        "div_redes": null,
-        "div_bottom": null,
-        "info_campus": null,
+        "div_redes": "",
+        "div_bottom": "",
+        "info_campus": "",
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
         "campus_locations": [
             {
@@ -240,16 +240,16 @@
                 "estatica": false
             }
         ],
-        "div_left": "",
-        "div_stats": "",
-        "div_right": "",
-        "div_galeria": "",
+        "div_left": null,
+        "div_stats": null,
+        "div_right": null,
+        "div_galeria": null,
         "imagen_1": "img/salud.jpg",
         "imagen_2": "img/student.jpg",
         "imagen_3": "img/student 2.jpg",
         "imagen_video_thumb": "img/hero-video-thumb.jpg",
-        "animaciones": "",
-        "info_portada": ""
+        "animaciones": false,
+        "info_portada": null
     },
     "trayectoria": {
         "_visible": "1",
@@ -275,11 +275,11 @@
                 "texto": "Carreras Disponibles"
             }
         ],
-        "div_global": "",
-        "div_perfil": "",
-        "div_btn": "",
-        "div_imagen": "",
-        "div_stats": "",
+        "div_global": null,
+        "div_perfil": null,
+        "div_btn": null,
+        "div_imagen": null,
+        "div_stats": null,
         "imagen_campus": "img/estudiantes1.png",
         "stat_anios": "29+",
         "stat_anios_label": "Años de Experiencia",
@@ -319,7 +319,7 @@
                 "btn_texto": "Explorar programas"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "area1_icono": "img/doctor.png",
         "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
         "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
@@ -398,7 +398,7 @@
                 "sede": ""
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "prog1_imagen": "img/enfermeria.jpg",
         "prog1_modalidad": "Presencial",
         "prog1_area": "Salud",
@@ -423,7 +423,7 @@
         "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
         "prog4_duracion": "5 Semestres",
         "prog4_sede": "Guayaquil",
-        "info_programas": ""
+        "info_programas": null
     },
     "experiencia": {
         "_visible": "1",
@@ -450,9 +450,9 @@
         ],
         "btn_texto": "Más beneficios",
         "imagen": "img/experiencia.png",
-        "div_header": "",
-        "div_btn": "",
-        "div_img": "",
+        "div_header": null,
+        "div_btn": null,
+        "div_img": null,
         "caract1_titulo": "Servicios Médicos",
         "caract1_desc": "Atención médica y odontológica gratuita para estudiantes.",
         "caract2_titulo": "Becas y Financiamiento",
@@ -468,8 +468,8 @@
         "_visible": "1",
         "etiqueta_superior": "HISTORIAS DE ÉXITO",
         "titulo": "Lo que dicen nuestros Graduados",
-        "div_global": "",
-        "div_testimonio": "",
+        "div_global": null,
+        "div_testimonio": null,
         "lista_testimonios": [
             {
                 "imagen": "img/MariaFernanda.png",
@@ -500,7 +500,7 @@
                 "carrera": "Graduado en Gastronomía"
             }
         ],
-        "info_testimonios": ""
+        "info_testimonios": null
     },
     "autoridades": {
         "_visible": "1",
@@ -508,8 +508,8 @@
         "titulo": "Nuestras Autoridades",
         "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "boton_directorio": "Ver Directorio",
-        "info_gestion": "",
-        "div_global": "",
+        "info_gestion": null,
+        "div_global": null,
         "btn_directorio": "Ver Directorio",
         "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
@@ -575,8 +575,8 @@
                 "imagen_fija": false
             }
         ],
-        "div_serv1": "",
-        "div_servicios_lista": "",
+        "div_serv1": null,
+        "div_servicios_lista": null,
         "etiqueta_superior": "Servicios Institucionales",
         "titulo": "Todo lo que necesitas en  *un solo lugar*",
         "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
@@ -640,12 +640,12 @@
                 "texto": "Híbrida"
             }
         ],
-        "div_textos": "",
-        "div_imagen": "",
-        "div_video": "",
-        "div_form": "",
-        "div_programas": "",
-        "div_modalidades": "",
+        "div_textos": null,
+        "div_imagen": null,
+        "div_video": null,
+        "div_form": null,
+        "div_programas": null,
+        "div_modalidades": null,
         "etiqueta_superior": "Admisiones Abiertas",
         "feature_1": "Proceso 100% en línea",
         "feature_2": "Asesoría personalizada",
@@ -689,10 +689,10 @@
                 "imagen": "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "div_noticia": "",
-        "info_noticias": "",
-        "div_secundarias": "",
+        "info_noticias": null,
+        "div_secundarias": null,
         "sec1_titulo": "Convenio internacional con universidad de España",
         "sec1_fecha": "10 Sep 2025",
         "sec1_imagen": "img/noticia-2.jpg",
@@ -732,8 +732,8 @@
                 "imagen": "img/noticia_feria_agroazucar.jpeg"
             }
         ],
-        "div_eventos": "",
-        "info_eventos": ""
+        "div_eventos": null,
+        "info_eventos": null
     },
     "alianzas": {
         "_visible": "1",
@@ -763,33 +763,33 @@
         ],
         "lista_fotos": [
             {
-                "imagen": "img/alianza_sub1.png",
+                "imagen": "img/3f6fdb21386a5df14f26db0621859f94.jpg",
                 "nombre": "Actividad ITB 1"
             },
             {
-                "imagen": "img/alianza_sub2.png",
+                "imagen": "img/aa93641f0a053c4c51ce8798439e0fc0.jpg",
                 "nombre": "Actividad ITB 2"
             },
             {
-                "imagen": "img/alianza_sub3.png",
+                "imagen": "img/0c1710d05b71a09bf3816d0ef2e88f41.jpg",
                 "nombre": "Actividad ITB 3"
             },
             {
-                "imagen": "img/alianza_sub4.png",
+                "imagen": "img/4e5ed163e35622a09b822732a1ec7bba.jpg",
                 "nombre": "Actividad ITB 4"
             },
             {
-                "imagen": "img/alianza_sub5.png",
+                "imagen": "img/231ebc34daaf70cf354e8c8ce468de89.jpg",
                 "nombre": "Actividad ITB 5"
             },
             {
-                "imagen": "img/alianza_sub6.png",
+                "imagen": "img/5e566b1016756cb9850c16cbc8ba6018.jpg",
                 "nombre": "Actividad ITB 6"
             }
         ],
-        "div_textos": "",
-        "div_logos": "",
-        "div_fotos": ""
+        "div_textos": null,
+        "div_logos": null,
+        "div_fotos": null
     },
     "equipo": {
         "items": [
