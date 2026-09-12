@@ -119,7 +119,14 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $raw_slug = trim($_POST['slug'] ?? '');
         $icon = trim($_POST['icon'] ?? 'bi bi-file-earmark-text');
         $menu_pos = trim($_POST['menu_pos'] ?? 'none');
-        $secciones = array_values(array_filter((array) ($_POST['secciones'] ?? [])));
+        // El formulario manda ademas delante de que hermano hay que colocar la
+        // pagina dentro del menu padre elegido. Sin esta linea la variable no
+        // existia y provocaba un aviso de PHP justo antes del redirect.
+        $menu_before = trim($_POST['menu_before'] ?? '');
+        // array_unique: el motor de páginas dinámicas recorre esta lista e
+        // incluye un componente por entrada, así que una clave repetida pintaba
+        // la misma sección varias veces en la página pública.
+        $secciones = array_values(array_unique(array_filter((array) ($_POST['secciones'] ?? []))));
 
         if (!$nombre) {
             flash_set('El nombre de la página no puede estar vacío.', 'error');
@@ -172,6 +179,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             'slug' => $slug,
             'icon' => $icon,
             'menu_pos' => $menu_pos,
+            // Delante de que hermano del submenu va. Se guarda para que al
+            // reabrir la pagina el formulario muestre la posicion real y no se
+            // mueva sola al volver a guardar.
+            'menu_before' => $menu_before,
             'secciones' => $secciones,
             // Mantener la copia editable de cada sección heredada al guardar la
             // configuración. Así, al volver a Crear página, las casillas siguen
@@ -212,46 +223,79 @@ function _pagina_custom_remove_from_menu(array &$data, string $slug): void
     ));
 }
 
-function _pagina_custom_sync_menu(array &$data, string $nombre, string $url, string $menu_pos): void
+/**
+ * Coloca (o recoloca) la pagina dentro del menu navegable publico.
+ *
+ * $menu_pos vale 'none', 'padre' o 'hijo:<texto del padre>'.
+ * $menu_before, si viene, es el texto del hermano DELANTE del cual hay que
+ * insertarla dentro de ese padre; vacio significa "al final de sus hermanos".
+ *
+ * OJO: esta funcion estaba a medio refactorizar y borraba el menu entero. La
+ * rama de 'hijo:' terminaba con `$items = $new;` donde $new era una variable
+ * que no existia y que solo llegaba a contener la pagina nueva, asi que al
+ * crear una pagina dentro de un menu padre el sitio se quedaba con UN unico
+ * item suelto (un 'hijo' sin padre, que la barra de navegacion ni siquiera
+ * pinta) y la navegacion desaparecia por completo. Usaba ademas otras dos
+ * variables inexistentes ($inserted y $menu_before, que no era parametro):
+ * cada una soltaba un aviso de PHP que, al imprimirse antes del header(),
+ * rompia el redirect y dejaba la pantalla del panel en un error.
+ */
+function _pagina_custom_sync_menu(array &$data, string $nombre, string $url, string $menu_pos, string $menu_before = ''): void
 {
-    if (!isset($data['menu']))
+    if (!isset($data['menu']) || !is_array($data['menu']))
         $data['menu'] = [];
     if (!is_array($data['menu']['items_menu'] ?? null))
         $data['menu']['items_menu'] = [];
 
-    $items = &$data['menu']['items_menu'];
+    // Se trabaja sobre una copia y se vuelve a asignar al final: asi, pase lo
+    // que pase, el menu nunca se queda a medias.
+    $items = array_values($data['menu']['items_menu']);
 
-    // Quitar entrada previa de esta misma URL
+    // Quitar la entrada previa de esta misma URL (puede venir de otro sitio del
+    // menu si el administrador acaba de cambiarla de lugar).
     $items = array_values(array_filter($items, fn($i) => ($i['url'] ?? '') !== $url));
 
-    if ($menu_pos === 'none' || !$menu_pos)
-        return;
+    $nuevo = ['texto' => $nombre, 'url' => $url, 'nivel' => 'hijo'];
 
     if ($menu_pos === 'padre') {
-        $items[] = ['texto' => $nombre, 'url' => $url, 'nivel' => 'padre'];
-        return;
-    }
+        $nuevo['nivel'] = 'padre';
+        $items[] = $nuevo;
+    } elseif (strpos($menu_pos, 'hijo:') === 0) {
+        $padre = substr($menu_pos, 5);
+        $insertar_en = null;
 
-    if (strpos($menu_pos, 'hijo:') === 0) {
-        $parent_text = substr($menu_pos, 5);
-        $insert_at = count($items);
         foreach ($items as $index => $item) {
-            if (($item['nivel'] ?? '') !== 'padre' || ($item['texto'] ?? '') !== $parent_text)
+            if (($item['nivel'] ?? 'padre') !== 'padre' || ($item['texto'] ?? '') !== $padre)
                 continue;
-            $insert_at = $index + 1;
-            for ($cursor = $index + 1; $cursor < count($items) && ($items[$cursor]['nivel'] ?? '') !== 'padre'; $cursor++) {
+
+            // Por defecto va detras del ultimo hijo de ese padre. Si se pidio
+            // colocarla delante de un hermano concreto, se corta ahi.
+            $insertar_en = $index + 1;
+            for ($cursor = $index + 1; $cursor < count($items) && ($items[$cursor]['nivel'] ?? 'padre') !== 'padre'; $cursor++) {
                 if ($menu_before !== '' && ($items[$cursor]['texto'] ?? '') === $menu_before) {
-                    $insert_at = $cursor;
-                    break 2;
+                    $insertar_en = $cursor;
+                    break;
                 }
-                $insert_at = $cursor + 1;
+                $insertar_en = $cursor + 1;
             }
             break;
         }
-        if (!$inserted)
-            $new[] = ['texto' => $nombre, 'url' => $url, 'nivel' => 'hijo'];
-        $items = $new;
+
+        if ($insertar_en === null) {
+            // El menu padre elegido ya no existe (lo renombraron o lo borraron).
+            // Antes de dejar la pagina como un 'hijo' huerfano -que la barra de
+            // navegacion no pinta y equivale a perderla-, se cuelga al final
+            // como opcion principal.
+            $nuevo['nivel'] = 'padre';
+            $items[] = $nuevo;
+        } else {
+            array_splice($items, $insertar_en, 0, [$nuevo]);
+        }
     }
+    // 'none' (o cualquier valor desconocido): la pagina simplemente no aparece
+    // en el menu, pero el resto del menu se conserva tal cual.
+
+    $data['menu']['items_menu'] = $items;
 }
 
 // ────────────────────────────────────────────────────────────────────────────
@@ -268,7 +312,15 @@ $nombre = $pg['nombre'] ?? '';
 $slug = $pg['slug'] ?? '';
 $icon = $pg['icon'] ?? 'bi bi-file-earmark-text';
 $menu_pos = $pg['menu_pos'] ?? 'none';
-$secs_selected = $pg['secciones'] ?? [];
+$menu_before = $pg['menu_before'] ?? '';
+// Si una sección se heredó de una página que después borraron, su casilla ya no
+// existe en el catálogo. Se marca entonces la del sitio, para que al volver a
+// guardar la sección no desaparezca de la página sin avisar (su contenido ya
+// copiado no se toca).
+$secs_selected = array_map(function ($clave) use ($paginas) {
+    [$origen, $base] = pagina_custom_split((string)$clave);
+    return ($origen !== '' && !isset($paginas[$origen])) ? $base : $clave;
+}, (array)($pg['secciones'] ?? []));
 
 $page_title = $is_editing ? "Editar: {$nombre}" : 'Crear nueva página';
 $current_key = $is_editing ? "custom_{$id}" : 'paginas_crear';
@@ -336,9 +388,14 @@ $secciones_disponibles = [
     ],
 ];
 
-// Las páginas creadas también son fuentes de secciones heredables. Se toma su
-// lista ya guardada para que las páginas viejas y las que se creen en adelante
-// aparezcan aquí automáticamente, bajo el nombre de su propia página.
+// Cada página ya creada es también una fuente de secciones: aparece como un
+// grupo más, con su nombre arriba y sus secciones debajo. Heredar de ahí copia
+// el contenido TAL Y COMO LO TIENE ESA PÁGINA, no el del sitio.
+//
+// La clave de esas casillas lleva delante el id de la página ('pg_xxxx:valores'),
+// y ese es justo el arreglo de lo que fallaba antes: al usar la clave pelada
+// ('valores') no eran casillas distintas sino la misma pintada varias veces, así
+// que marcar una marcaba todas sus copias y la sección se guardaba repetida.
 $catalogo_por_seccion = [];
 foreach ($secciones_disponibles as $grupo_items) {
     foreach ($grupo_items as $clave => $info) {
@@ -347,22 +404,26 @@ foreach ($secciones_disponibles as $grupo_items) {
 }
 
 foreach ($paginas as $pagina_id => $pagina) {
+    // Una página no puede heredar de sí misma.
+    if ($pagina_id === $id) continue;
+
     $nombre_grupo = trim((string)($pagina['nombre'] ?? ''));
-    $secciones_pagina = array_values(array_unique(array_filter((array)($pagina['secciones'] ?? []))));
-    if ($nombre_grupo === '' || empty($secciones_pagina)) continue;
+    if ($nombre_grupo === '') continue;
 
     $items_pagina = [];
-    foreach ($secciones_pagina as $seccion) {
-        // Solo se ofrecen secciones que el motor de páginas dinámicas sabe
-        // renderizar. El metadato conserva el mismo texto e ícono del catálogo.
-        if (isset($catalogo_por_seccion[$seccion])) {
-            $items_pagina[$seccion] = $catalogo_por_seccion[$seccion];
-        }
+    foreach ((array)($pagina['secciones'] ?? []) as $clave_origen) {
+        // Lo que esa página ofrece es la SECCIÓN, venga de donde venga: si a su
+        // vez la heredó de otra, aquí se ofrece igualmente como suya.
+        $base = pagina_custom_base((string)$clave_origen);
+        // Solo secciones que el motor de páginas dinámicas sabe pintar. El
+        // texto y el ícono son los mismos del catálogo del sitio.
+        if (!isset($catalogo_por_seccion[$base])) continue;
+        $items_pagina[$pagina_id . ':' . $base] = $catalogo_por_seccion[$base];
     }
     if (empty($items_pagina)) continue;
 
-    // Si dos páginas recibieran el mismo nombre, se conserva ambas sin que una
-    // reemplace a la otra en el catálogo visual.
+    // Si dos páginas se llamaran igual, se conservan las dos: al nombre
+    // repetido se le añade el final de su id.
     $nombre_visible = $nombre_grupo;
     if (isset($secciones_disponibles[$nombre_visible])) {
         $nombre_visible .= ' (' . substr((string)$pagina_id, -4) . ')';
@@ -449,24 +510,43 @@ echo layout_start($page_title, $current_key);
                 <!-- UBICACIÓN EN MENÚ PÚBLICO -->
                 <div class="form-group">
                     <label class="field-label">Posición en el Menú Navegable del Sitio</label>
-                    <select name="menu_pos" class="form-control">
-                        <option value="none" <?= $menu_pos === 'none' ? 'selected' : '' ?>>-- No agregar al menú público --
-                        </option>
-                        <option value="padre" <?= $menu_pos === 'padre' ? 'selected' : '' ?>>Menú Principal (Padre)
-                        </option>
-                        <optgroup label="── Submenú (Hijo) de...">
-                            <?php foreach ($padres as $p):
-                                $val = 'hijo:' . ($p['texto'] ?? ''); ?>
-                                <option value="<?= htmlspecialchars($val) ?>" <?= $menu_pos === $val ? 'selected' : '' ?>>
-                                    ↳ Dentro de "<?= htmlspecialchars($p['texto']) ?>"
-                                </option>
-                            <?php endforeach; ?>
-                        </optgroup>
-                    </select>
+
+                    <?php /* El valor real viaja en estos dos campos ocultos; el usuario lo
+                             elige en la ventana de abajo. Antes había además un <select>
+                             visible con las mismas opciones: se veían las dos cosas a la vez
+                             y la lista de abajo no hacía nada, porque el JavaScript buscaba
+                             el select por el id "menu_pos_select" y el select no tenía id. */ ?>
+                    <input type="hidden" name="menu_pos" id="menu_pos_select"
+                        value="<?= htmlspecialchars($menu_pos, ENT_QUOTES, 'UTF-8') ?>">
                     <input type="hidden" name="menu_before" id="menu_before"
                         value="<?= htmlspecialchars($menu_before, ENT_QUOTES, 'UTF-8') ?>">
-                    <p style="margin:0 0 10px;color:#6B7280;font-size:.82rem;">Selecciona dónde aparecerá esta página.
-                        Las opciones con sangría se añaden dentro del menú principal escogido.</p>
+
+                    <!-- Resumen de lo elegido + botón que abre la ventana -->
+                    <button type="button" class="menu-pos-trigger" id="menu-pos-trigger"
+                        aria-haspopup="dialog" aria-controls="menu-pos-modal">
+                        <span class="menu-pos-trigger__icon"><i class="bi bi-diagram-3"></i></span>
+                        <span class="menu-pos-trigger__text">
+                            <strong data-menu-resumen>No se mostrará en el menú</strong>
+                            <small data-menu-detalle>Solo estará disponible mediante su URL.</small>
+                        </span>
+                        <span class="menu-pos-trigger__cta">Elegir posición</span>
+                    </button>
+
+                    <!-- Ventana de selección -->
+                    <div class="menu-pos-modal" id="menu-pos-modal" hidden>
+                        <div class="menu-pos-modal__backdrop" data-menu-cerrar></div>
+                        <div class="menu-pos-modal__dialog" role="dialog" aria-modal="true"
+                            aria-labelledby="menu-pos-modal-title">
+                            <header class="menu-pos-modal__head">
+                                <div>
+                                    <h3 id="menu-pos-modal-title"><i class="bi bi-diagram-3"></i> ¿Dónde aparecerá esta página?</h3>
+                                    <p>Las opciones de abajo la colocan dentro de un menú principal; las flechas
+                                        deciden en qué lugar de ese submenú queda.</p>
+                                </div>
+                                <button type="button" class="menu-pos-modal__close" data-menu-cerrar
+                                    aria-label="Cerrar">&times;</button>
+                            </header>
+                            <div class="menu-pos-modal__body">
                     <div class="page-menu-placement" id="page-menu-placement">
                         <button type="button" class="page-menu-placement__choice" data-menu-pos="none"><i
                                 class="bi bi-eye-slash"></i><span><strong>No mostrar en el menú</strong><small>Solo
@@ -512,6 +592,21 @@ echo layout_start($page_title, $current_key);
                         <div class="page-menu-placement__new-page" id="menu-new-page-preview" hidden><i
                                 class="bi bi-arrow-return-right"></i><span>Nueva página</span></div>
                     </div>
+                            </div>
+                            <footer class="menu-pos-modal__foot">
+                                <span class="menu-pos-modal__current">
+                                    <i class="bi bi-check2-circle"></i>
+                                    <span><strong data-menu-resumen>No se mostrará en el menú</strong>
+                                        <small data-menu-detalle>Solo estará disponible mediante su URL.</small></span>
+                                </span>
+                                <span class="menu-pos-modal__actions">
+                                    <button type="button" class="menu-pos-modal__btn" data-menu-cancelar>Cancelar</button>
+                                    <button type="button" class="menu-pos-modal__btn menu-pos-modal__btn--primary"
+                                        data-menu-cerrar>Listo</button>
+                                </span>
+                            </footer>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -540,8 +635,9 @@ echo layout_start($page_title, $current_key);
                             $checked = in_array($s_key, $secs_selected) ? 'checked' : ''; ?>
                             <label class="sec-label"
                                 style="display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;padding:8px 10px;border-radius:8px;border:1.5px solid transparent;transition:all .15s;">
-                                <input type="checkbox" name="secciones[]" value="<?= $s_key ?>" <?= $checked ?>
+                                <input type="checkbox" name="secciones[]" value="<?= htmlspecialchars($s_key, ENT_QUOTES, 'UTF-8') ?>" <?= $checked ?>
                                     class="sec-checkbox" data-label="<?= htmlspecialchars($s_label) ?>"
+                                    data-base="<?= htmlspecialchars(pagina_custom_base((string)$s_key), ENT_QUOTES, 'UTF-8') ?>"
                                     style="width:16px;height:16px;accent-color:#F15A24;flex-shrink:0;">
                                 <span class="sec-text"
                                     style="font-size:.875rem;color:#1F242E;line-height:1.3;"><?= htmlspecialchars($s_label) ?></span>

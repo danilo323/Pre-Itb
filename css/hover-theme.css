@@ -8,15 +8,33 @@
     :is(.btn:not(.btn--solid), .btn-back, .navbar__btn:not(.btn--solid), .top-bar__icon-btn, .top-bar__lang-btn,
         .top-bar__search-btn, .navbar__toggle, .navbar__mobile-close,
         .navbar__mobile-quicklink, .transparencia__search-btn,
-        .footer-main__campus-btn, #top-to-bottom.scroll_visible):hover {
+        #top-to-bottom.scroll_visible):hover {
         background-color: var(--primary-orange, #F15A24) !important;
         border-color: var(--primary-orange, #F15A24) !important;
         color: #ffffff !important;
     }
 
-    :is(.footer-main__list a, .footer-social__icons a,
+    :is(.footer-social__icons a,
         .footer-bottom__right a, .sobre-hero__ruta-link):hover {
         background-color: var(--primary-orange, #F15A24);
+        color: #ffffff !important;
+    }
+
+    /* Las columnas del pie (enlaces y campus) son la excepcion a la regla del
+       fondo naranja: se pidio expresamente que al pasar el mouse NO se
+       resalten con el bloque de color, solo con la linea naranja debajo. */
+    :is(.footer-main__list a, .footer-main__campus-btn):hover {
+        background-color: transparent !important;
+        text-decoration: underline;
+        text-decoration-color: var(--primary-orange, #F15A24);
+        text-decoration-thickness: 2px;
+        text-underline-offset: 5px;
+    }
+
+    /* El texto se queda blanco. Se deja fuera el campus que se esta viendo en
+       el mapa, que conserva su naranja de "activo". */
+    .footer-main__list a:hover,
+    button.footer-main__campus-btn:not(.is-active):hover {
         color: #ffffff !important;
     }
 

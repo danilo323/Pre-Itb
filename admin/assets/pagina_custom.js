@@ -16,6 +16,12 @@ document.addEventListener('DOMContentLoaded', function () {
             const container = parent && parent.querySelector('.page-menu-placement__children');
             if (container) container.appendChild(child);
         });
+        const nombreOriginal = (name && name.value.trim()) || '';
+        if (nombreOriginal) {
+            panel.querySelectorAll('.page-menu-placement__existing-child').forEach(child => {
+                if ((child.dataset.child || '') === nombreOriginal) child.remove();
+            });
+        }
         const before = document.getElementById('menu_before');
         const preview = document.getElementById('menu-new-page-preview');
         let children = [], position = 0;
@@ -33,7 +39,8 @@ document.addEventListener('DOMContentLoaded', function () {
             if (!parent) { preview.hidden = true; return; }
             const parentRow = Array.from(panel.querySelectorAll('.page-menu-placement__parent-row')).find(row => row.dataset.menuPos === select.value);
             children = parentRow ? Array.from(parentRow.querySelectorAll('.page-menu-placement__existing-child')) : [];
-            position = before.value ? Math.max(0, children.findIndex(child => child.dataset.child === before.value)) : 0;
+            const encontrado = before.value ? children.findIndex(child => child.dataset.child === before.value) : -1;
+            position = encontrado >= 0 ? encontrado : children.length;
             drawPreview();
         };
         const drawPreview = function () {
@@ -59,6 +66,63 @@ document.addEventListener('DOMContentLoaded', function () {
         mark(); updateOrder();
         const updatePreviewName = function () { const label = preview.querySelector('span'); if (label) label.textContent = (name && name.value.trim()) || 'Nueva página'; };
         updatePreviewName(); if (name) name.addEventListener('input', updatePreviewName);
+        // ---- Ventana (modal) para elegir la posicion en el menu -------------
+        // La lista ya no cuelga suelta del formulario: se abre desde un boton
+        // que resume lo elegido. "Cancelar" devuelve el valor que habia al
+        // abrirla, asi que se puede trastear sin miedo a dejarlo a medias.
+        const modal = document.getElementById('menu-pos-modal');
+        const trigger = document.getElementById('menu-pos-trigger');
+        if (modal && trigger) {
+            let previo = { pos: select.value, before: before.value };
+            const textoResumen = function () {
+                const valor = select.value;
+                if (valor === 'padre')
+                    return ['Como opci\u00f3n principal del men\u00fa', 'Quedar\u00e1 al nivel de Instituto, Oferta Acad\u00e9mica y Admisiones.'];
+                if (valor.indexOf('hijo:') === 0) {
+                    const padre = valor.slice(5);
+                    return ['Dentro de \u00ab' + padre + '\u00bb',
+                        before.value ? 'Justo antes de \u00ab' + before.value + '\u00bb.' : 'Al final de las opciones de ese men\u00fa.'];
+                }
+                return ['No se mostrar\u00e1 en el men\u00fa', 'Solo estar\u00e1 disponible mediante su URL.'];
+            };
+            const pintarResumen = function () {
+                const textos = textoResumen();
+                document.querySelectorAll('[data-menu-resumen]').forEach(function (el) { el.textContent = textos[0]; });
+                document.querySelectorAll('[data-menu-detalle]').forEach(function (el) { el.textContent = textos[1]; });
+            };
+            const abrir = function () {
+                previo = { pos: select.value, before: before.value };
+                modal.hidden = false;
+                document.body.classList.add('menu-pos-modal-open');
+                // Si la pagina ya esta dentro de un menu padre, ese menu se abre
+                // desplegado para ver de una donde queda.
+                const fila = modal.querySelector('.page-menu-placement__parent-row.is-selected');
+                if (fila) fila.open = true;
+                const foco = modal.querySelector('.menu-pos-modal__close');
+                if (foco) foco.focus();
+            };
+            const cerrar = function () {
+                modal.hidden = true;
+                document.body.classList.remove('menu-pos-modal-open');
+                trigger.focus();
+            };
+            trigger.addEventListener('click', abrir);
+            modal.querySelectorAll('[data-menu-cerrar]').forEach(function (el) { el.addEventListener('click', cerrar); });
+            modal.querySelectorAll('[data-menu-cancelar]').forEach(function (el) {
+                el.addEventListener('click', function () {
+                    select.value = previo.pos;
+                    before.value = previo.before;
+                    mark(); updateOrder(); pintarResumen(); cerrar();
+                });
+            });
+            document.addEventListener('keydown', function (evento) {
+                if (evento.key === 'Escape' && !modal.hidden) cerrar();
+            });
+            // Cualquier clic de dentro puede cambiar la eleccion; el resumen se
+            // repinta al terminar de correr el manejador que lo provoco.
+            modal.addEventListener('click', function () { setTimeout(pintarResumen, 0); });
+            pintarResumen();
+        }
     }
     const grid = document.getElementById('secciones-grid'), list = document.getElementById('orden-lista'), summary = document.getElementById('orden-resumen');
     const updateOrder = () => {
@@ -75,7 +139,30 @@ document.addEventListener('DOMContentLoaded', function () {
         });
         summary.style.display = position > 1 ? 'block' : 'none';
     };
-    updateOrder(); if (grid) grid.addEventListener('change', event => { if (event.target.classList.contains('sec-checkbox')) updateOrder(); });
+    // Cada grupo (el sitio y cada pagina ya creada) ofrece la misma seccion con
+    // su propia casilla, porque el contenido que hereda es distinto. Lo que no
+    // tiene sentido es meter la misma seccion dos veces en la pagina, asi que al
+    // marcar una se desmarca la equivalente del otro grupo: manda la ultima.
+    const soltarGemelas = (casilla) => {
+        if (!grid || !casilla.checked) return;
+        grid.querySelectorAll('.sec-checkbox').forEach(otra => {
+            if (otra === casilla || !otra.checked) return;
+            if ((otra.dataset.base || otra.value) !== (casilla.dataset.base || casilla.value)) return;
+            otra.checked = false;
+            // Un parpadeo corto para que se vea de donde se quito.
+            const etiqueta = otra.closest('.sec-label');
+            if (!etiqueta) return;
+            etiqueta.classList.remove('sec-label--reemplazada');
+            void etiqueta.offsetWidth;
+            etiqueta.classList.add('sec-label--reemplazada');
+        });
+    };
+    updateOrder();
+    if (grid) grid.addEventListener('change', event => {
+        if (!event.target.classList.contains('sec-checkbox')) return;
+        soltarGemelas(event.target);
+        updateOrder();
+    });
 });
 function openIconModal() { document.getElementById('iconModal').style.display = 'flex'; }
 function closeIconModal() { document.getElementById('iconModal').style.display = 'none'; }

@@ -26,25 +26,6 @@
     </div>
 </div>
 
-<!-- =============================================
-     SKYLINE (transición hacia el footer)
-     Reemplaza al SVG dibujado a mano: ahora son 3 archivos reales que trajo
-     el usuario (svg/footer1.svg, footer2.svg, footer3.svg). Los tres comparten
-     la misma paleta de azules del footer y estaban pensados para superponerse:
-     footer2 = cordillera de fondo (capa trasera, a todo el ancho), footer1 =
-     los edificios/monumentos sueltos (capa delantera, mismo lienzo de
-     1920x759 que footer2, por eso encajan sin necesitar reposicionarlos), y
-     footer3 = un monumento (arco) que no venía incluido en el dibujo grande,
-     así que se coloca a mano en el hueco vacío que dejan los demás, a la
-     misma escala (ver .footer-skyline__landmark en css/footer.css). -->
-<div class="footer-skyline">
-    <div class="footer-skyline__scene">
-        <img src="svg/footer2.svg" alt="" class="footer-skyline__layer footer-skyline__layer--back" aria-hidden="true">
-        <img src="svg/footer1.svg" alt="" class="footer-skyline__layer footer-skyline__layer--front" aria-hidden="true">
-        <img src="svg/footer3.svg" alt="" class="footer-skyline__landmark" aria-hidden="true">
-    </div>
-</div>
-
 <!-- MAIN FOOTER                                   -->
 <!-- ============================================= -->
 <footer class="footer-main" id="footer">
@@ -67,6 +48,12 @@
                     </div>
                 </div>
             </div>
+
+            <?php /* Las tres columnas de enlaces van dentro de su propio bloque.
+                     Asi la linea divisoria de cada una mide lo mismo que la lista
+                     mas larga de las tres -y no lo que mide la fila entera, que la
+                     estiraba muy por debajo del texto por culpa del mapa. */ ?>
+            <div class="footer-main__links">
 
             <!-- Columna 2: Enlaces 1 -->
             <div class="footer-main__col">
@@ -193,6 +180,7 @@
                     <?php endforeach; ?>
                 </ul>
             </div>
+            </div><!-- /.footer-main__links -->
 
             <!-- Columna 5: Mapa -->
             <div class="footer-main__col footer-main__col--map">
@@ -230,6 +218,25 @@
         </div>
     </div>
 </footer>
+
+<!-- =============================================
+     SKYLINE (base del pie)
+     Los 3 SVG reales (svg/footer1.svg, footer2.svg, footer3.svg) que trajo
+     el usuario: footer2 = cordillera de fondo, footer1 = los edificios y
+     monumentos sueltos (mismo lienzo de 1920x759, por eso encajan sin
+     reposicionar nada) y footer3 = un arco que no venia en el dibujo
+     grande y se coloca a mano en el hueco que dejan los demas.
+     Antes iba ARRIBA, entre la tarjeta CTA y las columnas. Ahora cierra el
+     pie: los edificios se apoyan sobre la barra naranja de derechos, y el
+     cielo de la franja arranca del mismo azul del pie (ver .footer-skyline
+     en css/footer.css) para que no se vea ninguna costura. -->
+<div class="footer-skyline">
+    <div class="footer-skyline__scene">
+        <img src="svg/footer2.svg" alt="" class="footer-skyline__layer footer-skyline__layer--back" aria-hidden="true">
+        <img src="svg/footer1.svg" alt="" class="footer-skyline__layer footer-skyline__layer--front" aria-hidden="true">
+        <img src="svg/footer3.svg" alt="" class="footer-skyline__landmark" aria-hidden="true">
+    </div>
+</div>
 
 <!-- ============================================= -->
 <!-- BOTTOM BAR                                    -->

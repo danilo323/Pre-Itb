@@ -8,6 +8,10 @@ if (session_status() !== PHP_SESSION_ACTIVE) {
 
 require_once __DIR__ . '/includes/content_helper.php';
 require_once __DIR__ . '/admin/storage.php';
+// pagina_custom_base(): las secciones heredadas de otra página creada se
+// guardan como 'pg_xxxx:valores', y aquí hace falta solo la parte 'valores'
+// para saber qué componente incluir.
+require_once __DIR__ . '/admin/pagina_custom_helpers.php';
 
 $all_data = storage_load();
 $paginas_creadas = $all_data['_paginas_creadas'] ?? [];
@@ -92,11 +96,12 @@ $mapa_secciones = [
             echo '<div style="padding: 100px 20px; text-align: center; color: #6B7280;"><h2>Página en construcción</h2><p>Esta página aún no contiene secciones asignadas desde el panel de administración.</p></div>';
         } else {
             foreach ($secciones as $sec_key) {
-                if (isset($mapa_secciones[$sec_key]) && file_exists($mapa_secciones[$sec_key])) {
-                    if ($sec_key === 'alianzas') {
+                $sec_base = pagina_custom_base((string)$sec_key);
+                if (isset($mapa_secciones[$sec_base]) && file_exists($mapa_secciones[$sec_base])) {
+                    if ($sec_base === 'alianzas') {
                         $alianzas_solo_carrusel = true;
                     }
-                    include $mapa_secciones[$sec_key];
+                    include $mapa_secciones[$sec_base];
                 }
             }
         }
