@@ -5,7 +5,7 @@
 <section class="areas" id="areas">
     <div class="areas__container">
         <div class="areas__header" style="text-align: center;">
-            <span class="text-orange" style="font-weight: 600; font-size: 0.9rem; display: block; margin-bottom: 8px;"><?= content_get('areas', 'etiqueta_superior', 'Oferta Académica de Vanguardia') ?></span>
+            <span class="areas__label"><?= content_get('areas', 'etiqueta_superior', 'Oferta Académica de Vanguardia') ?></span>
             <h2 class="areas__title" style="font-family: var(--font-heading); font-size: 2.8rem;">
                 <?= htmlspecialchars(content_get('areas', 'titulo', 'Nuestras Áreas de Formación'), ENT_QUOTES, 'UTF-8') ?>
             </h2>

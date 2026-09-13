@@ -4,6 +4,7 @@
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
         "logo_principal": "img/28e06eb6813749e8f759a54e8e8ca62a.jpg",
+        "logo_principal": "img/28e06eb6813749e8f759a54e8e8ca62a.jpg",
         "div_seo": "",
         "div_logos": ""
     },
@@ -27,6 +28,16 @@
             {
                 "texto": "Transparencia / Leyes",
                 "url": "",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "prueba9",
+                "url": "prueba9.php",
                 "nivel": "hijo"
             },
             {
@@ -80,6 +91,11 @@
                 "nivel": "hijo"
             },
             {
+                "texto": "academia",
+                "url": "academia.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Vida Estudiantil",
                 "url": "#",
                 "nivel": "padre"
@@ -90,8 +106,23 @@
                 "nivel": "hijo"
             },
             {
+                "texto": "prueba 10",
+                "url": "prueba-10.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Admisiones",
                 "url": "#",
+                "nivel": "padre"
+            },
+            {
+                "texto": "prueba 03",
+                "url": "prueba-03.php",
+                "nivel": "hijo"
+            },
+            {
+                "texto": "prueba1",
+                "url": "prueba1.php",
                 "nivel": "padre"
             },
             {
@@ -145,10 +176,20 @@
                     "lat": -2.1997559074937,
                     "lng": -79.898543357849
                 }
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.1997559074937,
+                    "lng": -79.898543357849
+                }
             },
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.1594339489859835,
+                    "lng": -79.89686965942383
+                }
                 "mapa_url": "",
                 "ubicacion": {
                     "lat": -2.1594339489859835,
@@ -163,10 +204,20 @@
                     "lat": -2.170857362600965,
                     "lng": -79.89086151123048
                 }
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.170857362600965,
+                    "lng": -79.89086151123048
+                }
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
+                "mapa_url": "",
+                "ubicacion": {
+                    "lat": -2.169049509943826,
+                    "lng": -79.82616662979127
+                }
                 "mapa_url": "",
                 "ubicacion": {
                     "lat": -2.169049509943826,
@@ -959,7 +1010,17 @@
         "info_propia": "",
         "div_left": "",
         "subtitulo": "Conoce al ITB",
+        "div_left": "",
+        "subtitulo": "Conoce al ITB",
         "titulo": "Sobre nosotros",
+        "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+        "cta_texto": "Conoce Nuestra Historia",
+        "div_stats": "",
+        "stat_numero": "Fundado en 1996",
+        "rating": "4.9",
+        "div_right": "",
+        "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+        "video_url": "https://youtu.be/eTgzLxWGgS4",
         "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
         "cta_texto": "Conoce Nuestra Historia",
         "div_stats": "",

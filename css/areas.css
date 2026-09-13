@@ -18,6 +18,16 @@
     margin-bottom: 60px;
 }
 
+.areas__label {
+    font-weight: 700;
+    font-size: 0.9rem;
+    display: block;
+    margin-bottom: 8px;
+    color: var(--primary-blue);
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+}
+
 .areas__title {
     font-family: var(--font-heading);
     font-size: clamp(2rem, 3.5vw, 2.8rem);

@@ -153,24 +153,22 @@ button {
 }
 
 .btn--solid {
-    background-color: var(--primary-orange);
-    color: #ffffff;
-    border: none;
-    padding: 8px 8px 8px 20px;
-    border-radius: 12px;
-    font-size: 0.9rem;
-    font-weight: 400;
     display: inline-flex;
     align-items: center;
-    justify-content: space-between;
-    width: fit-content;
-    gap: 16px;
+    gap: 18px;
+    padding: 6px 4px 8px 24px;
+    border: 2px solid rgba(241, 90, 36, 0.5);
+    border-radius: 10px;
+    font-size: 1rem;
+    color: var(--primary-orange);
     text-decoration: none;
+    font-weight: 600;
+    width: fit-content;
     position: relative;
     overflow: hidden;
     z-index: 1;
     white-space: nowrap;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: color 0.3s ease, border-color 0.3s ease;
 }
 
 .btn--solid::before {
@@ -178,45 +176,49 @@ button {
     position: absolute;
     top: 0;
     left: 0;
-    width: 100%;
+    width: 0%;
     height: 100%;
-    background-color: #111111;
+    background-color: var(--primary-orange);
     z-index: -1;
-    transform: translateX(-101%);
-    transition: transform 0.4s ease;
-    border-radius: 12px;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 8px;
+}
+
+.btn--solid:hover::before {
+    width: 100%;
+}
+
+.btn--solid:hover {
+    color: #ffffff;
+    border-color: transparent;
 }
 
 .btn--solid .btn__icon-right {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: var(--primary-orange);
+    color: var(--white);
+    width: 40px;
+    height: 40px;
+    border-radius: 8px;
+    flex-shrink: 0;
+    transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+.btn--solid:hover .btn__icon-right {
     background-color: #ffffff;
     color: var(--primary-orange);
-    width: 36px;
-    height: 36px;
-    border-radius: 10px;
 }
 
 .btn--solid .btn__icon-right i {
     transform: rotate(-45deg);
     font-size: 0.9rem;
     transition: transform 0.3s ease;
-    /* TransiciÃ³n suave para la rotaciÃ³n */
-}
-
-.btn--solid:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px rgba(17, 17, 17, 0.3);
-}
-
-.btn--solid:hover::before {
-    transform: translateX(0);
 }
 
 .btn--solid:hover .btn__icon-right i {
     transform: rotate(0deg);
-    /* Rota la flecha para que apunte a la derecha */
 }
 
 

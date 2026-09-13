@@ -447,13 +447,33 @@ main {
     padding: 8px clamp(10px, 1.1vw, 20px);
     border-radius: 12px;
     color: var(--primary-orange);
-    border: 2px solid var(--primary-orange);
-    transition: var(--transition);
+    border: 2px solid rgba(241, 90, 36, 0.5);
+    transition: color 0.3s ease, border-color 0.3s ease, transform 0.3s ease;
+    position: relative;
+    overflow: hidden;
+    z-index: 1;
+}
+
+.navbar__btn--outline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 100%;
+    background-color: var(--primary-orange);
+    z-index: -1;
+    transition: width 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: 10px;
+}
+
+.navbar__btn--outline:hover::before {
+    width: 100%;
 }
 
 .navbar__btn--outline:hover {
-    background: var(--primary-orange);
     color: var(--white);
+    border-color: transparent;
     transform: translateY(-1px);
     box-shadow: 0 4px 12px rgba(241, 90, 36, 0.3);
 }
