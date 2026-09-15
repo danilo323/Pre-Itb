@@ -15,6 +15,11 @@
                 "nivel": "padre"
             },
             {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Sobre Nosotros",
                 "url": "sobre-nosotros.php",
                 "nivel": "hijo"
@@ -80,6 +85,11 @@
                 "nivel": "hijo"
             },
             {
+                "texto": "academia",
+                "url": "academia.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Vida Estudiantil",
                 "url": "#",
                 "nivel": "padre"
@@ -102,6 +112,11 @@
             {
                 "texto": "prueba1",
                 "url": "prueba1.php",
+                "nivel": "padre"
+            },
+            {
+                "texto": "Ejemplo_vivo",
+                "url": "ejemplovivo.php",
                 "nivel": "padre"
             }
         ],
@@ -133,8 +148,8 @@
                 "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.13507514962801,
-                    "lng": -79.91103172302248
+                    "lat": -2.136876341726589,
+                    "lng": -79.88777160644533
                 }
             },
             {
@@ -195,8 +210,8 @@
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
         "campus_locations": [
             {
-                "lat": -2.13507514962801,
-                "lng": -79.91103172302248
+                "lat": -2.136876341726589,
+                "lng": -79.88777160644533
             },
             {
                 "lat": -2.1997559074937,
@@ -240,16 +255,16 @@
                 "estatica": false
             }
         ],
-        "div_left": "",
-        "div_stats": "",
-        "div_right": "",
-        "div_galeria": "",
+        "div_left": null,
+        "div_stats": null,
+        "div_right": null,
+        "div_galeria": null,
         "imagen_1": "img/salud.jpg",
         "imagen_2": "img/student.jpg",
         "imagen_3": "img/student 2.jpg",
         "imagen_video_thumb": "img/hero-video-thumb.jpg",
-        "animaciones": "",
-        "info_portada": ""
+        "animaciones": false,
+        "info_portada": null
     },
     "trayectoria": {
         "_visible": "1",
@@ -275,11 +290,11 @@
                 "texto": "Carreras Disponibles"
             }
         ],
-        "div_global": "",
-        "div_perfil": "",
-        "div_btn": "",
-        "div_imagen": "",
-        "div_stats": "",
+        "div_global": null,
+        "div_perfil": null,
+        "div_btn": null,
+        "div_imagen": null,
+        "div_stats": null,
         "imagen_campus": "img/estudiantes1.png",
         "stat_anios": "29+",
         "stat_anios_label": "Años de Experiencia",
@@ -319,7 +334,7 @@
                 "btn_texto": "Explorar programas"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "area1_icono": "img/doctor.png",
         "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
         "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
@@ -398,7 +413,7 @@
                 "sede": ""
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "prog1_imagen": "img/enfermeria.jpg",
         "prog1_modalidad": "Presencial",
         "prog1_area": "Salud",
@@ -423,7 +438,7 @@
         "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
         "prog4_duracion": "5 Semestres",
         "prog4_sede": "Guayaquil",
-        "info_programas": ""
+        "info_programas": null
     },
     "experiencia": {
         "_visible": "1",
@@ -450,9 +465,9 @@
         ],
         "btn_texto": "Más beneficios",
         "imagen": "img/experiencia.png",
-        "div_header": "",
-        "div_btn": "",
-        "div_img": "",
+        "div_header": null,
+        "div_btn": null,
+        "div_img": null,
         "caract1_titulo": "Servicios Médicos",
         "caract1_desc": "Atención médica y odontológica gratuita para estudiantes.",
         "caract2_titulo": "Becas y Financiamiento",
@@ -468,8 +483,8 @@
         "_visible": "1",
         "etiqueta_superior": "HISTORIAS DE ÉXITO",
         "titulo": "Lo que dicen nuestros Graduados",
-        "div_global": "",
-        "div_testimonio": "",
+        "div_global": null,
+        "div_testimonio": null,
         "lista_testimonios": [
             {
                 "imagen": "img/MariaFernanda.png",
@@ -500,7 +515,7 @@
                 "carrera": "Graduado en Gastronomía"
             }
         ],
-        "info_testimonios": ""
+        "info_testimonios": null
     },
     "autoridades": {
         "_visible": "1",
@@ -575,8 +590,8 @@
                 "imagen_fija": false
             }
         ],
-        "div_serv1": "",
-        "div_servicios_lista": "",
+        "div_serv1": null,
+        "div_servicios_lista": null,
         "etiqueta_superior": "Servicios Institucionales",
         "titulo": "Todo lo que necesitas en  *un solo lugar*",
         "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
@@ -640,12 +655,12 @@
                 "texto": "Híbrida"
             }
         ],
-        "div_textos": "",
-        "div_imagen": "",
-        "div_video": "",
-        "div_form": "",
-        "div_programas": "",
-        "div_modalidades": "",
+        "div_textos": null,
+        "div_imagen": null,
+        "div_video": null,
+        "div_form": null,
+        "div_programas": null,
+        "div_modalidades": null,
         "etiqueta_superior": "Admisiones Abiertas",
         "feature_1": "Proceso 100% en línea",
         "feature_2": "Asesoría personalizada",
@@ -689,10 +704,10 @@
                 "imagen": "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "div_noticia": "",
-        "info_noticias": "",
-        "div_secundarias": "",
+        "info_noticias": null,
+        "div_secundarias": null,
         "sec1_titulo": "Convenio internacional con universidad de España",
         "sec1_fecha": "10 Sep 2025",
         "sec1_imagen": "img/noticia-2.jpg",
@@ -732,8 +747,8 @@
                 "imagen": "img/noticia_feria_agroazucar.jpeg"
             }
         ],
-        "div_eventos": "",
-        "info_eventos": ""
+        "div_eventos": null,
+        "info_eventos": null
     },
     "alianzas": {
         "_visible": "1",
@@ -1939,6 +1954,165 @@
                 }
             },
             "updated_at": "2026-09-12 01:19:44"
+        },
+        "pg_233ff2f4f3bb": {
+            "id": "pg_233ff2f4f3bb",
+            "nombre": "Ejemplo_vivo",
+            "slug": "ejemplovivo",
+            "icon": "bi bi-heart-pulse-fill",
+            "menu_pos": "padre",
+            "menu_before": "",
+            "secciones": [
+                "sobre_hero",
+                "areas",
+                "transparencia",
+                "pg_7716650bace6:mision_vision",
+                "pg_85f4857b7ca5:cogobierno"
+            ],
+            "contenido": {
+                "areas": {
+                    "_visible": "1",
+                    "etiqueta_superior": "Áreas de Conocimiento",
+                    "titulo": "Nuestras Áreas de Formación",
+                    "descripcion": "Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional",
+                    "lista_areas": [
+                        {
+                            "titulo": "Salud",
+                            "descripcion": "Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.",
+                            "programas": "Enfermería\r\nFisioterapia\r\nLaboratorio Clínico",
+                            "icono": "img/doctor.png",
+                            "imagen_fondo": "img/5fae5bd59953701d849a178aab7cc772.jpg",
+                            "btn_texto": "Explorar programas"
+                        },
+                        {
+                            "titulo": "Ciencias Empresariales",
+                            "descripcion": "Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.",
+                            "programas": "Administración de Empresas\r\nContabilidad\r\nMarketing Digital",
+                            "icono": "img/laptop.png",
+                            "imagen_fondo": "img/Areas_formacion_1.png",
+                            "btn_texto": "Explorar programas"
+                        },
+                        {
+                            "titulo": "Transporte",
+                            "descripcion": "Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.",
+                            "programas": "Logística y Transporte\r\nComercio Exterior\r\nOperaciones Portuarias",
+                            "icono": "img/coche.png",
+                            "imagen_fondo": "img/21b4145fb1708d4b3d4696596ea1b287.jpg",
+                            "btn_texto": "Explorar programas"
+                        }
+                    ],
+                    "div_global": null,
+                    "area1_icono": "img/doctor.png",
+                    "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
+                    "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
+                    "area1_btn": "Explorar programas",
+                    "area2_icono": "img/laptop.png",
+                    "area2_bg": "img/estudiantes1.png",
+                    "area2_titulo": "Facultad de Ciencias Empresarialesy Sistemas / Económicas yEmpresariales (FACES)",
+                    "area2_desc": "Programas de gestión, contabilidad, marketing y comercio para liderar en el sector empresarial e industrial.",
+                    "area2_btn": "Explorar programas",
+                    "area3_icono": "img/coche.png",
+                    "area3_titulo": "Facultad de Transportey Vialidad (FATV)",
+                    "area3_desc": "Formación especializada en mecánica, gestión de transporte, seguridad vial y escuela de conducción",
+                    "area3_btn": "Explorar programas"
+                },
+                "sobre_hero": {
+                    "_visible": "1",
+                    "info_propia": "",
+                    "div_left": "",
+                    "subtitulo": "Conoce al ITB",
+                    "titulo": "Sobre nosotros",
+                    "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+                    "cta_texto": "Conoce Nuestra Historia",
+                    "div_stats": "",
+                    "stat_numero": "Fundado en 1996",
+                    "rating": "4.9",
+                    "div_right": "",
+                    "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+                    "video_url": "https://youtu.be/eTgzLxWGgS4",
+                    "div_galeria": "",
+                    "info_portada": "",
+                    "animaciones": "",
+                    "imagenes_fondo": [
+                        {
+                            "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                            "estatica": true
+                        }
+                    ],
+                    "ruta_inicio": "Inicio",
+                    "ruta_actual": "Sobre Nosotros",
+                    "div_textos": ""
+                },
+                "sobre_mision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra misión",
+                    "descripcion": "......................",
+                    "puntos": [
+                        {
+                            "texto": "Autonomía de pensamiento y liderazgo."
+                        },
+                        {
+                            "texto": "Aliado estratégico de empresas e instituciones."
+                        },
+                        {
+                            "texto": "Formación práctica orientada al desarrollo económico y social."
+                        }
+                    ],
+                    "imagen": "img/213759381a126bbbc7a538f7475284fa.jpg"
+                },
+                "sobre_vision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra visión",
+                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+                    "puntos": [
+                        {
+                            "texto": "Liderazgo en educación tecnológica universitaria."
+                        },
+                        {
+                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+                        },
+                        {
+                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+                        }
+                    ],
+                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
+                "transparencia_leyes": {
+                    "titulo": "Transparencia e Información Pública",
+                    "descripcion": "En cumplimiento con las disposiciones legales y el principio de rendición de cuentas, el ITB pone a disposición de la ciudadanía la información institucional, financiera y administrativa.",
+                    "buscador_placeholder": "Buscar documento, resolución o presupuesto...",
+                    "cat_info_financiera": "Información Financiera y Presupuestaria",
+                    "cat_rendicion_cuentas": "Rendición de Cuentas y Gestión",
+                    "cat_talento_humano": "Talento Humano",
+                    "cat_remuneracion_mensual": "Remuneración Mensual",
+                    "_visible": "1"
+                }
+            },
+            "updated_at": "2026-09-15 14:36:29"
         }
     },
     "documentos_transparencia": {
@@ -1953,10 +2127,5 @@
                 "publicado": true
             }
         ]
-    },
-    "_meta": {
-        "documentos_transparencia": {
-            "last_id": 1
-        }
     }
 }

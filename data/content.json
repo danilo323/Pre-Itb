@@ -17,6 +17,16 @@
             {
                 "texto": "otro",
                 "url": "otro.php",
+                "nivel": "padre"
+            },
+            {
+                "texto": "menui de hijo",
+                "url": "",
+                "nivel": "padre"
+            },
+            {
+                "texto": "menu del hijo hijo",
+                "url": "",
                 "nivel": "hijo"
             },
             {
@@ -113,6 +123,11 @@
                 "texto": "prueba1",
                 "url": "prueba1.php",
                 "nivel": "padre"
+            },
+            {
+                "texto": "Ejemplo_vivo",
+                "url": "ejemplovivo.php",
+                "nivel": "padre"
             }
         ],
         "top_link_1": "Portal Estudiantil SGA",
@@ -122,9 +137,9 @@
         "top_link_5": "UNIEBEC",
         "cta_btn_1": "Solicitar Información",
         "cta_btn_2": "Matricúlame",
-        "div_main": "",
-        "div_top": "",
-        "div_cta": ""
+        "div_main": null,
+        "div_top": null,
+        "div_cta": null
     },
     "footer": {
         "cta_titulo": "¿Aún no decides qué carrera estudiar?",
@@ -155,20 +170,10 @@
                     "lat": -2.1997559074937,
                     "lng": -79.898543357849
                 }
-                "mapa_url": "",
-                "ubicacion": {
-                    "lat": -2.1997559074937,
-                    "lng": -79.898543357849
-                }
             },
             {
                 "nombre": "Campus Naval",
                 "direccion": "",
-                "mapa_url": "",
-                "ubicacion": {
-                    "lat": -2.1594339489859835,
-                    "lng": -79.89686965942383
-                }
                 "mapa_url": "",
                 "ubicacion": {
                     "lat": -2.1594339489859835,
@@ -183,20 +188,10 @@
                     "lat": -2.170857362600965,
                     "lng": -79.89086151123048
                 }
-                "mapa_url": "",
-                "ubicacion": {
-                    "lat": -2.170857362600965,
-                    "lng": -79.89086151123048
-                }
             },
             {
                 "nombre": "Campus Tomas Martínez",
                 "direccion": "",
-                "mapa_url": "",
-                "ubicacion": {
-                    "lat": -2.169049509943826,
-                    "lng": -79.82616662979127
-                }
                 "mapa_url": "",
                 "ubicacion": {
                     "lat": -2.169049509943826,
@@ -538,8 +533,8 @@
         "titulo": "Nuestras Autoridades",
         "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "boton_directorio": "Ver Directorio",
-        "info_gestion": null,
-        "div_global": null,
+        "info_gestion": "",
+        "div_global": "",
         "btn_directorio": "Ver Directorio",
         "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
         "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
@@ -793,33 +788,33 @@
         ],
         "lista_fotos": [
             {
-                "imagen": "img/3f6fdb21386a5df14f26db0621859f94.jpg",
+                "imagen": "img/alianza_sub1.png",
                 "nombre": "Actividad ITB 1"
             },
             {
-                "imagen": "img/aa93641f0a053c4c51ce8798439e0fc0.jpg",
+                "imagen": "img/alianza_sub2.png",
                 "nombre": "Actividad ITB 2"
             },
             {
-                "imagen": "img/0c1710d05b71a09bf3816d0ef2e88f41.jpg",
+                "imagen": "img/alianza_sub3.png",
                 "nombre": "Actividad ITB 3"
             },
             {
-                "imagen": "img/4e5ed163e35622a09b822732a1ec7bba.jpg",
+                "imagen": "img/alianza_sub4.png",
                 "nombre": "Actividad ITB 4"
             },
             {
-                "imagen": "img/231ebc34daaf70cf354e8c8ce468de89.jpg",
+                "imagen": "img/alianza_sub5.png",
                 "nombre": "Actividad ITB 5"
             },
             {
-                "imagen": "img/5e566b1016756cb9850c16cbc8ba6018.jpg",
+                "imagen": "img/alianza_sub6.png",
                 "nombre": "Actividad ITB 6"
             }
         ],
-        "div_textos": null,
-        "div_logos": null,
-        "div_fotos": null
+        "div_textos": "",
+        "div_logos": "",
+        "div_fotos": ""
     },
     "equipo": {
         "items": [
@@ -877,16 +872,12 @@
         "_visible": "1",
         "info_compartido": "",
         "div_textos": "",
-        "info_compartido": "",
-        "div_textos": "",
         "etiqueta_superior": "Trayectoria y Compromiso Educativo",
         "titulo": "Formando Líderes Prácticos con Visión de Futuro",
         "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
         "div_cita": "",
-        "div_cita": "",
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
-        "div_imagen": "",
         "div_imagen": "",
         "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
@@ -973,7 +964,6 @@
             }
         ],
         "div_estructura": "",
-        "div_estructura": "",
         "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
@@ -983,7 +973,6 @@
     },
     "sobre_hero": {
         "_visible": "1",
-        "info_propia": "",
         "info_propia": "",
         "div_left": "",
         "subtitulo": "Conoce al ITB",
@@ -1975,6 +1964,165 @@
                 }
             },
             "updated_at": "2026-09-12 01:19:44"
+        },
+        "pg_233ff2f4f3bb": {
+            "id": "pg_233ff2f4f3bb",
+            "nombre": "Ejemplo_vivo",
+            "slug": "ejemplovivo",
+            "icon": "bi bi-heart-pulse-fill",
+            "menu_pos": "padre",
+            "menu_before": "",
+            "secciones": [
+                "sobre_hero",
+                "areas",
+                "transparencia",
+                "pg_7716650bace6:mision_vision",
+                "pg_85f4857b7ca5:cogobierno"
+            ],
+            "contenido": {
+                "areas": {
+                    "_visible": "1",
+                    "etiqueta_superior": "Áreas de Conocimiento",
+                    "titulo": "Nuestras Áreas de Formación",
+                    "descripcion": "Descubre las áreas de estudio que ofrecemos para tu desarrollo profesional",
+                    "lista_areas": [
+                        {
+                            "titulo": "Salud",
+                            "descripcion": "Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.",
+                            "programas": "Enfermería\r\nFisioterapia\r\nLaboratorio Clínico",
+                            "icono": "img/doctor.png",
+                            "imagen_fondo": "img/5fae5bd59953701d849a178aab7cc772.jpg",
+                            "btn_texto": "Explorar programas"
+                        },
+                        {
+                            "titulo": "Ciencias Empresariales",
+                            "descripcion": "Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.",
+                            "programas": "Administración de Empresas\r\nContabilidad\r\nMarketing Digital",
+                            "icono": "img/laptop.png",
+                            "imagen_fondo": "img/Areas_formacion_1.png",
+                            "btn_texto": "Explorar programas"
+                        },
+                        {
+                            "titulo": "Transporte",
+                            "descripcion": "Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.",
+                            "programas": "Logística y Transporte\r\nComercio Exterior\r\nOperaciones Portuarias",
+                            "icono": "img/coche.png",
+                            "imagen_fondo": "img/21b4145fb1708d4b3d4696596ea1b287.jpg",
+                            "btn_texto": "Explorar programas"
+                        }
+                    ],
+                    "div_global": null,
+                    "area1_icono": "img/doctor.png",
+                    "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
+                    "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
+                    "area1_btn": "Explorar programas",
+                    "area2_icono": "img/laptop.png",
+                    "area2_bg": "img/estudiantes1.png",
+                    "area2_titulo": "Facultad de Ciencias Empresarialesy Sistemas / Económicas yEmpresariales (FACES)",
+                    "area2_desc": "Programas de gestión, contabilidad, marketing y comercio para liderar en el sector empresarial e industrial.",
+                    "area2_btn": "Explorar programas",
+                    "area3_icono": "img/coche.png",
+                    "area3_titulo": "Facultad de Transportey Vialidad (FATV)",
+                    "area3_desc": "Formación especializada en mecánica, gestión de transporte, seguridad vial y escuela de conducción",
+                    "area3_btn": "Explorar programas"
+                },
+                "sobre_hero": {
+                    "_visible": "1",
+                    "info_propia": "",
+                    "div_left": "",
+                    "subtitulo": "Conoce al ITB",
+                    "titulo": "Sobre nosotros",
+                    "descripcion": "Somos una institución de educación superior de Guayaquil comprometida con la excelencia académica, la innovación y la formación práctica de quienes transforman el país.",
+                    "cta_texto": "Conoce Nuestra Historia",
+                    "div_stats": "",
+                    "stat_numero": "Fundado en 1996",
+                    "rating": "4.9",
+                    "div_right": "",
+                    "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
+                    "video_url": "https://youtu.be/eTgzLxWGgS4",
+                    "div_galeria": "",
+                    "info_portada": "",
+                    "animaciones": false,
+                    "imagenes_fondo": [
+                        {
+                            "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                            "estatica": true
+                        }
+                    ],
+                    "ruta_inicio": "Inicio",
+                    "ruta_actual": "Sobre Nosotros",
+                    "div_textos": ""
+                },
+                "sobre_mision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra misión",
+                    "descripcion": "......................",
+                    "puntos": [
+                        {
+                            "texto": "Autonomía de pensamiento y liderazgo."
+                        },
+                        {
+                            "texto": "Aliado estratégico de empresas e instituciones."
+                        },
+                        {
+                            "texto": "Formación práctica orientada al desarrollo económico y social."
+                        }
+                    ],
+                    "imagen": "img/213759381a126bbbc7a538f7475284fa.jpg"
+                },
+                "sobre_vision": {
+                    "_visible": "1",
+                    "titulo": "Nuestra visión",
+                    "descripcion": "Ser una institución de futuro, acreditada internacionalmente, que lidere la formación tecnológica en el Ecuador.",
+                    "puntos": [
+                        {
+                            "texto": "Liderazgo en educación tecnológica universitaria."
+                        },
+                        {
+                            "texto": "Alianzas e integración con instituciones nacionales e internacionales."
+                        },
+                        {
+                            "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
+                        }
+                    ],
+                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Ceo del Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
+                "transparencia_leyes": {
+                    "titulo": "Transparencia e Información Pública",
+                    "descripcion": "En cumplimiento con las disposiciones legales y el principio de rendición de cuentas, el ITB pone a disposición de la ciudadanía la información institucional, financiera y administrativa.",
+                    "buscador_placeholder": "Buscar documento, resolución o presupuesto...",
+                    "cat_info_financiera": "Información Financiera y Presupuestaria",
+                    "cat_rendicion_cuentas": "Rendición de Cuentas y Gestión",
+                    "cat_talento_humano": "Talento Humano",
+                    "cat_remuneracion_mensual": "Remuneración Mensual",
+                    "_visible": "1"
+                }
+            },
+            "updated_at": "2026-09-15 14:36:29"
         }
     },
     "documentos_transparencia": {

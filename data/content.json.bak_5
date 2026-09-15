@@ -3,7 +3,7 @@
         "site_name": "ITB - Instituto Superior Tecnológico Bolivariano de Tecnología",
         "description": "Instituto Superior Tecnológico Bolivariano de Tecnología - Educación Superior de Excelencia. Formamos profesionales de alto nivel con educación práctica, tecnología e innovación.",
         "keywords": "educación, instituto, guayaquil, carreras, tecnología, bolivariano, itb",
-        "logo_principal": "img/28e06eb6813749e8f759a54e8e8ca62a.jpg",
+        "logo_principal": "img\/28e06eb6813749e8f759a54e8e8ca62a.jpg",
         "div_seo": "",
         "div_logos": ""
     },
@@ -13,6 +13,11 @@
                 "texto": "Instituto",
                 "url": "",
                 "nivel": "padre"
+            },
+            {
+                "texto": "otro",
+                "url": "otro.php",
+                "nivel": "hijo"
             },
             {
                 "texto": "Sobre Nosotros",
@@ -25,7 +30,7 @@
                 "nivel": "hijo"
             },
             {
-                "texto": "Transparencia / Leyes",
+                "texto": "Transparencia \/ Leyes",
                 "url": "",
                 "nivel": "hijo"
             },
@@ -80,6 +85,11 @@
                 "nivel": "hijo"
             },
             {
+                "texto": "academia",
+                "url": "academia.php",
+                "nivel": "hijo"
+            },
+            {
                 "texto": "Vida Estudiantil",
                 "url": "#",
                 "nivel": "padre"
@@ -93,6 +103,11 @@
                 "texto": "Admisiones",
                 "url": "#",
                 "nivel": "padre"
+            },
+            {
+                "texto": "prueba 03",
+                "url": "prueba-03.php",
+                "nivel": "hijo"
             },
             {
                 "texto": "prueba1",
@@ -117,7 +132,7 @@
         "cta_btn_1": "Test Vocacional",
         "cta_btn_2": "Vive la Experiencia ITB",
         "cta_btn_3": "Habla con un Asesor",
-        "logo": "img/e2792d46ea30367a4cc3b44a53ac5771.png",
+        "logo": "img\/e2792d46ea30367a4cc3b44a53ac5771.png",
         "contacto_1": "PBX: (04) 500 0175 - 230 7028\r\n500 2164 - 372 7040",
         "contacto_2": "1800 ITB-ITB: 482-482",
         "enlaces_columna_1": "Admiciones\r\nPreg\r\nCambio\r\nCambio 2",
@@ -125,11 +140,11 @@
         "lista_campus": [
             {
                 "nombre": "Campus Matriz",
-                "direccion": "https://maps.app.goo.gl/uBjrzN7wJuQHgDuu7",
+                "direccion": "https:\/\/maps.app.goo.gl\/uBjrzN7wJuQHgDuu7",
                 "mapa_url": "",
                 "ubicacion": {
-                    "lat": -2.13507514962801,
-                    "lng": -79.91103172302248
+                    "lat": -2.136876341726589,
+                    "lng": -79.88777160644533
                 }
             },
             {
@@ -190,8 +205,8 @@
         "mapa_contexto": "Instituto Superior Tecnológico Bolivariano, Guayaquil, Ecuador",
         "campus_locations": [
             {
-                "lat": -2.13507514962801,
-                "lng": -79.91103172302248
+                "lat": -2.136876341726589,
+                "lng": -79.88777160644533
             },
             {
                 "lat": -2.1997559074937,
@@ -220,42 +235,42 @@
         "stat_numero": "+20K Estudiantes Graduados",
         "rating": "4.9",
         "circular_text": "EST. 1995ITB INSTITUTO UNIVERSITARIO",
-        "video_url": "https://youtu.be/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B",
+        "video_url": "https:\/\/youtu.be\/eTgzLxWGgS4?si=itTyNJd-Es1E4f-B",
         "imagenes_fondo": [
             {
-                "archivo": "img/hero_1.jpeg",
+                "archivo": "img\/hero_1.jpeg",
                 "estatica": true
             },
             {
-                "archivo": "img/hero_2.jpg",
+                "archivo": "img\/hero_2.jpg",
                 "estatica": false
             },
             {
-                "archivo": "img/hero_3.jpg",
+                "archivo": "img\/hero_3.jpg",
                 "estatica": false
             }
         ],
-        "div_left": "",
-        "div_stats": "",
-        "div_right": "",
-        "div_galeria": "",
-        "imagen_1": "img/salud.jpg",
-        "imagen_2": "img/student.jpg",
-        "imagen_3": "img/student 2.jpg",
-        "imagen_video_thumb": "img/hero-video-thumb.jpg",
-        "animaciones": "",
-        "info_portada": ""
+        "div_left": null,
+        "div_stats": null,
+        "div_right": null,
+        "div_galeria": null,
+        "imagen_1": "img\/salud.jpg",
+        "imagen_2": "img\/student.jpg",
+        "imagen_3": "img\/student 2.jpg",
+        "imagen_video_thumb": "img\/hero-video-thumb.jpg",
+        "animaciones": false,
+        "info_portada": null
     },
     "trayectoria": {
         "_visible": "1",
         "etiqueta_superior": "NUESTRA TRAYECTORIA",
         "titulo": "Trayectoria y Compromiso con la Educación",
         "descripcion": "Desde 1995, el Instituto Superior Tecnológico Bolivariano de Tecnología ha formado profesionales con una educación integral basada en valores, innovación y excelencia académica. Nuestro compromiso es transformar vidas a través del conocimiento.",
-        "canciller_foto": "img/icon_trayectoria.jpg",
+        "canciller_foto": "img\/icon_trayectoria.jpg",
         "canciller_nombre": "PhD. Roberto Tolozano Benites",
         "canciller_cargo": "Canciller del ITB",
         "btn_historia": "Nuestra Historia",
-        "imagen_central": "img/dd95b82bdbfb76c87fa32641f8c2cf0f.png",
+        "imagen_central": "img\/dd95b82bdbfb76c87fa32641f8c2cf0f.png",
         "estadisticas": [
             {
                 "numero": "29+",
@@ -270,12 +285,12 @@
                 "texto": "Carreras Disponibles"
             }
         ],
-        "div_global": "",
-        "div_perfil": "",
-        "div_btn": "",
-        "div_imagen": "",
-        "div_stats": "",
-        "imagen_campus": "img/estudiantes1.png",
+        "div_global": null,
+        "div_perfil": null,
+        "div_btn": null,
+        "div_imagen": null,
+        "div_stats": null,
+        "imagen_campus": "img\/estudiantes1.png",
         "stat_anios": "29+",
         "stat_anios_label": "Años de Experiencia",
         "stat_graduados": "+17,000",
@@ -293,38 +308,38 @@
                 "titulo": "Salud",
                 "descripcion": "Formación integral en ciencias de la salud con laboratorios especializados y prácticas clínicas reales.",
                 "programas": "Enfermería\r\nFisioterapia\r\nLaboratorio Clínico",
-                "icono": "img/doctor.png",
-                "imagen_fondo": "img/5fae5bd59953701d849a178aab7cc772.jpg",
+                "icono": "img\/doctor.png",
+                "imagen_fondo": "img\/5fae5bd59953701d849a178aab7cc772.jpg",
                 "btn_texto": "Explorar programas"
             },
             {
                 "titulo": "Ciencias Empresariales",
                 "descripcion": "Desarrolla habilidades de liderazgo, gestión y emprendimiento con enfoque práctico y global.",
                 "programas": "Administración de Empresas\r\nContabilidad\r\nMarketing Digital",
-                "icono": "img/laptop.png",
-                "imagen_fondo": "img/Areas_formacion_1.png",
+                "icono": "img\/laptop.png",
+                "imagen_fondo": "img\/Areas_formacion_1.png",
                 "btn_texto": "Explorar programas"
             },
             {
                 "titulo": "Transporte",
                 "descripcion": "Especialízate en logística y transporte marítimo, terrestre y multimodal con certificaciones internacionales.",
                 "programas": "Logística y Transporte\r\nComercio Exterior\r\nOperaciones Portuarias",
-                "icono": "img/coche.png",
-                "imagen_fondo": "img/21b4145fb1708d4b3d4696596ea1b287.jpg",
+                "icono": "img\/coche.png",
+                "imagen_fondo": "img\/21b4145fb1708d4b3d4696596ea1b287.jpg",
                 "btn_texto": "Explorar programas"
             }
         ],
-        "div_global": "",
-        "area1_icono": "img/doctor.png",
+        "div_global": null,
+        "area1_icono": "img\/doctor.png",
         "area1_titulo": "Facultad de Saludy Servicios Sociales (FASSS)",
         "area1_desc": "Carreras técnicas y tecnológicas enfocadas en el cuidado de la salud, enfermería, rehabilitación y bienestar comunitario.",
         "area1_btn": "Explorar programas",
-        "area2_icono": "img/laptop.png",
-        "area2_bg": "img/estudiantes1.png",
-        "area2_titulo": "Facultad de Ciencias Empresarialesy Sistemas / Económicas yEmpresariales (FACES)",
+        "area2_icono": "img\/laptop.png",
+        "area2_bg": "img\/estudiantes1.png",
+        "area2_titulo": "Facultad de Ciencias Empresarialesy Sistemas \/ Económicas yEmpresariales (FACES)",
         "area2_desc": "Programas de gestión, contabilidad, marketing y comercio para liderar en el sector empresarial e industrial.",
         "area2_btn": "Explorar programas",
-        "area3_icono": "img/coche.png",
+        "area3_icono": "img\/coche.png",
         "area3_titulo": "Facultad de Transportey Vialidad (FATV)",
         "area3_desc": "Formación especializada en mecánica, gestión de transporte, seguridad vial y escuela de conducción",
         "area3_btn": "Explorar programas"
@@ -337,7 +352,7 @@
         "btn_ver_todos": "Ver todos los programas",
         "lista_programas": [
             {
-                "imagen": "img/10386d1246de0db082c29c5ab5820439.jpg",
+                "imagen": "img\/10386d1246de0db082c29c5ab5820439.jpg",
                 "modalidad": "Presencial",
                 "area": "Salud",
                 "titulo": "Tecnología Superior en Enfermería",
@@ -345,7 +360,7 @@
                 "sede": "Guayaquil"
             },
             {
-                "imagen": "img/Mecanica.jpg",
+                "imagen": "img\/Mecanica.jpg",
                 "modalidad": "Presencial",
                 "area": "Ciencias Empresariales",
                 "titulo": "Tecnología Superior en Marketing Digital",
@@ -353,7 +368,7 @@
                 "sede": "Guayaquil"
             },
             {
-                "imagen": "img/desarrollo_software.jpg",
+                "imagen": "img\/desarrollo_software.jpg",
                 "modalidad": "Presencial",
                 "area": "Transporte",
                 "titulo": "Tecnología Superior en Logística y Transporte",
@@ -361,7 +376,7 @@
                 "sede": "Guayaquil"
             },
             {
-                "imagen": "img/administracion.jpg",
+                "imagen": "img\/administracion.jpg",
                 "modalidad": "Híbrido",
                 "area": "Tecnología",
                 "titulo": "Tecnología Superior en Desarrollo de Software",
@@ -369,7 +384,7 @@
                 "sede": "Guayaquil"
             },
             {
-                "imagen": "img/programa_gastronomia.jpg",
+                "imagen": "img\/programa_gastronomia.jpg",
                 "modalidad": "Presencial",
                 "area": "",
                 "titulo": "Tecnología Superior en Gastronomía",
@@ -377,7 +392,7 @@
                 "sede": ""
             },
             {
-                "imagen": "img/programa_contabilidad.jpg",
+                "imagen": "img\/programa_contabilidad.jpg",
                 "modalidad": "Presencial",
                 "area": "",
                 "titulo": "Tecnología Superior en Contabilidad",
@@ -385,7 +400,7 @@
                 "sede": ""
             },
             {
-                "imagen": "img/programa_diseno_grafico.jpg",
+                "imagen": "img\/programa_diseno_grafico.jpg",
                 "modalidad": "Presencial",
                 "area": "",
                 "titulo": "Técnico Superior en Diseño Gráfico",
@@ -393,32 +408,32 @@
                 "sede": ""
             }
         ],
-        "div_global": "",
-        "prog1_imagen": "img/enfermeria.jpg",
+        "div_global": null,
+        "prog1_imagen": "img\/enfermeria.jpg",
         "prog1_modalidad": "Presencial",
         "prog1_area": "Salud",
         "prog1_titulo": "Tecnología Superior en Enfermería",
         "prog1_duracion": "5 Semestres",
         "prog1_sede": "Guayaquil",
-        "prog2_imagen": "img/Mecanica.jpg",
+        "prog2_imagen": "img\/Mecanica.jpg",
         "prog2_modalidad": "Presencial",
         "prog2_area": "Ciencias Empresariales",
         "prog2_titulo": "Tecnología Superior en Marketing Digital",
         "prog2_duracion": "5 Semestres",
         "prog2_sede": "Guayaquil",
-        "prog3_imagen": "img/desarrollo_software.jpg",
+        "prog3_imagen": "img\/desarrollo_software.jpg",
         "prog3_modalidad": "Presencial",
         "prog3_area": "Transporte",
         "prog3_titulo": "Tecnología Superior en Logística y Transporte",
         "prog3_duracion": "5 Semestres",
         "prog3_sede": "Guayaquil",
-        "prog4_imagen": "img/administracion.jpg",
+        "prog4_imagen": "img\/administracion.jpg",
         "prog4_modalidad": "Híbrido",
         "prog4_area": "Tecnología",
         "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
         "prog4_duracion": "5 Semestres",
         "prog4_sede": "Guayaquil",
-        "info_programas": ""
+        "info_programas": null
     },
     "experiencia": {
         "_visible": "1",
@@ -444,10 +459,10 @@
             }
         ],
         "btn_texto": "Más beneficios",
-        "imagen": "img/experiencia.png",
-        "div_header": "",
-        "div_btn": "",
-        "div_img": "",
+        "imagen": "img\/experiencia.png",
+        "div_header": null,
+        "div_btn": null,
+        "div_img": null,
         "caract1_titulo": "Servicios Médicos",
         "caract1_desc": "Atención médica y odontológica gratuita para estudiantes.",
         "caract2_titulo": "Becas y Financiamiento",
@@ -463,39 +478,39 @@
         "_visible": "1",
         "etiqueta_superior": "HISTORIAS DE ÉXITO",
         "titulo": "Lo que dicen nuestros Graduados",
-        "div_global": "",
-        "div_testimonio": "",
+        "div_global": null,
+        "div_testimonio": null,
         "lista_testimonios": [
             {
-                "imagen": "img/MariaFernanda.png",
+                "imagen": "img\/MariaFernanda.png",
                 "cita": "\"El ITB me brindó las herramientas y el conocimiento necesario para destacarme en el campo laboral. Los docentes y el enfoque práctico marcaron la diferencia en mi formación profesional. Hoy lidero un equipo de trabajo gracias a la preparación que recibí.\"",
                 "rol": "Graduada",
                 "nombre": "María Fernanda López",
                 "carrera": "Graduada en Enfermería - Promoción 2022"
             },
             {
-                "imagen": "img/8a568c0257127dd19236f871a537a0bd.jpg",
+                "imagen": "img\/8a568c0257127dd19236f871a537a0bd.jpg",
                 "cita": "\"La formación práctica y los proyectos reales que desarrollamos en clase me permitieron llegar a mi primera entrevista con un portafolio sólido. Hoy trabajo en el área que elegí desde el primer semestre.\"",
                 "rol": "Graduado",
                 "nombre": "Juan Perez Goya",
                 "carrera": "Graduado en Desarrollo de Software"
             },
             {
-                "imagen": "img/38f08960fc8ca02a6b4061c526c46759.jpg",
+                "imagen": "img\/38f08960fc8ca02a6b4061c526c46759.jpg",
                 "cita": "\"Lo que más valoro del ITB es la cercanía de los docentes: siempre hubo alguien dispuesto a resolver una duda o revisar un proyecto. Esa guía marcó la diferencia en mi formación.\"",
                 "rol": "Graduada",
                 "nombre": "Elena Fernandez Macias",
                 "carrera": "Graduada en Marketing Digital"
             },
             {
-                "imagen": "img/85dc8355286c1581b342d9b4220b5de6.jpg",
+                "imagen": "img\/85dc8355286c1581b342d9b4220b5de6.jpg",
                 "cita": "\"Estudiar y trabajar al mismo tiempo era mi mayor preocupación. Los horarios flexibles me permitieron avanzar sin dejar mi empleo, y hoy aplico a diario lo que aprendí en los talleres.\"",
                 "rol": "Graduado",
                 "nombre": "Francisco Arias Morales",
                 "carrera": "Graduado en Gastronomía"
             }
         ],
-        "info_testimonios": ""
+        "info_testimonios": null
     },
     "autoridades": {
         "_visible": "1",
@@ -507,22 +522,22 @@
         "div_global": "",
         "btn_directorio": "Ver Directorio",
         "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-        "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
+        "aut1_foto": "img\/PHD.Roberto_tolozano.jpg",
         "aut1_nombre": "PhD. Roberto Tolozano Benites",
         "aut1_cargo": "Canciller",
         "aut1_email": "#",
         "aut1_telf": "#",
-        "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
+        "aut2_foto": "img\/PHD.Elena_Tolozano.jpg",
         "aut2_nombre": "PhD. Elena Tolozano Benites",
         "aut2_cargo": "Rectora",
         "aut2_email": "#",
         "aut2_telf": "#",
-        "aut3_foto": "img/PHD.Luis_alzate.jpg",
+        "aut3_foto": "img\/PHD.Luis_alzate.jpg",
         "aut3_nombre": "PhD. Luis Alzate Peralta",
         "aut3_cargo": "Vicerrector Académico y de Investigación",
         "aut3_email": "#",
         "aut3_telf": "#",
-        "aut4_foto": "img/PHD.Michelle_tolozano.webp",
+        "aut4_foto": "img\/PHD.Michelle_tolozano.webp",
         "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
         "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
         "aut4_email": "#",
@@ -536,67 +551,67 @@
         "lista_servicios": [
             {
                 "titulo": "Campus Virtual",
-                "desc": "Plataforma educativa 24/7",
+                "desc": "Plataforma educativa 24\/7",
                 "btn_texto": "Ver Tour",
-                "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
+                "imagen": "img\/8d8f1b2790e8965ce7e64846e845660b.jpg",
                 "imagen_fija": false
             },
             {
                 "titulo": "Horarios",
                 "desc": "Consulta tus horarios de clase",
                 "btn_texto": "Ver Horarios",
-                "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
+                "imagen": "img\/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
                 "imagen_fija": false
             },
             {
                 "titulo": "Servicios Digitales",
                 "desc": "Trámites en línea y gestión académica",
                 "btn_texto": "Acceder",
-                "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
+                "imagen": "img\/e81e51892596205d405a8bf7cc8c28bf.jpg",
                 "imagen_fija": false
             },
             {
                 "titulo": "Podcast ITB",
                 "desc": "Escucha nuestro contenido educativo",
                 "btn_texto": "Escuchar",
-                "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg",
+                "imagen": "img\/374cb3f7202a851bf5bde99ec099e541.jpg",
                 "imagen_fija": false
             },
             {
                 "titulo": "Arte y Deportes",
                 "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
                 "btn_texto": "Conocer Más",
-                "imagen": "img/bienestar_estudiantil_1.png",
+                "imagen": "img\/bienestar_estudiantil_1.png",
                 "imagen_fija": false
             }
         ],
-        "div_serv1": "",
-        "div_servicios_lista": "",
+        "div_serv1": null,
+        "div_servicios_lista": null,
         "etiqueta_superior": "Servicios Institucionales",
         "titulo": "Todo lo que necesitas en  *un solo lugar*",
-        "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
+        "serv1_imagen": "img\/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
         "serv2_titulo": "Campus Virtual",
-        "serv2_desc": "Plataforma educativa 24/7",
-        "serv2_imagen": "img/servicio-campus.jpg",
+        "serv2_desc": "Plataforma educativa 24\/7",
+        "serv2_imagen": "img\/servicio-campus.jpg",
         "serv3_titulo": "Horarios",
         "serv3_desc": "Consulta tus horarios de clase",
-        "serv3_imagen": "img/salud.jpg",
+        "serv3_imagen": "img\/salud.jpg",
         "serv4_titulo": "Servicios Digitales",
         "serv4_desc": "Trámites en línea y gestión académica",
-        "serv4_imagen": "img/salud.jpg",
+        "serv4_imagen": "img\/salud.jpg",
         "serv5_titulo": "Podcast ITB",
         "serv5_desc": "Escucha nuestro contenido educativo",
-        "serv5_imagen": "img/salud.jpg",
+        "serv5_imagen": "img\/salud.jpg",
         "serv6_titulo": "Arte y Deportes",
         "serv6_desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
-        "serv6_imagen": "img/estudiantes1.png"
+        "serv6_imagen": "img\/estudiantes1.png"
     },
     "admision": {
         "_visible": "1",
         "titulo": "Inicia tu proceso de admisión",
         "descripcion": "Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.",
-        "imagen_principal": "img/admision1.png",
-        "video_url": "https://www.youtube.com/watch?v=_arpKGQERXM",
+        "imagen_principal": "img\/admision1.png",
+        "video_url": "https:\/\/www.youtube.com\/watch?v=_arpKGQERXM",
         "circular_text": "¿CÓMO INSCRIBIRSE?\r\nHAZ CLIC AQUÍ",
         "form_titulo": "Formulario de Registro",
         "form_subtitulo": "Los campos marcados con un asterisco (*) son obligatorios.",
@@ -635,12 +650,12 @@
                 "texto": "Híbrida"
             }
         ],
-        "div_textos": "",
-        "div_imagen": "",
-        "div_video": "",
-        "div_form": "",
-        "div_programas": "",
-        "div_modalidades": "",
+        "div_textos": null,
+        "div_imagen": null,
+        "div_video": null,
+        "div_form": null,
+        "div_programas": null,
+        "div_modalidades": null,
         "etiqueta_superior": "Admisiones Abiertas",
         "feature_1": "Proceso 100% en línea",
         "feature_2": "Asesoría personalizada",
@@ -656,79 +671,79 @@
         "categoria": "Evento",
         "fecha": "15 Sep 2025",
         "descripcion": "Lo mejor del Diseño de Modas y Maquillaje...",
-        "imagen": "img/noticia_1.png",
+        "imagen": "img\/noticia_1.png",
         "secundarias": [
             {
                 "titulo": "Estudiantes de Diseño de Modas",
                 "fecha": "Agosto 20, 2026",
-                "imagen": "img/noticia_2.png"
+                "imagen": "img\/noticia_2.png"
             },
             {
                 "titulo": "ITB promovió una movilidad",
                 "fecha": "Agosto 20, 2026",
-                "imagen": "img/noticia_3.png"
+                "imagen": "img\/noticia_3.png"
             },
             {
                 "titulo": "ITB transforma el ComicCon en una experiencia de aprendizaje",
                 "fecha": "Agosto 31, 2026",
-                "imagen": "img/ff4728ec07d83ad63f3412a6ee3ec0a6.jpg"
+                "imagen": "img\/ff4728ec07d83ad63f3412a6ee3ec0a6.jpg"
             },
             {
                 "titulo": "ITB recibe importante reconocimiento por su aportación en programas de formación juvenil",
                 "fecha": "Agosto 28, 2026",
-                "imagen": "img/166a6aba1ac9c52c78994ef657b1f8ac.jpg"
+                "imagen": "img\/166a6aba1ac9c52c78994ef657b1f8ac.jpg"
             },
             {
                 "titulo": "ITB desarrolló conferencia magistral sobre dirección escénica en la era digital",
                 "fecha": "Agosto 24, 2026",
-                "imagen": "img/1d6f11e5618ce57658f8d6f5a7839404.jpg"
+                "imagen": "img\/1d6f11e5618ce57658f8d6f5a7839404.jpg"
             }
         ],
-        "div_global": "",
+        "div_global": null,
         "div_noticia": "",
-        "info_noticias": "",
-        "div_secundarias": "",
+        "info_noticias": null,
+        "div_secundarias": null,
         "sec1_titulo": "Convenio internacional con universidad de España",
         "sec1_fecha": "10 Sep 2025",
-        "sec1_imagen": "img/noticia-2.jpg",
+        "sec1_imagen": "img\/noticia-2.jpg",
         "sec2_titulo": "Graduación de la promoción 2025: más de 500 nuevos profesionales",
         "sec2_fecha": "05 Sep 2025",
-        "sec2_imagen": "img/noticia-3.jpg",
+        "sec2_imagen": "img\/noticia-3.jpg",
         "sec3_titulo": "ITB inaugura nuevo laboratorio de simulación clínica",
         "sec3_fecha": "01 Sep 2025",
-        "sec3_imagen": "img/noticia-4.jpg",
+        "sec3_imagen": "img\/noticia-4.jpg",
         "eventos": [
             {
                 "categoria": "Evento",
                 "fecha": "15 Sep 2025",
                 "titulo": "¡METAMORFOSIS CREATIVA está por comenzar!",
                 "descripcion": "Lo mejor del Diseño de Modas y Maquillaje...",
-                "imagen": "img/noticia_1.png"
+                "imagen": "img\/noticia_1.png"
             },
             {
                 "categoria": "Evento",
                 "fecha": "12 Agt 2026",
                 "titulo": "Estudiantes de Marketing Digital y Redes Sociales presentan proyectos novedosos en Elevator Pitch",
                 "descripcion": "Una jornada académica que reunió a 21 mini agencias conformadas por estudiantes de la carrera Técnico Superior en Marketing Digital y Redes Sociales, quienes presentaron propuestas estratégicas y creativas para diferentes marcas y negocios.",
-                "imagen": "img/7706394bfe67bfced3f1464e086011eb.jpg"
+                "imagen": "img\/7706394bfe67bfced3f1464e086011eb.jpg"
             },
             {
                 "categoria": "Noticia",
                 "fecha": "18 Ago.",
                 "titulo": "ITB promovió una movilidad responsable durante la jornada “Guayaquil Camina Seguro”",
                 "descripcion": "Una jornada orientada a fortalecer la educación y concienciación sobre la importancia de una movilidad segura, sostenible e incluyente.",
-                "imagen": "img/noticia_camina_seguro.jpeg"
+                "imagen": "img\/noticia_camina_seguro.jpeg"
             },
             {
                 "categoria": "Noticia",
                 "fecha": "14 Ago.",
                 "titulo": "ITB presentó proyectos de investigación e innovación aplicada en la Feria Agroazucar",
                 "descripcion": "Cuatro proyectos desarrollados desde las facultades FACES y FATV se presentaron en la Feria Agroazucar.",
-                "imagen": "img/noticia_feria_agroazucar.jpeg"
+                "imagen": "img\/noticia_feria_agroazucar.jpeg"
             }
         ],
-        "div_eventos": "",
-        "info_eventos": ""
+        "div_eventos": null,
+        "info_eventos": null
     },
     "alianzas": {
         "_visible": "1",
@@ -736,49 +751,49 @@
         "boton_todas": "Ver Alianzas y Convenios",
         "lista_logos": [
             {
-                "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
+                "imagen": "img\/aecd83a071c09531ceea048d412d09e6.png",
                 "nombre": "Aliado 1"
             },
             {
-                "imagen": "img/alianza_2.jpg",
+                "imagen": "img\/alianza_2.jpg",
                 "nombre": "Aliado 2"
             },
             {
-                "imagen": "img/alianza_3.png",
+                "imagen": "img\/alianza_3.png",
                 "nombre": "Aliado 3"
             },
             {
-                "imagen": "img/alianza_4.png",
+                "imagen": "img\/alianza_4.png",
                 "nombre": "Aliado 4"
             },
             {
-                "imagen": "img/alianza_5.png",
+                "imagen": "img\/alianza_5.png",
                 "nombre": "Aliado 5"
             }
         ],
         "lista_fotos": [
             {
-                "imagen": "img/alianza_sub1.png",
+                "imagen": "img\/alianza_sub1.png",
                 "nombre": "Actividad ITB 1"
             },
             {
-                "imagen": "img/alianza_sub2.png",
+                "imagen": "img\/alianza_sub2.png",
                 "nombre": "Actividad ITB 2"
             },
             {
-                "imagen": "img/alianza_sub3.png",
+                "imagen": "img\/alianza_sub3.png",
                 "nombre": "Actividad ITB 3"
             },
             {
-                "imagen": "img/alianza_sub4.png",
+                "imagen": "img\/alianza_sub4.png",
                 "nombre": "Actividad ITB 4"
             },
             {
-                "imagen": "img/alianza_sub5.png",
+                "imagen": "img\/alianza_sub5.png",
                 "nombre": "Actividad ITB 5"
             },
             {
-                "imagen": "img/alianza_sub6.png",
+                "imagen": "img\/alianza_sub6.png",
                 "nombre": "Actividad ITB 6"
             }
         ],
@@ -796,7 +811,7 @@
                 "cargo": "Canciller",
                 "linkedin": "#",
                 "email": "cancilleria@itb.edu.ec",
-                "foto": "img/6035a72c5b8f82761090e417ffe86b7e.png",
+                "foto": "img\/6035a72c5b8f82761090e417ffe86b7e.png",
                 "mostrar_en_home": true,
                 "publicado": true
             },
@@ -808,7 +823,7 @@
                 "cargo": "Rectora",
                 "linkedin": "#",
                 "email": "rectorado@itb.edu.ec",
-                "foto": "img/14fc241f3e76d7c3c8ca2652aacee5e1.png",
+                "foto": "img\/14fc241f3e76d7c3c8ca2652aacee5e1.png",
                 "mostrar_en_home": true,
                 "publicado": true
             },
@@ -820,7 +835,7 @@
                 "cargo": "Vicerrector Académico y de Investigación",
                 "linkedin": "#",
                 "email": "vicerrectorado@itb.edu.ec",
-                "foto": "img/9deb8b0d70dc44ffa388327dfc21e321.png",
+                "foto": "img\/9deb8b0d70dc44ffa388327dfc21e321.png",
                 "mostrar_en_home": true,
                 "publicado": true
             },
@@ -832,7 +847,7 @@
                 "cargo": "Vicerrectora de Extensión y Gestión Administrativa",
                 "linkedin": "#",
                 "email": "extension@itb.edu.ec",
-                "foto": "img/41222399c1dda86559946d5b6aa993df.png",
+                "foto": "img\/41222399c1dda86559946d5b6aa993df.png",
                 "mostrar_en_home": true,
                 "publicado": true
             }
@@ -849,7 +864,7 @@
         "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
         "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
         "div_imagen": "",
-        "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
+        "imagen": "img\/21418cd57745501d0dbda34b79eacb7e.jpg"
     },
     "sobre_mision": {
         "_visible": "1",
@@ -866,7 +881,7 @@
                 "texto": "Formación práctica orientada al desarrollo económico y social."
             }
         ],
-        "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+        "imagen": "img\/6722e39fdc881aa2a5155f2761551c00.jpg"
     },
     "sobre_vision": {
         "_visible": "1",
@@ -883,7 +898,7 @@
                 "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
             }
         ],
-        "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+        "imagen": "img\/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
     },
     "sobre_valores": {
         "_visible": "1",
@@ -891,27 +906,27 @@
         "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
         "items": [
             {
-                "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                "icono": "img\/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
                 "titulo": "Cogobierno",
                 "descripcion": "Participación y gestión democrática"
             },
             {
-                "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                "icono": "img\/f85372445ff70bd838ecb51f47294030.svg",
                 "titulo": "Igualdad",
                 "descripcion": "Oportunidades sin discriminación"
             },
             {
-                "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                "icono": "img\/1870e3b99207af610588a15e8c564b66.svg",
                 "titulo": "Calidad",
                 "descripcion": "Excelencia en educación superior"
             },
             {
-                "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                "icono": "img\/135639f1bc8e047730e524fad7040ebc.svg",
                 "titulo": "Pertinencia",
                 "descripcion": "Programas alineados a la sociedad"
             },
             {
-                "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                "icono": "img\/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
                 "titulo": "Integralidad",
                 "descripcion": "Formación académica y humana"
             }
@@ -923,18 +938,18 @@
         "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
         "miembros": [
             {
-                "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                "foto": "img\/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
                 "nombre": "Obst. Lenny Mariscal San Martín",
                 "cargo": "Representante de Docentes"
             },
             {
-                "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                "foto": "img\/8974ecdec40ba06bcf640706e7a7ae12.jpg",
                 "nombre": "Ing. Marcos Escaleras Gómez",
                 "cargo": "Representante de Trabajadores"
             }
         ],
         "div_estructura": "",
-        "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+        "card_imagen": "img\/86d94af61b878d428da1c96394fcb831.jpg",
         "card_icono": "",
         "card_titulo": "Estructura Orgánica",
         "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
@@ -954,13 +969,13 @@
         "rating": "4.9",
         "div_right": "",
         "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
-        "video_url": "https://youtu.be/eTgzLxWGgS4",
+        "video_url": "https:\/\/youtu.be\/eTgzLxWGgS4",
         "div_galeria": "",
         "info_portada": "",
         "animaciones": "",
         "imagenes_fondo": [
             {
-                "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                "archivo": "img\/2c52f197c2ac047a11ef84bd8c818a9a.png",
                 "estatica": true
             }
         ],
@@ -979,9 +994,9 @@
         "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
         "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
         "div_multimedia": "",
-        "audio": "audio/himnoitb.mp3",
+        "audio": "audio\/himnoitb.mp3",
         "btn_descargar": "Descargar música",
-        "imagen": "img/Himno_Estudiante_itb.jpg",
+        "imagen": "img\/Himno_Estudiante_itb.jpg",
         "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
     },
     "custom_pg_67733c093467": {
@@ -997,7 +1012,7 @@
             "animaciones": true,
             "imagenes_fondo": [
                 {
-                    "archivo": "img/hero_2.jpg",
+                    "archivo": "img\/hero_2.jpg",
                     "estatica": false
                 }
             ]
@@ -1017,18 +1032,18 @@
             "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
             "miembros": [
                 {
-                    "foto": "img/c8bf4f7424e8fead2cf318d36aa90cb7.jpg",
+                    "foto": "img\/c8bf4f7424e8fead2cf318d36aa90cb7.jpg",
                     "nombre": "Obst. Lenny Mariscal San Martín",
                     "cargo": "Representante de Docentes"
                 },
                 {
-                    "foto": "img/b32dd35f80c29eeecc0b1a17c0536fe0.jpg",
+                    "foto": "img\/b32dd35f80c29eeecc0b1a17c0536fe0.jpg",
                     "nombre": "Ing. Marcos Escaleras Gómez",
                     "cargo": "Representante de Trabajadores"
                 }
             ],
             "div_estructura": null,
-            "card_imagen": "img/11ad0e374a18c1084f2eb8e891901c54.jpg",
+            "card_imagen": "img\/11ad0e374a18c1084f2eb8e891901c54.jpg",
             "card_icono": "",
             "card_titulo": "Estructura Orgánica",
             "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
@@ -1043,50 +1058,50 @@
             "div_logos": null,
             "lista_logos": [
                 {
-                    "imagen": "img/alianza_1.png",
+                    "imagen": "img\/alianza_1.png",
                     "nombre": "Aliado 1"
                 },
                 {
-                    "imagen": "img/alianza_2.jpg",
+                    "imagen": "img\/alianza_2.jpg",
                     "nombre": "Aliado 2"
                 },
                 {
-                    "imagen": "img/alianza_3.png",
+                    "imagen": "img\/alianza_3.png",
                     "nombre": "Aliado 3"
                 },
                 {
-                    "imagen": "img/alianza_4.png",
+                    "imagen": "img\/alianza_4.png",
                     "nombre": "Aliado 4"
                 },
                 {
-                    "imagen": "img/alianza_5.png",
+                    "imagen": "img\/alianza_5.png",
                     "nombre": "Aliado 5"
                 }
             ],
             "div_fotos": null,
             "lista_fotos": [
                 {
-                    "imagen": "img/alianza_sub1.png",
+                    "imagen": "img\/alianza_sub1.png",
                     "nombre": "Actividad ITB 1"
                 },
                 {
-                    "imagen": "img/alianza_sub2.png",
+                    "imagen": "img\/alianza_sub2.png",
                     "nombre": "Actividad ITB 2"
                 },
                 {
-                    "imagen": "img/alianza_sub3.png",
+                    "imagen": "img\/alianza_sub3.png",
                     "nombre": "Actividad ITB 3"
                 },
                 {
-                    "imagen": "img/alianza_sub4.png",
+                    "imagen": "img\/alianza_sub4.png",
                     "nombre": "Actividad ITB 4"
                 },
                 {
-                    "imagen": "img/alianza_sub5.png",
+                    "imagen": "img\/alianza_sub5.png",
                     "nombre": "Actividad ITB 5"
                 },
                 {
-                    "imagen": "img/alianza_sub6.png",
+                    "imagen": "img\/alianza_sub6.png",
                     "nombre": "Actividad ITB 6"
                 }
             ]
@@ -1117,22 +1132,22 @@
                     "div_global": "",
                     "btn_directorio": "Ver Directorio",
                     "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-                    "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
+                    "aut1_foto": "img\/PHD.Roberto_tolozano.jpg",
                     "aut1_nombre": "PhD. Roberto Tolozano Benites",
                     "aut1_cargo": "Canciller",
                     "aut1_email": "#",
                     "aut1_telf": "#",
-                    "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
+                    "aut2_foto": "img\/PHD.Elena_Tolozano.jpg",
                     "aut2_nombre": "PhD. Elena Tolozano Benites",
                     "aut2_cargo": "Rectora",
                     "aut2_email": "#",
                     "aut2_telf": "#",
-                    "aut3_foto": "img/PHD.Luis_alzate.jpg",
+                    "aut3_foto": "img\/PHD.Luis_alzate.jpg",
                     "aut3_nombre": "PhD. Luis Alzate Peralta",
                     "aut3_cargo": "Vicerrector Académico y de Investigación",
                     "aut3_email": "#",
                     "aut3_telf": "#",
-                    "aut4_foto": "img/PHD.Michelle_tolozano.webp",
+                    "aut4_foto": "img\/PHD.Michelle_tolozano.webp",
                     "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
                     "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
                     "aut4_email": "#",
@@ -1144,49 +1159,49 @@
                     "boton_todas": "Ver Alianzas y Convenios",
                     "lista_logos": [
                         {
-                            "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
+                            "imagen": "img\/aecd83a071c09531ceea048d412d09e6.png",
                             "nombre": "Aliado 1"
                         },
                         {
-                            "imagen": "img/alianza_2.jpg",
+                            "imagen": "img\/alianza_2.jpg",
                             "nombre": "Aliado 2"
                         },
                         {
-                            "imagen": "img/alianza_3.png",
+                            "imagen": "img\/alianza_3.png",
                             "nombre": "Aliado 3"
                         },
                         {
-                            "imagen": "img/alianza_4.png",
+                            "imagen": "img\/alianza_4.png",
                             "nombre": "Aliado 4"
                         },
                         {
-                            "imagen": "img/alianza_5.png",
+                            "imagen": "img\/alianza_5.png",
                             "nombre": "Aliado 5"
                         }
                     ],
                     "lista_fotos": [
                         {
-                            "imagen": "img/alianza_sub1.png",
+                            "imagen": "img\/alianza_sub1.png",
                             "nombre": "Actividad ITB 1"
                         },
                         {
-                            "imagen": "img/alianza_sub2.png",
+                            "imagen": "img\/alianza_sub2.png",
                             "nombre": "Actividad ITB 2"
                         },
                         {
-                            "imagen": "img/alianza_sub3.png",
+                            "imagen": "img\/alianza_sub3.png",
                             "nombre": "Actividad ITB 3"
                         },
                         {
-                            "imagen": "img/alianza_sub4.png",
+                            "imagen": "img\/alianza_sub4.png",
                             "nombre": "Actividad ITB 4"
                         },
                         {
-                            "imagen": "img/alianza_sub5.png",
+                            "imagen": "img\/alianza_sub5.png",
                             "nombre": "Actividad ITB 5"
                         },
                         {
-                            "imagen": "img/alianza_sub6.png",
+                            "imagen": "img\/alianza_sub6.png",
                             "nombre": "Actividad ITB 6"
                         }
                     ],
@@ -1207,13 +1222,13 @@
                     "rating": "4.9",
                     "div_right": "",
                     "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
-                    "video_url": "https://youtu.be/eTgzLxWGgS4",
+                    "video_url": "https:\/\/youtu.be\/eTgzLxWGgS4",
                     "div_galeria": "",
                     "info_portada": "",
                     "animaciones": false,
                     "imagenes_fondo": [
                         {
-                            "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                            "archivo": "img\/2c52f197c2ac047a11ef84bd8c818a9a.png",
                             "estatica": true
                         }
                     ],
@@ -1236,7 +1251,7 @@
                             "texto": "Formación práctica orientada al desarrollo económico y social."
                         }
                     ],
-                    "imagen": "img/213759381a126bbbc7a538f7475284fa.jpg"
+                    "imagen": "img\/213759381a126bbbc7a538f7475284fa.jpg"
                 },
                 "sobre_vision": {
                     "_visible": "1",
@@ -1253,7 +1268,7 @@
                             "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
                         }
                     ],
-                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                    "imagen": "img\/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
                 },
                 "himno": {
                     "_visible": "1",
@@ -1266,9 +1281,9 @@
                     "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
                     "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
                     "div_multimedia": "",
-                    "audio": "audio/himnoitb.mp3",
+                    "audio": "audio\/himnoitb.mp3",
                     "btn_descargar": "Descargar música",
-                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "imagen": "img\/Himno_Estudiante_itb.jpg",
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
@@ -1299,22 +1314,22 @@
                     "div_global": "",
                     "btn_directorio": "Ver Directorio",
                     "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-                    "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
+                    "aut1_foto": "img\/PHD.Roberto_tolozano.jpg",
                     "aut1_nombre": "PhD. Roberto Tolozano Benites",
                     "aut1_cargo": "Canciller",
                     "aut1_email": "#",
                     "aut1_telf": "#",
-                    "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
+                    "aut2_foto": "img\/PHD.Elena_Tolozano.jpg",
                     "aut2_nombre": "PhD. Elena Tolozano Benites",
                     "aut2_cargo": "Rectora",
                     "aut2_email": "#",
                     "aut2_telf": "#",
-                    "aut3_foto": "img/PHD.Luis_alzate.jpg",
+                    "aut3_foto": "img\/PHD.Luis_alzate.jpg",
                     "aut3_nombre": "PhD. Luis Alzate Peralta",
                     "aut3_cargo": "Vicerrector Académico y de Investigación",
                     "aut3_email": "#",
                     "aut3_telf": "#",
-                    "aut4_foto": "img/PHD.Michelle_tolozano.webp",
+                    "aut4_foto": "img\/PHD.Michelle_tolozano.webp",
                     "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
                     "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
                     "aut4_email": "#",
@@ -1333,13 +1348,13 @@
                     "rating": "4.9",
                     "div_right": "",
                     "circular_text": "SOBRE NOSOTROS\r\nITB INSTITUTO UNIVERSITARIO",
-                    "video_url": "https://youtu.be/eTgzLxWGgS4",
+                    "video_url": "https:\/\/youtu.be\/eTgzLxWGgS4",
                     "div_galeria": "",
                     "info_portada": "",
                     "animaciones": "",
                     "imagenes_fondo": [
                         {
-                            "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                            "archivo": "img\/2c52f197c2ac047a11ef84bd8c818a9a.png",
                             "estatica": true
                         }
                     ],
@@ -1362,7 +1377,7 @@
                             "texto": "Formación práctica orientada al desarrollo económico y social."
                         }
                     ],
-                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+                    "imagen": "img\/6722e39fdc881aa2a5155f2761551c00.jpg"
                 },
                 "sobre_vision": {
                     "_visible": "1",
@@ -1379,7 +1394,7 @@
                             "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
                         }
                     ],
-                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                    "imagen": "img\/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
                 },
                 "sobre_valores": {
                     "_visible": "1",
@@ -1387,27 +1402,27 @@
                     "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
                     "items": [
                         {
-                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "icono": "img\/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
                             "titulo": "Cogobierno",
                             "descripcion": "Participación y gestión democrática"
                         },
                         {
-                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "icono": "img\/f85372445ff70bd838ecb51f47294030.svg",
                             "titulo": "Igualdad",
                             "descripcion": "Oportunidades sin discriminación"
                         },
                         {
-                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "icono": "img\/1870e3b99207af610588a15e8c564b66.svg",
                             "titulo": "Calidad",
                             "descripcion": "Excelencia en educación superior"
                         },
                         {
-                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "icono": "img\/135639f1bc8e047730e524fad7040ebc.svg",
                             "titulo": "Pertinencia",
                             "descripcion": "Programas alineados a la sociedad"
                         },
                         {
-                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "icono": "img\/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
                             "titulo": "Integralidad",
                             "descripcion": "Formación académica y humana"
                         }
@@ -1419,18 +1434,18 @@
                     "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
                     "miembros": [
                         {
-                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "foto": "img\/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
                             "nombre": "Obst. Lenny Mariscal San Martín",
                             "cargo": "Representante de Docentes"
                         },
                         {
-                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "foto": "img\/8974ecdec40ba06bcf640706e7a7ae12.jpg",
                             "nombre": "Ing. Marcos Escaleras Gómez",
                             "cargo": "Representante de Trabajadores"
                         }
                     ],
                     "div_estructura": "",
-                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_imagen": "img\/86d94af61b878d428da1c96394fcb831.jpg",
                     "card_icono": "",
                     "card_titulo": "Estructura Orgánica",
                     "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
@@ -1448,9 +1463,9 @@
                     "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
                     "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
                     "div_multimedia": "",
-                    "audio": "audio/himnoitb.mp3",
+                    "audio": "audio\/himnoitb.mp3",
                     "btn_descargar": "Descargar música",
-                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "imagen": "img\/Himno_Estudiante_itb.jpg",
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
@@ -1476,37 +1491,37 @@
                     "lista_servicios": [
                         {
                             "titulo": "Campus Virtual",
-                            "desc": "Plataforma educativa 24/7",
+                            "desc": "Plataforma educativa 24\/7",
                             "btn_texto": "Ver Tour",
-                            "imagen": "img/8d8f1b2790e8965ce7e64846e845660b.jpg",
+                            "imagen": "img\/8d8f1b2790e8965ce7e64846e845660b.jpg",
                             "imagen_fija": false
                         },
                         {
                             "titulo": "Horarios",
                             "desc": "Consulta tus horarios de clase",
                             "btn_texto": "Ver Horarios",
-                            "imagen": "img/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
+                            "imagen": "img\/eb08df3fb385ad64eebe3283ccbeb8a0.jpg",
                             "imagen_fija": false
                         },
                         {
                             "titulo": "Servicios Digitales",
                             "desc": "Trámites en línea y gestión académica",
                             "btn_texto": "Acceder",
-                            "imagen": "img/e81e51892596205d405a8bf7cc8c28bf.jpg",
+                            "imagen": "img\/e81e51892596205d405a8bf7cc8c28bf.jpg",
                             "imagen_fija": false
                         },
                         {
                             "titulo": "Podcast ITB",
                             "desc": "Escucha nuestro contenido educativo",
                             "btn_texto": "Escuchar",
-                            "imagen": "img/374cb3f7202a851bf5bde99ec099e541.jpg",
+                            "imagen": "img\/374cb3f7202a851bf5bde99ec099e541.jpg",
                             "imagen_fija": false
                         },
                         {
                             "titulo": "Arte y Deportes",
                             "desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
                             "btn_texto": "Conocer Más",
-                            "imagen": "img/bienestar_estudiantil_1.png",
+                            "imagen": "img\/bienestar_estudiantil_1.png",
                             "imagen_fija": false
                         }
                     ],
@@ -1514,22 +1529,22 @@
                     "div_servicios_lista": "",
                     "etiqueta_superior": "Servicios Institucionales",
                     "titulo": "Todo lo que necesitas en  *un solo lugar*",
-                    "serv1_imagen": "img/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
+                    "serv1_imagen": "img\/1788754247_1720017362_dbe7fc57cd0d7d9ab805.jpg",
                     "serv2_titulo": "Campus Virtual",
-                    "serv2_desc": "Plataforma educativa 24/7",
-                    "serv2_imagen": "img/servicio-campus.jpg",
+                    "serv2_desc": "Plataforma educativa 24\/7",
+                    "serv2_imagen": "img\/servicio-campus.jpg",
                     "serv3_titulo": "Horarios",
                     "serv3_desc": "Consulta tus horarios de clase",
-                    "serv3_imagen": "img/salud.jpg",
+                    "serv3_imagen": "img\/salud.jpg",
                     "serv4_titulo": "Servicios Digitales",
                     "serv4_desc": "Trámites en línea y gestión académica",
-                    "serv4_imagen": "img/salud.jpg",
+                    "serv4_imagen": "img\/salud.jpg",
                     "serv5_titulo": "Podcast ITB",
                     "serv5_desc": "Escucha nuestro contenido educativo",
-                    "serv5_imagen": "img/salud.jpg",
+                    "serv5_imagen": "img\/salud.jpg",
                     "serv6_titulo": "Arte y Deportes",
                     "serv6_desc": "Clubes deportivos, grupos artísticos y actividades recreativas",
-                    "serv6_imagen": "img/estudiantes1.png"
+                    "serv6_imagen": "img\/estudiantes1.png"
                 },
                 "alianzas": {
                     "_visible": "1",
@@ -1537,49 +1552,49 @@
                     "boton_todas": "Ver Alianzas y Convenios",
                     "lista_logos": [
                         {
-                            "imagen": "img/aecd83a071c09531ceea048d412d09e6.png",
+                            "imagen": "img\/aecd83a071c09531ceea048d412d09e6.png",
                             "nombre": "Aliado 1"
                         },
                         {
-                            "imagen": "img/alianza_2.jpg",
+                            "imagen": "img\/alianza_2.jpg",
                             "nombre": "Aliado 2"
                         },
                         {
-                            "imagen": "img/alianza_3.png",
+                            "imagen": "img\/alianza_3.png",
                             "nombre": "Aliado 3"
                         },
                         {
-                            "imagen": "img/alianza_4.png",
+                            "imagen": "img\/alianza_4.png",
                             "nombre": "Aliado 4"
                         },
                         {
-                            "imagen": "img/alianza_5.png",
+                            "imagen": "img\/alianza_5.png",
                             "nombre": "Aliado 5"
                         }
                     ],
                     "lista_fotos": [
                         {
-                            "imagen": "img/alianza_sub1.png",
+                            "imagen": "img\/alianza_sub1.png",
                             "nombre": "Actividad ITB 1"
                         },
                         {
-                            "imagen": "img/alianza_sub2.png",
+                            "imagen": "img\/alianza_sub2.png",
                             "nombre": "Actividad ITB 2"
                         },
                         {
-                            "imagen": "img/alianza_sub3.png",
+                            "imagen": "img\/alianza_sub3.png",
                             "nombre": "Actividad ITB 3"
                         },
                         {
-                            "imagen": "img/alianza_sub4.png",
+                            "imagen": "img\/alianza_sub4.png",
                             "nombre": "Actividad ITB 4"
                         },
                         {
-                            "imagen": "img/alianza_sub5.png",
+                            "imagen": "img\/alianza_sub5.png",
                             "nombre": "Actividad ITB 5"
                         },
                         {
-                            "imagen": "img/alianza_sub6.png",
+                            "imagen": "img\/alianza_sub6.png",
                             "nombre": "Actividad ITB 6"
                         }
                     ],
@@ -1593,18 +1608,18 @@
                     "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
                     "miembros": [
                         {
-                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "foto": "img\/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
                             "nombre": "Obst. Lenny Mariscal San Martín",
                             "cargo": "Representante de Docentes"
                         },
                         {
-                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "foto": "img\/8974ecdec40ba06bcf640706e7a7ae12.jpg",
                             "nombre": "Ing. Marcos Escaleras Gómez",
                             "cargo": "Representante de Trabajadores"
                         }
                     ],
                     "div_estructura": "",
-                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_imagen": "img\/86d94af61b878d428da1c96394fcb831.jpg",
                     "card_icono": "",
                     "card_titulo": "Estructura Orgánica",
                     "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
@@ -1637,22 +1652,22 @@
                     "div_global": "",
                     "btn_directorio": "Ver Directorio",
                     "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-                    "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
+                    "aut1_foto": "img\/PHD.Roberto_tolozano.jpg",
                     "aut1_nombre": "PhD. Roberto Tolozano Benites",
                     "aut1_cargo": "Canciller",
                     "aut1_email": "#",
                     "aut1_telf": "#",
-                    "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
+                    "aut2_foto": "img\/PHD.Elena_Tolozano.jpg",
                     "aut2_nombre": "PhD. Elena Tolozano Benites",
                     "aut2_cargo": "Rectora",
                     "aut2_email": "#",
                     "aut2_telf": "#",
-                    "aut3_foto": "img/PHD.Luis_alzate.jpg",
+                    "aut3_foto": "img\/PHD.Luis_alzate.jpg",
                     "aut3_nombre": "PhD. Luis Alzate Peralta",
                     "aut3_cargo": "Vicerrector Académico y de Investigación",
                     "aut3_email": "#",
                     "aut3_telf": "#",
-                    "aut4_foto": "img/PHD.Michelle_tolozano.webp",
+                    "aut4_foto": "img\/PHD.Michelle_tolozano.webp",
                     "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
                     "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
                     "aut4_email": "#",
@@ -1664,27 +1679,27 @@
                     "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
                     "items": [
                         {
-                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "icono": "img\/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
                             "titulo": "Cogobierno",
                             "descripcion": "Participación y gestión democrática"
                         },
                         {
-                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "icono": "img\/f85372445ff70bd838ecb51f47294030.svg",
                             "titulo": "Igualdad",
                             "descripcion": "Oportunidades sin discriminación"
                         },
                         {
-                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "icono": "img\/1870e3b99207af610588a15e8c564b66.svg",
                             "titulo": "Calidad",
                             "descripcion": "Excelencia en educación superior"
                         },
                         {
-                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "icono": "img\/135639f1bc8e047730e524fad7040ebc.svg",
                             "titulo": "Pertinencia",
                             "descripcion": "Programas alineados a la sociedad"
                         },
                         {
-                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "icono": "img\/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
                             "titulo": "Integralidad",
                             "descripcion": "Formación académica y humana"
                         }
@@ -1696,18 +1711,18 @@
                     "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
                     "miembros": [
                         {
-                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "foto": "img\/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
                             "nombre": "Obst. Lenny Mariscal San Martín",
                             "cargo": "Representante de Docentes"
                         },
                         {
-                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "foto": "img\/8974ecdec40ba06bcf640706e7a7ae12.jpg",
                             "nombre": "Ing. Marcos Escaleras Gómez",
                             "cargo": "Representante de Trabajadores"
                         }
                     ],
                     "div_estructura": "",
-                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_imagen": "img\/86d94af61b878d428da1c96394fcb831.jpg",
                     "card_icono": "",
                     "card_titulo": "Estructura Orgánica",
                     "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
@@ -1725,9 +1740,9 @@
                     "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
                     "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
                     "div_multimedia": "",
-                    "audio": "audio/himnoitb.mp3",
+                    "audio": "audio\/himnoitb.mp3",
                     "btn_descargar": "Descargar música",
-                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "imagen": "img\/Himno_Estudiante_itb.jpg",
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
@@ -1761,7 +1776,7 @@
                             "texto": "Formación práctica orientada al desarrollo económico y social."
                         }
                     ],
-                    "imagen": "img/6722e39fdc881aa2a5155f2761551c00.jpg"
+                    "imagen": "img\/6722e39fdc881aa2a5155f2761551c00.jpg"
                 },
                 "sobre_vision": {
                     "_visible": "1",
@@ -1778,7 +1793,7 @@
                             "texto": "Transferencia tecnológica e innovación para el aprendizaje continuo."
                         }
                     ],
-                    "imagen": "img/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
+                    "imagen": "img\/9bd0a3e3159e32a41e17a2fdc48caa55.jpg"
                 },
                 "sobre_cogobierno": {
                     "_visible": "1",
@@ -1786,18 +1801,18 @@
                     "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
                     "miembros": [
                         {
-                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "foto": "img\/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
                             "nombre": "Obst. Lenny Mariscal San Martín",
                             "cargo": "Representante de Docentes"
                         },
                         {
-                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "foto": "img\/8974ecdec40ba06bcf640706e7a7ae12.jpg",
                             "nombre": "Ing. Marcos Escaleras Gómez",
                             "cargo": "Representante de Trabajadores"
                         }
                     ],
                     "div_estructura": "",
-                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_imagen": "img\/86d94af61b878d428da1c96394fcb831.jpg",
                     "card_icono": "",
                     "card_titulo": "Estructura Orgánica",
                     "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
@@ -1815,13 +1830,138 @@
                     "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
                     "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
                     "div_multimedia": "",
-                    "audio": "audio/himnoitb.mp3",
+                    "audio": "audio\/himnoitb.mp3",
                     "btn_descargar": "Descargar música",
-                    "imagen": "img/Himno_Estudiante_itb.jpg",
+                    "imagen": "img\/Himno_Estudiante_itb.jpg",
                     "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
                 }
             },
             "updated_at": "2026-09-12 01:05:14"
+        },
+        "pg_2336c72c2336": {
+            "id": "pg_2336c72c2336",
+            "nombre": "prueba 03",
+            "slug": "prueba-03",
+            "icon": "bi bi-file-earmark-text",
+            "menu_pos": "hijo:Admisiones",
+            "menu_before": "",
+            "secciones": [
+                "pg_7716650bace6:himno",
+                "pg_344b6c0b7ef3:alianzas",
+                "pg_85f4857b7ca5:cogobierno"
+            ],
+            "contenido": {
+                "alianzas": {
+                    "_visible": "1",
+                    "titulo": "Alianzas del ITB",
+                    "boton_todas": "Ver Alianzas y Convenios",
+                    "lista_logos": [
+                        {
+                            "imagen": "img\/aecd83a071c09531ceea048d412d09e6.png",
+                            "nombre": "Aliado 1"
+                        },
+                        {
+                            "imagen": "img\/alianza_2.jpg",
+                            "nombre": "Aliado 2"
+                        },
+                        {
+                            "imagen": "img\/alianza_3.png",
+                            "nombre": "Aliado 3"
+                        },
+                        {
+                            "imagen": "img\/alianza_4.png",
+                            "nombre": "Aliado 4"
+                        },
+                        {
+                            "imagen": "img\/alianza_5.png",
+                            "nombre": "Aliado 5"
+                        }
+                    ],
+                    "lista_fotos": [
+                        {
+                            "imagen": "img\/alianza_sub1.png",
+                            "nombre": "Actividad ITB 1"
+                        },
+                        {
+                            "imagen": "img\/alianza_sub2.png",
+                            "nombre": "Actividad ITB 2"
+                        },
+                        {
+                            "imagen": "img\/alianza_sub3.png",
+                            "nombre": "Actividad ITB 3"
+                        },
+                        {
+                            "imagen": "img\/alianza_sub4.png",
+                            "nombre": "Actividad ITB 4"
+                        },
+                        {
+                            "imagen": "img\/alianza_sub5.png",
+                            "nombre": "Actividad ITB 5"
+                        },
+                        {
+                            "imagen": "img\/alianza_sub6.png",
+                            "nombre": "Actividad ITB 6"
+                        }
+                    ],
+                    "div_textos": "",
+                    "div_logos": "",
+                    "div_fotos": ""
+                },
+                "sobre_cogobierno": {
+                    "_visible": "1",
+                    "titulo": "Co Gobierno",
+                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
+                    "miembros": [
+                        {
+                            "foto": "img\/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
+                            "nombre": "Obst. Lenny Mariscal San Martín",
+                            "cargo": "Representante de Docentes"
+                        },
+                        {
+                            "foto": "img\/8974ecdec40ba06bcf640706e7a7ae12.jpg",
+                            "nombre": "Ing. Marcos Escaleras Gómez",
+                            "cargo": "Representante de Trabajadores"
+                        }
+                    ],
+                    "div_estructura": "",
+                    "card_imagen": "img\/86d94af61b878d428da1c96394fcb831.jpg",
+                    "card_icono": "",
+                    "card_titulo": "Estructura Orgánica",
+                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
+                    "card_boton": "Ver Organigrama",
+                    "card_boton_url": "#"
+                },
+                "himno": {
+                    "_visible": "1",
+                    "div_textos": "",
+                    "titulo": "Música y letra",
+                    "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
+                    "div_letra": "",
+                    "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
+                    "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
+                    "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
+                    "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
+                    "div_multimedia": "",
+                    "audio": "audio\/himnoitb.mp3",
+                    "btn_descargar": "Descargar música",
+                    "imagen": "img\/Himno_Estudiante_itb.jpg",
+                    "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
+                }
+            },
+            "updated_at": "2026-09-12 01:19:44"
         }
+    },
+    "documentos_transparencia": {
+        "items": [
+            {
+                "id": 1,
+                "categoria": "info_financiera",
+                "nombre": "prueba",
+                "anio": "2026",
+                "archivo": "docs\/80198af8937d360be1f0443003c625b5.pdf",
+                "tamano": "",
+                "publicado": true
+            }
+        ]
     }
 }
