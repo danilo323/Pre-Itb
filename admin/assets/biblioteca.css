@@ -682,3 +682,492 @@
         flex: 1;
     }
 }
+
+/* =============================================
+   BARRA DE HERRAMIENTAS
+   Buscar · filtrar por uso · ordenar · rejilla o lista.
+   Patrón habitual de las bibliotecas de medios: la rejilla sirve para
+   reconocer una foto de un vistazo y la lista para comparar nombre, peso
+   y fecha. Cambiar de vista no toca los filtros ni lo marcado.
+   ============================================= */
+.biblioteca-toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin-top: 20px;
+}
+
+.biblioteca-buscador {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 280px;
+    max-width: 420px;
+}
+
+.biblioteca-buscador > i {
+    position: absolute;
+    left: 12px;
+    color: var(--text-muted);
+    pointer-events: none;
+    font-size: .9rem;
+}
+
+.biblioteca-buscador .form-input {
+    flex: 1;
+    padding-left: 34px;
+}
+
+.biblioteca-toolbar__controles {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    flex-wrap: wrap;
+}
+
+/* Filtros por uso */
+.biblioteca-filtros {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-main);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.biblioteca-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    border: 0;
+    background: none;
+    padding: 7px 12px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: .82rem;
+    font-weight: 600;
+    color: var(--text-body);
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.biblioteca-chip:hover {
+    color: var(--text-main);
+}
+
+.biblioteca-chip.is-activo {
+    background: var(--bg-panel);
+    color: var(--primary);
+    box-shadow: 0 1px 3px rgba(15, 34, 67, .12);
+}
+
+.biblioteca-chip__n {
+    font-size: .74rem;
+    padding: 1px 6px;
+    border-radius: 20px;
+    background: var(--bg-subtle);
+    color: var(--text-muted);
+}
+
+.biblioteca-chip.is-activo .biblioteca-chip__n {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.biblioteca-chip:focus-visible,
+.biblioteca-vista:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.biblioteca-orden .form-input {
+    padding: 8px 12px;
+    font-size: .84rem;
+}
+
+/* Conmutador de vista */
+.biblioteca-vistas {
+    display: flex;
+    gap: 2px;
+    background: var(--bg-main);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.biblioteca-vista {
+    border: 0;
+    background: none;
+    width: 34px;
+    height: 32px;
+    border-radius: 7px;
+    color: var(--text-muted);
+    cursor: pointer;
+    display: grid;
+    place-items: center;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.biblioteca-vista.is-activo {
+    background: var(--bg-panel);
+    color: var(--primary);
+    box-shadow: 0 1px 3px rgba(15, 34, 67, .12);
+}
+
+/* Resumen bajo la barra */
+.biblioteca-resumen {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin: 14px 0 4px;
+}
+
+.biblioteca-conteo--suave {
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.is-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
+}
+
+/* =============================================
+   ACCIONES EN LOTE
+   Con 105 imágenes, borrarlas de una en una no es viable.
+   ============================================= */
+.biblioteca-lote {
+    position: sticky;
+    top: 12px;
+    z-index: 20;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    margin: 12px 0;
+    padding: 12px 16px;
+    border-radius: 12px;
+    background: var(--primary-blue);
+    color: var(--bg-panel);
+    font-size: .88rem;
+    font-weight: 600;
+    box-shadow: 0 8px 22px rgba(15, 34, 67, .22);
+}
+
+.biblioteca-lote.is-hidden {
+    display: none;
+}
+
+.biblioteca-lote__acciones {
+    display: flex;
+    gap: 8px;
+}
+
+.biblioteca-lote .btn-outline {
+    border-color: rgba(255, 255, 255, .45);
+    color: var(--bg-panel);
+    background: transparent;
+}
+
+.biblioteca-lote .btn-outline:hover {
+    background: rgba(255, 255, 255, .12);
+}
+
+/* =============================================
+   TARJETA: CASILLA DE SELECCIÓN
+   ============================================= */
+.biblioteca-card {
+    position: relative;
+}
+
+.biblioteca-card__marca {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    width: 24px;
+    height: 24px;
+    cursor: pointer;
+}
+
+.biblioteca-card__marca input {
+    position: absolute;
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    margin: 0;
+    cursor: pointer;
+}
+
+.biblioteca-card__marca span {
+    display: block;
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    border: 2px solid var(--bg-panel);
+    background: rgba(17, 29, 53, .4);
+    box-shadow: 0 1px 4px rgba(15, 34, 67, .25);
+    transition: background-color .15s ease, border-color .15s ease;
+}
+
+.biblioteca-card__marca span::after {
+    content: '';
+    display: block;
+    width: 6px;
+    height: 11px;
+    margin: 2px auto 0;
+    border: solid var(--bg-panel);
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    opacity: 0;
+    transition: opacity .15s ease;
+}
+
+.biblioteca-card__marca input:checked + span {
+    background: var(--primary);
+    border-color: var(--primary);
+}
+
+.biblioteca-card__marca input:checked + span::after {
+    opacity: 1;
+}
+
+.biblioteca-card__marca input:focus-visible + span {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.biblioteca-card.is-marcada {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px var(--primary-light-strong);
+}
+
+/* Entrada de una imagen recién subida, para no perderla de vista. */
+.biblioteca-card.is-nueva {
+    animation: biblioteca-entra .45s ease-out;
+}
+
+@keyframes biblioteca-entra {
+    from { opacity: 0; transform: translateY(-10px) scale(.97); }
+    to   { opacity: 1; transform: none; }
+}
+
+.js-copiar-ruta.is-copiado {
+    border-color: var(--success);
+    color: var(--success);
+}
+
+/* =============================================
+   VISTA DE LISTA
+   Una fila por imagen: se comparan nombre, peso y fecha de un vistazo.
+   ============================================= */
+.biblioteca-grid[data-vista="lista"] {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+/* El atributo hidden solo vale display:none, que pierde contra el display
+   de estas reglas. Sin esto, al filtrar en vista de lista las tarjetas
+   ocultas seguian viendose. */
+.biblioteca-card[hidden] {
+    display: none !important;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card {
+    display: grid;
+    grid-template-columns: 56px 1fr auto;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 14px 10px 44px;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__marca {
+    top: 50%;
+    transform: translateY(-50%);
+    left: 12px;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__img {
+    height: 56px;
+    width: 56px;
+    border-radius: 8px;
+    overflow: hidden;
+    background-size: 10px 10px;
+    background-position: 0 0, 5px 5px;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__info {
+    padding: 0;
+    flex-direction: row;
+    align-items: center;
+    gap: 18px;
+    flex-wrap: wrap;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__nombre {
+    flex: 1 1 220px;
+    min-width: 0;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__acciones {
+    padding: 0;
+    display: flex;
+    gap: 8px;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__acciones .btn {
+    width: auto;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__lupa {
+    font-size: .8rem;
+}
+
+/* =============================================
+   SUBIDA: PROGRESO POR ARCHIVO
+   Una barra real por archivo, con su resultado. El patrón que usan las
+   bibliotecas de medios serias: nada de un giro indefinido que no dice
+   cuánto queda ni cuál de los archivos falló.
+   ============================================= */
+.biblioteca-preview {
+    position: relative;
+}
+
+.biblioteca-preview__barra {
+    position: absolute;
+    left: 8px;
+    right: 8px;
+    bottom: 30px;
+    height: 5px;
+    border-radius: 3px;
+    background: rgba(17, 29, 53, .25);
+    overflow: hidden;
+}
+
+.biblioteca-preview__barra span {
+    display: block;
+    height: 100%;
+    background: var(--primary);
+    transition: width .15s linear;
+}
+
+.biblioteca-preview__estado {
+    position: absolute;
+    top: 6px;
+    right: 6px;
+    width: 24px;
+    height: 24px;
+    display: grid;
+    place-items: center;
+    border-radius: 50%;
+    color: var(--bg-panel);
+    font-size: .8rem;
+}
+
+.biblioteca-preview.is-hecho .biblioteca-preview__estado {
+    background: var(--success);
+}
+
+.biblioteca-preview.is-error .biblioteca-preview__estado {
+    background: var(--danger);
+}
+
+.biblioteca-preview.is-subiendo img {
+    opacity: .55;
+}
+
+.biblioteca-preview.is-error {
+    border-color: var(--danger);
+}
+
+/* Velo al arrastrar archivos sobre la pantalla: no hace falta apuntar al
+   recuadro, se puede soltar donde sea. */
+.biblioteca-soltar {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: grid;
+    place-items: center;
+    background: rgba(17, 29, 53, .55);
+    pointer-events: none;
+}
+
+.biblioteca-soltar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 18px 28px;
+    border-radius: 14px;
+    border: 2px dashed var(--bg-panel);
+    background: rgba(17, 29, 53, .5);
+    color: var(--bg-panel);
+    font-weight: 700;
+}
+
+/* =============================================
+   AVISOS FLOTANTES
+   Evitan recargar la página entera por cada acción.
+   ============================================= */
+.biblioteca-avisos {
+    position: fixed;
+    right: 20px;
+    bottom: 20px;
+    z-index: 10001;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.biblioteca-aviso {
+    padding: 12px 18px;
+    border-radius: 10px;
+    font-size: .88rem;
+    font-weight: 600;
+    color: var(--bg-panel);
+    background: var(--success);
+    box-shadow: 0 10px 26px rgba(15, 34, 67, .26);
+    animation: biblioteca-aviso-entra .25s ease-out;
+}
+
+.biblioteca-aviso.is-warning { background: var(--warning); }
+.biblioteca-aviso.is-error   { background: var(--danger); }
+
+.biblioteca-aviso.is-saliendo {
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity .3s ease, transform .3s ease;
+}
+
+@keyframes biblioteca-aviso-entra {
+    from { opacity: 0; transform: translateY(10px); }
+    to   { opacity: 1; transform: none; }
+}
+
+@media (max-width: 600px) {
+    .biblioteca-toolbar,
+    .biblioteca-toolbar__controles {
+        width: 100%;
+    }
+
+    .biblioteca-buscador {
+        max-width: none;
+    }
+
+    .biblioteca-grid[data-vista="lista"] .biblioteca-card {
+        grid-template-columns: 48px 1fr;
+    }
+
+    .biblioteca-grid[data-vista="lista"] .biblioteca-card__acciones {
+        grid-column: 1 / -1;
+    }
+}

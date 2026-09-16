@@ -42,7 +42,67 @@ if (($_GET['ajax'] ?? '') === 'lista') {
     exit;
 }
 
-/* ---------- Subir imágenes ---------- */
+/* ---------- Subir UNA imagen y responder en JSON ----------
+   La pantalla sube de una en una desde el navegador, para poder enseñar el
+   progreso real de cada archivo y decir cuál falló y por qué. El POST normal de
+   más abajo se conserva para quien tenga JavaScript desactivado. */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'subir_una') {
+    csrf_check();
+
+    $res = biblioteca_guardar_subida($_FILES['imagen'] ?? []);
+
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store');
+
+    if (!$res['ok']) {
+        http_response_code(422);
+        echo json_encode(['ok' => false, 'error' => $res['error']], JSON_UNESCAPED_UNICODE);
+        exit;
+    }
+
+    // Se devuelven los datos de la tarjeta para poder pintarla sin recargar.
+    $nombre  = biblioteca_nombre_de_ruta($res['ruta']);
+    $fisica  = biblioteca_dir() . '/' . $nombre;
+    echo json_encode([
+        'ok'     => true,
+        'imagen' => [
+            'ruta'   => $res['ruta'],
+            'nombre' => $nombre,
+            'src'    => '../' . $res['ruta'],
+            'peso'   => biblioteca_peso_legible((int) @filesize($fisica)),
+            'fecha'  => date('d/m/Y'),
+        ],
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    exit;
+}
+
+/* ---------- Eliminar varias a la vez, en JSON ----------
+   Cada una pasa por la misma comprobación de uso que el borrado de una sola:
+   las que estén publicadas se rechazan y se dice cuáles. */
+if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'eliminar_varias') {
+    csrf_check();
+
+    $rutas = $_POST['rutas'] ?? [];
+    $borradas = [];
+    $fallos   = [];
+
+    foreach ((array) $rutas as $ruta) {
+        $res = biblioteca_eliminar((string) $ruta);
+        if ($res['ok']) $borradas[] = (string) $ruta;
+        else $fallos[] = biblioteca_nombre_de_ruta((string) $ruta) . ': ' . $res['error'];
+    }
+
+    header('Content-Type: application/json; charset=utf-8');
+    header('Cache-Control: no-store');
+    echo json_encode([
+        'ok'       => empty($fallos),
+        'borradas' => $borradas,
+        'fallos'   => $fallos,
+    ], JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
+    exit;
+}
+
+/* ---------- Subir imágenes (sin JavaScript) ---------- */
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && ($_POST['action'] ?? '') === 'subir') {
     csrf_check();
 
@@ -103,6 +163,19 @@ require_once __DIR__ . '/views/layout.php';
 $busqueda = trim((string) ($_GET['q'] ?? ''));
 $imagenes = biblioteca_listar($busqueda);
 $total    = count($imagenes);
+
+// Se calcula aquí, de una vez, lo que antes se consultaba dentro del bucle:
+// en qué secciones se usa cada imagen, cuántas están libres y cuánto ocupa
+// todo. Sirve para los filtros, el contador y las acciones en lote.
+$peso_total   = 0;
+$n_sin_usar   = 0;
+foreach ($imagenes as $i => $img) {
+    $usos = biblioteca_usos($img['ruta']);
+    $imagenes[$i]['usos']   = $usos;
+    $imagenes[$i]['en_uso'] = !empty($usos);
+    $peso_total += (int) $img['peso'];
+    if (empty($usos)) $n_sin_usar++;
+}
 
 // biblioteca.css no se declara aquí: views/layout.php ya lo carga en todas las
 // pantallas, porque el selector de imágenes puede salir en cualquiera.
@@ -165,20 +238,75 @@ echo layout_start('Biblioteca', 'biblioteca');
     </div>
 </div>
 
-<div class="collection-header">
-    <form method="get" class="search-box biblioteca-buscador">
-        <?php /* El placeholder desaparece al escribir y algunos lectores de
-                 pantalla ni lo anuncian, así que el campo lleva su etiqueta. */ ?>
+<?php /* Barra de herramientas: buscar, filtrar por uso, ordenar y elegir vista.
+         Todo se resuelve en el navegador sobre las tarjetas ya pintadas, salvo
+         la búsqueda, que sigue yendo al servidor para poder enlazarla. */ ?>
+<div class="biblioteca-toolbar">
+    <form method="get" class="biblioteca-buscador">
+        <i class="bi bi-search" aria-hidden="true"></i>
         <input type="search" name="q" value="<?= htmlspecialchars($busqueda, ENT_QUOTES, 'UTF-8') ?>"
                placeholder="Buscar por nombre de archivo..." class="form-input"
                aria-label="Buscar imágenes por nombre de archivo">
         <?php if ($busqueda !== ''): ?>
-            <a href="<?= $AB ?>/biblioteca.php" class="btn btn-outline">Ver todas</a>
+            <a href="<?= $AB ?>/biblioteca.php" class="btn btn-outline btn-sm">Ver todas</a>
         <?php endif; ?>
     </form>
-    <span class="biblioteca-conteo">
+
+    <div class="biblioteca-toolbar__controles">
+        <div class="biblioteca-filtros" role="group" aria-label="Filtrar por uso">
+            <button type="button" class="biblioteca-chip is-activo" data-filtro-uso="todas" aria-pressed="true">
+                Todas <span class="biblioteca-chip__n"><?= $total ?></span>
+            </button>
+            <button type="button" class="biblioteca-chip" data-filtro-uso="en-uso" aria-pressed="false">
+                En uso <span class="biblioteca-chip__n"><?= $total - $n_sin_usar ?></span>
+            </button>
+            <button type="button" class="biblioteca-chip" data-filtro-uso="sin-usar" aria-pressed="false">
+                Sin usar <span class="biblioteca-chip__n"><?= $n_sin_usar ?></span>
+            </button>
+        </div>
+
+        <label class="biblioteca-orden">
+            <span class="is-sr-only">Ordenar por</span>
+            <select id="biblioteca-orden" class="form-input">
+                <option value="recientes">Más recientes</option>
+                <option value="antiguas">Más antiguas</option>
+                <option value="nombre">Nombre (A-Z)</option>
+                <option value="pesadas">Más pesadas</option>
+            </select>
+        </label>
+
+        <div class="biblioteca-vistas" role="group" aria-label="Forma de ver las imágenes">
+            <button type="button" class="biblioteca-vista is-activo" data-vista="rejilla"
+                    aria-pressed="true" aria-label="Ver en rejilla" title="Rejilla">
+                <i class="bi bi-grid-3x3-gap-fill" aria-hidden="true"></i>
+            </button>
+            <button type="button" class="biblioteca-vista" data-vista="lista"
+                    aria-pressed="false" aria-label="Ver en lista" title="Lista">
+                <i class="bi bi-list-ul" aria-hidden="true"></i>
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="biblioteca-resumen">
+    <span id="biblioteca-conteo" class="biblioteca-conteo" role="status" aria-live="polite">
         <?= $total ?> <?= $total === 1 ? 'imagen' : 'imágenes' ?><?= $busqueda !== '' ? ' encontradas' : '' ?>
     </span>
+    <span class="biblioteca-conteo biblioteca-conteo--suave">
+        <?= biblioteca_peso_legible($peso_total) ?> en total
+    </span>
+</div>
+
+<?php /* Barra de selección: aparece al marcar imágenes. Permite borrar varias
+         de una vez, que con 105 archivos era ir de una en una. */ ?>
+<div class="biblioteca-lote is-hidden" id="biblioteca-lote" role="status" aria-live="polite">
+    <span id="biblioteca-lote-texto"></span>
+    <div class="biblioteca-lote__acciones">
+        <button type="button" class="btn btn-outline btn-sm" id="biblioteca-lote-cancelar">Quitar selección</button>
+        <button type="button" class="btn btn-danger btn-sm" id="biblioteca-lote-eliminar">
+            <i class="bi bi-trash-fill" aria-hidden="true"></i> Eliminar seleccionadas
+        </button>
+    </div>
 </div>
 
 <?php if ($total === 0): ?>
@@ -189,16 +317,34 @@ echo layout_start('Biblioteca', 'biblioteca');
             : 'Todavía no hay imágenes. Sube la primera con el recuadro de arriba.' ?></p>
     </div>
 <?php else: ?>
-    <div class="biblioteca-grid">
+    <div class="biblioteca-grid" id="biblioteca-grid" data-vista="rejilla">
         <?php foreach ($imagenes as $img): ?>
             <?php
-            $usos = biblioteca_usos($img['ruta']);
-            $en_uso = !empty($usos);
+            $usos = $img['usos'];
+            $en_uso = $img['en_uso'];
             $titulo_usos = $en_uso
                 ? 'En uso en: ' . implode(' · ', $usos)
                 : 'No se está usando en ninguna sección';
             ?>
-            <figure class="biblioteca-card<?= $en_uso ? ' is-en-uso' : '' ?>">
+            <?php /* Los data-* llevan los datos con los que el navegador filtra
+                     y ordena sin volver al servidor. */ ?>
+            <figure class="biblioteca-card<?= $en_uso ? ' is-en-uso' : '' ?>"
+                    data-nombre="<?= htmlspecialchars(mb_strtolower($img['nombre']), ENT_QUOTES, 'UTF-8') ?>"
+                    data-fecha="<?= (int) $img['fecha'] ?>"
+                    data-peso="<?= (int) $img['peso'] ?>"
+                    data-uso="<?= $en_uso ? 'en-uso' : 'sin-usar' ?>"
+                    data-ruta="<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>">
+
+                <?php if (!$en_uso): ?>
+                    <?php /* Solo se pueden marcar las que no están publicadas:
+                             las que están en uso no se pueden borrar igualmente. */ ?>
+                    <label class="biblioteca-card__marca">
+                        <input type="checkbox" class="js-marcar"
+                               aria-label="<?= htmlspecialchars('Seleccionar ' . $img['nombre'], ENT_QUOTES, 'UTF-8') ?>">
+                        <span aria-hidden="true"></span>
+                    </label>
+                <?php endif; ?>
+
                 <?php /* La miniatura recorta para cuadrar la rejilla, así que
                          al pulsarla se abre la foto entera. Es un <button> y no
                          un <div> con clic para que funcione con el teclado. */ ?>
@@ -227,6 +373,16 @@ echo layout_start('Biblioteca', 'biblioteca');
                     </span>
                 </figcaption>
                 <div class="biblioteca-card__acciones">
+                    <?php /* Copiar la ruta: es lo que hay que pegar en cualquier
+                             campo que pida una imagen, y hasta ahora había que
+                             teclear un nombre de 32 caracteres a mano. */ ?>
+                    <button type="button" class="btn btn-sm btn-outline js-copiar-ruta"
+                            data-ruta="<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>"
+                            aria-label="<?= htmlspecialchars('Copiar la ruta de ' . $img['nombre'], ENT_QUOTES, 'UTF-8') ?>"
+                            title="Copiar ruta">
+                        <i class="bi bi-clipboard" aria-hidden="true"></i> Copiar ruta
+                    </button>
+
                     <?php if ($en_uso): ?>
                         <?php /* Con muchas imágenes, "En uso" repetido no dice
                                  cuál es cuál: la etiqueta larga nombra el
