@@ -70,7 +70,7 @@ $pintar_programa = function (array $prog) {
         <div class="programas__header">
             <span class="programas__tag"><?= content_get('programas', 'etiqueta_superior', 'Formación Práctica e Innovadora') ?></span>
             <h2 class="programas__title">
-                <?= htmlspecialchars(content_get('programas', 'titulo', 'Programas Destacados'), ENT_QUOTES, 'UTF-8') ?>
+                <?= content_get('programas', 'titulo', 'Programas Destacados') ?>
             </h2>
             <p class="programas__subtitle">
                 <?= content_get('programas', 'descripcion', 'Descubre nuestros programas tecnológicos de mayor demanda laboral, diseñados para insertarte rápidamente en el mercado de trabajo.') ?>

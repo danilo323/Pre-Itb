@@ -35,7 +35,7 @@
             <!-- Columna 1: Logo y Teléfonos -->
             <div class="footer-main__col footer-main__col--logo">
                 <a href="index.php" class="footer-main__logo-link">
-                    <img src="<?= content_raw('footer', 'logo', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer-main__logo">
+                    <img src="<?= content_url('footer', 'logo', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer-main__logo">
                 </a>
                 <div class="footer-main__contact">
                     <div class="footer-main__contact-item">
@@ -207,13 +207,13 @@
         <div class="footer-social">
             <span class="footer-social__text"><?= content_get('footer', 'social_texto', '#ITB Instituto Superior Universitario Bolivariano en') ?></span>
             <div class="footer-social__icons">
-                <a href="<?= content_raw('footer', 'youtube_url', '#') ?>"><i class="fab fa-youtube"></i></a>
-                <a href="<?= content_raw('footer', 'instagram_url', '#') ?>"><i class="fab fa-instagram"></i></a>
-                <a href="<?= content_raw('footer', 'facebook_url', '#') ?>"><i class="fab fa-facebook-f"></i></a>
-                <a href="<?= content_raw('footer', 'gplus_url', '#') ?>"><i class="fab fa-google-plus-g"></i></a>
-                <a href="<?= content_raw('footer', 'twitter_url', '#') ?>"><i class="fab fa-twitter"></i></a>
-                <a href="<?= content_raw('footer', 'vimeo_url', '#') ?>"><i class="fab fa-vimeo-v"></i></a>
-                <a href="<?= content_raw('footer', 'linkedin_url', '#') ?>"><i class="fab fa-linkedin-in"></i></a>
+                <a href="<?= content_url('footer', 'youtube_url', '#') ?>"><i class="fab fa-youtube"></i></a>
+                <a href="<?= content_url('footer', 'instagram_url', '#') ?>"><i class="fab fa-instagram"></i></a>
+                <a href="<?= content_url('footer', 'facebook_url', '#') ?>"><i class="fab fa-facebook-f"></i></a>
+                <a href="<?= content_url('footer', 'gplus_url', '#') ?>"><i class="fab fa-google-plus-g"></i></a>
+                <a href="<?= content_url('footer', 'twitter_url', '#') ?>"><i class="fab fa-twitter"></i></a>
+                <a href="<?= content_url('footer', 'vimeo_url', '#') ?>"><i class="fab fa-vimeo-v"></i></a>
+                <a href="<?= content_url('footer', 'linkedin_url', '#') ?>"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>

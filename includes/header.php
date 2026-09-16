@@ -42,7 +42,7 @@
         <div class="navbar__container">
             <!-- Logo -->
             <a href="index.php" class="navbar__logo">
-                <img src="<?= content_raw('ajustes', 'logo_principal', 'img/logo.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
+                <img src="<?= content_url('ajustes', 'logo_principal', 'img/logo.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
             </a>
 
             <!-- Botón hamburguesa (Mobile) -->

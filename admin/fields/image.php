@@ -99,8 +99,8 @@ function field_image_parse($raw, array $config) {
             'image/webp',
             'image/gif',
             'image/svg+xml',
-            'text/xml',
             'image/svg'
+            // 'text/xml' se quito a proposito: admitia cualquier XML, no solo SVG.
         ];
         $mime = false;
         if (function_exists('finfo_open')) {
@@ -206,7 +206,20 @@ function field_image_parse($raw, array $config) {
             return 'img/' . $new_name;
 
         } else {
-            // SVG u otros: guardar sin comprimir
+            // SVG u otros: guardar sin comprimir.
+            // El SVG es XML y puede llevar scripts dentro, asi que se revisa
+            // antes de guardarlo. Se siguen admitiendo (los logos de aliados
+            // son SVG), pero se rechaza el que traiga codigo ejecutable.
+            if ($ext === 'svg') {
+                $svg = (string) @file_get_contents($tmp_name);
+                $peligroso = '/<\s*script\b|<\s*foreignObject\b|<\s*use[^>]+href\s*=\s*["\']\s*http|javascript\s*:|\son[a-z]+\s*=/i';
+                if ($svg === '' || preg_match($peligroso, $svg)) {
+                    $_SESSION['flash_message'] = 'El SVG contiene código ejecutable y no se subió. Expórtalo de nuevo sin scripts ni animaciones con JavaScript.';
+                    $_SESSION['flash_type'] = 'error';
+                    return $old_val;
+                }
+            }
+
             $new_name = bin2hex(random_bytes(16)) . '.' . $ext;
             $dest = $upload_dir . $new_name;
 

@@ -10,7 +10,7 @@
         <div class="experiencia__content">
             <span class="experiencia__tag"><?= content_get('experiencia', 'etiqueta_superior', '¿Por qué elegir el ITB?') ?></span>
             <h2 class="experiencia__title">
-                <?= htmlspecialchars(content_get('experiencia', 'titulo', 'Tu Experiencia ITB'), ENT_QUOTES, 'UTF-8') ?>
+                <?= content_get('experiencia', 'titulo', 'Tu Experiencia ITB') ?>
             </h2>
             <p class="experiencia__description">
                 <?= content_get('experiencia', 'descripcion', 'En el ITB no solo te formamos académicamente; nos preocupamos por tu bienestar integral. Te ofrecemos beneficios exclusivos diseñados para apoyarte durante toda tu carrera universitaria.') ?>

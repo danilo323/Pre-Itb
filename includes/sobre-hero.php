@@ -1,4 +1,11 @@
-<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('sobre_hero')) return; ?>
+<?php
+// La clave de seccion la decide la pagina que incluye este componente
+// ($hero_key), no este archivo. Antes estaba fija en 'sobre_hero', asi que
+// el interruptor de Sobre Nosotros ocultaba tambien el hero de Oferta
+// Academica y el interruptor propio de esa pagina no hacia nada.
+if (!function_exists('is_visible')) require_once 'content_helper.php';
+if (!is_visible($hero_key ?? 'sobre_hero')) return;
+?>
 <?php
 // includes/sobre-hero.php
 //
