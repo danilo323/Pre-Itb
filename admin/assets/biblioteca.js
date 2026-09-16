@@ -159,22 +159,121 @@
     const input = document.getElementById('biblioteca-input');
     if (!zona || !input) return;
 
-    const aviso = document.getElementById('biblioteca-seleccion');
-    const texto = document.getElementById('biblioteca-seleccion-texto');
+    const modal      = document.getElementById('biblioteca-modal');
+    const btnAbrir   = document.getElementById('biblioteca-abrir-subida');
+    const btnCerrar  = document.getElementById('biblioteca-modal-cerrar');
+    const btnCancel  = document.getElementById('biblioteca-modal-cancelar');
+    const btnEnviar  = document.getElementById('biblioteca-enviar');
+    const previews   = document.getElementById('biblioteca-previews');
+    const texto      = document.getElementById('biblioteca-seleccion-texto');
 
-    function mostrarSeleccion() {
-        const n = input.files ? input.files.length : 0;
-        if (!n) {
-            aviso.classList.add('is-hidden');
-            return;
-        }
-        texto.textContent = n === 1
-            ? `1 imagen lista: ${input.files[0].name}`
-            : `${n} imágenes listas para subir`;
-        aviso.classList.remove('is-hidden');
+    // Lista propia de archivos elegidos. Hace falta para poder quitar uno:
+    // input.files es de solo lectura, así que se rehace con un DataTransfer.
+    let elegidos = [];
+
+    const pesoLegible = (b) => {
+        if (b >= 1048576) return (b / 1048576).toFixed(1).replace('.', ',') + ' MB';
+        if (b >= 1024) return Math.round(b / 1024) + ' KB';
+        return b + ' B';
+    };
+
+    /* ---- Ventana de subida ---- */
+
+    let ultimoFoco = null;
+
+    function abrirModal() {
+        ultimoFoco = document.activeElement;
+        modal.classList.remove('is-hidden');
+        requestAnimationFrame(() => modal.classList.add('is-visible'));
+        // El foco entra en la ventana; si no, seguiría detrás, en la página.
+        (btnCerrar || modal).focus();
     }
 
-    input.addEventListener('change', mostrarSeleccion);
+    function cerrarModal() {
+        modal.classList.remove('is-visible');
+        setTimeout(() => modal.classList.add('is-hidden'), 200);
+        // Devolver el foco a donde estaba: quien navega con teclado no se pierde.
+        if (ultimoFoco) ultimoFoco.focus();
+    }
+
+    btnAbrir?.addEventListener('click', abrirModal);
+    btnCerrar?.addEventListener('click', cerrarModal);
+    btnCancel?.addEventListener('click', () => { limpiarSeleccion(); cerrarModal(); });
+    modal?.addEventListener('click', (e) => { if (e.target === modal) cerrarModal(); });
+
+    /* ---- Miniaturas de lo que se va a subir ---- */
+
+    function sincronizarInput() {
+        const dt = new DataTransfer();
+        elegidos.forEach((f) => dt.items.add(f));
+        input.files = dt.files;
+    }
+
+    function limpiarSeleccion() {
+        elegidos = [];
+        sincronizarInput();
+        pintarPreviews();
+    }
+
+    function pintarPreviews() {
+        previews.innerHTML = '';
+
+        if (!elegidos.length) {
+            previews.classList.add('is-hidden');
+            texto.textContent = '';
+            btnEnviar.disabled = true;
+            return;
+        }
+
+        previews.classList.remove('is-hidden');
+        btnEnviar.disabled = false;
+        texto.textContent = elegidos.length === 1
+            ? '1 imagen lista para subir'
+            : `${elegidos.length} imágenes listas para subir`;
+
+        elegidos.forEach((archivo, i) => {
+            const item = document.createElement('div');
+            item.className = 'biblioteca-preview';
+
+            const img = document.createElement('img');
+            // Se lee del archivo local, sin subir nada todavía.
+            img.src = URL.createObjectURL(archivo);
+            img.alt = archivo.name;
+            // Liberar la memoria del objeto en cuanto el navegador lo pintó.
+            img.addEventListener('load', () => URL.revokeObjectURL(img.src), { once: true });
+
+            const pie = document.createElement('span');
+            pie.className = 'biblioteca-preview__nombre';
+            pie.textContent = archivo.name;
+            pie.title = `${archivo.name} · ${pesoLegible(archivo.size)}`;
+
+            const quitar = document.createElement('button');
+            quitar.type = 'button';
+            quitar.className = 'biblioteca-preview__quitar';
+            quitar.innerHTML = '<i class="bi bi-x" aria-hidden="true"></i>';
+            quitar.setAttribute('aria-label', `Quitar ${archivo.name} de la selección`);
+            quitar.addEventListener('click', () => {
+                elegidos.splice(i, 1);
+                sincronizarInput();
+                pintarPreviews();
+            });
+
+            item.append(img, pie, quitar);
+            previews.appendChild(item);
+        });
+    }
+
+    function añadirArchivos(lista) {
+        // Solo imágenes, y sin repetir si se sueltan dos veces las mismas.
+        Array.from(lista || []).forEach((f) => {
+            const repetido = elegidos.some((e) => e.name === f.name && e.size === f.size);
+            if (!repetido) elegidos.push(f);
+        });
+        sincronizarInput();
+        pintarPreviews();
+    }
+
+    input.addEventListener('change', () => añadirArchivos(input.files));
 
     ['dragenter', 'dragover'].forEach(ev => {
         zona.addEventListener(ev, e => {
@@ -192,16 +291,56 @@
 
     zona.addEventListener('drop', e => {
         if (!e.dataTransfer || !e.dataTransfer.files.length) return;
-        // Pasar los archivos soltados al <input file> real: así el formulario
-        // se envía igual que si se hubieran elegido con el botón, sin montar
-        // una subida por AJAX aparte.
-        input.files = e.dataTransfer.files;
-        mostrarSeleccion();
+        añadirArchivos(e.dataTransfer.files);
     });
 
     // El recuadro entero abre el buscador de archivos, no solo el enlace.
     zona.addEventListener('click', e => {
         if (e.target.closest('label')) return; // el <label for> ya lo hace
         input.click();
+    });
+
+    /* ---- Visor: la imagen a tamaño completo ---- */
+
+    const visor       = document.getElementById('biblioteca-visor');
+    const visorImg    = document.getElementById('biblioteca-visor-img');
+    const visorNombre = document.getElementById('biblioteca-visor-nombre');
+    const visorMeta   = document.getElementById('biblioteca-visor-meta');
+    const visorCerrar = document.getElementById('biblioteca-visor-cerrar');
+    let focoAntesVisor = null;
+
+    function abrirVisor(boton) {
+        if (!visor) return;
+        focoAntesVisor = boton;
+        visorImg.src = boton.dataset.src;
+        visorImg.alt = boton.dataset.nombre || '';
+        visorNombre.textContent = boton.dataset.nombre || '';
+        visorMeta.textContent = boton.dataset.meta || '';
+        visor.classList.remove('is-hidden');
+        requestAnimationFrame(() => visor.classList.add('is-visible'));
+        visorCerrar?.focus();
+    }
+
+    function cerrarVisor() {
+        if (!visor) return;
+        visor.classList.remove('is-visible');
+        setTimeout(() => {
+            visor.classList.add('is-hidden');
+            visorImg.src = '';
+        }, 200);
+        if (focoAntesVisor) focoAntesVisor.focus();
+    }
+
+    document.querySelectorAll('.js-ver-imagen').forEach((b) => {
+        b.addEventListener('click', () => abrirVisor(b));
+    });
+    visorCerrar?.addEventListener('click', cerrarVisor);
+    visor?.addEventListener('click', (e) => { if (e.target === visor) cerrarVisor(); });
+
+    // Escape cierra la ventana que esté abierta, la de subir o la del visor.
+    document.addEventListener('keydown', (e) => {
+        if (e.key !== 'Escape') return;
+        if (visor && !visor.classList.contains('is-hidden')) cerrarVisor();
+        else if (modal && !modal.classList.contains('is-hidden')) cerrarModal();
     });
 })();

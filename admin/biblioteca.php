@@ -109,30 +109,61 @@ $total    = count($imagenes);
 echo layout_start('Biblioteca', 'biblioteca');
 ?>
 
-<div class="dash-header">
-    <h1>Biblioteca</h1>
-    <p>Todas las imágenes del sitio viven aquí. Sube una vez y reutilízala en las secciones, la portada o el pie de página.</p>
+<div class="dash-header dash-header--con-accion">
+    <div>
+        <h1>Biblioteca</h1>
+        <p>Todas las imágenes del sitio viven aquí. Sube una vez y reutilízala en las secciones, la portada o el pie de página.</p>
+    </div>
+    <?php /* La subida vive en una ventana aparte: antes la zona de arrastre
+             ocupaba la mitad de la pantalla siempre, aunque solo se use de vez
+             en cuando, y empujaba las imágenes hacia abajo. */ ?>
+    <button type="button" class="btn btn-primary" id="biblioteca-abrir-subida">
+        <i class="bi bi-upload" aria-hidden="true"></i> Subir imágenes
+    </button>
 </div>
 
-<form method="post" enctype="multipart/form-data" class="biblioteca-subida" id="biblioteca-subida">
-    <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
-    <input type="hidden" name="action" value="subir">
+<!-- Ventana de subida. Misma mecánica que el modal de confirmación del panel
+     (admin-confirm-overlay): oculta de entrada, se muestra con .is-visible. -->
+<div class="admin-confirm-overlay biblioteca-modal is-hidden" id="biblioteca-modal"
+     role="dialog" aria-modal="true" aria-labelledby="biblioteca-modal-titulo">
+    <div class="admin-confirm-box biblioteca-modal__caja">
+        <div class="biblioteca-modal__head">
+            <h3 id="biblioteca-modal-titulo"><i class="bi bi-images" aria-hidden="true"></i> Subir imágenes</h3>
+            <button type="button" class="biblioteca-modal__cerrar" id="biblioteca-modal-cerrar" aria-label="Cerrar">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
 
-    <div class="biblioteca-dropzone" id="biblioteca-dropzone">
-        <i class="bi bi-cloud-arrow-up-fill"></i>
-        <p class="biblioteca-dropzone__titulo">Arrastra tus imágenes aquí</p>
-        <p class="biblioteca-dropzone__texto">
-            o <label for="biblioteca-input" class="biblioteca-dropzone__enlace">búscalas en tu equipo</label>.
-            JPG, PNG, WEBP, GIF o SVG. Se comprimen solas al subir.
-        </p>
-        <input type="file" id="biblioteca-input" name="imagenes[]" accept="image/*" multiple class="is-hidden">
-    </div>
+        <form method="post" enctype="multipart/form-data" class="biblioteca-subida" id="biblioteca-subida">
+            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
+            <input type="hidden" name="action" value="subir">
 
-    <div class="biblioteca-seleccion is-hidden" id="biblioteca-seleccion">
-        <span id="biblioteca-seleccion-texto"></span>
-        <button type="submit" class="btn btn-primary"><i class="bi bi-upload"></i> Subir a la biblioteca</button>
+            <div class="biblioteca-dropzone" id="biblioteca-dropzone">
+                <i class="bi bi-cloud-arrow-up-fill" aria-hidden="true"></i>
+                <p class="biblioteca-dropzone__titulo">Arrastra tus imágenes aquí</p>
+                <p class="biblioteca-dropzone__texto">
+                    o <label for="biblioteca-input" class="biblioteca-dropzone__enlace">búscalas en tu equipo</label>.
+                    JPG, PNG, WEBP, GIF o SVG. Se comprimen solas al subir.
+                </p>
+                <input type="file" id="biblioteca-input" name="imagenes[]" accept="image/*" multiple class="is-hidden">
+            </div>
+
+            <?php /* Miniaturas de lo elegido ANTES de subir: así se ve que son
+                     las fotos correctas y se puede quitar alguna. */ ?>
+            <div class="biblioteca-previews is-hidden" id="biblioteca-previews" aria-live="polite"></div>
+
+            <div class="biblioteca-modal__pie">
+                <span id="biblioteca-seleccion-texto" class="biblioteca-seleccion__texto"></span>
+                <div class="biblioteca-modal__acciones">
+                    <button type="button" class="btn btn-outline" id="biblioteca-modal-cancelar">Cancelar</button>
+                    <button type="submit" class="btn btn-primary" id="biblioteca-enviar" disabled>
+                        <i class="bi bi-upload" aria-hidden="true"></i> Subir a la biblioteca
+                    </button>
+                </div>
+            </div>
+        </form>
     </div>
-</form>
+</div>
 
 <div class="collection-header">
     <form method="get" class="search-box biblioteca-buscador">
@@ -168,10 +199,18 @@ echo layout_start('Biblioteca', 'biblioteca');
                 : 'No se está usando en ninguna sección';
             ?>
             <figure class="biblioteca-card<?= $en_uso ? ' is-en-uso' : '' ?>">
-                <div class="biblioteca-card__img">
+                <?php /* La miniatura recorta para cuadrar la rejilla, así que
+                         al pulsarla se abre la foto entera. Es un <button> y no
+                         un <div> con clic para que funcione con el teclado. */ ?>
+                <button type="button" class="biblioteca-card__img js-ver-imagen"
+                        data-src="../<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-nombre="<?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-meta="<?= htmlspecialchars(biblioteca_peso_legible($img['peso']) . ' · ' . date('d/m/Y', $img['fecha']) . ' · ' . $titulo_usos, ENT_QUOTES, 'UTF-8') ?>"
+                        aria-label="<?= htmlspecialchars('Ver ' . $img['nombre'] . ' a tamaño completo', ENT_QUOTES, 'UTF-8') ?>">
                     <img src="../<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>"
                          alt="<?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>" loading="lazy">
-                </div>
+                    <span class="biblioteca-card__lupa" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>
+                </button>
                 <figcaption class="biblioteca-card__info">
                     <span class="biblioteca-card__nombre" title="<?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>">
                         <?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>
@@ -213,5 +252,24 @@ echo layout_start('Biblioteca', 'biblioteca');
         <?php endforeach; ?>
     </div>
 <?php endif; ?>
+
+<!-- Visor: la foto entera, sin el recorte de la miniatura. -->
+<div class="admin-confirm-overlay biblioteca-visor is-hidden" id="biblioteca-visor"
+     role="dialog" aria-modal="true" aria-labelledby="biblioteca-visor-nombre">
+    <div class="biblioteca-visor__caja">
+        <div class="biblioteca-visor__head">
+            <div>
+                <h3 id="biblioteca-visor-nombre"></h3>
+                <p class="biblioteca-visor__meta" id="biblioteca-visor-meta"></p>
+            </div>
+            <button type="button" class="biblioteca-modal__cerrar" id="biblioteca-visor-cerrar" aria-label="Cerrar">
+                <i class="bi bi-x-lg" aria-hidden="true"></i>
+            </button>
+        </div>
+        <div class="biblioteca-visor__lienzo">
+            <img id="biblioteca-visor-img" src="" alt="">
+        </div>
+    </div>
+</div>
 
 <?= layout_end() ?>
