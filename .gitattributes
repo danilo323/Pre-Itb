@@ -1,0 +1,2 @@
+# El entrypoint lo ejecuta /bin/sh dentro del contenedor: debe ir siempre con LF.
+docker/entrypoint.sh text eol=lf
