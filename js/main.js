@@ -188,6 +188,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Voltear los desplegables que no caben en pantalla.
+    //
+    // Se abren siempre hacia la derecha, así que una opción del final de la
+    // barra dejaba su submenú fuera de la ventana. Y como la página oculta el
+    // desbordamiento horizontal, esos enlaces quedaban inalcanzables: no había
+    // forma de llegar a ellos ni desplazando.
+    //
+    // Se mide justo antes de mostrarlo, porque el ancho depende del texto que
+    // el administrador haya escrito en el panel.
+    const ajustarLadoDropdown = (panel) => {
+        if (!panel || isMobileNav()) return;
+        panel.classList.remove('navbar__dropdown--flip');
+        const r = panel.getBoundingClientRect();
+        const margen = 8;
+        if (r.right > window.innerWidth - margen) {
+            panel.classList.add('navbar__dropdown--flip');
+        }
+    };
+
+    document.querySelectorAll('.navbar__item--dropdown, .navbar__dropdown-item--sub').forEach(item => {
+        const abrir = () => {
+            const panel = item.querySelector(':scope > .navbar__dropdown');
+            // En el siguiente fotograma el panel ya es visible y se puede medir.
+            requestAnimationFrame(() => ajustarLadoDropdown(panel));
+        };
+        item.addEventListener('mouseenter', abrir);
+        item.addEventListener('focusin', abrir);
+    });
+
+    // Tras cambiar el tamaño de la ventana, las medidas anteriores ya no valen.
+    window.addEventListener('resize', () => {
+        document.querySelectorAll('.navbar__dropdown--flip')
+            .forEach(p => p.classList.remove('navbar__dropdown--flip'));
+    });
+
     // =========================================
     // 3. SITE HEADER — Efecto scroll (sombra)
     // =========================================

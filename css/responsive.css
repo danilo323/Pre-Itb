@@ -235,8 +235,11 @@
         margin: 2px 0;
     }
 
+    /* El limite de 400px cortaba el submenu a partir de unos 9 hijos: el resto
+       quedaba invisible e inalcanzable por el overflow oculto. 200vh da margen
+       de sobra para cualquier menu y mantiene la animacion de apertura. */
     .navbar__item--dropdown.active > .navbar__dropdown {
-        max-height: 400px;
+        max-height: 200vh;
         padding: 6px 0 6px 12px;
     }
 
@@ -250,7 +253,7 @@
        hacía que, al abrir el menú principal, TODOS los sub-submenús se
        revelaran de una, sin haberlos tocado. */
     .navbar__dropdown-item--sub.active > .navbar__dropdown--sub {
-        max-height: 400px;
+        max-height: 200vh;
         padding: 6px 0 6px 12px;
     }
 
