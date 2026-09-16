@@ -1806,8 +1806,7 @@ return [
                 ],
                 // ---------------------------------------------------------
                 // SECCIÓN 1: título + descripción, arriba del buscador.
-                // El buscador en sí (includes/oferta-programas.php) no lee de
-                // aquí: sus tarjetas salen de la colección 'programas_academicos'.
+                // Las tarjetas del buscador van en la SECCIÓN 2, aquí debajo.
                 // ---------------------------------------------------------
                 'oferta_intro' => [
                     'label' => 'SECCIÓN 1: PRESENTACIÓN',
@@ -1825,14 +1824,203 @@ return [
                         ],
                     ],
                 ],
+                // ---------------------------------------------------------
+                // SECCIÓN 2: las tarjetas del buscador. Antes solo se podían
+                // tocar desde CONTENIDO → Programas Académicos, lejos de la
+                // página a la que pertenecen; ahora se editan aquí mismo.
+                // Las lee includes/oferta-programas.php y las filtra
+                // js/oferta-programas.js sin recargar la página.
+                // ---------------------------------------------------------
+                'oferta_programas' => [
+                    'label' => 'SECCIÓN 2: PROGRAMAS DEL BUSCADOR',
+                    'fields' => [
+                        'info_programas' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>CÓMO SE MUESTRAN:</strong> el buscador enseña <strong>4 programas por página</strong> y arma la paginación solo, así que puedes agregar los que quieras. Los filtros de la izquierda (Modalidad, Año de Inicio, Campo de Estudio) se aplican con lo que elijas en cada programa: si dejas uno vacío, ese programa no aparecerá al marcar esa casilla.<br><br><strong>LA PRIMERA VEZ:</strong> mientras no guardes esta sección, la página sigue mostrando los programas de <em>Inicio → Programas Destacados</em>. Pulsa <strong>Guardar</strong> una vez y a partir de ahí manda esta lista.',
+                        ],
+                        'lista_programas' => [
+                            'type' => 'repeater',
+                            'label' => 'Programas del buscador',
+                            'item_label' => 'Programa',
+                            'help' => 'El orden manda: así salen cuando "Ordenar por" está en Relevancia.',
+                            'subfields' => [
+                                'imagen' => [
+                                    'type' => 'image',
+                                    'label' => 'Foto del programa',
+                                    'help' => 'Tamaño recomendado: 400x300px (apaisada).',
+                                ],
+                                'nombre' => [
+                                    'type' => 'text',
+                                    'label' => 'Nombre del programa *',
+                                    'help' => 'Ej: Tecnología Superior en Enfermería',
+                                    'required' => true,
+                                ],
+                                'facultad' => [
+                                    'type' => 'text',
+                                    'label' => 'Facultad',
+                                    'help' => 'Línea azul debajo del nombre. Ej: Facultad de Salud y Servicios Sociales',
+                                ],
+                                'tipo' => [
+                                    'type' => 'select',
+                                    'label' => 'Aparece en',
+                                    'default' => 'Programa',
+                                    'help' => 'Con cuál de los dos botones de "Mostrar resultados por" sale esta tarjeta.',
+                                    'options' => [
+                                        'Programa' => 'Programas',
+                                        'Curso' => 'Cursos',
+                                    ],
+                                ],
+                                'campo_estudio' => [
+                                    'type' => 'select',
+                                    'label' => 'Campo de Estudio',
+                                    'help' => 'Filtro "Campo de Estudio" de la barra lateral.',
+                                    'options' => [
+                                        'FASSS' => 'FASSS — Facultad de Salud y Servicios Sociales',
+                                        'FATV' => 'FATV — Facultad de Transporte y Vialidad',
+                                        'FACES' => 'FACES — Facultad de Ciencias Empresariales y Sistemas',
+                                    ],
+                                ],
+                                'modalidad' => [
+                                    'type' => 'select',
+                                    'label' => 'Modalidad',
+                                    'default' => 'Presencial',
+                                    'options' => [
+                                        'Presencial' => 'Presencial',
+                                        'Hibrida' => 'Híbrida',
+                                        'Remoto' => 'Remoto',
+                                    ],
+                                ],
+                                'anio_inicio' => [
+                                    'type' => 'select',
+                                    'label' => 'Año de Inicio',
+                                    'default' => '2026',
+                                    'options' => [
+                                        '2026' => '2026',
+                                        '2027' => '2027',
+                                    ],
+                                ],
+                                'duracion' => [
+                                    'type' => 'text',
+                                    'label' => 'Duración',
+                                    'default' => '2 Años (4 Semestres)',
+                                ],
+                                'campus' => [
+                                    'type' => 'text',
+                                    'label' => 'Campus',
+                                    'default' => 'Campus Teresa Benites',
+                                ],
+                                'etiqueta' => [
+                                    'type' => 'select',
+                                    'label' => 'Distintivo de la tarjeta',
+                                    'help' => 'Insignia azul de la esquina, que solo se ve al pasar el ratón por la tarjeta. Si lo dejas en "Ninguno" la página le pone uno sola, para que ninguna tarjeta se quede sin insignia.',
+                                    'options' => [
+                                        '' => 'Ninguno',
+                                        'Nueva' => 'Nueva',
+                                        'Destacada' => 'Destacada',
+                                    ],
+                                ],
+                            ],
+                            'default' => [
+                                [
+                                    'imagen' => 'img/enfermeria.jpg',
+                                    'nombre' => 'Tecnología Superior en Enfermería',
+                                    'facultad' => 'Facultad de Salud y Servicios Sociales',
+                                    'tipo' => 'Programa',
+                                    'campo_estudio' => 'FASSS',
+                                    'modalidad' => 'Presencial',
+                                    'anio_inicio' => '2026',
+                                    'duracion' => '2 Años (4 Semestres)',
+                                    'campus' => 'Campus Teresa Benites',
+                                    'etiqueta' => 'Nueva',
+                                ],
+                                [
+                                    'imagen' => 'img/Mecanica.jpg',
+                                    'nombre' => 'Tecnología Superior en Mecánica Automotriz',
+                                    'facultad' => 'Facultad de Transporte y Vialidad',
+                                    'tipo' => 'Programa',
+                                    'campo_estudio' => 'FATV',
+                                    'modalidad' => 'Presencial',
+                                    'anio_inicio' => '2026',
+                                    'duracion' => '2 Años (4 Semestres)',
+                                    'campus' => 'Campus Teresa Benites',
+                                    'etiqueta' => 'Destacada',
+                                ],
+                                [
+                                    'imagen' => 'img/desarrollo_software.jpg',
+                                    'nombre' => 'Tecnología Superior en Desarrollo de Software',
+                                    'facultad' => 'Facultad de Ciencias Empresariales y Sistemas',
+                                    'tipo' => 'Programa',
+                                    'campo_estudio' => 'FACES',
+                                    'modalidad' => 'Hibrida',
+                                    'anio_inicio' => '2027',
+                                    'duracion' => '2 Años (4 Semestres)',
+                                    'campus' => 'Campus Teresa Benites',
+                                    'etiqueta' => 'Nueva',
+                                ],
+                                [
+                                    'imagen' => 'img/programa_administracion.jpg',
+                                    'nombre' => 'Tecnología Superior en Administración de Empresas',
+                                    'facultad' => 'Facultad de Ciencias Empresariales y Sistemas',
+                                    'tipo' => 'Programa',
+                                    'campo_estudio' => 'FACES',
+                                    'modalidad' => 'Presencial',
+                                    'anio_inicio' => '2026',
+                                    'duracion' => '2 Años (4 Semestres)',
+                                    'campus' => 'Campus Teresa Benites',
+                                    'etiqueta' => '',
+                                ],
+                                [
+                                    'imagen' => 'img/programa_contabilidad.jpg',
+                                    'nombre' => 'Tecnología Superior en Contabilidad',
+                                    'facultad' => 'Facultad de Ciencias Empresariales y Sistemas',
+                                    'tipo' => 'Programa',
+                                    'campo_estudio' => 'FACES',
+                                    'modalidad' => 'Hibrida',
+                                    'anio_inicio' => '2027',
+                                    'duracion' => '2 Años (4 Semestres)',
+                                    'campus' => 'Campus Teresa Benites',
+                                    'etiqueta' => '',
+                                ],
+                                [
+                                    'imagen' => 'img/programa_diseno_grafico.jpg',
+                                    'nombre' => 'Tecnología Superior en Diseño Gráfico',
+                                    'facultad' => 'Facultad de Ciencias Empresariales y Sistemas',
+                                    'tipo' => 'Programa',
+                                    'campo_estudio' => 'FACES',
+                                    'modalidad' => 'Remoto',
+                                    'anio_inicio' => '2026',
+                                    'duracion' => '2 Años (4 Semestres)',
+                                    'campus' => 'Campus Teresa Benites',
+                                    'etiqueta' => 'Destacada',
+                                ],
+                                [
+                                    'imagen' => 'img/programa_gastronomia.jpg',
+                                    'nombre' => 'Tecnología Superior en Gastronomía',
+                                    'facultad' => 'Facultad de Transporte y Vialidad',
+                                    'tipo' => 'Programa',
+                                    'campo_estudio' => 'FATV',
+                                    'modalidad' => 'Presencial',
+                                    'anio_inicio' => '2027',
+                                    'duracion' => '2 Años (4 Semestres)',
+                                    'campus' => 'Campus Teresa Benites',
+                                    'etiqueta' => '',
+                                ],
+                            ],
+                        ],
+                    ],
+                ],
             ],
         ],
-        // Colección de tarjetas del buscador de Oferta Académica. Cada item es
-        // un programa/carrera; se filtra y busca en el navegador (JS puro,
-        // sin recargar), así que aquí solo hace falta guardar el dato de cada
-        // tarjeta — el filtrado vive en js/oferta-programas.js.
+        // Colección ANTIGUA de las tarjetas del buscador de Oferta Académica.
+        // Ahora esas tarjetas se editan en Páginas → Oferta Académica →
+        // SECCIÓN 2: PROGRAMAS DEL BUSCADOR, que es donde está el resto de
+        // esa página. Esto se queda como respaldo: includes/oferta-programas.php
+        // solo lo lee si la sección 2 está vacía, así que no se pierde nada de
+        // lo que ya estuviera cargado aquí.
         'programas_academicos' => [
-            'label' => 'Programas Académicos',
+            'label' => 'Programas Académicos (antiguo)',
+            'subtitulo' => 'Se edita en Páginas → Oferta Académica',
             'group' => 'contenido',
             'icon' => 'bi bi-mortarboard-fill',
             'type' => 'collection',
@@ -1907,8 +2095,8 @@ return [
                     'help' => 'Insignia chica en la esquina superior de la tarjeta. Déjalo en "Ninguno" si no aplica.',
                     'options' => [
                         '' => 'Ninguno',
-                        'Nuevo' => 'Nuevo',
-                        'Tendencia' => 'Tendencia',
+                        'Nueva' => 'Nueva',
+                        'Destacada' => 'Destacada',
                     ],
                 ],
                 'imagen' => [

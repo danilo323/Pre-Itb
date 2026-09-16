@@ -319,49 +319,63 @@
     background-color: var(--gray-100);
 }
 
+/* ---- Insignia "Nueva" / "Tendencia" ----
+   Va en la esquina superior derecha de CADA tarjeta, pero solo se ve al pasar
+   el raton por encima: en reposo la lista se lee limpia y la insignia no
+   compite con el titulo del programa.
+
+   Se esconde con opacidad + visibilidad (no con display) para que la entrada
+   y la salida sean suaves; el -1px de top/right la monta sobre el borde de la
+   tarjeta, asi la curva de la insignia continua la del marco sin dejar una
+   linea gris asomando. */
 .oferta-card__badge {
     position: absolute;
     top: -1px;
     right: -1px;
     display: inline-flex;
     align-items: center;
-    flex-direction: row-reverse;
+    gap: 6px;
     background: var(--primary-blue);
     color: var(--white);
     font-family: var(--font-primary);
     font-size: 0.8rem;
     font-weight: 700;
-    padding: 6px 10px;
+    padding: 6px 16px;
     border-radius: 0 var(--radius-md) 0 16px;
     z-index: 2;
     letter-spacing: 0.5px;
     cursor: default;
-    transition: padding 0.3s ease;
-}
-
-.oferta-card__badge span {
-    max-width: 0;
-    opacity: 0;
-    overflow: hidden;
     white-space: nowrap;
-    transition: max-width 0.3s ease, opacity 0.3s ease, margin-right 0.3s ease;
-    margin-right: 0;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-6px);
+    transition: opacity 0.25s ease, transform 0.25s ease, visibility 0.25s;
 }
 
-.oferta-card__badge:hover {
-    padding: 6px 16px;
-}
-
-.oferta-card__badge:hover span {
-    max-width: 100px;
+/* :focus-within la saca tambien cuando se llega al enlace de la tarjeta con
+   el teclado, donde no hay raton que pasar por encima. */
+.oferta-card:hover .oferta-card__badge,
+.oferta-card:focus-within .oferta-card__badge {
     opacity: 1;
-    margin-right: 6px;
+    visibility: visible;
+    transform: none;
+}
+
+/* En tactil no existe el hover: si se dejara igual, la insignia no se veria
+   nunca en movil. Alli se muestra siempre. */
+@media (hover: none) {
+    .oferta-card__badge {
+        opacity: 1;
+        visibility: visible;
+        transform: none;
+    }
 }
 
 .oferta-card__badge svg {
     color: var(--primary-orange);
     width: 14px;
     height: 14px;
+    flex-shrink: 0;
 }
 
 .oferta-card__body {

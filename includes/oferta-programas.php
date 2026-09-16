@@ -1,32 +1,107 @@
-<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('oferta_intro')) return; ?>
+<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('oferta_programas')) return; ?>
 <?php
 // includes/oferta-programas.php
 //
 // Buscador de Oferta Académica: barra de búsqueda + filtros + grid de
-// tarjetas + paginación. Las tarjetas salen de la colección del panel
-// "Programas Académicos" (Contenido → Programas Académicos), no de una
-// sección de página — cada tarjeta es un item independiente, igual que
-// Equipo o Noticias.
+// tarjetas + paginación.
 //
 // El filtrado, la búsqueda, el orden y la paginación son enteramente del
 // lado del navegador (js/oferta-programas.js) sobre las tarjetas que PHP ya
 // pintó aquí: no hay recarga de página por cada clic.
 //
-// Reutiliza el interruptor "Visible" de la sección 'oferta_intro' de arriba:
-// esconder la presentación esconde también el buscador, porque uno no tiene
-// sentido sin el otro en esta página.
+// De dónde salen las tarjetas, en este orden:
+//   1. Páginas → Oferta Académica → SECCIÓN 2: PROGRAMAS DEL BUSCADOR. Es el
+//      sitio donde se editan: está junto al resto de la página a la que
+//      pertenecen y trae su propio interruptor "Visible".
+//   2. La colección Contenido → Programas Académicos, que es donde vivían
+//      antes. Se sigue leyendo para no perder lo que ya estuviera cargado
+//      ahí, pero si la sección 2 tiene programas, mandan los de la sección.
+//   3. Programas Destacados de Inicio. Último recurso para que el buscador
+//      nunca salga vacío en una instalación sin nada cargado todavía.
 
-$programas_items = collection_items('programas_academicos');
+$programas_items = content_raw('oferta_programas', 'lista_programas', []);
+if (!is_array($programas_items)) $programas_items = [];
+
+if (empty($programas_items)) {
+    $programas_items = collection_items('programas_academicos');
+}
 
 // Mismo criterio de "publicado" que ya usa includes/autoridades.php: acepta
 // tanto el booleano real que guarda el panel como el '1'/'0' de los datos
-// de ejemplo.
+// de ejemplo. Los programas de la sección 2 no llevan ese campo — quitarlos
+// de la lista ES borrarlos — así que se dan por publicados.
 $itb_campo_activo = function ($v) {
     return $v === null || $v === true || $v === '1' || $v === 1;
 };
 $programas_items = array_values(array_filter($programas_items, function ($p) use ($itb_campo_activo) {
-    return $itb_campo_activo($p['publicado'] ?? true);
+    return is_array($p) && $itb_campo_activo($p['publicado'] ?? true);
 }));
+
+// Respaldo (3): ni la seccion 2 del panel ni la coleccion tienen nada. Pasa en
+// una instalacion recien montada, donde la base de datos todavia no guarda
+// esas claves: el grid salia en blanco y la pagina entera se leia como rota,
+// con "No hay resultados" aunque el sitio si tiene oferta cargada.
+//
+// Se toman entonces los programas de "Programas Destacados" (seccion
+// 'programas' de Inicio, includes/programas.php): son los mismos estudios
+// guardados con otros nombres de campo, asi que solo hay que traducirlos a lo
+// que esperan la tarjeta y los filtros de aqui. En cuanto se guarde la
+// seccion 2 del panel, esto deja de usarse.
+if (empty($programas_items)) {
+    // Area del panel -> facultad que se imprime bajo el titulo + siglas del
+    // "Campo de Estudio" por el que filtra la columna de la izquierda.
+    $oferta_facultades = [
+        'salud'                  => ['Facultad de Salud y Servicios Sociales', 'FASSS'],
+        'transporte'             => ['Facultad de Transporte y Vialidad', 'FATV'],
+        'ciencias empresariales' => ['Facultad de Ciencias Empresariales y Sistemas', 'FACES'],
+        'tecnología'             => ['Facultad de Ciencias Empresariales y Sistemas', 'FACES'],
+    ];
+
+    // Los destacados guardan la modalidad como texto libre ("Hibrido",
+    // "Online / Presencial"); las casillas del filtro solo entienden
+    // Presencial / Hibrida / Remoto, asi que hay que encajarla en una de las
+    // tres o la tarjeta desapareceria al marcar cualquier modalidad.
+    $oferta_modalidad = function (string $bruto): string {
+        $m = mb_strtolower(trim($bruto), 'UTF-8');
+        $remoto = str_contains($m, 'remoto') || str_contains($m, 'online') || str_contains($m, 'virtual');
+        if (str_contains($m, 'brid')) return 'Hibrida';                  // hibrido / hibrida
+        if ($remoto && str_contains($m, 'presencial')) return 'Hibrida'; // "Online / Presencial"
+        if ($remoto) return 'Remoto';
+        return 'Presencial';
+    };
+
+    $programas_items = [];
+    foreach ((array) content_raw('programas', 'lista_programas', []) as $prog) {
+        if (!is_array($prog) || trim($prog['titulo'] ?? '') === '') continue;
+
+        $area = mb_strtolower(trim($prog['area'] ?? ''), 'UTF-8');
+        // Sin area (o con una que no esta en el mapa) se usa la facultad mas
+        // amplia, la que agrupa administracion, contabilidad, diseno y
+        // sistemas: asi la tarjeta nunca sale sin facultad ni fuera de todos
+        // los filtros de campo.
+        [$facultad, $campo] = $oferta_facultades[$area] ?? $oferta_facultades['ciencias empresariales'];
+
+        $sede = trim($prog['sede'] ?? '');
+
+        $programas_items[] = [
+            'tipo'          => 'Programa',
+            'nombre'        => trim($prog['titulo']),
+            'facultad'      => $facultad,
+            'campo_estudio' => $campo,
+            'modalidad'     => $oferta_modalidad((string) ($prog['modalidad'] ?? '')),
+            'duracion'      => trim($prog['duracion'] ?? ''),
+            'campus'        => $sede !== '' ? $sede : 'Campus Teresa Benites',
+            // Los destacados no guardan ano de inicio y el filtro solo ofrece
+            // 2026 y 2027: se reparte de forma fija (el mismo programa cae
+            // siempre en el mismo ano) para que ninguna de las dos casillas
+            // quede sin resultados. Es relleno: el ano real se pone en el panel.
+            'anio_inicio'   => (crc32($prog['titulo']) % 2 === 0) ? '2026' : '2027',
+            'etiqueta'      => trim($prog['etiqueta'] ?? ''),
+            'imagen'        => trim($prog['imagen'] ?? ''),
+            'publicado'     => true,
+        ];
+    }
+}
 ?>
 <!-- ============================================= -->
 <!-- OFERTA ACADÉMICA — BUSCADOR                   -->
@@ -146,7 +221,7 @@ $programas_items = array_values(array_filter($programas_items, function ($p) use
                              data-campo="<?= $h($campo) ?>">
                         <?php 
                             if ($etiqueta === '') {
-                                $etiqueta = (crc32($nombre) % 2 === 0) ? 'Nuevo' : 'Tendencia';
+                                $etiqueta = (crc32($nombre) % 2 === 0) ? 'Nueva' : 'Destacada';
                             }
                         ?>
                         <?php if ($etiqueta !== ''): ?>

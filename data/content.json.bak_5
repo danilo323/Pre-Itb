@@ -30,11 +30,6 @@
                 "nivel": 3
             },
             {
-                "texto": "Prueba Nivel 3",
-                "url": "prueba-nivel-3.php",
-                "nivel": 2
-            },
-            {
                 "texto": "HImno e Identidad",
                 "url": "",
                 "nivel": "hijo"
@@ -1388,17 +1383,6 @@
                 }
             },
             "updated_at": "2026-09-11 06:13:18"
-        },
-        "pg_cf4da6179df8": {
-            "id": "pg_cf4da6179df8",
-            "nombre": "Prueba Nivel 3",
-            "slug": "prueba-nivel-3",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "bajo:Instituto>Sobre Nosotros",
-            "menu_before": "",
-            "secciones": [],
-            "contenido": [],
-            "updated_at": "2026-09-16 01:37:39"
         },
         "pg_135c29c2e0b2": {
             "id": "pg_135c29c2e0b2",
