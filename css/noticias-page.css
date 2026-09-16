@@ -1,28 +1,26 @@
 /* =============================================
    PÁGINA NOTICIAS (Layout con Filtros)
    ============================================= */
+/* Ajustes propios de esta página. Se hacen con variables, no pisando los
+   componentes con selectores .page-noticias: así Alianzas sigue siendo la
+   misma sección aquí, en el Inicio y en cualquier página creada desde el
+   panel. Ver GUIA-MAQUETACION.md. */
 .page-noticias {
     background-color: var(--gray-50);
+
+    /* El carrusel se asienta debajo del listado; en esta página va sobre fondo
+       blanco para que no aparezca una franja gris cortando el diseño. */
+    --alianzas-bg: #ffffff;
+    --alianzas-y-top: var(--section-y-md);
+
+    /* La portada de esta página lleva algo menos de aire abajo que las demás. */
+    --sobre-hero-pb: var(--space-2xl);
 }
-
-/* ---- Hero ---- */
-#noticias-hero .sobre-hero__container {
-    padding-bottom: 60px;
-}
-
-
 
 /* ---- Main Content Area ---- */
 .noticias-page {
-    padding: 60px 0 0;
+    padding-block-start: var(--section-y-md);
     background-color: #ffffff;
-}
-
-/* El carrusel se asienta debajo de las noticias; le damos fondo blanco 
-   para que no se vea una franja gris (el color del body) cortando el diseño. */
-.page-noticias .alianzas--solo-carrusel {
-    background-color: #ffffff;
-    padding-top: 60px;
 }
 
 /* ---- Search Bar Strip ---- */
@@ -34,9 +32,9 @@
 }
 
 .noticias-search-bar__container {
-    max-width: 1400px;
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 40px;
+    padding-inline: var(--gutter);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -80,9 +78,9 @@
 }
 
 .noticias-page__header {
-    max-width: 1400px;
-    margin: 0 auto 40px;
-    padding: 0 40px;
+    max-width: var(--container-max);
+    margin: 0 auto var(--space-lg);
+    padding-inline: var(--gutter);
     text-align: center;
 }
 
@@ -102,9 +100,9 @@
 }
 
 .noticias-page__container {
-    max-width: 1400px;
+    max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 40px;
+    padding-inline: var(--gutter);
     display: grid;
     grid-template-columns: 280px 1fr;
     gap: 40px;

@@ -1,10 +1,12 @@
 /* =============================================
    OFERTA ACADÉMICA — BUSCADOR (filtros + grid + paginación)
    ============================================= */
+/* Mismo ancho y margen lateral que el contenedor común del sistema, para que
+   los bordes coincidan con el hero y el carrusel de esta misma página. */
 .oferta-buscador__container {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 24px;
+    padding-inline: var(--gutter);
 }
 
 /* ---- Barra de búsqueda ---- */

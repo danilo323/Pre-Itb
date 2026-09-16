@@ -1,9 +1,13 @@
 ﻿/* =============================================
    ALIANZAS
    ============================================= */
+/* El fondo sale de una variable para que una página pueda cambiarlo sin
+   escribir un selector propio que pise el componente (ver GUIA-MAQUETACION.md).
+   Noticias, por ejemplo, la pone en blanco para que no aparezca una franja
+   gris entre el listado y el carrusel. */
 .alianzas {
     padding-block: var(--section-y-md);
-    background: var(--gray-50);
+    background: var(--alianzas-bg, var(--gray-50));
     overflow: hidden;
 }
 
@@ -12,8 +16,8 @@
    y fea antes del carrusel de fotos. Se acorta el espacio y se quita el
    fondo para que pase directo de la sección de arriba a las fotos. */
 .alianzas--solo-carrusel {
-    padding-block-start: var(--space-md);
-    background: transparent;
+    padding-block-start: var(--alianzas-y-top, var(--space-md));
+    background: var(--alianzas-bg, transparent);
 }
 
 /* El ancho y el margen lateral los pone .container (css/sistema.css),
