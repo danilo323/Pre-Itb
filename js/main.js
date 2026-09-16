@@ -1194,48 +1194,19 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(paso);
         };
 
-        // Versión sobria para quien pidió menos movimiento: sube sin tirones ni
-        // adornos, en línea recta y en poco más de un cuarto de segundo, pero
-        // sigue siendo un desplazamiento y no un salto, para no perder de vista
-        // dónde estaba la página.
-        const subirDirecto = () => {
-            const inicio = window.scrollY;
-            if (inicio <= 0) return;
-
-            const duracion = 280;
-            const arranque = performance.now();
-            const suave = (t) => 1 - Math.pow(1 - t, 3);
-
-            let cancelado = false;
-            const cancelar = () => { cancelado = true; };
-            window.addEventListener('wheel', cancelar, { passive: true, once: true });
-            window.addEventListener('touchstart', cancelar, { passive: true, once: true });
-
-            const paso = (ahora) => {
-                if (cancelado) return;
-                const t = Math.min(1, (ahora - arranque) / duracion);
-                window.scrollTo(0, Math.round(inicio * (1 - suave(t))));
-                if (t < 1) requestAnimationFrame(paso);
-            };
-            requestAnimationFrame(paso);
-        };
-
         scrollToTopBtn.addEventListener('click', () => {
-            // "Reducir movimiento" no quiere decir quitar todo el movimiento:
-            // quiere decir evitar el que es decorativo o llamativo. Desplazar la
-            // página es lo que el botón hace, no un adorno, así que se sigue
-            // desplazando; lo que se quita son los golpes de rueda y el aparato
-            // del botón, y el recorrido se hace más corto y directo.
+            // Decisión tomada con el equipo: la animación se muestra siempre,
+            // también en los equipos que piden menos movimiento.
             //
-            // Antes aquí se saltaba al principio de golpe, y como Windows trae
-            // las animaciones desactivadas en bastantes equipos, mucha gente no
-            // llegaba a ver ningún movimiento.
-            const sinAdornos = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-            if (sinAdornos) {
-                subirDirecto();
-                return;
-            }
+            // Windows trae los efectos de animación desactivados en bastantes
+            // máquinas, y el navegador lo traslada a la web como "reducir
+            // movimiento". Antes eso hacía que el botón saltara al principio de
+            // golpe, y era el caso de buena parte de quienes lo probaban.
+            //
+            // La contrapartida, anotada a propósito: quien desactiva las
+            // animaciones por mareo o sensibilidad al movimiento verá también
+            // esta. Si alguna vez hace falta atenderlo, basta con volver a
+            // consultar prefers-reduced-motion aquí y acortar el recorrido.
 
             // El botón acusa el clic: se hunde y la flecha sale disparada.
             scrollToTopBtn.classList.remove('top-to-bottom--despegue');

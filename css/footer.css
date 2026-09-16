@@ -725,15 +725,9 @@ button.footer-main__campus-btn:hover {
 }
 
 /* Quien pidió menos animaciones en su sistema no recibe ninguna de estas. */
-@media (prefers-reduced-motion: reduce) {
-    #top-to-bottom,
-    #top-to-bottom i,
-    #top-to-bottom::after {
-        animation: none !important;
-        transition: opacity 0.2s ease, visibility 0.2s ease;
-    }
-
-    #top-to-bottom.scroll_visible:hover {
-        transform: none;
-    }
-}
+/* El impulso, el halo y el vuelo de la flecha se muestran siempre, también en
+   los equipos que piden menos movimiento. Es una decisión tomada con el
+   equipo: Windows trae los efectos de animación desactivados en bastantes
+   máquinas, y respetarlo dejaba a buena parte de los visitantes sin ver nada.
+   Si alguna vez hace falta volver atrás, basta con reponer aquí un bloque
+   @media (prefers-reduced-motion: reduce) que anule estas animaciones. */
