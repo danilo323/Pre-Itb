@@ -235,13 +235,27 @@
         margin: 2px 0;
     }
 
-    .navbar__item--dropdown.active .navbar__dropdown {
+    .navbar__item--dropdown.active > .navbar__dropdown {
         max-height: 400px;
         padding: 6px 0 6px 12px;
     }
 
     .navbar__item--dropdown.active .navbar__dropdown-icon {
         transform: rotate(180deg);
+    }
+
+    /* Sub-submenú (un "hijo" con sus propios "nieto"): mismo mecanismo de
+       abrir/cerrar con toque que el menú principal de arriba, pero cada uno
+       se abre solo — antes esta regla usaba un selector "descendiente" y
+       hacía que, al abrir el menú principal, TODOS los sub-submenús se
+       revelaran de una, sin haberlos tocado. */
+    .navbar__dropdown-item--sub.active > .navbar__dropdown--sub {
+        max-height: 400px;
+        padding: 6px 0 6px 12px;
+    }
+
+    .navbar__dropdown-item--sub.active > .navbar__dropdown-link .navbar__dropdown-subicon {
+        transform: rotate(90deg);
     }
 
     /* Accesos rápidos en móvil */

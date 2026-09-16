@@ -57,11 +57,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $content = $page['contenido'] ?? pagina_custom_snapshot($data, $page['secciones'] ?? []);
+$admin_page_css = ['pagina_custom.css'];
 echo layout_start('Contenido: ' . ($page['nombre'] ?? 'Página'), 'custom_' . $id);
 ?>
 <div class="card">
-    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;">
-        <div><h1 style="margin:0;color:#1A3B70;">Contenido de <?= htmlspecialchars($page['nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></h1><p style="margin:6px 0 0;color:#6B7280;">Cada sección conserva una copia independiente de sus textos e imágenes.</p></div>
+    <div class="pgc-header pgc-header--plain">
+        <div><h1>Contenido de <?= htmlspecialchars($page['nombre'] ?? '', ENT_QUOTES, 'UTF-8') ?></h1><p>Cada sección conserva una copia independiente de sus textos e imágenes.</p></div>
         <a class="btn btn-outline" href="<?= $ab ?>/pagina_custom.php?id=<?= urlencode($id) ?>">Configuración</a>
     </div>
     <form method="POST" enctype="multipart/form-data">

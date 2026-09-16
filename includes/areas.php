@@ -47,7 +47,7 @@
                 
                 $has_bg = !empty($imagen_fondo);
                 $card_class = $has_bg ? 'areas__card areas__card--image' : 'areas__card';
-                $bg_style = $has_bg ? 'background-image: linear-gradient(rgba(26, 54, 104, 0.8), rgba(26, 54, 104, 0.8)), url(\'' . htmlspecialchars($imagen_fondo, ENT_QUOTES, 'UTF-8') . '\');' : '';
+                $bg_style = $has_bg ? 'background-image: url(\'' . htmlspecialchars($imagen_fondo, ENT_QUOTES, 'UTF-8') . '\');' : '';
             ?>
             <div class="<?= $card_class ?>" style="<?= $bg_style ?>">
                 <div class="areas__card-icon">

@@ -400,8 +400,8 @@ main {
     z-index: 100;
 }
 
-.navbar__item--dropdown:hover .navbar__dropdown,
-.navbar__item--dropdown.active .navbar__dropdown {
+.navbar__item--dropdown:hover > .navbar__dropdown,
+.navbar__item--dropdown.active > .navbar__dropdown {
     opacity: 1;
     visibility: visible;
     transform: translateY(0);
@@ -423,6 +423,42 @@ main {
 .navbar__dropdown-link:hover {
     background-color: var(--primary-orange-light);
     color: var(--primary-orange);
+}
+
+/* Sub-submenú: un item "hijo" que a su vez tiene sus propios "nieto" */
+.navbar__dropdown-item--sub {
+    position: relative;
+}
+
+.navbar__dropdown-item--sub > .navbar__dropdown-link {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+}
+
+.navbar__dropdown-subicon {
+    font-size: 0.6rem;
+    color: var(--gray-400);
+    transition: var(--transition);
+}
+
+.navbar__dropdown-item--sub:hover .navbar__dropdown-subicon {
+    color: var(--primary-orange);
+    transform: translateX(2px);
+}
+
+.navbar__dropdown--sub {
+    top: -8px;
+    left: calc(100% + 8px);
+    transform: translateY(0) translateX(-8px);
+}
+
+.navbar__dropdown-item--sub:hover > .navbar__dropdown--sub,
+.navbar__dropdown-item--sub.active > .navbar__dropdown--sub {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0) translateX(0);
 }
 
 /* CTA Buttons */

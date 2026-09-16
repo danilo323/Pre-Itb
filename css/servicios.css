@@ -47,26 +47,7 @@
     margin-top: auto;
 }
 
-.btn__icon-right-white {
-    background-color: #ffffff;
-    color: var(--primary-orange);
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    margin-left: 12px;
-    flex-shrink: 0;
-}
-.btn__icon-right-white i {
-    transform: rotate(-45deg);
-    transition: transform 0.3s ease;
-}
-#btn-servicios-main:hover .btn__icon-right-white i {
-    transform: rotate(0deg);
-}
+
 
 /* ---- Cards Grid ---- */
 .servicios__cards {
@@ -109,48 +90,10 @@
     margin-bottom: 32px;
 }
 
-/* Botones Outline de las Cards */
-.btn--outline-servicios {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px 6px 6px 16px;
-    border: 1px solid var(--primary-orange);
-    border-radius: 8px;
-    color: var(--primary-orange);
-    text-decoration: none;
-    font-size: 0.85rem;
-    font-weight: 600;
+/* Alineación del botón estándar dentro de las tarjetas simples */
+.servicios__card-simple .btn--solid {
     margin-top: auto;
-    white-space: nowrap;
-    transition: all 0.3s ease;
-}
-.btn__icon-servicios {
-    background-color: var(--primary-orange);
-    color: #ffffff;
-    width: 32px;
-    height: 32px;
-    border-radius: 6px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.8rem;
-    transition: background-color 0.3s ease, color 0.3s ease;
-}
-.btn__icon-servicios i {
-    transform: rotate(-45deg);
-    transition: transform 0.3s ease;
-}
-.btn--outline-servicios:hover {
-    background-color: var(--primary-orange);
-    color: #ffffff;
-}
-.btn--outline-servicios:hover .btn__icon-servicios {
-    background-color: #ffffff;
-    color: var(--primary-orange);
-}
-.btn--outline-servicios:hover .btn__icon-servicios i {
-    transform: rotate(0deg);
+    align-self: flex-start;
 }
 
 /* Card con Imagen (Campus Virtual, Horarios, Servicios Digitales, Podcast,
@@ -301,11 +244,8 @@
 
 /* Ajuste específico para el botón de Conocer Más */
 .servicios__card-image .btn--solid {
-    width: 100%;
-    box-sizing: border-box;
-    padding: 8px 8px 8px 16px;
-    gap: 8px;
     margin-top: auto;
+    align-self: flex-start;
 }
 
 /* Responsive adjustments */

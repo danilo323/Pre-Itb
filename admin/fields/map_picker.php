@@ -12,10 +12,6 @@ function field_map_picker_render(string $name_path, $value, array $config): stri
     $json = $has_point ? json_encode(['lat' => $lat, 'lng' => $lng]) : '';
     $safe_json = htmlspecialchars($json ?: '', ENT_QUOTES, 'UTF-8');
     $point_state = $has_point ? '1' : '0';
-    // Se conservan para compatibilidad con el bloque legado comentado abajo.
-    $lat_js = json_encode($lat);
-    $lng_js = json_encode($lng);
-    $has_point_js = $has_point ? 'true' : 'false';
 
     return <<<HTML
 <div class="form-group field-map-picker js-map-picker" data-lat="{$lat}" data-lng="{$lng}" data-has-point="{$point_state}">
@@ -28,39 +24,6 @@ function field_map_picker_render(string $name_path, $value, array $config): stri
     <small id="{$id}_status" class="field-map-picker__status">Haz clic en el mapa para fijar la ubicación.</small>
     <input id="{$input_id}" class="js-map-picker-value" type="hidden" name="{$name_path}" value="{$safe_json}">
 </div>
-<!-- JavaScript moved to admin/assets/map_picker.js.
-<script>
-(function () {
-    var map = L.map('{$id}').setView([{$lat_js}, {$lng_js}], {$has_point_js} ? 16 : 13);
-    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', { maxZoom: 19, attribution: '&copy; OpenStreetMap' }).addTo(map);
-    var marker = null, input = document.getElementById('{$input_id}'), status = document.getElementById('{$id}_status');
-    function setPoint(lat, lng, zoom) {
-        lat = Number(lat); lng = Number(lng);
-        if (marker) {
-            marker.setLatLng([lat, lng]);
-        } else {
-            marker = L.marker([lat, lng], {draggable:true}).addTo(map);
-            marker.on('dragend', function () { var p = marker.getLatLng(); setPoint(p.lat, p.lng, false); });
-        }
-        input.value = JSON.stringify({lat: lat, lng: lng});
-        status.textContent = 'Ubicación elegida: ' + lat.toFixed(6) + ', ' + lng.toFixed(6);
-        if (zoom) map.setView([lat, lng], zoom);
-    }
-    if ({$has_point_js}) setPoint({$lat_js}, {$lng_js}, false);
-    map.on('click', function (event) { setPoint(event.latlng.lat, event.latlng.lng, false); });
-    document.querySelector('[data-map-search="{$id}"]').addEventListener('click', function () {
-        var query = document.getElementById('{$search_id}').value.trim();
-        if (!query) return;
-        status.textContent = 'Buscando ubicación…';
-        fetch('https://nominatim.openstreetmap.org/search?format=jsonv2&limit=1&q=' + encodeURIComponent(query), {headers:{'Accept':'application/json'}})
-            .then(function (r) { return r.json(); }).then(function (results) {
-                if (!results.length) { status.textContent = 'No se encontró esa ubicación. Señálala manualmente en el mapa.'; return; }
-                setPoint(results[0].lat, results[0].lon, 17);
-            }).catch(function () { status.textContent = 'No se pudo buscar. Señala la ubicación directamente en el mapa.'; });
-    });
-}());
-</script>
--->
 HTML;
 }
 

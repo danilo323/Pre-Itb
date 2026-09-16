@@ -333,6 +333,24 @@ document.addEventListener('DOMContentLoaded', function () {
             });
         }
 
+        // Niveles de menú sin tope fijo: 0 = principal, 1 = submenú, 2 =
+        // sub-submenú, y así sucesivamente. El nivel se guarda como número
+        // (antes era un texto fijo 'padre'/'hijo'/'nieto'); admin.css ya trae
+        // la sangría dibujada hasta el nivel 8, de sobra para un menú real.
+        const NIVEL_MAXIMO = 8;
+
+        function nivelDe(item) {
+            const inputNivel = item.querySelector('.mb-input-nivel');
+            const n = parseInt(inputNivel.value, 10);
+            return Number.isNaN(n) ? 0 : n;
+        }
+
+        function setNivel(item, nivel) {
+            nivel = Math.max(0, Math.min(NIVEL_MAXIMO, nivel));
+            item.querySelector('.mb-input-nivel').value = nivel;
+            item.dataset.nivel = nivel;
+        }
+
         function attachEvents(item) {
             const btnLeft = item.querySelector('.mb-btn-indent-left');
             const btnRight = item.querySelector('.mb-btn-indent-right');
@@ -344,7 +362,6 @@ document.addEventListener('DOMContentLoaded', function () {
             const btnCopy = item.querySelector('.mb-btn-copy');
             const btnAddChild = item.querySelector('.mb-btn-add-child');
 
-            const inputNivel = item.querySelector('.mb-input-nivel');
             const inputText = item.querySelector('.mb-input-text');
             const titleDisplay = item.querySelector('.mb-title-display');
 
@@ -362,15 +379,45 @@ document.addEventListener('DOMContentLoaded', function () {
                 item.classList.remove('is-editing');
             });
 
-            // Indentar
+            // Avisa con un temblor que ESE botón no puede hacer nada más
+            // ahora mismo (llegó al tope de indentación en esa dirección), en
+            // vez de no responder al clic y parecer roto.
+            function agitarBoton(boton) {
+                boton.classList.remove('mb-btn-shake');
+                void boton.offsetWidth; // reinicia la animación si se hace clic varias veces seguidas
+                boton.classList.add('mb-btn-shake');
+            }
+
+            // Indentar: sube o baja un nivel dentro de padre/hijo/nieto
             btnLeft.addEventListener('click', () => {
-                item.classList.remove('is-hijo');
-                inputNivel.value = 'padre';
+                const nivelActual = nivelDe(item);
+                if (nivelActual === 0) {
+                    // Ya es "padre": no hay nada más a la izquierda.
+                    agitarBoton(btnLeft);
+                    return;
+                }
+                setNivel(item, nivelActual - 1);
             });
+            btnLeft.addEventListener('animationend', () => btnLeft.classList.remove('mb-btn-shake'));
+
             btnRight.addEventListener('click', () => {
-                item.classList.add('is-hijo');
-                inputNivel.value = 'hijo';
+                // Un item solo puede ser un nivel MÁS PROFUNDO que el que tiene
+                // justo arriba (un "nieto" necesita un "hijo" inmediatamente
+                // antes, igual que un "hijo" necesita un "padre"). Sin este
+                // tope, se podía dejar un item "huérfano" -sin nada de qué
+                // colgar- y ese item simplemente desaparecía del menú del
+                // sitio público sin ningún aviso.
+                const anterior = item.previousElementSibling;
+                const nivelMaximo = anterior ? nivelDe(anterior) + 1 : 0;
+                const nivelActual = nivelDe(item);
+                const nivelNuevo = Math.min(nivelActual + 1, nivelMaximo);
+                if (nivelNuevo === nivelActual) {
+                    agitarBoton(btnRight);
+                    return;
+                }
+                setNivel(item, nivelNuevo);
             });
+            btnRight.addEventListener('animationend', () => btnRight.classList.remove('mb-btn-shake'));
 
             // Reordenar
             btnUp.addEventListener('click', () => {
@@ -388,12 +435,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 }
             });
 
-            // Eliminar
+            // Eliminar (mismo modal de confirmación que el resto del panel,
+            // en vez del confirm() nativo del navegador)
             btnRemove.addEventListener('click', () => {
-                if (confirm('¿Eliminar este enlace?')) {
+                window.customConfirm('¿Eliminar este enlace del menú?', () => {
                     item.remove();
                     updateIndices();
-                }
+                });
             });
 
             // Duplicar
@@ -405,11 +453,11 @@ document.addEventListener('DOMContentLoaded', function () {
                 updateIndices();
             });
 
-            // Añadir hijo
+            // Añadir sub-item: crea el nuevo item UN nivel más profundo que el
+            // item sobre el que se hizo clic, sin tocar el nivel de ese item
+            // (antes lo forzaba de vuelta a "padre" y por eso perdía su propio
+            // lugar en el árbol).
             btnAddChild.addEventListener('click', () => {
-                item.classList.remove('is-hijo'); // Asegurar que es padre
-                inputNivel.value = 'padre';
-
                 const newIndex = itemsContainer.children.length;
                 const html = template.innerHTML
                     .replace(/{INDEX}/g, newIndex)
@@ -419,8 +467,7 @@ document.addEventListener('DOMContentLoaded', function () {
                 tempDiv.innerHTML = html.trim();
                 const newItem = tempDiv.firstChild;
 
-                newItem.classList.add('is-hijo');
-                newItem.querySelector('.mb-input-nivel').value = 'hijo';
+                setNivel(newItem, nivelDe(item) + 1);
                 newItem.classList.add('is-editing');
                 newItem.querySelectorAll('input').forEach(i => i.removeAttribute('disabled'));
 

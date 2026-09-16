@@ -1,9 +1,26 @@
 <?php
 // admin/fields/menu_builder.php
 
+/**
+ * Convierte el 'nivel' guardado a un número de profundidad (0 = principal,
+ * 1 = submenú, 2 = sub-submenú, y así indefinidamente). Antes 'nivel' era
+ * un texto fijo ('padre'/'hijo'/'nieto'); esto sigue leyendo ese formato
+ * viejo para no romper menús ya guardados, pero de acá en adelante todo se
+ * guarda como número, sin techo de niveles.
+ */
+if (!function_exists('menu_builder_profundidad')) {
+    function menu_builder_profundidad($nivel): int {
+        if (is_numeric($nivel)) {
+            return max(0, (int) $nivel);
+        }
+        $legado = ['padre' => 0, 'hijo' => 1, 'nieto' => 2];
+        return $legado[$nivel] ?? 0;
+    }
+}
+
 function field_menu_builder_render(string $name_path, $value, array $config): string {
     $items = is_array($value) ? $value : [];
-    
+
     // HTML y Estilos
     ob_start();
     ?>
@@ -14,20 +31,19 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
                 <button type="button" class="btn-add-menu-item" title="Añadir Item Principal"><i class="bi bi-plus-lg"></i></button>
             </div>
         </div>
-        
+
         <?php if (!empty($config['help'])): ?>
             <p class="field-help"><?= htmlspecialchars($config['help'], ENT_QUOTES, 'UTF-8') ?></p>
         <?php endif; ?>
 
         <div class="menu-builder-items">
             <?php foreach ($items as $index => $item): ?>
-                <?php 
+                <?php
                 $texto = htmlspecialchars($item['texto'] ?? '', ENT_QUOTES, 'UTF-8');
                 $url = htmlspecialchars($item['url'] ?? '', ENT_QUOTES, 'UTF-8');
-                $nivel = htmlspecialchars($item['nivel'] ?? 'padre', ENT_QUOTES, 'UTF-8');
-                $is_hijo = $nivel === 'hijo' ? 'is-hijo' : '';
+                $profundidad = menu_builder_profundidad($item['nivel'] ?? 0);
                 ?>
-                <div class="menu-builder-item <?= $is_hijo ?>" data-index="<?= $index ?>">
+                <div class="menu-builder-item" data-index="<?= $index ?>" data-nivel="<?= $profundidad ?>">
                     <div class="mb-display-row">
                         <div class="mb-drag-handle">
                             <span class="mb-indent-dash">—</span>
@@ -36,8 +52,8 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
                         <div class="mb-title-display"><?= $texto === '' ? 'Nuevo Item' : $texto ?></div>
                         <div class="mb-actions">
                             <button type="button" class="mb-btn mb-btn-eye" title="Ocultar"><i class="bi bi-eye"></i></button>
-                            <button type="button" class="mb-btn mb-btn-indent-left" title="Nivel Padre"><i class="bi bi-arrow-bar-left"></i></button>
-                            <button type="button" class="mb-btn mb-btn-indent-right" title="Nivel Hijo"><i class="bi bi-arrow-bar-right"></i></button>
+                            <button type="button" class="mb-btn mb-btn-indent-left" title="Subir de nivel"><i class="bi bi-arrow-bar-left"></i></button>
+                            <button type="button" class="mb-btn mb-btn-indent-right" title="Bajar de nivel (anidar)"><i class="bi bi-arrow-bar-right"></i></button>
                             <button type="button" class="mb-btn mb-btn-add-child" title="Añadir Sub-item"><i class="bi bi-plus"></i></button>
                             <button type="button" class="mb-btn mb-btn-up" title="Subir"><i class="bi bi-chevron-up"></i></button>
                             <button type="button" class="mb-btn mb-btn-down" title="Bajar"><i class="bi bi-chevron-down"></i></button>
@@ -50,17 +66,17 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
                         <div class="mb-edit-fields">
                             <input type="text" name="<?= $name_path ?>[<?= $index ?>][texto]" value="<?= $texto ?>" placeholder="Texto del enlace (Ej: Quienes Somos)" class="mb-input-text" required>
                             <input type="text" name="<?= $name_path ?>[<?= $index ?>][url]" value="<?= $url ?>" placeholder="URL (Ej: /quienes-somos)" class="mb-input-url">
-                            <input type="hidden" name="<?= $name_path ?>[<?= $index ?>][nivel]" value="<?= $nivel ?>" class="mb-input-nivel">
+                            <input type="hidden" name="<?= $name_path ?>[<?= $index ?>][nivel]" value="<?= $profundidad ?>" class="mb-input-nivel">
                         </div>
                         <button type="button" class="btn btn-sm btn-outline-secondary mb-btn-close-edit">Listo</button>
                     </div>
                 </div>
             <?php endforeach; ?>
         </div>
-        
+
         <!-- Template oculto para nuevos items -->
         <template class="menu-builder-template">
-            <div class="menu-builder-item" data-index="{INDEX}">
+            <div class="menu-builder-item" data-index="{INDEX}" data-nivel="0">
                 <div class="mb-display-row">
                     <div class="mb-drag-handle">
                         <span class="mb-indent-dash">—</span>
@@ -69,8 +85,8 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
                     <div class="mb-title-display">Nuevo Item</div>
                     <div class="mb-actions">
                         <button type="button" class="mb-btn mb-btn-eye" title="Ocultar"><i class="bi bi-eye"></i></button>
-                        <button type="button" class="mb-btn mb-btn-indent-left" title="Nivel Padre"><i class="bi bi-arrow-bar-left"></i></button>
-                        <button type="button" class="mb-btn mb-btn-indent-right" title="Nivel Hijo"><i class="bi bi-arrow-bar-right"></i></button>
+                        <button type="button" class="mb-btn mb-btn-indent-left" title="Subir de nivel"><i class="bi bi-arrow-bar-left"></i></button>
+                        <button type="button" class="mb-btn mb-btn-indent-right" title="Bajar de nivel (anidar)"><i class="bi bi-arrow-bar-right"></i></button>
                         <button type="button" class="mb-btn mb-btn-add-child" title="Añadir Sub-item"><i class="bi bi-plus"></i></button>
                         <button type="button" class="mb-btn mb-btn-up" title="Subir"><i class="bi bi-chevron-up"></i></button>
                         <button type="button" class="mb-btn mb-btn-down" title="Bajar"><i class="bi bi-chevron-down"></i></button>
@@ -83,7 +99,7 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
                     <div class="mb-edit-fields">
                         <input type="text" name="<?= $name_path ?>[{INDEX}][texto]" value="" placeholder="Texto del enlace" class="mb-input-text" required disabled>
                         <input type="text" name="<?= $name_path ?>[{INDEX}][url]" value="" placeholder="URL" class="mb-input-url" disabled>
-                        <input type="hidden" name="<?= $name_path ?>[{INDEX}][nivel]" value="padre" class="mb-input-nivel" disabled>
+                        <input type="hidden" name="<?= $name_path ?>[{INDEX}][nivel]" value="0" class="mb-input-nivel" disabled>
                     </div>
                     <button type="button" class="btn btn-sm btn-outline-secondary mb-btn-close-edit">Listo</button>
                 </div>
@@ -96,13 +112,13 @@ function field_menu_builder_render(string $name_path, $value, array $config): st
 
 function field_menu_builder_parse($raw, array $config) {
     if (!is_array($raw)) return [];
-    
+
     $clean = [];
     foreach ($raw as $item) {
         $clean[] = [
             'texto' => htmlspecialchars(trim($item['texto'] ?? ''), ENT_QUOTES, 'UTF-8'),
             'url' => htmlspecialchars(trim($item['url'] ?? ''), ENT_QUOTES, 'UTF-8'),
-            'nivel' => in_array($item['nivel'] ?? '', ['padre', 'hijo']) ? $item['nivel'] : 'padre'
+            'nivel' => menu_builder_profundidad($item['nivel'] ?? 0),
         ];
     }
     return $clean;
