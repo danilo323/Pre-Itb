@@ -1,0 +1,162 @@
+/* ============================================================================
+   sistema.css — Sistema de espaciado y composicion del sitio ITB
+   ----------------------------------------------------------------------------
+   Este archivo define las piezas compartidas por TODAS las secciones:
+   la escala de espaciado, el contenedor comun y el ritmo vertical.
+
+   Por que existe: las secciones se reutilizan entre paginas desde el panel,
+   asi que una misma seccion debe verse igual la pongas donde la pongas. Antes
+   de esto habia 11 rellenos verticales distintos y 21 contenedores con 6
+   anchos maximos, asi que los bordes del contenido no se alineaban.
+
+   COMO SE USA (resumen; la guia completa esta en GUIA-MAQUETACION.md):
+
+     <section class="mi-seccion section">              96px arriba y abajo
+     <section class="mi-seccion section section--md">  80px
+     <section class="mi-seccion section section--sm">  48px
+
+       <div class="mi-seccion__container container">   1280px, el estandar
+
+   NO escribas media queries para reducir el relleno en movil: ya lo hace
+   este archivo. NO uses selectores .page-X: matan la reutilizacion.
+
+   Los tokens nuevos van AQUI, no en el :root de base.css (ese bloque esta
+   congelado para evitar conflictos con las ramas del equipo).
+   ============================================================================ */
+
+:root {
+    /* --- Escala de espaciado -------------------------------------------------
+       Retícula de 8. Los 13px, 18px y 22px que hay sueltos por el proyecto
+       quedan fuera a proposito: son ruido, no decisiones. */
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs: 12px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 80px;
+    --space-4xl: 96px;
+
+    /* --- Ritmo vertical de seccion ------------------------------------------
+       Tres densidades en lugar de once valores sueltos:
+         lg  absorbe los 100px (7 secciones) y los 90px
+         md  absorbe los 80px y los 70px
+         sm  absorbe los 48px del ajuste por pagina y los 40px */
+    --section-y-lg: 96px;
+    --section-y-md: 80px;
+    --section-y-sm: 48px;
+    --section-y: var(--section-y-lg);
+
+    /* --- Contenedores --------------------------------------------------------
+       De seis anchos maximos a tres. --container-max (1280px) ya existe en
+       base.css y NO se redeclara aqui. */
+    --gutter: 24px;              /* el margen lateral de 15 de los 21 contenedores */
+    --container-wide: 1440px;    /* absorbe 1350, 1400 y 1440 */
+    --container-narrow: 900px;   /* absorbe 950 */
+
+    /* --- Separaciones dentro de una seccion ----------------------------------
+       De 26 valores distintos a cinco. */
+    --gap-xs: 8px;
+    --gap-sm: 16px;
+    --gap-md: 24px;
+    --gap-lg: 32px;
+    --gap-xl: 48px;
+
+    /* --- Compensacion de la cabecera fija ------------------------------------
+       Hay tres formas distintas de descontarla en el proyecto. Estos dos
+       tokens las unifican sin cambiar el resultado actual. */
+    --hero-offset: var(--header-height);
+    --page-hero-pad: 90px;
+}
+
+/* ----------------------------------------------------------------------------
+   Contenedor comun
+   Se AÑADE a la clase BEM que ya tenga la seccion, no la sustituye:
+     <div class="trayectoria__container container">
+   y se borra del CSS de esa seccion el max-width + margin auto + padding.
+   ---------------------------------------------------------------------------- */
+.container {
+    width: 100%;
+    max-width: var(--container-max);
+    margin-inline: auto;
+    padding-inline: var(--gutter);
+    box-sizing: border-box;
+}
+
+.container--wide   { max-width: var(--container-wide); }
+.container--narrow { max-width: var(--container-narrow); }
+.container--flush  { padding-inline: 0; }
+
+/* ----------------------------------------------------------------------------
+   Ritmo vertical
+   La seccion lee su relleno de una variable. Eso permite que una pagina lo
+   ajuste cambiando la VARIABLE, nunca con un selector de pagina.
+   ---------------------------------------------------------------------------- */
+.section { padding-block: var(--section-y); }
+
+.section--lg { --section-y: var(--section-y-lg); }
+.section--md { --section-y: var(--section-y-md); }
+.section--sm { --section-y: var(--section-y-sm); }
+
+.section--flush-top    { padding-block-start: 0; }
+.section--flush-bottom { padding-block-end: 0; }
+
+/* ----------------------------------------------------------------------------
+   Densidad por pagina
+   Sustituye al ajuste ".page-sobre-nosotros .autoridades { padding: 48px }".
+   Es una clase de DENSIDAD, no de pagina: sirve en cualquier sitio y no
+   acopla el componente al lugar donde vive.
+
+     <body class="densidad-compacta">
+   ---------------------------------------------------------------------------- */
+.densidad-compacta {
+    --section-y-lg: 56px;
+    --section-y-md: 48px;
+    --section-y-sm: 40px;
+}
+
+.densidad-amplia {
+    --section-y-lg: 120px;
+    --section-y-md: 96px;
+    --section-y-sm: 64px;
+}
+
+/* ----------------------------------------------------------------------------
+   Reduccion en pantallas pequeñas
+   Un solo bloque para todo el sitio. Antes, 8 de las 11 secciones de la
+   portada conservaban sus 100px en un telefono de 360px porque nadie habia
+   escrito su media query.
+
+   Funciona porque var() se resuelve al calcular el valor: al redeclarar
+   --section-y-lg aqui, --section-y se recalcula solo en todas las secciones.
+
+   Puntos de ruptura canonicos: 1200 / 992 / 768 / 480.
+   Los de 1380 y 1150 son exclusivos de la cabecera y no se tocan.
+   ---------------------------------------------------------------------------- */
+@media (max-width: 992px) {
+    :root {
+        --section-y-lg: 72px;
+        --section-y-md: 60px;
+        --section-y-sm: 40px;
+    }
+}
+
+@media (max-width: 768px) {
+    :root {
+        --section-y-lg: 56px;
+        --section-y-md: 48px;
+        --section-y-sm: 32px;
+        --gutter: 20px;
+    }
+}
+
+@media (max-width: 480px) {
+    :root {
+        --section-y-lg: 44px;
+        --section-y-md: 40px;
+        --section-y-sm: 28px;
+        --gutter: 16px;
+    }
+}

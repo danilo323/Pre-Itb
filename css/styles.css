@@ -4,6 +4,9 @@
    =============================================
 */
 
+/* Sistema de espaciado y composicion (escala, .container, .section).
+   Va primero para que el resto de hojas pueda usar sus variables. */
+@import url('sistema.css');
 @import url('base.css');
 @import url('header.css');
 @import url('hero.css');
@@ -17,6 +20,10 @@
 @import url('admision.css');
 @import url('noticias.css');
 @import url('alianzas.css');
+/* Hero de paginas internas. Antes solo era alcanzable desde sobre-nosotros.css,
+   asi que oferta-academica.php lo usaba sin sus estilos y quedaba bajo la
+   cabecera fija. */
+@import url('sobre-hero.css');
 @import url('footer.css');
 @import url('responsive.css');
 @import url('hover-theme.css');

@@ -31,7 +31,7 @@ require_once 'includes/content_helper.php';
         ?>
         
         <!-- Aquí irán los siguientes bloques de Oferta Académica -->
-        <section style="padding: 100px 0; text-align: center;">
+        <section class="section" style="text-align: center;">
             <div class="container">
                 <h2>Secciones en construcción...</h2>
                 <p>Próximamente agregaremos la lista de carreras y modalidades aquí.</p>
