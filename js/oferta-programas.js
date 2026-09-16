@@ -64,21 +64,51 @@
             const boton = document.createElement('button');
             boton.type = 'button';
             boton.textContent = etiqueta;
-            if (opciones.activa) boton.classList.add('is-activa');
+
+            // Los números se leen solos, pero las flechas no dicen nada: sin
+            // esto, quien use lector de pantalla oye "botón" y poco más.
+            boton.setAttribute('aria-label', opciones.etiquetaLarga || `Ir a la página ${pagina}`);
+
+            if (opciones.activa) {
+                boton.classList.add('is-activa');
+                // Así es como un lector de pantalla anuncia "página actual".
+                boton.setAttribute('aria-current', 'page');
+                boton.setAttribute('aria-label', `Página ${pagina}, página actual`);
+                // Ya estás en ella: pulsarla no lleva a ninguna parte.
+                boton.disabled = true;
+            }
             if (opciones.deshabilitada) boton.disabled = true;
+
             boton.addEventListener('click', () => {
                 paginaActual = pagina;
                 render();
                 paginacion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                // Tras repintar, el foco vuelve al número de la página en la que
+                // se acaba de entrar, para no perderlo al principio del documento.
+                const nuevoActivo = paginacion.querySelector('.is-activa');
+                if (nuevoActivo) nuevoActivo.focus({ preventScroll: true });
             });
             return boton;
         };
 
-        paginacion.appendChild(crearBoton('‹', paginaActual - 1, { deshabilitada: paginaActual === 1 }));
+        paginacion.appendChild(crearBoton('‹', paginaActual - 1, {
+            deshabilitada: paginaActual === 1,
+            etiquetaLarga: 'Página anterior'
+        }));
         for (let p = 1; p <= paginas; p++) {
             paginacion.appendChild(crearBoton(String(p), p, { activa: p === paginaActual }));
         }
-        paginacion.appendChild(crearBoton('›', paginaActual + 1, { deshabilitada: paginaActual === paginas }));
+        paginacion.appendChild(crearBoton('›', paginaActual + 1, {
+            deshabilitada: paginaActual === paginas,
+            etiquetaLarga: 'Página siguiente'
+        }));
+
+        // "Página 2 de 3" para quien no ve los botones. No se muestra en
+        // pantalla; lo lee el lector cuando cambia.
+        const estado = document.createElement('span');
+        estado.className = 'oferta-buscador__paginacion-estado';
+        estado.textContent = `Página ${paginaActual} de ${paginas}`;
+        paginacion.appendChild(estado);
     }
 
     function render() {
@@ -94,9 +124,17 @@
         visibles.forEach((card) => { card.hidden = false; });
 
         if (contador) {
-            contador.textContent = total === 0
-                ? 'No hay resultados'
-                : `Mostrando ${inicio + 1}-${Math.min(inicio + POR_PAGINA, total)} de ${total} resultado${total === 1 ? '' : 's'}`;
+            if (total === 0) {
+                contador.textContent = 'No hay resultados';
+            } else {
+                const desde = inicio + 1;
+                const hasta = Math.min(inicio + POR_PAGINA, total);
+                let texto = `Mostrando ${desde}-${hasta} de ${total} resultado${total === 1 ? '' : 's'}`;
+                // Con más de una página se dice en cuál estás, además de
+                // resaltarla en los botones de abajo.
+                if (paginas > 1) texto += ` · Página ${paginaActual} de ${paginas}`;
+                contador.textContent = texto;
+            }
         }
         if (vacio) vacio.hidden = total !== 0;
 

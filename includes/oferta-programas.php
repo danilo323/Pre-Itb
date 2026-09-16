@@ -59,7 +59,11 @@ $programas_items = array_values(array_filter($programas_items, function ($p) use
             </div>
 
             <div class="oferta-buscador__resultados-head">
-                <span class="oferta-buscador__contador" id="oferta-buscador-contador"></span>
+                <?php /* aria-live: al filtrar o cambiar de página, un lector de
+                         pantalla lee el recuento nuevo sin que haya que ir a
+                         buscarlo. "polite" espera a que termine de hablar. */ ?>
+                <span class="oferta-buscador__contador" id="oferta-buscador-contador"
+                      role="status" aria-live="polite"></span>
                 <label class="oferta-buscador__orden">
                     Ordenar por:
                     <select id="oferta-buscador-orden">

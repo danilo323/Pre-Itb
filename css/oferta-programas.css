@@ -427,8 +427,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    margin-top: 36px;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-top: var(--space-lg);
 }
 
 .oferta-buscador__paginacion button {
@@ -452,10 +453,66 @@
     color: var(--white);
 }
 
+/* Página actual.
+   -------------------------------------------------------------------------
+   El JS ya marcaba el botón con .is-activa, pero no había ninguna regla para
+   esa clase: el número de la página en la que estabas se veía igual que los
+   demás y no había forma de saber dónde estabas.
 
-.oferta-buscador__paginacion button:disabled {
+   Se distingue por tres vías a la vez, no solo por color, para que también se
+   note en pantallas en blanco y negro o con daltonismo: fondo relleno, texto
+   en negrita y un subrayado grueso debajo. */
+.oferta-buscador__paginacion button.is-activa {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: var(--white);
+    font-weight: 800;
+    cursor: default;
+    position: relative;
+}
+
+.oferta-buscador__paginacion button.is-activa::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--primary-orange);
+}
+
+/* El botón de la página actual no cambia al pasar el cursor: no lleva a
+   ninguna parte porque ya estás ahí. */
+.oferta-buscador__paginacion button.is-activa:hover {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.oferta-buscador__paginacion button:disabled:not(.is-activa) {
     opacity: 0.4;
     cursor: not-allowed;
+}
+
+/* Foco visible al recorrer con el teclado. */
+.oferta-buscador__paginacion button:focus-visible {
+    outline: 2px solid var(--primary-orange);
+    outline-offset: 2px;
+}
+
+/* Texto solo para lectores de pantalla: "Página 2 de 3" junto a los botones. */
+.oferta-buscador__paginacion-estado {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* =============================================
