@@ -1804,6 +1804,123 @@ return [
                         ],
                     ],
                 ],
+                // ---------------------------------------------------------
+                // SECCIÓN 1: título + descripción, arriba del buscador.
+                // El buscador en sí (includes/oferta-programas.php) no lee de
+                // aquí: sus tarjetas salen de la colección 'programas_academicos'.
+                // ---------------------------------------------------------
+                'oferta_intro' => [
+                    'label' => 'SECCIÓN 1: PRESENTACIÓN',
+                    'fields' => [
+                        'titulo' => [
+                            'type' => 'textarea',
+                            'label' => 'Título',
+                            'default' => "Cientos de programas.\nUn título diseñado a tu medida.",
+                            'help' => 'Cada línea nueva del texto se pinta en su propia línea.',
+                        ],
+                        'descripcion' => [
+                            'type' => 'textarea',
+                            'label' => 'Descripción',
+                            'default' => 'Elegir tu especialidad es solo el punto de partida. Diseña tu propia ruta académica combinando las materias y áreas que realmente te apasionan. Estudia con total flexibilidad y llega tan lejos como te propongas.',
+                        ],
+                    ],
+                ],
+            ],
+        ],
+        // Colección de tarjetas del buscador de Oferta Académica. Cada item es
+        // un programa/carrera; se filtra y busca en el navegador (JS puro,
+        // sin recargar), así que aquí solo hace falta guardar el dato de cada
+        // tarjeta — el filtrado vive en js/oferta-programas.js.
+        'programas_academicos' => [
+            'label' => 'Programas Académicos',
+            'group' => 'contenido',
+            'icon' => 'bi bi-mortarboard-fill',
+            'type' => 'collection',
+            'sortable' => true,
+            'columns' => ['nombre', 'facultad'],
+            'fields' => [
+                'tipo' => [
+                    'type' => 'select',
+                    'label' => 'Tipo *',
+                    'help' => 'Con qué opción de "Mostrar resultados por" aparece esta tarjeta.',
+                    'required' => true,
+                    'default' => 'Programa',
+                    'options' => [
+                        'Programa' => 'Programa',
+                        'Curso' => 'Curso',
+                    ],
+                ],
+                'nombre' => [
+                    'type' => 'text',
+                    'label' => 'Nombre del programa *',
+                    'help' => 'Ej: Tecnología Superior en Enfermería',
+                    'required' => true,
+                ],
+                'facultad' => [
+                    'type' => 'text',
+                    'label' => 'Facultad *',
+                    'help' => 'Ej: Facultad de Salud y Servicios Sociales',
+                    'required' => true,
+                ],
+                'campo_estudio' => [
+                    'type' => 'select',
+                    'label' => 'Campo de Estudio *',
+                    'help' => 'Con qué filtro de la barra lateral aparece este programa.',
+                    'required' => true,
+                    'options' => [
+                        'FASSS' => 'FASSS — Facultad de Salud y Servicios Sociales',
+                        'FATV' => 'FATV — Facultad de Transporte y Vialidad',
+                        'FACES' => 'FACES — Facultad de Ciencias Empresariales y Sistemas',
+                    ],
+                ],
+                'modalidad' => [
+                    'type' => 'select',
+                    'label' => 'Modalidad *',
+                    'required' => true,
+                    'options' => [
+                        'Presencial' => 'Presencial',
+                        'Hibrida' => 'Híbrida',
+                        'Remoto' => 'Remoto',
+                    ],
+                ],
+                'duracion' => [
+                    'type' => 'text',
+                    'label' => 'Duración',
+                    'default' => '2 Años (4 Semestres)',
+                ],
+                'campus' => [
+                    'type' => 'text',
+                    'label' => 'Campus',
+                    'default' => 'Campus Teresa Benites',
+                ],
+                'anio_inicio' => [
+                    'type' => 'select',
+                    'label' => 'Año de Inicio',
+                    'options' => [
+                        '2026' => '2026',
+                        '2027' => '2027',
+                    ],
+                ],
+                'etiqueta' => [
+                    'type' => 'select',
+                    'label' => 'Distintivo de la tarjeta',
+                    'help' => 'Insignia chica en la esquina superior de la tarjeta. Déjalo en "Ninguno" si no aplica.',
+                    'options' => [
+                        '' => 'Ninguno',
+                        'Nuevo' => 'Nuevo',
+                        'Tendencia' => 'Tendencia',
+                    ],
+                ],
+                'imagen' => [
+                    'type' => 'image',
+                    'label' => 'Foto del programa',
+                    'help' => 'Tamaño recomendado: 400x300px.',
+                ],
+                'publicado' => [
+                    'type' => 'bool',
+                    'label' => 'Publicado',
+                    'default' => true,
+                ],
             ],
         ],
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
