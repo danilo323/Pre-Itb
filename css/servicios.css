@@ -53,7 +53,7 @@
 .servicios__cards {
     flex-grow: 1;
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+    grid-template-columns: repeat(5, 1fr);
     gap: 16px;
 }
 
@@ -62,11 +62,11 @@
     box-sizing: border-box;
     border: 1px solid #eaeaea;
     border-radius: 12px;
-    padding: 48px 16px 80px;
+    padding: 40px 16px 64px;
     background: #ffffff;
     display: flex;
     flex-direction: column;
-    min-height: 440px;
+    min-height: 400px;
     transition: box-shadow 0.3s ease, border-color 0.3s ease;
 }
 .servicios__card-simple:hover {
@@ -106,8 +106,8 @@
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 48px 16px 80px;
-    min-height: 440px;
+    padding: 40px 16px 64px;
+    min-height: 400px;
     /* Estado de reposo: la misma tarjeta blanca de .servicios__card-simple,
        que es lo que se ve mientras la foto esta oculta. El borde hace falta
        para que la tarjeta se recorte contra el fondo blanco de la seccion. */
