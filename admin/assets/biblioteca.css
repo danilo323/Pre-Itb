@@ -1501,3 +1501,203 @@
     flex: 0 0 auto;
     white-space: nowrap;
 }
+
+/* =============================================
+   VISOR CON FICHA
+   La imagen a la izquierda y sus datos a la derecha, como en cualquier
+   biblioteca de medios. Antes solo se veía la foto y una línea de texto:
+   para saber el tamaño real, la ruta o dónde estaba puesta había que
+   salir a buscarlo.
+   ============================================= */
+.biblioteca-visor__caja {
+    width: min(1180px, 95vw);
+}
+
+.biblioteca-visor__head h3 {
+    font-size: 1rem;
+    font-weight: 700;
+}
+
+.biblioteca-visor__cuerpo {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) 320px;
+    min-height: 0;
+    flex: 1;
+}
+
+.biblioteca-visor__lienzo {
+    position: relative;
+    padding: 24px;
+}
+
+.biblioteca-visor__lienzo img {
+    max-height: calc(92vh - 170px);
+}
+
+/* Flechas para recorrer sin cerrar el visor. */
+.biblioteca-visor__nav {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    display: grid;
+    place-items: center;
+    border: 1px solid var(--border-color);
+    border-radius: 50%;
+    background: var(--bg-panel);
+    color: var(--text-body);
+    cursor: pointer;
+    box-shadow: 0 2px 10px rgba(15, 34, 67, .16);
+    transition: background-color .15s ease, color .15s ease, opacity .15s ease;
+}
+
+.biblioteca-visor__nav:hover:not(:disabled) {
+    background: var(--primary);
+    border-color: var(--primary);
+    color: var(--bg-panel);
+}
+
+.biblioteca-visor__nav:disabled {
+    opacity: .3;
+    cursor: default;
+}
+
+.biblioteca-visor__nav:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.biblioteca-visor__nav--prev { left: 14px; }
+.biblioteca-visor__nav--next { right: 14px; }
+
+/* ---- Ficha ---- */
+.biblioteca-visor__ficha {
+    border-left: 1px solid var(--border-color);
+    padding: 20px;
+    overflow-y: auto;
+    background: var(--bg-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.biblioteca-ficha {
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.biblioteca-ficha__fila {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 9px 0;
+    border-bottom: 1px solid var(--border-color);
+}
+
+.biblioteca-ficha__fila:last-child {
+    border-bottom: 0;
+}
+
+.biblioteca-ficha__fila dt {
+    font-size: .78rem;
+    color: var(--text-muted);
+    font-weight: 600;
+}
+
+.biblioteca-ficha__fila dd {
+    margin: 0;
+    font-size: .84rem;
+    font-weight: 700;
+    color: var(--text-main);
+    text-align: right;
+}
+
+.biblioteca-ficha__bloque h4 {
+    margin: 0 0 8px;
+    font-size: .74rem;
+    text-transform: uppercase;
+    letter-spacing: .04em;
+    color: var(--text-muted);
+}
+
+.biblioteca-ficha__ruta {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.biblioteca-ficha__ruta code {
+    flex: 1;
+    min-width: 0;
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    font-size: .76rem;
+    color: var(--text-body);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.biblioteca-ficha__ruta .btn {
+    flex-shrink: 0;
+    white-space: nowrap;
+}
+
+.biblioteca-ficha__usos {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.biblioteca-ficha__usos li {
+    padding: 8px 10px;
+    border-radius: 8px;
+    background: var(--primary-light);
+    border: 1px solid var(--primary-light-strong);
+    color: var(--primary-hover);
+    font-size: .8rem;
+    font-weight: 600;
+}
+
+.biblioteca-ficha__usos li.is-libre {
+    background: var(--bg-panel);
+    border-color: var(--border-color);
+    color: var(--text-muted);
+    font-weight: 500;
+}
+
+.biblioteca-ficha__pie {
+    margin-top: auto;
+    display: flex;
+    gap: 8px;
+}
+
+.biblioteca-ficha__pie .btn {
+    flex: 1;
+    justify-content: center;
+}
+
+/* En pantallas estrechas la ficha pasa debajo de la imagen. */
+@media (max-width: 900px) {
+    .biblioteca-visor__cuerpo {
+        grid-template-columns: 1fr;
+    }
+
+    .biblioteca-visor__ficha {
+        border-left: 0;
+        border-top: 1px solid var(--border-color);
+    }
+
+    .biblioteca-visor__lienzo img {
+        max-height: 45vh;
+    }
+}

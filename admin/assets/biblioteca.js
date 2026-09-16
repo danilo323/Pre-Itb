@@ -681,21 +681,103 @@
     const visor       = $('biblioteca-visor');
     const visorImg    = $('biblioteca-visor-img');
     const visorNombre = $('biblioteca-visor-nombre');
-    const visorMeta   = $('biblioteca-visor-meta');
     const visorCerrar = $('biblioteca-visor-cerrar');
     let focoAntesVisor = null;
 
+    const visorDim    = $('biblioteca-visor-dim');
+    const visorPeso   = $('biblioteca-visor-peso');
+    const visorTipo   = $('biblioteca-visor-tipo');
+    const visorFecha  = $('biblioteca-visor-fecha');
+    const visorRuta   = $('biblioteca-visor-ruta');
+    const visorCopiar = $('biblioteca-visor-copiar');
+    const visorUsos   = $('biblioteca-visor-usos');
+    const visorAbrir  = $('biblioteca-visor-abrir');
+    const visorPrev   = $('biblioteca-visor-prev');
+    const visorNext   = $('biblioteca-visor-next');
+
+    let botonActual = null;
+
+    // Solo las que se ven ahora: si hay un filtro puesto, las flechas
+    // recorren ese subconjunto y no la biblioteca entera.
+    function botonesVisibles() {
+        return tarjetas()
+            .filter((c) => !c.hidden)
+            .map((c) => c.querySelector('.js-ver-imagen'))
+            .filter(Boolean);
+    }
+
+    function rellenarFicha(boton) {
+        const d = boton.dataset;
+
+        visorNombre.textContent = d.nombre || '';
+        if (visorPeso)  visorPeso.textContent  = d.peso || '—';
+        if (visorTipo)  visorTipo.textContent  = d.tipo || '—';
+        if (visorFecha) visorFecha.textContent = d.fecha || '—';
+
+        if (visorRuta)   visorRuta.textContent = d.ruta || '';
+        if (visorCopiar) visorCopiar.dataset.ruta = d.ruta || '';
+        if (visorAbrir)  visorAbrir.href = d.src || '#';
+
+        // El tamaño real se lee de la propia imagen al cargarla: pedírselo al
+        // servidor para las 107 de la rejilla ralentizaría la pantalla.
+        if (visorDim) {
+            visorDim.textContent = 'Midiendo…';
+            const medir = () => {
+                visorDim.textContent = visorImg.naturalWidth
+                    ? visorImg.naturalWidth + ' × ' + visorImg.naturalHeight + ' px'
+                    : 'No disponible';
+            };
+            if (visorImg.complete && visorImg.naturalWidth) medir();
+            else visorImg.addEventListener('load', medir, { once: true });
+        }
+
+        if (visorUsos) {
+            const usos = (d.usos || '').split('|').filter(Boolean);
+            visorUsos.innerHTML = '';
+            if (!usos.length) {
+                const li = document.createElement('li');
+                li.className = 'is-libre';
+                li.textContent = 'No se está usando en ninguna sección. Se puede eliminar.';
+                visorUsos.appendChild(li);
+            } else {
+                usos.forEach((u) => {
+                    const li = document.createElement('li');
+                    li.textContent = u;
+                    visorUsos.appendChild(li);
+                });
+            }
+        }
+
+        const lista = botonesVisibles();
+        const i = lista.indexOf(boton);
+        if (visorPrev) visorPrev.disabled = i <= 0;
+        if (visorNext) visorNext.disabled = i < 0 || i >= lista.length - 1;
+    }
+
     function abrirVisor(boton) {
         if (!visor) return;
-        focoAntesVisor = boton;
+        if (!botonActual) focoAntesVisor = boton; // solo al abrir, no al pasar
+        botonActual = boton;
+
         visorImg.src = boton.dataset.src;
         visorImg.alt = boton.dataset.nombre || '';
-        visorNombre.textContent = boton.dataset.nombre || '';
-        visorMeta.textContent = boton.dataset.meta || '';
+        rellenarFicha(boton);
+
         visor.classList.remove('is-hidden');
         requestAnimationFrame(() => visor.classList.add('is-visible'));
         visorCerrar?.focus();
     }
+
+    function mover(paso) {
+        const lista = botonesVisibles();
+        const i = lista.indexOf(botonActual);
+        const siguiente = lista[i + paso];
+        if (siguiente) abrirVisor(siguiente);
+    }
+
+    visorPrev?.addEventListener('click', () => mover(-1));
+    visorNext?.addEventListener('click', () => mover(1));
+    visorCopiar?.addEventListener('click', function () { copiarRuta(this); });
 
     function cerrarVisor() {
         if (!visor) return;
@@ -704,6 +786,7 @@
             visor.classList.add('is-hidden');
             visorImg.src = '';
         }, 200);
+        botonActual = null;
         if (focoAntesVisor) focoAntesVisor.focus();
     }
 
@@ -712,8 +795,17 @@
 
     // Escape cierra la ventana que esté abierta, la de subir o la del visor.
     document.addEventListener('keydown', (e) => {
-        if (e.key !== 'Escape') return;
-        if (visor && !visor.classList.contains('is-hidden')) cerrarVisor();
-        else if (modal && !modal.classList.contains('is-hidden')) cerrarModal();
+        const visorAbierto = visor && !visor.classList.contains('is-hidden');
+
+        if (e.key === 'Escape') {
+            if (visorAbierto) cerrarVisor();
+            else if (modal && !modal.classList.contains('is-hidden')) cerrarModal();
+            return;
+        }
+
+        // Recorrer la biblioteca con las flechas, como en cualquier visor.
+        if (!visorAbierto) return;
+        if (e.key === 'ArrowLeft')  { e.preventDefault(); mover(-1); }
+        if (e.key === 'ArrowRight') { e.preventDefault(); mover(1); }
     });
 })();

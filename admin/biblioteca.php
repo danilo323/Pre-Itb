@@ -352,6 +352,11 @@ echo layout_start('Biblioteca', 'biblioteca');
                         data-src="../<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>"
                         data-nombre="<?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>"
                         data-meta="<?= htmlspecialchars(biblioteca_peso_legible($img['peso']) . ' · ' . date('d/m/Y', $img['fecha']) . ' · ' . $titulo_usos, ENT_QUOTES, 'UTF-8') ?>"
+                        data-ruta="<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>"
+                        data-peso="<?= htmlspecialchars(biblioteca_peso_legible($img['peso']), ENT_QUOTES, 'UTF-8') ?>"
+                        data-fecha="<?= date('d/m/Y', $img['fecha']) ?>"
+                        data-tipo="<?= htmlspecialchars(strtoupper($img['ext']), ENT_QUOTES, 'UTF-8') ?>"
+                        data-usos="<?= htmlspecialchars(implode('|', $usos), ENT_QUOTES, 'UTF-8') ?>"
                         aria-label="<?= htmlspecialchars('Ver ' . $img['nombre'] . ' a tamaño completo', ENT_QUOTES, 'UTF-8') ?>">
                     <img src="../<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>"
                          alt="<?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>" loading="lazy">
@@ -414,16 +419,74 @@ echo layout_start('Biblioteca', 'biblioteca');
      role="dialog" aria-modal="true" aria-labelledby="biblioteca-visor-nombre">
     <div class="biblioteca-visor__caja">
         <div class="biblioteca-visor__head">
-            <div>
-                <h3 id="biblioteca-visor-nombre"></h3>
-                <p class="biblioteca-visor__meta" id="biblioteca-visor-meta"></p>
-            </div>
+            <h3 id="biblioteca-visor-nombre"></h3>
             <button type="button" class="biblioteca-modal__cerrar" id="biblioteca-visor-cerrar" aria-label="Cerrar">
                 <i class="bi bi-x-lg" aria-hidden="true"></i>
             </button>
         </div>
-        <div class="biblioteca-visor__lienzo">
-            <img id="biblioteca-visor-img" src="" alt="">
+
+        <div class="biblioteca-visor__cuerpo">
+            <div class="biblioteca-visor__lienzo">
+                <?php /* Flechas para recorrer la biblioteca sin cerrar y volver
+                         a abrir. También responden a las teclas de dirección. */ ?>
+                <button type="button" class="biblioteca-visor__nav biblioteca-visor__nav--prev"
+                        id="biblioteca-visor-prev" aria-label="Imagen anterior">
+                    <i class="bi bi-chevron-left" aria-hidden="true"></i>
+                </button>
+                <img id="biblioteca-visor-img" src="" alt="">
+                <button type="button" class="biblioteca-visor__nav biblioteca-visor__nav--next"
+                        id="biblioteca-visor-next" aria-label="Imagen siguiente">
+                    <i class="bi bi-chevron-right" aria-hidden="true"></i>
+                </button>
+            </div>
+
+            <?php /* Ficha del archivo. Antes el visor solo enseñaba la foto y
+                     una línea de texto: para saber el tamaño real, la ruta o en
+                     qué secciones estaba puesta había que salir a buscarlo. */ ?>
+            <aside class="biblioteca-visor__ficha">
+                <dl class="biblioteca-ficha">
+                    <div class="biblioteca-ficha__fila">
+                        <dt>Dimensiones</dt>
+                        <dd id="biblioteca-visor-dim">—</dd>
+                    </div>
+                    <div class="biblioteca-ficha__fila">
+                        <dt>Peso</dt>
+                        <dd id="biblioteca-visor-peso">—</dd>
+                    </div>
+                    <div class="biblioteca-ficha__fila">
+                        <dt>Formato</dt>
+                        <dd id="biblioteca-visor-tipo">—</dd>
+                    </div>
+                    <div class="biblioteca-ficha__fila">
+                        <dt>Subida</dt>
+                        <dd id="biblioteca-visor-fecha">—</dd>
+                    </div>
+                </dl>
+
+                <div class="biblioteca-ficha__bloque">
+                    <h4>Ruta del archivo</h4>
+                    <div class="biblioteca-ficha__ruta">
+                        <code id="biblioteca-visor-ruta"></code>
+                        <button type="button" class="btn btn-sm btn-outline js-copiar-ruta"
+                                id="biblioteca-visor-copiar" data-ruta=""
+                                aria-label="Copiar la ruta del archivo">
+                            <i class="bi bi-clipboard" aria-hidden="true"></i> Copiar
+                        </button>
+                    </div>
+                </div>
+
+                <div class="biblioteca-ficha__bloque">
+                    <h4>Dónde se usa</h4>
+                    <ul class="biblioteca-ficha__usos" id="biblioteca-visor-usos"></ul>
+                </div>
+
+                <div class="biblioteca-ficha__pie">
+                    <a href="#" target="_blank" rel="noopener" class="btn btn-sm btn-outline"
+                       id="biblioteca-visor-abrir">
+                        <i class="bi bi-box-arrow-up-right" aria-hidden="true"></i> Abrir original
+                    </a>
+                </div>
+            </aside>
         </div>
     </div>
 </div>
