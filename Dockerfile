@@ -12,6 +12,13 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
+# Exactamente un MPM: mod_php solo funciona con prefork. Si por cualquier motivo
+# quedan habilitados event o worker, Apache aborta con AH00534 "More than one
+# MPM loaded". Se fuerza aqui y se comprueba la configuracion en tiempo de build.
+RUN a2dismod -q mpm_event mpm_worker 2>/dev/null || true \
+    && a2enmod -q mpm_prefork \
+    && ls /etc/apache2/mods-enabled/ | grep '^mpm_'
+
 # php.ini de producción + ajustes del proyecto (subidas de 32 MB, errores a log)
 RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
 COPY docker/php.ini "$PHP_INI_DIR/conf.d/zz-itb.ini"
@@ -29,6 +36,9 @@ RUN chmod 755 /var/www/html
 # Entrypoint: ajusta el puerto de Railway y enlaza el volume persistente
 COPY docker/entrypoint.sh /usr/local/bin/itb-entrypoint
 RUN sed -i 's/\r$//' /usr/local/bin/itb-entrypoint && chmod +x /usr/local/bin/itb-entrypoint
+
+# Falla el build (no el deploy) si la configuracion de Apache no es valida.
+RUN apache2ctl -t
 
 ENV PORT=8080
 EXPOSE 8080

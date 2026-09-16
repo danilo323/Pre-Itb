@@ -10,14 +10,31 @@ set -eu
 APP=/var/www/html
 PORT="${PORT:-8080}"
 
+# ---- 0) Un solo MPM --------------------------------------------------------
+# mod_php exige prefork. Si en el entorno aparece habilitado event o worker,
+# Apache aborta con AH00534 "More than one MPM loaded" y el servicio entra en
+# bucle de reinicios. Se garantiza aqui en cada arranque (idempotente).
+for m in mpm_event mpm_worker; do
+  if [ -e "/etc/apache2/mods-enabled/$m.load" ]; then
+    a2dismod -q "$m" || rm -f "/etc/apache2/mods-enabled/$m.load" "/etc/apache2/mods-enabled/$m.conf"
+  fi
+done
+[ -e /etc/apache2/mods-enabled/mpm_prefork.load ] || a2enmod -q mpm_prefork
+echo "[itb] MPM habilitado: $(ls /etc/apache2/mods-enabled/ | grep '^mpm_.*\.load$' | tr '\n' ' ')"
+
 # ---- 1) Puerto dinamico ----------------------------------------------------
 sed -i "s/^Listen 80$/Listen ${PORT}/" /etc/apache2/ports.conf
 sed -i "s/<VirtualHost \*:80>/<VirtualHost *:${PORT}>/" /etc/apache2/sites-available/000-default.conf
+echo "[itb] Apache escuchara en el puerto ${PORT}"
 
 # ---- 2) Volume persistente -------------------------------------------------
 # Railway exporta RAILWAY_VOLUME_MOUNT_PATH; en Docker local se puede pasar
-# ITB_VOLUME_PATH. Si ninguna existe, el sitio corre en modo efimero.
+# ITB_VOLUME_PATH. Si ninguna existe pero /data-vol esta montado, se usa.
+# Sin nada de eso, el sitio corre en modo efimero.
 VOL="${ITB_VOLUME_PATH:-${RAILWAY_VOLUME_MOUNT_PATH:-}}"
+if [ -z "$VOL" ] && [ -d /data-vol ]; then
+  VOL=/data-vol
+fi
 
 if [ -n "$VOL" ] && [ -d "$VOL" ]; then
   for d in data img docs audio; do

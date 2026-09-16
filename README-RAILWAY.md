@@ -84,6 +84,24 @@ docker run --rm -p 8080:8080 \
 
 Abrir `http://localhost:8080`.
 
+## Si algo falla en el deploy
+
+Mirar primero los *Deploy Logs* del servicio. Las primeras líneas del contenedor
+son del entrypoint y dicen exactamente qué detectó:
+
+```
+[itb] MPM habilitado: mpm_prefork.load
+[itb] Apache escuchara en el puerto 8080
+[itb] volume activo en /data-vol (data img docs audio)
+```
+
+| Síntoma en el log | Causa | Qué hacer |
+|---|---|---|
+| `AH00534: apache2: Configuration error: More than one MPM loaded` | Apache arrancó con dos MPM (prefork + event/worker). El entrypoint ahora deshabilita event/worker en cada arranque y el build hace `apache2ctl -t`. | Redeploy con la última versión de la rama. Si persiste, revisar en *Settings → Deploy* que **no** haya un *Custom Start Command*: debe ir vacío para que se use `apache2-foreground`. |
+| `[itb] sin volume: ... son efimeros` | No hay Volume montado (falta `RAILWAY_VOLUME_MOUNT_PATH`). | *Settings → Volumes → Add Volume* con mount path `/data-vol` y redeploy. |
+| El servicio arranca pero el dominio da 502 | El puerto del dominio no coincide con el de Apache. | En *Settings → Networking* el puerto debe ser el mismo que la variable `PORT` (8080). |
+| `Database connection error` en los logs | Variables `MYSQL*` ausentes o incorrectas. El sitio sigue funcionando con el JSON. | Revisar las referencias `${{MySQL.MYSQLHOST}}` etc. en *Variables*. |
+
 ## Limitaciones conocidas (entorno de prueba)
 
 - **Sesiones en el contenedor**: cada redeploy cierra la sesión del panel. Basta volver a entrar.
