@@ -43,3 +43,8 @@ Thumbs.db
 desktop.ini
 
 mockups/*
+# Imagen ajena al sitio subida al probar la biblioteca (una guia de tarjetas
+# de otro proyecto). Sigue en disco, para que no desaparezca de la biblioteca
+# local, pero no viaja en el repositorio. Si se borra desde el panel, esta
+# linea se puede quitar.
+img/6677009e90cc042586aecf5d81b39cdd.png
