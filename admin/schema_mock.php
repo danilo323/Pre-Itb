@@ -2024,6 +2024,61 @@ return [
                 'publicado' => ['type' => 'bool', 'label' => 'Publicado', 'default' => true],
             ],
         ],
+        'programas_academicos' => [
+            'label' => 'Programas Académicos',
+            'group' => 'contenido',
+            'icon' => 'bi bi-journal-bookmark-fill',
+            'type' => 'collection',
+            'sortable' => true,
+            'columns' => ['nombre', 'tipo'],
+            'fields' => [
+                'publicado' => ['type' => 'bool', 'label' => 'Publicado', 'default' => true],
+                'nombre' => ['type' => 'text', 'label' => 'Nombre del Programa *', 'help' => 'Ej.: Tecnología Superior en Enfermería', 'required' => true],
+                'facultad' => ['type' => 'text', 'label' => 'Facultad *', 'help' => 'Ej.: Facultad de Salud y Servicios Sociales', 'required' => true],
+                'tipo' => [
+                    'type' => 'select',
+                    'label' => 'Tipo *',
+                    'options' => ['Programa' => 'Programa', 'Curso' => 'Curso'],
+                    'default' => 'Programa',
+                    'required' => true
+                ],
+                'modalidad' => [
+                    'type' => 'select',
+                    'label' => 'Modalidad *',
+                    'options' => ['Presencial' => 'Presencial', 'Hibrida' => 'Híbrida', 'Remoto' => 'Remoto'],
+                    'default' => 'Presencial',
+                    'required' => true
+                ],
+                'duracion' => ['type' => 'text', 'label' => 'Duración *', 'help' => 'Ej.: 2 Años (4 Semestres)', 'default' => '2 Años (4 Semestres)', 'required' => true],
+                'campus' => ['type' => 'text', 'label' => 'Campus *', 'help' => 'Ej.: Campus Teresa Benites', 'default' => 'Campus Teresa Benites', 'required' => true],
+                'anio_inicio' => [
+                    'type' => 'select',
+                    'label' => 'Año de Inicio *',
+                    'options' => ['2026' => '2026', '2027' => '2027'],
+                    'default' => '2026',
+                    'required' => true
+                ],
+                'campo_estudio' => [
+                    'type' => 'select',
+                    'label' => 'Campo de Estudio *',
+                    'options' => ['FASSS' => 'FASSS', 'FATV' => 'FATV', 'FACES' => 'FACES'],
+                    'default' => 'FASSS',
+                    'required' => true
+                ],
+                'etiqueta' => [
+                    'type' => 'select',
+                    'label' => 'Etiqueta Especial',
+                    'options' => ['' => '-- Ninguna --', 'Nuevo' => 'Nuevo', 'Tendencia' => 'Tendencia', 'Destacado' => 'Destacado'],
+                    'default' => ''
+                ],
+                'imagen' => [
+                    'type' => 'image',
+                    'label' => 'Imagen *',
+                    'help' => 'Sube la imagen destacada para la tarjeta.',
+                    'required' => true
+                ],
+            ],
+        ],
         'demo_iconos' => [
             'label' => 'Ejemplo Selección Íconos',
             'group' => 'globales',

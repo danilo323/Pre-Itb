@@ -263,5 +263,55 @@ function collection_items(string $collection_name): array {
         ];
     }
     
+    if ($collection_name === 'programas_academicos') {
+        return [
+            1 => [
+                'id' => 1,
+                'orden' => '1',
+                'nombre' => 'Tecnología Superior en Enfermería (Prueba)',
+                'facultad' => 'Facultad de Salud y Servicios Sociales (Prueba)',
+                'tipo' => 'Programa',
+                'modalidad' => 'Presencial',
+                'duracion' => '2 Años (4 Semestres)',
+                'campus' => 'Campus Teresa Benites',
+                'anio_inicio' => '2026',
+                'campo_estudio' => 'FASSS',
+                'etiqueta' => 'Nuevo',
+                'imagen' => 'img/noticia_1.png',
+                'publicado' => '1'
+            ],
+            2 => [
+                'id' => 2,
+                'orden' => '2',
+                'nombre' => 'Tecnología Superior en Mecánica Automotriz (Prueba)',
+                'facultad' => 'Facultad de Transporte y Vialidad (Prueba)',
+                'tipo' => 'Programa',
+                'modalidad' => 'Presencial',
+                'duracion' => '2 Años (4 Semestres)',
+                'campus' => 'Campus Teresa Benites',
+                'anio_inicio' => '2026',
+                'campo_estudio' => 'FATV',
+                'etiqueta' => 'Destacado',
+                'imagen' => 'img/noticia_2.png',
+                'publicado' => '1'
+            ],
+            3 => [
+                'id' => 3,
+                'orden' => '3',
+                'nombre' => 'Tecnología Superior en Desarrollo de Software (Prueba)',
+                'facultad' => 'Facultad de Ciencias Empresariales y Sistemas (Prueba)',
+                'tipo' => 'Programa',
+                'modalidad' => 'Hibrida',
+                'duracion' => '2 Años (4 Semestres)',
+                'campus' => 'Campus Teresa Benites',
+                'anio_inicio' => '2026',
+                'campo_estudio' => 'FACES',
+                'etiqueta' => 'Tendencia',
+                'imagen' => 'img/noticia_3.png',
+                'publicado' => '1'
+            ]
+        ];
+    }
+    
     return [];
 }
