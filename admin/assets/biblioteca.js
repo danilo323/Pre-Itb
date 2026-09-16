@@ -780,6 +780,30 @@
 
     visorPrev?.addEventListener('click', () => mover(-1));
     visorNext?.addEventListener('click', () => mover(1));
+
+    // Fondo de la vista previa. Por defecto liso; quien necesite comprobar la
+    // transparencia de un logo puede poner el tablero solo mientras lo mira.
+    const lienzo = document.querySelector('.biblioteca-visor__lienzo');
+
+    function ponerFondo(nombre) {
+        if (lienzo) lienzo.dataset.fondo = nombre;
+        document.querySelectorAll('[data-fondo]').forEach((b) => {
+            if (!b.matches('.biblioteca-fondo')) return;
+            const activo = b.dataset.fondo === nombre;
+            b.classList.toggle('is-activo', activo);
+            b.setAttribute('aria-pressed', String(activo));
+        });
+        try { localStorage.setItem('itb-biblioteca-fondo', nombre); } catch (err) {}
+    }
+
+    document.querySelectorAll('.biblioteca-fondo').forEach((b) => {
+        b.addEventListener('click', () => ponerFondo(b.dataset.fondo));
+    });
+
+    try {
+        const guardado = localStorage.getItem('itb-biblioteca-fondo');
+        if (guardado) ponerFondo(guardado);
+    } catch (err) {}
     visorCopiar?.addEventListener('click', function () { copiarRuta(this); });
 
     function cerrarVisor() {

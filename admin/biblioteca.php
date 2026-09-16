@@ -499,6 +499,22 @@ echo layout_start('Biblioteca', 'biblioteca');
                     <ul class="biblioteca-ficha__usos" id="biblioteca-visor-usos"></ul>
                 </div>
 
+                <?php /* Para las imágenes con transparencia: sobre blanco no se
+                         distingue qué es fondo y qué es imagen. En vez de dejar
+                         el tablero puesto siempre, que ensucia, se puede cambiar
+                         el fondo solo cuando hace falta. */ ?>
+                <div class="biblioteca-ficha__bloque">
+                    <h4>Fondo de la vista</h4>
+                    <div class="biblioteca-fondos" role="group" aria-label="Fondo de la vista previa">
+                        <button type="button" class="biblioteca-fondo is-activo" data-fondo="claro"
+                                aria-pressed="true" title="Claro">Claro</button>
+                        <button type="button" class="biblioteca-fondo" data-fondo="oscuro"
+                                aria-pressed="false" title="Oscuro">Oscuro</button>
+                        <button type="button" class="biblioteca-fondo" data-fondo="cuadros"
+                                aria-pressed="false" title="Cuadros, para ver la transparencia">Cuadros</button>
+                    </div>
+                </div>
+
                 <div class="biblioteca-ficha__pie">
                     <a href="#" target="_blank" rel="noopener" class="btn btn-sm btn-outline"
                        id="biblioteca-visor-abrir">

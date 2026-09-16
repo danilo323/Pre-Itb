@@ -619,13 +619,10 @@
     display: grid;
     place-items: center;
     padding: 20px;
-    /* Cuadros para que se note la transparencia de un PNG o un SVG. */
+    /* Fondo liso. El tablero de ajedrez ensuciaba la vista de cada imagen,
+       y solo hacia falta para las pocas que tienen transparencia: para esas
+       esta el conmutador de fondo de la ficha. */
     background-color: var(--bg-main);
-    background-image:
-        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%),
-        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%);
-    background-size: 20px 20px;
-    background-position: 0 0, 10px 10px;
 }
 
 .biblioteca-visor__lienzo img {
@@ -1914,4 +1911,80 @@
 .biblioteca-modal__pie .btn[disabled] {
     opacity: .5;
     cursor: not-allowed;
+}
+
+/* =============================================
+   VISTA PREVIA: FONDO Y ENCUADRE
+   ============================================= */
+
+/* Fondo liso por defecto, con un degradado apenas perceptible para que la
+   imagen no quede flotando sobre un plano muerto. */
+.biblioteca-visor__lienzo {
+    background: linear-gradient(160deg, var(--bg-subtle) 0%, var(--bg-main) 100%);
+}
+
+.biblioteca-visor__lienzo[data-fondo="oscuro"] {
+    background: linear-gradient(160deg, var(--primary-blue-light) 0%, var(--primary-blue-dark) 100%);
+}
+
+/* Solo aquí, y solo si se pide: el tablero sirve para comprobar qué parte
+   de un logo es transparente. */
+.biblioteca-visor__lienzo[data-fondo="cuadros"] {
+    background-color: var(--bg-panel);
+    background-image:
+        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%),
+        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%);
+    background-size: 22px 22px;
+    background-position: 0 0, 11px 11px;
+}
+
+/* La imagen se despega del fondo con una sombra, en vez de con un marco
+   blanco que competía con las fotos de fondo claro. */
+.biblioteca-visor__lienzo img {
+    border-radius: 10px;
+    box-shadow: 0 10px 34px rgba(15, 34, 67, .18);
+    background: var(--bg-panel);
+}
+
+.biblioteca-visor__lienzo[data-fondo="cuadros"] img {
+    background: none;
+    box-shadow: 0 6px 20px rgba(15, 34, 67, .14);
+}
+
+/* Conmutador de fondo */
+.biblioteca-fondos {
+    display: flex;
+    gap: 4px;
+    background: var(--bg-main);
+    padding: 4px;
+    border-radius: 10px;
+}
+
+.biblioteca-fondo {
+    flex: 1;
+    border: 0;
+    background: none;
+    padding: 7px 8px;
+    border-radius: 7px;
+    font: inherit;
+    font-size: .76rem;
+    font-weight: 600;
+    color: var(--text-body);
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.biblioteca-fondo:hover {
+    color: var(--text-main);
+}
+
+.biblioteca-fondo.is-activo {
+    background: var(--bg-panel);
+    color: var(--primary);
+    box-shadow: 0 1px 3px rgba(15, 34, 67, .12);
+}
+
+.biblioteca-fondo:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
 }
