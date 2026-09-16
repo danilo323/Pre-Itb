@@ -56,8 +56,13 @@
 /* ---- Carril de las citas ----
    Va aparte del de las fotos para que el titulo de la seccion, que esta entre
    los dos, se quede quieto mientras las historias pasan. */
+.testimonios__content {
+    min-width: 0;
+}
+
 .testimonios__quote-viewport {
     overflow: hidden;
+    min-width: 0;
 }
 
 .testimonios__quote-track {
