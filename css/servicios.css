@@ -139,44 +139,11 @@
    Se envuelve en @media (hover: hover) porque en pantallas tactiles no hay
    como siempre, en vez de no revelarla nunca. */
 
-/* Ajuste de contraste para el botón cuando la foto (fondo oscuro) es visible */
-.servicios__card-image .btn--solid {
-    color: #ffffff;
-    border-color: rgba(255, 255, 255, 0.5);
-}
-.servicios__card-image .btn--solid .btn__icon-right {
-    background-color: #ffffff;
-    color: var(--primary-orange);
-}
-.servicios__card-image .btn--solid::before {
-    background-color: #ffffff;
-}
-.servicios__card-image .btn--solid:hover {
-    color: var(--primary-orange);
-    border-color: transparent;
-}
-.servicios__card-image .btn--solid:hover .btn__icon-right {
-    background-color: var(--primary-orange);
-    color: #ffffff;
-}
-
 @media (hover: hover) {
     .servicios__card-image img,
     .servicios__card-image .servicios__card-overlay {
         opacity: 0;
         transition: opacity 0.45s ease, transform 0.5s ease;
-    }
-    /* El botón vuelve a ser naranja en estado de reposo (fondo blanco) */
-    .servicios__card-image:not(:hover):not(:focus-within):not(.servicios__card-image--imagen-fija) .btn--solid {
-        color: var(--primary-orange);
-        border-color: rgba(241, 90, 36, 0.5);
-    }
-    .servicios__card-image:not(:hover):not(:focus-within):not(.servicios__card-image--imagen-fija) .btn--solid .btn__icon-right {
-        background-color: var(--primary-orange);
-        color: var(--white);
-    }
-    .servicios__card-image:not(:hover):not(:focus-within):not(.servicios__card-image--imagen-fija) .btn--solid::before {
-        background-color: var(--primary-orange);
     }
     .servicios__card-image .servicios__card-title-white {
         color: #111111;
