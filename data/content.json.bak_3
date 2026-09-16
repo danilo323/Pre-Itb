@@ -1234,11 +1234,105 @@
             "menu_pos": "bajo:Instituto>Sobre Nosotros>sub-hijo",
             "menu_before": "",
             "secciones": [
+                "presentacion",
+                "valores",
                 "cogobierno",
+                "programas",
                 "servicios",
                 "alianzas"
             ],
             "contenido": {
+                "programas": {
+                    "_visible": "1",
+                    "etiqueta_superior": "Oferta Académica",
+                    "titulo": "Programas Destacados",
+                    "descripcion": "Descubre nuestros programas tecnológicos de mayor demanda laboral, diseñados para insertarte rápidamente en el mercado de trabajo.",
+                    "btn_ver_todos": "Ver todos los programas",
+                    "lista_programas": [
+                        {
+                            "imagen": "img/10386d1246de0db082c29c5ab5820439.jpg",
+                            "modalidad": "Presencial",
+                            "area": "Salud",
+                            "titulo": "Tecnología Superior en Enfermería",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/Mecanica.jpg",
+                            "modalidad": "Presencial",
+                            "area": "Ciencias Empresariales",
+                            "titulo": "Tecnología Superior en Marketing Digital",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/desarrollo_software.jpg",
+                            "modalidad": "Presencial",
+                            "area": "Transporte",
+                            "titulo": "Tecnología Superior en Logística y Transporte",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/administracion.jpg",
+                            "modalidad": "Híbrido",
+                            "area": "Tecnología",
+                            "titulo": "Tecnología Superior en Desarrollo de Software",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/programa_gastronomia.jpg",
+                            "modalidad": "Presencial",
+                            "area": "",
+                            "titulo": "Tecnología Superior en Gastronomía",
+                            "duracion": "5 Niveles",
+                            "sede": ""
+                        },
+                        {
+                            "imagen": "img/programa_contabilidad.jpg",
+                            "modalidad": "Presencial",
+                            "area": "",
+                            "titulo": "Tecnología Superior en Contabilidad",
+                            "duracion": "5 Niveles",
+                            "sede": ""
+                        },
+                        {
+                            "imagen": "img/programa_diseno_grafico.jpg",
+                            "modalidad": "Presencial",
+                            "area": "",
+                            "titulo": "Técnico Superior en Diseño Gráfico",
+                            "duracion": "2 Niveles",
+                            "sede": ""
+                        }
+                    ],
+                    "div_global": null,
+                    "prog1_imagen": "img/enfermeria.jpg",
+                    "prog1_modalidad": "Presencial",
+                    "prog1_area": "Salud",
+                    "prog1_titulo": "Tecnología Superior en Enfermería",
+                    "prog1_duracion": "5 Semestres",
+                    "prog1_sede": "Guayaquil",
+                    "prog2_imagen": "img/Mecanica.jpg",
+                    "prog2_modalidad": "Presencial",
+                    "prog2_area": "Ciencias Empresariales",
+                    "prog2_titulo": "Tecnología Superior en Marketing Digital",
+                    "prog2_duracion": "5 Semestres",
+                    "prog2_sede": "Guayaquil",
+                    "prog3_imagen": "img/desarrollo_software.jpg",
+                    "prog3_modalidad": "Presencial",
+                    "prog3_area": "Transporte",
+                    "prog3_titulo": "Tecnología Superior en Logística y Transporte",
+                    "prog3_duracion": "5 Semestres",
+                    "prog3_sede": "Guayaquil",
+                    "prog4_imagen": "img/administracion.jpg",
+                    "prog4_modalidad": "Híbrido",
+                    "prog4_area": "Tecnología",
+                    "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
+                    "prog4_duracion": "5 Semestres",
+                    "prog4_sede": "Guayaquil",
+                    "info_programas": null
+                },
                 "servicios": {
                     "_visible": "1",
                     "serv1_titulo": "Bienestar Estudiantil",
@@ -1358,6 +1452,51 @@
                     "div_logos": "",
                     "div_fotos": ""
                 },
+                "sobre_intro": {
+                    "_visible": "1",
+                    "info_compartido": "",
+                    "div_textos": "",
+                    "etiqueta_superior": "Trayectoria y Compromiso Educativo",
+                    "titulo": "Formando Líderes Prácticos con Visión de Futuro",
+                    "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
+                    "div_cita": "",
+                    "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
+                    "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
+                    "div_imagen": "",
+                    "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
+                },
+                "sobre_valores": {
+                    "_visible": "1",
+                    "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
+                    "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
+                    "items": [
+                        {
+                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "titulo": "Cogobierno",
+                            "descripcion": "Participación y gestión democrática"
+                        },
+                        {
+                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "titulo": "Igualdad",
+                            "descripcion": "Oportunidades sin discriminación"
+                        },
+                        {
+                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "titulo": "Calidad",
+                            "descripcion": "Excelencia en educación superior"
+                        },
+                        {
+                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "titulo": "Pertinencia",
+                            "descripcion": "Programas alineados a la sociedad"
+                        },
+                        {
+                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "titulo": "Integralidad",
+                            "descripcion": "Formación académica y humana"
+                        }
+                    ]
+                },
                 "sobre_cogobierno": {
                     "_visible": "1",
                     "titulo": "Co Gobierno",
@@ -1383,7 +1522,7 @@
                     "card_boton_url": "#"
                 }
             },
-            "updated_at": "2026-09-16 01:42:59"
+            "updated_at": "2026-09-16 01:43:22"
         }
     },
     "documentos_transparencia": {

@@ -314,7 +314,7 @@ return [
         'biblioteca' => [
             'label' => 'Biblioteca',
             'group' => 'globales',
-            'icon' => 'bi bi-imagenes',
+            'icon' => 'bi bi-images',
             'type' => 'custom',
             'url' => 'biblioteca.php',
             'subtitulo' => 'Subir y gestionar imagenes',

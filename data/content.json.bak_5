@@ -25,11 +25,6 @@
                 "nivel": "nieto"
             },
             {
-                "texto": "Prueba Nivel 4",
-                "url": "prueba-nivel-4.php",
-                "nivel": 3
-            },
-            {
                 "texto": "HImno e Identidad",
                 "url": "",
                 "nivel": "hijo"
@@ -1383,17 +1378,6 @@
                 }
             },
             "updated_at": "2026-09-11 06:13:18"
-        },
-        "pg_135c29c2e0b2": {
-            "id": "pg_135c29c2e0b2",
-            "nombre": "Prueba Nivel 4",
-            "slug": "prueba-nivel-4",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "bajo:Instituto>Sobre Nosotros>sub-hijo",
-            "menu_before": "",
-            "secciones": [],
-            "contenido": [],
-            "updated_at": "2026-09-16 01:38:02"
         }
     },
     "documentos_transparencia": {
