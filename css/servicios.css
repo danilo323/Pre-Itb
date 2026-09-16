@@ -90,10 +90,10 @@
     margin-bottom: 24px;
 }
 
-/* Alineación del botón estándar dentro de las tarjetas simples */
+/* Alineación del botón estándar dentro de las tarjetas simples.
+   El ancho y la proporción se deciden más abajo, en .servicios__cards .btn. */
 .servicios__card-simple .btn--solid {
     margin-top: auto;
-    align-self: flex-start;
 }
 
 /* Card con Imagen (Campus Virtual, Horarios, Servicios Digitales, Podcast,
@@ -242,10 +242,24 @@
     margin-bottom: 24px;
 }
 
-/* Ajuste específico para el botón de las tarjetas para que quepan en las 5 columnas */
+/* Botón al pie de la tarjeta, en las 5 columnas.
+   ---------------------------------------------------------------------------
+   Antes cada botón medía lo que medía su texto ("Acceder" 135px, "Conocer Más"
+   169px): la fila se veía descuadrada y el más largo se salía de su tarjeta,
+   porque el interior útil es 166px (198 de ancho menos 2x16 de relleno) y .btn
+   no deja que el texto parta.
+
+   Ahora todos ocupan el ancho de la tarjeta, así que quedan iguales entre sí y
+   ninguno puede desbordarse por largo que sea el texto que se escriba en el
+   panel. El texto va a la izquierda y la flecha a la derecha.
+   'width: auto' es necesario para anular el 'width: fit-content' de .btn--solid
+   en base.css, que impedía que el botón se estirara. */
 .servicios__cards .btn--solid {
     margin-top: auto;
-    align-self: flex-start;
+    align-self: stretch;
+    width: auto;
+    max-width: 100%;
+    justify-content: space-between;
     font-size: 0.9rem;
     padding: 5px 4px 5px 18px;
     gap: 14px;
