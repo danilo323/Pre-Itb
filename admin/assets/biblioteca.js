@@ -198,7 +198,9 @@
     const btnCancel = $('biblioteca-modal-cancelar');
     const btnEnviar = $('biblioteca-enviar');
     const previews  = $('biblioteca-previews');
+    const previewsCaja = $('biblioteca-previews-caja');
     const texto     = $('biblioteca-seleccion-texto');
+    const btnVaciar = $('biblioteca-vaciar');
 
     let elegidos = [];
     let subiendo = false;
@@ -224,6 +226,7 @@
         if (ultimoFoco) ultimoFoco.focus();
     }
 
+    btnVaciar?.addEventListener('click', () => { if (!subiendo) limpiarSeleccion(); });
     btnAbrir?.addEventListener('click', abrirModal);
     btnCerrar?.addEventListener('click', cerrarModal);
     btnCancel?.addEventListener('click', () => { limpiarSeleccion(); cerrarModal(); });
@@ -247,13 +250,13 @@
         previews.innerHTML = '';
 
         if (!elegidos.length) {
-            previews.classList.add('is-hidden');
+            previewsCaja?.classList.add('is-hidden');
             if (texto) texto.textContent = '';
             if (btnEnviar) btnEnviar.disabled = true;
             return;
         }
 
-        previews.classList.remove('is-hidden');
+        previewsCaja?.classList.remove('is-hidden');
         if (btnEnviar) btnEnviar.disabled = subiendo;
 
         if (texto) {

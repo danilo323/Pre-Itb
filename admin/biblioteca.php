@@ -201,7 +201,13 @@ echo layout_start('Biblioteca', 'biblioteca');
      role="dialog" aria-modal="true" aria-labelledby="biblioteca-modal-titulo">
     <div class="admin-confirm-box biblioteca-modal__caja">
         <div class="biblioteca-modal__head">
-            <h3 id="biblioteca-modal-titulo"><i class="bi bi-images" aria-hidden="true"></i> Subir imágenes</h3>
+            <div class="biblioteca-modal__titulo">
+                <span class="biblioteca-modal__icono" aria-hidden="true"><i class="bi bi-cloud-arrow-up-fill"></i></span>
+                <div>
+                    <h3 id="biblioteca-modal-titulo">Subir imágenes</h3>
+                    <p>Se guardan en la biblioteca y quedan disponibles en todo el sitio.</p>
+                </div>
+            </div>
             <button type="button" class="biblioteca-modal__cerrar" id="biblioteca-modal-cerrar" aria-label="Cerrar">
                 <i class="bi bi-x-lg" aria-hidden="true"></i>
             </button>
@@ -212,21 +218,34 @@ echo layout_start('Biblioteca', 'biblioteca');
             <input type="hidden" name="action" value="subir">
 
             <div class="biblioteca-dropzone" id="biblioteca-dropzone">
-                <i class="bi bi-cloud-arrow-up-fill" aria-hidden="true"></i>
+                <span class="biblioteca-dropzone__icono" aria-hidden="true">
+                    <i class="bi bi-images"></i>
+                </span>
                 <p class="biblioteca-dropzone__titulo">Arrastra tus imágenes aquí</p>
                 <p class="biblioteca-dropzone__texto">
-                    o <label for="biblioteca-input" class="biblioteca-dropzone__enlace">búscalas en tu equipo</label>.
-                    JPG, PNG, WEBP, GIF o SVG. Se comprimen solas al subir.
+                    o <label for="biblioteca-input" class="biblioteca-dropzone__enlace">búscalas en tu equipo</label>
                 </p>
+                <ul class="biblioteca-dropzone__notas">
+                    <li><i class="bi bi-file-earmark-image" aria-hidden="true"></i> JPG, PNG, WEBP, GIF o SVG</li>
+                    <li><i class="bi bi-magic" aria-hidden="true"></i> Se comprimen solas</li>
+                    <li><i class="bi bi-stack" aria-hidden="true"></i> Varias a la vez</li>
+                </ul>
                 <input type="file" id="biblioteca-input" name="imagenes[]" accept="image/*" multiple class="is-hidden">
             </div>
 
             <?php /* Miniaturas de lo elegido ANTES de subir: así se ve que son
                      las fotos correctas y se puede quitar alguna. */ ?>
-            <div class="biblioteca-previews is-hidden" id="biblioteca-previews" aria-live="polite"></div>
+            <div class="biblioteca-previews-caja is-hidden" id="biblioteca-previews-caja">
+                <div class="biblioteca-previews-caja__head">
+                    <h4 id="biblioteca-seleccion-texto" class="biblioteca-seleccion__texto"></h4>
+                    <button type="button" class="biblioteca-previews-caja__vaciar" id="biblioteca-vaciar">
+                        Quitar todas
+                    </button>
+                </div>
+                <div class="biblioteca-previews" id="biblioteca-previews" aria-live="polite"></div>
+            </div>
 
             <div class="biblioteca-modal__pie">
-                <span id="biblioteca-seleccion-texto" class="biblioteca-seleccion__texto"></span>
                 <div class="biblioteca-modal__acciones">
                     <button type="button" class="btn btn-outline" id="biblioteca-modal-cancelar">Cancelar</button>
                     <button type="submit" class="btn btn-primary" id="biblioteca-enviar" disabled>

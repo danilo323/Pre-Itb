@@ -1701,3 +1701,217 @@
         max-height: 45vh;
     }
 }
+
+/* El botón de la cabecera va por encima del adorno circular, igual que el
+   título y el párrafo, que ya llevan position: relative por el mismo motivo. */
+.dash-header--con-accion .btn {
+    position: relative;
+    z-index: 1;
+    flex-shrink: 0;
+}
+
+/* =============================================
+   VENTANA DE SUBIDA — DISEÑO
+   ============================================= */
+.biblioteca-modal__caja {
+    width: min(760px, 94vw);
+    border-radius: 16px;
+}
+
+.biblioteca-modal__head {
+    align-items: flex-start;
+    padding: 22px 24px 18px;
+    background: var(--bg-subtle);
+}
+
+.biblioteca-modal__titulo {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    min-width: 0;
+}
+
+.biblioteca-modal__icono {
+    flex-shrink: 0;
+    width: 42px;
+    height: 42px;
+    border-radius: 12px;
+    display: grid;
+    place-items: center;
+    background: var(--primary-light);
+    color: var(--primary);
+    font-size: 1.15rem;
+}
+
+.biblioteca-modal__titulo h3 {
+    margin: 0;
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.biblioteca-modal__titulo p {
+    margin: 3px 0 0;
+    font-size: .82rem;
+    color: var(--text-muted);
+}
+
+/* ---- Zona de arrastre ---- */
+.biblioteca-dropzone {
+    border-width: 2px;
+    border-radius: 14px;
+    padding: 30px 24px 24px;
+    background: var(--bg-subtle);
+}
+
+.biblioteca-dropzone.is-encima {
+    border-style: solid;
+    transform: scale(1.005);
+}
+
+.biblioteca-dropzone__icono {
+    display: grid;
+    place-items: center;
+    width: 58px;
+    height: 58px;
+    margin: 0 auto 14px;
+    border-radius: 50%;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    color: var(--primary);
+    font-size: 1.5rem;
+    transition: transform .2s ease, border-color .2s ease;
+}
+
+.biblioteca-dropzone:hover .biblioteca-dropzone__icono,
+.biblioteca-dropzone.is-encima .biblioteca-dropzone__icono {
+    transform: translateY(-2px);
+    border-color: var(--primary);
+}
+
+/* El icono viejo iba suelto y se colaba en esta regla. */
+.biblioteca-dropzone > i {
+    display: none;
+}
+
+.biblioteca-dropzone__titulo {
+    font-size: 1rem;
+}
+
+.biblioteca-dropzone__texto {
+    margin-bottom: 16px;
+}
+
+/* Qué se admite, en tres apuntes cortos en vez de una frase larga. */
+.biblioteca-dropzone__notas {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.biblioteca-dropzone__notas li {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 10px;
+    border-radius: 20px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    font-size: .74rem;
+    font-weight: 600;
+    color: var(--text-muted);
+}
+
+.biblioteca-dropzone__notas i {
+    color: var(--primary);
+    font-size: .8rem;
+}
+
+/* ---- Lo elegido ---- */
+.biblioteca-previews-caja {
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    overflow: hidden;
+}
+
+.biblioteca-previews-caja.is-hidden {
+    display: none;
+}
+
+.biblioteca-previews-caja__head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--bg-subtle);
+    border-bottom: 1px solid var(--border-color);
+}
+
+.biblioteca-previews-caja__head h4 {
+    margin: 0;
+    font-size: .84rem;
+    font-weight: 700;
+    color: var(--text-main);
+}
+
+.biblioteca-previews-caja__vaciar {
+    border: 0;
+    background: none;
+    padding: 4px 6px;
+    border-radius: 6px;
+    font: inherit;
+    font-size: .78rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    cursor: pointer;
+    transition: color .15s ease, background-color .15s ease;
+}
+
+.biblioteca-previews-caja__vaciar:hover {
+    color: var(--danger);
+    background: var(--danger-light);
+}
+
+.biblioteca-previews {
+    padding: 14px 16px;
+    max-height: 230px;
+    overflow-y: auto;
+    grid-template-columns: repeat(auto-fill, minmax(104px, 1fr));
+}
+
+.biblioteca-preview {
+    border-radius: 10px;
+}
+
+.biblioteca-preview img {
+    height: 78px;
+}
+
+/* ---- Pie ---- */
+.biblioteca-modal__pie {
+    justify-content: flex-end;
+    padding-top: 18px;
+}
+
+.biblioteca-modal__acciones {
+    margin-left: 0;
+}
+
+.biblioteca-modal__pie .btn {
+    min-width: 116px;
+    justify-content: center;
+}
+
+.biblioteca-modal__pie .btn-primary {
+    min-width: 190px;
+}
+
+.biblioteca-modal__pie .btn[disabled] {
+    opacity: .5;
+    cursor: not-allowed;
+}

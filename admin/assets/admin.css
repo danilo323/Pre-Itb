@@ -1144,6 +1144,10 @@ textarea.form-control, .field-group textarea {
     height: 220px;
     border-radius: 50%;
     background: rgba(232, 113, 42, 0.18);
+    /* Es un adorno, pero se pinta por encima de todo lo que haya en esa
+       esquina y se quedaba con los clics: un botón puesto ahí no respondía.
+       Con esto los deja pasar a lo que tenga debajo. */
+    pointer-events: none;
 }
 
 .dash-header h1 {
