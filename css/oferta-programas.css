@@ -288,6 +288,32 @@
 }
 
 /* ---- Tarjeta de programa (ancha, imagen a la izquierda) ---- */
+/* Entrada de los resultados.
+   -------------------------------------------------------------------------
+   Al cambiar de página o filtrar, las tarjetas se sustituyen de golpe y cuesta
+   ver que la lista cambió. Entran con un fundido corto y un empujón hacia
+   arriba, escalonadas una tras otra, para que el cambio se lea de un vistazo.
+
+   Es breve a propósito (unos 300 ms, la última empieza 120 ms después que la
+   primera): lo justo para notarlo sin hacer esperar a quien va con prisa.
+   js/oferta-programas.js pone .is-entrando y el orden en --orden-entrada. */
+@keyframes oferta-card-entra {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.oferta-card.is-entrando {
+    animation: oferta-card-entra 0.3s ease-out backwards;
+    animation-delay: calc(var(--orden-entrada, 0) * 40ms);
+}
+
+/* Quien pidió menos movimiento ve el cambio igual, pero sin desplazamiento. */
+@media (prefers-reduced-motion: reduce) {
+    .oferta-card.is-entrando {
+        animation-name: none;
+    }
+}
+
 .oferta-card {
     position: relative;
     display: flex;

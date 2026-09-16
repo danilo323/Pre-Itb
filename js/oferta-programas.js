@@ -21,6 +21,28 @@
     const POR_PAGINA = 4;
     let paginaActual = 1;
 
+    // Al cambiar de página, la vista sube al principio de los resultados.
+    //
+    // Antes se llevaba a la paginación, que está al final de la lista: como
+    // suele quedar fuera de pantalla, el navegador bajaba la vista para
+    // enseñarla y parecía que la página "se iba hacia abajo" sola. Y si la
+    // página nueva traía menos tarjetas, el salto era aún mayor.
+    //
+    // Solo se mueve si el principio de la lista quedó por encima de la
+    // ventana: si ya lo estás viendo, no tiene sentido moverte nada.
+    function subirAResultados() {
+        const ancla = document.querySelector('.oferta-buscador__resultados-head') || grid;
+        if (!ancla) return;
+
+        const margen = 110; // hueco para la cabecera fija
+        const arriba = ancla.getBoundingClientRect().top;
+        if (arriba >= margen) return;
+
+        const destino = Math.max(0, window.scrollY + arriba - margen);
+        const sinAnimacion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: destino, behavior: sinAnimacion ? 'auto' : 'smooth' });
+    }
+
     function filtrosActivos(nombreFiltro) {
         return Array.from(checksFiltro)
             .filter((c) => c.dataset.filtro === nombreFiltro && c.checked)
@@ -81,8 +103,8 @@
 
             boton.addEventListener('click', () => {
                 paginaActual = pagina;
-                render();
-                paginacion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                render({ animar: true });
+                subirAResultados();
                 // Tras repintar, el foco vuelve al número de la página en la que
                 // se acaba de entrar, para no perderlo al principio del documento.
                 const nuevoActivo = paginacion.querySelector('.is-activa');
@@ -111,17 +133,34 @@
         paginacion.appendChild(estado);
     }
 
-    function render() {
+    function render(opciones = {}) {
         const filtradas = ordenar(aplicarFiltros());
         const total = filtradas.length;
         const paginas = Math.max(1, Math.ceil(total / POR_PAGINA));
         if (paginaActual > paginas) paginaActual = paginas;
 
-        tarjetas.forEach((card) => { card.hidden = true; });
+        tarjetas.forEach((card) => {
+            card.hidden = true;
+            card.classList.remove('is-entrando');
+            card.style.removeProperty('--orden-entrada');
+        });
 
         const inicio = (paginaActual - 1) * POR_PAGINA;
         const visibles = filtradas.slice(inicio, inicio + POR_PAGINA);
         visibles.forEach((card) => { card.hidden = false; });
+
+        // Las tarjetas nuevas entran con una animación corta y escalonada, para
+        // que se note que la lista cambió. Solo tras una acción (cambiar de
+        // página, filtrar, buscar): en la carga inicial no hace falta.
+        if (opciones.animar && visibles.length) {
+            // Forzar un reflujo antes de poner la clase, o el navegador agrupa
+            // el quitar y el poner y la animación no llega a verse.
+            void grid.offsetWidth;
+            visibles.forEach((card, i) => {
+                card.style.setProperty('--orden-entrada', String(i));
+                card.classList.add('is-entrando');
+            });
+        }
 
         if (contador) {
             if (total === 0) {
@@ -143,7 +182,7 @@
 
     function reiniciarYRenderizar() {
         paginaActual = 1;
-        render();
+        render({ animar: true });
     }
 
     inputBuscar?.addEventListener('input', reiniciarYRenderizar);
