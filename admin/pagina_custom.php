@@ -224,11 +224,52 @@ function _pagina_custom_remove_from_menu(array &$data, string $slug): void
 }
 
 /**
+ * Encuentra, dentro de la lista PLANA de items del menú (cada uno con su
+ * 'nivel' = profundidad numérica), el índice del nodo identificado por
+ * $ruta (ej. ['Instituto', 'Sobre Nosotros'] = el "Sobre Nosotros" que
+ * cuelga de "Instituto", sin importar cuántos otros items haya alrededor).
+ * Devuelve null si algún tramo de la ruta ya no existe (la borraron o le
+ * cambiaron el nombre).
+ */
+function _pagina_custom_localizar_nodo(array $items, array $ruta): ?int {
+    $inicio = 0;
+    $fin = count($items) - 1;
+    $indice = null;
+    foreach ($ruta as $profundidad => $texto) {
+        $encontrado = null;
+        for ($i = $inicio; $i <= $fin; $i++) {
+            $nivel_i = menu_builder_profundidad($items[$i]['nivel'] ?? 0);
+            if ($nivel_i < $profundidad) break; // salimos del territorio de este padre
+            if ($nivel_i === $profundidad && trim($items[$i]['texto'] ?? '') === $texto) {
+                $encontrado = $i;
+                break;
+            }
+        }
+        if ($encontrado === null) return null;
+        $indice = $encontrado;
+
+        // El territorio del siguiente tramo de la ruta es: desde justo
+        // después de este nodo, hasta el último de sus descendientes.
+        $fin_descendientes = $encontrado;
+        for ($i = $encontrado + 1; $i < count($items); $i++) {
+            if (menu_builder_profundidad($items[$i]['nivel'] ?? 0) <= $profundidad) break;
+            $fin_descendientes = $i;
+        }
+        $inicio = $encontrado + 1;
+        $fin = $fin_descendientes;
+    }
+    return $indice;
+}
+
+/**
  * Coloca (o recoloca) la pagina dentro del menu navegable publico.
  *
- * $menu_pos vale 'none', 'padre' o 'hijo:<texto del padre>'.
+ * $menu_pos vale 'none', 'padre' o 'bajo:<ruta>', donde <ruta> es la cadena
+ * de textos separados por '>' hasta el nodo elegido (ej. "Instituto" para
+ * colgarla como submenú de Instituto, o "Instituto>Sobre Nosotros" para
+ * colgarla un nivel más adentro de eso) — sin límite de profundidad.
  * $menu_before, si viene, es el texto del hermano DELANTE del cual hay que
- * insertarla dentro de ese padre; vacio significa "al final de sus hermanos".
+ * insertarla dentro de ese nodo; vacio significa "al final de sus hermanos".
  *
  * OJO: esta funcion estaba a medio refactorizar y borraba el menu entero. La
  * rama de 'hijo:' terminaba con `$items = $new;` donde $new era una variable
@@ -255,40 +296,42 @@ function _pagina_custom_sync_menu(array &$data, string $nombre, string $url, str
     // menu si el administrador acaba de cambiarla de lugar).
     $items = array_values(array_filter($items, fn($i) => ($i['url'] ?? '') !== $url));
 
-    $nuevo = ['texto' => $nombre, 'url' => $url, 'nivel' => 'hijo'];
+    $nuevo = ['texto' => $nombre, 'url' => $url, 'nivel' => 0];
 
     if ($menu_pos === 'padre') {
-        $nuevo['nivel'] = 'padre';
         $items[] = $nuevo;
-    } elseif (strpos($menu_pos, 'hijo:') === 0) {
-        $padre = substr($menu_pos, 5);
-        $insertar_en = null;
+    } elseif (strpos($menu_pos, 'bajo:') === 0) {
+        $ruta = explode('>', substr($menu_pos, 5));
+        $indice_padre = _pagina_custom_localizar_nodo($items, $ruta);
 
-        foreach ($items as $index => $item) {
-            if (($item['nivel'] ?? 'padre') !== 'padre' || ($item['texto'] ?? '') !== $padre)
-                continue;
-
-            // Por defecto va detras del ultimo hijo de ese padre. Si se pidio
-            // colocarla delante de un hermano concreto, se corta ahi.
-            $insertar_en = $index + 1;
-            for ($cursor = $index + 1; $cursor < count($items) && ($items[$cursor]['nivel'] ?? 'padre') !== 'padre'; $cursor++) {
-                if ($menu_before !== '' && ($items[$cursor]['texto'] ?? '') === $menu_before) {
-                    $insertar_en = $cursor;
-                    break;
-                }
-                $insertar_en = $cursor + 1;
-            }
-            break;
-        }
-
-        if ($insertar_en === null) {
-            // El menu padre elegido ya no existe (lo renombraron o lo borraron).
-            // Antes de dejar la pagina como un 'hijo' huerfano -que la barra de
+        if ($indice_padre === null) {
+            // El nodo elegido ya no existe (lo renombraron o lo borraron).
+            // Antes de dejar la pagina como un item huerfano -que la barra de
             // navegacion no pinta y equivale a perderla-, se cuelga al final
             // como opcion principal.
-            $nuevo['nivel'] = 'padre';
             $items[] = $nuevo;
         } else {
+            $profundidad_padre = menu_builder_profundidad($items[$indice_padre]['nivel'] ?? 0);
+            $profundidad_hijo = $profundidad_padre + 1;
+
+            // Por defecto va detras del ultimo hijo directo de ese nodo. Si se
+            // pidio colocarla delante de un hermano concreto, se corta ahi.
+            $insertar_en = $indice_padre + 1;
+            for ($cursor = $indice_padre + 1; $cursor < count($items); $cursor++) {
+                $nivel_cursor = menu_builder_profundidad($items[$cursor]['nivel'] ?? 0);
+                if ($nivel_cursor <= $profundidad_padre) break; // ya salimos de sus descendientes
+                if ($nivel_cursor === $profundidad_hijo) {
+                    if ($menu_before !== '' && trim($items[$cursor]['texto'] ?? '') === $menu_before) {
+                        $insertar_en = $cursor;
+                        break;
+                    }
+                    $insertar_en = $cursor + 1;
+                }
+                // nivel_cursor > profundidad_hijo: es descendiente de otro
+                // hijo (un nieto más profundo); se salta sin contarlo.
+            }
+
+            $nuevo['nivel'] = $profundidad_hijo;
             array_splice($items, $insertar_en, 0, [$nuevo]);
         }
     }
@@ -434,17 +477,16 @@ foreach ($paginas as $pagina_id => $pagina) {
 echo layout_start($page_title, $current_key);
 ?>
 
-<div class="card" style="max-width:960px;margin:0 auto;">
+<div class="card pgc-card">
 
     <!-- Encabezado -->
-    <div
-        style="display:flex;justify-content:space-between;align-items:center;margin-bottom:24px;border-bottom:2px solid #F4F6F9;padding-bottom:16px;">
+    <div class="pgc-header">
         <div>
-            <h1 style="margin:0;font-size:1.5rem;color:#1A3B70;display:flex;align-items:center;gap:10px;">
-                <i id="preview_title_icon" class="<?= htmlspecialchars($icon) ?>" style="color:#F15A24;"></i>
+            <h1>
+                <i id="preview_title_icon" class="<?= htmlspecialchars($icon) ?> pgc-icon-accent"></i>
                 <?= htmlspecialchars($page_title) ?>
             </h1>
-            <p style="margin:4px 0 0;color:#6B7280;font-size:.9rem;">
+            <p>
                 Configura esta página: nombre, URL, ícono, posición en el menú y secciones heredadas.
             </p>
         </div>
@@ -453,8 +495,7 @@ echo layout_start($page_title, $current_key);
                 <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                 <input type="hidden" name="action" value="delete">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
-                <button type="button" class="btn btn-danger" style="display:flex;align-items:center;gap:6px;"
-                    onclick="customConfirm('¿Eliminar la página &quot;<?= htmlspecialchars(addslashes($nombre)) ?>&quot; permanentemente? Esta acción no se puede deshacer.', function(){ document.getElementById(\'form-delete-pagina\').submit(); })">
+                <button type="button" class="btn btn-danger js-delete-page pgc-btn-inline" data-page-name="<?= htmlspecialchars($nombre, ENT_QUOTES, 'UTF-8') ?>">
                     <i class="bi bi-trash-fill"></i> Eliminar página
                 </button>
             </form>
@@ -467,12 +508,11 @@ echo layout_start($page_title, $current_key);
         <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
 
         <!-- BLOQUE 1: DATOS BÁSICOS -->
-        <div class="singleton-panel"
-            style="background:#F4F6F9;padding:20px;border-radius:8px;margin-bottom:24px;border-left:4px solid #1A3B70;">
-            <h3 style="margin-top:0;font-size:1.05rem;color:#1A3B70;margin-bottom:16px;">
+        <div class="singleton-panel pgc-basic-info">
+            <h3 class="pgc-section-title">
                 <i class="bi bi-sliders"></i> Información General y Enlace
             </h3>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;">
+            <div class="pgc-grid-2">
                 <div class="form-group">
                     <label class="field-label">Nombre de la Página *</label>
                     <input type="text" name="nombre" value="<?= htmlspecialchars($nombre) ?>"
@@ -480,29 +520,26 @@ echo layout_start($page_title, $current_key);
                 </div>
                 <div class="form-group">
                     <label class="field-label">URL / Slug *</label>
-                    <div
-                        style="display:flex;align-items:center;background:#fff;border:1px solid #D1D5DB;border-radius:6px;overflow:hidden;">
-                        <span style="background:#E5E7EB;padding:10px 12px;color:#6B7280;font-size:.85rem;">/</span>
+                    <div class="pgc-slug-group">
+                        <span class="pgc-slug-prefix">/</span>
                         <input type="text" name="slug" value="<?= htmlspecialchars($slug) ?>"
-                            placeholder="web-itb-academia" required class="form-control" style="border:none;"
+                            placeholder="web-itb-academia" required class="form-control pgc-slug-input"
                             id="input_slug">
                     </div>
-                    <small style="color:#6B7280;">Solo letras minúsculas, números y guiones (sin espacios ni
+                    <small class="pgc-hint">Solo letras minúsculas, números y guiones (sin espacios ni
                         tildes).</small>
                 </div>
             </div>
-            <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-top:16px;">
+            <div class="pgc-grid-2 pgc-grid-2--spaced">
                 <!-- SELECTOR DE ÍCONO -->
                 <div class="form-group">
                     <label class="field-label">Ícono de Menú (Bootstrap Icons)</label>
-                    <div style="display:flex;gap:10px;align-items:center;">
-                        <div id="icon_display_box"
-                            style="width:44px;height:44px;background:#1A3B70;color:#fff;border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:1.4rem;">
+                    <div class="pgc-icon-picker">
+                        <div id="icon_display_box" class="pgc-icon-preview">
                             <i class="<?= htmlspecialchars($icon) ?>" id="current_icon_i"></i>
                         </div>
                         <input type="hidden" name="icon" id="input_icon_val" value="<?= htmlspecialchars($icon) ?>">
-                        <button type="button" class="btn btn-outline" onclick="openIconModal()"
-                            style="display:flex;align-items:center;gap:6px;">
+                        <button type="button" class="btn btn-outline pgc-btn-inline" onclick="openIconModal()">
                             <i class="bi bi-grid-3x3-gap-fill"></i> Elegir ícono...
                         </button>
                     </div>
@@ -558,36 +595,7 @@ echo layout_start($page_title, $current_key);
                         <div class="page-menu-placement__parents">
                             <div class="page-menu-placement__title"><i class="bi bi-diagram-3"></i> Agregar dentro de un
                                 menú principal</div>
-                            <?php $current_parent = '';
-                            foreach ($public_items as $item):
-                                $nivel = $item['nivel'] ?? 'padre';
-                                $texto = trim($item['texto'] ?? '');
-                                if ($texto === '')
-                                    continue;
-                                if ($nivel === 'padre'):
-                                    $current_parent = $texto;
-                                    $val = 'hijo:' . $texto; ?>
-                                    <details class="page-menu-placement__parent-row"
-                                        data-menu-pos="<?= htmlspecialchars($val, ENT_QUOTES, 'UTF-8') ?>">
-                                        <summary class="page-menu-placement__parent"><span
-                                                class="page-menu-placement__number">#</span><strong><?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?></strong><span
-                                                class="page-menu-placement__action"><i class="bi bi-plus-lg"></i> Añadir
-                                                aquí</span></summary>
-                                        <div class="page-menu-placement__children"
-                                            data-parent="<?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?>"></div>
-                                    </details>
-                                <?php else: ?>
-                                    <div class="page-menu-placement__existing-child"
-                                        data-parent="<?= htmlspecialchars($current_parent, ENT_QUOTES, 'UTF-8') ?>"
-                                        data-child="<?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?>"><i
-                                            class="bi bi-arrow-return-right"></i><span><?= htmlspecialchars($texto, ENT_QUOTES, 'UTF-8') ?></span><span
-                                            class="page-menu-placement__row-actions"><button type="button"
-                                                class="js-menu-position" data-direction="before"
-                                                title="Colocar la página antes"><i class="bi bi-chevron-up"></i></button><button
-                                                type="button" class="js-menu-position" data-direction="after"
-                                                title="Colocar la página después"><i
-                                                    class="bi bi-chevron-down"></i></button></span></div>
-                                <?php endif; endforeach; ?>
+                            <?= pagina_custom_menu_pintar(pagina_custom_menu_arbol($public_items)) ?>
                         </div>
                         <div class="page-menu-placement__new-page" id="menu-new-page-preview" hidden><i
                                 class="bi bi-arrow-return-right"></i><span>Nueva página</span></div>
@@ -612,37 +620,30 @@ echo layout_start($page_title, $current_key);
         </div>
 
         <!-- BLOQUE 2: SECCIONES HEREDADAS -->
-        <div style="border:1px solid #E5E7EB;border-radius:8px;padding:20px;margin-bottom:24px;">
-            <h3
-                style="margin-top:0;font-size:1.05rem;color:#1A3B70;margin-bottom:6px;display:flex;align-items:center;gap:8px;">
-                <i class="bi bi-layers-half" style="color:#F15A24;"></i> Selección de Componentes / Secciones Heredables
+        <div class="pgc-section">
+            <h3 class="pgc-section-title pgc-section-title--tight">
+                <i class="bi bi-layers-half pgc-icon-accent"></i> Selección de Componentes / Secciones Heredables
             </h3>
-            <p style="color:#6B7280;font-size:.88rem;margin:0 0 16px;">
-                Selecciona los componentes que incluirá esta página. <strong style="color:#1A3B70;">El número <span
-                        style="color:#F15A24;">●</span> indica el orden de aparición de arriba a abajo.</strong>
+            <p class="pgc-section-hint">
+                Selecciona los componentes que incluirá esta página. <strong class="pgc-text-blue">El número <span
+                        class="pgc-icon-accent">●</span> indica el orden de aparición de arriba a abajo.</strong>
             </p>
-            <div id="secciones-grid"
-                style="display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:16px;">
+            <div id="secciones-grid" class="pgc-sections-grid">
                 <?php foreach ($secciones_disponibles as $grupo_nombre => $grupo_items): ?>
-                    <div style="background:#F8FAFC;border:1px solid #E2E8F0;border-radius:8px;padding:14px;">
-                        <div
-                            style="font-weight:700;color:#0F2243;font-size:.93rem;padding-bottom:8px;margin-bottom:10px;border-bottom:2px solid #1A3B70;">
+                    <div class="pgc-section-group">
+                        <div class="pgc-section-group__title">
                             <?= htmlspecialchars($grupo_nombre) ?>
                         </div>
                         <?php foreach ($grupo_items as $s_key => $s_info):
                             $s_label = $s_info['label'];
                             $s_icon = $s_info['icon'];
                             $checked = in_array($s_key, $secs_selected) ? 'checked' : ''; ?>
-                            <label class="sec-label"
-                                style="display:flex;align-items:center;gap:10px;margin-bottom:6px;cursor:pointer;padding:8px 10px;border-radius:8px;border:1.5px solid transparent;transition:all .15s;">
+                            <label class="sec-label">
                                 <input type="checkbox" name="secciones[]" value="<?= htmlspecialchars($s_key, ENT_QUOTES, 'UTF-8') ?>" <?= $checked ?>
                                     class="sec-checkbox" data-label="<?= htmlspecialchars($s_label) ?>"
-                                    data-base="<?= htmlspecialchars(pagina_custom_base((string)$s_key), ENT_QUOTES, 'UTF-8') ?>"
-                                    style="width:16px;height:16px;accent-color:#F15A24;flex-shrink:0;">
-                                <span class="sec-text"
-                                    style="font-size:.875rem;color:#1F242E;line-height:1.3;"><?= htmlspecialchars($s_label) ?></span>
-                                <span class="sec-badge"
-                                    style="display:none;margin-left:auto;background:#F15A24;color:#fff;font-size:.7rem;font-weight:800;min-width:22px;height:22px;border-radius:50%;align-items:center;justify-content:center;flex-shrink:0;box-shadow:0 2px 6px rgba(241,90,36,.4);"></span>
+                                    data-base="<?= htmlspecialchars(pagina_custom_base((string)$s_key), ENT_QUOTES, 'UTF-8') ?>">
+                                <span class="sec-text"><?= htmlspecialchars($s_label) ?></span>
+                                <span class="sec-badge"></span>
                             </label>
                         <?php endforeach; ?>
                     </div>
@@ -650,20 +651,18 @@ echo layout_start($page_title, $current_key);
             </div>
 
             <!-- PANEL RESUMEN DE ORDEN (chips) -->
-            <div id="orden-resumen"
-                style="margin-top:16px;padding:14px 16px;border-radius:10px;border:1.5px dashed #D1D5DB;display:none;">
-                <div
-                    style="font-size:.8rem;font-weight:700;color:#6B7280;letter-spacing:.08em;text-transform:uppercase;margin-bottom:10px;display:flex;align-items:center;gap:6px;">
-                    <i class="bi bi-arrow-down-short" style="color:#F15A24;font-size:1rem;"></i> Orden en la página
+            <div id="orden-resumen" class="pgc-order-summary">
+                <div class="pgc-order-summary__label">
+                    <i class="bi bi-arrow-down-short pgc-icon-accent"></i> Orden en la página
                     pública
                 </div>
-                <div id="orden-lista" style="display:flex;flex-wrap:wrap;gap:8px;"></div>
+                <div id="orden-lista" class="pgc-order-list"></div>
             </div>
         </div><!-- /.bloque secciones heredadas -->
 
         <div class="form-actions">
             <a href="<?= $ab ?>/index.php" class="btn btn-outline">Cancelar</a>
-            <button type="submit" class="btn btn-primary" style="display:flex;align-items:center;gap:8px;">
+            <button type="submit" class="btn btn-primary pgc-btn-inline--wide">
                 <i class="bi bi-check-circle-fill"></i>
                 <?= $is_editing ? 'Guardar Cambios' : 'Crear Página Ahora' ?>
             </button>
@@ -678,14 +677,13 @@ echo layout_start($page_title, $current_key);
         <!-- ═══════════════════════════════════════════════════════════════════════════
      PANEL DE CONTENIDO EDITABLE (equivalente a singleton.php para páginas)
 ════════════════════════════════════════════════════════════════════════════ -->
-        <div class="card" id="contenido" style="max-width:960px;margin:24px auto 0;">
-            <div
-                style="display:flex;justify-content:space-between;align-items:center;margin-bottom:20px;border-bottom:2px solid #F4F6F9;padding-bottom:16px;">
+        <div class="card pgc-card pgc-card--spaced" id="contenido">
+            <div class="pgc-header">
                 <div>
-                    <h2 style="margin:0;font-size:1.35rem;color:#1A3B70;display:flex;align-items:center;gap:10px;">
-                        <i class="bi bi-pencil-square" style="color:#F15A24;"></i> Contenido de la página
+                    <h2>
+                        <i class="bi bi-pencil-square pgc-icon-accent"></i> Contenido de la página
                     </h2>
-                    <p style="margin:4px 0 0;color:#6B7280;font-size:.9rem;">Edita los textos, imágenes y datos de cada sección
+                    <p>Edita los textos, imágenes y datos de cada sección
                         seleccionada arriba.</p>
                 </div>
             </div>
@@ -706,7 +704,7 @@ echo layout_start($page_title, $current_key);
                 <?php endforeach; ?>
                 <div class="form-actions">
                     <a href="<?= $ab ?>/index.php" class="btn btn-outline">Cancelar</a>
-                    <button type="submit" class="btn btn-primary" style="display:flex;align-items:center;gap:8px;">
+                    <button type="submit" class="btn btn-primary pgc-btn-inline--wide">
                         <i class="bi bi-floppy-fill"></i> Guardar contenido
                     </button>
                 </div>
@@ -715,127 +713,26 @@ echo layout_start($page_title, $current_key);
     <?php endif; endif; ?>
 
 <!-- MODAL SELECTOR DE ÍCONOS BOOTSTRAP -->
-<div id="iconModal"
-    style="display:none;position:fixed;inset:0;background:rgba(15,34,67,.75);backdrop-filter:blur(4px);z-index:9999;align-items:center;justify-content:center;padding:20px;">
-    <div
-        style="background:#fff;width:100%;max-width:580px;border-radius:12px;padding:24px;box-shadow:0 20px 40px rgba(0,0,0,.3);max-height:80vh;display:flex;flex-direction:column;">
-        <div
-            style="display:flex;justify-content:space-between;align-items:center;border-bottom:1px solid #E5E7EB;padding-bottom:12px;margin-bottom:16px;">
-            <h3 style="margin:0;color:#1A3B70;font-size:1.1rem;display:flex;align-items:center;gap:8px;">
-                <i class="bi bi-grid-3x3-gap-fill" style="color:#F15A24;"></i> Ícono de Bootstrap Icons
-            </h3>
-            <button type="button" onclick="closeIconModal()"
-                style="background:none;border:none;font-size:1.5rem;cursor:pointer;color:#6B7280;">&times;</button>
+<div id="iconModal" class="pgc-icon-modal-overlay">
+    <div class="pgc-icon-modal">
+        <div class="pgc-icon-modal__head">
+            <h3><i class="bi bi-grid-3x3-gap-fill pgc-icon-accent"></i> Ícono de Bootstrap Icons</h3>
+            <button type="button" onclick="closeIconModal()" class="pgc-icon-modal__close">&times;</button>
         </div>
         <input type="text" id="icon_search_input" placeholder="Buscar ícono..." oninput="filterIcons(this.value)"
-            style="width:100%;padding:10px;border:1px solid #D1D5DB;border-radius:6px;margin-bottom:16px;">
-        <div id="icon_grid"
-            style="display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;overflow-y:auto;">
+            class="pgc-icon-search">
+        <div id="icon_grid" class="pgc-icon-grid">
             <?php foreach ($bi_icons as $bi_class => $bi_label): ?>
                 <div class="icon-option-card" onclick="selectIcon('<?= $bi_class ?>')"
-                    style="border:1px solid #E2E8F0;border-radius:8px;padding:12px 8px;text-align:center;cursor:pointer;transition:all .2s;"
                     data-name="<?= strtolower("{$bi_class} {$bi_label}") ?>">
-                    <i class="bi <?= $bi_class ?>"
-                        style="font-size:1.8rem;color:#1A3B70;display:block;margin-bottom:4px;"></i>
-                    <span
-                        style="font-size:.72rem;color:#6B7280;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;"><?= htmlspecialchars($bi_label) ?></span>
+                    <i class="bi <?= $bi_class ?> pgc-icon-option__glyph"></i>
+                    <span class="pgc-icon-option__label"><?= htmlspecialchars($bi_label) ?></span>
                 </div>
             <?php endforeach; ?>
         </div>
     </div>
 </div>
 
-<!-- Recursos movidos a admin/assets/pagina_custom.css y pagina_custom.js.
-<style>
-    .icon-option-card:hover {
-        border-color: #F15A24 !important;
-        background: #FFF5F2 !important;
-        transform: translateY(-2px);
-    }
 
-    .sec-label:hover {
-        background: #F0F4FF;
-        border-color: #CBD5E1 !important;
-    }
-
-    .sec-label.is-checked {
-        background: #FFF5F2 !important;
-        border-color: #F15A24 !important;
-    }
-</style>
-<script>
-    // Auto-slug desde el nombre
-    document.getElementById('input_nombre').addEventListener('input', function () {
-        const s = document.getElementById('input_slug');
-        if (s.dataset.manual) return;
-        s.value = this.value.toLowerCase()
-            .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-            .replace(/[^a-z0-9\s\-]/g, '')
-            .trim().replace(/\s+/g, '-');
-    });
-    document.getElementById('input_slug').addEventListener('input', function () {
-        this.dataset.manual = '1';
-    });
-
-    function openIconModal() { document.getElementById('iconModal').style.display = 'flex'; }
-    function closeIconModal() { document.getElementById('iconModal').style.display = 'none'; }
-    function selectIcon(cls) {
-        const full = 'bi ' + cls;
-        document.getElementById('input_icon_val').value = full;
-        document.getElementById('current_icon_i').className = full;
-        document.getElementById('preview_title_icon').className = full;
-        closeIconModal();
-    }
-    // ── NUMERACIÓN VISUAL DE ORDEN DE SECCIONES ──────────────────────────────────
-    // Lee todos los checkboxes en el orden del DOM (izquierda→derecha, arriba→abajo),
-    // que es exactamente el orden en que pagina_dinamica.php los incluye.
-    // Por cada checkbox marcado pinta un badge naranja con su posición y actualiza
-    // el panel de resumen inferior.
-    (function () {
-
-        function actualizarOrden() {
-            const checkboxes = document.querySelectorAll('.sec-checkbox');
-            let pos = 1;
-            const resumenLista = document.getElementById('orden-lista');
-            const resumenPanel = document.getElementById('orden-resumen');
-            resumenLista.innerHTML = '';
-
-            checkboxes.forEach(function (cb) {
-                const label = cb.closest('.sec-label');
-                const badge = label.querySelector('.sec-badge');
-                const icono = label.querySelector('.bi:not(.sec-badge .bi)');
-                const texto = cb.dataset.label || cb.value;
-
-                if (cb.checked) {
-                    badge.textContent = pos;
-                    badge.style.display = 'flex';
-                    label.classList.add('is-checked');
-
-                    // Chip en el resumen
-                    const chip = document.createElement('span');
-                    chip.style.cssText = 'display:inline-flex;align-items:center;gap:5px;background:#fff;border:1.5px solid #E2E8F0;border-radius:20px;padding:4px 12px 4px 8px;font-size:.8rem;color:#1A3B70;font-weight:600;box-shadow:0 1px 3px rgba(0,0,0,.07);';
-                    chip.innerHTML = '<span style="background:#F15A24;color:#fff;font-weight:800;font-size:.68rem;min-width:18px;height:18px;border-radius:50%;display:inline-flex;align-items:center;justify-content:center;flex-shrink:0;">' + pos + '</span>' + texto;
-                    resumenLista.appendChild(chip);
-
-                    pos++;
-                } else {
-                    badge.style.display = 'none';
-                    label.classList.remove('is-checked');
-                }
-            });
-
-            resumenPanel.style.display = pos > 1 ? 'block' : 'none';
-        }
-
-        // Inicializar al cargar (para páginas en edición ya guardadas)
-        actualizarOrden();
-
-        // Re-calcular en cada cambio
-        document.getElementById('secciones-grid').addEventListener('change', function (e) {
-            if (e.target.classList.contains('sec-checkbox')) actualizarOrden();
-        });
-    }());
-</script>
--->
 
 <?php echo layout_end(); ?>

@@ -77,58 +77,103 @@
                         ];
                     }
                     
-                    $total = count($items_menu);
-                    for ($i = 0; $i < $total; $i++) {
-                        $item = $items_menu[$i];
-                        $nivel = $item['nivel'] ?? 'padre';
-                        
-                        // Si el nivel es hijo aquí, lo ignoramos, ya que se procesa dentro de su padre
-                        if ($nivel === 'hijo') continue;
-                        
-                        $texto = htmlspecialchars($item['texto'] ?? '', ENT_QUOTES, 'UTF-8');
-                        $raw_url = trim($item['url'] ?? '');
-                        if ($raw_url === '' && (function_exists('mb_strtolower') ? mb_strtolower(trim($item['texto'] ?? '')) : strtolower(trim($item['texto'] ?? ''))) === 'sobre nosotros') {
-                            $raw_url = 'sobre-nosotros.php';
-                        }
-                        $url = htmlspecialchars($raw_url !== '' ? $raw_url : '#', ENT_QUOTES, 'UTF-8');
-                        
-                        // Buscar si los siguientes elementos son hijos de este padre
-                        $children = [];
-                        for ($j = $i + 1; $j < $total; $j++) {
-                            if (($items_menu[$j]['nivel'] ?? 'padre') === 'hijo') {
-                                $children[] = $items_menu[$j];
-                            } else {
-                                break;
+                    // Arma la URL de un item del menú (con el caso especial de
+                    // "Sobre Nosotros" sin URL propia, heredado de antes).
+                    if (!function_exists('navbar_menu_url')) {
+                        function navbar_menu_url(array $item): string {
+                            $raw_url = trim($item['url'] ?? '');
+                            $texto_normalizado = function_exists('mb_strtolower')
+                                ? mb_strtolower(trim($item['texto'] ?? ''))
+                                : strtolower(trim($item['texto'] ?? ''));
+                            if ($raw_url === '' && $texto_normalizado === 'sobre nosotros') {
+                                $raw_url = 'sobre-nosotros.php';
                             }
-                        }
-                        
-                        if (count($children) > 0) {
-                            // Renderizar Padre con submenú (Dropdown)
-                            echo '<li class="navbar__item navbar__item--dropdown">';
-                            echo '<a href="' . $url . '" class="navbar__link">' . $texto . ' <i class="fas fa-chevron-down navbar__dropdown-icon"></i></a>';
-                            echo '<ul class="navbar__dropdown">';
-                            foreach ($children as $child) {
-                                $c_texto = htmlspecialchars($child['texto'] ?? '', ENT_QUOTES, 'UTF-8');
-                                $c_raw_url = trim($child['url'] ?? '');
-                                if ($c_raw_url === '' && (function_exists('mb_strtolower') ? mb_strtolower(trim($child['texto'] ?? '')) : strtolower(trim($child['texto'] ?? ''))) === 'sobre nosotros') {
-                                    $c_raw_url = 'sobre-nosotros.php';
-                                }
-                                $c_url = htmlspecialchars($c_raw_url !== '' ? $c_raw_url : '#', ENT_QUOTES, 'UTF-8');
-                                if ($c_texto) {
-                                    echo '<li><a href="' . $c_url . '" class="navbar__dropdown-link">' . $c_texto . '</a></li>';
-                                }
-                            }
-                            echo '</ul>';
-                            echo '</li>';
-                        } else {
-                            // Renderizar enlace normal (Sin hijos)
-                            if ($texto) {
-                                echo '<li class="navbar__item">';
-                                echo '<a href="' . $url . '" class="navbar__link">' . $texto . '</a>';
-                                echo '</li>';
-                            }
+                            return htmlspecialchars($raw_url !== '' ? $raw_url : '#', ENT_QUOTES, 'UTF-8');
                         }
                     }
+
+                    // 'nivel' venia como texto fijo ('padre'/'hijo'/'nieto'). Ahora
+                    // es un numero de profundidad (0, 1, 2, ...) sin techo, pero
+                    // esto sigue leyendo el formato viejo para no romper menus
+                    // guardados antes de este cambio.
+                    if (!function_exists('navbar_menu_profundidad')) {
+                        function navbar_menu_profundidad($nivel): int {
+                            if (is_numeric($nivel)) return max(0, (int) $nivel);
+                            $legado = ['padre' => 0, 'hijo' => 1, 'nieto' => 2];
+                            return $legado[$nivel] ?? 0;
+                        }
+                    }
+
+                    // Convierte la lista plana (cada item con su profundidad) en un
+                    // arbol real, sin importar cuantos niveles tenga: cada nodo trae
+                    // sus hijos directos adentro de 'children'. Si un item viene con
+                    // una profundidad mayor a la que le corresponde (datos raros,
+                    // editados a mano, etc.) se recorta a la mas profunda valida en
+                    // vez de perderlo — antes esos items simplemente desaparecian.
+                    if (!function_exists('navbar_menu_armar_arbol')) {
+                        function navbar_menu_armar_arbol(array $items): array {
+                            $raiz = [];
+                            $pila = [];
+                            $pila[0] = &$raiz;
+                            foreach ($items as $item) {
+                                $texto = trim($item['texto'] ?? '');
+                                if ($texto === '') continue;
+                                $prof = navbar_menu_profundidad($item['nivel'] ?? 0);
+                                if ($prof > count($pila) - 1) $prof = count($pila) - 1;
+
+                                $nodo = $item;
+                                $nodo['children'] = [];
+                                $pila[$prof][] = $nodo;
+
+                                for ($k = count($pila) - 1; $k > $prof; $k--) {
+                                    unset($pila[$k]);
+                                }
+                                $ultimo = &$pila[$prof][count($pila[$prof]) - 1];
+                                $pila[$prof + 1] = &$ultimo['children'];
+                            }
+                            return $raiz;
+                        }
+                    }
+
+                    // Pinta la lista de <li>: en el nivel 0 son los items del menu
+                    // principal (con flecha hacia abajo si tienen hijos); de ahi
+                    // para adentro cada nivel se abre como un flyout hacia la
+                    // derecha del anterior (misma clase para cualquier profundidad,
+                    // por eso no hace falta un caso especial por nivel).
+                    if (!function_exists('navbar_menu_pintar')) {
+                        function navbar_menu_pintar(array $nodos, int $profundidad = 0): string {
+                            $html = '';
+                            foreach ($nodos as $nodo) {
+                                $texto = htmlspecialchars($nodo['texto'] ?? '', ENT_QUOTES, 'UTF-8');
+                                if ($texto === '') continue;
+                                $url = navbar_menu_url($nodo);
+                                $hijos = $nodo['children'] ?? [];
+
+                                if ($profundidad === 0) {
+                                    if (count($hijos) > 0) {
+                                        $html .= '<li class="navbar__item navbar__item--dropdown">';
+                                        $html .= '<a href="' . $url . '" class="navbar__link">' . $texto . ' <i class="fas fa-chevron-down navbar__dropdown-icon"></i></a>';
+                                        $html .= '<ul class="navbar__dropdown">' . navbar_menu_pintar($hijos, $profundidad + 1) . '</ul>';
+                                        $html .= '</li>';
+                                    } else {
+                                        $html .= '<li class="navbar__item"><a href="' . $url . '" class="navbar__link">' . $texto . '</a></li>';
+                                    }
+                                } else {
+                                    if (count($hijos) > 0) {
+                                        $html .= '<li class="navbar__dropdown-item--sub">';
+                                        $html .= '<a href="' . $url . '" class="navbar__dropdown-link">' . $texto . ' <i class="fas fa-chevron-right navbar__dropdown-subicon"></i></a>';
+                                        $html .= '<ul class="navbar__dropdown navbar__dropdown--sub">' . navbar_menu_pintar($hijos, $profundidad + 1) . '</ul>';
+                                        $html .= '</li>';
+                                    } else {
+                                        $html .= '<li><a href="' . $url . '" class="navbar__dropdown-link">' . $texto . '</a></li>';
+                                    }
+                                }
+                            }
+                            return $html;
+                        }
+                    }
+
+                    echo navbar_menu_pintar(navbar_menu_armar_arbol($items_menu));
                     ?>
                 </ul>
 

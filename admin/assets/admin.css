@@ -1388,6 +1388,7 @@ textarea.form-control, .field-group textarea {
 }
 .menu-builder-items {
     padding: 16px 0;
+    overflow-x: auto;
 }
 .menu-builder-item {
     border-bottom: 1px solid #f1f5f9;
@@ -1420,11 +1421,19 @@ textarea.form-control, .field-group textarea {
     margin-right: 8px;
     font-weight: 300;
 }
-.menu-builder-item.is-hijo .mb-drag-handle {
-    margin-left: 40px;
-    width: 100px;
-}
-.menu-builder-item.is-hijo .mb-indent-dash {
+/* Sangría según [data-nivel]: 0 = principal, 1 = submenú, 2 = sub-submenú, y
+   así en adelante sin tope fijo. Se definen niveles hasta el 8 (de sobra
+   para un menú de navegación real); si algún día hiciera falta más, solo hay
+   que agregar una línea más acá, no cambiar la lógica. */
+.menu-builder-item[data-nivel="1"] .mb-drag-handle { margin-left: 40px; width: 100px; }
+.menu-builder-item[data-nivel="2"] .mb-drag-handle { margin-left: 80px; width: 140px; }
+.menu-builder-item[data-nivel="3"] .mb-drag-handle { margin-left: 120px; width: 180px; }
+.menu-builder-item[data-nivel="4"] .mb-drag-handle { margin-left: 160px; width: 220px; }
+.menu-builder-item[data-nivel="5"] .mb-drag-handle { margin-left: 200px; width: 260px; }
+.menu-builder-item[data-nivel="6"] .mb-drag-handle { margin-left: 240px; width: 300px; }
+.menu-builder-item[data-nivel="7"] .mb-drag-handle { margin-left: 280px; width: 340px; }
+.menu-builder-item[data-nivel="8"] .mb-drag-handle { margin-left: 320px; width: 380px; }
+.menu-builder-item:not([data-nivel="0"]) .mb-indent-dash {
     display: inline-block;
 }
 .mb-title-display {
@@ -1454,6 +1463,20 @@ textarea.form-control, .field-group textarea {
 .mb-btn:hover { background: var(--primary-light, #fff7ed); color: var(--primary, #f97316); } /* Orange ITB */
 .mb-btn-remove:hover { background: var(--danger-light, #fee2e2); color: var(--danger, #ef4444); }
 
+/* Aviso de "no se puede indentar más" en el botón "→" del constructor de menú:
+   no hace nada raro, solo tiembla un instante en vez de quedarse sin
+   responder al clic. */
+@keyframes mbBtnShake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-3px); }
+    40%, 60% { transform: translateX(3px); }
+}
+.mb-btn-shake {
+    animation: mbBtnShake 0.4s ease-in-out;
+    color: var(--danger, #ef4444);
+}
+
 .mb-edit-row {
     display: none;
     padding: 16px 24px 16px 84px;
@@ -1462,9 +1485,14 @@ textarea.form-control, .field-group textarea {
     align-items: flex-start;
     gap: 16px;
 }
-.menu-builder-item.is-hijo .mb-edit-row {
-    padding-left: 124px;
-}
+.menu-builder-item[data-nivel="1"] .mb-edit-row { padding-left: 124px; }
+.menu-builder-item[data-nivel="2"] .mb-edit-row { padding-left: 164px; }
+.menu-builder-item[data-nivel="3"] .mb-edit-row { padding-left: 204px; }
+.menu-builder-item[data-nivel="4"] .mb-edit-row { padding-left: 244px; }
+.menu-builder-item[data-nivel="5"] .mb-edit-row { padding-left: 284px; }
+.menu-builder-item[data-nivel="6"] .mb-edit-row { padding-left: 324px; }
+.menu-builder-item[data-nivel="7"] .mb-edit-row { padding-left: 364px; }
+.menu-builder-item[data-nivel="8"] .mb-edit-row { padding-left: 404px; }
 .menu-builder-item.is-editing .mb-edit-row {
     display: flex;
 }
@@ -1489,6 +1517,28 @@ textarea.form-control, .field-group textarea {
     outline: none;
     border-color: var(--primary, #f97316); /* Orange ITB */
     box-shadow: 0 0 0 3px var(--primary-light, rgba(249, 115, 22, 0.1));
+}
+
+/* Pantallas angostas: la sangría se reduce a la mitad para que no toque
+   scroll horizontal hasta niveles bien profundos. .menu-builder-items ya
+   trae overflow-x:auto como red de seguridad para el caso extremo. */
+@media (max-width: 960px) {
+    .menu-builder-item[data-nivel="1"] .mb-drag-handle { margin-left: 20px; width: 80px; }
+    .menu-builder-item[data-nivel="2"] .mb-drag-handle { margin-left: 40px; width: 90px; }
+    .menu-builder-item[data-nivel="3"] .mb-drag-handle { margin-left: 60px; width: 100px; }
+    .menu-builder-item[data-nivel="4"] .mb-drag-handle { margin-left: 80px; width: 110px; }
+    .menu-builder-item[data-nivel="5"] .mb-drag-handle { margin-left: 100px; width: 120px; }
+    .menu-builder-item[data-nivel="6"] .mb-drag-handle { margin-left: 120px; width: 130px; }
+    .menu-builder-item[data-nivel="7"] .mb-drag-handle { margin-left: 140px; width: 140px; }
+    .menu-builder-item[data-nivel="8"] .mb-drag-handle { margin-left: 160px; width: 150px; }
+    .menu-builder-item[data-nivel="1"] .mb-edit-row { padding-left: 44px; }
+    .menu-builder-item[data-nivel="2"] .mb-edit-row { padding-left: 64px; }
+    .menu-builder-item[data-nivel="3"] .mb-edit-row { padding-left: 84px; }
+    .menu-builder-item[data-nivel="4"] .mb-edit-row { padding-left: 104px; }
+    .menu-builder-item[data-nivel="5"] .mb-edit-row { padding-left: 124px; }
+    .menu-builder-item[data-nivel="6"] .mb-edit-row { padding-left: 144px; }
+    .menu-builder-item[data-nivel="7"] .mb-edit-row { padding-left: 164px; }
+    .menu-builder-item[data-nivel="8"] .mb-edit-row { padding-left: 184px; }
 }
 
 /* ================== CAMPO: IMAGEN ================== */

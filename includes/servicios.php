@@ -12,9 +12,9 @@
             <p class="servicios__desc">
                 <?= htmlspecialchars(content_get('servicios', 'serv1_desc', 'Impulsamos tu desarrollo integral dentro y fuera del aula con beneficios exclusivos para tu carrera.'), ENT_QUOTES, 'UTF-8') ?>
             </p>
-            <a href="#" class="btn--solid" id="btn-servicios-main">
+            <a href="#" class="btn btn--solid" id="btn-servicios-main">
                 <?= htmlspecialchars(content_get('servicios', 'serv1_btn', 'Más servicios'), ENT_QUOTES, 'UTF-8') ?>
-                <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
 
@@ -77,9 +77,9 @@
                 <div class="servicios__card-simple">
                     <h3 class="servicios__card-title"><?= $titulo ?></h3>
                     <p class="servicios__card-text"><?= $desc ?></p>
-                    <a href="#" class="btn--outline-servicios">
+                    <a href="#" class="btn btn--solid">
                         <?= $btn_texto ?>
-                        <span class="btn__icon-servicios"><i class="fas fa-arrow-right"></i></span>
+                        <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
             <?php else: ?>
@@ -90,9 +90,9 @@
                     <div class="servicios__card-content">
                         <h3 class="servicios__card-title-white"><?= $titulo ?></h3>
                         <p class="servicios__card-text-white"><?= $desc ?></p>
-                        <a href="#" class="btn--solid">
+                        <a href="#" class="btn btn--solid">
                             <?= $btn_texto ?>
-                            <span class="btn__icon-right-white"><i class="fas fa-arrow-right"></i></span>
+                            <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>
                 </div>

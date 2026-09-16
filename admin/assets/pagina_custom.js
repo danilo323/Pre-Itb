@@ -9,13 +9,9 @@ document.addEventListener('DOMContentLoaded', function () {
     }
     const select = document.getElementById('menu_pos_select'), panel = document.getElementById('page-menu-placement');
     if (select && panel) {
-        // Cada hijo se coloca dentro de su <details> padre: el desplegado es
-        // nativo de HTML y no depende de clases ni de estados ocultos.
-        panel.querySelectorAll('.page-menu-placement__existing-child').forEach(child => {
-            const parent = Array.from(panel.querySelectorAll('.page-menu-placement__parent-row')).find(row => row.dataset.menuPos === 'hijo:' + child.dataset.parent);
-            const container = parent && parent.querySelector('.page-menu-placement__children');
-            if (container) container.appendChild(child);
-        });
+        // El HTML ya viene armado como árbol de verdad (cada fila con sus
+        // propios hijos adentro, ver pagina_custom_helpers.php), así que acá
+        // no hace falta reordenar ni reparentar nada al cargar.
         const nombreOriginal = (name && name.value.trim()) || '';
         if (nombreOriginal) {
             panel.querySelectorAll('.page-menu-placement__existing-child').forEach(child => {
@@ -25,20 +21,44 @@ document.addEventListener('DOMContentLoaded', function () {
         const before = document.getElementById('menu_before');
         const preview = document.getElementById('menu-new-page-preview');
         let children = [], position = 0;
+
+        // El contenedor de hijos del valor "bajo:<ruta>" actualmente elegido:
+        // si <ruta> es un menú principal (nivel 0), es el .children de su
+        // propio <details>; si es más profundo, es el .children de esa fila
+        // en particular (identificado por data-parent-ruta). Puede no existir
+        // todavía si ese nodo no tiene ningún hijo puesto.
+        const contenedorDe = function (ruta) {
+            const detalles = Array.from(panel.querySelectorAll('.page-menu-placement__parent-row')).find(row => row.dataset.menuPos === 'bajo:' + ruta);
+            if (detalles) return detalles.querySelector(':scope > .page-menu-placement__children');
+            return panel.querySelector('.page-menu-placement__children[data-parent-ruta="' + CSS.escape(ruta) + '"]');
+        };
+        // Hermanos (mismo nivel) del valor actualmente elegido en `select`.
+        // La usan tanto updateOrder() como los botones antes/después.
+        const calcularHermanos = function () {
+            if (select.value.indexOf('bajo:') !== 0) return [];
+            const contenedor = contenedorDe(select.value.slice(5));
+            return contenedor ? Array.from(contenedor.querySelectorAll(':scope > .page-menu-placement__existing-child')) : [];
+        };
         const updateOrder = function () {
-            const parent = select.value.indexOf('hijo:') === 0 ? select.value.slice(5) : '';
             panel.querySelectorAll('.page-menu-placement__parent-row').forEach(row => row.classList.toggle('is-selected', row.dataset.menuPos === select.value));
             if (select.value === 'padre') {
                 preview.hidden = false;
                 preview.classList.add('is-main-menu-item');
+                delete preview.dataset.nivel;
                 panel.querySelector('.page-menu-placement__parents').appendChild(preview);
                 before.value = '';
                 return;
             }
             preview.classList.remove('is-main-menu-item');
-            if (!parent) { preview.hidden = true; return; }
-            const parentRow = Array.from(panel.querySelectorAll('.page-menu-placement__parent-row')).find(row => row.dataset.menuPos === select.value);
-            children = parentRow ? Array.from(parentRow.querySelectorAll('.page-menu-placement__existing-child')) : [];
+            if (select.value.indexOf('bajo:') !== 0) {
+                preview.hidden = true;
+                return;
+            }
+            const ruta = select.value.slice(5);
+            // El nivel de la vista previa es uno más profundo que el nodo
+            // elegido: la cantidad de tramos de su ruta ya es justamente eso.
+            preview.dataset.nivel = ruta.split('>').length;
+            children = calcularHermanos();
             const encontrado = before.value ? children.findIndex(child => child.dataset.child === before.value) : -1;
             position = encontrado >= 0 ? encontrado : children.length;
             drawPreview();
@@ -46,7 +66,24 @@ document.addEventListener('DOMContentLoaded', function () {
         const drawPreview = function () {
             if (!preview || !children.length && position !== 0) return;
             preview.hidden = false;
-            if (position < children.length) children[position].before(preview); else if (children.length) children[children.length - 1].after(preview); else { const row = Array.from(panel.querySelectorAll('.page-menu-placement__parent-row')).find(item => item.dataset.menuPos === select.value); if (row) row.querySelector('.page-menu-placement__children').appendChild(preview); }
+            if (position < children.length) {
+                children[position].before(preview);
+            } else if (children.length) {
+                children[children.length - 1].after(preview);
+            } else if (select.value.indexOf('bajo:') === 0) {
+                // Sin ningún hijo todavía: si el nodo elegido es un menú
+                // principal, la vista previa va en su .children (ya existe
+                // siempre); si es más profundo, se cuelga justo después de
+                // esa fila (todavía no tiene su propio contenedor de hijos).
+                const ruta = select.value.slice(5);
+                const detalles = Array.from(panel.querySelectorAll('.page-menu-placement__parent-row')).find(row => row.dataset.menuPos === select.value);
+                if (detalles) {
+                    detalles.querySelector(':scope > .page-menu-placement__children').appendChild(preview);
+                } else {
+                    const fila = Array.from(panel.querySelectorAll('.page-menu-placement__existing-child[data-ruta]')).find(row => row.dataset.ruta === ruta);
+                    if (fila) fila.after(preview);
+                }
+            }
             before.value = position < children.length ? children[position].dataset.child : '';
         };
         const mark = () => panel.querySelectorAll('[data-menu-pos]').forEach(button => button.classList.toggle('is-selected', button.dataset.menuPos === select.value));
@@ -60,8 +97,34 @@ document.addEventListener('DOMContentLoaded', function () {
         panel.querySelectorAll('.js-menu-position').forEach(button => button.addEventListener('click', function (event) {
             event.stopPropagation();
             const row = this.closest('.page-menu-placement__existing-child');
+            // Antes, estas flechas solo reordenaban DENTRO de lo que ya
+            // estuviera elegido con "Añadir aquí"; si todavía no habías
+            // elegido nada (o habías elegido otro nodo), el clic no colocaba
+            // la página en el nivel de esta fila. Ahora cada fila elige su
+            // propio nivel sola, con un solo clic: se cuelga como hermana de
+            // ESTA fila, sin importar qué tan profunda esté.
+            const partes = row.dataset.ruta.split('>');
+            partes.pop();
+            const nuevoValor = 'bajo:' + partes.join('>');
+            if (select.value !== nuevoValor) {
+                select.value = nuevoValor;
+                before.value = '';
+                mark();
+            }
+            preview.classList.remove('is-main-menu-item');
+            preview.dataset.nivel = row.dataset.nivel;
+            children = calcularHermanos();
             position = children.indexOf(row) + (this.dataset.direction === 'after' ? 1 : 0);
             drawPreview();
+        }));
+        // Botón "+" de cada hijo: cuelga la página como sub-item (nieto) de ESE
+        // hijo en particular, sin tocar el nivel del hijo mismo.
+        panel.querySelectorAll('.js-menu-add-nieto').forEach(button => button.addEventListener('click', function (event) {
+            event.stopPropagation();
+            select.value = this.dataset.menuPos;
+            before.value = '';
+            mark();
+            updateOrder();
         }));
         mark(); updateOrder();
         const updatePreviewName = function () { const label = preview.querySelector('span'); if (label) label.textContent = (name && name.value.trim()) || 'Nueva página'; };
@@ -78,10 +141,13 @@ document.addEventListener('DOMContentLoaded', function () {
                 const valor = select.value;
                 if (valor === 'padre')
                     return ['Como opci\u00f3n principal del men\u00fa', 'Quedar\u00e1 al nivel de Instituto, Oferta Acad\u00e9mica y Admisiones.'];
-                if (valor.indexOf('hijo:') === 0) {
-                    const padre = valor.slice(5);
-                    return ['Dentro de \u00ab' + padre + '\u00bb',
-                        before.value ? 'Justo antes de \u00ab' + before.value + '\u00bb.' : 'Al final de las opciones de ese men\u00fa.'];
+                if (valor.indexOf('bajo:') === 0) {
+                    const ruta = valor.slice(5).split('>');
+                    const nombre = ruta[ruta.length - 1];
+                    const detalle = before.value ? 'Justo antes de \u00ab' + before.value + '\u00bb.' : 'Al final de las opciones de ese men\u00fa.';
+                    return ruta.length === 1
+                        ? ['Dentro de \u00ab' + nombre + '\u00bb', detalle]
+                        : ['Dentro del submen\u00fa \u00ab' + nombre + '\u00bb', detalle];
                 }
                 return ['No se mostrar\u00e1 en el men\u00fa', 'Solo estar\u00e1 disponible mediante su URL.'];
             };
@@ -94,9 +160,15 @@ document.addEventListener('DOMContentLoaded', function () {
                 previo = { pos: select.value, before: before.value };
                 modal.hidden = false;
                 document.body.classList.add('menu-pos-modal-open');
-                // Si la pagina ya esta dentro de un menu padre, ese menu se abre
-                // desplegado para ver de una donde queda.
-                const fila = modal.querySelector('.page-menu-placement__parent-row.is-selected');
+                // Si la pagina ya esta dentro de un menu (a cualquier
+                // profundidad), ese <details> se abre desplegado para ver de
+                // una donde queda.
+                let fila = modal.querySelector('.page-menu-placement__parent-row.is-selected');
+                if (!fila && select.value.indexOf('bajo:') === 0) {
+                    const marcado = modal.querySelector('[data-menu-pos].is-selected');
+                    const contenedorPadre = marcado && marcado.closest('.page-menu-placement__parent-row');
+                    if (contenedorPadre) fila = contenedorPadre;
+                }
                 if (fila) fila.open = true;
                 const foco = modal.querySelector('.menu-pos-modal__close');
                 if (foco) foco.focus();

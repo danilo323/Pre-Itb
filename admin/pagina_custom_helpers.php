@@ -2,6 +2,84 @@
 // Utilidades compartidas para las páginas creadas desde el panel.
 
 /**
+ * Arma el árbol del menú público (items_menu) para el selector de "Posición
+ * en el Menú": cada nodo trae sus hijos directos en 'children' y su propia
+ * 'ruta' (ej. "Instituto>Sobre Nosotros"), que es como el selector identifica
+ * "insertar aquí adentro" sin importar cuántos niveles de profundidad tenga.
+ * Usa menu_builder_profundidad() (admin/fields/menu_builder.php) para leer
+ * tanto el formato viejo ('padre'/'hijo'/'nieto') como el nuevo (número).
+ */
+function pagina_custom_menu_arbol(array $items): array {
+    $raiz = [];
+    $pila = [];
+    $pila[0] = &$raiz;
+    $ruta_por_nivel = [];
+    foreach ($items as $item) {
+        $texto = trim($item['texto'] ?? '');
+        if ($texto === '') continue;
+        $prof = menu_builder_profundidad($item['nivel'] ?? 0);
+        if ($prof > count($pila) - 1) $prof = count($pila) - 1;
+
+        $ruta_padre = $prof > 0 ? ($ruta_por_nivel[$prof - 1] ?? '') : '';
+        $ruta = ($ruta_padre !== '' ? $ruta_padre . '>' : '') . $texto;
+
+        $nodo = $item;
+        $nodo['children'] = [];
+        $nodo['ruta'] = $ruta;
+        $pila[$prof][] = $nodo;
+
+        for ($k = count($pila) - 1; $k > $prof; $k--) {
+            unset($pila[$k]);
+            unset($ruta_por_nivel[$k]);
+        }
+        $ultimo = &$pila[$prof][count($pila[$prof]) - 1];
+        $pila[$prof + 1] = &$ultimo['children'];
+        $ruta_por_nivel[$prof] = $ruta;
+    }
+    return $raiz;
+}
+
+/**
+ * Pinta el árbol del selector de posición: nivel 0 son los <details> de cada
+ * menú principal; de ahí para adentro, cada nodo es una fila que puede a su
+ * vez tener sus propios hijos (sin límite), indentados un poco más cada vez.
+ * Cada fila trae su propio botón "+" para colgar la página nueva justo
+ * debajo de ESE nodo, sin importar en qué nivel esté.
+ */
+function pagina_custom_menu_pintar(array $nodos, int $profundidad = 0): string {
+    $html = '';
+    foreach ($nodos as $nodo) {
+        $texto = htmlspecialchars($nodo['texto'] ?? '', ENT_QUOTES, 'UTF-8');
+        if ($texto === '') continue;
+        $ruta = htmlspecialchars($nodo['ruta'], ENT_QUOTES, 'UTF-8');
+        $valor_agregar = htmlspecialchars('bajo:' . $nodo['ruta'], ENT_QUOTES, 'UTF-8');
+        $hijos = $nodo['children'] ?? [];
+        $hijos_html = pagina_custom_menu_pintar($hijos, $profundidad + 1);
+
+        if ($profundidad === 0) {
+            $html .= '<details class="page-menu-placement__parent-row" data-menu-pos="' . $valor_agregar . '">';
+            $html .= '<summary class="page-menu-placement__parent"><span class="page-menu-placement__number">#</span>';
+            $html .= '<strong>' . $texto . '</strong>';
+            $html .= '<span class="page-menu-placement__action"><i class="bi bi-plus-lg"></i> Añadir aquí</span></summary>';
+            $html .= '<div class="page-menu-placement__children">' . $hijos_html . '</div>';
+            $html .= '</details>';
+        } else {
+            $html .= '<div class="page-menu-placement__existing-child" data-nivel="' . $profundidad . '" data-ruta="' . $ruta . '" data-child="' . $texto . '">';
+            $html .= '<i class="bi bi-arrow-return-right"></i><span>' . $texto . '</span>';
+            $html .= '<span class="page-menu-placement__row-actions">';
+            $html .= '<button type="button" class="js-menu-position" data-direction="before" title="Colocar la página antes"><i class="bi bi-chevron-up"></i></button>';
+            $html .= '<button type="button" class="js-menu-position" data-direction="after" title="Colocar la página después"><i class="bi bi-chevron-down"></i></button>';
+            $html .= '<button type="button" class="js-menu-add-nieto" data-menu-pos="' . $valor_agregar . '" title="Agregar como sub-item de «' . $texto . '»"><i class="bi bi-plus-lg"></i></button>';
+            $html .= '</span></div>';
+            if (!empty($hijos)) {
+                $html .= '<div class="page-menu-placement__children" data-parent-ruta="' . $ruta . '">' . $hijos_html . '</div>';
+            }
+        }
+    }
+    return $html;
+}
+
+/**
  * Una sección elegida puede venir de dos sitios, y la clave lo dice:
  *   'valores'            → la sección Valores tal y como está en el sitio.
  *   'pg_ab12ef:valores'  → la sección Valores tal y como la tiene la página

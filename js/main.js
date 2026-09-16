@@ -143,6 +143,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // =========================================
     const dropdownItems = document.querySelectorAll('.navbar__item--dropdown');
 
+    const subDropdownItems = document.querySelectorAll('.navbar__dropdown-item--sub');
+
     dropdownItems.forEach(item => {
         const link = item.querySelector('.navbar__link');
         if (link) {
@@ -151,6 +153,34 @@ document.addEventListener('DOMContentLoaded', () => {
                     e.preventDefault();
                     item.classList.toggle('active');
                     dropdownItems.forEach(other => {
+                        if (other !== item) other.classList.remove('active');
+                    });
+                    // Un submenú recién abierto nunca debe heredar el
+                    // sub-submenú que hubiera quedado abierto la vez anterior.
+                    subDropdownItems.forEach(sub => sub.classList.remove('active'));
+                }
+            });
+        }
+        // En escritorio, al sacar el mouse de TODO el dropdown (no solo del
+        // sub-item) se cierra también cualquier sub-submenú que haya quedado
+        // abierto — así nunca se ve un "hijo con hijos" ya desplegado antes de
+        // pasar el cursor sobre él.
+        item.addEventListener('mouseleave', () => {
+            item.querySelectorAll('.navbar__dropdown-item--sub.active').forEach(sub => sub.classList.remove('active'));
+        });
+    });
+
+    // Sub-submenú (un "hijo" con sus propios "nieto"): en escritorio se abre
+    // con :hover, pero eso no existe al tocar en celular, así que en mobile
+    // necesita el mismo toggle por clic que el dropdown principal de arriba.
+    subDropdownItems.forEach(item => {
+        const link = item.querySelector(':scope > .navbar__dropdown-link');
+        if (link) {
+            link.addEventListener('click', (e) => {
+                if (isMobileNav()) {
+                    e.preventDefault();
+                    item.classList.toggle('active');
+                    subDropdownItems.forEach(other => {
                         if (other !== item) other.classList.remove('active');
                     });
                 }
@@ -176,6 +206,7 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!isMobileNav()) {
             closeMenu();
             dropdownItems.forEach(item => item.classList.remove('active'));
+            subDropdownItems.forEach(item => item.classList.remove('active'));
         }
     });
 
