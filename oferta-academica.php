@@ -17,7 +17,7 @@ require_once 'includes/content_helper.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jarallax/2.1.4/jarallax.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/sobre-hero.css">
+    <link rel="stylesheet" href="css/oferta-academica.css">
     <link rel="stylesheet" href="css/pagina-interna.css">
     <link rel="stylesheet" href="css/oferta-catalogo.css">
 </head>
@@ -32,7 +32,16 @@ require_once 'includes/content_helper.php';
         include 'includes/sobre-hero.php'; 
         ?>
         
-        <?php include 'includes/oferta-catalogo.php'; ?>
+        <?php include 'includes/oferta-intro.php'; ?>
+        <?php include 'includes/oferta-programas.php'; ?>
+
+        <?php
+        // Mismo carrusel de fotos de Alianzas que Inicio, reutilizado tal
+        // cual como en Sobre Nosotros: $alianzas_solo_carrusel oculta el
+        // título/botón y la fila de logos, y deja solo el carril de fotos.
+        $alianzas_solo_carrusel = true;
+        include 'includes/alianzas.php';
+        ?>
 
     </main>
 
@@ -41,7 +50,7 @@ require_once 'includes/content_helper.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/2.1.4/jarallax.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/pagina-interna.js"></script>
-    <script src="js/oferta-catalogo.js"></script>
+    <script src="js/oferta-programas.js"></script>
 
 </body>
 

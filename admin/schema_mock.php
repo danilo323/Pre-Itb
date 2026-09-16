@@ -1804,239 +1804,122 @@ return [
                         ],
                     ],
                 ],
-                'oferta_catalogo' => [
-                    'label' => 'SECCIÓN 2: PROGRAMAS DESTACADOS (BUSCADOR Y FILTROS)',
+                // ---------------------------------------------------------
+                // SECCIÓN 1: título + descripción, arriba del buscador.
+                // El buscador en sí (includes/oferta-programas.php) no lee de
+                // aquí: sus tarjetas salen de la colección 'programas_academicos'.
+                // ---------------------------------------------------------
+                'oferta_intro' => [
+                    'label' => 'SECCIÓN 1: PRESENTACIÓN',
                     'fields' => [
-                        'info_filtros' => [
-                            'type' => 'alert',
-                            'alert_type' => 'info',
-                            'label' => '<strong>LAS CASILLAS DE FILTRO SE ARMAN SOLAS.</strong> Las opciones de <em>Modalidad</em>, <em>Año de Inicio</em> y <em>Campo de Estudio</em> salen de lo que escribas en cada programa de la lista de abajo. Si agregas un programa con una modalidad nueva, su casilla aparece sola en la página: no hay que crearla aquí.',
-                        ],
-                        'div_textos' => [
-                            'type' => 'divider',
-                            'label' => 'Textos de entrada',
-                        ],
                         'titulo' => [
                             'type' => 'textarea',
                             'label' => 'Título',
                             'default' => "Cientos de programas.\nUn título diseñado a tu medida.",
-                            'help' => 'Cada salto de línea se respeta en la página. En el diseño va en dos líneas.',
+                            'help' => 'Cada línea nueva del texto se pinta en su propia línea.',
                         ],
                         'descripcion' => [
                             'type' => 'textarea',
                             'label' => 'Descripción',
                             'default' => 'Elegir tu especialidad es solo el punto de partida. Diseña tu propia ruta académica combinando las materias y áreas que realmente te apasionan. Estudia con total flexibilidad y llega tan lejos como te propongas.',
                         ],
-                        'div_buscador' => [
-                            'type' => 'divider',
-                            'label' => 'Barra de búsqueda',
-                        ],
-                        'buscador_label' => [
-                            'type' => 'textarea',
-                            'label' => 'Texto a la izquierda del buscador',
-                            'default' => "Explora nuestras Áreas Académicas\no busca un Programa específico",
-                            'help' => 'Cada salto de línea se respeta. En el diseño va en dos líneas.',
-                        ],
-                        'buscador_placeholder' => [
-                            'type' => 'text',
-                            'label' => 'Texto de ejemplo dentro del buscador',
-                            'default' => 'Busca por curso, programa o facultad...',
-                            'help' => 'El buscador mira el título, la facultad, el campo de estudio y la etiqueta de cada programa.',
-                        ],
-                        'div_filtros' => [
-                            'type' => 'divider',
-                            'label' => 'Columna de filtros',
-                        ],
-                        'filtros_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título de la columna',
-                            'default' => 'Filtros',
-                        ],
-                        'filtros_borrar' => [
-                            'type' => 'text',
-                            'label' => 'Enlace para quitar los filtros',
-                            'default' => 'Borrar',
-                        ],
-                        'filtro_tipo_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del grupo Cursos / Programas',
-                            'default' => 'Mostrar resultados por',
-                        ],
-                        'filtro_modalidad_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del grupo de modalidades',
-                            'default' => 'Modalidad',
-                        ],
-                        'filtro_anio_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del grupo de años',
-                            'default' => 'Año de Inicio',
-                        ],
-                        'filtro_campo_titulo' => [
-                            'type' => 'text',
-                            'label' => 'Título del grupo de campos de estudio',
-                            'default' => 'Campo de Estudio',
-                        ],
-                        'div_resultados' => [
-                            'type' => 'divider',
-                            'label' => 'Resultados y paginación',
-                        ],
-                        'por_pagina' => [
-                            'type' => 'text',
-                            'label' => 'Programas por página',
-                            'default' => '4',
-                            'help' => 'Cuántas tarjetas se ven antes de pasar a la página siguiente. Los botones de paginación aparecen solos cuando hay más programas que este número.',
-                        ],
-                        'conteo_texto' => [
-                            'type' => 'text',
-                            'label' => 'Texto del contador de resultados',
-                            'default' => 'Mostrando {desde}-{hasta} de {total} resultados',
-                            'help' => 'Escribe {desde}, {hasta} y {total} donde quieras que salgan los números. Se reemplazan solos.',
-                        ],
-                        'orden_label' => [
-                            'type' => 'text',
-                            'label' => 'Texto antes del selector de orden',
-                            'default' => 'Ordenar por:',
-                        ],
-                        'btn_card' => [
-                            'type' => 'text',
-                            'label' => 'Texto del botón de cada tarjeta',
-                            'default' => 'Ver programa',
-                        ],
-                        'sin_resultados' => [
-                            'type' => 'text',
-                            'label' => 'Aviso cuando no hay resultados',
-                            'default' => 'No encontramos programas con esos filtros. Prueba quitando alguno.',
-                        ],
-                        'div_lista' => [
-                            'type' => 'divider',
-                            'label' => 'Programas del catálogo',
-                        ],
-                        'lista_programas' => [
-                            'type' => 'repeater',
-                            'label' => 'Lista de Programas',
-                            'item_label' => 'Programa',
-                            'help' => 'Agrega tantos como quieras: la página los reparte sola en páginas de 4 (o lo que pongas arriba).',
-                            'subfields' => [
-                                'imagen' => [
-                                    'type' => 'image',
-                                    'label' => 'Foto del programa',
-                                    'help' => 'Tamaño recomendado: 600x450px (apaisada).',
-                                ],
-                                'titulo' => [
-                                    'type' => 'text',
-                                    'label' => 'Nombre del programa *',
-                                    'required' => true,
-                                    'help' => 'Un programa sin nombre no se muestra.',
-                                ],
-                                'facultad' => [
-                                    'type' => 'text',
-                                    'label' => 'Facultad',
-                                    'help' => 'Ej: Facultad de Salud / Servicios Sociales',
-                                ],
-                                'campo' => [
-                                    'type' => 'text',
-                                    'label' => 'Campo de Estudio',
-                                    'help' => 'Las siglas de la facultad (FASSS, FATV, FACES). Con esto se arma la casilla del filtro "Campo de Estudio".',
-                                ],
-                                'etiqueta' => [
-                                    'type' => 'text',
-                                    'label' => 'Etiqueta de la esquina',
-                                    'help' => 'La pastilla azul sobre la tarjeta. Ej: Salud, Automotriz, Software. Déjala vacía para no mostrarla.',
-                                ],
-                                'modalidad' => [
-                                    'type' => 'text',
-                                    'label' => 'Modalidad',
-                                    'help' => 'Ej: Presencial / Híbrida. Separa con "/" para que cuente como dos modalidades en el filtro.',
-                                ],
-                                'duracion' => [
-                                    'type' => 'text',
-                                    'label' => 'Duración',
-                                    'help' => 'Ej: 2 Años (4 Semestres)',
-                                ],
-                                'campus' => [
-                                    'type' => 'text',
-                                    'label' => 'Campus',
-                                    'help' => 'Ej: Campus Teresa Benites',
-                                ],
-                                'anio' => [
-                                    'type' => 'text',
-                                    'label' => 'Año de inicio',
-                                    'help' => 'Solo el año (2026, 2027...). Con esto se arma la casilla del filtro "Año de Inicio".',
-                                ],
-                                'tipo' => [
-                                    'type' => 'select',
-                                    'label' => 'Aparece en',
-                                    'default' => 'Cursos / Programas',
-                                    'options' => [
-                                        'Cursos / Programas' => 'Cursos y Programas (sale en los dos)',
-                                        'Cursos' => 'Solo en Cursos',
-                                        'Programas' => 'Solo en Programas',
-                                    ],
-                                    'help' => 'Decide con cuál de los dos botones de arriba ("Mostrar resultados por") se ve este programa.',
-                                ],
-                                'enlace' => [
-                                    'type' => 'text',
-                                    'label' => 'Enlace del programa',
-                                    'help' => 'A dónde llevan el nombre y el botón. Déjalo en # mientras no exista la página.',
-                                ],
-                            ],
-                            'default' => [
-                                [
-                                    'imagen' => 'img/enfermeria.jpg',
-                                    'titulo' => 'Tecnología Superior en enfermería',
-                                    'facultad' => 'Facultad de Salud / Servicios Sociales',
-                                    'campo' => 'FASSS',
-                                    'etiqueta' => 'Salud',
-                                    'modalidad' => 'Presencial / Híbrida',
-                                    'duracion' => '2 Años (4 Semestres)',
-                                    'campus' => 'Campus Teresa Benites',
-                                    'anio' => '2026',
-                                    'tipo' => 'Cursos / Programas',
-                                    'enlace' => '#',
-                                ],
-                                [
-                                    'imagen' => 'img/Mecanica.jpg',
-                                    'titulo' => 'Tecnología Superior en Mecánica Automotriz',
-                                    'facultad' => 'Facultad de Transporte y Vialidad',
-                                    'campo' => 'FATV',
-                                    'etiqueta' => 'Automotriz',
-                                    'modalidad' => 'Presencial / Híbrida',
-                                    'duracion' => '2 Años (4 Semestres)',
-                                    'campus' => 'Campus Teresa Benites',
-                                    'anio' => '2026',
-                                    'tipo' => 'Cursos / Programas',
-                                    'enlace' => '#',
-                                ],
-                                [
-                                    'imagen' => 'img/desarrollo_software.jpg',
-                                    'titulo' => 'Tecnología Superior en Desarrollo de Software',
-                                    'facultad' => 'Facultad de Ciencias Empresariales y Sistemas / Económicas y Empresariales',
-                                    'campo' => 'FACES',
-                                    'etiqueta' => 'Software',
-                                    'modalidad' => 'Presencial / Híbrida',
-                                    'duracion' => '2 Años (4 Semestres)',
-                                    'campus' => 'Campus Teresa Benites',
-                                    'anio' => '2027',
-                                    'tipo' => 'Cursos / Programas',
-                                    'enlace' => '#',
-                                ],
-                                [
-                                    'imagen' => 'img/administracion.jpg',
-                                    'titulo' => 'Tecnología Superior en Administración',
-                                    'facultad' => 'Facultad de Ciencias Empresariales y Sistemas / Económicas y Empresariales',
-                                    'campo' => 'FACES',
-                                    'etiqueta' => 'Gestión',
-                                    'modalidad' => 'Remoto',
-                                    'duracion' => '2 Años (4 Semestres)',
-                                    'campus' => 'Campus Teresa Benites',
-                                    'anio' => '2027',
-                                    'tipo' => 'Cursos / Programas',
-                                    'enlace' => '#',
-                                ],
-                            ],
-                        ],
                     ],
+                ],
+            ],
+        ],
+        // Colección de tarjetas del buscador de Oferta Académica. Cada item es
+        // un programa/carrera; se filtra y busca en el navegador (JS puro,
+        // sin recargar), así que aquí solo hace falta guardar el dato de cada
+        // tarjeta — el filtrado vive en js/oferta-programas.js.
+        'programas_academicos' => [
+            'label' => 'Programas Académicos',
+            'group' => 'contenido',
+            'icon' => 'bi bi-mortarboard-fill',
+            'type' => 'collection',
+            'sortable' => true,
+            'columns' => ['nombre', 'facultad'],
+            'fields' => [
+                'tipo' => [
+                    'type' => 'select',
+                    'label' => 'Tipo *',
+                    'help' => 'Con qué opción de "Mostrar resultados por" aparece esta tarjeta.',
+                    'required' => true,
+                    'default' => 'Programa',
+                    'options' => [
+                        'Programa' => 'Programa',
+                        'Curso' => 'Curso',
+                    ],
+                ],
+                'nombre' => [
+                    'type' => 'text',
+                    'label' => 'Nombre del programa *',
+                    'help' => 'Ej: Tecnología Superior en Enfermería',
+                    'required' => true,
+                ],
+                'facultad' => [
+                    'type' => 'text',
+                    'label' => 'Facultad *',
+                    'help' => 'Ej: Facultad de Salud y Servicios Sociales',
+                    'required' => true,
+                ],
+                'campo_estudio' => [
+                    'type' => 'select',
+                    'label' => 'Campo de Estudio *',
+                    'help' => 'Con qué filtro de la barra lateral aparece este programa.',
+                    'required' => true,
+                    'options' => [
+                        'FASSS' => 'FASSS — Facultad de Salud y Servicios Sociales',
+                        'FATV' => 'FATV — Facultad de Transporte y Vialidad',
+                        'FACES' => 'FACES — Facultad de Ciencias Empresariales y Sistemas',
+                    ],
+                ],
+                'modalidad' => [
+                    'type' => 'select',
+                    'label' => 'Modalidad *',
+                    'required' => true,
+                    'options' => [
+                        'Presencial' => 'Presencial',
+                        'Hibrida' => 'Híbrida',
+                        'Remoto' => 'Remoto',
+                    ],
+                ],
+                'duracion' => [
+                    'type' => 'text',
+                    'label' => 'Duración',
+                    'default' => '2 Años (4 Semestres)',
+                ],
+                'campus' => [
+                    'type' => 'text',
+                    'label' => 'Campus',
+                    'default' => 'Campus Teresa Benites',
+                ],
+                'anio_inicio' => [
+                    'type' => 'select',
+                    'label' => 'Año de Inicio',
+                    'options' => [
+                        '2026' => '2026',
+                        '2027' => '2027',
+                    ],
+                ],
+                'etiqueta' => [
+                    'type' => 'select',
+                    'label' => 'Distintivo de la tarjeta',
+                    'help' => 'Insignia chica en la esquina superior de la tarjeta. Déjalo en "Ninguno" si no aplica.',
+                    'options' => [
+                        '' => 'Ninguno',
+                        'Nuevo' => 'Nuevo',
+                        'Tendencia' => 'Tendencia',
+                    ],
+                ],
+                'imagen' => [
+                    'type' => 'image',
+                    'label' => 'Foto del programa',
+                    'help' => 'Tamaño recomendado: 400x300px.',
+                ],
+                'publicado' => [
+                    'type' => 'bool',
+                    'label' => 'Publicado',
+                    'default' => true,
                 ],
             ],
         ],

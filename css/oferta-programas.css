@@ -1,0 +1,626 @@
+/* =============================================
+   OFERTA ACADÉMICA — BUSCADOR (filtros + grid + paginación)
+   ============================================= */
+.oferta-buscador__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 24px;
+}
+
+/* ---- Barra de búsqueda ---- */
+.oferta-buscador__searchbar {
+    background: var(--gray-50);
+    padding: 22px 0;
+    border-top: 1px solid var(--gray-200);
+    border-bottom: 1px solid var(--gray-200);
+}
+
+.oferta-buscador__searchbar-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    flex-wrap: wrap;
+}
+
+.oferta-buscador__searchbar-label {
+    margin: 0;
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    color: var(--gray-800);
+    line-height: 1.4;
+}
+
+.oferta-buscador__search-group {
+    flex: 1;
+    min-width: 260px;
+}
+
+/* ---- Cuerpo: filtros + resultados ----
+   4 hijos en este orden: filtros-head, resultados-head, aside.filtros,
+   div.resultados. Con grid-auto-flow normal (fila por fila) caen solos en
+   2 filas x 2 columnas: los encabezados arriba, el contenido debajo — así
+   "Filtros/Borrar" queda AFUERA de la caja con borde, igual que ya estaba
+   "Mostrando.../Ordenar por". */
+.oferta-buscador__body {
+    display: grid;
+    grid-template-columns: 290px 1fr;
+    column-gap: 32px;
+    row-gap: 14px;
+    padding: 36px 0 90px;
+    align-items: start;
+}
+
+.oferta-buscador__filtros {
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 18px;
+    position: sticky;
+    top: calc(var(--header-height) + 16px);
+}
+
+/* "Filtros" y "Borrar" van a los extremos, no pegados: el padding los alinea
+   con el interior de la caja de filtros de abajo — "Filtros" a la misma
+   sangria que los titulos de grupo (18px de la caja + 20px del h4) y "Borrar"
+   al mismo borde derecho donde terminan los guiones de plegado. */
+.oferta-buscador__filtros-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 22px;
+    padding: 0 18px 0 38px;
+    align-self: center;
+}
+
+.oferta-buscador__filtros-head span {
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-orange);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.oferta-buscador__borrar {
+    border: none;
+    background: none;
+    color: var(--primary-orange);
+    font-family: var(--font-primary);
+    font-size: 0.8rem;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.oferta-buscador__borrar:hover {
+    text-decoration: underline;
+}
+
+.oferta-buscador__grupo {
+    padding: 14px 0;
+    border-bottom: 1px solid var(--gray-100);
+}
+
+.oferta-buscador__grupo:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.oferta-buscador__grupo h4 {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 10px;
+    padding-left: 20px;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+
+.oferta-buscador__grupo-toggle {
+    display: block;
+    color: var(--primary-blue);
+    flex-shrink: 0;
+}
+
+.oferta-buscador__radio,
+.oferta-buscador__check,
+.oferta-buscador__campo {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    font-family: var(--font-primary);
+    font-size: 0.86rem;
+    color: var(--gray-600);
+    padding: 5px 0 5px 20px;
+    cursor: pointer;
+}
+
+/* "Campo de Estudio" no lleva casilla visible en el diseño: se ve como
+   texto suelto e indentado, aunque por dentro sigue siendo un checkbox real
+   (escondido, no eliminado) para que el filtrado en JS siga funcionando
+   igual — el <label> hace clic en el input aunque esté oculto. */
+.oferta-buscador__campo {
+    padding-left: 48px;
+}
+
+.oferta-buscador__campo input {
+    position: absolute;
+    opacity: 0;
+    width: 1px;
+    height: 1px;
+    pointer-events: none;
+}
+
+/* Controles propios: el navegador dibuja el radio y la casilla nativos en
+   gris/azul del sistema, y el diseno los pide en naranja institucional. Se
+   apaga la apariencia nativa (appearance:none) pero se conserva el <input>
+   real, asi que teclado, :focus y el filtrado en JS siguen funcionando. */
+.oferta-buscador__radio input,
+.oferta-buscador__check input {
+    appearance: none;
+    -webkit-appearance: none;
+    margin: 0;
+    flex-shrink: 0;
+    width: 18px;
+    height: 18px;
+    background: var(--white);
+    cursor: pointer;
+    display: grid;
+    place-content: center;
+    transition: var(--transition-fast);
+}
+
+.oferta-buscador__radio input:focus-visible,
+.oferta-buscador__check input:focus-visible {
+    outline: 2px solid var(--primary-orange);
+    outline-offset: 2px;
+}
+
+/* Radio: el aro naranja se ve SIEMPRE (marcado o no); al marcar aparece el
+   punto naranja de dentro. */
+.oferta-buscador__radio input {
+    border: 1.5px solid var(--primary-orange);
+    border-radius: 50%;
+}
+
+.oferta-buscador__radio input::before {
+    content: "";
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--primary-orange);
+    transform: scale(0);
+    transition: transform 0.15s ease;
+}
+
+.oferta-buscador__radio input:checked::before {
+    transform: scale(1);
+}
+
+/* Casilla: cuadro gris redondeado; al marcar se rellena de naranja con el
+   visto blanco encima. */
+.oferta-buscador__check input {
+    border: 1.5px solid var(--gray-400);
+    border-radius: 4px;
+}
+
+.oferta-buscador__check input::before {
+    content: "";
+    width: 11px;
+    height: 11px;
+    background: var(--white);
+    clip-path: polygon(14% 45%, 0 60%, 39% 100%, 100% 22%, 84% 8%, 37% 70%);
+    transform: scale(0);
+    transition: transform 0.15s ease;
+}
+
+.oferta-buscador__check input:checked {
+    background: var(--primary-orange);
+    border-color: var(--primary-orange);
+}
+
+.oferta-buscador__check input:checked::before {
+    transform: scale(1);
+}
+
+.oferta-buscador__check input:hover:not(:checked) {
+    border-color: var(--primary-orange);
+}
+
+/* ---- Resultados ---- */
+.oferta-buscador__resultados-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+    align-self: center;
+}
+
+.oferta-buscador__contador {
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.oferta-buscador__orden {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-family: var(--font-primary);
+    font-size: 0.9rem;
+    color: var(--primary-blue);
+    font-weight: 600;
+}
+
+.oferta-buscador__orden select {
+    border: 1px solid #888888;
+    border-radius: var(--radius-full);
+    padding: 10px 42px 10px 20px;
+    font-family: var(--font-primary);
+    font-size: 0.95rem;
+    color: var(--gray-800);
+    background: #F4F6F9 url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='%234B5563' stroke-width='2.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E") no-repeat right 16px center;
+    background-size: 16px;
+    appearance: none;
+    cursor: pointer;
+    font-weight: 500;
+}
+
+.oferta-buscador__grid {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.oferta-buscador__vacio {
+    text-align: center;
+    color: var(--gray-500);
+    font-family: var(--font-primary);
+    font-size: 0.92rem;
+    padding: 48px 0;
+}
+
+/* ---- Tarjeta de programa (ancha, imagen a la izquierda) ---- */
+.oferta-card {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    background: var(--white);
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-md);
+    padding: 18px 24px 18px 18px;
+    box-shadow: var(--shadow-sm);
+    transition: var(--transition);
+}
+
+.oferta-card[hidden] {
+    display: none !important;
+}
+
+.oferta-card:hover {
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+    transform: translateY(-5px);
+    border-color: var(--primary-orange);
+}
+
+.oferta-card__img {
+    flex-shrink: 0;
+    width: 320px;
+    height: 180px;
+    border-radius: var(--radius-sm);
+    background-size: cover;
+    background-position: center;
+    background-color: var(--gray-100);
+}
+
+.oferta-card__badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    background: var(--primary-blue);
+    color: var(--white);
+    font-family: var(--font-primary);
+    font-size: 0.8rem;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 0 var(--radius-md) 0 16px;
+    z-index: 2;
+    letter-spacing: 0.5px;
+    cursor: default;
+    transition: padding 0.3s ease;
+}
+
+.oferta-card__badge span {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width 0.3s ease, opacity 0.3s ease, margin-right 0.3s ease;
+    margin-right: 0;
+}
+
+.oferta-card__badge:hover {
+    padding: 6px 16px;
+}
+
+.oferta-card__badge:hover span {
+    max-width: 100px;
+    opacity: 1;
+    margin-right: 6px;
+}
+
+.oferta-card__badge svg {
+    color: var(--primary-orange);
+    width: 14px;
+    height: 14px;
+}
+
+.oferta-card__body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.oferta-card__title {
+    margin: 0;
+    font-family: var(--font-heading);
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--gray-800);
+    line-height: 1.3;
+}
+
+.oferta-card__facultad {
+    margin: 0 0 4px;
+    font-family: var(--font-heading);
+    font-size: 0.85rem;
+    font-weight: 700;
+    color: var(--primary-blue);
+}
+
+.oferta-card__meta {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.oferta-card__meta li {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-family: var(--font-primary);
+    font-size: 0.88rem;
+    color: var(--gray-500);
+}
+
+.oferta-card__meta svg {
+    color: var(--primary-orange);
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
+}
+
+.oferta-card__cta {
+    position: absolute;
+    right: 24px;
+    bottom: 32px;
+}
+
+/* ---- Paginación ---- */
+.oferta-buscador__paginacion {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin-top: 36px;
+}
+
+.oferta-buscador__paginacion button {
+    min-width: 34px;
+    height: 34px;
+    padding: 0 10px;
+    border: 1px solid var(--gray-200);
+    border-radius: var(--radius-sm);
+    background: var(--white);
+    color: var(--gray-600);
+    font-family: var(--font-primary);
+    font-size: 0.85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition-fast);
+}
+
+.oferta-buscador__paginacion button:hover:not(:disabled) {
+    background: var(--primary-orange);
+    border-color: var(--primary-orange);
+    color: var(--white);
+}
+
+
+.oferta-buscador__paginacion button:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* =============================================
+   RESPONSIVE
+   ============================================= */
+@media (max-width: 900px) {
+    .oferta-buscador__body {
+        grid-template-columns: 1fr;
+        padding: 28px 0 60px;
+        row-gap: 16px;
+    }
+
+    /* En una sola columna el grid coloca los 4 hijos en orden del DOM
+       (Filtros, Mostrando..., caja de filtros, tarjetas) y cada encabezado
+       quedaria lejos de lo que encabeza. Con order se reagrupan por pares. */
+    .oferta-buscador__filtros-head {
+        order: 1;
+    }
+
+    .oferta-buscador__filtros {
+        order: 2;
+        /* Ya no es una columna estrecha al lado de los resultados: si los 4
+           grupos se apilan, la caja se vuelve altisima y empuja las tarjetas
+           fuera de la pantalla. Se reparten en las columnas que quepan. */
+        position: static;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
+        column-gap: 28px;
+        padding: 4px 18px 14px;
+    }
+
+    .oferta-buscador__resultados-head {
+        order: 3;
+    }
+
+    .oferta-buscador__resultados {
+        order: 4;
+    }
+
+    /* En rejilla, el grupo final ya no es "el ultimo de la lista": todas las
+       celdas llevan la misma separacion para que no desentone una. */
+    .oferta-buscador__grupo,
+    .oferta-buscador__grupo:last-child {
+        padding: 14px 0;
+        border-bottom: 1px solid var(--gray-100);
+    }
+
+    /* La tarjeta ancha (imagen de 320px + texto + boton) no entra: imagen
+       arriba y contenido debajo. */
+    .oferta-card {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 16px;
+        padding: 14px;
+    }
+
+    .oferta-card__img {
+        width: 100%;
+        height: 200px;
+    }
+
+    .oferta-card__cta {
+        position: static;
+        align-self: flex-start;
+    }
+}
+
+@media (max-width: 600px) {
+    .oferta-buscador__container {
+        padding: 0 16px;
+    }
+
+    .oferta-buscador__searchbar-inner {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 14px;
+    }
+
+    .oferta-buscador__search-group {
+        max-width: none;
+        min-width: 0;
+    }
+
+    /* En movil la barra pasa a pildora. La lupa conserva el gris compartido
+       (#8B96A8 de pagina-interna.css) y va a ras del borde ocupando todo el
+       alto: el overflow:hidden del grupo la recorta contra el radio, asi que
+       queda como una tapa redondeada y no como un boton suelto flotando.
+
+       Dos detalles a proposito:
+       - Los selectores llevan DOS clases porque pagina-interna.css se carga
+         despues que este archivo (ver oferta-academica.php): con una sola
+         clase ganaria el estilo compartido por orden de origen.
+       - Solo se cualifica .oferta-buscador__*, nunca .transparencia__* a
+         secas, para que el buscador de Transparencia siga igual.
+       Todo va dentro del media query: en escritorio la barra no cambia. */
+    .oferta-buscador__search-group.transparencia__search-group {
+        height: 56px;
+        border-radius: var(--radius-full);
+        border-color: var(--gray-300);
+    }
+
+    .oferta-buscador__search-group .transparencia__search-input {
+        padding: 0 8px 0 20px;
+        /* 1rem = 16px: por debajo de eso, iOS hace zoom al enfocar el campo
+           y descuadra la pagina. */
+        font-size: 1rem;
+    }
+
+    /* El ancho iguala al alto de la barra para que el gris cubra la curva
+       justa, sin dejar un pico recto asomando. */
+    .oferta-buscador__search-group .transparencia__search-btn {
+        width: 56px;
+    }
+
+    /* La lupa crece con el boton: el SVG trae width/height en el HTML, y sin
+       esto se quedaria pequena dentro de la tapa mas grande. */
+    .oferta-buscador__search-group .transparencia__search-btn svg {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* En tactil no hay hover: el feedback util es el de pulsado, con el mismo
+       gris oscuro que ya usa el hover compartido. */
+    .oferta-buscador__search-group .transparencia__search-btn:active {
+        background: #78849A;
+    }
+
+    /* En pantalla estrecha los grupos vuelven a una sola columna y se recorta
+       la sangria interna, que en movil solo roba ancho al texto. */
+    .oferta-buscador__filtros {
+        grid-template-columns: 1fr;
+        padding: 4px 16px 12px;
+    }
+
+    .oferta-buscador__filtros-head {
+        padding: 0 16px 0 26px;
+    }
+
+    .oferta-buscador__grupo h4,
+    .oferta-buscador__radio,
+    .oferta-buscador__check {
+        padding-left: 10px;
+    }
+
+    .oferta-buscador__campo {
+        padding-left: 34px;
+    }
+
+    .oferta-buscador__resultados-head {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    /* "Ordenar por:" y su desplegable, uno a cada extremo, para que el select
+       no quede colgando pegado a la etiqueta. */
+    .oferta-buscador__orden {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .oferta-card__img {
+        height: 160px;
+    }
+
+    .oferta-buscador__paginacion {
+        flex-wrap: wrap;
+        margin-top: 28px;
+    }
+}
