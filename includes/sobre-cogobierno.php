@@ -22,7 +22,7 @@ if ($cogob_url === '') $cogob_url = '#';
 <!-- 5. CO GOBIERNO                                -->
 <!-- ============================================= -->
 <section class="sobre-cogob" id="co-gobierno">
-    <div class="sobre-cogob__container">
+    <div class="sobre-cogob__container container">
 
         <!-- Lado izquierdo: título, texto y representantes -->
         <div class="sobre-cogob__content">

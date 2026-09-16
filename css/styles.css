@@ -20,10 +20,19 @@
 @import url('admision.css');
 @import url('noticias.css');
 @import url('alianzas.css');
-/* Hero de paginas internas. Antes solo era alcanzable desde sobre-nosotros.css,
-   asi que oferta-academica.php lo usaba sin sus estilos y quedaba bajo la
-   cabecera fija. */
+
+/* Secciones reutilizables que antes solo cargaba sobre-nosotros.css. Vivian
+   en una cascada aparte, asi que cualquier otra pagina que las usara (o que se
+   creara desde el panel) se quedaba sin sus estilos. Ahora estan disponibles
+   en todo el sitio, que es lo que el panel ya prometia. */
 @import url('sobre-hero.css');
+@import url('sobre-intro.css');
+@import url('sobre-mision-vision.css');
+@import url('sobre-valores.css');
+@import url('sobre-cogobierno.css');
+@import url('nosotros_himno.css');
+@import url('pagina-interna.css');
+
 @import url('footer.css');
 @import url('responsive.css');
 @import url('hover-theme.css');

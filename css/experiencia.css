@@ -2,14 +2,11 @@
    TU EXPERIENCIA ITB
    ============================================= */
 .experiencia {
-    padding: 100px 0;
+    padding-block: var(--section-y-lg);
     background: var(--white);
 }
 
 .experiencia__container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 24px;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 80px;

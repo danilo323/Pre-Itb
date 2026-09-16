@@ -2,25 +2,22 @@
    ALIANZAS
    ============================================= */
 .alianzas {
-    padding: 80px 0;
+    padding-block: var(--section-y-md);
     background: var(--gray-50);
     overflow: hidden;
 }
 
 /* Variante "solo carrusel" (sobre-nosotros.php): sin título ni logos, el
-   relleno de 80px y el fondo gris de arriba quedaban como una franja vacía
+   relleno completo y el fondo gris de arriba quedaban como una franja vacía
    y fea antes del carrusel de fotos. Se acorta el espacio y se quita el
    fondo para que pase directo de la sección de arriba a las fotos. */
 .alianzas--solo-carrusel {
-    padding-top: 24px;
+    padding-block-start: var(--space-md);
     background: transparent;
 }
 
-.alianzas__container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 24px;
-}
+/* El ancho y el margen lateral los pone .container (css/sistema.css),
+   que se añade a esta clase en includes/alianzas.php. */
 
 /* Cabecera: título a la izquierda y botón a la derecha,
    con la misma disposición que la de Noticias. */

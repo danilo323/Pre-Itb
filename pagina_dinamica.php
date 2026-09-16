@@ -85,8 +85,11 @@ $mapa_secciones = [
     <link rel="stylesheet" href="css/sobre-nosotros.css">
     <link rel="stylesheet" href="css/pagina-interna.css">
 </head>
-<!-- page-sobre-nosotros activa los estilos modulares de las secciones heredadas. -->
-<body class="page-dinamica page-sobre-nosotros">
+<!-- Ya no hace falta declarar la clase de Sobre Nosotros: sus secciones se
+     cargan desde css/styles.css como cualquier otra. Antes era obligatorio
+     para que se vieran, y a cambio esta pagina heredaba un espaciado que no
+     le correspondia. -->
+<body class="page-dinamica">
 
     <?php include __DIR__ . '/includes/header.php'; ?>
 

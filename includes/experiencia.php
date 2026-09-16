@@ -4,7 +4,7 @@
 <!-- TU EXPERIENCIA ITB                            -->
 <!-- ============================================= -->
 <section class="experiencia" id="experiencia">
-    <div class="experiencia__container">
+    <div class="experiencia__container container">
 
         <!-- Lado izquierdo: Texto -->
         <div class="experiencia__content">

@@ -111,8 +111,10 @@
 
      <body class="densidad-compacta">
    ---------------------------------------------------------------------------- */
+/* Reproduce exactamente el ritmo que tenia Sobre Nosotros con el antiguo
+   ajuste de 48px, para que esa pagina no cambie de aspecto. */
 .densidad-compacta {
-    --section-y-lg: 56px;
+    --section-y-lg: 48px;
     --section-y-md: 48px;
     --section-y-sm: 40px;
 }
@@ -158,5 +160,36 @@
         --section-y-md: 40px;
         --section-y-sm: 28px;
         --gutter: 16px;
+    }
+}
+
+/* Las densidades tambien se reducen en pantallas pequeñas. Sin esto ganarian
+   siempre (tienen mas especificidad que :root) y una pagina compacta acabaria
+   con MAS aire en el movil que en el escritorio. */
+@media (max-width: 768px) {
+    .densidad-compacta {
+        --section-y-lg: 32px;
+        --section-y-md: 32px;
+        --section-y-sm: 28px;
+    }
+
+    .densidad-amplia {
+        --section-y-lg: 72px;
+        --section-y-md: 60px;
+        --section-y-sm: 44px;
+    }
+}
+
+@media (max-width: 480px) {
+    .densidad-compacta {
+        --section-y-lg: 28px;
+        --section-y-md: 28px;
+        --section-y-sm: 24px;
+    }
+
+    .densidad-amplia {
+        --section-y-lg: 56px;
+        --section-y-md: 48px;
+        --section-y-sm: 36px;
     }
 }

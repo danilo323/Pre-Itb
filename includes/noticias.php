@@ -51,7 +51,7 @@ $secundarias_visibles = 2;
 <!-- NOTICIAS, EVENTOS Y ALIANZAS                  -->
 <!-- ============================================= -->
 <section class="noticias" id="noticias">
-    <div class="noticias__container">
+    <div class="noticias__container container">
         <div class="noticias__header">
             <div>
                 <span class="section-tag"><?= content_get('noticias', 'etiqueta_superior', 'Vida Universitaria y Actualidad') ?></span>

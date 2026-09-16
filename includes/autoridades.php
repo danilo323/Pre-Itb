@@ -3,7 +3,7 @@
 <!-- NUESTRAS AUTORIDADES                          -->
 <!-- ============================================= -->
 <section class="autoridades" id="autoridades">
-    <div class="autoridades__container">
+    <div class="autoridades__container container">
 
         <!-- Header -->
         <div class="autoridades__header">

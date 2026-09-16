@@ -66,7 +66,7 @@ $pintar_programa = function (array $prog) {
 <!-- PROGRAMAS DESTACADOS                          -->
 <!-- ============================================= -->
 <section class="programas" id="programas">
-    <div class="programas__container">
+    <div class="programas__container container">
         <div class="programas__header">
             <span class="programas__tag"><?= content_get('programas', 'etiqueta_superior', 'Formación Práctica e Innovadora') ?></span>
             <h2 class="programas__title">

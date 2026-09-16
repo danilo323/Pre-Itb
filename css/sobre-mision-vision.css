@@ -1,12 +1,12 @@
 /* =============================================
    2 y 3. MISIÓN Y VISIÓN
    ============================================= */
-.page-sobre-nosotros .sobre-mv-section {
+.sobre-mv-section {
     padding: 40px 0 60px;
     background: var(--white);
 }
 
-.page-sobre-nosotros .sobre-mv__container {
+.sobre-mv__container {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 24px;
@@ -18,7 +18,7 @@
 /* La tarjeta es SOLO el marco durazno: un padding chico alrededor y nada más.
    El fondo blanco lo pone el panel del texto, así que del color de la tarjeta
    únicamente se ven los bordes y el espacio entre la foto y el panel. */
-.page-sobre-nosotros .sobre-mv__card {
+.sobre-mv__card {
     display: grid;
     grid-template-columns: 1fr 1.12fr;
     gap: 16px;
@@ -28,32 +28,32 @@
     background: #fdf3ee;
 }
 
-.page-sobre-nosotros .sobre-mv__card--invertida {
+.sobre-mv__card--invertida {
     grid-template-columns: 1.12fr 1fr;
 }
 
 /* Entrada de las tarjetas: Misión llega desde la derecha y Visión desde la
    izquierda. js/sobre-nosotros.js activa .is-visible al entrar en pantalla. */
-.page-sobre-nosotros .sobre-mv__card {
+.sobre-mv__card {
     opacity: 0;
     transform: translateX(48px);
     transition: opacity 0.65s ease-out, transform 0.65s ease-out;
 }
 
-.page-sobre-nosotros .sobre-mv__card.is-visible {
+.sobre-mv__card.is-visible {
     opacity: 1;
     transform: translateX(0);
 }
 
 /* Visión: la imagen se va al lado derecho sin tocar el HTML. */
-.page-sobre-nosotros .sobre-mv__card--invertida .sobre-mv__image {
+.sobre-mv__card--invertida .sobre-mv__image {
     order: 2;
 }
 
 /* La foto guarda su proporción 4:3 y se centra frente al panel del texto.
    El align-self es lo que impide que la rejilla la estire a la altura de la
    fila (que es el comportamiento por defecto) y le rompa la proporción. */
-.page-sobre-nosotros .sobre-mv__image {
+.sobre-mv__image {
     align-self: center;
     aspect-ratio: 4 / 3;
     margin: 6px;
@@ -61,7 +61,7 @@
     overflow: hidden;
 }
 
-.page-sobre-nosotros .sobre-mv__image img {
+.sobre-mv__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -70,7 +70,7 @@
 
 /* El panel blanco del texto sí llena todo el alto de la tarjeta (es el
    comportamiento normal de la rejilla), y su contenido se centra dentro. */
-.page-sobre-nosotros .sobre-mv__body {
+.sobre-mv__body {
     display: flex;
     flex-direction: column;
     justify-content: center;
@@ -79,7 +79,7 @@
     padding: 30px 34px;
 }
 
-.page-sobre-nosotros .sobre-mv__title {
+.sobre-mv__title {
     font-family: var(--font-heading);
     font-size: clamp(1.7rem, 2.5vw, 2.1rem);
     font-weight: 800;
@@ -92,7 +92,7 @@
 }
 
 /* El texto va corrido a la derecha para dejarle sitio a la línea naranja. */
-.page-sobre-nosotros .sobre-mv__text {
+.sobre-mv__text {
     position: relative;
     padding-left: 28px;
 }
@@ -100,7 +100,7 @@
 /* Bolita naranja arriba, línea continua y otra bolita abajo: la línea es el
    propio <span> y las bolitas son sus dos pseudos, centradas justo en las
    puntas para que se lea como un solo trazo de extremo a extremo. */
-.page-sobre-nosotros .sobre-mv__linea {
+.sobre-mv__linea {
     position: absolute;
     left: 5px;
     top: 7px;
@@ -110,8 +110,8 @@
     border-radius: 1px;
 }
 
-.page-sobre-nosotros .sobre-mv__linea::before,
-.page-sobre-nosotros .sobre-mv__linea::after {
+.sobre-mv__linea::before,
+.sobre-mv__linea::after {
     content: '';
     position: absolute;
     left: 50%;
@@ -121,17 +121,17 @@
     background: var(--primary-orange);
 }
 
-.page-sobre-nosotros .sobre-mv__linea::before {
+.sobre-mv__linea::before {
     top: 0;
     transform: translate(-50%, -50%);
 }
 
-.page-sobre-nosotros .sobre-mv__linea::after {
+.sobre-mv__linea::after {
     bottom: 0;
     transform: translate(-50%, 50%);
 }
 
-.page-sobre-nosotros .sobre-mv__desc {
+.sobre-mv__desc {
     font-family: var(--font-primary);
     font-size: 0.95rem;
     color: #4b5563;
@@ -139,7 +139,7 @@
     margin-bottom: 18px;
 }
 
-.page-sobre-nosotros .sobre-mv__list {
+.sobre-mv__list {
     display: flex;
     flex-direction: column;
     gap: 10px;
@@ -148,7 +148,7 @@
     margin: 0;
 }
 
-.page-sobre-nosotros .sobre-mv__list li {
+.sobre-mv__list li {
     display: flex;
     align-items: flex-start;
     gap: 10px;
@@ -160,8 +160,8 @@
 }
 
 /* El visto va del mismo naranja que la línea y las bolitas. */
-.page-sobre-nosotros .sobre-mv__check,
-.page-sobre-nosotros .sobre-mv__list i {
+.sobre-mv__check,
+.sobre-mv__list i {
     color: var(--primary-orange);
     font-size: 0.95rem;
     font-weight: 700;
@@ -174,27 +174,27 @@
    RESPONSIVE - MISIÓN Y VISIÓN
    ============================================= */
 @media (max-width: 992px) {
-    .page-sobre-nosotros .sobre-mv__card,
-    .page-sobre-nosotros .sobre-mv__card--invertida {
+    .sobre-mv__card,
+    .sobre-mv__card--invertida {
         grid-template-columns: 1fr;
         gap: 14px;
     }
 
-    .page-sobre-nosotros .sobre-mv__card--invertida .sobre-mv__image {
+    .sobre-mv__card--invertida .sobre-mv__image {
         order: 0;
     }
 }
 
 @media (max-width: 768px) {
-    .page-sobre-nosotros .sobre-mv-section {
+    .sobre-mv-section {
         padding: 24px 0 40px;
     }
 
-    .page-sobre-nosotros .sobre-mv__card {
+    .sobre-mv__card {
         padding: 10px;
     }
 
-    .page-sobre-nosotros .sobre-mv__body {
+    .sobre-mv__body {
         padding: 24px 22px;
     }
 }
