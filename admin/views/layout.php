@@ -135,8 +135,9 @@ function layout_start(string $title = "Panel de Administración", string $curren
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{$ab}/assets/admin.css?v={$time}">
+    <link rel="stylesheet" href="{$ab}/assets/biblioteca.css?v={$time}">
 {$extra_css}</head>
-<body>
+<body data-admin-base="{$ab}">
     <div class="admin-topbar">
         <div class="topbar-left">
             <!-- Oculto en móvil -->
@@ -177,6 +178,7 @@ function layout_end(): string {
     </div> <!-- /.admin-container -->
 
     <script src="{$ab}/assets/admin.js?v={$time}"></script>
+    <script src="{$ab}/assets/biblioteca.js?v={$time}"></script>
 {$extra_js}</body>
 </html>
 HTML;
