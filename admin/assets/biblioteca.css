@@ -117,24 +117,29 @@
     box-shadow: 0 6px 18px rgba(15, 34, 67, .10);
 }
 
-/* Fondo a cuadros: deja ver de un vistazo qué PNG tiene transparencia. */
+/* La foto llena la tarjeta, como en cualquier biblioteca de medios: la
+   rejilla sirve para reconocer la imagen de un vistazo, y para verla entera
+   está el visor. El fondo es un gris liso; los cuadros de tablero de ajedrez
+   ensuciaban la pantalla entera y solo servían para las pocas imágenes con
+   transparencia, que se siguen viendo bien sobre gris. */
 .biblioteca-card__img {
-    height: 130px;
+    height: 150px;
     background-color: var(--bg-main);
-    background-image:
-        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%),
-        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%);
-    background-size: 16px 16px;
-    background-position: 0 0, 8px 8px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .biblioteca-card__img img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform .35s ease;
+}
+
+.biblioteca-card:hover .biblioteca-card__img img {
+    transform: scale(1.04);
 }
 
 .biblioteca-card__info {
@@ -332,20 +337,16 @@
     height: 104px;
     flex-shrink: 0;
     background-color: var(--bg-main);
-    background-image:
-        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%),
-        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%);
-    background-size: 14px 14px;
-    background-position: 0 0, 7px 7px;
     display: flex;
     align-items: center;
     justify-content: center;
+    overflow: hidden;
 }
 
 .bib-picker__thumb img {
-    max-width: 100%;
-    max-height: 100%;
-    object-fit: contain;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
 }
 
 .bib-picker__nombre {
@@ -1002,8 +1003,6 @@
     width: 56px;
     border-radius: 8px;
     overflow: hidden;
-    background-size: 10px 10px;
-    background-position: 0 0, 5px 5px;
 }
 
 .biblioteca-grid[data-vista="lista"] .biblioteca-card__info {
@@ -1170,4 +1169,335 @@
     .biblioteca-grid[data-vista="lista"] .biblioteca-card__acciones {
         grid-column: 1 / -1;
     }
+}
+
+/* =============================================
+   AJUSTES DE DISEÑO
+   Reescriben reglas de más arriba. Van al final para que ganen sin
+   tener que subir la especificidad con selectores más largos.
+   ============================================= */
+
+/* ---------------------------------------------
+   BUSCADOR
+   Antes era un campo suelto con borde fino que no pegaba con los chips
+   ni con el desplegable de al lado. Ahora tiene el mismo alto que el
+   resto de controles, la lupa dentro y un foco que se ve.
+   --------------------------------------------- */
+.biblioteca-toolbar {
+    align-items: center;
+    gap: 14px;
+    padding: 14px 16px;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
+    border-radius: 14px;
+    box-shadow: 0 1px 2px rgba(15, 34, 67, .04);
+}
+
+.biblioteca-buscador {
+    position: relative;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex: 1 1 260px;
+    max-width: 380px;
+}
+
+.biblioteca-buscador > i {
+    position: absolute;
+    left: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--text-muted);
+    font-size: .92rem;
+    pointer-events: none;
+    transition: color .15s ease;
+}
+
+.biblioteca-buscador .form-input {
+    flex: 1;
+    height: 40px;
+    padding: 0 14px 0 38px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-subtle);
+    font-size: .88rem;
+    color: var(--text-main);
+    transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+
+.biblioteca-buscador .form-input::placeholder {
+    color: var(--text-muted);
+}
+
+.biblioteca-buscador .form-input:hover {
+    background: var(--bg-panel);
+}
+
+.biblioteca-buscador .form-input:focus {
+    outline: none;
+    background: var(--bg-panel);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.biblioteca-buscador:focus-within > i {
+    color: var(--primary);
+}
+
+/* Los controles de la derecha comparten alto con el buscador. */
+.biblioteca-filtros,
+.biblioteca-vistas {
+    height: 40px;
+    align-items: center;
+    border-radius: 10px;
+}
+
+.biblioteca-orden .form-input {
+    height: 40px;
+    border-radius: 10px;
+    border: 1px solid var(--border-color);
+    background: var(--bg-subtle);
+    padding: 0 34px 0 14px;
+}
+
+.biblioteca-orden .form-input:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.biblioteca-vista {
+    height: 32px;
+}
+
+/* ---------------------------------------------
+   TARJETA
+   Menos ruido: las acciones aparecen al acercarse o al enfocar con el
+   teclado. Antes los dos botones estaban siempre a la vista en las 107
+   tarjetas y competían con las fotos.
+   --------------------------------------------- */
+.biblioteca-card {
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform .18s ease, box-shadow .18s ease, border-color .18s ease;
+}
+
+.biblioteca-card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px rgba(15, 34, 67, .12);
+}
+
+.biblioteca-card__info {
+    padding: 12px 14px 10px;
+    gap: 4px;
+}
+
+.biblioteca-card__nombre {
+    font-size: .82rem;
+}
+
+.biblioteca-card__acciones {
+    display: flex;
+    gap: 8px;
+    padding: 0 14px 14px;
+    opacity: 0;
+    transform: translateY(4px);
+    transition: opacity .18s ease, transform .18s ease;
+}
+
+.biblioteca-card:hover .biblioteca-card__acciones,
+.biblioteca-card:focus-within .biblioteca-card__acciones,
+.biblioteca-card.is-marcada .biblioteca-card__acciones {
+    opacity: 1;
+    transform: none;
+}
+
+/* En pantallas táctiles no hay "pasar el cursor": siempre visibles. */
+@media (hover: none) {
+    .biblioteca-card__acciones {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.biblioteca-card__acciones .btn {
+    flex: 1;
+    font-size: .76rem;
+    padding: 7px 8px;
+}
+
+/* La etiqueta de uso pasa a ser una insignia sobre la foto: libera la
+   ficha de texto y se lee antes. */
+.biblioteca-card__uso {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 2;
+    margin: 0;
+    padding: 4px 9px;
+    border-radius: 20px;
+    font-size: .7rem;
+    font-weight: 700;
+    background: rgba(255, 255, 255, .92);
+    color: var(--text-body);
+    box-shadow: 0 1px 4px rgba(15, 34, 67, .18);
+    backdrop-filter: blur(2px);
+}
+
+.biblioteca-card.is-en-uso .biblioteca-card__uso {
+    background: var(--primary-blue);
+    color: var(--bg-panel);
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__uso {
+    position: static;
+    box-shadow: none;
+    backdrop-filter: none;
+    background: var(--bg-main);
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__acciones {
+    opacity: 1;
+    transform: none;
+}
+
+/* ---------------------------------------------
+   SELECCIÓN
+   Antes solo cambiaba el borde y con 107 tarjetas costaba ver cuáles
+   estaban marcadas. Ahora la casilla se ve siempre en la esquina, la
+   tarjeta marcada se tiñe y toda la miniatura es zona de marcado.
+   --------------------------------------------- */
+.biblioteca-card__marca span {
+    width: 26px;
+    height: 26px;
+    border-radius: 8px;
+    border: 2px solid rgba(255, 255, 255, .9);
+    background: rgba(17, 29, 53, .32);
+    backdrop-filter: blur(3px);
+}
+
+.biblioteca-card__marca span::after {
+    width: 6px;
+    height: 12px;
+    margin-top: 3px;
+}
+
+.biblioteca-card.is-marcada {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light-strong), 0 10px 24px rgba(15, 34, 67, .14);
+}
+
+/* Velo de color sobre la foto marcada: se distingue a un metro de la
+   pantalla, sin tener que buscar la casilla. */
+.biblioteca-card.is-marcada .biblioteca-card__img::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: var(--primary-light-strong);
+    pointer-events: none;
+}
+
+.biblioteca-card__img {
+    position: relative;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card.is-marcada {
+    background: var(--primary-light);
+}
+
+/* ---------------------------------------------
+   BARRA DE SELECCIÓN
+   --------------------------------------------- */
+.biblioteca-lote {
+    border-radius: 14px;
+    padding: 14px 18px;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-light));
+}
+
+.biblioteca-lote #biblioteca-lote-texto {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .92rem;
+}
+
+/* Tic de la fuente de iconos del panel: dibujarlo con gradientes salia
+   torcido segun el zoom. */
+.biblioteca-lote #biblioteca-lote-texto::before {
+    content: '\F26E';
+    font-family: bootstrap-icons;
+    font-size: .8rem;
+    line-height: 1;
+    width: 24px;
+    height: 24px;
+    border-radius: 7px;
+    background: var(--primary);
+    color: var(--bg-panel);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+}
+
+/* ---------------------------------------------
+   REJILLA
+   --------------------------------------------- */
+.biblioteca-grid {
+    grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
+    gap: 20px;
+    margin-top: 16px;
+}
+
+.biblioteca-resumen {
+    margin: 16px 0 2px;
+}
+
+/* ---------------------------------------------
+   ESTADO VACÍO
+   --------------------------------------------- */
+.biblioteca-vacia {
+    background: var(--bg-panel);
+    border: 1px dashed var(--border-color-strong);
+    border-radius: 14px;
+    margin-top: 16px;
+}
+
+.biblioteca-vacia i {
+    color: var(--border-color-strong);
+}
+
+@media (max-width: 900px) {
+    .biblioteca-toolbar {
+        align-items: stretch;
+    }
+
+    .biblioteca-buscador {
+        max-width: none;
+    }
+}
+
+/* ---------------------------------------------
+   AJUSTES DE LA VISTA DE LISTA
+   --------------------------------------------- */
+
+/* La insignia conserva su color según el estado: en la lista se quedaba
+   en gris y "En uso" apenas se distinguía de "Sin usar". */
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__uso {
+    background: var(--bg-subtle);
+    color: var(--text-body);
+    border: 1px solid var(--border-color);
+    white-space: nowrap;
+}
+
+.biblioteca-grid[data-vista="lista"] .biblioteca-card.is-en-uso .biblioteca-card__uso {
+    background: var(--primary-light);
+    border-color: var(--primary-light-strong);
+    color: var(--primary-hover);
+}
+
+/* En la rejilla los botones se reparten el ancho; en la lista van al
+   contenido, o "Copiar ruta" se partía en dos renglones. */
+.biblioteca-grid[data-vista="lista"] .biblioteca-card__acciones .btn {
+    flex: 0 0 auto;
+    white-space: nowrap;
 }
