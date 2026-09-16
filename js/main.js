@@ -1114,25 +1114,49 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Subida animada a mano en lugar de behavior:'smooth'.
+        // Subida animada a mano, en dos tiempos.
         //
-        // El desplazamiento nativo dura siempre lo mismo, venga uno de media
-        // página o del final de una página muy larga: desde abajo se siente
-        // como un tirón. Aquí la duración crece con la distancia pero tiene
-        // tope, y la curva arranca despacio, coge velocidad y frena al llegar,
-        // que es lo que da la sensación de suavidad.
+        // El desplazamiento nativo sube a ritmo constante y se siente artificial.
+        // Este imita lo que haría una persona: primero unos golpes de rueda, que
+        // es un movimiento a tirones (cada golpe arranca rápido y frena), y en
+        // cuanto coge carrerilla se lanza del tirón hasta arriba.
+        //
+        // No se pueden disparar eventos de rueda reales desde código, así que lo
+        // que se reproduce es su curva de movimiento, que es lo que se percibe.
+        const GOLPE_RUEDA = 160;   // lo que recorre un golpe de rueda, en píxeles
+        const GOLPES = 3;          // golpes antes de lanzarse
+
         const subirAnimado = () => {
             const inicio = window.scrollY;
             if (inicio <= 0) return;
 
-            // Entre 0,45 y 1,1 segundos según lo lejos que estemos.
-            const duracion = Math.min(1100, Math.max(450, inicio * 0.6));
+            // La parte "a rueda" es de tamaño fijo, igual que lo sería de verdad,
+            // pero nunca se come más de un tercio del recorrido: en una página
+            // corta quedaría en tirones y no llegaría a lanzarse nunca.
+            const tramoRueda = Math.min(GOLPE_RUEDA * GOLPES, inicio * 0.33);
+            const tramoVuelo = inicio - tramoRueda;
+
+            const msRueda = 130 * GOLPES;
+            // El lanzamiento va más rápido cuanto más lejos esté el principio.
+            const msVuelo = Math.min(620, Math.max(280, tramoVuelo * 0.085));
             const arranque = performance.now();
 
-            // Curva de aceleración y frenada (cúbica).
-            const curva = (t) => (t < 0.5)
-                ? 4 * t * t * t
-                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+            // Un golpe de rueda: sale disparado y se va parando.
+            const golpe = (f) => 1 - Math.pow(1 - f, 3);
+
+            // Tramo a rueda: tres golpes encadenados, cada uno con su frenada.
+            const aRueda = (t) => {
+                const p = t * GOLPES;
+                const i = Math.min(GOLPES - 1, Math.floor(p));
+                return (i + golpe(p - i)) / GOLPES;
+            };
+
+            // Tramo de vuelo: acelera durante la mayor parte del recorrido y
+            // deja el último cuarto para frenar, que es donde se nota si el
+            // aterrizaje es suave o un golpe seco contra el borde.
+            const enVuelo = (t) => (t < 0.76)
+                ? 0.84 * Math.pow(t / 0.76, 1.85)
+                : 0.84 + 0.16 * (1 - Math.pow(1 - (t - 0.76) / 0.24, 2.6));
 
             let cancelado = false;
             // Si la persona toca la rueda o la pantalla, mandan ellos: se
@@ -1141,15 +1165,30 @@ document.addEventListener('DOMContentLoaded', () => {
             window.addEventListener('wheel', cancelar, { passive: true, once: true });
             window.addEventListener('touchstart', cancelar, { passive: true, once: true });
 
+            const limpiar = () => {
+                window.removeEventListener('wheel', cancelar);
+                window.removeEventListener('touchstart', cancelar);
+            };
+
             const paso = (ahora) => {
-                if (cancelado) return;
-                const t = Math.min(1, (ahora - arranque) / duracion);
-                window.scrollTo(0, Math.round(inicio * (1 - curva(t))));
-                if (t < 1) {
+                if (cancelado) { limpiar(); return; }
+                const transcurrido = ahora - arranque;
+                let recorrido;
+
+                if (transcurrido < msRueda) {
+                    recorrido = tramoRueda * aRueda(transcurrido / msRueda);
+                } else {
+                    const t = Math.min(1, (transcurrido - msRueda) / msVuelo);
+                    recorrido = tramoRueda + tramoVuelo * enVuelo(t);
+                }
+
+                window.scrollTo(0, Math.max(0, Math.round(inicio - recorrido)));
+
+                if (transcurrido < msRueda + msVuelo) {
                     requestAnimationFrame(paso);
                 } else {
-                    window.removeEventListener('wheel', cancelar);
-                    window.removeEventListener('touchstart', cancelar);
+                    window.scrollTo(0, 0);
+                    limpiar();
                 }
             };
             requestAnimationFrame(paso);
