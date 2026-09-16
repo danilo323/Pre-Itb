@@ -1726,6 +1726,86 @@ return [
                 ],
             ],
         ],
+        'oferta_academica' => [
+            'label' => 'Oferta Académica',
+            'group' => 'paginas',
+            'icon' => 'bi bi-book-fill',
+            'type' => 'page',
+            'sections' => [
+                'oferta_hero' => [
+                    'label' => 'HERO (PORTADA)',
+                    'fields' => [
+                        'info_propia' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>ESTA PORTADA ES SOLO DE OFERTA ACADÉMICA.</strong> Comparte el mismo diseño que Sobre Nosotros, pero se edita aquí de manera independiente.',
+                        ],
+                        'div_textos' => [
+                            'type' => 'divider',
+                            'label' => 'Textos del Banner',
+                        ],
+                        'titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título de la página',
+                            'default' => 'Oferta Académica',
+                            'help' => 'Texto grande centrado sobre la foto.',
+                        ],
+                        'ruta_inicio' => [
+                            'type' => 'text',
+                            'label' => 'Ruta: primer enlace',
+                            'default' => 'Inicio',
+                            'help' => 'Primera parte de la ruta de navegación. Siempre lleva a la página de inicio.',
+                        ],
+                        'ruta_actual' => [
+                            'type' => 'text',
+                            'label' => 'Ruta: página actual',
+                            'default' => 'Oferta Académica',
+                            'help' => 'Segunda parte de la ruta, la que va en naranja. Queda así: Inicio > Oferta Académica.',
+                        ],
+                        'div_galeria' => [
+                            'type' => 'divider',
+                            'label' => 'Imagen de Fondo',
+                        ],
+                        'info_portada' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>CÓMO SE COMPORTA EL FONDO:</strong> con una sola foto el banner se queda quieto. Si cargas varias, enciende <em>Animaciones y efectos</em> para que roten.',
+                        ],
+                        'animaciones' => [
+                            'type' => 'bool',
+                            'label' => 'Animaciones y efectos',
+                            'default' => true,
+                            'exclusive_group' => 'oferta_hero_modo',
+                            'exclusive_default' => true,
+                            'help' => 'Encendido: las fotos rotan. Apagado: el fondo se queda fijo en la foto que marques abajo.',
+                        ],
+                        'imagenes_fondo' => [
+                            'type' => 'repeater',
+                            'label' => '',
+                            'item_label' => 'Imagen',
+                            'help' => 'Con una sola foto basta. Si agregas más, se rotan como carrusel.',
+                            'default' => [
+                                ['archivo' => 'img/hero_2.jpg', 'estatica' => false],
+                            ],
+                            'subfields' => [
+                                'archivo' => [
+                                    'type' => 'image',
+                                    'label' => 'Foto de Fondo',
+                                    'help' => 'Tamaño recomendado: 1920x600px (apaisada).',
+                                ],
+                                'estatica' => [
+                                    'type' => 'bool',
+                                    'label' => 'Imagen fija',
+                                    'default' => false,
+                                    'exclusive_group' => 'oferta_hero_modo',
+                                    'help' => 'Enciéndelo para que el fondo se quede quieto en esta foto.',
+                                ],
+                            ]
+                        ],
+                    ],
+                ],
+            ],
+        ],
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
         // así que en vez de 'fields' declara la pantalla que lo atiende con
         // 'url'. El menú lateral y el escritorio ya saben leer esa clave, así

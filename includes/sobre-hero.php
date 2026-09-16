@@ -17,7 +17,9 @@
 
 // 1. Fotos de fondo, con su marca de "imagen fija" (mismo criterio que
 //    includes/hero.php: se aceptan booleanos y los '1'/'0' de texto).
-$imagenes = content_raw('sobre_hero', 'imagenes_fondo', [
+$seccion_key = $hero_key ?? 'sobre_hero';
+
+$imagenes = content_raw($seccion_key, 'imagenes_fondo', [
     ['archivo' => 'img/hero_2.jpg'],
     ['archivo' => 'img/hero_3.jpg'],
 ]);
@@ -45,7 +47,7 @@ if (empty($slides)) {
 // 2. Elegir el modo de la portada (misma regla que el hero del Inicio):
 //    manda la foto marcada como fija; si no hay ninguna, manda el interruptor
 //    de animaciones; y con una sola foto no hay nada que rotar.
-$animaciones = $sobre_hero_encendido(content_raw('sobre_hero', 'animaciones', true));
+$animaciones = $sobre_hero_encendido(content_raw($seccion_key, 'animaciones', true));
 
 $indice_fija = null;
 foreach ($slides as $i => $s) {
@@ -82,16 +84,16 @@ if ($hero_estatico) {
 
     <div class="sobre-hero__container">
         <h1 class="sobre-hero__title">
-            <?= content_get('sobre_hero', 'titulo', 'Sobre nosotros') ?>
+            <?= content_get($seccion_key, 'titulo', 'Sobre nosotros') ?>
         </h1>
 
         <nav class="sobre-hero__ruta" aria-label="Ruta de navegación">
             <a href="index.php" class="sobre-hero__ruta-link">
-                <?= content_get('sobre_hero', 'ruta_inicio', 'Inicio') ?>
+                <?= content_get($seccion_key, 'ruta_inicio', 'Inicio') ?>
             </a>
             <i class="fas fa-chevron-right sobre-hero__ruta-sep" aria-hidden="true"></i>
             <span class="sobre-hero__ruta-actual" aria-current="page">
-                <?= content_get('sobre_hero', 'ruta_actual', 'Sobre Nosotros') ?>
+                <?= content_get($seccion_key, 'ruta_actual', 'Sobre Nosotros') ?>
             </span>
         </nav>
     </div>
