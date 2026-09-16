@@ -1194,10 +1194,46 @@ document.addEventListener('DOMContentLoaded', () => {
             requestAnimationFrame(paso);
         };
 
+        // Versión sobria para quien pidió menos movimiento: sube sin tirones ni
+        // adornos, en línea recta y en poco más de un cuarto de segundo, pero
+        // sigue siendo un desplazamiento y no un salto, para no perder de vista
+        // dónde estaba la página.
+        const subirDirecto = () => {
+            const inicio = window.scrollY;
+            if (inicio <= 0) return;
+
+            const duracion = 280;
+            const arranque = performance.now();
+            const suave = (t) => 1 - Math.pow(1 - t, 3);
+
+            let cancelado = false;
+            const cancelar = () => { cancelado = true; };
+            window.addEventListener('wheel', cancelar, { passive: true, once: true });
+            window.addEventListener('touchstart', cancelar, { passive: true, once: true });
+
+            const paso = (ahora) => {
+                if (cancelado) return;
+                const t = Math.min(1, (ahora - arranque) / duracion);
+                window.scrollTo(0, Math.round(inicio * (1 - suave(t))));
+                if (t < 1) requestAnimationFrame(paso);
+            };
+            requestAnimationFrame(paso);
+        };
+
         scrollToTopBtn.addEventListener('click', () => {
-            // Quien haya pedido menos animaciones en su sistema sube de golpe.
-            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
-                window.scrollTo(0, 0);
+            // "Reducir movimiento" no quiere decir quitar todo el movimiento:
+            // quiere decir evitar el que es decorativo o llamativo. Desplazar la
+            // página es lo que el botón hace, no un adorno, así que se sigue
+            // desplazando; lo que se quita son los golpes de rueda y el aparato
+            // del botón, y el recorrido se hace más corto y directo.
+            //
+            // Antes aquí se saltaba al principio de golpe, y como Windows trae
+            // las animaciones desactivadas en bastantes equipos, mucha gente no
+            // llegaba a ver ningún movimiento.
+            const sinAdornos = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+            if (sinAdornos) {
+                subirDirecto();
                 return;
             }
 
