@@ -76,7 +76,7 @@
 
 .servicios__card-title {
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: #111111;
     line-height: 1.2;
@@ -84,7 +84,7 @@
 }
 
 .servicios__card-text {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #666666;
     line-height: 1.5;
     margin-bottom: 24px;
@@ -228,7 +228,7 @@
 
 .servicios__card-title-white {
     font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-size: 1.15rem;
     font-weight: 800;
     color: #ffffff;
     line-height: 1.2;
@@ -236,7 +236,7 @@
 }
 
 .servicios__card-text-white {
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     color: #e0e0e0;
     line-height: 1.5;
     margin-bottom: 24px;
@@ -246,14 +246,14 @@
 .servicios__cards .btn--solid {
     margin-top: auto;
     align-self: flex-start;
-    font-size: 0.8rem;
-    padding: 4px 4px 4px 14px;
-    gap: 12px;
+    font-size: 0.9rem;
+    padding: 5px 4px 5px 18px;
+    gap: 14px;
 }
 
 .servicios__cards .btn--solid .btn__icon-right {
-    width: 32px;
-    height: 32px;
+    width: 36px;
+    height: 36px;
 }
 
 /* Responsive adjustments */
