@@ -76,18 +76,18 @@
 
 .servicios__card-title {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #111111;
     line-height: 1.2;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .servicios__card-text {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #666666;
     line-height: 1.5;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
 /* Alineación del botón estándar dentro de las tarjetas simples */
@@ -228,24 +228,32 @@
 
 .servicios__card-title-white {
     font-family: var(--font-heading);
-    font-size: 1.25rem;
+    font-size: 1.1rem;
     font-weight: 800;
     color: #ffffff;
     line-height: 1.2;
-    margin-bottom: 20px;
+    margin-bottom: 16px;
 }
 
 .servicios__card-text-white {
-    font-size: 0.85rem;
+    font-size: 0.8rem;
     color: #e0e0e0;
     line-height: 1.5;
-    margin-bottom: 32px;
+    margin-bottom: 24px;
 }
 
-/* Ajuste específico para el botón de Conocer Más */
-.servicios__card-image .btn--solid {
+/* Ajuste específico para el botón de las tarjetas para que quepan en las 5 columnas */
+.servicios__cards .btn--solid {
     margin-top: auto;
     align-self: flex-start;
+    font-size: 0.8rem;
+    padding: 4px 4px 4px 14px;
+    gap: 12px;
+}
+
+.servicios__cards .btn--solid .btn__icon-right {
+    width: 32px;
+    height: 32px;
 }
 
 /* Responsive adjustments */
