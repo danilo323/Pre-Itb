@@ -2032,6 +2032,11 @@ return [
             'sortable' => true,
             'columns' => ['nombre', 'tipo'],
             'fields' => [
+                'aviso_publicado' => [
+                    'type' => 'alert',
+                    'alert_type' => 'info',
+                    'label' => '<strong>OJO:</strong> para que este programa se vea en la página <em>Oferta Académica</em>, el interruptor <strong>Publicado</strong> de aquí abajo tiene que quedar encendido (en naranja). Si lo dejas apagado, el programa se guarda aquí pero no aparece en la web.',
+                ],
                 'publicado' => ['type' => 'bool', 'label' => 'Publicado', 'default' => true],
                 'nombre' => ['type' => 'text', 'label' => 'Nombre del Programa *', 'help' => 'Ej.: Tecnología Superior en Enfermería', 'required' => true],
                 'facultad' => ['type' => 'text', 'label' => 'Facultad *', 'help' => 'Ej.: Facultad de Salud y Servicios Sociales', 'required' => true],
