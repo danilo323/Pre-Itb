@@ -1114,12 +1114,61 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Animación suave al hacer click
+        // Subida animada a mano en lugar de behavior:'smooth'.
+        //
+        // El desplazamiento nativo dura siempre lo mismo, venga uno de media
+        // página o del final de una página muy larga: desde abajo se siente
+        // como un tirón. Aquí la duración crece con la distancia pero tiene
+        // tope, y la curva arranca despacio, coge velocidad y frena al llegar,
+        // que es lo que da la sensación de suavidad.
+        const subirAnimado = () => {
+            const inicio = window.scrollY;
+            if (inicio <= 0) return;
+
+            // Entre 0,45 y 1,1 segundos según lo lejos que estemos.
+            const duracion = Math.min(1100, Math.max(450, inicio * 0.6));
+            const arranque = performance.now();
+
+            // Curva de aceleración y frenada (cúbica).
+            const curva = (t) => (t < 0.5)
+                ? 4 * t * t * t
+                : 1 - Math.pow(-2 * t + 2, 3) / 2;
+
+            let cancelado = false;
+            // Si la persona toca la rueda o la pantalla, mandan ellos: se
+            // interrumpe la animación en el sitio donde vaya.
+            const cancelar = () => { cancelado = true; };
+            window.addEventListener('wheel', cancelar, { passive: true, once: true });
+            window.addEventListener('touchstart', cancelar, { passive: true, once: true });
+
+            const paso = (ahora) => {
+                if (cancelado) return;
+                const t = Math.min(1, (ahora - arranque) / duracion);
+                window.scrollTo(0, Math.round(inicio * (1 - curva(t))));
+                if (t < 1) {
+                    requestAnimationFrame(paso);
+                } else {
+                    window.removeEventListener('wheel', cancelar);
+                    window.removeEventListener('touchstart', cancelar);
+                }
+            };
+            requestAnimationFrame(paso);
+        };
+
         scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            // Quien haya pedido menos animaciones en su sistema sube de golpe.
+            if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+                window.scrollTo(0, 0);
+                return;
+            }
+
+            // El botón acusa el clic: se hunde y la flecha sale disparada.
+            scrollToTopBtn.classList.remove('top-to-bottom--despegue');
+            void scrollToTopBtn.offsetWidth; // reinicia la animación si se pulsa seguido
+            scrollToTopBtn.classList.add('top-to-bottom--despegue');
+            setTimeout(() => scrollToTopBtn.classList.remove('top-to-bottom--despegue'), 600);
+
+            subirAnimado();
         });
     }
 

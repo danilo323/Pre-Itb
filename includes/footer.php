@@ -260,17 +260,34 @@
     <i class="fas fa-angles-up"></i>
 </div>
 
+<?php
+// Botón flotante de WhatsApp. El número, el texto de la burbuja y el mensaje
+// con el que se abre el chat se editan en el panel (Pie de Página → Botón
+// flotante de WhatsApp). Antes el número estaba escrito aquí como
+// 593XXXXXXXXX, así que el enlace no llevaba a ninguna parte y sólo un
+// programador podía cambiarlo.
+//
+// Sin número configurado no se pinta la burbuja: mejor eso que un botón que
+// no funciona en todas las páginas del sitio.
+$wa_numero = preg_replace('/\D+/', '', (string) content_raw('footer', 'whatsapp_numero', ''));
+if ($wa_numero !== ''):
+    $wa_texto   = content_get('footer', 'whatsapp_texto', '¿Tienes preguntas? Pregunta a ITB Chat');
+    $wa_mensaje = (string) content_raw('footer', 'whatsapp_mensaje', 'Hola, tengo una pregunta sobre el ITB');
+    $wa_url     = 'https://wa.me/' . $wa_numero . '?text=' . rawurlencode($wa_mensaje);
+?>
 <!-- Botón flotante WhatsApp -->
 <div class="whatsapp-float js-floating" id="whatsapp-float">
-    <a href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20ITB" 
-       target="_blank" 
-       class="whatsapp-float__link" 
-       aria-label="Chatea con ITBChat por WhatsApp">
+    <a href="<?= htmlspecialchars($wa_url, ENT_QUOTES, 'UTF-8') ?>"
+       target="_blank"
+       rel="noopener"
+       class="whatsapp-float__link"
+       aria-label="Chatea con el ITB por WhatsApp">
         <div class="whatsapp-float__label">
-            <span>¿Tienes preguntas? Pregunta a ITB Chat</span>
+            <span><?= $wa_texto ?></span>
         </div>
         <div class="whatsapp-float__icon">
             <i class="fab fa-whatsapp"></i>
         </div>
     </a>
 </div>
+<?php endif; ?>

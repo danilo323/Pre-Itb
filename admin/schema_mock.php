@@ -300,6 +300,31 @@ return [
                     'label' => 'LinkedIn URL',
                     'default' => '#',
                 ],
+                'div_whatsapp' => [
+                    'type' => 'divider',
+                    'label' => 'Botón flotante de WhatsApp',
+                ],
+                'whatsapp_info' => [
+                    'type' => 'alert',
+                    'alert_type' => 'info',
+                    'label' => 'Esta burbuja aparece en <strong>todas las páginas</strong>, incluidas las que crees desde el panel. Si dejas el número vacío, el botón no se muestra.',
+                ],
+                'whatsapp_numero' => [
+                    'type' => 'text',
+                    'label' => 'Número de WhatsApp',
+                    'default' => '',
+                    'help' => 'Con código de país y sin espacios ni signos. Ejemplo: 593991234567',
+                ],
+                'whatsapp_texto' => [
+                    'type' => 'text',
+                    'label' => 'Texto de la burbuja',
+                    'default' => '¿Tienes preguntas? Pregunta a ITB Chat',
+                ],
+                'whatsapp_mensaje' => [
+                    'type' => 'text',
+                    'label' => 'Mensaje con el que se abre el chat',
+                    'default' => 'Hola, tengo una pregunta sobre el ITB',
+                ],
                 'div_bottom' => [
                     'type' => 'divider',
                     'label' => 'Barra inferior',
