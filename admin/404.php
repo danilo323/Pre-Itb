@@ -12,7 +12,7 @@ $SB = site_base();
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@700&family=Inter:wght@400;600&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="<?= htmlspecialchars($SB, ENT_QUOTES, 'UTF-8') ?>/css/404.css">
+    <link rel="stylesheet" href="<?= htmlspecialchars($SB, ENT_QUOTES, 'UTF-8') ?>css/404.css">
 </head>
 <body>
     <h1 class="error-code">404</h1>

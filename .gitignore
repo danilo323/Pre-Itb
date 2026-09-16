@@ -11,6 +11,12 @@ CLAUDE.md
 .claude/
 md/
 
+# Estado de runtime del panel (no versionar)
+data/registros.json
+data/rate_limits.json
+data/*.bak_*
+data/*.tmp_*
+
 # Archivos temporales de PHP / Sesiones (por si acaso)
 *.log
 *.tmp
