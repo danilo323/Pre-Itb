@@ -139,7 +139,7 @@ $programas_items = array_values(array_filter($programas_items, function ($p) use
                         $card_index++;
                     ?>
                     <article class="oferta-card" <?= $is_hidden ?>
-                             data-nombre="<?= $h(mb_strtolower($nombre . ' ' . ($p['facultad'] ?? ''))) ?>"
+                             data-nombre="<?= $h(strtolower($nombre . ' ' . ($p['facultad'] ?? ''))) ?>"
                              data-tipo="<?= $h($tipo) ?>"
                              data-modalidad="<?= $h($modalidad) ?>"
                              data-anio="<?= $h($anio) ?>"
