@@ -1,23 +1,29 @@
-<?php if (!function_exists('is_visible')) require_once 'content_helper.php'; if (!is_visible('sobre_hero')) return; ?>
 <?php
 // includes/sobre-hero.php
 //
-// Portada propia de la página Sobre Nosotros. No es la del Inicio: aquí no hay
-// botón, ni estadísticas con estrellas, ni texto giratorio, ni botón de video.
-// Solo la foto de fondo, el título de la página y la ruta de navegación
-// ("Inicio > Sobre Nosotros").
+// Portada de "página interna": foto de fondo, título y ruta de navegación
+// ("Inicio > X"). Nace como la portada propia de Sobre Nosotros, pero es
+// reutilizable por cualquier página: quien la incluya solo tiene que definir
+// $hero_key ANTES del include con la sección de schema que quiere leer (si no
+// se define, cae en 'sobre_hero' para no romper a quien ya la usaba así). No
+// hay botón, ni estadísticas con estrellas, ni texto giratorio, ni botón de
+// video — eso es solo del hero del Inicio.
 //
-// Se edita en el panel en Páginas → Sobre Nosotros → HERO (PORTADA), en la
-// sección 'sobre_hero', sin tocar la del Inicio.
+// Se edita en el panel en Páginas → <esa página> → HERO (PORTADA), en la
+// sección que corresponda, sin tocar la de las demás páginas.
 //
 // Del hero del Inicio se reaprovecha SOLO el fondo: las clases .hero__slideshow
 // / .hero__slide son las que ya animan js/main.js y viste css/hero.css, así que
 // el carrusel y el efecto de acercamiento funcionan igual sin duplicar código.
 // Lo de encima (título y ruta) es propio y vive en css/sobre-hero.css.
+if (!function_exists('is_visible')) require_once 'content_helper.php';
+$seccion_key = $hero_key ?? 'sobre_hero';
+if (!is_visible($seccion_key)) return;
 
 // 1. Fotos de fondo, con su marca de "imagen fija" (mismo criterio que
 //    includes/hero.php: se aceptan booleanos y los '1'/'0' de texto).
-$imagenes = content_raw('sobre_hero', 'imagenes_fondo', [
+
+$imagenes = content_raw($seccion_key, 'imagenes_fondo', [
     ['archivo' => 'img/hero_2.jpg'],
     ['archivo' => 'img/hero_3.jpg'],
 ]);
@@ -45,7 +51,7 @@ if (empty($slides)) {
 // 2. Elegir el modo de la portada (misma regla que el hero del Inicio):
 //    manda la foto marcada como fija; si no hay ninguna, manda el interruptor
 //    de animaciones; y con una sola foto no hay nada que rotar.
-$animaciones = $sobre_hero_encendido(content_raw('sobre_hero', 'animaciones', true));
+$animaciones = $sobre_hero_encendido(content_raw($seccion_key, 'animaciones', true));
 
 $indice_fija = null;
 foreach ($slides as $i => $s) {
@@ -82,16 +88,16 @@ if ($hero_estatico) {
 
     <div class="sobre-hero__container">
         <h1 class="sobre-hero__title">
-            <?= content_get('sobre_hero', 'titulo', 'Sobre nosotros') ?>
+            <?= content_get($seccion_key, 'titulo', 'Sobre nosotros') ?>
         </h1>
 
         <nav class="sobre-hero__ruta" aria-label="Ruta de navegación">
             <a href="index.php" class="sobre-hero__ruta-link">
-                <?= content_get('sobre_hero', 'ruta_inicio', 'Inicio') ?>
+                <?= content_get($seccion_key, 'ruta_inicio', 'Inicio') ?>
             </a>
             <i class="fas fa-chevron-right sobre-hero__ruta-sep" aria-hidden="true"></i>
             <span class="sobre-hero__ruta-actual" aria-current="page">
-                <?= content_get('sobre_hero', 'ruta_actual', 'Sobre Nosotros') ?>
+                <?= content_get($seccion_key, 'ruta_actual', 'Sobre Nosotros') ?>
             </span>
         </nav>
     </div>
