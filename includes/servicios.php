@@ -78,7 +78,7 @@
                     <h3 class="servicios__card-title"><?= $titulo ?></h3>
                     <p class="servicios__card-text"><?= $desc ?></p>
                     <a href="#" class="btn btn--solid">
-                        <?= $btn_texto ?>
+                        <span class="btn__label"><?= $btn_texto ?></span>
                         <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
@@ -90,8 +90,11 @@
                     <div class="servicios__card-content">
                         <h3 class="servicios__card-title-white"><?= $titulo ?></h3>
                         <p class="servicios__card-text-white"><?= $desc ?></p>
+                        <?php /* El texto va en su propio span para que pueda
+                                 encogerse: si no, el icono se salia de la
+                                 tarjeta y quedaba cortado. */ ?>
                         <a href="#" class="btn btn--solid">
-                            <?= $btn_texto ?>
+                            <span class="btn__label"><?= $btn_texto ?></span>
                             <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>

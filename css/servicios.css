@@ -260,14 +260,30 @@
     width: auto;
     max-width: 100%;
     justify-content: space-between;
-    font-size: 0.9rem;
-    padding: 5px 4px 5px 18px;
-    gap: 14px;
+    /* El relleno, la separación y el tamaño de letra se ajustan al ancho
+       disponible: con valores fijos, en pantallas medianas el contenido ya no
+       cabía en la tarjeta. */
+    font-size: clamp(0.78rem, 0.82vw, 0.9rem);
+    padding: 5px 4px 5px clamp(10px, 1vw, 18px);
+    gap: clamp(6px, 0.6vw, 14px);
+    overflow: hidden;
 }
 
+/* El texto cede espacio antes que la flecha. Si aun así no cabe, se recorta
+   con puntos suspensivos: preferimos eso a que se corte el icono, que es lo
+   que pasaba antes porque el texto no podia encogerse. */
+.servicios__cards .btn--solid .btn__label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* La flecha nunca se encoge ni se recorta. */
 .servicios__cards .btn--solid .btn__icon-right {
-    width: 36px;
-    height: 36px;
+    flex: 0 0 auto;
+    width: clamp(28px, 2vw, 36px);
+    height: clamp(28px, 2vw, 36px);
 }
 
 /* Responsive adjustments */
