@@ -59,10 +59,58 @@
     transition: box-shadow 0.3s ease;
     display: flex;
     flex-direction: column;
+    position: relative;
 }
 
 .programas__card:hover {
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.1);
+}
+
+/* Badge (Nuevo / Tendencia) */
+.programas__card-badge {
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    display: inline-flex;
+    align-items: center;
+    flex-direction: row-reverse;
+    background: var(--primary-blue);
+    color: var(--white);
+    font-family: var(--font-primary);
+    font-size: 0.75rem;
+    font-weight: 700;
+    padding: 6px 10px;
+    border-radius: 0 12px 0 16px;
+    z-index: 2;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    cursor: default;
+    transition: padding 0.3s ease;
+}
+
+.programas__card-badge span {
+    max-width: 0;
+    opacity: 0;
+    overflow: hidden;
+    white-space: nowrap;
+    transition: max-width 0.3s ease, opacity 0.3s ease, margin-right 0.3s ease;
+    margin-right: 0;
+}
+
+.programas__card-badge:hover {
+    padding: 6px 16px;
+}
+
+.programas__card-badge:hover span {
+    max-width: 100px;
+    opacity: 1;
+    margin-right: 6px;
+}
+
+.programas__card-badge svg {
+    color: var(--primary-orange);
+    width: 14px;
+    height: 14px;
 }
 
 /* Imagen con padding interno (efecto flotante) */
@@ -108,6 +156,16 @@
     color: #555;
     margin-bottom: 8px;
     line-height: 1.4;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.programas__card-details p svg {
+    color: var(--primary-orange);
+    width: 14px;
+    height: 14px;
+    flex-shrink: 0;
 }
 
 .programas__card-details p:last-child {

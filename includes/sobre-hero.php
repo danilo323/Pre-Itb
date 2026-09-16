@@ -1,30 +1,27 @@
 <?php
-// La clave de seccion la decide la pagina que incluye este componente
-// ($hero_key), no este archivo. Antes estaba fija en 'sobre_hero', asi que
-// el interruptor de Sobre Nosotros ocultaba tambien el hero de Oferta
-// Academica y el interruptor propio de esa pagina no hacia nada.
-if (!function_exists('is_visible')) require_once 'content_helper.php';
-if (!is_visible($hero_key ?? 'sobre_hero')) return;
-?>
-<?php
 // includes/sobre-hero.php
 //
-// Portada propia de la página Sobre Nosotros. No es la del Inicio: aquí no hay
-// botón, ni estadísticas con estrellas, ni texto giratorio, ni botón de video.
-// Solo la foto de fondo, el título de la página y la ruta de navegación
-// ("Inicio > Sobre Nosotros").
+// Portada de "página interna": foto de fondo, título y ruta de navegación
+// ("Inicio > X"). Nace como la portada propia de Sobre Nosotros, pero es
+// reutilizable por cualquier página: quien la incluya solo tiene que definir
+// $hero_key ANTES del include con la sección de schema que quiere leer (si no
+// se define, cae en 'sobre_hero' para no romper a quien ya la usaba así). No
+// hay botón, ni estadísticas con estrellas, ni texto giratorio, ni botón de
+// video — eso es solo del hero del Inicio.
 //
-// Se edita en el panel en Páginas → Sobre Nosotros → HERO (PORTADA), en la
-// sección 'sobre_hero', sin tocar la del Inicio.
+// Se edita en el panel en Páginas → <esa página> → HERO (PORTADA), en la
+// sección que corresponda, sin tocar la de las demás páginas.
 //
 // Del hero del Inicio se reaprovecha SOLO el fondo: las clases .hero__slideshow
 // / .hero__slide son las que ya animan js/main.js y viste css/hero.css, así que
 // el carrusel y el efecto de acercamiento funcionan igual sin duplicar código.
 // Lo de encima (título y ruta) es propio y vive en css/sobre-hero.css.
+if (!function_exists('is_visible')) require_once 'content_helper.php';
+$seccion_key = $hero_key ?? 'sobre_hero';
+if (!is_visible($seccion_key)) return;
 
 // 1. Fotos de fondo, con su marca de "imagen fija" (mismo criterio que
 //    includes/hero.php: se aceptan booleanos y los '1'/'0' de texto).
-$seccion_key = $hero_key ?? 'sobre_hero';
 
 $imagenes = content_raw($seccion_key, 'imagenes_fondo', [
     ['archivo' => 'img/hero_2.jpg'],

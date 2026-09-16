@@ -272,6 +272,8 @@ document.addEventListener('DOMContentLoaded', () => {
         '.autoridades__card, ' +
         '.servicios__card, ' +
         '.admision__content, .admision__form-wrapper, ' +
+        '.oferta-intro__container, .oferta-buscador__searchbar, .oferta-buscador__filtros, .oferta-card, ' +
+        '.transparencia__header, .transparencia__search, .transparencia__grupo, .transparencia__documento, ' +
         // Se anima la TARJETA de noticias secundarias entera, no cada noticia
         // suelta. Las noticias viven dentro de un carril que ya se mueve con su
         // propio transform, y esta animación usa transform también: las dos se

@@ -230,7 +230,9 @@ function collection_items(string $collection_name): array {
     }
 
     // Sin datos guardados, la coleccion esta vacia y punto. Antes se devolvian
-    // cuatro autoridades escritas aqui, asi que el administrador las borraba
-    // desde el panel y reaparecian al recargar, sin forma de evitarlo.
+    // cuatro autoridades y tres programas escritos aqui, asi que el
+    // administrador los borraba desde el panel y reaparecian al recargar, sin
+    // forma de evitarlo. Los de programas ademas llevaban '(Prueba)' en el
+    // nombre, o sea que esa palabra podia acabar publicada en el sitio.
     return [];
 }

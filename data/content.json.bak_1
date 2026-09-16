@@ -12,47 +12,37 @@
             {
                 "texto": "Instituto",
                 "url": "",
-                "nivel": "padre"
+                "nivel": 0
             },
             {
                 "texto": "Sobre Nosotros",
                 "url": "sobre-nosotros.php",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "sub-hijo",
-                "url": "",
-                "nivel": "nieto"
-            },
-            {
-                "texto": "academia",
-                "url": "academia.php",
-                "nivel": 3
+                "nivel": 1
             },
             {
                 "texto": "HImno e Identidad",
                 "url": "",
-                "nivel": "hijo"
+                "nivel": 1
             },
             {
                 "texto": "Transparencia / Leyes",
                 "url": "",
-                "nivel": "hijo"
+                "nivel": 1
             },
             {
                 "texto": "Oferta Académica",
-                "url": "",
-                "nivel": "padre"
+                "url": "oferta-academica.php",
+                "nivel": 0
             },
             {
                 "texto": "Vida Estudiantil",
                 "url": "",
-                "nivel": "padre"
+                "nivel": 0
             },
             {
                 "texto": "Admisiones",
                 "url": "#",
-                "nivel": "padre"
+                "nivel": 0
             }
         ],
         "top_link_1": "Portal Estudiantil SGA",
@@ -923,6 +913,140 @@
         "ruta_actual": "Sobre Nosotros",
         "div_textos": ""
     },
+    "oferta_hero": {
+        "_visible": "1",
+        "titulo": "Oferta Académica",
+        "ruta_inicio": "Inicio",
+        "ruta_actual": "Oferta Académica",
+        "animaciones": "1",
+        "imagenes_fondo": [
+            {
+                "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                "estatica": true
+            }
+        ]
+    },
+    "oferta_intro": {
+        "_visible": "1",
+        "titulo": "Cientos de programas.\nUn título diseñado a tu medida.",
+        "descripcion": "Elegir tu especialidad es solo el punto de partida. Diseña tu propia ruta académica combinando las materias y áreas que realmente te apasionan. Estudia con total flexibilidad y llega tan lejos como te propongas."
+    },
+    "programas_academicos": {
+        "items": [
+            {
+                "id": 1,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Enfermería",
+                "facultad": "Facultad de Salud y Servicios Sociales",
+                "campo_estudio": "FASSS",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "Nuevo",
+                "imagen": "img/enfermeria.jpg",
+                "publicado": true
+            },
+            {
+                "id": 2,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Mecánica Automotriz",
+                "facultad": "Facultad de Transporte y Vialidad",
+                "campo_estudio": "FATV",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "Tendencia",
+                "imagen": "img/Mecanica.jpg",
+                "publicado": true
+            },
+            {
+                "id": 3,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Desarrollo de Software",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas / Económicas y Empresariales",
+                "campo_estudio": "FACES",
+                "modalidad": "Hibrida",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2027",
+                "etiqueta": "Nuevo",
+                "imagen": "img/desarrollo_software.jpg",
+                "publicado": true
+            },
+            {
+                "id": 4,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Administración de Empresas",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "campo_estudio": "FACES",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "",
+                "imagen": "img/programa_administracion.jpg",
+                "publicado": true
+            },
+            {
+                "id": 5,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Contabilidad",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "campo_estudio": "FACES",
+                "modalidad": "Hibrida",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2027",
+                "etiqueta": "",
+                "imagen": "img/programa_contabilidad.jpg",
+                "publicado": true
+            },
+            {
+                "id": 6,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Diseño Gráfico",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "campo_estudio": "FACES",
+                "modalidad": "Remoto",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "Tendencia",
+                "imagen": "img/programa_diseno_grafico.jpg",
+                "publicado": true
+            },
+            {
+                "id": 7,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Gastronomía",
+                "facultad": "Facultad de Transporte y Vialidad",
+                "campo_estudio": "FATV",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2027",
+                "etiqueta": "",
+                "imagen": "img/programa_gastronomia.jpg",
+                "publicado": true
+            },
+            {
+                "id": 8,
+                "publicado": true,
+                "nombre": "prueba1",
+                "facultad": "Facultad de engermeria",
+                "tipo": "Programa",
+                "modalidad": "Presencial",
+                "duracion": "4 años",
+                "campus": "teresa bnenites",
+                "anio_inicio": "",
+                "campo_estudio": "FATV",
+                "etiqueta": "Nuevo",
+                "imagen": "img/be1862b0bd8ad896401f652485914c82.png"
+            }
+        ]
+    },
     "himno": {
         "_visible": "1",
         "div_textos": "",
@@ -1537,5 +1661,10 @@
                 "publicado": true
             }
         ]
+    },
+    "_meta": {
+        "programas_academicos": {
+            "last_id": 8
+        }
     }
 }

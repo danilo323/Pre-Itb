@@ -71,7 +71,7 @@
                             ['texto' => 'Sobre Nosotros', 'url' => 'sobre-nosotros.php', 'nivel' => 'hijo'],
                             ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
                             ['texto' => 'Transparencia / Leyes', 'url' => 'transparencia-leyes.php', 'nivel' => 'hijo'],
-                            ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
+                            ['texto' => 'Oferta Académica', 'url' => 'oferta-academica.php', 'nivel' => 'padre'],
                             ['texto' => 'Vida Estudiantil', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Admisiones', 'url' => '#', 'nivel' => 'padre'],
                         ];
