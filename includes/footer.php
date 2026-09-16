@@ -269,7 +269,24 @@
 //
 // Sin número configurado no se pinta la burbuja: mejor eso que un botón que
 // no funciona en todas las páginas del sitio.
+// Se acepta el numero como lo escriba cada cual y se normaliza aqui, porque
+// WhatsApp solo entiende el formato internacional sin signos. Convierte
+// "099 123 4567", "+593 99 123 4567" y "00593991234567" al mismo resultado.
 $wa_numero = preg_replace('/\D+/', '', (string) content_raw('footer', 'whatsapp_numero', ''));
+
+if ($wa_numero !== '') {
+    if (strpos($wa_numero, '00') === 0) {
+        // Prefijo internacional a la europea: 00593... -> 593...
+        $wa_numero = substr($wa_numero, 2);
+    } elseif ($wa_numero[0] === '0') {
+        // Formato nacional ecuatoriano: 0991234567 -> 593991234567
+        $wa_numero = '593' . substr($wa_numero, 1);
+    } elseif (strlen($wa_numero) <= 10 && strpos($wa_numero, '593') !== 0) {
+        // Escrito sin el cero y sin pais: 991234567 -> 593991234567
+        $wa_numero = '593' . $wa_numero;
+    }
+}
+
 if ($wa_numero !== ''):
     $wa_texto   = content_get('footer', 'whatsapp_texto', '¿Tienes preguntas? Pregunta a ITB Chat');
     $wa_mensaje = (string) content_raw('footer', 'whatsapp_mensaje', 'Hola, tengo una pregunta sobre el ITB');

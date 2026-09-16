@@ -313,7 +313,7 @@ return [
                     'type' => 'text',
                     'label' => 'Número de WhatsApp',
                     'default' => '',
-                    'help' => 'Con código de país y sin espacios ni signos. Ejemplo: 593991234567',
+                    'help' => 'Escríbelo como quieras: 0991234567, +593 99 123 4567 o 593991234567. Un celular de Ecuador tiene 10 dígitos empezando por 09.',
                 ],
                 'whatsapp_texto' => [
                     'type' => 'text',
