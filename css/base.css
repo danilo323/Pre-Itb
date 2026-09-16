@@ -67,6 +67,8 @@ html {
     /* La cabecera es fija: sin esto, al saltar a un ancla (#noticias, #alianzas)
        el titulo de la seccion quedaria escondido detras de ella. */
     scroll-padding-top: var(--header-height);
+    overflow-x: hidden;
+    width: 100%;
 }
 
 body {
