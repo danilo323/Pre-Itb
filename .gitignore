@@ -41,3 +41,5 @@ admin/test_*.php
 ehthumbs.db
 Thumbs.db
 desktop.ini
+
+mockups/*
