@@ -136,8 +136,11 @@ echo layout_start('Biblioteca', 'biblioteca');
 
 <div class="collection-header">
     <form method="get" class="search-box biblioteca-buscador">
-        <input type="text" name="q" value="<?= htmlspecialchars($busqueda, ENT_QUOTES, 'UTF-8') ?>"
-               placeholder="Buscar por nombre de archivo..." class="form-input">
+        <?php /* El placeholder desaparece al escribir y algunos lectores de
+                 pantalla ni lo anuncian, así que el campo lleva su etiqueta. */ ?>
+        <input type="search" name="q" value="<?= htmlspecialchars($busqueda, ENT_QUOTES, 'UTF-8') ?>"
+               placeholder="Buscar por nombre de archivo..." class="form-input"
+               aria-label="Buscar imágenes por nombre de archivo">
         <?php if ($busqueda !== ''): ?>
             <a href="<?= $AB ?>/biblioteca.php" class="btn btn-outline">Ver todas</a>
         <?php endif; ?>
@@ -186,17 +189,22 @@ echo layout_start('Biblioteca', 'biblioteca');
                 </figcaption>
                 <div class="biblioteca-card__acciones">
                     <?php if ($en_uso): ?>
+                        <?php /* Con muchas imágenes, "En uso" repetido no dice
+                                 cuál es cuál: la etiqueta larga nombra el
+                                 archivo y dónde está puesto. */ ?>
                         <button type="button" class="btn btn-sm btn-outline" disabled
-                                title="<?= htmlspecialchars($titulo_usos, ENT_QUOTES, 'UTF-8') ?>">
-                            <i class="bi bi-lock-fill"></i> En uso
+                                title="<?= htmlspecialchars($titulo_usos, ENT_QUOTES, 'UTF-8') ?>"
+                                aria-label="<?= htmlspecialchars($img['nombre'] . ' está en uso: ' . $titulo_usos, ENT_QUOTES, 'UTF-8') ?>">
+                            <i class="bi bi-lock-fill" aria-hidden="true"></i> En uso
                         </button>
                     <?php else: ?>
                         <form method="post" class="js-delete-form">
                             <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
                             <input type="hidden" name="action" value="eliminar">
                             <input type="hidden" name="ruta" value="<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>">
-                            <button type="button" class="btn btn-sm btn-danger js-delete-btn">
-                                <i class="bi bi-trash-fill"></i> Eliminar
+                            <button type="button" class="btn btn-sm btn-danger js-delete-btn"
+                                    aria-label="<?= htmlspecialchars('Eliminar ' . $img['nombre'], ENT_QUOTES, 'UTF-8') ?>">
+                                <i class="bi bi-trash-fill" aria-hidden="true"></i> Eliminar
                             </button>
                         </form>
                     <?php endif; ?>

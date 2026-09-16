@@ -205,7 +205,9 @@ function biblioteca_guardar_subida(array $archivo): array {
     // B. Tipo MIME real con finfo — no fiarse de la extensión.
     $allowed_mimes = [
         'image/jpeg', 'image/pjpeg', 'image/png', 'image/webp',
-        'image/gif', 'image/svg+xml', 'text/xml', 'image/svg',
+        'image/gif', 'image/svg+xml', 'image/svg',
+        // 'text/xml' se deja fuera a propósito: admitía cualquier XML, no
+        // solo SVG, así que bastaba renombrar un archivo para colarlo.
     ];
     $mime = false;
     if (function_exists('finfo_open')) {
@@ -217,6 +219,19 @@ function biblioteca_guardar_subida(array $archivo): array {
     }
     if ($mime !== false && !in_array($mime, $allowed_mimes, true)) {
         return $fallo("«{$original_name}»: no parece una imagen válida ({$mime}).");
+    }
+
+    // B bis. El SVG es XML y puede llevar código dentro. Se siguen admitiendo
+    // (los logos de aliados lo son) pero se rechaza el que traiga script,
+    // manejadores de eventos o referencias a otro servidor. Esta comprobación
+    // vivía en el campo de imagen; al pasar la subida aquí se mueve con ella,
+    // porque esta es ahora la única puerta de entrada de archivos.
+    if ($ext === 'svg') {
+        $svg = (string) @file_get_contents($tmp_name);
+        $peligroso = '/<\s*script\b|<\s*foreignObject\b|<\s*use[^>]+href\s*=\s*["\']\s*http|javascript\s*:|\son[a-z]+\s*=/i';
+        if ($svg === '' || preg_match($peligroso, $svg)) {
+            return $fallo("«{$original_name}»: el SVG contiene código ejecutable. Expórtalo de nuevo sin scripts ni animaciones con JavaScript.");
+        }
     }
 
     // C. Tamaño máximo.

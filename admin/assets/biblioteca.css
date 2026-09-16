@@ -14,9 +14,9 @@
 }
 
 .biblioteca-dropzone {
-    border: 2px dashed #CBD5E1;
+    border: 2px dashed var(--border-color-strong);
     border-radius: 12px;
-    background: #F8FAFC;
+    background: var(--bg-subtle);
     padding: 34px 24px;
     text-align: center;
     cursor: pointer;
@@ -25,13 +25,13 @@
 
 .biblioteca-dropzone:hover,
 .biblioteca-dropzone.is-encima {
-    border-color: #F15A24;
-    background: #FFF7F3;
+    border-color: var(--primary);
+    background: var(--primary-light);
 }
 
 .biblioteca-dropzone i {
     font-size: 2.2rem;
-    color: #F15A24;
+    color: var(--primary);
     display: block;
     margin-bottom: 8px;
 }
@@ -39,17 +39,17 @@
 .biblioteca-dropzone__titulo {
     margin: 0 0 4px;
     font-weight: 700;
-    color: #1F242E;
+    color: var(--text-main);
 }
 
 .biblioteca-dropzone__texto {
     margin: 0;
     font-size: .86rem;
-    color: #6B7280;
+    color: var(--text-body);
 }
 
 .biblioteca-dropzone__enlace {
-    color: #F15A24;
+    color: var(--primary);
     font-weight: 600;
     text-decoration: underline;
     cursor: pointer;
@@ -71,11 +71,11 @@
     flex-wrap: wrap;
     margin-top: 14px;
     padding: 12px 16px;
-    background: #FFF7F3;
-    border: 1px solid #FBD5C4;
+    background: var(--primary-light);
+    border: 1px solid var(--primary-light-strong);
     border-radius: 10px;
     font-size: .88rem;
-    color: #1F242E;
+    color: var(--text-main);
     font-weight: 600;
 }
 
@@ -91,7 +91,7 @@
 .biblioteca-conteo {
     font-size: .85rem;
     font-weight: 600;
-    color: #6B7280;
+    color: var(--text-body);
 }
 
 .biblioteca-grid {
@@ -103,8 +103,8 @@
 
 .biblioteca-card {
     margin: 0;
-    background: #FFFFFF;
-    border: 1px solid #E5E7EB;
+    background: var(--bg-panel);
+    border: 1px solid var(--border-color);
     border-radius: 12px;
     overflow: hidden;
     display: flex;
@@ -113,17 +113,17 @@
 }
 
 .biblioteca-card:hover {
-    border-color: #CBD5E1;
+    border-color: var(--border-color-strong);
     box-shadow: 0 6px 18px rgba(15, 34, 67, .10);
 }
 
 /* Fondo a cuadros: deja ver de un vistazo qué PNG tiene transparencia. */
 .biblioteca-card__img {
     height: 130px;
-    background-color: #F4F6F9;
+    background-color: var(--bg-main);
     background-image:
-        linear-gradient(45deg, #E9EDF3 25%, transparent 25%, transparent 75%, #E9EDF3 75%),
-        linear-gradient(45deg, #E9EDF3 25%, transparent 25%, transparent 75%, #E9EDF3 75%);
+        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%),
+        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%);
     background-size: 16px 16px;
     background-position: 0 0, 8px 8px;
     display: flex;
@@ -150,7 +150,7 @@
 .biblioteca-card__nombre {
     font-size: .8rem;
     font-weight: 600;
-    color: #1F242E;
+    color: var(--text-main);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -158,18 +158,18 @@
 
 .biblioteca-card__meta {
     font-size: .74rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .biblioteca-card__uso {
     font-size: .74rem;
     font-weight: 600;
-    color: #9CA3AF;
+    color: var(--text-muted);
     margin-top: 2px;
 }
 
 .biblioteca-card.is-en-uso .biblioteca-card__uso {
-    color: #1A3B70;
+    color: var(--primary-blue);
 }
 
 .biblioteca-card__acciones {
@@ -189,7 +189,7 @@
 .biblioteca-vacia {
     text-align: center;
     padding: 60px 20px;
-    color: #9CA3AF;
+    color: var(--text-muted);
 }
 
 .biblioteca-vacia i {
@@ -223,7 +223,7 @@
 }
 
 .bib-picker {
-    background: #FFFFFF;
+    background: var(--bg-panel);
     border-radius: 14px;
     width: min(980px, 100%);
     max-height: min(680px, 90vh);
@@ -245,35 +245,35 @@
     justify-content: space-between;
     gap: 16px;
     padding: 16px 20px;
-    border-bottom: 1px solid #E5E7EB;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .bib-picker__head h3 {
     margin: 0;
     font-size: 1rem;
     font-weight: 700;
-    color: #1F242E;
+    color: var(--text-main);
     display: flex;
     align-items: center;
     gap: 8px;
 }
 
 .bib-picker__head h3 i {
-    color: #F15A24;
+    color: var(--primary);
 }
 
 .bib-picker__cerrar {
     border: none;
     background: none;
     font-size: 1.05rem;
-    color: #6B7280;
+    color: var(--text-body);
     cursor: pointer;
     line-height: 1;
     padding: 4px;
 }
 
 .bib-picker__cerrar:hover {
-    color: #1F242E;
+    color: var(--text-main);
 }
 
 .bib-picker__barra {
@@ -281,7 +281,7 @@
     align-items: center;
     gap: 12px;
     padding: 14px 20px;
-    border-bottom: 1px solid #F1F5F9;
+    border-bottom: 1px solid var(--border-color);
 }
 
 .bib-picker__barra .bib-picker__buscar {
@@ -307,9 +307,9 @@
 }
 
 .bib-picker__item {
-    border: 2px solid #E5E7EB;
+    border: 2px solid var(--border-color);
     border-radius: 10px;
-    background: #FFFFFF;
+    background: var(--bg-panel);
     padding: 0 0 8px;
     cursor: pointer;
     display: flex;
@@ -323,7 +323,7 @@
 
 .bib-picker__item:hover,
 .bib-picker__item:focus-visible {
-    border-color: #F15A24;
+    border-color: var(--primary);
     transform: translateY(-2px);
     outline: none;
 }
@@ -331,10 +331,10 @@
 .bib-picker__thumb {
     height: 104px;
     flex-shrink: 0;
-    background-color: #F4F6F9;
+    background-color: var(--bg-main);
     background-image:
-        linear-gradient(45deg, #E9EDF3 25%, transparent 25%, transparent 75%, #E9EDF3 75%),
-        linear-gradient(45deg, #E9EDF3 25%, transparent 25%, transparent 75%, #E9EDF3 75%);
+        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%),
+        linear-gradient(45deg, var(--border-color) 25%, transparent 25%, transparent 75%, var(--border-color) 75%);
     background-size: 14px 14px;
     background-position: 0 0, 7px 7px;
     display: flex;
@@ -351,7 +351,7 @@
 .bib-picker__nombre {
     font-size: .74rem;
     font-weight: 600;
-    color: #1F242E;
+    color: var(--text-main);
     padding: 0 8px;
     white-space: nowrap;
     overflow: hidden;
@@ -360,14 +360,14 @@
 
 .bib-picker__peso {
     font-size: .7rem;
-    color: #9CA3AF;
+    color: var(--text-muted);
     padding: 0 8px;
 }
 
 .bib-picker__vacio {
     grid-column: 1 / -1;
     text-align: center;
-    color: #9CA3AF;
+    color: var(--text-muted);
     font-size: .88rem;
     padding: 50px 20px;
     margin: 0;
@@ -379,13 +379,13 @@
     justify-content: space-between;
     gap: 16px;
     padding: 14px 20px;
-    border-top: 1px solid #E5E7EB;
-    background: #F8FAFC;
+    border-top: 1px solid var(--border-color);
+    background: var(--bg-subtle);
 }
 
 .bib-picker__conteo {
     font-size: .82rem;
-    color: #6B7280;
+    color: var(--text-body);
     font-weight: 600;
 }
 
