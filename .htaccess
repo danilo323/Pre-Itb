@@ -6,6 +6,7 @@ RewriteRule ^admin/?$ admin/index.php [L]
 RewriteRule ^admin/login/?$ admin/login.php [L]
 RewriteRule ^admin/logout/?$ admin/logout.php [L]
 RewriteRule ^sobre-nosotros/?$ sobre-nosotros.php [L]
+RewriteRule ^noticias/?$ noticias.php [L]
 
 # Redirección amigable para páginas dinámicas personalizadas
 RewriteCond %{REQUEST_FILENAME} !-f
