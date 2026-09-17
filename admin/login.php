@@ -96,7 +96,7 @@ if ($isLocked && $error === '') {
         <span class="login-vitrina__velo"></span>
 
         <div class="login-vitrina__marca">
-            <img src="<?= $SB ?>img/logo-itb-white.png" alt="Instituto Superior Universitario Bolivariano de Tecnología">
+            <img src="<?= $AB ?>/assets/logo-itb.png" alt="Instituto Superior Universitario Bolivariano de Tecnología">
         </div>
 
         <p class="login-vitrina__pie">
