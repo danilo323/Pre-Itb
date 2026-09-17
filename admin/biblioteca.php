@@ -336,6 +336,12 @@ echo layout_start('Biblioteca', 'biblioteca');
             : 'Todavía no hay imágenes. Sube la primera con el recuadro de arriba.' ?></p>
     </div>
 <?php else: ?>
+    <?php
+    // Sin la extension mbstring, mb_strtolower() no existe y la pagina moria
+    // aqui dentro: la rejilla salia vacia aunque las imagenes estuvieran. Se
+    // cae a strtolower() como ya hace biblioteca_listar() en biblioteca_lib.php.
+    $to_lower = fn(string $s): string => function_exists('mb_strtolower') ? mb_strtolower($s, 'UTF-8') : strtolower($s);
+    ?>
     <div class="biblioteca-grid" id="biblioteca-grid" data-vista="rejilla">
         <?php foreach ($imagenes as $img): ?>
             <?php
@@ -348,7 +354,7 @@ echo layout_start('Biblioteca', 'biblioteca');
             <?php /* Los data-* llevan los datos con los que el navegador filtra
                      y ordena sin volver al servidor. */ ?>
             <figure class="biblioteca-card<?= $en_uso ? ' is-en-uso' : '' ?>"
-                    data-nombre="<?= htmlspecialchars(mb_strtolower($img['nombre']), ENT_QUOTES, 'UTF-8') ?>"
+                    data-nombre="<?= htmlspecialchars($to_lower($img['nombre']), ENT_QUOTES, 'UTF-8') ?>"
                     data-fecha="<?= (int) $img['fecha'] ?>"
                     data-peso="<?= (int) $img['peso'] ?>"
                     data-uso="<?= $en_uso ? 'en-uso' : 'sin-usar' ?>"

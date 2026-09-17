@@ -61,8 +61,13 @@ if (empty($programas_items)) {
     // "Online / Presencial"); las casillas del filtro solo entienden
     // Presencial / Hibrida / Remoto, asi que hay que encajarla en una de las
     // tres o la tarjeta desapareceria al marcar cualquier modalidad.
-    $oferta_modalidad = function (string $bruto): string {
-        $m = mb_strtolower(trim($bruto), 'UTF-8');
+    // mbstring no siempre esta instalada; sin este respaldo la pagina entera
+    // se caia justo en el caso que este bloque venia a cubrir (base recien
+    // montada). Mismo patron que includes/transparencia.php.
+    $oferta_a_minusculas = fn(string $s): string => function_exists('mb_strtolower') ? mb_strtolower($s, 'UTF-8') : strtolower($s);
+
+    $oferta_modalidad = function (string $bruto) use ($oferta_a_minusculas): string {
+        $m = $oferta_a_minusculas(trim($bruto));
         $remoto = str_contains($m, 'remoto') || str_contains($m, 'online') || str_contains($m, 'virtual');
         if (str_contains($m, 'brid')) return 'Hibrida';                  // hibrido / hibrida
         if ($remoto && str_contains($m, 'presencial')) return 'Hibrida'; // "Online / Presencial"
@@ -74,7 +79,7 @@ if (empty($programas_items)) {
     foreach ((array) content_raw('programas', 'lista_programas', []) as $prog) {
         if (!is_array($prog) || trim($prog['titulo'] ?? '') === '') continue;
 
-        $area = mb_strtolower(trim($prog['area'] ?? ''), 'UTF-8');
+        $area = $oferta_a_minusculas(trim($prog['area'] ?? ''));
         // Sin area (o con una que no esta en el mapa) se usa la facultad mas
         // amplia, la que agrupa administracion, contabilidad, diseno y
         // sistemas: asi la tarjeta nunca sale sin facultad ni fuera de todos
