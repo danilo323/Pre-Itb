@@ -293,7 +293,6 @@ echo layout_start('Documentos', 'documentos');
 <div class="documentos-lote is-hidden" id="documentos-lote" role="status" aria-live="polite">
     <span id="documentos-lote-texto"></span>
     <div class="documentos-lote__acciones">
-        <button type="button" class="btn btn-outline btn-sm" id="documentos-lote-cancelar">Quitar selección</button>
         <button type="button" class="btn btn-danger btn-sm" id="documentos-lote-eliminar">
             <i class="bi bi-trash-fill" aria-hidden="true"></i> Eliminar seleccionados
         </button>
