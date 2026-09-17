@@ -2130,111 +2130,14 @@ return [
                 ],
             ],
         ],
-        // Colección ANTIGUA de las tarjetas del buscador de Oferta Académica.
-        // Ahora esas tarjetas se editan en Páginas → Oferta Académica →
-        // SECCIÓN 2: PROGRAMAS DEL BUSCADOR, que es donde está el resto de
-        // esa página. Esto se queda como respaldo: includes/oferta-programas.php
-        // solo lo lee si la sección 2 está vacía, así que no se pierde nada de
-        // lo que ya estuviera cargado aquí.
-        'programas_academicos' => [
-            'label' => 'Programas Académicos (antiguo)',
-            'subtitulo' => 'Se edita en Páginas → Oferta Académica',
-            'group' => 'contenido',
-            'icon' => 'bi bi-mortarboard-fill',
-            'type' => 'collection',
-            'sortable' => true,
-            'columns' => ['nombre', 'facultad'],
-            'fields' => [
-                'tipo' => [
-                    'type' => 'select',
-                    'label' => 'Tipo *',
-                    'help' => 'Con qué opción de "Mostrar resultados por" aparece esta tarjeta.',
-                    'required' => true,
-                    'default' => 'Programa',
-                    'options' => [
-                        'Programa' => 'Programa',
-                        'Curso' => 'Curso',
-                    ],
-                ],
-                'nombre' => [
-                    'type' => 'text',
-                    'label' => 'Nombre del programa *',
-                    'help' => 'Ej: Tecnología Superior en Enfermería',
-                    'required' => true,
-                ],
-                'facultad' => [
-                    'type' => 'text',
-                    'label' => 'Facultad *',
-                    'help' => 'Ej: Facultad de Salud y Servicios Sociales',
-                    'required' => true,
-                ],
-                'campo_estudio' => [
-                    'type' => 'select',
-                    'label' => 'Campo de Estudio *',
-                    'help' => 'Con qué filtro de la barra lateral aparece este programa.',
-                    'required' => true,
-                    'options' => [
-                        'FASSS' => 'FASSS — Facultad de Salud y Servicios Sociales',
-                        'FATV' => 'FATV — Facultad de Transporte y Vialidad',
-                        'FACES' => 'FACES — Facultad de Ciencias Empresariales y Sistemas',
-                    ],
-                ],
-                'modalidad' => [
-                    'type' => 'select',
-                    'label' => 'Modalidad *',
-                    'required' => true,
-                    'options' => [
-                        'Presencial' => 'Presencial',
-                        'Hibrida' => 'Híbrida',
-                        'Remoto' => 'Remoto',
-                    ],
-                ],
-                'duracion' => [
-                    'type' => 'text',
-                    'label' => 'Duración',
-                    'default' => '2 Años (4 Semestres)',
-                ],
-                'campus' => [
-                    'type' => 'text',
-                    'label' => 'Campus',
-                    'default' => 'Campus Teresa Benites',
-                ],
-                'anio_inicio' => [
-                    'type' => 'select',
-                    'label' => 'Año de Inicio',
-                    'options' => [
-                        '2026' => '2026',
-                        '2027' => '2027',
-                    ],
-                ],
-                'etiqueta' => [
-                    'type' => 'select',
-                    'label' => 'Distintivo de la tarjeta',
-                    'help' => 'Insignia chica en la esquina superior de la tarjeta. Déjalo en "Ninguno" si no aplica.',
-                    'options' => [
-                        '' => 'Ninguno',
-                        'Nueva' => 'Nueva',
-                        'Destacada' => 'Destacada',
-                    ],
-                ],
-                'imagen' => [
-                    'type' => 'image',
-                    'label' => 'Foto del programa',
-                    'help' => 'Tamaño recomendado: 400x300px.',
-                ],
-                'publicado' => [
-                    'type' => 'bool',
-                    'label' => 'Publicado',
-                    'default' => true,
-                ],
-            ],
-        ],
-        // Colección de tarjetas del buscador de Oferta Académica. Cada item es
-        // un programa/carrera; se filtra y busca en el navegador (JS puro,
-        // sin recargar), así que aquí solo hace falta guardar el dato de cada
-        // NOTA: aqui habia una segunda declaracion de 'programas_academicos'.
-        // El array la traia dos veces, asi que PHP se quedaba en silencio con
-        // la de mas abajo y esta no tenia ningun efecto. Se elimino la muerta.
+        // NOTA: aqui vivia una SEGUNDA declaracion de 'programas_academicos',
+        // etiquetada "(antiguo)". El array traia la misma clave dos veces, asi
+        // que PHP se quedaba en silencio con la de mas abajo y esta nunca tuvo
+        // ningun efecto: no se podia abrir desde el panel y, al compartir clave,
+        // tampoco tenia datos propios. Se elimino. El respaldo que describia su
+        // comentario sigue funcionando, porque includes/oferta-programas.php lee
+        // los DATOS de 'programas_academicos', no su entrada de esquema.
+
         // Item con PÁGINA PROPIA: no es una colección ni un singleton de campos,
         // así que en vez de 'fields' declara la pantalla que lo atiende con
         // 'url'. El menú lateral y el escritorio ya saben leer esa clave, así
