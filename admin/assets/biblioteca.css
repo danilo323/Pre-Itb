@@ -281,17 +281,213 @@
     color: var(--text-main);
 }
 
+.bib-picker {
+    position: relative;   /* ancla del velo de arrastre */
+}
+
 .bib-picker__barra {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     padding: 14px 20px;
     border-bottom: 1px solid var(--border-color);
 }
 
-.bib-picker__barra .bib-picker__buscar {
+/* --- Buscador ---
+   Mismo aspecto que el de la pantalla de Biblioteca (.biblioteca-buscador):
+   lupa dentro a la izquierda, fondo suave y aro naranja al enfocar. Antes
+   era un input pelado estirado de lado a lado. */
+.bib-picker__campo {
+    position: relative;
+    display: flex;
+    align-items: center;
     flex: 1;
     min-width: 0;
+}
+
+.bib-picker__campo > i {
+    position: absolute;
+    left: 13px;
+    color: var(--text-muted);
+    font-size: .9rem;
+    pointer-events: none;
+    transition: color .15s ease;
+}
+
+.bib-picker__campo:focus-within > i {
+    color: var(--primary);
+}
+
+.bib-picker__buscar {
+    width: 100%;
+    height: 40px;
+    padding: 0 38px 0 36px;
+    border: 1px solid var(--border-color);
+    border-radius: 10px;
+    background: var(--bg-subtle);
+    font-family: inherit;
+    font-size: .88rem;
+    color: var(--text-main);
+    transition: border-color .15s ease, background-color .15s ease, box-shadow .15s ease;
+}
+
+.bib-picker__buscar::placeholder {
+    color: var(--text-muted);
+}
+
+.bib-picker__buscar:hover {
+    background: var(--bg-panel);
+}
+
+.bib-picker__buscar:focus {
+    outline: none;
+    background: var(--bg-panel);
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+/* La aspa nativa de type="search" sobra: ya hay un botón propio, que además
+   aparece y desaparece con el contenido. */
+.bib-picker__buscar::-webkit-search-cancel-button {
+    -webkit-appearance: none;
+    appearance: none;
+}
+
+.bib-picker__limpiar {
+    position: absolute;
+    right: 5px;
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 8px;
+    background: none;
+    color: var(--text-muted);
+    font-size: .7rem;
+    cursor: pointer;
+    transition: background-color .15s ease, color .15s ease;
+}
+
+.bib-picker__limpiar:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.bib-picker__limpiar[hidden] {
+    display: none;
+}
+
+/* --- Botón de subir --- */
+.bib-picker__subir {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    flex-shrink: 0;
+    padding: 0 16px;
+    border: none;
+    border-radius: 10px;
+    background: var(--primary);
+    color: #fff;
+    font-family: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color .15s ease, opacity .15s ease;
+}
+
+.bib-picker__subir:hover {
+    background: var(--primary-hover);
+}
+
+.bib-picker__subir:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.bib-picker__subir:disabled {
+    opacity: .6;
+    cursor: progress;
+}
+
+/* --- Cola de subida ---
+   Sale entre la barra y la rejilla mientras se suben archivos, y se retira
+   sola cuando todo ha ido bien. Los errores se quedan. */
+.bib-picker__cola {
+    padding: 10px 20px;
+    border-bottom: 1px solid var(--border-color);
+    background: var(--bg-subtle);
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    max-height: 168px;
+    overflow-y: auto;
+    flex-shrink: 0;
+}
+
+.bib-picker__cola[hidden] {
+    display: none;
+}
+
+.bib-picker__subida {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: .8rem;
+    color: var(--text-body);
+}
+
+.bib-picker__subida > i {
+    flex-shrink: 0;
+    font-size: .95rem;
+    color: var(--text-muted);
+}
+
+.bib-picker__subida.is-hecho > i {
+    color: var(--success);
+}
+
+.bib-picker__subida.is-error > i {
+    color: var(--danger);
+}
+
+.bib-picker__subida-nombre {
+    flex: 0 1 auto;
+    min-width: 0;
+    max-width: 240px;
+    font-weight: 600;
+    color: var(--text-main);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.bib-picker__subida-msg {
+    flex: 1;
+    min-width: 0;
+    color: var(--text-muted);
+}
+
+.bib-picker__subida.is-error .bib-picker__subida-msg {
+    color: var(--danger);
+}
+
+.bib-picker__progreso {
+    flex: 1;
+    min-width: 60px;
+    height: 6px;
+    border-radius: 999px;
+    background: var(--border-color);
+    overflow: hidden;
+}
+
+.bib-picker__progreso > span {
+    display: block;
+    height: 100%;
+    background: var(--primary);
+    border-radius: inherit;
+    transition: width .15s ease;
 }
 
 /* La rejilla es lo único que hace scroll: la cabecera con el buscador y el
@@ -312,6 +508,7 @@
 }
 
 .bib-picker__item {
+    position: relative;
     border: 2px solid var(--border-color);
     border-radius: 10px;
     background: var(--bg-panel);
@@ -331,6 +528,26 @@
     border-color: var(--primary);
     transform: translateY(-2px);
     outline: none;
+}
+
+/* Lo que se acaba de subir: va lo primero y se marca, para no tener que
+   buscarlo entre las demás. La marca dura lo que dure el modal abierto. */
+.bib-picker__item.is-nueva {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px var(--primary-light);
+}
+
+.bib-picker__nueva {
+    position: absolute;
+    top: 7px;
+    left: 7px;
+    padding: 3px 8px;
+    border-radius: 999px;
+    background: var(--primary);
+    color: #fff;
+    font-size: .64rem;
+    font-weight: 700;
+    letter-spacing: .01em;
 }
 
 .bib-picker__thumb {
@@ -390,9 +607,86 @@
     font-weight: 600;
 }
 
+.bib-picker__acciones {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+/* Se conserva la puerta a la Biblioteca completa: desde el selector solo se
+   sube y se elige; borrar, ver usos y renombrar siguen estando allí. */
+.bib-picker__enlace {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: .8rem;
+    font-weight: 600;
+    color: var(--text-muted);
+    text-decoration: none;
+    transition: color .15s ease;
+}
+
+.bib-picker__enlace:hover {
+    color: var(--primary);
+}
+
+/* --- Velo de arrastre ---
+   pointer-events:none es imprescindible: si captura el ratón, el navegador
+   deja de mandar dragleave y el velo se queda pegado tapando el modal. */
+.bib-picker__soltar {
+    position: absolute;
+    inset: 0;
+    z-index: 5;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    border-radius: 14px;
+    background: rgba(15, 34, 67, .82);
+    pointer-events: none;
+}
+
+.bib-picker-overlay.is-soltando .bib-picker__soltar {
+    display: flex;
+}
+
+.bib-picker__soltar span {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 16px 24px;
+    border: 2px dashed rgba(255, 255, 255, .55);
+    border-radius: 12px;
+    color: #fff;
+    font-size: .95rem;
+    font-weight: 600;
+}
+
+.bib-picker__soltar i {
+    font-size: 1.3rem;
+}
+
 @media (max-width: 600px) {
     .bib-picker__barra {
         flex-wrap: wrap;
+    }
+
+    .bib-picker__campo {
+        flex: 1 1 100%;
+    }
+
+    .bib-picker__subir {
+        flex: 1 1 100%;
+        justify-content: center;
+    }
+
+    .bib-picker__pie {
+        flex-wrap: wrap;
+        gap: 10px;
+    }
+
+    .bib-picker__acciones {
+        width: 100%;
+        justify-content: space-between;
     }
 
     .bib-picker__grid {
