@@ -191,14 +191,25 @@ function auth_check_inactivity(): bool {
 /**
  * Exige que el usuario esté autenticado.
  * Si no lo está o la sesión expiró, redirige inmediatamente a login.php.
+ *
+ * El aviso de "sesión expirada" solo se añade cuando de verdad había una
+ * sesión y ha caducado. Antes se añadía siempre, así que quien entraba por
+ * primera vez a /admin leía un aviso de sesión caducada sin haber entrado
+ * nunca al panel.
  */
 function auth_require(): void {
     auth_session_start();
 
-    if (!auth_check_inactivity() || empty($_SESSION['admin_logged'])) {
+    // Hay que mirarlo ANTES de auth_check_inactivity(): esa función vacía la
+    // sesión cuando detecta que caducó, y después ya no se distinguirían los
+    // dos casos.
+    $habia_sesion = !empty($_SESSION['admin_logged']);
+    $sigue_viva   = auth_check_inactivity();
+
+    if (!$sigue_viva || empty($_SESSION['admin_logged'])) {
         require_once __DIR__ . '/base_url.php';
-        $ab = admin_base();
-        header('Location: ' . $ab . '/login.php?expired=1');
+        $caduco = ($habia_sesion && !$sigue_viva);
+        header('Location: ' . admin_base() . '/login.php' . ($caduco ? '?expired=1' : ''));
         exit;
     }
 }
