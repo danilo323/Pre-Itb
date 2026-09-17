@@ -63,9 +63,11 @@
 .navbar__menu {
     grid-row: 2;
     grid-column: 2;
-    /* Los enlaces se van a la izquierda (junto al logo) y los botones a la
-       derecha, en vez de amontonarse todos a la derecha dejando un hueco. */
-    justify-content: space-between;
+    /* Los enlaces a la izquierda (junto al logo) y los botones a la derecha.
+       El reparto lo hace ahora el 'margin-left:auto' de .navbar__cta, no
+       'space-between': asi los botones siguen pegados al borde pero ceden
+       sitio cuando el menu crece, en vez de dejar un hueco fijo en medio. */
+    justify-content: flex-start;
     min-width: 0;
 }
 
@@ -346,17 +348,29 @@ main {
     min-width: 0;
 }
 
+/* La lista ocupa el espacio que sobra entre el logo y los botones.
+   Antes .navbar__menu repartia con 'space-between' y la lista no podia
+   crecer, asi que al quitar opciones del panel quedaba un hueco muerto en
+   el centro (unos 540px a 1920) y al añadirlas se desbordaban. Ahora la
+   lista crece y encoge, y los botones se van al borde con 'margin-left:auto'
+   (ver .navbar__cta), que hace lo mismo que 'space-between' pero cede
+   cuando el menu necesita sitio. */
 .navbar__list {
     display: flex;
     align-items: center;
-    gap: clamp(1px, 0.3vw, 4px);
+    gap: clamp(4px, 0.6vw, 12px);
     min-width: 0;
-    flex-shrink: 1;
+    flex: 1 1 auto;
 }
 
+/* Los items pueden encogerse hasta cierto punto antes de que el menu
+   colapse. Sin esto no cedian nada y los que no cabian acababan debajo de
+   los botones, recortados por el overflow oculto de la pagina: el
+   administrador añadia una opcion en el panel y simplemente no aparecia. */
 .navbar__item {
     position: relative;
-    flex-shrink: 0;
+    flex: 0 1 auto;
+    min-width: 0;
 }
 
 .navbar__link {
@@ -388,6 +402,9 @@ main {
     top: calc(100% + 8px);
     left: 0;
     min-width: 220px;
+    /* Nunca mas ancho que la ventana, para que no se salga en pantallas
+       estrechas donde el overflow oculto lo dejaria inalcanzable. */
+    max-width: min(340px, calc(100vw - 2 * var(--header-inset)));
     background: var(--white);
     border-radius: var(--radius-md);
     box-shadow: var(--shadow-lg);
@@ -454,6 +471,21 @@ main {
     transform: translateY(0) translateX(-8px);
 }
 
+/* Volteo: los desplegables siempre se abrian hacia la derecha, asi que en una
+   opcion del final de la barra el segundo nivel se salia de la pantalla y
+   quedaba fuera de alcance (la pagina oculta el desbordamiento horizontal).
+   js/main.js añade esta clase cuando mide que no cabe. */
+.navbar__dropdown--flip {
+    left: auto;
+    right: 0;
+}
+
+.navbar__dropdown--sub.navbar__dropdown--flip {
+    left: auto;
+    right: calc(100% + 8px);
+    transform: translateY(0) translateX(8px);
+}
+
 .navbar__dropdown-item--sub:hover > .navbar__dropdown--sub,
 .navbar__dropdown-item--sub.active > .navbar__dropdown--sub {
     opacity: 1;
@@ -466,7 +498,11 @@ main {
     display: flex;
     align-items: stretch;
     gap: clamp(6px, 0.7vw, 10px);
-    margin-left: clamp(6px, 1vw, 14px);
+    /* 'auto' empuja los botones al borde derecho igual que hacia
+       'space-between', pero se colapsa a 0 cuando el menu necesita el
+       espacio, en vez de forzar que los enlaces se desborden. */
+    margin-left: auto;
+    padding-left: clamp(6px, 1vw, 14px);
     flex-shrink: 0;
 }
 

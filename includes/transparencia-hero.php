@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 // includes/transparencia-hero.php
 $hero_imgs = content_raw('hero', 'imagenes_fondo', [['archivo' => 'img/hero_1.jpeg']]);
 $page_hero_img = htmlspecialchars($hero_imgs[0]['archivo'] ?? 'img/hero_1.jpeg', ENT_QUOTES, 'UTF-8');

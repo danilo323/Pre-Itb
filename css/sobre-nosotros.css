@@ -1,34 +1,28 @@
 /* =============================================
    PÁGINA "SOBRE NOSOTROS"  (/sobre-nosotros.php)
    =============================================
-   Master stylesheet que importa las hojas de estilo
-   modulares de cada sección.
+
+   ESTE ARCHIVO YA NO HACE FALTA. Se mantiene vacío solo para que no falle
+   ninguna rama del equipo que todavía lo enlace con un <link>.
+
+   Qué cambió y por qué:
+
+   - Las hojas de las secciones (sobre-hero, sobre-intro, mision-vision,
+     valores, cogobierno, himno) ahora se importan desde css/styles.css, que
+     cargan todas las páginas. Antes vivían en esta cascada aparte, así que una
+     sección reutilizada fuera de Sobre Nosotros se quedaba sin estilos.
+
+   - El ajuste de 48px que había aquí forzaba a que Autoridades, Cogobierno,
+     Himno y Transparencia midieran distinto según la página. Como
+     pagina_dinamica.php declaraba la clase de esta página, ese ajuste se
+     colaba además en TODAS las páginas creadas desde el panel.
+     Su sustituto es la clase de densidad del sistema:
+
+         <body class="densidad-compacta">
+
+     que hace lo mismo pero sirve en cualquier página y no acopla la sección
+     al sitio donde vive. Ver css/sistema.css y GUIA-MAQUETACION.md.
+
+   - hover-theme.css se importaba aquí y también desde styles.css, así que se
+     cargaba dos veces en esta página.
 */
-
-@import url('sobre-hero.css');
-@import url('sobre-intro.css');
-@import url('sobre-mision-vision.css');
-@import url('sobre-valores.css');
-@import url('sobre-cogobierno.css');
-@import url('nosotros_himno.css');
-@import url('hover-theme.css');
-
-/* Secciones 5 a 8: una cadencia vertical más compacta en esta página, sin
-   modificar el espacio interno de sus tarjetas, formularios o acordeones. */
-.page-sobre-nosotros .autoridades,
-.page-sobre-nosotros .sobre-cogob,
-.page-sobre-nosotros .himno,
-.page-sobre-nosotros .transparencia {
-    padding-top: 48px;
-    padding-bottom: 48px;
-}
-
-@media (max-width: 768px) {
-    .page-sobre-nosotros .autoridades,
-    .page-sobre-nosotros .sobre-cogob,
-    .page-sobre-nosotros .himno,
-    .page-sobre-nosotros .transparencia {
-        padding-top: 32px;
-        padding-bottom: 32px;
-    }
-}

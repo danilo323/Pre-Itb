@@ -51,7 +51,7 @@ $secundarias_visibles = 2;
 <!-- NOTICIAS, EVENTOS Y ALIANZAS                  -->
 <!-- ============================================= -->
 <section class="noticias" id="noticias">
-    <div class="noticias__container">
+    <div class="noticias__container container">
         <div class="noticias__header">
             <div>
                 <span class="section-tag"><?= content_get('noticias', 'etiqueta_superior', 'Vida Universitaria y Actualidad') ?></span>
@@ -59,7 +59,7 @@ $secundarias_visibles = 2;
                     <?= content_title('noticias', 'titulo_seccion', 'Noticias y Eventos del ITB') ?>
                 </h2>
             </div>
-            <a href="noticias.php" class="btn--solid" id="btn-todas-noticias">
+            <a class="btn--solid" id="btn-todas-noticias">
                 <?= content_get('noticias', 'boton_todas', 'Ver más Noticias y Eventos') ?>
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>

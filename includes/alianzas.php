@@ -32,7 +32,7 @@ $alianzas_fotos = array_values(array_filter((array)$alianzas_fotos, function ($f
 <!-- ALIANZAS                                      -->
 <!-- ============================================= -->
 <section class="alianzas<?= empty($alianzas_solo_carrusel) ? '' : ' alianzas--solo-carrusel' ?>" id="alianzas">
-    <div class="alianzas__container">
+    <div class="alianzas__container container">
 
         <?php /* El titulo y el boton se saltan cuando quien incluye esta
                  seccion pide solo el carrusel (lo hace sobre-nosotros.php). */ ?>

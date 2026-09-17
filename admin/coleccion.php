@@ -6,7 +6,11 @@ require_once __DIR__ . '/views/layout.php';
 $schema = require __DIR__ . '/schema_mock.php';
 $AB = admin_base();
 
-$section = $_GET['c'] ?? 'testimonios';
+// Sin ?c= no hay colección que enseñar. Antes el valor por defecto era
+// 'testimonios', una colección que ya no existe en el esquema: la comprobación
+// de aquí abajo la rechazaba igual, pero el código sugería una colección
+// imaginaria a quien lo leyera.
+$section = trim((string) ($_GET['c'] ?? ''));
 
 // Validar Whitelist del schema (V2)
 if (!isset($schema['items'][$section]) || $schema['items'][$section]['type'] !== 'collection') {

@@ -1,12 +1,12 @@
 /* =============================================
    1. PRESENTACIÓN (TRAYECTORIA Y COMPROMISO)
    ============================================= */
-.page-sobre-nosotros .sobre-intro {
+.sobre-intro {
     padding: 80px 0 60px;
     background: var(--white);
 }
 
-.page-sobre-nosotros .sobre-intro__container {
+.sobre-intro__container {
     max-width: var(--container-max);
     margin: 0 auto;
     padding: 0 24px;
@@ -18,27 +18,27 @@
 
 /* Entrada de la primera sección al aparecer en pantalla. El observador de
    js/sobre-nosotros.js añade .is-visible cuando el bloque entra al viewport. */
-.page-sobre-nosotros .sobre-intro__content,
-.page-sobre-nosotros .sobre-intro__image-wrapper {
+.sobre-intro__content,
+.sobre-intro__image-wrapper {
     opacity: 0;
     transition: opacity 0.65s ease-out, transform 0.65s ease-out;
 }
 
-.page-sobre-nosotros .sobre-intro__content {
+.sobre-intro__content {
     transform: translateY(36px);
 }
 
-.page-sobre-nosotros .sobre-intro__image-wrapper {
+.sobre-intro__image-wrapper {
     transform: translateY(36px);
     transition-delay: 0.12s;
 }
-.page-sobre-nosotros .sobre-intro__content.is-visible,
-.page-sobre-nosotros .sobre-intro__image-wrapper.is-visible {
+.sobre-intro__content.is-visible,
+.sobre-intro__image-wrapper.is-visible {
     opacity: 1;
     transform: translateY(0);
 }
 
-.page-sobre-nosotros .sobre-intro__content .section-tag {
+.sobre-intro__content .section-tag {
     display: inline-block;
     color: var(--primary-orange);
     font-size: 0.85rem;
@@ -51,7 +51,7 @@
     font-family: var(--font-primary);
 }
 
-.page-sobre-nosotros .sobre-intro__title {
+.sobre-intro__title {
     font-family: var(--font-heading);
     font-size: clamp(2.2rem, 3.6vw, 3rem);
     font-weight: 800;
@@ -61,7 +61,7 @@
     letter-spacing: -0.5px;
 }
 
-.page-sobre-nosotros .sobre-intro__text p {
+.sobre-intro__text p {
     font-size: 0.95rem;
     color: #4b5563;
     line-height: 1.7;
@@ -69,12 +69,12 @@
     font-family: var(--font-primary);
 }
 
-.page-sobre-nosotros .sobre-intro__text p:last-child {
+.sobre-intro__text p:last-child {
     margin-bottom: 0;
 }
 
 /* Tarjeta de cita (debajo del texto) */
-.page-sobre-nosotros .tarjeta-cita {
+.tarjeta-cita {
     background-color: #f8fafc;
     padding: 24px 28px;
     border-radius: 12px;
@@ -83,7 +83,7 @@
     border: 1px solid rgba(226, 232, 240, 0.8);
 }
 
-.page-sobre-nosotros .tarjeta-cita__texto {
+.tarjeta-cita__texto {
     font-family: var(--font-primary);
     font-size: 1.05rem;
     line-height: 1.55;
@@ -92,7 +92,7 @@
     margin-bottom: 10px;
 }
 
-.page-sobre-nosotros .tarjeta-cita__autor {
+.tarjeta-cita__autor {
     display: block;
     font-family: var(--font-primary);
     font-size: 0.85rem;
@@ -101,12 +101,12 @@
 }
 
 /* Lado derecho: Imagen con tarjeta flotante */
-.page-sobre-nosotros .sobre-intro__image-wrapper {
+.sobre-intro__image-wrapper {
     position: relative;
     width: 100%;
 }
 
-.page-sobre-nosotros .sobre-intro__image {
+.sobre-intro__image {
     width: 100%;
     aspect-ratio: 4 / 4.7;
     border-radius: 16px;
@@ -114,7 +114,7 @@
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.07);
 }
 
-.page-sobre-nosotros .sobre-intro__image img {
+.sobre-intro__image img {
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -122,7 +122,7 @@
 }
 
 /* Tarjeta flotante en la esquina inferior izquierda */
-.page-sobre-nosotros .sobre-intro__badge {
+.sobre-intro__badge {
     position: absolute;
     bottom: 24px;
     left: 24px;
@@ -134,7 +134,7 @@
     min-width: 220px;
 }
 
-.page-sobre-nosotros .sobre-intro__badge-tag {
+.sobre-intro__badge-tag {
     display: block;
     font-size: 0.7rem;
     font-weight: 700;
@@ -145,7 +145,7 @@
     font-family: var(--font-primary);
 }
 
-.page-sobre-nosotros .sobre-intro__badge-title {
+.sobre-intro__badge-title {
     font-family: var(--font-primary);
     font-size: 0.95rem;
     font-weight: 700;
@@ -154,21 +154,21 @@
     margin-bottom: 6px;
 }
 
-.page-sobre-nosotros .sobre-intro__badge-rating {
+.sobre-intro__badge-rating {
     display: flex;
     align-items: center;
     gap: 8px;
     font-family: var(--font-primary);
 }
 
-.page-sobre-nosotros .sobre-intro__badge-stars {
+.sobre-intro__badge-stars {
     display: flex;
     gap: 3px;
     color: #f59e0b;
     font-size: 0.8rem;
 }
 
-.page-sobre-nosotros .sobre-intro__badge-score {
+.sobre-intro__badge-score {
     font-size: 0.85rem;
     font-weight: 700;
     color: #1e293b;
@@ -178,18 +178,18 @@
    RESPONSIVE - PRESENTACIÓN
    ============================================= */
 @media (max-width: 992px) {
-    .page-sobre-nosotros .sobre-intro__container {
+    .sobre-intro__container {
         grid-template-columns: 1fr;
         gap: 36px;
     }
 }
 
 @media (max-width: 768px) {
-    .page-sobre-nosotros .sobre-intro {
+    .sobre-intro {
         padding: 50px 0 36px;
     }
 
-    .page-sobre-nosotros .sobre-intro__badge {
+    .sobre-intro__badge {
         bottom: 16px;
         left: 16px;
         padding: 14px 18px;

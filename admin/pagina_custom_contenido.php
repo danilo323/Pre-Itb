@@ -47,7 +47,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $field_config['_old_value'] = $content[$section][$field] ?? ($field_config['default'] ?? '');
             $content[$section][$field] = field_parse($field_config['type'] ?? 'text', $_POST['contenido'][$section][$field] ?? null, $field_config);
         }
-        $content[$section]['_visible'] = '1';
+        // Mismo criterio que en pagina_custom.php: ya no se fuerza a '1'. Esta
+        // pantalla no pinta el interruptor, así que aquí siempre se conserva
+        // lo que hubiera guardado.
+        $visible_posteado = $_POST['contenido'][$section]['_visible'] ?? null;
+        if ($visible_posteado !== null) {
+            $content[$section]['_visible'] = ((string) $visible_posteado === '1') ? '1' : '0';
+        } elseif (!array_key_exists('_visible', $content[$section] ?? [])) {
+            $content[$section]['_visible'] = '1';
+        }
     }
     $data['_paginas_creadas'][$id]['contenido'] = $content;
     storage_save($data);

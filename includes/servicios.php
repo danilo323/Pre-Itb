@@ -7,13 +7,13 @@
         <!-- Columna de Texto Principal -->
         <div class="servicios__intro">
             <h2 class="servicios__title">
-                <?= nl2br(htmlspecialchars(content_get('servicios', 'serv1_titulo', "Bienestar\nEstudiantil"), ENT_QUOTES, 'UTF-8')) ?>
+                <?= nl2br(content_get('servicios', 'serv1_titulo', "Bienestar\nEstudiantil")) ?>
             </h2>
             <p class="servicios__desc">
-                <?= htmlspecialchars(content_get('servicios', 'serv1_desc', 'Impulsamos tu desarrollo integral dentro y fuera del aula con beneficios exclusivos para tu carrera.'), ENT_QUOTES, 'UTF-8') ?>
+                <?= content_get('servicios', 'serv1_desc', 'Impulsamos tu desarrollo integral dentro y fuera del aula con beneficios exclusivos para tu carrera.') ?>
             </p>
             <a href="#" class="btn btn--solid" id="btn-servicios-main">
-                <?= htmlspecialchars(content_get('servicios', 'serv1_btn', 'Más servicios'), ENT_QUOTES, 'UTF-8') ?>
+                <?= content_get('servicios', 'serv1_btn', 'Más servicios') ?>
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>
         </div>
@@ -78,7 +78,7 @@
                     <h3 class="servicios__card-title"><?= $titulo ?></h3>
                     <p class="servicios__card-text"><?= $desc ?></p>
                     <a href="#" class="btn btn--solid">
-                        <?= $btn_texto ?>
+                        <span class="btn__label"><?= $btn_texto ?></span>
                         <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                     </a>
                 </div>
@@ -90,8 +90,11 @@
                     <div class="servicios__card-content">
                         <h3 class="servicios__card-title-white"><?= $titulo ?></h3>
                         <p class="servicios__card-text-white"><?= $desc ?></p>
+                        <?php /* El texto va en su propio span para que pueda
+                                 encogerse: si no, el icono se salia de la
+                                 tarjeta y quedaba cortado. */ ?>
                         <a href="#" class="btn btn--solid">
-                            <?= $btn_texto ?>
+                            <span class="btn__label"><?= $btn_texto ?></span>
                             <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                         </a>
                     </div>

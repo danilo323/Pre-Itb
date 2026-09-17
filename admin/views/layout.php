@@ -9,7 +9,8 @@ auth_require();
 require_once __DIR__ . '/../csrf.php';
 csrf_token(); // asegura que $_SESSION['csrf_token'] exista antes de renderizar formularios
 
-function layout_sidebar($current_key = ''): string {
+function layout_sidebar($current_key = ''): string
+{
     $schema = require __DIR__ . '/../schema_mock.php';
     $ab = admin_base();
 
@@ -38,23 +39,24 @@ function layout_sidebar($current_key = ''): string {
         $has_items = !empty($items_by_group[$group_key]);
         $is_paginas_group = ($group_key === 'paginas');
 
-        if (!$has_items && !$is_paginas_group) continue;
-        
+        if (!$has_items && !$is_paginas_group)
+            continue;
+
         $html .= "        <li class=\"sidebar-section-label\">" . htmlspecialchars($group_label) . "</li>\n";
-        
+
         // Renderizar items estáticos del schema
         if ($has_items) {
             foreach ($items_by_group[$group_key] as $key => $item) {
                 $label = htmlspecialchars($item['label'], ENT_QUOTES, 'UTF-8');
-                $icon  = $item['icon'] ?? 'bi bi-file-earmark-text';
+                $icon = $item['icon'] ?? 'bi bi-file-earmark-text';
                 $active = ($current_key === $key) ? 'class="active"' : '';
-                
+
                 if (!empty($item['url'])) {
                     $url = $ab . '/' . ltrim($item['url'], '/');
                 } else {
                     $url = ($item['type'] === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
                 }
-                
+
                 $html .= "        <li><a href=\"{$url}\" {$active}><i class=\"{$icon}\"></i> {$label}</a></li>\n";
             }
         }
@@ -63,10 +65,10 @@ function layout_sidebar($current_key = ''): string {
         if ($is_paginas_group) {
             foreach ($paginas_creadas as $p_id => $p_data) {
                 $p_label = htmlspecialchars($p_data['nombre'] ?? 'Página Sin Título', ENT_QUOTES, 'UTF-8');
-                $p_icon  = htmlspecialchars($p_data['icon'] ?? 'bi bi-file-earmark-text', ENT_QUOTES, 'UTF-8');
-                $p_key   = 'custom_' . $p_id;
-                $active  = ($current_key === $p_key) ? 'class="active"' : '';
-                $p_url   = "{$ab}/pagina_custom.php?id=" . urlencode($p_id);
+                $p_icon = htmlspecialchars($p_data['icon'] ?? 'bi bi-file-earmark-text', ENT_QUOTES, 'UTF-8');
+                $p_key = 'custom_' . $p_id;
+                $active = ($current_key === $p_key) ? 'class="active"' : '';
+                $p_url = "{$ab}/pagina_custom.php?id=" . urlencode($p_id);
 
                 $html .= "        <li><a href=\"{$p_url}\" {$active}><i class=\"{$p_icon}\"></i> {$p_label}</a></li>\n";
             }
@@ -83,17 +85,21 @@ function layout_sidebar($current_key = ''): string {
     return $html;
 }
 
-function layout_flash(): string {
-    if (session_status() !== PHP_SESSION_ACTIVE) return '';
+function layout_flash(): string
+{
+    if (session_status() !== PHP_SESSION_ACTIVE)
+        return '';
     $html = '';
     if (!empty($_SESSION['flash_message'])) {
-        $msg  = htmlspecialchars($_SESSION['flash_message'], ENT_QUOTES, 'UTF-8');
+        $msg = htmlspecialchars($_SESSION['flash_message'], ENT_QUOTES, 'UTF-8');
         $type = $_SESSION['flash_type'] ?? 'success';
 
         // Icono Bootstrap Icons acorde al tipo (mismo criterio que admin/fields/alert.php)
         $icon = 'bi-check-circle-fill';
-        if ($type === 'error') $icon = 'bi-x-octagon-fill';
-        if ($type === 'warning') $icon = 'bi-exclamation-triangle-fill';
+        if ($type === 'error')
+            $icon = 'bi-x-octagon-fill';
+        if ($type === 'warning')
+            $icon = 'bi-exclamation-triangle-fill';
 
         $html = "<div id=\"panel-flash\" class=\"flash-message flash-{$type}\"><i class=\"bi {$icon}\"></i> <span>{$msg}</span></div>\n";
         unset($_SESSION['flash_message'], $_SESSION['flash_type']);
@@ -101,23 +107,31 @@ function layout_flash(): string {
     return $html;
 }
 
-function flash_set(string $message, string $type = 'success'): void {
-    if (session_status() !== PHP_SESSION_ACTIVE) session_start();
+function flash_set(string $message, string $type = 'success'): void
+{
+    if (session_status() !== PHP_SESSION_ACTIVE)
+        session_start();
     $_SESSION['flash_message'] = $message;
-    $_SESSION['flash_type']    = $type;
+    $_SESSION['flash_type'] = $type;
 }
 
-function layout_start(string $title = "Panel de Administración", string $current_key = ''): string {
+function layout_start(string $title = "Panel de Administración", string $current_key = ''): string
+{
     global $admin_page_css;
     $safe_title = htmlspecialchars($title, ENT_QUOTES, 'UTF-8');
-    $sidebar    = layout_sidebar($current_key);
-    $flash      = layout_flash();
-    $user       = htmlspecialchars($_SESSION['user'] ?? 'HOLA', ENT_QUOTES, 'UTF-8');
-    $time       = time();
-    $ab         = admin_base();
-    $sb         = site_base();
+    $sidebar = layout_sidebar($current_key);
+    $flash = layout_flash();
+    $user = htmlspecialchars($_SESSION['user'] ?? 'HOLA', ENT_QUOTES, 'UTF-8');
+    $time = time();
+    $ab = admin_base();
+    $sb = site_base();
+    // El selector de imágenes puede subir archivos desde cualquier pantalla, y
+    // para eso necesita el token. Antes solo estaba en el formulario de la
+    // pantalla de Biblioteca, así que fuera de ella no había forma de subir.
+    // No añade exposición: el token ya viaja en cada formulario del panel.
+    $csrf = htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8');
     $extra_css = '';
-    foreach ((array)($admin_page_css ?? []) as $asset) {
+    foreach ((array) ($admin_page_css ?? []) as $asset) {
         $href = preg_match('#^https?://#', $asset) ? $asset : "{$ab}/assets/" . ltrim($asset, '/');
         $version = preg_match('#^https?://#', $asset) ? '' : "?v={$time}";
         $extra_css .= "    <link rel=\"stylesheet\" href=\"{$href}{$version}\">\n";
@@ -138,7 +152,7 @@ function layout_start(string $title = "Panel de Administración", string $curren
     <link rel="stylesheet" href="{$ab}/assets/biblioteca.css?v={$time}">
     <link rel="stylesheet" href="{$ab}/assets/documentos.css?v={$time}">
 {$extra_css}</head>
-<body>
+<body data-admin-base="{$ab}" data-csrf="{$csrf}">
     <div class="admin-topbar">
         <div class="topbar-left">
             <!-- Oculto en móvil -->
@@ -163,12 +177,13 @@ function layout_start(string $title = "Panel de Administración", string $curren
 HTML;
 }
 
-function layout_end(): string {
+function layout_end(): string
+{
     global $admin_page_js;
-    $ab   = admin_base();
+    $ab = admin_base();
     $time = time();
     $extra_js = '';
-    foreach ((array)($admin_page_js ?? []) as $asset) {
+    foreach ((array) ($admin_page_js ?? []) as $asset) {
         $src = preg_match('#^https?://#', $asset) ? $asset : "{$ab}/assets/" . ltrim($asset, '/');
         $version = preg_match('#^https?://#', $asset) ? '' : "?v={$time}";
         $extra_js .= "    <script src=\"{$src}{$version}\"></script>\n";

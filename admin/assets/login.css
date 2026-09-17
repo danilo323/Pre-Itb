@@ -1,0 +1,422 @@
+/* admin/assets/login.css
+   Pantalla de acceso al panel. Vive aparte de admin.css porque solo la usa
+   login.php: el resto del panel ya no descarga estos estilos.
+
+   Composicion: la pantalla entera partida en dos. A la izquierda la marca
+   sobre la foto, a sangre; a la derecha el formulario en su propia tarjeta,
+   centrado. Se reparte por proporcion, no por un ancho fijo, para que se
+   vea igual de cuidada en un portatil de 1366 que en un monitor de 1920.
+
+   Color: planos de la paleta institucional, sin degradados. Los niveles de
+   profundidad salen de los tres azules que ya existen en admin.css:
+     fondo del formulario  #111D35  --primary-blue-dark
+     tarjeta y lado foto   #1B2A4A  --primary-blue
+     bordes                #26375C  --primary-blue-light
+
+   Reutiliza de admin.css y no se duplica aqui:
+     - las variables de marca (--primary-blue, --primary, radios...)
+     - .field-group (separacion de campo + etiqueta)
+     - .flash-message / .flash-error / .flash-info */
+
+.login-body {
+    /* Tonos planos de la misma familia, no opacidades: asi el contraste no
+       depende de lo que quede debajo. */
+    --login-texto: #FFFFFF;
+    --login-texto-tenue: #93A1BA;
+    --login-borde: var(--primary-blue-light);
+
+    display: grid;
+    /* El lado del formulario no baja de 380px ni pasa de 620px: por debajo
+       se aprieta y por encima la tarjeta queda perdida en el centro. */
+    grid-template-columns: minmax(0, 1fr) clamp(380px, 38%, 620px);
+    min-height: 100vh;
+    min-height: 100dvh;
+    background: var(--primary-blue-dark);
+    color: var(--login-texto);
+}
+
+/* ===============================================================
+   MITAD IZQUIERDA — MARCA SOBRE LA FOTO
+   =============================================================== */
+.login-vitrina {
+    position: relative;
+    overflow: hidden;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 20px;
+    padding: clamp(24px, 4.4vh, 52px);
+    background: var(--primary-blue);
+}
+
+.login-vitrina__foto {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Velo azul plano (no degradado) para que el blanco de la foto no se coma
+   el logotipo ni el texto de abajo. */
+.login-vitrina__velo {
+    position: absolute;
+    inset: 0;
+    z-index: 1;
+    background: rgba(17, 29, 53, 0.72);
+}
+
+.login-vitrina__marca,
+.login-vitrina__pie {
+    position: relative;
+    z-index: 2;
+}
+
+/* Se usa una copia recortada del logotipo (admin/assets/logo-itb.png) y no
+   img/logo-itb-white.png: el original arrastra un margen transparente que
+   se come el 23% del ancho y el 31% del alto del archivo, asi que la marca
+   se veia pequena por mucho que se agrandara la caja. El original sigue
+   igual para el sitio publico; aqui solo se recorto el aire sobrante. */
+.login-vitrina__marca img {
+    display: block;
+    height: clamp(48px, 6.6vh, 68px);
+    width: auto;
+}
+
+.login-vitrina__pie {
+    display: flex;
+    align-items: center;
+    gap: 9px;
+    margin: 0;
+    font-size: 13px;
+    line-height: 1.5;
+    color: var(--login-texto-tenue);
+}
+
+.login-vitrina__pie i {
+    font-size: 15px;
+    flex-shrink: 0;
+}
+
+/* ===============================================================
+   MITAD DERECHA — FORMULARIO
+   =============================================================== */
+.login-acceso {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: clamp(18px, 4.4vh, 52px) clamp(22px, 3vw, 48px);
+}
+
+.login-panel {
+    width: 100%;
+    max-width: 380px;
+    padding: clamp(18px, 3.2vh, 32px) clamp(22px, 2vw, 28px) clamp(18px, 2.8vh, 28px);
+    border: 1px solid var(--login-borde);
+    border-radius: 16px;
+    background: var(--primary-blue);
+    animation: login-entrada 0.5s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+
+/* Sin excepcion para prefers-reduced-motion, igual que en el resto del
+   sitio: se decidio que la animacion se vea siempre, porque varios equipos
+   tienen los efectos de Windows desactivados y se quedaban sin ella. */
+@keyframes login-entrada {
+    from {
+        opacity: 0;
+        transform: translateY(14px);
+    }
+    to {
+        opacity: 1;
+        transform: none;
+    }
+}
+
+.login-panel__titulo {
+    margin: 0 0 5px;
+    text-align: center;
+    font-size: clamp(20px, 2.4vh, 23px);
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    color: var(--login-texto);
+}
+
+.login-panel__sub {
+    margin: 0 0 clamp(16px, 2.4vh, 22px);
+    text-align: center;
+    font-size: 12.5px;
+    line-height: 1.5;
+    color: var(--login-texto-tenue);
+}
+
+/* Los avisos del sistema (sesion caducada, credenciales erroneas) llegan
+   de .flash-message en admin.css; aqui solo se ajusta la separacion. */
+.login-panel .flash-message {
+    margin-bottom: 16px;
+    padding: 10px 12px;
+    font-size: 12.5px;
+    line-height: 1.45;
+    align-items: flex-start;
+    box-shadow: none;
+}
+
+.login-panel .flash-message i {
+    font-size: 15px;
+    margin-top: 1px;
+}
+
+/* --- Campos --------------------------------------------------- */
+.login-form .field-group {
+    margin-bottom: clamp(9px, 1.7vh, 15px);
+}
+
+.login-form .field-group > label {
+    font-size: 12px;
+    font-weight: 500;
+    margin-bottom: 6px;
+    color: var(--login-texto-tenue);
+}
+
+.login-campo {
+    position: relative;
+    display: block;
+}
+
+/* El campo hereda su aspecto de .field-group (admin.css): fondo blanco,
+   borde y foco naranja. Aqui solo se ajusta el tamano y, en la contrasena,
+   el hueco del boton de la derecha. El selector repite los :not() del
+   original porque, si no, no gana en especificidad. */
+.login-form .login-campo input:not([type="checkbox"]):not([type="radio"]):not([type="file"]) {
+    padding: 11px 14px;
+    font-size: 13.5px;
+    border-color: transparent;
+}
+
+.login-form .login-campo--clave input {
+    padding-right: 42px;
+}
+
+/* --- Boton de ver contrasena ---------------------------------- */
+.login-ver {
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 30px;
+    height: 30px;
+    display: grid;
+    place-items: center;
+    border: none;
+    border-radius: 8px;
+    background: transparent;
+    color: #8B95A8;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.login-ver:hover {
+    background: var(--primary-light);
+    color: var(--primary);
+}
+
+.login-ver:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 1px;
+}
+
+/* --- Aviso de bloqueo de mayusculas --------------------------- */
+/* Ocupa el hueco que en el diseno de referencia tiene el enlace pequeno
+   bajo la contrasena. Aparece solo cuando hace falta. */
+.login-mayusculas {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 6px;
+    margin: -6px 0 12px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: #FFB183;
+}
+
+.login-mayusculas[hidden] {
+    display: none;
+}
+
+/* --- Boton principal ------------------------------------------ */
+.login-btn {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 9px;
+    margin-top: 4px;
+    padding: 12px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--primary);
+    color: #fff;
+    font-family: inherit;
+    font-size: 14px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.login-btn i {
+    transition: transform 0.25s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.login-btn:hover {
+    background: var(--primary-hover);
+}
+
+.login-btn:hover i {
+    transform: translateX(4px);
+}
+
+.login-btn:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+}
+
+.login-btn.is-locked,
+.login-btn:disabled {
+    background: var(--primary-blue-light);
+    color: var(--login-texto-tenue);
+    cursor: not-allowed;
+}
+
+.login-btn:disabled i {
+    transform: none;
+}
+
+/* --- Separador y accion secundaria ----------------------------- */
+.login-sep {
+    margin: clamp(11px, 2.2vh, 20px) 0 clamp(9px, 1.6vh, 14px);
+    text-align: center;
+    font-size: 11.5px;
+    color: var(--login-texto-tenue);
+}
+
+.login-secundario {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--login-borde);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--login-texto);
+    font-size: 13px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.login-secundario i {
+    font-size: 15px;
+    color: var(--primary);
+}
+
+.login-secundario:hover {
+    background: var(--primary-blue-light);
+    color: var(--login-texto);
+}
+
+.login-secundario:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 2px;
+}
+
+.login-nota {
+    margin: clamp(10px, 1.8vh, 18px) 0 0;
+    text-align: center;
+    font-size: 11.5px;
+    line-height: 1.5;
+    color: var(--login-texto-tenue);
+}
+
+/* ===============================================================
+   ADAPTACION A PANTALLAS PEQUENAS
+   Puntos de ruptura canonicos del proyecto (768 / 480).
+
+   Se apilan a 768 y no antes a proposito: una ventana ancha y baja (un
+   portatil con la ventana a media altura) entra mucho mejor en dos
+   columnas que apilada, que es cuando aparece la barra de scroll.
+   =============================================================== */
+@media (max-width: 768px) {
+    /* Las dos mitades pasan a dos filas: la marca se queda como franja de
+       cabecera y el formulario ocupa el resto. */
+    .login-body {
+        grid-template-columns: minmax(0, 1fr);
+        grid-template-rows: auto 1fr;
+    }
+
+    .login-vitrina {
+        min-height: 150px;
+        justify-content: center;
+        align-items: center;
+        padding: 26px 24px;
+    }
+
+    .login-vitrina__marca img {
+        height: 50px;
+    }
+
+    .login-vitrina__pie {
+        display: none;
+    }
+
+    .login-acceso {
+        align-items: flex-start;
+        padding: 30px 24px 40px;
+    }
+}
+
+@media (max-width: 480px) {
+    .login-vitrina {
+        min-height: 120px;
+        padding: 22px;
+    }
+
+    .login-vitrina__marca img {
+        height: 42px;
+    }
+
+    .login-acceso {
+        padding: 26px 18px 34px;
+    }
+
+    .login-panel {
+        max-width: none;
+        padding: 24px 20px 22px;
+    }
+}
+
+/* Ventanas muy bajas (un navegador a media altura, una tablet tumbada).
+   Se retira lo prescindible: el subtitulo repite lo que ya dice el
+   logotipo del lado izquierdo, y la nota del pie es informativa. Asi el
+   formulario sigue entrando entero, incluso con un aviso arriba. */
+@media (max-height: 560px) {
+    .login-acceso {
+        padding-block: 14px;
+    }
+
+    .login-panel {
+        padding-top: 16px;
+        padding-bottom: 16px;
+    }
+
+    .login-panel__sub,
+    .login-nota {
+        display: none;
+    }
+
+    .login-panel__titulo {
+        margin-bottom: 14px;
+    }
+}

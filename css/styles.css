@@ -4,6 +4,9 @@
    =============================================
 */
 
+/* Sistema de espaciado y composicion (escala, .container, .section).
+   Va primero para que el resto de hojas pueda usar sus variables. */
+@import url('sistema.css');
 @import url('base.css');
 @import url('header.css');
 @import url('hero.css');
@@ -17,6 +20,19 @@
 @import url('admision.css');
 @import url('noticias.css');
 @import url('alianzas.css');
+
+/* Secciones reutilizables que antes solo cargaba sobre-nosotros.css. Vivian
+   en una cascada aparte, asi que cualquier otra pagina que las usara (o que se
+   creara desde el panel) se quedaba sin sus estilos. Ahora estan disponibles
+   en todo el sitio, que es lo que el panel ya prometia. */
+@import url('sobre-hero.css');
+@import url('sobre-intro.css');
+@import url('sobre-mision-vision.css');
+@import url('sobre-valores.css');
+@import url('sobre-cogobierno.css');
+@import url('nosotros_himno.css');
+@import url('pagina-interna.css');
+
 @import url('footer.css');
 @import url('responsive.css');
 @import url('hover-theme.css');

@@ -188,6 +188,41 @@ document.addEventListener('DOMContentLoaded', () => {
         }
     });
 
+    // Voltear los desplegables que no caben en pantalla.
+    //
+    // Se abren siempre hacia la derecha, así que una opción del final de la
+    // barra dejaba su submenú fuera de la ventana. Y como la página oculta el
+    // desbordamiento horizontal, esos enlaces quedaban inalcanzables: no había
+    // forma de llegar a ellos ni desplazando.
+    //
+    // Se mide justo antes de mostrarlo, porque el ancho depende del texto que
+    // el administrador haya escrito en el panel.
+    const ajustarLadoDropdown = (panel) => {
+        if (!panel || isMobileNav()) return;
+        panel.classList.remove('navbar__dropdown--flip');
+        const r = panel.getBoundingClientRect();
+        const margen = 8;
+        if (r.right > window.innerWidth - margen) {
+            panel.classList.add('navbar__dropdown--flip');
+        }
+    };
+
+    document.querySelectorAll('.navbar__item--dropdown, .navbar__dropdown-item--sub').forEach(item => {
+        const abrir = () => {
+            const panel = item.querySelector(':scope > .navbar__dropdown');
+            // En el siguiente fotograma el panel ya es visible y se puede medir.
+            requestAnimationFrame(() => ajustarLadoDropdown(panel));
+        };
+        item.addEventListener('mouseenter', abrir);
+        item.addEventListener('focusin', abrir);
+    });
+
+    // Tras cambiar el tamaño de la ventana, las medidas anteriores ya no valen.
+    window.addEventListener('resize', () => {
+        document.querySelectorAll('.navbar__dropdown--flip')
+            .forEach(p => p.classList.remove('navbar__dropdown--flip'));
+    });
+
     // =========================================
     // 3. SITE HEADER — Efecto scroll (sombra)
     // =========================================
@@ -1081,12 +1116,107 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         });
 
-        // Animación suave al hacer click
+        // Subida animada a mano, en dos tiempos.
+        //
+        // El desplazamiento nativo sube a ritmo constante y se siente artificial.
+        // Este imita lo que haría una persona: primero unos golpes de rueda, que
+        // es un movimiento a tirones (cada golpe arranca rápido y frena), y en
+        // cuanto coge carrerilla se lanza del tirón hasta arriba.
+        //
+        // No se pueden disparar eventos de rueda reales desde código, así que lo
+        // que se reproduce es su curva de movimiento, que es lo que se percibe.
+        const GOLPE_RUEDA = 160;   // lo que recorre un golpe de rueda, en píxeles
+        const GOLPES = 3;          // golpes antes de lanzarse
+
+        const subirAnimado = () => {
+            const inicio = window.scrollY;
+            if (inicio <= 0) return;
+
+            // La parte "a rueda" es de tamaño fijo, igual que lo sería de verdad,
+            // pero nunca se come más de un tercio del recorrido: en una página
+            // corta quedaría en tirones y no llegaría a lanzarse nunca.
+            const tramoRueda = Math.min(GOLPE_RUEDA * GOLPES, inicio * 0.33);
+            const tramoVuelo = inicio - tramoRueda;
+
+            const msRueda = 130 * GOLPES;
+            // El lanzamiento va más rápido cuanto más lejos esté el principio.
+            const msVuelo = Math.min(620, Math.max(280, tramoVuelo * 0.085));
+            const arranque = performance.now();
+
+            // Un golpe de rueda: sale disparado y se va parando.
+            const golpe = (f) => 1 - Math.pow(1 - f, 3);
+
+            // Tramo a rueda: tres golpes encadenados, cada uno con su frenada.
+            const aRueda = (t) => {
+                const p = t * GOLPES;
+                const i = Math.min(GOLPES - 1, Math.floor(p));
+                return (i + golpe(p - i)) / GOLPES;
+            };
+
+            // Tramo de vuelo: acelera durante la mayor parte del recorrido y
+            // deja el último cuarto para frenar, que es donde se nota si el
+            // aterrizaje es suave o un golpe seco contra el borde.
+            const enVuelo = (t) => (t < 0.76)
+                ? 0.84 * Math.pow(t / 0.76, 1.85)
+                : 0.84 + 0.16 * (1 - Math.pow(1 - (t - 0.76) / 0.24, 2.6));
+
+            let cancelado = false;
+            // Si la persona toca la rueda o la pantalla, mandan ellos: se
+            // interrumpe la animación en el sitio donde vaya.
+            const cancelar = () => { cancelado = true; };
+            window.addEventListener('wheel', cancelar, { passive: true, once: true });
+            window.addEventListener('touchstart', cancelar, { passive: true, once: true });
+
+            const limpiar = () => {
+                window.removeEventListener('wheel', cancelar);
+                window.removeEventListener('touchstart', cancelar);
+            };
+
+            const paso = (ahora) => {
+                if (cancelado) { limpiar(); return; }
+                const transcurrido = ahora - arranque;
+                let recorrido;
+
+                if (transcurrido < msRueda) {
+                    recorrido = tramoRueda * aRueda(transcurrido / msRueda);
+                } else {
+                    const t = Math.min(1, (transcurrido - msRueda) / msVuelo);
+                    recorrido = tramoRueda + tramoVuelo * enVuelo(t);
+                }
+
+                window.scrollTo(0, Math.max(0, Math.round(inicio - recorrido)));
+
+                if (transcurrido < msRueda + msVuelo) {
+                    requestAnimationFrame(paso);
+                } else {
+                    window.scrollTo(0, 0);
+                    limpiar();
+                }
+            };
+            requestAnimationFrame(paso);
+        };
+
         scrollToTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
+            // Decisión tomada con el equipo: la animación se muestra siempre,
+            // también en los equipos que piden menos movimiento.
+            //
+            // Windows trae los efectos de animación desactivados en bastantes
+            // máquinas, y el navegador lo traslada a la web como "reducir
+            // movimiento". Antes eso hacía que el botón saltara al principio de
+            // golpe, y era el caso de buena parte de quienes lo probaban.
+            //
+            // La contrapartida, anotada a propósito: quien desactiva las
+            // animaciones por mareo o sensibilidad al movimiento verá también
+            // esta. Si alguna vez hace falta atenderlo, basta con volver a
+            // consultar prefers-reduced-motion aquí y acortar el recorrido.
+
+            // El botón acusa el clic: se hunde y la flecha sale disparada.
+            scrollToTopBtn.classList.remove('top-to-bottom--despegue');
+            void scrollToTopBtn.offsetWidth; // reinicia la animación si se pulsa seguido
+            scrollToTopBtn.classList.add('top-to-bottom--despegue');
+            setTimeout(() => scrollToTopBtn.classList.remove('top-to-bottom--despegue'), 600);
+
+            subirAnimado();
         });
     }
 

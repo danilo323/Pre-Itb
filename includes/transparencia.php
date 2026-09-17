@@ -1,5 +1,10 @@
 <?php
 // includes/transparencia.php
+// El panel pinta un interruptor "Visible" para esta seccion; sin esta linea
+// el interruptor no hacia nada.
+if (!function_exists('is_visible')) require_once __DIR__ . '/content_helper.php';
+if (!is_visible('transparencia_leyes')) return;
+
 $doc_categorias = [
     'info_financiera'      => content_get('transparencia_leyes', 'cat_info_financiera', 'Información Financiera y Presupuestaria'),
     'rendicion_cuentas'    => content_get('transparencia_leyes', 'cat_rendicion_cuentas', 'Rendición de Cuentas y Gestión'),

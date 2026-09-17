@@ -11,6 +11,12 @@ CLAUDE.md
 .claude/
 md/
 
+# Estado de runtime del panel (no versionar)
+data/registros.json
+data/rate_limits.json
+data/*.bak_*
+data/*.tmp_*
+
 # Archivos temporales de PHP / Sesiones (por si acaso)
 *.log
 *.tmp
@@ -41,3 +47,10 @@ admin/test_*.php
 ehthumbs.db
 Thumbs.db
 desktop.ini
+
+mockups/*
+# Imagen ajena al sitio subida al probar la biblioteca (una guia de tarjetas
+# de otro proyecto). Sigue en disco, para que no desaparezca de la biblioteca
+# local, pero no viaja en el repositorio. Si se borra desde el panel, esta
+# linea se puede quitar.
+img/6677009e90cc042586aecf5d81b39cdd.png

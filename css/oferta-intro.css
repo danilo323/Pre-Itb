@@ -2,11 +2,14 @@
    OFERTA ACADÉMICA — PRESENTACIÓN (título + descripción)
    ============================================= */
 .oferta-intro {
-    padding: 90px 24px 60px;
+    padding-block: var(--section-y-lg) var(--section-y-md);
+    padding-inline: var(--gutter);
     background: var(--white);
     text-align: center;
 }
 
+/* Más estrecho que el contenedor común a propósito: es un párrafo de
+   presentación y a partir de unos 820px la línea se hace incómoda de leer. */
 .oferta-intro__container {
     max-width: 820px;
     margin: 0 auto;

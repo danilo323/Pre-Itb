@@ -98,6 +98,38 @@ function pagina_custom_base(string $clave): string {
     return pagina_custom_split($clave)[1];
 }
 
+/**
+ * Traduce la posición de menú guardada al formato actual.
+ *
+ * Antes se guardaba 'hijo:<texto>', que significaba "cuelga de la opción
+ * principal llamada <texto>". Hoy eso se expresa como 'bajo:<ruta>', donde la
+ * ruta puede tener varios tramos separados por '>'. Para un solo tramo son
+ * exactamente lo mismo.
+ *
+ * Sin esta traducción, las páginas guardadas con el formato antiguo no casaban
+ * con ninguna rama de _pagina_custom_sync_menu() y caían en el 'none'
+ * implícito: DESAPARECÍAN del menú al volver a guardarlas. En los datos reales
+ * hay 5 páginas de 6 en esa situación.
+ *
+ * No reescribe nada por su cuenta: normaliza al leer y al sincronizar, y el
+ * valor guardado se actualiza solo la próxima vez que se guarde esa página.
+ */
+function pagina_custom_menu_pos_normalizar(string $menu_pos): string {
+    $menu_pos = trim($menu_pos);
+
+    if (strpos($menu_pos, 'hijo:') === 0) {
+        return 'bajo:' . substr($menu_pos, 5);
+    }
+
+    // 'nieto:<texto>' nunca llegó a usarse en los datos, pero se contempla por
+    // si quedara alguno suelto: es un tramo más de la misma ruta.
+    if (strpos($menu_pos, 'nieto:') === 0) {
+        return 'bajo:' . substr($menu_pos, 6);
+    }
+
+    return $menu_pos;
+}
+
 function pagina_custom_sources(array $secciones): array {
     $mapa = [
         'hero' => ['hero'], 'sobre_hero' => ['sobre_hero'],

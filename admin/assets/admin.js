@@ -85,40 +85,45 @@ document.addEventListener('DOMContentLoaded', function () {
         }, 3500);
     }
 
-    // ── Preview de imagen (función reutilizable) ─────────
+    // ── Campo de imagen ─────────────────────────────────
+    // Ya no sube archivos: las imágenes entran por Globales → Biblioteca y
+    // aquí solo se elige una de las que ya están ahí. El selector lo monta
+    // admin/assets/biblioteca.js, que expone window.abrirBiblioteca().
     function initImageField(group) {
-        const fileInput   = group.querySelector('input[type="file"]');
         const hiddenInput = group.querySelector('input[type="hidden"]');
         const box         = group.querySelector('.image-preview-wrapper');
         const preview     = box ? box.querySelector('.image-preview') : null;
         const img         = preview ? preview.querySelector('img') : null;
         const placeholder = box ? box.querySelector('.image-placeholder') : null;
         const removeBtn   = box ? box.querySelector('.btn-remove-image') : null;
+        const pickBtn     = group.querySelector('.js-abrir-biblioteca');
+        const pickLabel   = group.querySelector('.js-texto-elegir');
 
-        if (fileInput) {
-            fileInput.addEventListener('change', function () {
-                const file = this.files[0];
-                if (!file) return;
-                const reader = new FileReader();
-                reader.onload = e => {
-                    if (img) img.src = e.target.result;
+        if (pickBtn) {
+            pickBtn.addEventListener('click', function () {
+                if (typeof window.abrirBiblioteca !== 'function') return;
+                // ruta = lo que se guarda ('img/foto.jpg');
+                // src  = la misma ruta vista desde /admin, para la vista previa.
+                window.abrirBiblioteca(function (ruta, src) {
+                    if (hiddenInput) hiddenInput.value = ruta;
+                    if (img) img.src = src;
                     if (preview) preview.classList.remove('is-hidden');
                     if (placeholder) placeholder.classList.add('is-hidden');
                     if (removeBtn) removeBtn.classList.remove('is-hidden');
-                };
-                reader.readAsDataURL(file);
+                    if (pickLabel) pickLabel.textContent = 'Cambiar imagen';
+                });
             });
         }
 
         if (removeBtn) {
             removeBtn.addEventListener('click', function () {
                 window.customConfirm('¿Estás seguro de que deseas quitar esta imagen?', () => {
-                    if (fileInput) fileInput.value = '';
                     if (hiddenInput) hiddenInput.value = '';
                     if (img) img.src = '';
                     if (preview) preview.classList.add('is-hidden');
                     if (placeholder) placeholder.classList.remove('is-hidden');
                     removeBtn.classList.add('is-hidden');
+                    if (pickLabel) pickLabel.textContent = 'Elegir de la biblioteca';
                 });
             });
         }
@@ -345,17 +350,10 @@ document.addEventListener('DOMContentLoaded', function () {
                 });
             }
 
-            // Regenerar IDs únicos para los inputs de imagen clonados
-            // Si no se hace esto, el label[for] apunta al file input del item original
-            // y el botón "Cambiar imagen" nunca abre el selector del item nuevo.
-            newItem.querySelectorAll('.field-image').forEach(fieldImg => {
-                const oldInput  = fieldImg.querySelector('input[type="file"]');
-                const labelBtn  = fieldImg.querySelector('label.btn[for]');
-                if (oldInput && labelBtn) {
-                    const newId = 'file_' + Math.random().toString(36).substr(2, 9);
-                    oldInput.id = newId;
-                    labelBtn.setAttribute('for', newId);
-                }
+            // El item clonado se queda sin imagen (arriba se vacía su input
+            // oculto), así que su botón no puede seguir diciendo "Cambiar".
+            newItem.querySelectorAll('.js-texto-elegir').forEach(t => {
+                t.textContent = 'Elegir de la biblioteca';
             });
 
             items.appendChild(newItem);

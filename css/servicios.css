@@ -90,10 +90,10 @@
     margin-bottom: 24px;
 }
 
-/* Alineación del botón estándar dentro de las tarjetas simples */
+/* Alineación del botón estándar dentro de las tarjetas simples.
+   El ancho y la proporción se deciden más abajo, en .servicios__cards .btn. */
 .servicios__card-simple .btn--solid {
     margin-top: auto;
-    align-self: flex-start;
 }
 
 /* Card con Imagen (Campus Virtual, Horarios, Servicios Digitales, Podcast,
@@ -242,18 +242,48 @@
     margin-bottom: 24px;
 }
 
-/* Ajuste específico para el botón de las tarjetas para que quepan en las 5 columnas */
+/* Botón al pie de la tarjeta, en las 5 columnas.
+   ---------------------------------------------------------------------------
+   Antes cada botón medía lo que medía su texto ("Acceder" 135px, "Conocer Más"
+   169px): la fila se veía descuadrada y el más largo se salía de su tarjeta,
+   porque el interior útil es 166px (198 de ancho menos 2x16 de relleno) y .btn
+   no deja que el texto parta.
+
+   Ahora todos ocupan el ancho de la tarjeta, así que quedan iguales entre sí y
+   ninguno puede desbordarse por largo que sea el texto que se escriba en el
+   panel. El texto va a la izquierda y la flecha a la derecha.
+   'width: auto' es necesario para anular el 'width: fit-content' de .btn--solid
+   en base.css, que impedía que el botón se estirara. */
 .servicios__cards .btn--solid {
     margin-top: auto;
-    align-self: flex-start;
-    font-size: 0.9rem;
-    padding: 5px 4px 5px 18px;
-    gap: 14px;
+    align-self: stretch;
+    width: auto;
+    max-width: 100%;
+    justify-content: space-between;
+    /* El relleno, la separación y el tamaño de letra se ajustan al ancho
+       disponible: con valores fijos, en pantallas medianas el contenido ya no
+       cabía en la tarjeta. */
+    font-size: clamp(0.78rem, 0.82vw, 0.9rem);
+    padding: 5px 4px 5px clamp(10px, 1vw, 18px);
+    gap: clamp(6px, 0.6vw, 14px);
+    overflow: hidden;
 }
 
+/* El texto cede espacio antes que la flecha. Si aun así no cabe, se recorta
+   con puntos suspensivos: preferimos eso a que se corte el icono, que es lo
+   que pasaba antes porque el texto no podia encogerse. */
+.servicios__cards .btn--solid .btn__label {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+
+/* La flecha nunca se encoge ni se recorta. */
 .servicios__cards .btn--solid .btn__icon-right {
-    width: 36px;
-    height: 36px;
+    flex: 0 0 auto;
+    width: clamp(28px, 2vw, 36px);
+    height: clamp(28px, 2vw, 36px);
 }
 
 /* Responsive adjustments */

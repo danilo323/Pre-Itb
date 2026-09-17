@@ -42,7 +42,7 @@
         <div class="navbar__container">
             <!-- Logo -->
             <a href="index.php" class="navbar__logo">
-                <img src="<?= content_raw('ajustes', 'logo_principal', 'img/logo.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
+                <img src="<?= content_url('ajustes', 'logo_principal', 'img/logo.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
             </a>
 
             <!-- Botón hamburguesa (Mobile) -->
@@ -77,16 +77,25 @@
                         ];
                     }
                     
-                    // Arma la URL de un item del menú (con el caso especial de
-                    // "Sobre Nosotros" sin URL propia, heredado de antes).
+                    // Arma la URL de un item del menú (con resolución automática para
+                    // páginas institucionales si vienen sin URL propia o con '#').
                     if (!function_exists('navbar_menu_url')) {
                         function navbar_menu_url(array $item): string {
                             $raw_url = trim($item['url'] ?? '');
                             $texto_normalizado = function_exists('mb_strtolower')
                                 ? mb_strtolower(trim($item['texto'] ?? ''))
                                 : strtolower(trim($item['texto'] ?? ''));
-                            if ($raw_url === '' && $texto_normalizado === 'sobre nosotros') {
-                                $raw_url = 'sobre-nosotros.php';
+
+                            if ($raw_url === '' || $raw_url === '#') {
+                                if ($texto_normalizado === 'sobre nosotros' || $texto_normalizado === 'nosotros') {
+                                    $raw_url = 'sobre-nosotros.php';
+                                } elseif ($texto_normalizado === 'oferta académica' || $texto_normalizado === 'oferta academica') {
+                                    $raw_url = 'oferta-academica.php';
+                                } elseif ($texto_normalizado === 'transparencia / leyes' || $texto_normalizado === 'transparencia' || $texto_normalizado === 'leyes') {
+                                    $raw_url = 'transparencia-leyes.php';
+                                } elseif ($texto_normalizado === 'noticias' || $texto_normalizado === 'noticias y eventos') {
+                                    $raw_url = 'noticias.php';
+                                }
                             }
                             return htmlspecialchars($raw_url !== '' ? $raw_url : '#', ENT_QUOTES, 'UTF-8');
                         }
