@@ -9,6 +9,12 @@ function field_repeater_render(string $name_path, $value, array $config): string
 
     // Si no hay valor previo, asumimos un array vacío
     $items = is_array($value) ? $value : [];
+    // Algunos repeaters representan una plantilla editable (por ejemplo, los
+    // cuatro PDFs de una carrera). Si aún no se ha guardado nada, mostrar sus
+    // ítems predeterminados para que el administrador pueda cargarlos.
+    if (empty($items) && !empty($config['default']) && is_array($config['default'])) {
+        $items = $config['default'];
+    }
 
     $html = "<div class='repeater-group' data-name-path='{$name_path}' data-item-label='{$item_label}'>\n";
     if (!empty($label)) {

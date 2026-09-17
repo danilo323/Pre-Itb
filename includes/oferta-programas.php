@@ -22,6 +22,11 @@
 $programas_items = content_raw('oferta_programas', 'lista_programas', []);
 if (!is_array($programas_items)) $programas_items = [];
 
+$btn_solicitar_texto_def = content_get('oferta_programas', 'btn_solicitar_texto', 'Solicitar Información');
+$btn_solicitar_enlace_def = content_get('oferta_programas', 'btn_solicitar_enlace', '#');
+$btn_matricular_texto_def = content_get('oferta_programas', 'btn_matricular_texto', 'Matricúlame');
+$btn_matricular_enlace_def = content_get('oferta_programas', 'btn_matricular_enlace', '#');
+
 if (empty($programas_items)) {
     $programas_items = collection_items('programas_academicos');
 }
@@ -219,6 +224,37 @@ if (empty($programas_items)) {
                         $etiqueta = trim($p['etiqueta'] ?? '');
                         $imagen = content_image_exists($p['imagen'] ?? '') ? $p['imagen'] : '';
                         $h = fn($v) => htmlspecialchars((string)$v, ENT_QUOTES, 'UTF-8');
+                        $perfil = trim($p['perfil'] ?? '');
+                        $competencias_administrativa = trim($p['competencias_administrativa'] ?? '');
+                        $competencias_asistencial = trim($p['competencias_asistencial'] ?? '');
+                        $documentos_admision = trim($p['documentos_admision'] ?? '');
+                        $inversion = trim($p['inversion'] ?? '');
+                        $horarios = trim($p['horarios'] ?? '');
+                        $documentos = is_array($p['documentos'] ?? null) ? $p['documentos'] : [];
+                        $detalle_id = 'oferta-card-detalle-' . $card_index;
+                        $btn_solicitar_texto = trim($p['btn_solicitar_texto'] ?? '') !== '' ? $p['btn_solicitar_texto'] : $btn_solicitar_texto_def;
+                        $btn_solicitar_enlace = trim($p['btn_solicitar_enlace'] ?? '') !== '' ? $p['btn_solicitar_enlace'] : $btn_solicitar_enlace_def;
+                        $btn_matricular_texto = trim($p['btn_matricular_texto'] ?? '') !== '' ? $p['btn_matricular_texto'] : $btn_matricular_texto_def;
+                        $btn_matricular_enlace = trim($p['btn_matricular_enlace'] ?? '') !== '' ? $p['btn_matricular_enlace'] : $btn_matricular_enlace_def;
+
+                        // Valores iniciales para que los programas ya creados conserven
+                        // una ficha completa. Al guardar desde el panel, cada valor pasa
+                        // a ser independiente por programa.
+                        if ($perfil === '') $perfil = 'El Técnico Superior podrá desempeñarse, bajo supervisión profesional, en establecimientos de salud, brindando atención administrativa y asistencial de calidad.';
+                        if ($competencias_administrativa === '') $competencias_administrativa = "Participar en el ingreso, egreso y traslado de pacientes en establecimientos de salud.\nParticipar en el manejo de carpetas, informes, archivos y registros de atención de salud.\nOrientar, informar y ayudar a pacientes, familiares, usuarios y público en general.";
+                        if ($competencias_asistencial === '') $competencias_asistencial = "Participar en el ingreso, egreso y traslado de pacientes en establecimientos de salud.\nParticipar en el manejo de carpetas, informes, archivos y registros de atención de salud.\nOrientar, informar y ayudar a pacientes, familiares, usuarios y público en general.";
+                        if ($documentos_admision === '') $documentos_admision = "Copia de cédula de identidad a color.\nCopia de papeleta de votación a color (actualizada).\n6 fotos tamaño carnet (formales y tomadas en estudio fotográfico).\nCopia de título de bachiller, legalizado por el ministerio de educación.";
+                        if ($inversion === '') $inversion = 'Consulta con un asesor para conocer la inversión y las facilidades de pago disponibles.';
+                        if ($horarios === '') $horarios = 'Consulta los horarios disponibles para este programa.';
+                        if (!$documentos) $documentos = [
+                            ['titulo' => 'Malla'], ['titulo' => 'Acuerdo'], ['titulo' => 'Justificación'], ['titulo' => 'Tríptico'],
+                        ];
+                        $lista_competencias = function ($texto) use ($h) {
+                            $items = array_filter(array_map('trim', preg_split('/\R/', $texto)));
+                            $html = '<ul>';
+                            foreach ($items as $item) $html .= '<li>' . $h($item) . '</li>';
+                            return $html . '</ul>';
+                        };
                         $is_hidden = $card_index >= 4 ? 'hidden' : '';
                         $card_index++;
                     ?>
@@ -243,19 +279,64 @@ if (empty($programas_items)) {
                                 <span><?= $h($etiqueta) ?></span>
                             </span>
                         <?php endif; ?>
-                        <div class="oferta-card__img"<?= $imagen ? " style=\"background-image:url('" . $h($imagen) . "')\"" : '' ?>></div>
-                        <div class="oferta-card__body">
-                            <h3 class="oferta-card__title"><?= $h($nombre) ?></h3>
-                            <p class="oferta-card__facultad"><?= $h($p['facultad'] ?? '') ?></p>
-                            <ul class="oferta-card__meta">
-                                <li><?= file_get_contents(__DIR__ . '/../svg/icono-modalidad.svg') ?> Modalidad: <?= $h($modalidad_label) ?></li>
-                                <li><?= file_get_contents(__DIR__ . '/../svg/icono-duracion.svg') ?> Duración: <?= $h($p['duracion'] ?? '') ?></li>
-                                <li><?= file_get_contents(__DIR__ . '/../svg/icono-campus.svg') ?> <?= $h($p['campus'] ?? '') ?></li>
-                            </ul>
+                        <div class="oferta-card__resumen">
+                            <div class="oferta-card__img"<?= $imagen ? " style=\"background-image:url('" . $h($imagen) . "')\"" : '' ?>></div>
+                            <div class="oferta-card__body">
+                                <h3 class="oferta-card__title"><?= $h($nombre) ?></h3>
+                                <p class="oferta-card__facultad"><?= $h($p['facultad'] ?? '') ?></p>
+                                <ul class="oferta-card__meta">
+                                    <li><i class="fas fa-user-graduate" aria-hidden="true"></i> Modalidad: <?= $h($modalidad_label) ?></li>
+                                    <li><i class="far fa-calendar-alt" aria-hidden="true"></i> Duración: <?= $h($p['duracion'] ?? '') ?></li>
+                                    <li><i class="fas fa-map-marker-alt" aria-hidden="true"></i> <?= $h($p['campus'] ?? '') ?></li>
+                                </ul>
+                            </div>
+                            <button class="oferta-card__toggle" type="button" aria-expanded="false" aria-controls="<?= $detalle_id ?>" aria-label="Ver información de <?= $h($nombre) ?>">
+                                <i class="fas fa-chevron-down" aria-hidden="true"></i>
+                            </button>
                         </div>
-                        <a href="#" class="btn--outline-card oferta-card__cta">
-                            Ver programa <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
-                        </a>
+                        <div class="oferta-card__detalle" id="<?= $detalle_id ?>" hidden>
+                            <section class="oferta-card__informacion">
+                                <div class="oferta-card__info-tabs" role="tablist" aria-label="Información del programa">
+                                    <button type="button" role="tab" aria-selected="true" class="is-active">Documentos de admisión <i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                                    <button type="button" role="tab" aria-selected="false">Inversión <i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                                    <button type="button" role="tab" aria-selected="false">Horarios <i class="fas fa-chevron-right" aria-hidden="true"></i></button>
+                                </div>
+                                <div class="oferta-card__info-panel" role="tabpanel"><?= $lista_competencias($documentos_admision) ?></div>
+                                <div class="oferta-card__info-panel" role="tabpanel" hidden><?= $lista_competencias($inversion) ?></div>
+                                <div class="oferta-card__info-panel" role="tabpanel" hidden><?= $lista_competencias($horarios) ?></div>
+                            </section>
+                            <section class="oferta-card__perfil">
+                                <h4>Perfil</h4>
+                                <?= nl2br($h($perfil)) ?>
+                            </section>
+                            <section class="oferta-card__competencias">
+                                <div class="oferta-card__tabs" role="tablist" aria-label="Competencias de <?= $h($nombre) ?>">
+                                    <span class="oferta-card__competencias-titulo">Competencias</span>
+                                    <button type="button" role="tab" aria-selected="true" class="is-active">Área Administrativa</button>
+                                    <button type="button" role="tab" aria-selected="false">Área Asistencial</button>
+                                </div>
+                                <div class="oferta-card__tab-panel" role="tabpanel"><?= $lista_competencias($competencias_administrativa) ?></div>
+                                <div class="oferta-card__tab-panel" role="tabpanel" hidden><?= $lista_competencias($competencias_asistencial) ?></div>
+                            </section>
+                            <section class="oferta-card__documentos">
+                                <h4>Documentos de Carrera</h4>
+                                <div class="oferta-card__documentos-pie">
+                                    <div class="oferta-card__pdfs">
+                                        <?php foreach ($documentos as $documento): if (!is_array($documento) || trim($documento['titulo'] ?? '') === '') continue; $archivo = trim($documento['archivo'] ?? ($documento['url'] ?? '')); ?>
+                                            <?php if ($archivo !== ''): ?>
+                                                <a href="<?= $h($archivo) ?>" target="_blank" rel="noopener"><span class="oferta-card__pdf-icon" aria-hidden="true">PDF</span><span><?= $h($documento['titulo']) ?></span></a>
+                                            <?php else: ?>
+                                                <span class="oferta-card__pdf-pendiente"><span class="oferta-card__pdf-icon" aria-hidden="true">PDF</span><span><?= $h($documento['titulo']) ?></span></span>
+                                            <?php endif; ?>
+                                        <?php endforeach; ?>
+                                    </div>
+                                    <div class="oferta-card__acciones">
+                                        <a href="<?= $h($btn_solicitar_enlace) ?>" class="navbar__btn navbar__btn--outline"><?= $h($btn_solicitar_texto) ?></a>
+                                        <a href="<?= $h($btn_matricular_enlace) ?>" class="navbar__btn btn btn--solid"><?= $h($btn_matricular_texto) ?><span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span></a>
+                                    </div>
+                                </div>
+                            </section>
+                        </div>
                     </article>
                     <?php endforeach; ?>
                 </div>

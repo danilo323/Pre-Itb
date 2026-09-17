@@ -1872,6 +1872,34 @@ return [
                             'alert_type' => 'info',
                             'label' => '<strong>CÓMO SE MUESTRAN:</strong> el buscador enseña <strong>4 programas por página</strong> y arma la paginación solo, así que puedes agregar los que quieras. Los filtros de la izquierda (Modalidad, Año de Inicio, Campo de Estudio) se aplican con lo que elijas en cada programa: si dejas uno vacío, ese programa no aparecerá al marcar esa casilla.<br><br><strong>LA PRIMERA VEZ:</strong> mientras no guardes esta sección, la página sigue mostrando los programas de <em>Inicio → Programas Destacados</em>. Pulsa <strong>Guardar</strong> una vez y a partir de ahí manda esta lista.',
                         ],
+                        'div_botones' => [
+                            'type' => 'divider',
+                            'label' => 'Botones de Acción de las Tarjetas',
+                        ],
+                        'btn_solicitar_texto' => [
+                            'type' => 'text',
+                            'label' => 'Texto Botón 1 (Secundario)',
+                            'default' => 'Solicitar Información',
+                            'help' => 'Texto del botón con contorno que aparece al desplegar cualquier tarjeta.',
+                        ],
+                        'btn_solicitar_enlace' => [
+                            'type' => 'text',
+                            'label' => 'Enlace Botón 1',
+                            'default' => '#',
+                            'help' => 'Dirección o ancla del botón (ej: #admision, https://..., etc.).',
+                        ],
+                        'btn_matricular_texto' => [
+                            'type' => 'text',
+                            'label' => 'Texto Botón 2 (Principal)',
+                            'default' => 'Matricúlame',
+                            'help' => 'Texto del botón sólido que aparece al desplegar cualquier tarjeta.',
+                        ],
+                        'btn_matricular_enlace' => [
+                            'type' => 'text',
+                            'label' => 'Enlace Botón 2',
+                            'default' => '#',
+                            'help' => 'Dirección o ancla del botón (ej: #admision, https://..., etc.).',
+                        ],
                         'lista_programas' => [
                             'type' => 'repeater',
                             'label' => 'Programas del buscador',
@@ -1952,6 +1980,73 @@ return [
                                         'Nueva' => 'Nueva',
                                         'Destacada' => 'Destacada',
                                     ],
+                                ],
+                                'perfil' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Perfil del programa',
+                                    'help' => 'Texto que aparece al desplegar la tarjeta.',
+                                ],
+                                'competencias_administrativa' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Competencias — Área Administrativa',
+                                    'help' => 'Una competencia por línea.',
+                                ],
+                                'competencias_asistencial' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Competencias — Área Asistencial',
+                                    'help' => 'Una competencia por línea.',
+                                ],
+                                'documentos_admision' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Documentos de admisión',
+                                    'help' => 'Un requisito por línea.',
+                                ],
+                                'inversion' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Inversión',
+                                ],
+                                'horarios' => [
+                                    'type' => 'textarea',
+                                    'label' => 'Horarios',
+                                ],
+                                'documentos' => [
+                                    'type' => 'repeater',
+                                    'label' => 'Documentos de Carrera (PDF)',
+                                    'item_label' => 'Documento',
+                                    'subfields' => [
+                                        'titulo' => ['type' => 'text', 'label' => 'Nombre del documento'],
+                                        'archivo' => ['type' => 'file', 'label' => 'Archivo PDF', 'accept' => '.pdf', 'allowed_exts' => ['pdf']],
+                                    ],
+                                    'default' => [
+                                        ['titulo' => 'Malla', 'archivo' => ''],
+                                        ['titulo' => 'Acuerdo', 'archivo' => ''],
+                                        ['titulo' => 'Justificación', 'archivo' => ''],
+                                        ['titulo' => 'Tríptico', 'archivo' => ''],
+                                    ],
+                                ],
+                                'div_botones_item' => [
+                                    'type' => 'divider',
+                                    'label' => 'Botones de Acción (Opcional por programa)',
+                                ],
+                                'btn_solicitar_texto' => [
+                                    'type' => 'text',
+                                    'label' => 'Botón 1: Texto personalizado',
+                                    'help' => 'Opcional. Si lo dejas vacío, usa el texto general de la sección ("Solicitar Información").',
+                                ],
+                                'btn_solicitar_enlace' => [
+                                    'type' => 'text',
+                                    'label' => 'Botón 1: Enlace personalizado',
+                                    'help' => 'Opcional. Si lo dejas vacío, usa el enlace general de la sección.',
+                                ],
+                                'btn_matricular_texto' => [
+                                    'type' => 'text',
+                                    'label' => 'Botón 2: Texto personalizado',
+                                    'help' => 'Opcional. Si lo dejas vacío, usa el texto general de la sección ("Matricúlame").',
+                                ],
+                                'btn_matricular_enlace' => [
+                                    'type' => 'text',
+                                    'label' => 'Botón 2: Enlace personalizado',
+                                    'help' => 'Opcional. Si lo dejas vacío, usa el enlace general de la sección.',
                                 ],
                             ],
                             'default' => [
