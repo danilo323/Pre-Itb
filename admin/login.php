@@ -6,6 +6,7 @@ require_once __DIR__ . '/base_url.php';
 
 auth_session_start();
 $AB = admin_base();
+$SB = site_base();
 
 // Si ya está logueado y la sesión es válida, ir directo al panel
 if (!empty($_SESSION['admin_logged']) && auth_check_inactivity()) {
@@ -60,6 +61,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
     }
 }
+
+// Si el bloqueo sigue activo al abrir la pagina (no solo al enviar el
+// formulario), avisarlo de entrada en vez de dejar que lo descubra fallando.
+if ($isLocked && $error === '') {
+    $minutes = max(1, (int) ceil($rateLimit['seconds_left'] / 60));
+    $error = "Acceso bloqueado temporalmente por demasiados intentos fallidos. Vuelve a intentarlo en {$minutes} minuto(s).";
+}
 ?>
 <!DOCTYPE html>
 <html lang="es">
@@ -73,53 +81,138 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <!-- Ruta calculada dinámicamente: funciona igual en la raíz del dominio o en una subcarpeta (XAMPP) -->
     <link rel="stylesheet" href="<?= $AB ?>/assets/admin.css">
+    <!-- login.css va después de admin.css: reutiliza sus variables, .field-group
+         y .flash-message, y solo añade lo propio de esta pantalla. -->
+    <link rel="stylesheet" href="<?= $AB ?>/assets/login.css">
 </head>
 <body class="login-body">
 
-    <div class="login-card">
+    <!-- Mitad de marca. Es puramente decorativa: nada de lo que hay aquí
+         hace falta para iniciar sesión, por eso en móvil se reduce a una
+         franja de cabecera. -->
+    <aside class="login-vitrina">
 
-        <div class="login-header">
-            <div class="login-brand-icon">
-                <i class="bi bi-mortarboard-fill"></i>
-            </div>
-            <h2>ITB Admin</h2>
-            <p>Panel de Administración — Acceso Privado</p>
+        <img class="login-vitrina__foto" src="<?= $AB ?>/assets/login-fondo.jpg" alt="" aria-hidden="true">
+        <span class="login-vitrina__velo"></span>
+
+        <div class="login-vitrina__marca">
+            <img src="<?= $SB ?>img/logo-itb-white.png" alt="Instituto Superior Universitario Bolivariano de Tecnología">
         </div>
 
-        <?php if (!empty($notice)): ?>
-            <div class="flash-message flash-info">
-                <i class="bi bi-info-circle-fill"></i>
-                <?= htmlspecialchars($notice, ENT_QUOTES, 'UTF-8') ?>
-            </div>
-        <?php endif; ?>
+        <p class="login-vitrina__pie">
+            <i class="bi bi-shield-lock"></i>
+            Área privada del sitio institucional
+        </p>
 
-        <?php if (!empty($error)): ?>
-            <div class="flash-message flash-error">
-                <i class="bi bi-x-octagon-fill"></i>
-                <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
-            </div>
-        <?php endif; ?>
+    </aside>
 
-        <form method="POST" action="" class="login-form">
-            <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
+    <!-- Mitad de acceso -->
+    <div class="login-acceso">
+        <main class="login-panel">
 
-            <div class="field-group">
-                <label for="username">Usuario</label>
-                <input type="text" id="username" name="username" placeholder="admin" required autofocus autocomplete="username">
-            </div>
+            <h1 class="login-panel__titulo">Iniciar sesión</h1>
+            <p class="login-panel__sub">Panel de administración del ITB</p>
 
-            <div class="field-group">
-                <label for="password">Contraseña</label>
-                <input type="password" id="password" name="password" placeholder="••••••••" required autocomplete="current-password">
-            </div>
+            <?php if (!empty($notice)): ?>
+                <div class="flash-message flash-info" role="status">
+                    <i class="bi bi-info-circle-fill"></i>
+                    <?= htmlspecialchars($notice, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+            <?php endif; ?>
 
-            <button type="submit" class="btn-block <?= $isLocked ? 'is-locked' : '' ?>" <?= $isLocked ? 'disabled' : '' ?>>
-                Entrar al Panel <i class="bi bi-arrow-right"></i>
-            </button>
+            <?php if (!empty($error)): ?>
+                <div class="flash-message flash-error" role="alert">
+                    <i class="bi bi-x-octagon-fill"></i>
+                    <?= htmlspecialchars($error, ENT_QUOTES, 'UTF-8') ?>
+                </div>
+            <?php endif; ?>
 
-        </form>
+            <form method="POST" action="" class="login-form">
+                <input type="hidden" name="csrf_token" value="<?= htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8') ?>">
+
+                <div class="field-group">
+                    <label for="username">Usuario</label>
+                    <span class="login-campo">
+                        <input type="text" id="username" name="username" placeholder="admin" required autofocus autocomplete="username" <?= $isLocked ? 'disabled' : '' ?>>
+                    </span>
+                </div>
+
+                <div class="field-group">
+                    <label for="password">Contraseña</label>
+                    <span class="login-campo login-campo--clave">
+                        <input type="password" id="password" name="password" placeholder="Tu contraseña" required autocomplete="current-password" <?= $isLocked ? 'disabled' : '' ?>>
+                        <button type="button" class="login-ver" id="verClave" aria-controls="password" aria-pressed="false" aria-label="Mostrar la contraseña" title="Mostrar la contraseña">
+                            <i class="bi bi-eye"></i>
+                        </button>
+                    </span>
+                </div>
+
+                <p class="login-mayusculas" id="avisoMayusculas" role="status" hidden>
+                    <i class="bi bi-capslock-fill"></i>
+                    Bloqueo de mayúsculas activado
+                </p>
+
+                <button type="submit" class="login-btn <?= $isLocked ? 'is-locked' : '' ?>" <?= $isLocked ? 'disabled' : '' ?>>
+                    Entrar al Panel <i class="bi bi-arrow-right"></i>
+                </button>
+
+            </form>
+
+            <p class="login-sep">¿No eres parte del equipo?</p>
+
+            <a class="login-secundario" href="<?= $SB ?>">
+                <i class="bi bi-house-door"></i> Volver al sitio
+            </a>
+
+            <p class="login-nota">La sesión se cierra sola tras un rato sin actividad.</p>
+
+        </main>
 
     </div>
+
+    <script>
+    // Dos ayudas puntuales de esta pantalla. Van aquí y no en admin.js porque
+    // admin.js no se carga en el login (y no tendría sentido cargarlo entero).
+    (function () {
+        'use strict';
+
+        var clave = document.getElementById('password');
+        var boton = document.getElementById('verClave');
+        var aviso = document.getElementById('avisoMayusculas');
+
+        // 1. Ver / ocultar la contraseña.
+        if (clave && boton) {
+            boton.addEventListener('click', function () {
+                var visible = clave.type === 'text';
+                clave.type = visible ? 'password' : 'text';
+                boton.setAttribute('aria-pressed', String(!visible));
+
+                var texto = visible ? 'Mostrar la contraseña' : 'Ocultar la contraseña';
+                boton.setAttribute('aria-label', texto);
+                boton.setAttribute('title', texto);
+                boton.querySelector('i').className = visible ? 'bi bi-eye' : 'bi bi-eye-slash';
+
+                // Devolver el foco al campo sin perder la posición del cursor:
+                // si no, al seguir escribiendo el texto se iría al principio.
+                var fin = clave.value.length;
+                clave.focus();
+                try { clave.setSelectionRange(fin, fin); } catch (e) { /* algunos navegadores no lo permiten en type=password */ }
+            });
+        }
+
+        // 2. Avisar del bloqueo de mayúsculas: es la causa más común de
+        //    "la contraseña es correcta y no entra".
+        if (clave && aviso) {
+            var revisar = function (e) {
+                if (typeof e.getModifierState !== 'function') return;
+                aviso.hidden = !e.getModifierState('CapsLock');
+            };
+            clave.addEventListener('keydown', revisar);
+            clave.addEventListener('keyup', revisar);
+            clave.addEventListener('blur', function () { aviso.hidden = true; });
+        }
+    })();
+    </script>
 
 </body>
 </html>
