@@ -763,39 +763,52 @@
 
     /* ---------- TARJETA NUEVA SIN RECARGAR ---------- */
 
-    function anadirTarjeta(img) {
-        if (!grid || !img) return;
+    function anadirTarjeta(doc) {
+        if (!grid || !doc) return;
         const vacia = document.querySelector('.documentos-vacia');
         if (vacia) vacia.remove();
 
+        const ext = (doc.nombre || '').split('.').pop().toLowerCase();
+        let doc_icon = 'bi-file-earmark-fill';
+        let doc_color = '#6c757d';
+        if (ext === 'pdf') { doc_icon = 'bi-file-earmark-pdf-fill'; doc_color = '#dc3545'; }
+        else if (['doc', 'docx'].includes(ext)) { doc_icon = 'bi-file-earmark-word-fill'; doc_color = '#0d6efd'; }
+        else if (['xls', 'xlsx'].includes(ext)) { doc_icon = 'bi-file-earmark-excel-fill'; doc_color = '#198754'; }
+        else if (ext === 'xml') { doc_icon = 'bi-file-earmark-code-fill'; doc_color = '#fd7e14'; }
+
         const fig = document.createElement('figure');
         fig.className = 'documentos-card is-nueva';
-        fig.dataset.nombre = (img.nombre || '').toLowerCase();
+        fig.dataset.nombre = (doc.nombre || '').toLowerCase();
         fig.dataset.fecha = String(Math.floor(Date.now() / 1000));
         fig.dataset.peso = '0';
         fig.dataset.uso = 'sin-usar';
-        fig.dataset.ruta = img.ruta;
+        fig.dataset.ruta = doc.ruta;
 
         fig.innerHTML =
             '<label class="documentos-card__marca">' +
-                '<input type="checkbox" class="js-marcar" aria-label="Seleccionar ' + img.nombre + '">' +
+                '<input type="checkbox" class="js-marcar" aria-label="Seleccionar ' + doc.nombre + '">' +
                 '<span aria-hidden="true"></span>' +
             '</label>' +
             '<button type="button" class="documentos-card__img js-ver-documento" ' +
-                    'data-src="' + img.src + '" data-nombre="' + img.nombre + '" ' +
-                    'data-meta="' + img.peso + ' Â· ' + img.fecha + ' Â· ReciÃ©n subida" ' +
-                    'aria-label="Ver ' + img.nombre + ' a tamaÃ±o completo">' +
-                '<img src="' + img.src + '" alt="' + img.nombre + '" draggable="false">' +
-                '<span class="documentos-card__lupa" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>' +
+                    'data-src="../' + doc.ruta + '" ' +
+                    'data-nombre="' + doc.nombre + '" ' +
+                    'data-ruta="' + doc.ruta + '" ' +
+                    'data-peso="' + doc.peso + '" ' +
+                    'data-fecha="' + doc.fecha + '" ' +
+                    'data-tipo="' + ext.toUpperCase() + '" ' +
+                    'data-usos="" ' +
+                    'aria-label="Abrir ' + doc.nombre + '">' +
+                '<i class="bi ' + doc_icon + '" style="font-size:3.5rem; color:' + doc_color + ';"></i>' +
+                '<span class="documentos-card__ext">' + ext.toUpperCase() + '</span>' +
             '</button>' +
             '<figcaption class="documentos-card__info">' +
-                '<span class="documentos-card__nombre" title="' + img.nombre + '">' + img.nombre + '</span>' +
-                '<span class="documentos-card__meta">' + img.peso + ' Â· ' + img.fecha + '</span>' +
+                '<span class="documentos-card__nombre" title="' + doc.nombre + '">' + doc.nombre + '</span>' +
+                '<span class="documentos-card__meta">' + doc.peso + ' · ' + doc.fecha + '</span>' +
                 '<span class="documentos-card__uso"><i class="bi bi-dash-circle"></i> Sin usar</span>' +
             '</figcaption>' +
             '<div class="documentos-card__acciones">' +
-                '<button type="button" class="btn btn-sm btn-outline js-copiar-ruta" data-ruta="' + img.ruta + '" ' +
-                        'aria-label="Copiar la ruta de ' + img.nombre + '"><i class="bi bi-clipboard" aria-hidden="true"></i> Copiar ruta</button>' +
+                '<button type="button" class="btn btn-sm btn-outline js-copiar-ruta" data-ruta="' + doc.ruta + '" ' +
+                        'aria-label="Copiar la ruta de ' + doc.nombre + '"><i class="bi bi-clipboard" aria-hidden="true"></i> Copiar ruta</button>' +
             '</div>';
 
         grid.prepend(fig);
