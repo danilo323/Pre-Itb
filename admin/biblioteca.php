@@ -378,7 +378,8 @@ echo layout_start('Biblioteca', 'biblioteca');
                         data-usos="<?= htmlspecialchars(implode('|', $usos), ENT_QUOTES, 'UTF-8') ?>"
                         aria-label="<?= htmlspecialchars('Ver ' . $img['nombre'] . ' a tamaño completo', ENT_QUOTES, 'UTF-8') ?>">
                     <img src="../<?= htmlspecialchars($img['ruta'], ENT_QUOTES, 'UTF-8') ?>"
-                         alt="<?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>" loading="lazy">
+                         alt="<?= htmlspecialchars($img['nombre'], ENT_QUOTES, 'UTF-8') ?>"
+                         loading="lazy" draggable="false">
                     <span class="biblioteca-card__lupa" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>
                 </button>
                 <figcaption class="biblioteca-card__info">
@@ -452,7 +453,7 @@ echo layout_start('Biblioteca', 'biblioteca');
                         id="biblioteca-visor-prev" aria-label="Imagen anterior">
                     <i class="bi bi-chevron-left" aria-hidden="true"></i>
                 </button>
-                <img id="biblioteca-visor-img" src="" alt="">
+                <img id="biblioteca-visor-img" src="" alt="" draggable="false">
                 <button type="button" class="biblioteca-visor__nav biblioteca-visor__nav--next"
                         id="biblioteca-visor-next" aria-label="Imagen siguiente">
                     <i class="bi bi-chevron-right" aria-hidden="true"></i>

@@ -433,26 +433,69 @@
     // subida: obligar a apuntar al recuadro es una punteria innecesaria.
     if (grid && modal) {
         let velo = null;
-        window.addEventListener('dragover', (e) => {
-            if (!e.dataTransfer || !Array.from(e.dataTransfer.types).includes('Files')) return;
-            e.preventDefault();
-            if (!velo) {
-                velo = document.createElement('div');
-                velo.className = 'biblioteca-soltar';
-                velo.innerHTML = '<span><i class="bi bi-cloud-arrow-up-fill"></i> Suelta las imágenes para subirlas</span>';
-                document.body.appendChild(velo);
-            }
-        });
-        window.addEventListener('dragleave', (e) => {
-            if (e.relatedTarget) return;
+        let profundidad = 0;      // dragenter/dragleave se disparan en cascada
+        let arrastreInterno = false;
+
+        // Arrastrar una imagen DE LA PROPIA pagina no es subir nada. El
+        // navegador la ofrece como archivo, asi que sin esta marca el velo
+        // aparecia igual y luego no se iba.
+        document.addEventListener('dragstart', () => { arrastreInterno = true; });
+        document.addEventListener('dragend', () => { arrastreInterno = false; quitarVelo(); });
+
+        function quitarVelo() {
+            profundidad = 0;
             if (velo) { velo.remove(); velo = null; }
+        }
+
+        function ponerVelo() {
+            if (velo) return;
+            velo = document.createElement('div');
+            velo.className = 'biblioteca-soltar';
+            velo.innerHTML = '<span><i class="bi bi-cloud-arrow-up-fill"></i> Suelta las imágenes para subirlas</span>';
+            document.body.appendChild(velo);
+        }
+
+        const traeArchivos = (e) =>
+            !!e.dataTransfer && Array.from(e.dataTransfer.types || []).includes('Files');
+
+        window.addEventListener('dragenter', (e) => {
+            if (arrastreInterno || !traeArchivos(e)) return;
+            profundidad++;
+            ponerVelo();
         });
+
+        window.addEventListener('dragover', (e) => {
+            if (arrastreInterno || !traeArchivos(e)) return;
+            e.preventDefault();   // sin esto el navegador abre el archivo
+            ponerVelo();
+        });
+
+        window.addEventListener('dragleave', () => {
+            profundidad = Math.max(0, profundidad - 1);
+            if (profundidad === 0) quitarVelo();
+        });
+
         window.addEventListener('drop', (e) => {
+            // El velo se retira SIEMPRE, incluso si lo soltado no eran
+            // archivos: antes se salia antes de llegar aqui y se quedaba
+            // pegado tapando la pantalla, con lo que parecia colgada.
+            quitarVelo();
+            arrastreInterno = false;
+
             if (!e.dataTransfer || !e.dataTransfer.files.length) return;
             e.preventDefault();
-            if (velo) { velo.remove(); velo = null; }
             if (modal.classList.contains('is-hidden')) abrirModal();
             anadirArchivos(e.dataTransfer.files);
+        });
+
+        // Ultima red: si el arrastre acaba fuera de la ventana no llega ningun
+        // evento y el velo se quedaria puesto.
+        window.addEventListener('blur', quitarVelo);
+        document.addEventListener('visibilitychange', () => {
+            if (document.hidden) quitarVelo();
+        });
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') quitarVelo();
         });
     }
 
@@ -480,7 +523,7 @@
                     'data-src="' + img.src + '" data-nombre="' + img.nombre + '" ' +
                     'data-meta="' + img.peso + ' · ' + img.fecha + ' · Recién subida" ' +
                     'aria-label="Ver ' + img.nombre + ' a tamaño completo">' +
-                '<img src="' + img.src + '" alt="' + img.nombre + '">' +
+                '<img src="' + img.src + '" alt="' + img.nombre + '" draggable="false">' +
                 '<span class="biblioteca-card__lupa" aria-hidden="true"><i class="bi bi-arrows-fullscreen"></i></span>' +
             '</button>' +
             '<figcaption class="biblioteca-card__info">' +
