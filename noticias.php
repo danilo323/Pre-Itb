@@ -27,7 +27,15 @@ require_once 'includes/content_helper.php';
     <?php include 'includes/header.php'; ?>
 
     <main>
-        <?php include 'includes/noticias-hero.php'; ?>
+        <?php
+        // Misma portada que Sobre Nosotros y Oferta Académica, leyendo su
+        // propia sección del panel. Antes esto era includes/noticias-hero.php,
+        // una copia con el título escrito en el código y la foto tomada de
+        // Sobre Nosotros: no se podía editar y cambiar la portada de una
+        // página cambiaba la de la otra.
+        $hero_key = 'noticias_hero';
+        include 'includes/sobre-hero.php';
+        ?>
         <?php include 'includes/noticias-main.php'; ?>
         
         <?php

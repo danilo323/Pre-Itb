@@ -21,6 +21,28 @@
     const POR_PAGINA = 4;
     let paginaActual = 1;
 
+    // Al cambiar de página, la vista sube al principio de los resultados.
+    //
+    // Antes se llevaba a la paginación, que está al final de la lista: como
+    // suele quedar fuera de pantalla, el navegador bajaba la vista para
+    // enseñarla y parecía que la página "se iba hacia abajo" sola. Y si la
+    // página nueva traía menos tarjetas, el salto era aún mayor.
+    //
+    // Solo se mueve si el principio de la lista quedó por encima de la
+    // ventana: si ya lo estás viendo, no tiene sentido moverte nada.
+    function subirAResultados() {
+        const ancla = document.querySelector('.oferta-buscador__resultados-head') || grid;
+        if (!ancla) return;
+
+        const margen = 110; // hueco para la cabecera fija
+        const arriba = ancla.getBoundingClientRect().top;
+        if (arriba >= margen) return;
+
+        const destino = Math.max(0, window.scrollY + arriba - margen);
+        const sinAnimacion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        window.scrollTo({ top: destino, behavior: sinAnimacion ? 'auto' : 'smooth' });
+    }
+
     function filtrosActivos(nombreFiltro) {
         return Array.from(checksFiltro)
             .filter((c) => c.dataset.filtro === nombreFiltro && c.checked)
@@ -64,39 +86,94 @@
             const boton = document.createElement('button');
             boton.type = 'button';
             boton.textContent = etiqueta;
-            if (opciones.activa) boton.classList.add('is-activa');
+
+            // Los números se leen solos, pero las flechas no dicen nada: sin
+            // esto, quien use lector de pantalla oye "botón" y poco más.
+            boton.setAttribute('aria-label', opciones.etiquetaLarga || `Ir a la página ${pagina}`);
+
+            if (opciones.activa) {
+                boton.classList.add('is-activa');
+                // Así es como un lector de pantalla anuncia "página actual".
+                boton.setAttribute('aria-current', 'page');
+                boton.setAttribute('aria-label', `Página ${pagina}, página actual`);
+                // Ya estás en ella: pulsarla no lleva a ninguna parte.
+                boton.disabled = true;
+            }
             if (opciones.deshabilitada) boton.disabled = true;
+
             boton.addEventListener('click', () => {
                 paginaActual = pagina;
-                render();
-                paginacion.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                render({ animar: true });
+                subirAResultados();
+                // Tras repintar, el foco vuelve al número de la página en la que
+                // se acaba de entrar, para no perderlo al principio del documento.
+                const nuevoActivo = paginacion.querySelector('.is-activa');
+                if (nuevoActivo) nuevoActivo.focus({ preventScroll: true });
             });
             return boton;
         };
 
-        paginacion.appendChild(crearBoton('‹', paginaActual - 1, { deshabilitada: paginaActual === 1 }));
+        paginacion.appendChild(crearBoton('‹', paginaActual - 1, {
+            deshabilitada: paginaActual === 1,
+            etiquetaLarga: 'Página anterior'
+        }));
         for (let p = 1; p <= paginas; p++) {
             paginacion.appendChild(crearBoton(String(p), p, { activa: p === paginaActual }));
         }
-        paginacion.appendChild(crearBoton('›', paginaActual + 1, { deshabilitada: paginaActual === paginas }));
+        paginacion.appendChild(crearBoton('›', paginaActual + 1, {
+            deshabilitada: paginaActual === paginas,
+            etiquetaLarga: 'Página siguiente'
+        }));
+
+        // "Página 2 de 3" para quien no ve los botones. No se muestra en
+        // pantalla; lo lee el lector cuando cambia.
+        const estado = document.createElement('span');
+        estado.className = 'oferta-buscador__paginacion-estado';
+        estado.textContent = `Página ${paginaActual} de ${paginas}`;
+        paginacion.appendChild(estado);
     }
 
-    function render() {
+    function render(opciones = {}) {
         const filtradas = ordenar(aplicarFiltros());
         const total = filtradas.length;
         const paginas = Math.max(1, Math.ceil(total / POR_PAGINA));
         if (paginaActual > paginas) paginaActual = paginas;
 
-        tarjetas.forEach((card) => { card.hidden = true; });
+        tarjetas.forEach((card) => {
+            card.hidden = true;
+            card.classList.remove('is-entrando');
+            card.style.removeProperty('--orden-entrada');
+        });
 
         const inicio = (paginaActual - 1) * POR_PAGINA;
         const visibles = filtradas.slice(inicio, inicio + POR_PAGINA);
         visibles.forEach((card) => { card.hidden = false; });
 
+        // Las tarjetas nuevas entran con una animación corta y escalonada, para
+        // que se note que la lista cambió. Solo tras una acción (cambiar de
+        // página, filtrar, buscar): en la carga inicial no hace falta.
+        if (opciones.animar && visibles.length) {
+            // Forzar un reflujo antes de poner la clase, o el navegador agrupa
+            // el quitar y el poner y la animación no llega a verse.
+            void grid.offsetWidth;
+            visibles.forEach((card, i) => {
+                card.style.setProperty('--orden-entrada', String(i));
+                card.classList.add('is-entrando');
+            });
+        }
+
         if (contador) {
-            contador.textContent = total === 0
-                ? 'No hay resultados'
-                : `Mostrando ${inicio + 1}-${Math.min(inicio + POR_PAGINA, total)} de ${total} resultado${total === 1 ? '' : 's'}`;
+            if (total === 0) {
+                contador.textContent = 'No hay resultados';
+            } else {
+                const desde = inicio + 1;
+                const hasta = Math.min(inicio + POR_PAGINA, total);
+                let texto = `Mostrando ${desde}-${hasta} de ${total} resultado${total === 1 ? '' : 's'}`;
+                // Con más de una página se dice en cuál estás, además de
+                // resaltarla en los botones de abajo.
+                if (paginas > 1) texto += ` · Página ${paginaActual} de ${paginas}`;
+                contador.textContent = texto;
+            }
         }
         if (vacio) vacio.hidden = total !== 0;
 
@@ -105,7 +182,7 @@
 
     function reiniciarYRenderizar() {
         paginaActual = 1;
-        render();
+        render({ animar: true });
     }
 
     inputBuscar?.addEventListener('input', reiniciarYRenderizar);

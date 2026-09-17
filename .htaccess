@@ -7,6 +7,9 @@ RewriteRule ^admin/login/?$ admin/login.php [L]
 RewriteRule ^admin/logout/?$ admin/logout.php [L]
 RewriteRule ^sobre-nosotros/?$ sobre-nosotros.php [L]
 RewriteRule ^noticias/?$ noticias.php [L]
+# Oferta Academica ya estaba enlazada en el menu, pero solo respondia con la
+# extension .php: sin esta linea, /oferta-academica daba 404.
+RewriteRule ^oferta-academica/?$ oferta-academica.php [L]
 
 # Redirección amigable para páginas dinámicas personalizadas
 RewriteCond %{REQUEST_FILENAME} !-f

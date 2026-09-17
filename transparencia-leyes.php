@@ -1,4 +1,4 @@
-﻿<?php
+<?php
 session_start();
 require_once 'includes/content_helper.php';
 ?>

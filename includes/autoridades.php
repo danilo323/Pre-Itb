@@ -3,7 +3,7 @@
 <!-- NUESTRAS AUTORIDADES                          -->
 <!-- ============================================= -->
 <section class="autoridades" id="autoridades">
-    <div class="autoridades__container">
+    <div class="autoridades__container container">
 
         <!-- Header -->
         <div class="autoridades__header">
@@ -51,32 +51,9 @@
                 ];
             }, $lista_autoridades);
 
-            // Respaldo solo si no queda nadie publicado (colección vacía),
-            // para no dejar la sección en blanco.
-            if (empty($lista_autoridades)) {
-                $lista_autoridades = [
-                    [
-                        'nombre' => 'PhD. Roberto Tolozano Benites',
-                        'cargo' => 'Canciller',
-                        'imagen' => 'img/autoridad_1.png'
-                    ],
-                    [
-                        'nombre' => 'PhD. Elena Tolozano Benites',
-                        'cargo' => 'Rectora',
-                        'imagen' => 'img/autoridad_2.png'
-                    ],
-                    [
-                        'nombre' => 'PhD. Luis Alzate Peralta',
-                        'cargo' => 'Vicerrector Académico<br>y de Investigación',
-                        'imagen' => 'img/autoridad_3.png'
-                    ],
-                    [
-                        'nombre' => 'PhD. Michelle Tolozano Lapierre',
-                        'cargo' => 'Vicerrectora de Extensión<br>y Gestión Administrativa',
-                        'imagen' => 'img/autoridad_4.png'
-                    ]
-                ];
-            }
+            // Sin respaldo escrito en el codigo: si el administrador despublica a
+            // todos, la seccion queda vacia, que es lo que ha pedido. Antes
+            // reaparecian cuatro personas fijas y no habia forma de quitarlas.
 
             foreach ((array)$lista_autoridades as $auth):
                 $foto_path = trim($auth['imagen'] ?? '');

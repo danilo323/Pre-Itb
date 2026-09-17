@@ -1030,6 +1030,20 @@
                 "etiqueta": "",
                 "imagen": "img/programa_gastronomia.jpg",
                 "publicado": true
+            },
+            {
+                "id": 8,
+                "publicado": false,
+                "nombre": "prueba1",
+                "facultad": "Facultad de engermeria",
+                "tipo": "Programa",
+                "modalidad": "Presencial",
+                "duracion": "4 años",
+                "campus": "teresa bnenites",
+                "anio_inicio": "",
+                "campo_estudio": "FATV",
+                "etiqueta": "Nuevo",
+                "imagen": "img/be1862b0bd8ad896401f652485914c82.png"
             }
         ]
     },
@@ -1647,5 +1661,10 @@
                 "publicado": true
             }
         ]
+    },
+    "_meta": {
+        "programas_academicos": {
+            "last_id": 8
+        }
     }
 }

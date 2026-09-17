@@ -21,7 +21,11 @@ require_once 'includes/content_helper.php';
     <link rel="stylesheet" href="css/pagina-interna.css">
 </head>
 
-<body class="page-sobre-nosotros">
+<!-- densidad-compacta: ritmo vertical mas ajustado para esta pagina. Sustituye
+     al antiguo ajuste ".page-sobre-nosotros .autoridades { padding: 48px }" de
+     css/sobre-nosotros.css, que cambiaba el espaciado de esas secciones segun
+     la pagina y se colaba en las paginas creadas desde el panel. -->
+<body class="page-sobre-nosotros densidad-compacta">
 
     <?php include 'includes/header.php'; ?>
 

@@ -116,6 +116,11 @@ function layout_start(string $title = "Panel de Administración", string $curren
     $time       = time();
     $ab         = admin_base();
     $sb         = site_base();
+    // El selector de imágenes puede subir archivos desde cualquier pantalla, y
+    // para eso necesita el token. Antes solo estaba en el formulario de la
+    // pantalla de Biblioteca, así que fuera de ella no había forma de subir.
+    // No añade exposición: el token ya viaja en cada formulario del panel.
+    $csrf       = htmlspecialchars(csrf_token(), ENT_QUOTES, 'UTF-8');
     $extra_css = '';
     foreach ((array)($admin_page_css ?? []) as $asset) {
         $href = preg_match('#^https?://#', $asset) ? $asset : "{$ab}/assets/" . ltrim($asset, '/');
@@ -135,8 +140,9 @@ function layout_start(string $title = "Panel de Administración", string $curren
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="{$ab}/assets/admin.css?v={$time}">
+    <link rel="stylesheet" href="{$ab}/assets/biblioteca.css?v={$time}">
 {$extra_css}</head>
-<body>
+<body data-admin-base="{$ab}" data-csrf="{$csrf}">
     <div class="admin-topbar">
         <div class="topbar-left">
             <!-- Oculto en móvil -->
@@ -177,6 +183,7 @@ function layout_end(): string {
     </div> <!-- /.admin-container -->
 
     <script src="{$ab}/assets/admin.js?v={$time}"></script>
+    <script src="{$ab}/assets/biblioteca.js?v={$time}"></script>
 {$extra_js}</body>
 </html>
 HTML;

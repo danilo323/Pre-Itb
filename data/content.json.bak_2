@@ -1033,7 +1033,7 @@
             },
             {
                 "id": 8,
-                "publicado": false,
+                "publicado": true,
                 "nombre": "prueba1",
                 "facultad": "Facultad de engermeria",
                 "tipo": "Programa",

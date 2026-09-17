@@ -1,10 +1,12 @@
 /* =============================================
    OFERTA ACADÉMICA — BUSCADOR (filtros + grid + paginación)
    ============================================= */
+/* Mismo ancho y margen lateral que el contenedor común del sistema, para que
+   los bordes coincidan con el hero y el carrusel de esta misma página. */
 .oferta-buscador__container {
     max-width: var(--container-max);
     margin: 0 auto;
-    padding: 0 24px;
+    padding-inline: var(--gutter);
 }
 
 /* ---- Barra de búsqueda ---- */
@@ -286,6 +288,28 @@
 }
 
 /* ---- Tarjeta de programa (ancha, imagen a la izquierda) ---- */
+/* Entrada de los resultados.
+   -------------------------------------------------------------------------
+   Al cambiar de página o filtrar, las tarjetas se sustituyen de golpe y cuesta
+   ver que la lista cambió. Entran con un fundido corto y un empujón hacia
+   arriba, escalonadas una tras otra, para que el cambio se lea de un vistazo.
+
+   Es breve a propósito (unos 300 ms, la última empieza 120 ms después que la
+   primera): lo justo para notarlo sin hacer esperar a quien va con prisa.
+   js/oferta-programas.js pone .is-entrando y el orden en --orden-entrada. */
+@keyframes oferta-card-entra {
+    from { opacity: 0; transform: translateY(12px); }
+    to   { opacity: 1; transform: none; }
+}
+
+.oferta-card.is-entrando {
+    animation: oferta-card-entra 0.3s ease-out backwards;
+    animation-delay: calc(var(--orden-entrada, 0) * 40ms);
+}
+
+/* Igual que la insignia y el boton de subir: la entrada se ve en todos los
+   equipos, tambien en los que piden menos movimiento. */
+
 .oferta-card {
     position: relative;
     display: flex;
@@ -319,49 +343,102 @@
     background-color: var(--gray-100);
 }
 
+/* ---- Insignia "Nueva" / "Destacada" ----
+   Tal y como la definio diseno: en reposo se ve SOLO LA ESTRELLA en la
+   esquina superior derecha de la tarjeta, y al pasar el raton la insignia se
+   despliega hacia la izquierda y aparece la palabra.
+
+   Antes la insignia entera estaba oculta hasta el hover, asi que en reposo no
+   habia ninguna marca: no se distinguia un programa nuevo de uno normal sin
+   recorrer la lista con el raton.
+
+   El despliegue se hace con max-width (no con display ni width:auto) porque es
+   lo unico animable aqui: el texto ya esta en el HTML, solo se le da o se le
+   quita sitio. El -1px de top/right monta la insignia sobre el borde de la
+   tarjeta, asi su curva continua la del marco sin dejar una linea gris. */
 .oferta-card__badge {
     position: absolute;
     top: -1px;
     right: -1px;
     display: inline-flex;
     align-items: center;
-    flex-direction: row-reverse;
     background: var(--primary-blue);
     color: var(--white);
     font-family: var(--font-primary);
     font-size: 0.8rem;
     font-weight: 700;
-    padding: 6px 10px;
+    padding: 7px 11px;
     border-radius: 0 var(--radius-md) 0 16px;
     z-index: 2;
     letter-spacing: 0.5px;
     cursor: default;
-    transition: padding 0.3s ease;
+    white-space: nowrap;
+    transition: padding 0.3s ease, box-shadow 0.25s ease;
 }
 
-.oferta-card__badge span {
+/* La palabra: sin sitio en reposo, se lo gana al pasar el raton. */
+.oferta-card__badge > span {
+    display: inline-block;
     max-width: 0;
     opacity: 0;
     overflow: hidden;
-    white-space: nowrap;
-    transition: max-width 0.3s ease, opacity 0.3s ease, margin-right 0.3s ease;
-    margin-right: 0;
+    transition: max-width 0.32s cubic-bezier(0.22, 1, 0.36, 1),
+                opacity 0.22s ease,
+                margin-left 0.32s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.oferta-card__badge:hover {
-    padding: 6px 16px;
+/* :focus-within la despliega tambien al llegar a la tarjeta con el teclado,
+   donde no hay raton que pasar por encima. */
+.oferta-card:hover .oferta-card__badge,
+.oferta-card:focus-within .oferta-card__badge {
+    padding-right: 16px;
+    box-shadow: 0 4px 14px rgba(26, 59, 112, 0.26);
 }
 
-.oferta-card__badge:hover span {
-    max-width: 100px;
+.oferta-card:hover .oferta-card__badge > span,
+.oferta-card:focus-within .oferta-card__badge > span {
+    max-width: 140px;
     opacity: 1;
-    margin-right: 6px;
+    margin-left: 7px;
 }
+
+/* La estrella acompaña el despliegue con un giro corto. */
+.oferta-card__badge svg {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.oferta-card:hover .oferta-card__badge svg,
+.oferta-card:focus-within .oferta-card__badge svg {
+    transform: rotate(72deg);
+}
+
+/* En tactil no existe el hover: si se dejara igual, la palabra no se veria
+   nunca en movil. Alli la insignia sale desplegada desde el principio. */
+@media (hover: none) {
+    .oferta-card__badge {
+        padding-right: 16px;
+    }
+
+    .oferta-card__badge > span {
+        max-width: 140px;
+        opacity: 1;
+        margin-left: 7px;
+    }
+}
+
+/* La insignia se despliega igual en todos los equipos, tambien en los que
+   piden menos movimiento. Es la misma decision que se tomo con el boton de
+   subir: Windows trae los efectos de animacion desactivados en bastantes
+   maquinas, y respetarlo dejaba a buena parte del equipo viendo la palabra
+   siempre puesta, que no es lo que pidio diseno. Para volver atras, reponer
+   aqui un bloque @media (prefers-reduced-motion: reduce) con el despliegue
+   fijo. */
 
 .oferta-card__badge svg {
     color: var(--primary-orange);
     width: 14px;
     height: 14px;
+    flex-shrink: 0;
 }
 
 .oferta-card__body {
@@ -425,8 +502,9 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    gap: 6px;
-    margin-top: 36px;
+    flex-wrap: wrap;
+    gap: var(--space-2xs);
+    margin-top: var(--space-lg);
 }
 
 .oferta-buscador__paginacion button {
@@ -450,10 +528,66 @@
     color: var(--white);
 }
 
+/* Página actual.
+   -------------------------------------------------------------------------
+   El JS ya marcaba el botón con .is-activa, pero no había ninguna regla para
+   esa clase: el número de la página en la que estabas se veía igual que los
+   demás y no había forma de saber dónde estabas.
 
-.oferta-buscador__paginacion button:disabled {
+   Se distingue por tres vías a la vez, no solo por color, para que también se
+   note en pantallas en blanco y negro o con daltonismo: fondo relleno, texto
+   en negrita y un subrayado grueso debajo. */
+.oferta-buscador__paginacion button.is-activa {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: var(--white);
+    font-weight: 800;
+    cursor: default;
+    position: relative;
+}
+
+.oferta-buscador__paginacion button.is-activa::after {
+    content: '';
+    position: absolute;
+    left: 50%;
+    bottom: -6px;
+    transform: translateX(-50%);
+    width: 18px;
+    height: 3px;
+    border-radius: 2px;
+    background: var(--primary-orange);
+}
+
+/* El botón de la página actual no cambia al pasar el cursor: no lleva a
+   ninguna parte porque ya estás ahí. */
+.oferta-buscador__paginacion button.is-activa:hover {
+    background: var(--primary-blue);
+    border-color: var(--primary-blue);
+    color: var(--white);
+}
+
+.oferta-buscador__paginacion button:disabled:not(.is-activa) {
     opacity: 0.4;
     cursor: not-allowed;
+}
+
+/* Foco visible al recorrer con el teclado. */
+.oferta-buscador__paginacion button:focus-visible {
+    outline: 2px solid var(--primary-orange);
+    outline-offset: 2px;
+}
+
+/* Texto solo para lectores de pantalla: "Página 2 de 3" junto a los botones. */
+.oferta-buscador__paginacion-estado {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0, 0, 0, 0);
+    white-space: nowrap;
+    border: 0;
 }
 
 /* =============================================

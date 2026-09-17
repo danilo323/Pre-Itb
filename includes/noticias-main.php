@@ -140,16 +140,20 @@ $todas_las_noticias = array_values(array_filter((array)$todas_las_noticias, func
                 <?php endforeach; ?>
             </div>
 
-            <!-- Paginación -->
-            <div class="noticias-page__pagination">
-                <a href="#" class="noticias-page__page active">1</a>
-                <a href="#" class="noticias-page__page">2</a>
-                <a href="#" class="noticias-page__page">3</a>
-                <a href="#" class="noticias-page__page">4</a>
-                <span class="noticias-page__page-dots">...</span>
-                <a href="#" class="noticias-page__page">8</a>
-                <a href="#" class="noticias-page__page-next"><i class="fas fa-chevron-right"></i></a>
-            </div>
+            <?php /* Paginación: por ahora es maqueta, los números todavía no
+                     llevan a ninguna parte (falta el JS que filtre y pagine,
+                     como el de js/oferta-programas.js). Se deja con sus marcas
+                     de accesibilidad puestas para que al cablearla solo haya
+                     que mover la clase y el aria-current. */ ?>
+            <nav class="noticias-page__pagination" aria-label="Paginación de noticias">
+                <a href="#" class="noticias-page__page active" aria-current="page" aria-label="Página 1, página actual">1</a>
+                <a href="#" class="noticias-page__page" aria-label="Ir a la página 2">2</a>
+                <a href="#" class="noticias-page__page" aria-label="Ir a la página 3">3</a>
+                <a href="#" class="noticias-page__page" aria-label="Ir a la página 4">4</a>
+                <span class="noticias-page__page-dots" aria-hidden="true">...</span>
+                <a href="#" class="noticias-page__page" aria-label="Ir a la página 8">8</a>
+                <a href="#" class="noticias-page__page-next" aria-label="Página siguiente"><i class="fas fa-chevron-right" aria-hidden="true"></i></a>
+            </nav>
 
         </div>
     </div>

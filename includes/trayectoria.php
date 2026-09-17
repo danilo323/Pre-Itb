@@ -18,7 +18,7 @@
             <!-- Perfil del Canciller -->
             <div class="trayectoria__profile">
                 <div class="trayectoria__profile-img">
-                    <img src="<?= content_raw('trayectoria', 'canciller_foto', 'img/icon_trayectoria.jpg') ?>" alt="<?= content_get('trayectoria', 'canciller_nombre', 'PhD. Roberto Tolozano Benites') ?>">
+                    <img src="<?= content_url('trayectoria', 'canciller_foto', 'img/icon_trayectoria.jpg') ?>" alt="<?= content_get('trayectoria', 'canciller_nombre', 'PhD. Roberto Tolozano Benites') ?>">
                 </div>
                 <div class="trayectoria__profile-info">
                     <span class="trayectoria__profile-role"><?= content_get('trayectoria', 'canciller_cargo', 'Canciller') ?></span>
@@ -34,7 +34,7 @@
 
         <!-- Centro: Imagen con Jarallax -->
         <div class="trayectoria__image" data-jarallax data-speed="0.5" data-img-position="top">
-            <img src="<?= content_raw('trayectoria', 'imagen_central', 'img/trayectoria.png') ?>" alt="Estudiantes ITB en el campus" class="jarallax-img">
+            <img src="<?= content_url('trayectoria', 'imagen_central', 'img/trayectoria.png') ?>" alt="Estudiantes ITB en el campus" class="jarallax-img">
         </div>
 
         <!-- Lado derecho: Estadísticas -->
