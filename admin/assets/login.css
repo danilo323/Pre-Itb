@@ -73,9 +73,14 @@
     z-index: 2;
 }
 
+/* Se usa una copia recortada del logotipo (admin/assets/logo-itb.png) y no
+   img/logo-itb-white.png: el original arrastra un margen transparente que
+   se come el 23% del ancho y el 31% del alto del archivo, asi que la marca
+   se veia pequena por mucho que se agrandara la caja. El original sigue
+   igual para el sitio publico; aqui solo se recorto el aire sobrante. */
 .login-vitrina__marca img {
     display: block;
-    height: clamp(40px, 6vh, 62px);
+    height: clamp(48px, 6.6vh, 68px);
     width: auto;
 }
 
@@ -359,7 +364,7 @@
     }
 
     .login-vitrina__marca img {
-        height: 46px;
+        height: 50px;
     }
 
     .login-vitrina__pie {
@@ -379,7 +384,7 @@
     }
 
     .login-vitrina__marca img {
-        height: 40px;
+        height: 42px;
     }
 
     .login-acceso {
