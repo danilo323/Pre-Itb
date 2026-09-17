@@ -1,0 +1,9 @@
+/* =============================================
+   MANIFIESTO DE ESTILOS — PÁGINA OFERTA ACADÉMICA
+   Mismo patrón que css/sobre-nosotros.css: agrupa el CSS propio de esta
+   página (y el del hero de página interna, compartido con Sobre Nosotros)
+   en un solo <link> para el <head>.
+   ============================================= */
+@import url('sobre-hero.css');
+@import url('oferta-intro.css');
+@import url('oferta-programas.css');

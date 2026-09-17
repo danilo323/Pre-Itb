@@ -45,7 +45,18 @@ $pintar_programa = function (array $prog) {
     $img_src = trim($prog['imagen'] ?? '');
     if ($img_src !== '' && !content_image_exists($img_src)) $img_src = 'img/placeholder_imagen.svg';
     $titulo = htmlspecialchars(trim($prog['titulo'] ?? 'Título del programa'), ENT_QUOTES, 'UTF-8');
+    
+    $etiqueta = trim($prog['etiqueta'] ?? '');
+    if ($etiqueta === '') {
+        $etiqueta = (crc32($prog['titulo'] ?? 'x') % 2 === 0) ? 'Nuevo' : 'Tendencia';
+    }
+    $is_new = stripos($etiqueta, 'nuev') !== false;
+    $svg_file = $is_new ? 'estrella-insignia.svg' : 'estrella-5.svg';
     ?>
+    <div class="programas__card-badge<?= !$is_new ? ' programas__card-badge--alt' : '' ?>">
+        <?= file_get_contents(__DIR__ . '/../svg/' . $svg_file) ?>
+        <?= htmlspecialchars($etiqueta, ENT_QUOTES, 'UTF-8') ?>
+    </div>
     <div class="programas__card-img">
         <?php if ($img_src !== ''): ?>
             <img src="<?= htmlspecialchars($img_src, ENT_QUOTES, 'UTF-8') ?>" alt="<?= $titulo ?>">
@@ -54,8 +65,8 @@ $pintar_programa = function (array $prog) {
     <div class="programas__card-body">
         <h3 class="programas__card-title"><?= nl2br($titulo) ?></h3>
         <div class="programas__card-details">
-            <p>Modalidad: <?= htmlspecialchars(trim($prog['modalidad'] ?? 'Presencial'), ENT_QUOTES, 'UTF-8') ?></p>
-            <p>Duración: <?= htmlspecialchars(trim($prog['duracion'] ?? '2 Años'), ENT_QUOTES, 'UTF-8') ?></p>
+            <p><?= file_get_contents(__DIR__ . '/../svg/icono-modalidad.svg') ?> Modalidad: <?= htmlspecialchars(trim($prog['modalidad'] ?? 'Presencial'), ENT_QUOTES, 'UTF-8') ?></p>
+            <p><?= file_get_contents(__DIR__ . '/../svg/icono-duracion.svg') ?> Duración: <?= htmlspecialchars(trim($prog['duracion'] ?? '2 Años'), ENT_QUOTES, 'UTF-8') ?></p>
         </div>
         <a href="#" class="btn--outline-card">Ver programa <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span></a>
     </div>
@@ -66,11 +77,11 @@ $pintar_programa = function (array $prog) {
 <!-- PROGRAMAS DESTACADOS                          -->
 <!-- ============================================= -->
 <section class="programas" id="programas">
-    <div class="programas__container">
+    <div class="programas__container container">
         <div class="programas__header">
             <span class="programas__tag"><?= content_get('programas', 'etiqueta_superior', 'Formación Práctica e Innovadora') ?></span>
             <h2 class="programas__title">
-                <?= htmlspecialchars(content_get('programas', 'titulo', 'Programas Destacados'), ENT_QUOTES, 'UTF-8') ?>
+                <?= content_get('programas', 'titulo', 'Programas Destacados') ?>
             </h2>
             <p class="programas__subtitle">
                 <?= content_get('programas', 'descripcion', 'Descubre nuestros programas tecnológicos de mayor demanda laboral, diseñados para insertarte rápidamente en el mercado de trabajo.') ?>
@@ -110,7 +121,7 @@ $pintar_programa = function (array $prog) {
         </div>
 
         <div class="programas__footer">
-            <a href="#" class="btn--solid">
+            <a href="oferta-academica.php" class="btn--solid">
                 <?= content_get('programas', 'btn_ver_todos', 'Ver todos los programas') ?>
                 <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
             </a>

@@ -116,8 +116,12 @@ function field_menu_builder_parse($raw, array $config) {
     $clean = [];
     foreach ($raw as $item) {
         $clean[] = [
-            'texto' => htmlspecialchars(trim($item['texto'] ?? ''), ENT_QUOTES, 'UTF-8'),
-            'url' => htmlspecialchars(trim($item['url'] ?? ''), ENT_QUOTES, 'UTF-8'),
+            // Se guarda el texto tal cual lo escribio el administrador. Escapar
+            // aqui era un error: includes/header.php ya escapa al pintar, asi que
+            // un "&" se convertia en "&amp;" y volvia a escaparse en cada guardado,
+            // corrompiendo la etiqueta de forma acumulativa.
+            'texto' => trim($item['texto'] ?? ''),
+            'url' => trim($item['url'] ?? ''),
             'nivel' => menu_builder_profundidad($item['nivel'] ?? 0),
         ];
     }

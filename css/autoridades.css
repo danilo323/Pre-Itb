@@ -2,15 +2,11 @@
    NUESTRAS AUTORIDADES
    ============================================= */
 .autoridades {
-    padding: 100px 0;
+    padding-block: var(--section-y-lg);
     background: #f5f5f5;
 }
 
-.autoridades__container {
-    max-width: var(--container-max);
-    margin: 0 auto;
-    padding: 0 24px;
-}
+/* El ancho y el margen lateral los pone .container (css/sistema.css). */
 
 /* ---- Header ---- */
 .autoridades__header {

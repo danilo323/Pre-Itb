@@ -42,7 +42,7 @@
         <div class="navbar__container">
             <!-- Logo -->
             <a href="index.php" class="navbar__logo">
-                <img src="<?= content_raw('ajustes', 'logo_principal', 'img/logo.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
+                <img src="<?= content_url('ajustes', 'logo_principal', 'img/logo.png') ?>" alt="ITB - Instituto Superior Tecnológico Bolivariano" class="navbar__logo-img">
             </a>
 
             <!-- Botón hamburguesa (Mobile) -->
@@ -71,7 +71,7 @@
                             ['texto' => 'Sobre Nosotros', 'url' => 'sobre-nosotros.php', 'nivel' => 'hijo'],
                             ['texto' => 'Himno e Identidad', 'url' => '#', 'nivel' => 'hijo'],
                             ['texto' => 'Transparencia / Leyes', 'url' => 'transparencia-leyes.php', 'nivel' => 'hijo'],
-                            ['texto' => 'Oferta Académica', 'url' => '#', 'nivel' => 'padre'],
+                            ['texto' => 'Oferta Académica', 'url' => 'oferta-academica.php', 'nivel' => 'padre'],
                             ['texto' => 'Vida Estudiantil', 'url' => '#', 'nivel' => 'padre'],
                             ['texto' => 'Admisiones', 'url' => '#', 'nivel' => 'padre'],
                         ];

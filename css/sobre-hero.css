@@ -41,7 +41,9 @@
     max-width: var(--container-max);
     width: 100%;
     margin: 0 auto;
-    padding: 80px 24px;
+    /* El aire de abajo sale de una variable para que una página pueda
+       ajustarlo sin escribir un selector que pise el componente. */
+    padding: var(--space-3xl) var(--gutter) var(--sobre-hero-pb, var(--space-3xl));
 }
 
 .sobre-hero__title {

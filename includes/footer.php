@@ -35,7 +35,7 @@
             <!-- Columna 1: Logo y Teléfonos -->
             <div class="footer-main__col footer-main__col--logo">
                 <a href="index.php" class="footer-main__logo-link">
-                    <img src="<?= content_raw('footer', 'logo', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer-main__logo">
+                    <img src="<?= content_url('footer', 'logo', 'img/logo-itb-white.png') ?>" alt="ITB Logo" class="footer-main__logo">
                 </a>
                 <div class="footer-main__contact">
                     <div class="footer-main__contact-item">
@@ -207,13 +207,13 @@
         <div class="footer-social">
             <span class="footer-social__text"><?= content_get('footer', 'social_texto', '#ITB Instituto Superior Universitario Bolivariano en') ?></span>
             <div class="footer-social__icons">
-                <a href="<?= content_raw('footer', 'youtube_url', '#') ?>"><i class="fab fa-youtube"></i></a>
-                <a href="<?= content_raw('footer', 'instagram_url', '#') ?>"><i class="fab fa-instagram"></i></a>
-                <a href="<?= content_raw('footer', 'facebook_url', '#') ?>"><i class="fab fa-facebook-f"></i></a>
-                <a href="<?= content_raw('footer', 'gplus_url', '#') ?>"><i class="fab fa-google-plus-g"></i></a>
-                <a href="<?= content_raw('footer', 'twitter_url', '#') ?>"><i class="fab fa-twitter"></i></a>
-                <a href="<?= content_raw('footer', 'vimeo_url', '#') ?>"><i class="fab fa-vimeo-v"></i></a>
-                <a href="<?= content_raw('footer', 'linkedin_url', '#') ?>"><i class="fab fa-linkedin-in"></i></a>
+                <a href="<?= content_url('footer', 'youtube_url', '#') ?>"><i class="fab fa-youtube"></i></a>
+                <a href="<?= content_url('footer', 'instagram_url', '#') ?>"><i class="fab fa-instagram"></i></a>
+                <a href="<?= content_url('footer', 'facebook_url', '#') ?>"><i class="fab fa-facebook-f"></i></a>
+                <a href="<?= content_url('footer', 'gplus_url', '#') ?>"><i class="fab fa-google-plus-g"></i></a>
+                <a href="<?= content_url('footer', 'twitter_url', '#') ?>"><i class="fab fa-twitter"></i></a>
+                <a href="<?= content_url('footer', 'vimeo_url', '#') ?>"><i class="fab fa-vimeo-v"></i></a>
+                <a href="<?= content_url('footer', 'linkedin_url', '#') ?>"><i class="fab fa-linkedin-in"></i></a>
             </div>
         </div>
     </div>
@@ -260,17 +260,51 @@
     <i class="fas fa-angles-up"></i>
 </div>
 
+<?php
+// Botón flotante de WhatsApp. El número, el texto de la burbuja y el mensaje
+// con el que se abre el chat se editan en el panel (Pie de Página → Botón
+// flotante de WhatsApp). Antes el número estaba escrito aquí como
+// 593XXXXXXXXX, así que el enlace no llevaba a ninguna parte y sólo un
+// programador podía cambiarlo.
+//
+// Sin número configurado no se pinta la burbuja: mejor eso que un botón que
+// no funciona en todas las páginas del sitio.
+// Se acepta el numero como lo escriba cada cual y se normaliza aqui, porque
+// WhatsApp solo entiende el formato internacional sin signos. Convierte
+// "099 123 4567", "+593 99 123 4567" y "00593991234567" al mismo resultado.
+$wa_numero = preg_replace('/\D+/', '', (string) content_raw('footer', 'whatsapp_numero', ''));
+
+if ($wa_numero !== '') {
+    if (strpos($wa_numero, '00') === 0) {
+        // Prefijo internacional a la europea: 00593... -> 593...
+        $wa_numero = substr($wa_numero, 2);
+    } elseif ($wa_numero[0] === '0') {
+        // Formato nacional ecuatoriano: 0991234567 -> 593991234567
+        $wa_numero = '593' . substr($wa_numero, 1);
+    } elseif (strlen($wa_numero) <= 10 && strpos($wa_numero, '593') !== 0) {
+        // Escrito sin el cero y sin pais: 991234567 -> 593991234567
+        $wa_numero = '593' . $wa_numero;
+    }
+}
+
+if ($wa_numero !== ''):
+    $wa_texto   = content_get('footer', 'whatsapp_texto', '¿Tienes preguntas? Pregunta a ITB Chat');
+    $wa_mensaje = (string) content_raw('footer', 'whatsapp_mensaje', 'Hola, tengo una pregunta sobre el ITB');
+    $wa_url     = 'https://wa.me/' . $wa_numero . '?text=' . rawurlencode($wa_mensaje);
+?>
 <!-- Botón flotante WhatsApp -->
 <div class="whatsapp-float js-floating" id="whatsapp-float">
-    <a href="https://wa.me/593XXXXXXXXX?text=Hola%2C%20tengo%20una%20pregunta%20sobre%20el%20ITB" 
-       target="_blank" 
-       class="whatsapp-float__link" 
-       aria-label="Chatea con ITBChat por WhatsApp">
+    <a href="<?= htmlspecialchars($wa_url, ENT_QUOTES, 'UTF-8') ?>"
+       target="_blank"
+       rel="noopener"
+       class="whatsapp-float__link"
+       aria-label="Chatea con el ITB por WhatsApp">
         <div class="whatsapp-float__label">
-            <span>¿Tienes preguntas? Pregunta a ITB Chat</span>
+            <span><?= $wa_texto ?></span>
         </div>
         <div class="whatsapp-float__icon">
             <i class="fab fa-whatsapp"></i>
         </div>
     </a>
 </div>
+<?php endif; ?>

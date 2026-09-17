@@ -7,7 +7,7 @@
         <div class="areas__header" style="text-align: center;">
             <span class="areas__label"><?= content_get('areas', 'etiqueta_superior', 'Oferta Académica de Vanguardia') ?></span>
             <h2 class="areas__title" style="font-family: var(--font-heading); font-size: 2.8rem;">
-                <?= htmlspecialchars(content_get('areas', 'titulo', 'Nuestras Áreas de Formación'), ENT_QUOTES, 'UTF-8') ?>
+                <?= content_get('areas', 'titulo', 'Nuestras Áreas de Formación') ?>
             </h2>
             <p class="areas__subtitle" style="margin: 0 auto 40px auto;">
                 <?= content_get('areas', 'descripcion', 'Programas tecnológicos de nivel superior diseñados para responder a las exigencias del mercado laboral actual con un enfoque 100% práctico.') ?>

@@ -89,6 +89,25 @@ function content_get(string $section, string $field, string $default = ''): stri
     return htmlspecialchars((string)$value, ENT_QUOTES, 'UTF-8');
 }
 
+/**
+ * Direccion (href o src) lista para imprimir dentro de un atributo.
+ *
+ * Usar SIEMPRE esto en lugar de content_raw() dentro de href="" o src="":
+ * content_raw() devuelve el valor tal cual, asi que un texto con comillas
+ * escrito desde el panel podia cerrar el atributo e inyectar codigo.
+ *
+ * Si el campo esta vacio devuelve $default, para que un enlace sin rellenar
+ * no quede apuntando a la nada.
+ */
+function content_url(string $section, string $field, string $default = '#'): string {
+    $data = content_all_data();
+    $value = trim((string)($data[$section][$field] ?? ''));
+    if ($value === '') {
+        $value = $default;
+    }
+    return htmlspecialchars($value, ENT_QUOTES, 'UTF-8');
+}
+
 function content_raw(string $section, string $field, $default = '') {
     $data = content_all_data();
     $val = $data[$section][$field] ?? null;
@@ -210,58 +229,10 @@ function collection_items(string $collection_name): array {
         return $data[$collection_name]['items'];
     }
 
-    if ($collection_name === 'equipo') {
-        return [
-            1 => [
-                'id' => 1, 
-                'orden' => '1',
-                'nombre' => 'Roberto Tolozano Benites',
-                'nombre_completo' => 'PhD. Roberto Tolozano Benites', 
-                'cargo' => 'Canciller', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/autoridad_1.png',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ],
-            2 => [
-                'id' => 2, 
-                'orden' => '2',
-                'nombre' => 'Elena Tolozano Benites',
-                'nombre_completo' => 'PhD. Elena Tolozano Benites', 
-                'cargo' => 'Rectora', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/autoridad_2.png',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ],
-            3 => [
-                'id' => 3, 
-                'orden' => '3',
-                'nombre' => 'Luis Alzate Peralta',
-                'nombre_completo' => 'PhD. Luis Alzate Peralta', 
-                'cargo' => 'Vicerrector Académico y de Investigación', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/autoridad_3.png',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ],
-            4 => [
-                'id' => 4, 
-                'orden' => '4',
-                'nombre' => 'Michelle Tolozano Lapierre',
-                'nombre_completo' => 'PhD. Michelle Tolozano Lapierre', 
-                'cargo' => 'Vicerrectora de Extensión y Gestión Administrativa', 
-                'linkedin' => '#',
-                'email' => '#',
-                'foto' => 'img/autoridad_4.png',
-                'mostrar_en_home' => '1', 
-                'publicado' => '1'
-            ]
-        ];
-    }
-    
+    // Sin datos guardados, la coleccion esta vacia y punto. Antes se devolvian
+    // cuatro autoridades y tres programas escritos aqui, asi que el
+    // administrador los borraba desde el panel y reaparecian al recargar, sin
+    // forma de evitarlo. Los de programas ademas llevaban '(Prueba)' en el
+    // nombre, o sea que esa palabra podia acabar publicada en el sitio.
     return [];
 }

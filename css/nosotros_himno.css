@@ -3,7 +3,8 @@
    ============================================= */
 
 .himno {
-    padding: 80px 24px;
+    padding-block: var(--section-y-md);
+    padding-inline: var(--gutter);
     background-color: var(--white);
     display: flex;
     justify-content: center;

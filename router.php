@@ -14,6 +14,7 @@ $routes = [
     '/admin/login'    => __DIR__ . '/admin/login.php',
     '/admin/logout'   => __DIR__ . '/admin/logout.php',
     '/sobre-nosotros' => __DIR__ . '/sobre-nosotros.php',
+    '/noticias'       => __DIR__ . '/noticias.php',
 ];
 
 if (isset($routes[$path])) {

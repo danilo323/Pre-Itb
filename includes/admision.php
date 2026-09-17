@@ -25,8 +25,8 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
             <!-- Título Animado (Marquesina Infinita) -->
             <div class="admision__marquee-wrapper">
                 <div class="admision__marquee-track">
-                    <h2 class="admision__huge-title"><?= htmlspecialchars(content_get('admision', 'titulo', 'Inicia tu proceso de admisión'), ENT_QUOTES, 'UTF-8') ?></h2>
-                    <h2 class="admision__huge-title"><?= htmlspecialchars(content_get('admision', 'titulo', 'Inicia tu proceso de admisión'), ENT_QUOTES, 'UTF-8') ?></h2>
+                    <h2 class="admision__huge-title"><?= content_get('admision', 'titulo', 'Inicia tu proceso de admisión') ?></h2>
+                    <h2 class="admision__huge-title"><?= content_get('admision', 'titulo', 'Inicia tu proceso de admisión') ?></h2>
                 </div>
             </div>
             
@@ -34,7 +34,7 @@ $admision_tiene_video = str_contains($admision_video_embed, 'youtube.com/embed/'
                 <!-- Columna Centro: Texto descriptivo -->
                 <div class="admision__text-wrapper">
                     <p class="admision__desc">
-                        <?= htmlspecialchars(content_get('admision', 'descripcion', 'Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.'), ENT_QUOTES, 'UTF-8') ?>
+                        <?= content_get('admision', 'descripcion', 'Da el primer paso hacia tu futuro profesional. Déjanos tus datos y un asesor académico se contactará contigo para guiarte en la elección de tu carrera, becas y opciones de financiamiento.') ?>
                     </p>
                     
                     <a href="<?= $admision_tiene_video ? htmlspecialchars($admision_video_raw, ENT_QUOTES, 'UTF-8') : '#admision-form' ?>"

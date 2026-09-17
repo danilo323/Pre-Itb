@@ -657,4 +657,77 @@ button.footer-main__campus-btn:hover {
 #top-to-bottom.scroll_visible:hover {
     background-color: var(--primary-orange-hover);
     opacity: 1;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(241, 90, 36, 0.35);
 }
+
+/* La flecha acompaña al cursor: insinúa hacia dónde lleva el botón. */
+#top-to-bottom i {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+#top-to-bottom.scroll_visible:hover i {
+    transform: translateY(-2px);
+}
+
+/* Al pulsar, el botón se hunde un momento. */
+#top-to-bottom.scroll_visible:active {
+    transform: translateY(0) scale(0.92);
+    transition-duration: 0.1s;
+}
+
+/* ---------------------------------------------------------------------------
+   Despegue: reacción al clic mientras la página sube.
+   js/main.js pone .top-to-bottom--despegue durante 600ms.
+   El botón da un impulso hacia arriba y suelta un halo que se expande, para
+   que el clic tenga respuesta inmediata aunque el recorrido dure un segundo.
+   --------------------------------------------------------------------------- */
+@keyframes top-to-bottom-impulso {
+    0%   { transform: translateY(0) scale(0.9); }
+    35%  { transform: translateY(-10px) scale(1.06); }
+    100% { transform: translateY(0) scale(1); }
+}
+
+@keyframes top-to-bottom-flecha {
+    0%   { transform: translateY(0); opacity: 1; }
+    40%  { transform: translateY(-16px); opacity: 0; }
+    41%  { transform: translateY(14px); opacity: 0; }
+    100% { transform: translateY(0); opacity: 1; }
+}
+
+@keyframes top-to-bottom-halo {
+    0%   { transform: scale(0.8); opacity: 0.55; }
+    100% { transform: scale(2.1); opacity: 0; }
+}
+
+#top-to-bottom.top-to-bottom--despegue {
+    animation: top-to-bottom-impulso 0.55s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+/* La flecha sale por arriba y vuelve a entrar por abajo. */
+#top-to-bottom.top-to-bottom--despegue i {
+    animation: top-to-bottom-flecha 0.55s ease-in-out;
+}
+
+/* El halo es un pseudo-elemento, así no hace falta más HTML. */
+#top-to-bottom::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    border: 2px solid var(--primary-orange, #F15A24);
+    opacity: 0;
+    pointer-events: none;
+}
+
+#top-to-bottom.top-to-bottom--despegue::after {
+    animation: top-to-bottom-halo 0.6s ease-out;
+}
+
+/* Quien pidió menos animaciones en su sistema no recibe ninguna de estas. */
+/* El impulso, el halo y el vuelo de la flecha se muestran siempre, también en
+   los equipos que piden menos movimiento. Es una decisión tomada con el
+   equipo: Windows trae los efectos de animación desactivados en bastantes
+   máquinas, y respetarlo dejaba a buena parte de los visitantes sin ver nada.
+   Si alguna vez hace falta volver atrás, basta con reponer aquí un bloque
+   @media (prefers-reduced-motion: reduce) que anule estas animaciones. */

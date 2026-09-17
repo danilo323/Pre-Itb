@@ -12,52 +12,37 @@
             {
                 "texto": "Instituto",
                 "url": "",
-                "nivel": "padre"
+                "nivel": 0
             },
             {
                 "texto": "Sobre Nosotros",
                 "url": "sobre-nosotros.php",
-                "nivel": "hijo"
-            },
-            {
-                "texto": "sub-hijo",
-                "url": "",
-                "nivel": "nieto"
-            },
-            {
-                "texto": "Prueba Nivel 4",
-                "url": "prueba-nivel-4.php",
-                "nivel": 3
-            },
-            {
-                "texto": "Prueba Nivel 3",
-                "url": "prueba-nivel-3.php",
-                "nivel": 2
+                "nivel": 1
             },
             {
                 "texto": "HImno e Identidad",
                 "url": "",
-                "nivel": "hijo"
+                "nivel": 1
             },
             {
                 "texto": "Transparencia / Leyes",
                 "url": "",
-                "nivel": "hijo"
+                "nivel": 1
             },
             {
                 "texto": "Oferta Académica",
-                "url": "",
-                "nivel": "padre"
+                "url": "oferta-academica.php",
+                "nivel": 0
             },
             {
                 "texto": "Vida Estudiantil",
                 "url": "",
-                "nivel": "padre"
+                "nivel": 0
             },
             {
                 "texto": "Admisiones",
                 "url": "#",
-                "nivel": "padre"
+                "nivel": 0
             }
         ],
         "top_link_1": "Portal Estudiantil SGA",
@@ -928,6 +913,126 @@
         "ruta_actual": "Sobre Nosotros",
         "div_textos": ""
     },
+    "oferta_hero": {
+        "_visible": "1",
+        "titulo": "Oferta Académica",
+        "ruta_inicio": "Inicio",
+        "ruta_actual": "Oferta Académica",
+        "animaciones": "1",
+        "imagenes_fondo": [
+            {
+                "archivo": "img/2c52f197c2ac047a11ef84bd8c818a9a.png",
+                "estatica": true
+            }
+        ]
+    },
+    "oferta_intro": {
+        "_visible": "1",
+        "titulo": "Cientos de programas.\nUn título diseñado a tu medida.",
+        "descripcion": "Elegir tu especialidad es solo el punto de partida. Diseña tu propia ruta académica combinando las materias y áreas que realmente te apasionan. Estudia con total flexibilidad y llega tan lejos como te propongas."
+    },
+    "programas_academicos": {
+        "items": [
+            {
+                "id": 1,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Enfermería",
+                "facultad": "Facultad de Salud y Servicios Sociales",
+                "campo_estudio": "FASSS",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "Nuevo",
+                "imagen": "img/enfermeria.jpg",
+                "publicado": true
+            },
+            {
+                "id": 2,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Mecánica Automotriz",
+                "facultad": "Facultad de Transporte y Vialidad",
+                "campo_estudio": "FATV",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "Tendencia",
+                "imagen": "img/Mecanica.jpg",
+                "publicado": true
+            },
+            {
+                "id": 3,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Desarrollo de Software",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas / Económicas y Empresariales",
+                "campo_estudio": "FACES",
+                "modalidad": "Hibrida",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2027",
+                "etiqueta": "Nuevo",
+                "imagen": "img/desarrollo_software.jpg",
+                "publicado": true
+            },
+            {
+                "id": 4,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Administración de Empresas",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "campo_estudio": "FACES",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "",
+                "imagen": "img/programa_administracion.jpg",
+                "publicado": true
+            },
+            {
+                "id": 5,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Contabilidad",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "campo_estudio": "FACES",
+                "modalidad": "Hibrida",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2027",
+                "etiqueta": "",
+                "imagen": "img/programa_contabilidad.jpg",
+                "publicado": true
+            },
+            {
+                "id": 6,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Diseño Gráfico",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "campo_estudio": "FACES",
+                "modalidad": "Remoto",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2026",
+                "etiqueta": "Tendencia",
+                "imagen": "img/programa_diseno_grafico.jpg",
+                "publicado": true
+            },
+            {
+                "id": 7,
+                "tipo": "Programa",
+                "nombre": "Tecnología Superior en Gastronomía",
+                "facultad": "Facultad de Transporte y Vialidad",
+                "campo_estudio": "FATV",
+                "modalidad": "Presencial",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "anio_inicio": "2027",
+                "etiqueta": "",
+                "imagen": "img/programa_gastronomia.jpg",
+                "publicado": true
+            }
+        ]
+    },
     "himno": {
         "_visible": "1",
         "div_textos": "",
@@ -1236,13 +1341,108 @@
             "nombre": "academia",
             "slug": "academia",
             "icon": "bi bi-mortarboard-fill",
-            "menu_pos": "hijo:Oferta Académica",
+            "menu_pos": "bajo:Instituto>Sobre Nosotros>sub-hijo",
+            "menu_before": "",
             "secciones": [
+                "presentacion",
+                "valores",
                 "cogobierno",
+                "programas",
                 "servicios",
                 "alianzas"
             ],
             "contenido": {
+                "programas": {
+                    "_visible": "1",
+                    "etiqueta_superior": "Oferta Académica",
+                    "titulo": "Programas Destacados",
+                    "descripcion": "Descubre nuestros programas tecnológicos de mayor demanda laboral, diseñados para insertarte rápidamente en el mercado de trabajo.",
+                    "btn_ver_todos": "Ver todos los programas",
+                    "lista_programas": [
+                        {
+                            "imagen": "img/10386d1246de0db082c29c5ab5820439.jpg",
+                            "modalidad": "Presencial",
+                            "area": "Salud",
+                            "titulo": "Tecnología Superior en Enfermería",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/Mecanica.jpg",
+                            "modalidad": "Presencial",
+                            "area": "Ciencias Empresariales",
+                            "titulo": "Tecnología Superior en Marketing Digital",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/desarrollo_software.jpg",
+                            "modalidad": "Presencial",
+                            "area": "Transporte",
+                            "titulo": "Tecnología Superior en Logística y Transporte",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/administracion.jpg",
+                            "modalidad": "Híbrido",
+                            "area": "Tecnología",
+                            "titulo": "Tecnología Superior en Desarrollo de Software",
+                            "duracion": "5 Semestres",
+                            "sede": "Guayaquil"
+                        },
+                        {
+                            "imagen": "img/programa_gastronomia.jpg",
+                            "modalidad": "Presencial",
+                            "area": "",
+                            "titulo": "Tecnología Superior en Gastronomía",
+                            "duracion": "5 Niveles",
+                            "sede": ""
+                        },
+                        {
+                            "imagen": "img/programa_contabilidad.jpg",
+                            "modalidad": "Presencial",
+                            "area": "",
+                            "titulo": "Tecnología Superior en Contabilidad",
+                            "duracion": "5 Niveles",
+                            "sede": ""
+                        },
+                        {
+                            "imagen": "img/programa_diseno_grafico.jpg",
+                            "modalidad": "Presencial",
+                            "area": "",
+                            "titulo": "Técnico Superior en Diseño Gráfico",
+                            "duracion": "2 Niveles",
+                            "sede": ""
+                        }
+                    ],
+                    "div_global": null,
+                    "prog1_imagen": "img/enfermeria.jpg",
+                    "prog1_modalidad": "Presencial",
+                    "prog1_area": "Salud",
+                    "prog1_titulo": "Tecnología Superior en Enfermería",
+                    "prog1_duracion": "5 Semestres",
+                    "prog1_sede": "Guayaquil",
+                    "prog2_imagen": "img/Mecanica.jpg",
+                    "prog2_modalidad": "Presencial",
+                    "prog2_area": "Ciencias Empresariales",
+                    "prog2_titulo": "Tecnología Superior en Marketing Digital",
+                    "prog2_duracion": "5 Semestres",
+                    "prog2_sede": "Guayaquil",
+                    "prog3_imagen": "img/desarrollo_software.jpg",
+                    "prog3_modalidad": "Presencial",
+                    "prog3_area": "Transporte",
+                    "prog3_titulo": "Tecnología Superior en Logística y Transporte",
+                    "prog3_duracion": "5 Semestres",
+                    "prog3_sede": "Guayaquil",
+                    "prog4_imagen": "img/administracion.jpg",
+                    "prog4_modalidad": "Híbrido",
+                    "prog4_area": "Tecnología",
+                    "prog4_titulo": "Tecnología Superior en Desarrollo de Software",
+                    "prog4_duracion": "5 Semestres",
+                    "prog4_sede": "Guayaquil",
+                    "info_programas": null
+                },
                 "servicios": {
                     "_visible": "1",
                     "serv1_titulo": "Bienestar Estudiantil",
@@ -1362,6 +1562,51 @@
                     "div_logos": "",
                     "div_fotos": ""
                 },
+                "sobre_intro": {
+                    "_visible": "1",
+                    "info_compartido": "",
+                    "div_textos": "",
+                    "etiqueta_superior": "Trayectoria y Compromiso Educativo",
+                    "titulo": "Formando Líderes Prácticos con Visión de Futuro",
+                    "descripcion": "En ITB priorizamos una educación de alta calidad enfocada en formar pensadores innovadores. Te brindamos un entorno práctico para potenciar tus talentos más allá del salón de clases, conectándote con la comunidad y el sector laboral.\r\n\r\nCon casi 3 décadas de trayectoria desde nuestra fundación en 1996, nos hemos consolidado como un referente de educación superior en Guayaquil, abriendo las puertas para que transformes tu pasión en tu profesión.",
+                    "div_cita": "",
+                    "cita_texto": "Impulsamos una educación práctica, accesible e innovadora para formarte como el profesional que la industria necesita.",
+                    "cita_autor": "PhD. Elena Tolozano Benites, Rectora",
+                    "div_imagen": "",
+                    "imagen": "img/21418cd57745501d0dbda34b79eacb7e.jpg"
+                },
+                "sobre_valores": {
+                    "_visible": "1",
+                    "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
+                    "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
+                    "items": [
+                        {
+                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
+                            "titulo": "Cogobierno",
+                            "descripcion": "Participación y gestión democrática"
+                        },
+                        {
+                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
+                            "titulo": "Igualdad",
+                            "descripcion": "Oportunidades sin discriminación"
+                        },
+                        {
+                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
+                            "titulo": "Calidad",
+                            "descripcion": "Excelencia en educación superior"
+                        },
+                        {
+                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
+                            "titulo": "Pertinencia",
+                            "descripcion": "Programas alineados a la sociedad"
+                        },
+                        {
+                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
+                            "titulo": "Integralidad",
+                            "descripcion": "Formación académica y humana"
+                        }
+                    ]
+                },
                 "sobre_cogobierno": {
                     "_visible": "1",
                     "titulo": "Co Gobierno",
@@ -1387,29 +1632,7 @@
                     "card_boton_url": "#"
                 }
             },
-            "updated_at": "2026-09-11 06:13:18"
-        },
-        "pg_cf4da6179df8": {
-            "id": "pg_cf4da6179df8",
-            "nombre": "Prueba Nivel 3",
-            "slug": "prueba-nivel-3",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "bajo:Instituto>Sobre Nosotros",
-            "menu_before": "",
-            "secciones": [],
-            "contenido": [],
-            "updated_at": "2026-09-16 01:37:39"
-        },
-        "pg_135c29c2e0b2": {
-            "id": "pg_135c29c2e0b2",
-            "nombre": "Prueba Nivel 4",
-            "slug": "prueba-nivel-4",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "bajo:Instituto>Sobre Nosotros>sub-hijo",
-            "menu_before": "",
-            "secciones": [],
-            "contenido": [],
-            "updated_at": "2026-09-16 01:38:02"
+            "updated_at": "2026-09-16 01:43:22"
         }
     },
     "documentos_transparencia": {
