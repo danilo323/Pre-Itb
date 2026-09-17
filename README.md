@@ -44,6 +44,39 @@ El proyecto está dividido en dos partes independientes:
     └── assets/            # CSS/JS exclusivos del panel (aislados del frontend público)
 ```
 
+## 💾 Dónde vive el contenido
+
+El contenido que se edita desde el panel **no está en la base de datos por defecto**: vive en archivos dentro de `data/`. MySQL es opcional.
+
+Al **leer**, el orden de preferencia es: MySQL (tabla `site_content`) si está conectada y tiene filas → si no, `data/content.json` → si tampoco, la semilla `data/seed/content.json`.
+Al **guardar**, siempre se escribe el JSON y, además, MySQL si hay conexión.
+
+> Ojo con ese orden: **MySQL gana al leer**. Dos personas con el mismo código pueden ver contenidos distintos según lo que tenga cada una en su MySQL local. No es un fallo, es el diseño — pero conviene saberlo.
+
+Las tablas no hay que crearlas a mano: `includes/db.php` ejecuta un `CREATE TABLE IF NOT EXISTS` en cuanto hay conexión.
+
+### Qué archivos de `data/` viajan en el repositorio
+
+| Archivo | ¿Va en el repo? | Qué guarda |
+|---|---|---|
+| `content.json` | **Sí** | El contenido del sitio: textos, imágenes, programas, menú |
+| `seed/content.json` | **Sí** | Semilla de arranque para una instalación nueva |
+| `content.json.bak_1..5` | No | Respaldos rotativos automáticos (las últimas 5 versiones) |
+| `rate_limits.json` | No | Contador de intentos fallidos de acceso al panel |
+| `registros.json` | **Sí, por ahora** | Solicitudes del formulario de admisión ⚠️ |
+
+Los dos ignorados son estado local de cada máquina y se regeneran solos; no sirve de nada que viajen.
+
+> ⚠️ **Pendiente con `registros.json`.** Guarda las solicitudes del formulario de admisión: nombre, apellido, email, teléfono y **cédula**. Hoy solo tiene registros de prueba, por eso se dejó dentro del repositorio. **Antes de que el formulario reciba solicitudes reales hay que sacarlo**, o se van a subir datos personales de gente real en cada commit.
+>
+> La regla ya está puesta en el `.gitignore`, pero eso no basta con un archivo que git ya venía siguiendo: hay que ejecutar además `git rm --cached data/registros.json`. Y avisar antes al equipo, porque a quien haga `pull` se le borrará su copia local.
+
+### Editar contenido entre varias personas
+
+`content.json` se reescribe **entero** en cada guardado del panel. Si dos personas editan a la vez, ese archivo choca en git y resolverlo a mano es muy incómodo.
+
+Mientras no haya una MySQL compartida, la regla es simple: **que edite contenido una persona a la vez**, con `pull` antes y `push` después.
+
 ## 🚀 Cómo correr el proyecto
 
 Hay dos formas de levantarlo — usa la que te resulte más cómoda, las dos funcionan igual:
@@ -103,4 +136,6 @@ Contraseña:  1234
 ## 🗺️ Próximos pasos
 
 - Probar y afinar la sincronización con MySQL en un entorno real (hoy corre sobre JSON en disco).
+- Sacar `data/registros.json` del repositorio antes de que el formulario reciba solicitudes reales (ver *Dónde vive el contenido*).
+- Registrar la ruta limpia `/transparencia-leyes` en `router.php` y `.htaccess`, y enlazarla desde el menú (hoy solo responde por `/transparencia-leyes.php`).
 - Optimizar carga y rendimiento SEO.
