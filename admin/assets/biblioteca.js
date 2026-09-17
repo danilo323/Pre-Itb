@@ -9,13 +9,76 @@
 //
 //   2. La pantalla admin/biblioteca.php: arrastrar y soltar archivos.
 //
-// El selector nunca sube nada: solo devuelve la ruta de una imagen que YA
-// está en la biblioteca. Subir es cosa de la pantalla de Biblioteca.
+// Las dos suben por el mismo sitio: subirImagen(), aquí abajo. Antes la
+// subida vivía dentro del bloque de la pantalla de Biblioteca, que sale
+// antes en cualquier otra pantalla, así que el selector no podía subir y
+// se limitaba a enlazar a la Biblioteca en una pestaña nueva.
 
 (function () {
     'use strict';
 
     const baseAdmin = document.body.dataset.adminBase || '/admin';
+
+    /* ============================================================
+       0. COSAS QUE USAN LAS DOS PARTES
+       ============================================================ */
+
+    // El token va en el <body> (views/layout.php). Se deja el formulario de
+    // la pantalla de Biblioteca como respaldo por si alguna pantalla del
+    // panel no pasara por el layout.
+    function tokenCsrf() {
+        const enCuerpo = document.body.dataset.csrf;
+        if (enCuerpo) return enCuerpo;
+        const input = document.querySelector('input[name="csrf_token"]');
+        return input ? input.value : '';
+    }
+
+    // Sube UN archivo y va contando su progreso. XMLHttpRequest y no fetch,
+    // porque fetch todavía no informa del progreso de subida.
+    // Resuelve siempre (nunca rechaza): { ok, imagen } o { ok:false, error }.
+    function subirImagen(archivo, alProgresar) {
+        return new Promise((resolve) => {
+            const datos = new FormData();
+            datos.append('csrf_token', tokenCsrf());
+            datos.append('action', 'subir_una');
+            datos.append('imagen', archivo);
+
+            const xhr = new XMLHttpRequest();
+            // Siempre a biblioteca.php, no a la pantalla actual: el endpoint
+            // responde antes de pintar nada, así que sirve desde cualquiera.
+            xhr.open('POST', baseAdmin + '/biblioteca.php', true);
+
+            xhr.upload.addEventListener('progress', (e) => {
+                if (!e.lengthComputable || typeof alProgresar !== 'function') return;
+                alProgresar(Math.round((e.loaded / e.total) * 100));
+            });
+
+            xhr.addEventListener('load', () => {
+                let r = {};
+                try { r = JSON.parse(xhr.responseText); } catch (err) { r = {}; }
+                if (xhr.status >= 200 && xhr.status < 300 && r.ok) {
+                    resolve({ ok: true, imagen: r.imagen });
+                } else if (xhr.status === 403) {
+                    // csrf_check() corta con texto plano, no con JSON.
+                    resolve({ ok: false, error: 'La sesión caducó. Recarga la página e inténtalo otra vez.' });
+                } else {
+                    resolve({ ok: false, error: r.error || 'No se pudo subir.' });
+                }
+            });
+
+            xhr.addEventListener('error', () => {
+                resolve({ ok: false, error: 'Se perdió la conexión.' });
+            });
+
+            xhr.send(datos);
+        });
+    }
+
+    // Mismo criterio que la pantalla de Biblioteca: imágenes y SVG. El
+    // servidor vuelve a comprobarlo; esto solo evita el viaje en balde.
+    function esImagen(f) {
+        return /^image\//.test(f.type) || /\.svg$/i.test(f.name);
+    }
 
     /* ============================================================
        1. SELECTOR DE IMÁGENES
@@ -24,6 +87,8 @@
     let overlay = null;      // el modal, se construye una sola vez
     let alElegir = null;     // callback del campo que lo abrió
     let imagenes = [];       // última lista traída del servidor
+    let recienSubidas = [];  // rutas de esta sesión del modal, para destacarlas
+    let subiendoEnPicker = false;
 
     function construirModal() {
         overlay = document.createElement('div');
@@ -37,19 +102,40 @@
                     </button>
                 </div>
                 <div class="bib-picker__barra">
-                    <input type="text" class="bib-picker__buscar form-input" placeholder="Buscar por nombre de archivo...">
-                    <a href="${baseAdmin}/biblioteca.php" target="_blank" rel="noopener" class="btn btn-outline btn-sm">
+                    <div class="bib-picker__campo">
+                        <i class="bi bi-search" aria-hidden="true"></i>
+                        <input type="search" class="bib-picker__buscar" placeholder="Buscar por nombre de archivo…"
+                               aria-label="Buscar imágenes por nombre de archivo" autocomplete="off">
+                        <button type="button" class="bib-picker__limpiar" aria-label="Limpiar la búsqueda" hidden>
+                            <i class="bi bi-x-lg"></i>
+                        </button>
+                    </div>
+                    <button type="button" class="bib-picker__subir">
                         <i class="bi bi-upload"></i> Subir imágenes
-                    </a>
+                    </button>
+                    <input type="file" class="bib-picker__file" accept="image/*,.svg" multiple hidden>
                 </div>
+                <div class="bib-picker__cola" hidden aria-live="polite"></div>
                 <div class="bib-picker__grid"></div>
                 <div class="bib-picker__pie">
                     <span class="bib-picker__conteo"></span>
-                    <button type="button" class="btn btn-outline bib-picker__cancelar">Cancelar</button>
+                    <div class="bib-picker__acciones">
+                        <a href="${baseAdmin}/biblioteca.php" target="_blank" rel="noopener" class="bib-picker__enlace">
+                            <i class="bi bi-box-arrow-up-right"></i> Administrar biblioteca
+                        </a>
+                        <button type="button" class="btn btn-outline bib-picker__cancelar">Cancelar</button>
+                    </div>
+                </div>
+                <div class="bib-picker__soltar" aria-hidden="true">
+                    <span><i class="bi bi-cloud-arrow-up-fill"></i> Suelta las imágenes para subirlas</span>
                 </div>
             </div>
         `;
         document.body.appendChild(overlay);
+
+        const buscar = overlay.querySelector('.bib-picker__buscar');
+        const limpiar = overlay.querySelector('.bib-picker__limpiar');
+        const file = overlay.querySelector('.bib-picker__file');
 
         overlay.querySelector('.bib-picker__cerrar').addEventListener('click', cerrar);
         overlay.querySelector('.bib-picker__cancelar').addEventListener('click', cerrar);
@@ -58,8 +144,16 @@
         // cualquier clic en la rejilla cerraría el selector.
         overlay.addEventListener('click', e => { if (e.target === overlay) cerrar(); });
 
-        overlay.querySelector('.bib-picker__buscar').addEventListener('input', function () {
+        buscar.addEventListener('input', function () {
+            limpiar.hidden = this.value === '';
             pintar(this.value.trim().toLowerCase());
+        });
+
+        limpiar.addEventListener('click', () => {
+            buscar.value = '';
+            limpiar.hidden = true;
+            pintar('');
+            buscar.focus();
         });
 
         // Delegación: las tarjetas se repintan al buscar, así que el listener
@@ -70,9 +164,79 @@
             elegir(card.dataset.ruta, card.dataset.src);
         });
 
-        document.addEventListener('keydown', e => {
-            if (e.key === 'Escape' && overlay.classList.contains('is-visible')) cerrar();
+        /* ---- Subida desde el propio selector ---- */
+        overlay.querySelector('.bib-picker__subir').addEventListener('click', () => file.click());
+        file.addEventListener('change', () => {
+            subirEnPicker(file.files);
+            file.value = '';   // permite volver a elegir el mismo archivo
         });
+
+        engancharArrastre();
+
+        document.addEventListener('keydown', e => {
+            if (e.key !== 'Escape' || !overlay.classList.contains('is-visible')) return;
+            // Con la búsqueda escrita, Escape la limpia antes de cerrar: es lo
+            // que espera quien está filtrando.
+            if (buscar.value !== '') {
+                buscar.value = '';
+                limpiar.hidden = true;
+                pintar('');
+                return;
+            }
+            cerrar();
+        });
+    }
+
+    /* ---- Arrastrar y soltar sobre el selector ----
+       Mismo planteamiento que en la pantalla de Biblioteca: dragenter y
+       dragleave burbujean por cada hijo, así que hace falta un contador; y
+       el velo se quita SIEMPRE al soltar, incluso si lo soltado no eran
+       archivos, porque si no se queda tapando el modal y parece colgado. */
+    function engancharArrastre() {
+        let profundidad = 0;
+        let arrastreInterno = false;
+
+        const traeArchivos = (e) =>
+            !!e.dataTransfer && Array.from(e.dataTransfer.types || []).includes('Files');
+
+        const quitar = () => {
+            profundidad = 0;
+            overlay.classList.remove('is-soltando');
+        };
+
+        // Arrastrar una miniatura del propio selector no es subir nada.
+        overlay.addEventListener('dragstart', () => { arrastreInterno = true; });
+        overlay.addEventListener('dragend', () => { arrastreInterno = false; quitar(); });
+
+        overlay.addEventListener('dragenter', (e) => {
+            if (arrastreInterno || !traeArchivos(e)) return;
+            profundidad++;
+            overlay.classList.add('is-soltando');
+        });
+
+        overlay.addEventListener('dragover', (e) => {
+            if (arrastreInterno || !traeArchivos(e)) return;
+            e.preventDefault();   // sin esto el navegador abre el archivo
+        });
+
+        overlay.addEventListener('dragleave', () => {
+            profundidad = Math.max(0, profundidad - 1);
+            if (profundidad === 0) quitar();
+        });
+
+        overlay.addEventListener('drop', (e) => {
+            quitar();
+            arrastreInterno = false;
+            if (!e.dataTransfer || !e.dataTransfer.files.length) return;
+            e.preventDefault();
+            subirEnPicker(e.dataTransfer.files);
+        });
+
+        // Redes de seguridad: si el arrastre acaba fuera de la ventana no
+        // llega ningún evento y el velo se quedaría puesto.
+        window.addEventListener('blur', quitar);
+        document.addEventListener('visibilitychange', () => { if (document.hidden) quitar(); });
+        document.addEventListener('keydown', (e) => { if (e.key === 'Escape') quitar(); });
     }
 
     function pintar(filtro) {
@@ -87,21 +251,125 @@
                 <p class="bib-picker__vacio">
                     ${imagenes.length
                         ? 'Ninguna imagen coincide con esa búsqueda.'
-                        : 'La biblioteca está vacía. Sube imágenes desde Globales → Biblioteca.'}
+                        : 'La biblioteca está vacía. Usa «Subir imágenes» aquí arriba, o arrastra los archivos hasta esta ventana.'}
                 </p>`;
             conteo.textContent = '';
             return;
         }
 
-        grid.innerHTML = lista.map(i => `
-            <button type="button" class="bib-picker__item" data-ruta="${escapar(i.ruta)}" data-src="${escapar(i.src)}">
+        grid.innerHTML = lista.map(i => {
+            const nueva = recienSubidas.includes(i.ruta);
+            return `
+            <button type="button" class="bib-picker__item${nueva ? ' is-nueva' : ''}" data-ruta="${escapar(i.ruta)}" data-src="${escapar(i.src)}">
                 <span class="bib-picker__thumb"><img src="${escapar(i.src)}" alt="" loading="lazy"></span>
+                ${nueva ? '<span class="bib-picker__nueva">Recién subida</span>' : ''}
                 <span class="bib-picker__nombre" title="${escapar(i.nombre)}">${escapar(i.nombre)}</span>
                 <span class="bib-picker__peso">${escapar(i.peso)}</span>
-            </button>
-        `).join('');
+            </button>`;
+        }).join('');
 
         conteo.textContent = lista.length + (lista.length === 1 ? ' imagen' : ' imágenes');
+    }
+
+    /* ---- Subir desde el selector ----
+       Se sube de una en una para poder enseñar el progreso real de cada
+       archivo y decir cuál falló y por qué, igual que en la pantalla de
+       Biblioteca. Las que entran se colocan las PRIMERAS de la rejilla y se
+       marcan, que es lo que se acaba de subir y lo que se va a elegir. */
+    async function subirEnPicker(archivos) {
+        if (subiendoEnPicker) return;
+
+        const buenos = Array.from(archivos || []).filter(esImagen);
+        const cola = overlay.querySelector('.bib-picker__cola');
+
+        if (!buenos.length) {
+            pintarCola([{ nombre: '', estado: 'error', error: 'Eso no es una imagen. Se admiten JPG, PNG, WEBP, GIF y SVG.' }]);
+            return;
+        }
+
+        subiendoEnPicker = true;
+        overlay.querySelector('.bib-picker__subir').disabled = true;
+
+        const items = buenos.map(f => ({ nombre: f.name, archivo: f, estado: 'espera', progreso: 0, error: '' }));
+        pintarCola(items);
+
+        const entradas = [];
+        const fallos = [];
+
+        for (const item of items) {
+            item.estado = 'subiendo';
+            pintarCola(items);
+
+            const r = await subirImagen(item.archivo, (pct) => {
+                item.progreso = pct;
+                pintarCola(items);
+            });
+
+            if (r.ok) {
+                item.estado = 'hecho';
+                entradas.push(r.imagen);
+                recienSubidas.push(r.imagen.ruta);
+                // Al principio: biblioteca_listar() ordena por fecha
+                // descendente, así que ahí es donde le toca.
+                imagenes.unshift(r.imagen);
+            } else {
+                item.estado = 'error';
+                item.error = r.error;
+                fallos.push(item);
+            }
+            pintarCola(items);
+        }
+
+        subiendoEnPicker = false;
+        overlay.querySelector('.bib-picker__subir').disabled = false;
+
+        // La búsqueda se limpia: si había un filtro puesto, lo recién subido
+        // no aparecería y daría la sensación de que no se subió.
+        const buscar = overlay.querySelector('.bib-picker__buscar');
+        buscar.value = '';
+        overlay.querySelector('.bib-picker__limpiar').hidden = true;
+        pintar('');
+
+        if (entradas.length) {
+            const grid = overlay.querySelector('.bib-picker__grid');
+            grid.scrollTop = 0;
+            // Se le da el foco a la primera: así se elige con Enter, sin
+            // tener que buscarla entre las demás.
+            const primera = grid.querySelector('.bib-picker__item.is-nueva');
+            if (primera) primera.focus();
+        }
+
+        // Los errores se quedan a la vista; si todo fue bien, la cola se
+        // retira sola y deja sitio a la rejilla.
+        if (!fallos.length) {
+            setTimeout(() => {
+                if (subiendoEnPicker) return;
+                cola.hidden = true;
+                cola.innerHTML = '';
+            }, 1400);
+        } else {
+            pintarCola(items.filter(i => i.estado === 'error'));
+        }
+    }
+
+    function pintarCola(items) {
+        const cola = overlay.querySelector('.bib-picker__cola');
+        if (!items.length) { cola.hidden = true; cola.innerHTML = ''; return; }
+
+        cola.hidden = false;
+        cola.innerHTML = items.map(i => {
+            const icono = i.estado === 'hecho' ? 'bi-check-circle-fill'
+                : i.estado === 'error' ? 'bi-exclamation-triangle-fill'
+                : 'bi-arrow-up-circle';
+            return `
+            <div class="bib-picker__subida is-${i.estado}">
+                <i class="bi ${icono}" aria-hidden="true"></i>
+                <span class="bib-picker__subida-nombre">${escapar(i.nombre)}</span>
+                ${i.estado === 'subiendo'
+                    ? `<span class="bib-picker__progreso"><span style="width:${i.progreso}%"></span></span>`
+                    : `<span class="bib-picker__subida-msg">${escapar(i.error || (i.estado === 'hecho' ? 'Subida' : 'En cola'))}</span>`}
+            </div>`;
+        }).join('');
     }
 
     // Los nombres de archivo van dentro de atributos HTML: hay que escaparlos
@@ -131,8 +399,16 @@
         overlay.classList.remove('is-hidden');
         requestAnimationFrame(() => overlay.classList.add('is-visible'));
 
+        // Cada apertura empieza limpia: la marca de "recién subida" es de la
+        // sesión anterior y ya no dice nada.
+        recienSubidas = [];
+        const cola = overlay.querySelector('.bib-picker__cola');
+        cola.hidden = true;
+        cola.innerHTML = '';
+
         const buscar = overlay.querySelector('.bib-picker__buscar');
         buscar.value = '';
+        overlay.querySelector('.bib-picker__limpiar').hidden = true;
         overlay.querySelector('.bib-picker__grid').innerHTML =
             '<p class="bib-picker__vacio">Cargando imágenes…</p>';
 
@@ -164,10 +440,8 @@
     if (!zona && !grid) return;
 
     const $ = (id) => document.getElementById(id);
-    const token = () => {
-        const i = document.querySelector('#biblioteca-subida [name="csrf_token"]');
-        return i ? i.value : '';
-    };
+    // Mismo token que usa el selector: vive en el <body> (views/layout.php).
+    const token = tokenCsrf;
 
     // Mensaje flotante breve, para no recargar la página por cada acción.
     function avisar(texto, tipo) {
@@ -331,49 +605,26 @@
         pintarPreviews();
     }
 
-    // Sube UN archivo y va contando su progreso. XMLHttpRequest y no fetch,
-    // porque fetch todavía no informa del progreso de subida.
-    function subirUno(item) {
-        return new Promise((resolve) => {
-            const datos = new FormData();
-            datos.append('csrf_token', token());
-            datos.append('action', 'subir_una');
-            datos.append('imagen', item.archivo);
+    // La subida en sí la hace subirImagen(), compartida con el selector.
+    // Aquí solo se traduce su progreso y su resultado a las miniaturas de
+    // esta pantalla.
+    async function subirUno(item) {
+        item.estado = 'subiendo';
+        pintarPreviews();
 
-            const xhr = new XMLHttpRequest();
-            xhr.open('POST', window.location.pathname, true);
-
-            xhr.upload.addEventListener('progress', (e) => {
-                if (!e.lengthComputable) return;
-                item.progreso = Math.round((e.loaded / e.total) * 100);
-                pintarPreviews();
-            });
-
-            xhr.addEventListener('load', () => {
-                let r = {};
-                try { r = JSON.parse(xhr.responseText); } catch (err) { r = {}; }
-                if (xhr.status >= 200 && xhr.status < 300 && r.ok) {
-                    item.estado = 'hecho';
-                    resolve({ ok: true, imagen: r.imagen });
-                } else {
-                    item.estado = 'error';
-                    item.error = r.error || 'No se pudo subir.';
-                    resolve({ ok: false, error: item.error });
-                }
-                pintarPreviews();
-            });
-
-            xhr.addEventListener('error', () => {
-                item.estado = 'error';
-                item.error = 'Se perdió la conexión.';
-                pintarPreviews();
-                resolve({ ok: false, error: item.error });
-            });
-
-            item.estado = 'subiendo';
+        const r = await subirImagen(item.archivo, (pct) => {
+            item.progreso = pct;
             pintarPreviews();
-            xhr.send(datos);
         });
+
+        if (r.ok) {
+            item.estado = 'hecho';
+        } else {
+            item.estado = 'error';
+            item.error = r.error;
+        }
+        pintarPreviews();
+        return r;
     }
 
     $('biblioteca-subida')?.addEventListener('submit', async (e) => {
