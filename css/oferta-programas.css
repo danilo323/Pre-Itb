@@ -140,28 +140,13 @@
     cursor: pointer;
 }
 
-/* "Campo de Estudio" no lleva casilla visible en el diseño: se ve como
-   texto suelto e indentado, aunque por dentro sigue siendo un checkbox real
-   (escondido, no eliminado) para que el filtrado en JS siga funcionando
-   igual — el <label> hace clic en el input aunque esté oculto. */
-.oferta-buscador__campo {
-    padding-left: 48px;
-}
-
-.oferta-buscador__campo input {
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-    pointer-events: none;
-}
-
 /* Controles propios: el navegador dibuja el radio y la casilla nativos en
    gris/azul del sistema, y el diseno los pide en naranja institucional. Se
    apaga la apariencia nativa (appearance:none) pero se conserva el <input>
    real, asi que teclado, :focus y el filtrado en JS siguen funcionando. */
 .oferta-buscador__radio input,
-.oferta-buscador__check input {
+.oferta-buscador__check input,
+.oferta-buscador__campo input {
     appearance: none;
     -webkit-appearance: none;
     margin: 0;
@@ -1071,12 +1056,9 @@
 
     .oferta-buscador__grupo h4,
     .oferta-buscador__radio,
-    .oferta-buscador__check {
-        padding-left: 10px;
-    }
-
+    .oferta-buscador__check,
     .oferta-buscador__campo {
-        padding-left: 34px;
+        padding-left: 10px;
     }
 
     .oferta-buscador__resultados-head {

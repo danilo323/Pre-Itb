@@ -35,11 +35,6 @@
                 "nivel": "hijo"
             },
             {
-                "texto": "prueba9",
-                "url": "prueba9.php",
-                "nivel": "hijo"
-            },
-            {
                 "texto": "Nuestra Institución 1",
                 "url": "#",
                 "nivel": "padre"
@@ -1456,125 +1451,6 @@
             },
             "updated_at": "2026-09-11 06:04:45"
         },
-        "pg_25d477632949": {
-            "id": "pg_25d477632949",
-            "nombre": "prueba9",
-            "slug": "prueba9",
-            "icon": "bi bi-file-earmark-text",
-            "menu_pos": "hijo:Instituto",
-            "secciones": [
-                "valores",
-                "autoridades",
-                "himno",
-                "cogobierno"
-            ],
-            "contenido": {
-                "autoridades": {
-                    "_visible": "1",
-                    "etiqueta_superior": "Nuestro Equipo",
-                    "titulo": "Nuestras Autoridades",
-                    "descripcion": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-                    "boton_directorio": "Ver Directorio",
-                    "info_gestion": "",
-                    "div_global": "",
-                    "btn_directorio": "Ver Directorio",
-                    "subtitulo": "Profesionales comprometidos con la excelencia académica, la innovación educativa y la gestión transparente de nuestra comunidad universitaria.",
-                    "aut1_foto": "img/PHD.Roberto_tolozano.jpg",
-                    "aut1_nombre": "PhD. Roberto Tolozano Benites",
-                    "aut1_cargo": "Canciller",
-                    "aut1_email": "#",
-                    "aut1_telf": "#",
-                    "aut2_foto": "img/PHD.Elena_Tolozano.jpg",
-                    "aut2_nombre": "PhD. Elena Tolozano Benites",
-                    "aut2_cargo": "Rectora",
-                    "aut2_email": "#",
-                    "aut2_telf": "#",
-                    "aut3_foto": "img/PHD.Luis_alzate.jpg",
-                    "aut3_nombre": "PhD. Luis Alzate Peralta",
-                    "aut3_cargo": "Vicerrector Académico y de Investigación",
-                    "aut3_email": "#",
-                    "aut3_telf": "#",
-                    "aut4_foto": "img/PHD.Michelle_tolozano.webp",
-                    "aut4_nombre": "PhD. Michelle Tolozano Lapierre",
-                    "aut4_cargo": "Vicerrectora de Extensión y Gestión Administrativa",
-                    "aut4_email": "#",
-                    "aut4_telf": "#"
-                },
-                "sobre_valores": {
-                    "_visible": "1",
-                    "etiqueta_superior": "NUESTROS PRINCIPIOS Y VALORES",
-                    "titulo": "Los pilares que guían la excelencia académica y humana en el ITB.",
-                    "items": [
-                        {
-                            "icono": "img/c2bfa7c423adcd2d8b2f04fcea0a4f78.svg",
-                            "titulo": "Cogobierno",
-                            "descripcion": "Participación y gestión democrática"
-                        },
-                        {
-                            "icono": "img/f85372445ff70bd838ecb51f47294030.svg",
-                            "titulo": "Igualdad",
-                            "descripcion": "Oportunidades sin discriminación"
-                        },
-                        {
-                            "icono": "img/1870e3b99207af610588a15e8c564b66.svg",
-                            "titulo": "Calidad",
-                            "descripcion": "Excelencia en educación superior"
-                        },
-                        {
-                            "icono": "img/135639f1bc8e047730e524fad7040ebc.svg",
-                            "titulo": "Pertinencia",
-                            "descripcion": "Programas alineados a la sociedad"
-                        },
-                        {
-                            "icono": "img/ee1ecfe29ff4e6f05c5ddc7707199b0d.svg",
-                            "titulo": "Integralidad",
-                            "descripcion": "Formación académica y humana"
-                        }
-                    ]
-                },
-                "sobre_cogobierno": {
-                    "_visible": "1",
-                    "titulo": "Co Gobierno",
-                    "descripcion": "Representantes de la comunidad académica que participan activamente en la toma de decisiones e institucionalidad del ITB",
-                    "miembros": [
-                        {
-                            "foto": "img/a91dff1fd95b4e6d0d6e68c5388c927b.jpg",
-                            "nombre": "Obst. Lenny Mariscal San Martín",
-                            "cargo": "Representante de Docentes"
-                        },
-                        {
-                            "foto": "img/8974ecdec40ba06bcf640706e7a7ae12.jpg",
-                            "nombre": "Ing. Marcos Escaleras Gómez",
-                            "cargo": "Representante de Trabajadores"
-                        }
-                    ],
-                    "div_estructura": "",
-                    "card_imagen": "img/86d94af61b878d428da1c96394fcb831.jpg",
-                    "card_icono": "",
-                    "card_titulo": "Estructura Orgánica",
-                    "card_descripcion": "Conoce la jerarquía, áreas académicas y departamentos administrativos que conforman el ITB.",
-                    "card_boton": "Ver Organigrama",
-                    "card_boton_url": "#"
-                },
-                "himno": {
-                    "_visible": "1",
-                    "div_textos": "",
-                    "titulo": "Música y letra",
-                    "descripcion": "Nuestro himno representa la historia, los valores y el espíritu de excelencia de la comunidad bolivariana. Acompaña cada uno de nuestros actos solemnes y nos identifica como líderes tecnológicos en el país.",
-                    "div_letra": "",
-                    "autor": "Dr. Narcilo Natan\r\nVillavicencio Maldonado",
-                    "coro": "Juventud estudiosa presente\r\nahora y siempre por la patria inmortal\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel futuro nos grita más fuerte:\r\n¡Bolivarianos estudiar es triunfar!\r\nel bienestar de la sociedad.",
-                    "estrofa1": "Nuestra patria reclama el progreso\r\ny el progreso será realidad\r\nsi estudiamos con fe y más esfuerzo\r\ncon ahínco, con pasión y voluntad",
-                    "estrofa2": "Adelante que el triunfo ya es nuestro\r\ndios nos guía en nuestro caminar\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!\r\nadelante valor... triunfaremos\r\n¡Bolivarianos estudiar es triunfar!",
-                    "div_multimedia": "",
-                    "audio": "audio/himnoitb.mp3",
-                    "btn_descargar": "Descargar música",
-                    "imagen": "img/Himno_Estudiante_itb.jpg",
-                    "nota_legal": "Estos archivos son para uso exclusivo del usuario final. Por favor, no los redistribuya\r\nsin el permiso del coro de ITB."
-                }
-            },
-            "updated_at": "2026-09-12 00:35:10"
-        },
         "pg_85f4857b7ca5": {
             "id": "pg_85f4857b7ca5",
             "nombre": "prueba 10",
@@ -1779,28 +1655,18 @@
         }
     },
     "documentos_transparencia": {
-        "items": [
-            {
-                "id": 1,
-                "categoria": "info_financiera",
-                "nombre": "prueba",
-                "anio": "2026",
-                "archivo": "docs/80198af8937d360be1f0443003c625b5.pdf",
-                "tamano": "",
-                "publicado": true
-            }
-        ]
+        "items": []
     },
     "oferta_hero": {
         "_visible": "1",
-        "info_propia": "",
-        "div_textos": "",
+        "info_propia": null,
+        "div_textos": null,
         "titulo": "Oferta Académica",
         "ruta_inicio": "Inicio",
         "ruta_actual": "Oferta Académica",
-        "div_galeria": "",
-        "info_portada": "",
-        "animaciones": "1",
+        "div_galeria": null,
+        "info_portada": null,
+        "animaciones": true,
         "imagenes_fondo": [
             {
                 "archivo": "img/8d23c44388c955b4b97dd12108bd42d6.png",
@@ -1815,7 +1681,7 @@
     },
     "oferta_programas": {
         "_visible": "1",
-        "info_programas": "",
+        "info_programas": null,
         "lista_programas": [
             {
                 "imagen": "img/enfermeria.jpg",
@@ -2105,10 +1971,27 @@
                 "btn_matricular_enlace": ""
             }
         ],
-        "div_botones": "",
+        "div_botones": null,
         "btn_solicitar_texto": "Contacta un asesor",
         "btn_solicitar_enlace": "#",
         "btn_matricular_texto": "Matricularme",
         "btn_matricular_enlace": "#"
+    },
+    "oferta_filtros": {
+        "_visible": "1",
+        "info_filtros": null,
+        "div_filtro_tipo": null,
+        "filtro_tipo_titulo": "Mostrar resultados por",
+        "filtro_tipo_opcion_cursos": "Cursos",
+        "filtro_tipo_opcion_programas": "Programas",
+        "div_filtro_modalidad": null,
+        "filtro_modalidad_titulo": "Modalidad",
+        "filtro_modalidad_opciones": "Presencial\r\nHíbrida\r\nRemoto",
+        "div_filtro_anio": null,
+        "filtro_anio_titulo": "Año de Inicio",
+        "filtro_anio_opciones": "2026\r\n2027",
+        "div_filtro_campo": null,
+        "filtro_campo_titulo": "Campo de Estudio",
+        "filtro_campo_opciones": "Facultad de Salud y Servicios Sociales\r\nFacultad de Transporte y Vialidad\r\nFacultad de Ciencias Empresariales y Sistemas / Económicas y Empresariales"
     }
 }

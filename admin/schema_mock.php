@@ -1872,6 +1872,7 @@ return [
                             'alert_type' => 'info',
                             'label' => '<strong>CÓMO SE MUESTRAN:</strong> el buscador enseña <strong>4 programas por página</strong> y arma la paginación solo, así que puedes agregar los que quieras. Los filtros de la izquierda (Modalidad, Año de Inicio, Campo de Estudio) se aplican con lo que elijas en cada programa: si dejas uno vacío, ese programa no aparecerá al marcar esa casilla.<br><br><strong>LA PRIMERA VEZ:</strong> mientras no guardes esta sección, la página sigue mostrando los programas de <em>Inicio → Programas Destacados</em>. Pulsa <strong>Guardar</strong> una vez y a partir de ahí manda esta lista.',
                         ],
+
                         'div_botones' => [
                             'type' => 'divider',
                             'label' => 'Botones de Acción de las Tarjetas',
@@ -2138,8 +2139,89 @@ return [
                         ],
                     ],
                 ],
+                // ---------------------------------------------------------
+                // SECCIÓN 3: los filtros laterales del buscador.
+                // Permite configurar títulos y opciones de la barra lateral
+                // izquierda (Mostrar resultados por, Modalidad, Año de Inicio,
+                // Campo de Estudio).
+                // ---------------------------------------------------------
+                'oferta_filtros' => [
+                    'label' => 'SECCIÓN 3: FILTROS DEL BUSCADOR',
+                    'fields' => [
+                        'info_filtros' => [
+                            'type' => 'alert',
+                            'alert_type' => 'info',
+                            'label' => '<strong>BARRA LATERAL DE FILTROS:</strong> Aquí puedes configurar los <strong>títulos y opciones</strong> que aparecen en la barra lateral izquierda del buscador de programas. Cada grupo de opciones se escribe una por línea.',
+                        ],
+                        'div_filtro_tipo' => [
+                            'type' => 'divider',
+                            'label' => 'Filtro 1: Tipo de Resultado',
+                        ],
+                        'filtro_tipo_titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título del grupo',
+                            'default' => 'Mostrar resultados por',
+                        ],
+                        'filtro_tipo_opcion_cursos' => [
+                            'type' => 'text',
+                            'label' => 'Texto para "Cursos"',
+                            'default' => 'Cursos',
+                        ],
+                        'filtro_tipo_opcion_programas' => [
+                            'type' => 'text',
+                            'label' => 'Texto para "Programas"',
+                            'default' => 'Programas',
+                        ],
+                        'div_filtro_modalidad' => [
+                            'type' => 'divider',
+                            'label' => 'Filtro 2: Modalidad',
+                        ],
+                        'filtro_modalidad_titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título del grupo',
+                            'default' => 'Modalidad',
+                        ],
+                        'filtro_modalidad_opciones' => [
+                            'type' => 'textarea',
+                            'label' => 'Opciones (una por línea)',
+                            'default' => "Presencial\nHíbrida\nRemoto",
+                            'help' => 'Escribe una modalidad por línea. Ej: Presencial, Híbrida, Remoto',
+                        ],
+                        'div_filtro_anio' => [
+                            'type' => 'divider',
+                            'label' => 'Filtro 3: Año de Inicio',
+                        ],
+                        'filtro_anio_titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título del grupo',
+                            'default' => 'Año de Inicio',
+                        ],
+                        'filtro_anio_opciones' => [
+                            'type' => 'textarea',
+                            'label' => 'Opciones (uno por línea)',
+                            'default' => "2026\n2027",
+                            'help' => 'Escribe un año por línea. Ej: 2026, 2027',
+                        ],
+                        'div_filtro_campo' => [
+                            'type' => 'divider',
+                            'label' => 'Filtro 4: Campo de Estudio',
+                        ],
+                        'filtro_campo_titulo' => [
+                            'type' => 'text',
+                            'label' => 'Título del grupo',
+                            'default' => 'Campo de Estudio',
+                        ],
+                        'filtro_campo_opciones' => [
+                            'type' => 'textarea',
+                            'label' => 'Opciones (uno por línea)',
+                            'default' => "FASSS\nFATV\nFACES",
+                            'help' => 'Escribe un campo de estudio por línea. Ej: FASSS, FATV, FACES',
+                        ],
+                    ],
+                ],
             ],
         ],
+
         // Página de Noticias. Su portada usa el mismo componente que Sobre
         // Nosotros y Oferta Académica (includes/sobre-hero.php), leyendo esta
         // sección: antes era un archivo aparte con el título escrito en el

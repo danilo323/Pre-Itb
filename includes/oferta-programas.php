@@ -159,53 +159,78 @@ if (empty($programas_items)) {
                 </label>
             </div>
 
+            <?php
+            /* ── Sidebar: títulos y opciones desde el panel ─────────────── */
+            $filtro_tipo_titulo      = content_get('oferta_filtros', 'filtro_tipo_titulo', content_get('filtros_buscador', 'filtro_tipo_titulo', 'Mostrar resultados por'));
+            $filtro_tipo_cursos      = content_get('oferta_filtros', 'filtro_tipo_opcion_cursos', content_get('filtros_buscador', 'filtro_tipo_opcion_cursos', 'Cursos'));
+            $filtro_tipo_programas   = content_get('oferta_filtros', 'filtro_tipo_opcion_programas', content_get('filtros_buscador', 'filtro_tipo_opcion_programas', 'Programas'));
+
+            $filtro_modalidad_titulo = content_get('oferta_filtros', 'filtro_modalidad_titulo', content_get('filtros_buscador', 'filtro_modalidad_titulo', 'Modalidad'));
+            $filtro_modalidad_raw    = content_get('oferta_filtros', 'filtro_modalidad_opciones', content_get('filtros_buscador', 'filtro_modalidad_opciones', "Presencial\nHíbrida\nRemoto"));
+            $filtro_modalidad_opts   = array_filter(array_map('trim', explode("\n", $filtro_modalidad_raw)));
+
+            $filtro_anio_titulo      = content_get('oferta_filtros', 'filtro_anio_titulo', content_get('filtros_buscador', 'filtro_anio_titulo', 'Año de Inicio'));
+            $filtro_anio_raw         = content_get('oferta_filtros', 'filtro_anio_opciones', content_get('filtros_buscador', 'filtro_anio_opciones', "2026\n2027"));
+            $filtro_anio_opts        = array_filter(array_map('trim', explode("\n", $filtro_anio_raw)));
+
+            $filtro_campo_titulo     = content_get('oferta_filtros', 'filtro_campo_titulo', content_get('filtros_buscador', 'filtro_campo_titulo', 'Campo de Estudio'));
+            $filtro_campo_raw        = content_get('oferta_filtros', 'filtro_campo_opciones', content_get('filtros_buscador', 'filtro_campo_opciones', "FASSS\nFATV\nFACES"));
+            $filtro_campo_opts       = array_filter(array_map('trim', explode("\n", $filtro_campo_raw)));
+
+            /* Mapa para tildes: el value del checkbox debe casar con lo que
+               devuelve el campo «modalidad» de cada programa (sin tilde:
+               "Hibrida"), pero el texto visible puede llevar tilde. */
+            $modalidad_display = [
+                'Presencial' => 'Presencial',
+                'Hibrida'    => 'Híbrida',
+                'Remoto'     => 'Remoto',
+            ];
+            ?>
             <aside class="oferta-buscador__filtros">
+                <!-- Filtro 1: Tipo -->
                 <div class="oferta-buscador__grupo">
-                    <h4>Mostrar resultados por</h4>
+                    <h4><?= htmlspecialchars($filtro_tipo_titulo) ?></h4>
                     <label class="oferta-buscador__radio">
                         <input type="radio" name="oferta-tipo" value="Curso" data-filtro-tipo>
-                        Cursos
+                        <?= htmlspecialchars($filtro_tipo_cursos) ?>
                     </label>
                     <label class="oferta-buscador__radio">
                         <input type="radio" name="oferta-tipo" value="Programa" data-filtro-tipo checked>
-                        Programas
+                        <?= htmlspecialchars($filtro_tipo_programas) ?>
                     </label>
                 </div>
 
+                <!-- Filtro 2: Modalidad -->
                 <div class="oferta-buscador__grupo">
-                    <h4>Modalidad <svg class="oferta-buscador__grupo-toggle" width="22" height="3" viewBox="0 0 22 3" shape-rendering="crispEdges" aria-hidden="true"><rect width="22" height="3" fill="currentColor"/></svg></h4>
+                    <h4><?= htmlspecialchars($filtro_modalidad_titulo) ?> <svg class="oferta-buscador__grupo-toggle" width="22" height="3" viewBox="0 0 22 3" shape-rendering="crispEdges" aria-hidden="true"><rect width="22" height="3" fill="currentColor"/></svg></h4>
+                    <?php foreach ($filtro_modalidad_opts as $mod): 
+                        /* El value sin tilde para que coincida con data-modalidad */
+                        $mod_value = str_replace(['á','é','í','ó','ú','Á','É','Í','Ó','Ú'], ['a','e','i','o','u','A','E','I','O','U'], $mod);
+                    ?>
                     <label class="oferta-buscador__check">
-                        <input type="checkbox" value="Presencial" data-filtro="modalidad"> Presencial
+                        <input type="checkbox" value="<?= htmlspecialchars($mod_value) ?>" data-filtro="modalidad"> <?= htmlspecialchars($mod) ?>
                     </label>
-                    <label class="oferta-buscador__check">
-                        <input type="checkbox" value="Hibrida" data-filtro="modalidad"> Híbrida
-                    </label>
-                    <label class="oferta-buscador__check">
-                        <input type="checkbox" value="Remoto" data-filtro="modalidad"> Remoto
-                    </label>
+                    <?php endforeach; ?>
                 </div>
 
+                <!-- Filtro 3: Año de Inicio -->
                 <div class="oferta-buscador__grupo">
-                    <h4>Año de Inicio <svg class="oferta-buscador__grupo-toggle" width="22" height="3" viewBox="0 0 22 3" shape-rendering="crispEdges" aria-hidden="true"><rect width="22" height="3" fill="currentColor"/></svg></h4>
+                    <h4><?= htmlspecialchars($filtro_anio_titulo) ?> <svg class="oferta-buscador__grupo-toggle" width="22" height="3" viewBox="0 0 22 3" shape-rendering="crispEdges" aria-hidden="true"><rect width="22" height="3" fill="currentColor"/></svg></h4>
+                    <?php foreach ($filtro_anio_opts as $anio): ?>
                     <label class="oferta-buscador__check">
-                        <input type="checkbox" value="2026" data-filtro="anio"> 2026
+                        <input type="checkbox" value="<?= htmlspecialchars($anio) ?>" data-filtro="anio"> <?= htmlspecialchars($anio) ?>
                     </label>
-                    <label class="oferta-buscador__check">
-                        <input type="checkbox" value="2027" data-filtro="anio"> 2027
-                    </label>
+                    <?php endforeach; ?>
                 </div>
 
+                <!-- Filtro 4: Campo de Estudio -->
                 <div class="oferta-buscador__grupo oferta-buscador__grupo--campo">
-                    <h4>Campo de Estudio <svg class="oferta-buscador__grupo-toggle" width="22" height="3" viewBox="0 0 22 3" shape-rendering="crispEdges" aria-hidden="true"><rect width="22" height="3" fill="currentColor"/></svg></h4>
-                    <label class="oferta-buscador__campo">
-                        <input type="checkbox" value="FASSS" data-filtro="campo"> FASSS
+                    <h4><?= htmlspecialchars($filtro_campo_titulo) ?> <svg class="oferta-buscador__grupo-toggle" width="22" height="3" viewBox="0 0 22 3" shape-rendering="crispEdges" aria-hidden="true"><rect width="22" height="3" fill="currentColor"/></svg></h4>
+                    <?php foreach ($filtro_campo_opts as $campo): ?>
+                    <label class="oferta-buscador__check">
+                        <input type="checkbox" value="<?= htmlspecialchars($campo) ?>" data-filtro="campo"> <?= htmlspecialchars($campo) ?>
                     </label>
-                    <label class="oferta-buscador__campo">
-                        <input type="checkbox" value="FATV" data-filtro="campo"> FATV
-                    </label>
-                    <label class="oferta-buscador__campo">
-                        <input type="checkbox" value="FACES" data-filtro="campo"> FACES
-                    </label>
+                    <?php endforeach; ?>
                 </div>
             </aside>
 
@@ -263,7 +288,8 @@ if (empty($programas_items)) {
                              data-tipo="<?= $h($tipo) ?>"
                              data-modalidad="<?= $h($modalidad) ?>"
                              data-anio="<?= $h($anio) ?>"
-                             data-campo="<?= $h($campo) ?>">
+                             data-campo="<?= $h($campo) ?>"
+                             data-facultad="<?= $h($p['facultad'] ?? '') ?>">
                         <?php 
                             if ($etiqueta === '') {
                                 $etiqueta = (crc32($nombre) % 2 === 0) ? 'Nueva' : 'Destacada';

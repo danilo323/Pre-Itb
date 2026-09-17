@@ -60,7 +60,16 @@
             if (card.dataset.tipo !== tipo) return false;
             if (modalidades.length && !modalidades.includes(card.dataset.modalidad)) return false;
             if (anios.length && !anios.includes(card.dataset.anio)) return false;
-            if (campos.length && !campos.includes(card.dataset.campo)) return false;
+            if (campos.length) {
+                const cVal = (card.dataset.campo || '').toLowerCase().trim();
+                const fVal = (card.dataset.facultad || '').toLowerCase().trim();
+                const match = campos.some((c) => {
+                    const cLower = (c || '').toLowerCase().trim();
+                    if (!cLower) return false;
+                    return cLower === cVal || cLower === fVal || (fVal && fVal.includes(cLower)) || (fVal && cLower.includes(fVal));
+                });
+                if (!match) return false;
+            }
             if (texto && !card.dataset.nombre.includes(texto)) return false;
             return true;
         });
