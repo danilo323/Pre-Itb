@@ -144,10 +144,10 @@ $catalogo_grupo = function (string $titulo, string $nombre, array $opciones) {
     <div class="catalogo__intro">
         <div class="catalogo__intro-inner">
             <h2 class="catalogo__intro-title">
-                <?= nl2br(htmlspecialchars(content_get('oferta_catalogo', 'titulo', "Cientos de programas.\nUn título diseñado a tu medida."), ENT_QUOTES, 'UTF-8')) ?>
+                <?= nl2br(content_get('oferta_catalogo', 'titulo', "Cientos de programas.\nUn título diseñado a tu medida.")) ?>
             </h2>
             <p class="catalogo__intro-text">
-                <?= nl2br(htmlspecialchars(content_get('oferta_catalogo', 'descripcion', 'Elegir tu especialidad es solo el punto de partida. Diseña tu propia ruta académica combinando las materias y áreas que realmente te apasionan. Estudia con total flexibilidad y llega tan lejos como te propongas.'), ENT_QUOTES, 'UTF-8')) ?>
+                <?= nl2br(content_get('oferta_catalogo', 'descripcion', 'Elegir tu especialidad es solo el punto de partida. Diseña tu propia ruta académica combinando las materias y áreas que realmente te apasionan. Estudia con total flexibilidad y llega tan lejos como te propongas.')) ?>
             </p>
         </div>
     </div>
@@ -156,14 +156,14 @@ $catalogo_grupo = function (string $titulo, string $nombre, array $opciones) {
     <div class="catalogo__buscador">
         <div class="catalogo__buscador-inner">
             <p class="catalogo__buscador-label">
-                <?= nl2br(htmlspecialchars(content_get('oferta_catalogo', 'buscador_label', "Explora nuestras Áreas Académicas\no busca un Programa específico"), ENT_QUOTES, 'UTF-8')) ?>
+                <?= nl2br(content_get('oferta_catalogo', 'buscador_label', "Explora nuestras Áreas Académicas\no busca un Programa específico")) ?>
             </p>
             <div class="catalogo__buscador-campo">
                 <label class="catalogo__buscador-oculto" for="catalogo-busqueda">
-                    <?= htmlspecialchars(content_get('oferta_catalogo', 'buscador_placeholder', 'Busca por curso, programa o facultad...'), ENT_QUOTES, 'UTF-8') ?>
+                    <?= content_get('oferta_catalogo', 'buscador_placeholder', 'Busca por curso, programa o facultad...') ?>
                 </label>
                 <input type="search" id="catalogo-busqueda" class="catalogo__buscador-input"
-                       placeholder="<?= htmlspecialchars(content_get('oferta_catalogo', 'buscador_placeholder', 'Busca por curso, programa o facultad...'), ENT_QUOTES, 'UTF-8') ?>"
+                       placeholder="<?= content_get('oferta_catalogo', 'buscador_placeholder', 'Busca por curso, programa o facultad...') ?>"
                        autocomplete="off">
                 <button type="button" class="catalogo__buscador-btn js-catalogo-buscar" aria-label="Buscar">
                     <i class="fas fa-search" aria-hidden="true"></i>
@@ -181,10 +181,10 @@ $catalogo_grupo = function (string $titulo, string $nombre, array $opciones) {
                 <div class="catalogo-filtros__cabecera">
                     <span class="catalogo-filtros__titulo">
                         <i class="fas fa-sliders-h" aria-hidden="true"></i>
-                        <?= htmlspecialchars(content_get('oferta_catalogo', 'filtros_titulo', 'Filtros'), ENT_QUOTES, 'UTF-8') ?>
+                        <?= content_get('oferta_catalogo', 'filtros_titulo', 'Filtros') ?>
                     </span>
                     <button type="button" class="catalogo-filtros__borrar js-filtros-borrar">
-                        <?= htmlspecialchars(content_get('oferta_catalogo', 'filtros_borrar', 'Borrar'), ENT_QUOTES, 'UTF-8') ?>
+                        <?= content_get('oferta_catalogo', 'filtros_borrar', 'Borrar') ?>
                     </button>
                 </div>
 
@@ -192,7 +192,7 @@ $catalogo_grupo = function (string $titulo, string $nombre, array $opciones) {
                      de radio y no casillas. -->
                 <div class="catalogo-filtros__grupo">
                     <p class="catalogo-filtros__grupo-titulo">
-                        <?= htmlspecialchars(content_get('oferta_catalogo', 'filtro_tipo_titulo', 'Mostrar resultados por'), ENT_QUOTES, 'UTF-8') ?>
+                        <?= content_get('oferta_catalogo', 'filtro_tipo_titulo', 'Mostrar resultados por') ?>
                     </p>
                     <div class="catalogo-filtros__opciones">
                         <label class="catalogo-filtros__opcion" for="filtro-tipo-cursos">
@@ -219,13 +219,13 @@ $catalogo_grupo = function (string $titulo, string $nombre, array $opciones) {
             <div class="catalogo__resultados">
                 <div class="catalogo__barra">
                     <p class="catalogo__conteo js-catalogo-conteo"
-                       data-plantilla="<?= htmlspecialchars(content_get('oferta_catalogo', 'conteo_texto', 'Mostrando {desde}-{hasta} de {total} resultados'), ENT_QUOTES, 'UTF-8') ?>"
+                       data-plantilla="<?= content_get('oferta_catalogo', 'conteo_texto', 'Mostrando {desde}-{hasta} de {total} resultados') ?>"
                        aria-live="polite">
                         Mostrando <?= $catalogo_total ? 1 : 0 ?>-<?= min($catalogo_por_pagina, $catalogo_total) ?> de <?= $catalogo_total ?> resultados
                     </p>
                     <div class="catalogo__orden">
                         <label for="catalogo-orden">
-                            <?= htmlspecialchars(content_get('oferta_catalogo', 'orden_label', 'Ordenar por:'), ENT_QUOTES, 'UTF-8') ?>
+                            <?= content_get('oferta_catalogo', 'orden_label', 'Ordenar por:') ?>
                         </label>
                         <select id="catalogo-orden" class="catalogo__orden-select js-catalogo-orden">
                             <option value="relevancia">Relevancia</option>
@@ -289,7 +289,7 @@ $catalogo_grupo = function (string $titulo, string $nombre, array $opciones) {
 
                             <div class="catalogo-card__accion">
                                 <a href="<?= htmlspecialchars($enlace, ENT_QUOTES, 'UTF-8') ?>" class="btn--outline-card">
-                                    <?= htmlspecialchars(content_get('oferta_catalogo', 'btn_card', 'Ver programa'), ENT_QUOTES, 'UTF-8') ?>
+                                    <?= content_get('oferta_catalogo', 'btn_card', 'Ver programa') ?>
                                     <span class="btn__icon-right"><i class="fas fa-arrow-right"></i></span>
                                 </a>
                             </div>
@@ -303,7 +303,7 @@ $catalogo_grupo = function (string $titulo, string $nombre, array $opciones) {
 
                 <!-- Sale cuando los filtros dejan la lista sin ninguna tarjeta -->
                 <p class="catalogo__vacio js-catalogo-vacio" hidden>
-                    <?= htmlspecialchars(content_get('oferta_catalogo', 'sin_resultados', 'No encontramos programas con esos filtros. Prueba quitando alguno.'), ENT_QUOTES, 'UTF-8') ?>
+                    <?= content_get('oferta_catalogo', 'sin_resultados', 'No encontramos programas con esos filtros. Prueba quitando alguno.') ?>
                 </p>
 
                 <!-- La paginación la arma el JS con los resultados que queden -->

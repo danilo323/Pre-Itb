@@ -19,6 +19,11 @@ require_once 'includes/content_helper.php';
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/oferta-academica.css">
     <link rel="stylesheet" href="css/pagina-interna.css">
+    <?php /* PENDIENTE: esta hoja pesa 12 KB y se descarga en cada visita, pero
+             ahora mismo no la usa nadie: includes/oferta-catalogo.php y
+             js/oferta-catalogo.js existen y no se incluyen en ninguna parte.
+             Es una segunda versión del buscador, en marcha. Cuando se decida,
+             o se engancha el componente o se quitan los tres archivos. */ ?>
     <link rel="stylesheet" href="css/oferta-catalogo.css">
 </head>
 
