@@ -307,12 +307,8 @@
     animation-delay: calc(var(--orden-entrada, 0) * 40ms);
 }
 
-/* Quien pidió menos movimiento ve el cambio igual, pero sin desplazamiento. */
-@media (prefers-reduced-motion: reduce) {
-    .oferta-card.is-entrando {
-        animation-name: none;
-    }
-}
+/* Igual que la insignia y el boton de subir: la entrada se ve en todos los
+   equipos, tambien en los que piden menos movimiento. */
 
 .oferta-card {
     position: relative;
@@ -430,25 +426,13 @@
     }
 }
 
-/* Quien pidio menos movimiento ve la insignia desplegada y quieta, en vez de
-   tener que descubrirla con un gesto. */
-@media (prefers-reduced-motion: reduce) {
-    .oferta-card__badge,
-    .oferta-card__badge > span,
-    .oferta-card__badge svg {
-        transition: none;
-    }
-
-    .oferta-card__badge {
-        padding-right: 16px;
-    }
-
-    .oferta-card__badge > span {
-        max-width: 140px;
-        opacity: 1;
-        margin-left: 7px;
-    }
-}
+/* La insignia se despliega igual en todos los equipos, tambien en los que
+   piden menos movimiento. Es la misma decision que se tomo con el boton de
+   subir: Windows trae los efectos de animacion desactivados en bastantes
+   maquinas, y respetarlo dejaba a buena parte del equipo viendo la palabra
+   siempre puesta, que no es lo que pidio diseno. Para volver atras, reponer
+   aqui un bloque @media (prefers-reduced-motion: reduce) con el despliegue
+   fijo. */
 
 .oferta-card__badge svg {
     color: var(--primary-orange);
