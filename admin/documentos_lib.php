@@ -232,8 +232,22 @@ function documentos_guardar_subida(array $archivo): array {
 
     $upload_dir = documentos_dir() . '/';
 
-    // D. Guardar tal cual, con nombre aleatorio.
-    $nombre = bin2hex(random_bytes(16)) . '.' . $ext;
+    // D. Guardar usando su nombre original limpio, porque en documentos es útil leer el nombre
+    $nombre_base = pathinfo($original_name, PATHINFO_FILENAME);
+    // Quitar tildes y caracteres raros
+    $nombre_base = strtr(utf8_decode($nombre_base), utf8_decode('àáâãäçèéêëìíîïñòóôõöùúûüýÿÀÁÂÃÄÇÈÉÊËÌÍÎÏÑÒÓÔÕÖÙÚÛÜÝ'), 'aaaaaceeeeiiiinooooouuuuyyAAAAACEEEEIIIINOOOOOUUUUY');
+    $nombre_base = preg_replace('/[^a-zA-Z0-9_\-]/', '-', $nombre_base);
+    $nombre_base = preg_replace('/-+/', '-', $nombre_base);
+    $nombre_base = trim($nombre_base, '-');
+    if ($nombre_base === '') $nombre_base = 'documento';
+    
+    $nombre = $nombre_base . '.' . $ext;
+    $contador = 1;
+    // Si ya existe uno con ese nombre, le ponemos un sufijo -1, -2, etc.
+    while (file_exists($upload_dir . $nombre)) {
+        $nombre = $nombre_base . '-' . $contador . '.' . $ext;
+        $contador++;
+    }
     if (!move_uploaded_file($tmp_name, $upload_dir . $nombre)) {
         return $fallo("Â«{$original_name}Â»: no se pudo guardar en el servidor.");
     }
