@@ -8,7 +8,9 @@ require_once __DIR__ . '/fields/_loader.php';
 $schema = require __DIR__ . '/schema_mock.php';
 $AB = admin_base();
 
-$section = $_GET['c'] ?? 'testimonios';
+// Igual que en coleccion.php: sin ?c= no hay nada que editar. El antiguo
+// valor por defecto, 'testimonios', ya no existe en el esquema.
+$section = trim((string) ($_GET['c'] ?? ''));
 $id = $_GET['id'] ?? 'new';
 
 // Whitelist del schema

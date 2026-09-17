@@ -42,6 +42,31 @@
     --sidebar-bg: var(--primary-blue);
     --sidebar-hover: var(--primary-blue-light);
 
+    /* --- Escala de espaciado -------------------------------------------------
+       El panel tenía tokens de color, radio y sombra pero NINGUNO de espaciado:
+       171 declaraciones de padding/margin/gap con valores sueltos. Es la misma
+       carencia que tenía el sitio público antes de css/sistema.css.
+
+       Los nombres y los valores son EXACTAMENTE los de css/sistema.css, para no
+       montar un segundo sistema: quien se mueve entre el panel y el sitio no
+       tiene que recordar dos escalas. Ese archivo es la fuente de verdad; aquí
+       se repiten porque el panel no carga la hoja del sitio público.
+
+       Es aditivo: no migra nada. Las pantallas se van pasando a la escala según
+       se tocan. Los 20px (15 usos) y 40px (4 usos) que hoy tiene el panel se
+       absorben en --space-sm/--space-md y --space-lg/--space-xl al migrarlas;
+       los 6, 10, 14, 15, 18, 36 y 84 sueltos son ruido y se retiran. */
+    --space-3xs: 4px;
+    --space-2xs: 8px;
+    --space-xs: 12px;
+    --space-sm: 16px;
+    --space-md: 24px;
+    --space-lg: 32px;
+    --space-xl: 48px;
+    --space-2xl: 64px;
+    --space-3xl: 80px;
+    --space-4xl: 96px;
+
     /* Escala de radios */
     --radius-sm: 8px;
     --radius: 12px;
