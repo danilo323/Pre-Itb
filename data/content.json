@@ -71,7 +71,7 @@
             },
             {
                 "texto": "Oferta Académica",
-                "url": "#",
+                "url": "oferta-academica.php",
                 "nivel": "padre"
             },
             {
@@ -1793,14 +1793,14 @@
     },
     "oferta_hero": {
         "_visible": "1",
-        "info_propia": null,
-        "div_textos": null,
+        "info_propia": "",
+        "div_textos": "",
         "titulo": "Oferta Académica",
         "ruta_inicio": "Inicio",
         "ruta_actual": "Oferta Académica",
-        "div_galeria": null,
-        "info_portada": null,
-        "animaciones": true,
+        "div_galeria": "",
+        "info_portada": "",
+        "animaciones": "1",
         "imagenes_fondo": [
             {
                 "archivo": "img/8d23c44388c955b4b97dd12108bd42d6.png",
@@ -1815,7 +1815,7 @@
     },
     "oferta_programas": {
         "_visible": "1",
-        "info_programas": null,
+        "info_programas": "",
         "lista_programas": [
             {
                 "imagen": "img/enfermeria.jpg",
@@ -1830,7 +1830,7 @@
                 "etiqueta": "Nueva",
                 "perfil": "El Técnico Superior en Enfermería podrá desempeñarse, bajo supervisión profesional de la licenciada en enfermería, tanto en el área pública como privada y en los tres niveles de atención, dentro del país y fuera de él, diferenciado en conducta, actitudes habilidades y aptitudes que requiere un técnico en enfermería.\r\n\r\nEl egresado debe ser un profesional preparado para la demanda competitiva de la actualidad con solidez científica, habilidades, destrezas, actitudes y valores que le permitan tomar decisiones en la solución de problemas de manera múltiple interdisciplinaria; convirtiéndose así en un profesional confiable para el equipo de salud. Aplicar y generar el auto cuidado, nuevos conocimientos y el uso de tecnología que incidan en la salud-enfermedad del individuo, familia y comunidad en las diversas etapas de la vida.",
                 "competencias_administrativa": "",
-                "competencias_asistencial": "",
+                "competencias_asistencial": "prueba\r\nprueba1\r\nprueba2\r\nprueba3",
                 "documentos_admision": "",
                 "inversion": "",
                 "horarios": "",
@@ -2105,7 +2105,7 @@
                 "btn_matricular_enlace": ""
             }
         ],
-        "div_botones": null,
+        "div_botones": "",
         "btn_solicitar_texto": "Contacta un asesor",
         "btn_solicitar_enlace": "#",
         "btn_matricular_texto": "Matricularme",

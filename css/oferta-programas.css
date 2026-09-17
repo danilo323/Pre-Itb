@@ -694,6 +694,125 @@
 .oferta-card__acciones .btn--solid { padding: 4px 5px 4px 14px; }
 .oferta-card__acciones .btn--solid .btn__icon-right { width: 30px; height: 30px; }
 
+/* =========================================================================
+   ANIMACIONES DE ENTRADA AL DESPLEGAR LA FICHA (.is-expandida)
+   La imagen y cada bloque de texto/sección entran con animación escalonada
+   y fluida para una experiencia dinámica y premium.
+   Nota: NO se desactiva con prefers-reduced-motion porque en Windows
+   Chrome/Edge lo marcan activo por defecto en la mayoría de máquinas.
+   ========================================================================= */
+
+@keyframes oferta-expand-img {
+    0% {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.95);
+        filter: blur(4px) brightness(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0) brightness(1);
+    }
+}
+
+@keyframes oferta-expand-text {
+    0% {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes oferta-detalle-fade {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Transición suave del marco de la tarjeta al expandirse */
+.oferta-card {
+    transition: padding 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, transform 0.25s ease;
+}
+
+.oferta-card.is-expandida {
+    border-color: rgba(241, 90, 36, 0.4) !important;
+    box-shadow: 0 12px 36px rgba(15, 34, 67, 0.14) !important;
+}
+
+/* Despliegue del contenedor de detalles */
+.oferta-card.is-expandida .oferta-card__detalle {
+    animation: oferta-detalle-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 1. Imagen principal desplegada */
+.oferta-card.is-expandida .oferta-card__img {
+    animation: oferta-expand-img 0.48s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 2. Título del programa */
+.oferta-card.is-expandida .oferta-card__title {
+    animation: oferta-expand-text 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.08s;
+}
+
+/* 3. Facultad */
+.oferta-card.is-expandida .oferta-card__facultad {
+    animation: oferta-expand-text 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.14s;
+}
+
+/* 4. Lista de características (Modalidad, Duración, Campus) */
+.oferta-card.is-expandida .oferta-card__meta li {
+    animation: oferta-expand-text 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.oferta-card.is-expandida .oferta-card__meta li:nth-child(1) { animation-delay: 0.20s; }
+.oferta-card.is-expandida .oferta-card__meta li:nth-child(2) { animation-delay: 0.25s; }
+.oferta-card.is-expandida .oferta-card__meta li:nth-child(3) { animation-delay: 0.30s; }
+
+/* 5. Bloque de pestañas de Información (Documentos de admisión, Inversión, Horarios) */
+.oferta-card.is-expandida .oferta-card__informacion {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.36s;
+}
+
+/* 6. Bloque de Perfil del programa */
+.oferta-card.is-expandida .oferta-card__perfil {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.44s;
+}
+
+/* 7. Bloque de Competencias */
+.oferta-card.is-expandida .oferta-card__competencias {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.52s;
+}
+
+/* 8. Bloque de Documentos de Carrera (PDFs) */
+.oferta-card.is-expandida .oferta-card__documentos {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.60s;
+}
+
+/* 9. Botones de acción ("Solicitar Información", "Matricúlame") */
+.oferta-card.is-expandida .oferta-card__acciones {
+    animation: oferta-expand-text 0.46s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.68s;
+}
+
+/* Micro-animación suave al cambiar de panel o pestaña */
+.oferta-card__info-panel:not([hidden]),
+.oferta-card__tab-panel:not([hidden]) {
+    animation: oferta-expand-text 0.28s ease-out;
+}
+
 /* ---- Paginación ---- */
 .oferta-buscador__paginacion {
     display: flex;

@@ -202,7 +202,14 @@
             const abierto = toggle.getAttribute('aria-expanded') === 'true';
             toggle.setAttribute('aria-expanded', String(!abierto));
             detalle.hidden = abierto;
-            card.classList.toggle('is-expandida', !abierto);
+            if (!abierto) {
+                // Forzar reflujo para reiniciar las animaciones de entrada cada vez que se despliega
+                card.classList.remove('is-expandida');
+                void card.offsetWidth;
+                card.classList.add('is-expandida');
+            } else {
+                card.classList.remove('is-expandida');
+            }
         });
 
         card.querySelectorAll('.oferta-card__tabs [role="tab"]').forEach((tab, indice) => {
