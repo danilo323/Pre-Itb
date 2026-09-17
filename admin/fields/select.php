@@ -10,7 +10,10 @@ function field_select_render(string $name_path, $value, array $config): string {
     foreach ($options as $opt_value => $opt_label) {
         $safe_val = htmlspecialchars($opt_value, ENT_QUOTES, 'UTF-8');
         $safe_label = htmlspecialchars($opt_label, ENT_QUOTES, 'UTF-8');
-        $selected = ($value === $opt_value) ? 'selected' : '';
+        // Mismo cuidado que en field_select_parse(): la clave de un select de
+        // anios llega como entero, y sin igualar tipos la opcion guardada no se
+        // marcaria y el panel mostraria "-- Seleccionar --" con el dato puesto.
+        $selected = ((string)$value === (string)$opt_value) ? 'selected' : '';
         $options_html .= "<option value=\"{$safe_val}\" {$selected}>{$safe_label}</option>";
     }
     
@@ -26,7 +29,11 @@ HTML;
 }
 
 function field_select_parse($raw, array $config) {
-    $allowed = array_keys($config['options'] ?? []);
+    // array_keys() convierte a ENTERO toda clave que sea un numero en texto:
+    // un select de anios ('2026' => '2026') devolvia [2026, 2027] y la
+    // comparacion estricta de abajo rechazaba el '2026' que manda el <select>,
+    // guardando vacio. Se normalizan a texto antes de comparar.
+    $allowed = array_map('strval', array_keys($config['options'] ?? []));
     $val = trim((string)$raw);
     // Whitelist: solo aceptar valores que estén en las opciones definidas
     return in_array($val, $allowed, true) ? $val : '';

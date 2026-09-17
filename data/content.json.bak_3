@@ -20,6 +20,11 @@
                 "nivel": 1
             },
             {
+                "texto": "academia",
+                "url": "academia.php",
+                "nivel": 3
+            },
+            {
                 "texto": "HImno e Identidad",
                 "url": "",
                 "nivel": 1

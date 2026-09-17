@@ -19,6 +19,7 @@ require_once 'includes/content_helper.php';
     <link rel="stylesheet" href="css/styles.css">
     <link rel="stylesheet" href="css/oferta-academica.css">
     <link rel="stylesheet" href="css/pagina-interna.css">
+    <link rel="stylesheet" href="css/oferta-catalogo.css">
 </head>
 
 <body class="page-oferta-academica">
