@@ -103,7 +103,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 $field_config['_old_value'] = $content[$section][$field] ?? ($field_config['default'] ?? '');
                 $content[$section][$field] = field_parse($field_config['type'] ?? 'text', $_POST['contenido'][$section][$field] ?? null, $field_config);
             }
-            $content[$section]['_visible'] = '1';
+
+            // Visibilidad de ESTA sección en ESTA página. Antes se forzaba a
+            // '1' en cada guardado, así que una sección de una página creada
+            // no se podía ocultar nunca: el valor se machacaba siempre.
+            //
+            // Funciona porque content_all_data() superpone el contenido de la
+            // página sobre el global con array_replace, y '_visible' entra en
+            // esa superposición igual que cualquier otro campo.
+            // Si el formulario no trae el interruptor (otra pantalla, un POST
+            // parcial), se respeta lo que hubiera: nunca se oculta una sección
+            // por omisión.
+            $visible_posteado = $_POST['contenido'][$section]['_visible'] ?? null;
+            if ($visible_posteado !== null) {
+                $content[$section]['_visible'] = ((string) $visible_posteado === '1') ? '1' : '0';
+            } elseif (!array_key_exists('_visible', $content[$section] ?? [])) {
+                $content[$section]['_visible'] = '1';
+            }
         }
         $data['_paginas_creadas'][$id]['contenido'] = $content;
         storage_save($data);
@@ -288,6 +304,11 @@ function _pagina_custom_sync_menu(array &$data, string $nombre, string $url, str
     if (!is_array($data['menu']['items_menu'] ?? null))
         $data['menu']['items_menu'] = [];
 
+    // Las paginas guardadas con el formato antiguo ('hijo:<texto>') se traducen
+    // al actual; si no, no casaban con ninguna rama de aqui abajo y la pagina
+    // desaparecia del menu al reguardarla.
+    $menu_pos = pagina_custom_menu_pos_normalizar($menu_pos);
+
     // Se trabaja sobre una copia y se vuelve a asignar al final: asi, pase lo
     // que pase, el menu nunca se queda a medias.
     $items = array_values($data['menu']['items_menu']);
@@ -354,16 +375,14 @@ $pg = $is_editing ? $paginas[$id] : [];
 $nombre = $pg['nombre'] ?? '';
 $slug = $pg['slug'] ?? '';
 $icon = $pg['icon'] ?? 'bi bi-file-earmark-text';
-$menu_pos = $pg['menu_pos'] ?? 'none';
+// Normalizado también al leer: si no, una página guardada con el formato
+// antiguo abría el formulario con "no aparece en el menú" marcado, y el
+// administrador veía un estado que no era el real.
+$menu_pos = pagina_custom_menu_pos_normalizar((string) ($pg['menu_pos'] ?? 'none'));
 $menu_before = $pg['menu_before'] ?? '';
-// Si una sección se heredó de una página que después borraron, su casilla ya no
-// existe en el catálogo. Se marca entonces la del sitio, para que al volver a
-// guardar la sección no desaparezca de la página sin avisar (su contenido ya
-// copiado no se toca).
-$secs_selected = array_map(function ($clave) use ($paginas) {
-    [$origen, $base] = pagina_custom_split((string)$clave);
-    return ($origen !== '' && !isset($paginas[$origen])) ? $base : $clave;
-}, (array)($pg['secciones'] ?? []));
+// $secs_selected (las casillas que salen marcadas) se calcula MÁS ABAJO, en
+// cuanto existe el catálogo: solo comparándolo con él se sabe si una clave
+// guardada tiene casilla o no.
 
 $page_title = $is_editing ? "Editar: {$nombre}" : 'Crear nueva página';
 $current_key = $is_editing ? "custom_{$id}" : 'paginas_crear';
@@ -473,6 +492,30 @@ foreach ($paginas as $pagina_id => $pagina) {
     }
     $secciones_disponibles[$nombre_visible] = $items_pagina;
 }
+
+// ── Qué casillas salen marcadas ─────────────────────────────────────────────
+// Una clave guardada puede haberse quedado sin casilla por varios motivos: la
+// página de la que se heredó se borró, esa página sigue existiendo pero ya no
+// tiene esa sección, o la sección dejó de estar en el catálogo. En todos esos
+// casos se marca la del sitio, para que al guardar NO se caiga de la página sin
+// avisar. El contenido ya copiado no se toca.
+//
+// Antes solo se contemplaba el primer motivo ("la página fue borrada"), así que
+// una herencia cuyo origen seguía vivo pero había soltado esa sección quedaba
+// sin marcar y desaparecía al guardar. Medido sobre los datos reales: le pasaba
+// a «prueba 03», que heredaba el himno de «prueba1» y esta solo tiene alianzas.
+$claves_con_casilla = [];
+foreach ($secciones_disponibles as $grupo_items) {
+    foreach ($grupo_items as $clave_disponible => $_info) {
+        $claves_con_casilla[$clave_disponible] = true;
+    }
+}
+
+$secs_selected = array_map(function ($clave) use ($claves_con_casilla) {
+    $clave = (string) $clave;
+    if (isset($claves_con_casilla[$clave])) return $clave;
+    return pagina_custom_base($clave);
+}, (array)($pg['secciones'] ?? []));
 
 echo layout_start($page_title, $current_key);
 ?>
@@ -691,10 +734,25 @@ echo layout_start($page_title, $current_key);
                 <input type="hidden" name="csrf_token" value="<?= csrf_token() ?>">
                 <input type="hidden" name="action" value="save_content">
                 <input type="hidden" name="id" value="<?= htmlspecialchars($id) ?>">
-                <?php foreach ($sec_configs as $section => $config): ?>
+                <?php foreach ($sec_configs as $section => $config):
+                    // '1' por defecto: una sección recién añadida se ve.
+                    $sec_visible = (string) ($pg_content[$section]['_visible'] ?? '1') === '1';
+                ?>
                     <details class="admin-accordion" open>
                         <summary><?= htmlspecialchars($config['label'] ?? $section, ENT_QUOTES, 'UTF-8') ?></summary>
                         <div class="accordion-content">
+                            <?php /* Ocultar afecta SOLO a esta página: el contenido de la
+                                     página se superpone al global al renderizarla. */ ?>
+                            <div class="pgc-visibilidad">
+                                <label class="bool-toggle-label">
+                                    <input type="hidden" name="contenido[<?= htmlspecialchars($section, ENT_QUOTES, 'UTF-8') ?>][_visible]" value="0">
+                                    <input type="checkbox" name="contenido[<?= htmlspecialchars($section, ENT_QUOTES, 'UTF-8') ?>][_visible]" value="1"
+                                           class="bool-toggle-input" <?= $sec_visible ? 'checked' : '' ?>>
+                                    <span class="bool-toggle-switch"></span>
+                                    <span class="bool-toggle-text">Visible en esta página</span>
+                                </label>
+                                <small>Desmarca para ocultar esta sección solo aquí, sin borrar su contenido ni afectar a otras páginas.</small>
+                            </div>
                             <?php foreach (($config['fields'] ?? []) as $field => $field_config):
                                 $val = $pg_content[$section][$field] ?? ($field_config['default'] ?? '');
                                 echo field_render("contenido[{$section}][{$field}]", $val, $field_config);
