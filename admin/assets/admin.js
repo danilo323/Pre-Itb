@@ -129,6 +129,64 @@ document.addEventListener('DOMContentLoaded', function () {
         initImageField(group);
     });
 
+    // ── Campo de documento ────────────────────────────────
+    function initDocumentField(group) {
+        // En file.php hemos reusado las clases wrapper de image-preview por simplicidad
+        const hiddenInput = group.querySelector('.js-doc-input');
+        const box         = group.querySelector('.image-preview-wrapper');
+        const preview     = box ? box.querySelector('.image-preview') : null;
+        const placeholder = box ? box.querySelector('.image-placeholder') : null;
+        const removeBtn   = box ? box.querySelector('.btn-remove-image') : null;
+        const pickBtn     = group.querySelector('.js-abrir-documentos');
+        const pickLabel   = group.querySelector('.js-texto-elegir');
+
+        if (pickBtn) {
+            pickBtn.addEventListener('click', function () {
+                if (typeof window.abrirdocumentos !== 'function') return;
+                window.abrirdocumentos(function (ruta, src) {
+                    if (hiddenInput) hiddenInput.value = ruta;
+                    
+                    // Actualizar el nombre del archivo y el icono
+                    if (preview) {
+                        const nombre = ruta.split('/').pop();
+                        const ext = nombre.split('.').pop().toLowerCase();
+                        
+                        let docIcon = 'bi-file-earmark-text';
+                        if (ext === 'pdf') docIcon = 'bi-file-earmark-pdf-fill';
+                        else if (['doc', 'docx'].includes(ext)) docIcon = 'bi-file-earmark-word-fill';
+                        else if (['xls', 'xlsx'].includes(ext)) docIcon = 'bi-file-earmark-excel-fill';
+                        
+                        const iconEl = preview.querySelector('i');
+                        const nameEl = preview.querySelector('div');
+                        if (iconEl) iconEl.className = 'bi ' + docIcon;
+                        if (nameEl) nameEl.textContent = nombre;
+                        
+                        preview.classList.remove('is-hidden');
+                    }
+                    if (placeholder) placeholder.classList.add('is-hidden');
+                    if (removeBtn) removeBtn.classList.remove('is-hidden');
+                    if (pickLabel) pickLabel.textContent = 'Cambiar documento';
+                });
+            });
+        }
+
+        if (removeBtn) {
+            removeBtn.addEventListener('click', function () {
+                window.customConfirm('¿Estás seguro de que deseas quitar este documento?', () => {
+                    if (hiddenInput) hiddenInput.value = '';
+                    if (preview) preview.classList.add('is-hidden');
+                    if (placeholder) placeholder.classList.remove('is-hidden');
+                    removeBtn.classList.add('is-hidden');
+                    if (pickLabel) pickLabel.textContent = 'Elegir de Documentos';
+                });
+            });
+        }
+    }
+
+    document.querySelectorAll('.field-file, .field-image:has(.js-abrir-documentos)').forEach(group => {
+        initDocumentField(group);
+    });
+
     // ── Preview de audio (mismo patrón que el de imagen) ─
     // admin/fields/audio.php genera la misma estructura que image.php pero con
     // sus propias clases, así que necesita su propio inicializador.

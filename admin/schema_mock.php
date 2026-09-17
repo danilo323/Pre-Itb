@@ -128,6 +128,12 @@ return [
                 ],
             ],
         ],
+        'documentos' => [
+            'label' => 'Documentos',
+            'group' => 'globales',
+            'icon' => 'bi bi-folder-fill',
+            'url' => 'documentos.php',
+        ],
         'footer' => [
             'label' => 'Pie de Página',
             'group' => 'globales',
