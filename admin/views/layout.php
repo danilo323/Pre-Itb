@@ -54,7 +54,7 @@ function layout_sidebar($current_key = ''): string
                 if (!empty($item['url'])) {
                     $url = $ab . '/' . ltrim($item['url'], '/');
                 } else {
-                    $url = ($item['type'] === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
+                    $url = (($item['type'] ?? '') === 'collection') ? "{$ab}/coleccion.php?c={$key}" : "{$ab}/singleton.php?c={$key}";
                 }
 
                 $html .= "        <li><a href=\"{$url}\" {$active}><i class=\"{$icon}\"></i> {$label}</a></li>\n";

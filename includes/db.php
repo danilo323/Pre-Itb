@@ -20,11 +20,11 @@ class Database {
         $configFile = dirname(__DIR__) . '/admin/config.php';
         $config = file_exists($configFile) ? (require $configFile) : [];
 
-        $host = getenv('DB_HOST') ?: ($config['db_host'] ?? '127.0.0.1');
-        $port = (int)(getenv('DB_PORT') ?: ($config['db_port'] ?? 3306));
-        $name = getenv('DB_NAME') ?: ($config['db_name'] ?? '');
-        $user = getenv('DB_USER') ?: ($config['db_user'] ?? '');
-        $pass = getenv('DB_PASS') ?: ($config['db_pass'] ?? '');
+        $host = getenv('MYSQLHOST') ?: (getenv('DB_HOST') ?: ($config['db_host'] ?? '127.0.0.1'));
+        $port = (int)(getenv('MYSQLPORT') ?: (getenv('DB_PORT') ?: ($config['db_port'] ?? 3306)));
+        $name = getenv('MYSQLDATABASE') ?: (getenv('DB_NAME') ?: ($config['db_name'] ?? ''));
+        $user = getenv('MYSQLUSER') ?: (getenv('DB_USER') ?: ($config['db_user'] ?? ''));
+        $pass = getenv('MYSQLPASSWORD') ?: (getenv('DB_PASS') ?: ($config['db_pass'] ?? ''));
 
         if (empty($name) || empty($user)) {
             return null;
@@ -133,6 +133,35 @@ class Database {
                     PRIMARY KEY (`ip`)
                 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
             ");
+
+            // Si la base de datos está vacía (como en un nuevo deploy en Railway), sembrarla desde database/init.sql
+            $initSqlFile = dirname(__DIR__) . '/database/init.sql';
+            if (file_exists($initSqlFile)) {
+                $contentCount = (int)self::$instance->query("SELECT COUNT(*) FROM site_content")->fetchColumn();
+                if ($contentCount === 0) {
+                    $rawSql = @file_get_contents($initSqlFile);
+                    if (!empty($rawSql)) {
+                        $lines = explode("\n", $rawSql);
+                        $statement = '';
+                        foreach ($lines as $line) {
+                            $trimmed = trim($line);
+                            if ($trimmed === '' || str_starts_with($trimmed, '--') || str_starts_with($trimmed, '/*')) {
+                                continue;
+                            }
+                            $statement .= $line . "\n";
+                            if (str_ends_with($trimmed, ';')) {
+                                try {
+                                    self::$instance->exec($statement);
+                                } catch (Exception $ex) {
+                                    // Ignorar comandos no críticos como CREATE DATABASE si ya existe
+                                }
+                                $statement = '';
+                            }
+                        }
+                        error_log("[ITB] Base de datos sembrada automáticamente desde database/init.sql");
+                    }
+                }
+            }
 
             // Migración inicial de registros.json a form_registros si la tabla está vacía
             $regJson = dirname(__DIR__) . '/data/registros.json';

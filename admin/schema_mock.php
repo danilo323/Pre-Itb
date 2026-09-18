@@ -132,7 +132,9 @@ return [
             'label' => 'Documentos',
             'group' => 'globales',
             'icon' => 'bi bi-folder-fill',
+            'type' => 'custom',
             'url' => 'documentos.php',
+            'subtitulo' => 'Subir y gestionar documentos',
         ],
         'footer' => [
             'label' => 'Pie de Página',

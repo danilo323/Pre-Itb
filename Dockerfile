@@ -1,25 +1,45 @@
+# Dockerfile universal para desarrollo local (docker compose) y despliegue en la nube (Railway)
 FROM php:8.2-apache
 
-# Instalar dependencias del sistema y extensiones de PHP requeridas
-RUN apt-get update && apt-get install -y \
-    libpng-dev \
-    libjpeg-dev \
-    libfreetype6-dev \
-    libonig-dev \
-    libzip-dev \
-    zip \
-    unzip \
-    && docker-php-ext-configure gd --with-freetype --with-jpeg \
-    && docker-php-ext-install -j$(nproc) pdo_mysql mysqli mbstring gd fileinfo \
+# Extensiones del sistema y PHP requeridas (GD con soporte webp/jpeg/freetype, PDO MySQL, etc.)
+RUN apt-get update && apt-get install -y --no-install-recommends \
+        libpng-dev \
+        libjpeg62-turbo-dev \
+        libwebp-dev \
+        libfreetype6-dev \
+        libonig-dev \
+        libzip-dev \
+        zip \
+        unzip \
+    && docker-php-ext-configure gd --with-jpeg --with-webp --with-freetype \
+    && docker-php-ext-install -j"$(nproc)" gd pdo_mysql mysqli mbstring fileinfo \
+    && a2enmod rewrite headers \
     && rm -rf /var/lib/apt/lists/*
 
-# Habilitar mod_rewrite para URLs limpias y redirecciones del .htaccess
-RUN a2enmod rewrite
+# Asegurar MPM prefork para mod_php
+RUN a2dismod -q mpm_event mpm_worker 2>/dev/null || true \
+    && a2enmod -q mpm_prefork
 
-# Permitir lectura completa de .htaccess en /var/www/html
-RUN sed -ri -e 's!AllowOverride None!AllowOverride All!g' /etc/apache2/apache2.conf /etc/apache2/conf-available/*.conf
+# Configuración de producción de PHP y ajustes del proyecto
+RUN mv "$PHP_INI_DIR/php.ini-production" "$PHP_INI_DIR/php.ini"
+COPY docker/php.ini "$PHP_INI_DIR/conf.d/zz-itb.ini"
 
-# Ajustes de rendimiento y tamaño de subida para la biblioteca de medios
-RUN echo "upload_max_filesize = 32M\npost_max_size = 32M\nmemory_limit = 256M\n" > /usr/local/etc/php/conf.d/custom.ini
+# Configuración de VirtualHost con soporte completo de .htaccess
+COPY docker/apache-vhost.conf /etc/apache2/sites-available/000-default.conf
 
-WORKDIR /var/www/html
+# Código del sitio
+COPY --chown=www-data:www-data . /var/www/html/
+RUN chmod 755 /var/www/html
+
+# Entrypoint dinámico (soporte para puerto Railway $PORT y volúmenes)
+COPY docker/entrypoint.sh /usr/local/bin/itb-entrypoint
+RUN sed -i 's/\r$//' /usr/local/bin/itb-entrypoint && chmod +x /usr/local/bin/itb-entrypoint
+
+# Validar sintaxis de Apache en tiempo de compilación
+RUN apache2ctl -t
+
+ENV PORT=8080
+EXPOSE 8080
+
+ENTRYPOINT ["itb-entrypoint"]
+CMD ["apache2-foreground"]
