@@ -133,7 +133,7 @@
 .areas__card .btn--solid {
     margin-top: auto;
     align-self: center;
-    /* Centra el botÃ³n horizontalmente */
+    /* Centra el botón horizontalmente */
 }
 
 .areas__card:hover .btn--solid .btn__icon-right i {

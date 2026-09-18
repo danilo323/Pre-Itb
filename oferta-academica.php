@@ -17,8 +17,9 @@ require_once 'includes/content_helper.php';
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jarallax/2.1.4/jarallax.min.css">
     <link rel="stylesheet" href="css/styles.css">
-    <link rel="stylesheet" href="css/oferta-academica.css">
-    <link rel="stylesheet" href="css/pagina-interna.css">
+    <link rel="stylesheet" href="css/oferta-academica.css?v=<?= filemtime('css/oferta-academica.css') ?>">
+    <link rel="stylesheet" href="css/oferta-programas.css?v=<?= filemtime('css/oferta-programas.css') ?>">
+    <link rel="stylesheet" href="css/pagina-interna.css?v=<?= filemtime('css/pagina-interna.css') ?>">
     <?php /* PENDIENTE: esta hoja pesa 12 KB y se descarga en cada visita, pero
              ahora mismo no la usa nadie: includes/oferta-catalogo.php y
              js/oferta-catalogo.js existen y no se incluyen en ninguna parte.
@@ -55,7 +56,7 @@ require_once 'includes/content_helper.php';
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jarallax/2.1.4/jarallax.min.js"></script>
     <script src="js/main.js"></script>
     <script src="js/pagina-interna.js"></script>
-    <script src="js/oferta-programas.js"></script>
+    <script src="js/oferta-programas.js?v=<?= filemtime('js/oferta-programas.js') ?>"></script>
 
 </body>
 

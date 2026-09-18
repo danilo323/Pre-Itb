@@ -1,0 +1,29 @@
+# Control de versiones y herramientas
+.git
+.gitignore
+.gitattributes
+.dockerignore
+.gemini
+.agents
+.claude
+md/
+
+# Scripts de prueba sin autenticación: no deben ser accesibles por HTTP
+test/
+admin/test_motor.php
+
+# Estado local / datos sensibles que no van al contenedor
+cookies.txt
+data/registros.json
+data/rate_limits.json
+data/*.bak_*
+data/*.tmp_*
+
+# Documentación (solo se conserva la guía de despliegue)
+*.md
+!README-RAILWAY.md
+
+# Basura
+*.log
+Thumbs.db
+desktop.ini

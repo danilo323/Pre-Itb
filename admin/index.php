@@ -91,14 +91,14 @@ foreach ($groups as $group_key => $group_label):
                 if (!empty($item['url'])) {
                     $url = ltrim($item['url'], '/');
                 } else {
-                    $url = ($item['type'] === 'collection') ? "coleccion.php?c={$key}" : "singleton.php?c={$key}";
+                    $url = (($item['type'] ?? '') === 'collection') ? "coleccion.php?c={$key}" : "singleton.php?c={$key}";
                 }
                 $icon = $item['icon'] ?? 'bi bi-file-earmark-text';
                 
                 // Determinar subtítulo
                 if (!empty($item['subtitulo'])) {
                     $subtitle = $item['subtitulo'];
-                } elseif ($item['type'] === 'collection') {
+                } elseif (($item['type'] ?? '') === 'collection') {
                     $count = count(collection_items($key));
                     $subtitle = $count . ' item' . ($count !== 1 ? 's' : '');
                 } else {

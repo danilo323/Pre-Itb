@@ -60,7 +60,16 @@
             if (card.dataset.tipo !== tipo) return false;
             if (modalidades.length && !modalidades.includes(card.dataset.modalidad)) return false;
             if (anios.length && !anios.includes(card.dataset.anio)) return false;
-            if (campos.length && !campos.includes(card.dataset.campo)) return false;
+            if (campos.length) {
+                const cVal = (card.dataset.campo || '').toLowerCase().trim();
+                const fVal = (card.dataset.facultad || '').toLowerCase().trim();
+                const match = campos.some((c) => {
+                    const cLower = (c || '').toLowerCase().trim();
+                    if (!cLower) return false;
+                    return cLower === cVal || cLower === fVal || (fVal && fVal.includes(cLower)) || (fVal && cLower.includes(fVal));
+                });
+                if (!match) return false;
+            }
             if (texto && !card.dataset.nombre.includes(texto)) return false;
             return true;
         });
@@ -189,6 +198,55 @@
     selectOrden?.addEventListener('change', reiniciarYRenderizar);
     radiosTipo.forEach((r) => r.addEventListener('change', reiniciarYRenderizar));
     checksFiltro.forEach((c) => c.addEventListener('change', reiniciarYRenderizar));
+
+    // Cada ficha se abre de forma independiente. El detalle se mantiene en el
+    // HTML (en vez de construirse al clic), así también lo pueden recorrer los
+    // lectores de pantalla y funciona sin depender de una animación.
+    tarjetas.forEach((card) => {
+        const toggle = card.querySelector('.oferta-card__toggle');
+        const detalle = card.querySelector('.oferta-card__detalle');
+        if (!toggle || !detalle) return;
+
+        toggle.addEventListener('click', () => {
+            const abierto = toggle.getAttribute('aria-expanded') === 'true';
+            toggle.setAttribute('aria-expanded', String(!abierto));
+            detalle.hidden = abierto;
+            if (!abierto) {
+                // Forzar reflujo para reiniciar las animaciones de entrada cada vez que se despliega
+                card.classList.remove('is-expandida');
+                void card.offsetWidth;
+                card.classList.add('is-expandida');
+            } else {
+                card.classList.remove('is-expandida');
+            }
+        });
+
+        card.querySelectorAll('.oferta-card__tabs [role="tab"]').forEach((tab, indice) => {
+            tab.addEventListener('click', () => {
+                const tabs = Array.from(card.querySelectorAll('.oferta-card__tabs [role="tab"]'));
+                const panels = Array.from(card.querySelectorAll('.oferta-card__tab-panel'));
+                tabs.forEach((item, i) => {
+                    const activa = i === indice;
+                    item.classList.toggle('is-active', activa);
+                    item.setAttribute('aria-selected', String(activa));
+                    panels[i].hidden = !activa;
+                });
+            });
+        });
+
+        card.querySelectorAll('.oferta-card__info-tabs [role="tab"]').forEach((tab, indice) => {
+            tab.addEventListener('click', () => {
+                const tabs = Array.from(card.querySelectorAll('.oferta-card__info-tabs [role="tab"]'));
+                const panels = Array.from(card.querySelectorAll('.oferta-card__info-panel'));
+                tabs.forEach((item, i) => {
+                    const activa = i === indice;
+                    item.classList.toggle('is-active', activa);
+                    item.setAttribute('aria-selected', String(activa));
+                    panels[i].hidden = !activa;
+                });
+            });
+        });
+    });
 
     btnBorrar?.addEventListener('click', () => {
         checksFiltro.forEach((c) => { c.checked = false; });

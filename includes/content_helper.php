@@ -5,14 +5,14 @@
 require_once dirname(__DIR__) . '/admin/storage.php';
 
 /**
- * Ruta del archivo persistente JSON (data/content.json).
+ * Compatibilidad con plugins y scripts (retorna ruta histórica).
  */
 function content_storage_file(): string {
     return storage_file();
 }
 
 /**
- * Carga los datos almacenados en disco (con soporte de semilla).
+ * Carga los datos almacenados directamente desde la Base de Datos MySQL.
  */
 function content_storage_load(): array {
     return storage_load();
@@ -55,7 +55,7 @@ function content_cache_clear(): void {
 }
 
 /**
- * Guarda el array de datos permanentemente en disco y en MySQL.
+ * Guarda el array de datos permanentemente en la Base de Datos MySQL.
  */
 function content_storage_save(?array $data = null): bool {
     if ($data === null) {

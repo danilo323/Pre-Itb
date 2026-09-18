@@ -11,7 +11,7 @@ return [
     'db_port'               => 3306,
     'db_name'               => 'itb_admin',
     'db_user'               => 'root',
-    'db_pass'               => '123456789',
+    'db_pass'               => '12345',
 
     // Parámetros de sesión
     'session_name'          => 'itb_admin_sess',

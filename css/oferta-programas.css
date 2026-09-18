@@ -140,28 +140,13 @@
     cursor: pointer;
 }
 
-/* "Campo de Estudio" no lleva casilla visible en el diseño: se ve como
-   texto suelto e indentado, aunque por dentro sigue siendo un checkbox real
-   (escondido, no eliminado) para que el filtrado en JS siga funcionando
-   igual — el <label> hace clic en el input aunque esté oculto. */
-.oferta-buscador__campo {
-    padding-left: 48px;
-}
-
-.oferta-buscador__campo input {
-    position: absolute;
-    opacity: 0;
-    width: 1px;
-    height: 1px;
-    pointer-events: none;
-}
-
 /* Controles propios: el navegador dibuja el radio y la casilla nativos en
    gris/azul del sistema, y el diseno los pide en naranja institucional. Se
    apaga la apariencia nativa (appearance:none) pero se conserva el <input>
    real, asi que teclado, :focus y el filtrado en JS siguen funcionando. */
 .oferta-buscador__radio input,
-.oferta-buscador__check input {
+.oferta-buscador__check input,
+.oferta-buscador__campo input {
     appearance: none;
     -webkit-appearance: none;
     margin: 0;
@@ -497,6 +482,322 @@
     bottom: 32px;
 }
 
+/* Ficha desplegable del programa. El resumen reemplaza al antiguo enlace
+   “Ver programa”; la flecha es el único control para abrir la información. */
+.oferta-card {
+    display: block;
+    padding: 18px;
+}
+
+.oferta-card:hover {
+    transform: none;
+}
+
+.oferta-card__resumen {
+    display: flex;
+    align-items: center;
+    gap: 30px;
+    padding-bottom: 12px;
+}
+
+.oferta-card__resumen .oferta-card__img { width: 180px; height: 100px; }
+
+.oferta-card__toggle {
+    width: 34px;
+    height: 34px;
+    margin: 0 0 0 auto;
+    align-self: flex-end;
+    flex: 0 0 auto;
+    border: 0;
+    border-radius: 6px;
+    background: var(--primary-orange);
+    color: var(--white);
+    cursor: pointer;
+    font-size: 0.85rem;
+}
+
+.oferta-card__toggle:focus-visible,
+.oferta-card__tabs button:focus-visible { outline: 2px solid var(--primary-blue); outline-offset: 3px; }
+.oferta-card__toggle i { transition: transform .2s ease; }
+.oferta-card.is-expandida .oferta-card__toggle {
+    position: absolute;
+    z-index: 3;
+    top: 16px;
+    right: 16px;
+}
+.oferta-card.is-expandida .oferta-card__toggle i { transform: rotate(180deg); }
+
+/* Abierta, la tarjeta adopta la composición vertical de la ficha: foto
+   completa, título y datos debajo, y el control queda sobre la esquina. */
+.oferta-card.is-expandida { padding: 12px 12px 18px; }
+.oferta-card.is-expandida .oferta-card__badge { display: none; }
+.oferta-card.is-expandida .oferta-card__resumen { display: block; padding: 0; }
+.oferta-card.is-expandida .oferta-card__resumen .oferta-card__img {
+    width: 100%;
+    height: auto;
+    /* Se conserva el encuadre superior y se elimina el excedente inferior
+       de la foto, tal como la referencia de la ficha desplegada. */
+    aspect-ratio: 1.76 / 1;
+    border-radius: 4px;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-position: center top;
+}
+.oferta-card.is-expandida .oferta-card__body { padding: 14px 8px 0; }
+.oferta-card.is-expandida .oferta-card__title { font-size: 1.2rem; }
+.oferta-card.is-expandida .oferta-card__meta { flex-direction: row; flex-wrap: wrap; gap: 8px 24px; }
+.oferta-card.is-expandida .oferta-card__meta li { font-size: .76rem; }
+.oferta-card__meta i { width: 14px; color: var(--primary-orange); text-align: center; }
+
+.oferta-card__detalle {
+    margin: 14px 8px 0;
+    padding-top: 16px;
+    border-top: 1px solid var(--gray-200);
+    color: var(--gray-700);
+    font-family: var(--font-primary);
+    font-size: .84rem;
+    line-height: 1.45;
+}
+
+.oferta-card__detalle h4,
+.oferta-card__competencias-titulo {
+    display: block;
+    margin: 0 0 10px;
+    color: var(--primary-blue);
+    font-family: var(--font-heading);
+    font-size: .9rem;
+}
+
+.oferta-card__perfil { margin-bottom: 16px; }
+.oferta-card__informacion { margin-bottom: 16px; }
+.oferta-card__info-tabs { display: flex; align-items: center; gap: 26px; flex-wrap: wrap; }
+.oferta-card__info-tabs button {
+    padding: 0 0 6px;
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    color: var(--primary-blue);
+    font-family: var(--font-primary);
+    font-size: .76rem;
+    cursor: pointer;
+}
+.oferta-card__info-tabs button.is-active { color: var(--primary-orange); border-color: var(--primary-orange); }
+.oferta-card__info-tabs i { margin-left: 8px; font-size: .65rem; }
+.oferta-card__info-panel {
+    margin-top: 10px;
+    padding: 14px 18px;
+    border: 1px solid var(--gray-200);
+    border-radius: 10px;
+    color: var(--gray-800);
+    font-size: .88rem;
+}
+.oferta-card__info-panel ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc outside !important;
+}
+.oferta-card__info-panel li {
+    display: list-item;
+    margin-bottom: 5px;
+    list-style: disc outside !important;
+}
+.oferta-card__info-panel li:last-child { margin-bottom: 0; }
+.oferta-card__competencias { border-top: 1px solid var(--gray-200); padding-top: 12px; }
+.oferta-card__tabs { display: flex; align-items: center; gap: 20px; flex-wrap: wrap; }
+.oferta-card__tabs button { border: 0; border-bottom: 2px solid transparent; padding: 0 0 5px; background: transparent; color: var(--primary-blue); font: inherit; cursor: pointer; }
+.oferta-card__tabs button.is-active { color: var(--primary-orange); border-color: var(--primary-orange); }
+.oferta-card__tab-panel { margin-top: 8px; white-space: normal; }
+.oferta-card__tab-panel ul {
+    margin: 0;
+    padding-left: 18px;
+    list-style: disc outside !important;
+}
+.oferta-card__tab-panel li {
+    display: list-item;
+    margin: 0 0 5px;
+    list-style: disc outside !important;
+}
+.oferta-card__documentos { margin-top: 16px; padding-top: 12px; border-top: 1px solid var(--gray-200); }
+.oferta-card__documentos-pie { display: flex; align-items: flex-end; justify-content: space-between; gap: 20px; }
+.oferta-card__pdfs {
+    display: grid;
+    grid-template-columns: repeat(4, 70px);
+    column-gap: 18px;
+    align-items: start;
+    margin-top: 12px;
+}
+.oferta-card__pdfs a,
+.oferta-card__pdf-pendiente {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 6px;
+    color: var(--primary-orange);
+    font-size: .72rem;
+    font-weight: 600;
+    text-align: center;
+}
+.oferta-card__pdfs a { text-decoration: none; }
+
+/* Documento PDF delineado, con esquina doblada, como el ícono de la ficha. */
+.oferta-card__pdf-icon {
+    position: relative;
+    display: grid;
+    place-items: end center;
+    width: 25px;
+    height: 32px;
+    padding-bottom: 3px;
+    border: 1px solid #8a8f98;
+    border-radius: 1px;
+    color: #6f7680;
+    font-family: Arial, sans-serif;
+    font-size: 6px;
+    font-weight: 700;
+    line-height: 1;
+}
+.oferta-card__pdf-icon::before {
+    content: '';
+    position: absolute;
+    top: -1px;
+    right: -1px;
+    width: 8px;
+    height: 8px;
+    border-left: 1px solid #8a8f98;
+    border-bottom: 1px solid #8a8f98;
+    background: var(--white);
+}
+.oferta-card__pdf-icon::after {
+    content: '⌁';
+    position: absolute;
+    top: 9px;
+    color: #6f7680;
+    font-size: 16px;
+    font-weight: 400;
+}
+.oferta-card__acciones { display: flex; justify-content: flex-end; gap: 8px; }
+.oferta-card__acciones .navbar__btn { font-size: .78rem; }
+.oferta-card__acciones .btn--solid { padding: 4px 5px 4px 14px; }
+.oferta-card__acciones .btn--solid .btn__icon-right { width: 30px; height: 30px; }
+
+/* =========================================================================
+   ANIMACIONES DE ENTRADA AL DESPLEGAR LA FICHA (.is-expandida)
+   La imagen y cada bloque de texto/sección entran con animación escalonada
+   y fluida para una experiencia dinámica y premium.
+   Nota: NO se desactiva con prefers-reduced-motion porque en Windows
+   Chrome/Edge lo marcan activo por defecto en la mayoría de máquinas.
+   ========================================================================= */
+
+@keyframes oferta-expand-img {
+    0% {
+        opacity: 0;
+        transform: translateY(-16px) scale(0.95);
+        filter: blur(4px) brightness(0.9);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+        filter: blur(0) brightness(1);
+    }
+}
+
+@keyframes oferta-expand-text {
+    0% {
+        opacity: 0;
+        transform: translateY(22px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes oferta-detalle-fade {
+    0% {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Transición suave del marco de la tarjeta al expandirse */
+.oferta-card {
+    transition: padding 0.35s ease, box-shadow 0.35s ease, border-color 0.35s ease, transform 0.25s ease;
+}
+
+.oferta-card.is-expandida {
+    border-color: rgba(241, 90, 36, 0.4) !important;
+    box-shadow: 0 12px 36px rgba(15, 34, 67, 0.14) !important;
+}
+
+/* Despliegue del contenedor de detalles */
+.oferta-card.is-expandida .oferta-card__detalle {
+    animation: oferta-detalle-fade 0.4s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 1. Imagen principal desplegada */
+.oferta-card.is-expandida .oferta-card__img {
+    animation: oferta-expand-img 0.48s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+/* 2. Título del programa */
+.oferta-card.is-expandida .oferta-card__title {
+    animation: oferta-expand-text 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.08s;
+}
+
+/* 3. Facultad */
+.oferta-card.is-expandida .oferta-card__facultad {
+    animation: oferta-expand-text 0.42s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.14s;
+}
+
+/* 4. Lista de características (Modalidad, Duración, Campus) */
+.oferta-card.is-expandida .oferta-card__meta li {
+    animation: oferta-expand-text 0.38s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+.oferta-card.is-expandida .oferta-card__meta li:nth-child(1) { animation-delay: 0.20s; }
+.oferta-card.is-expandida .oferta-card__meta li:nth-child(2) { animation-delay: 0.25s; }
+.oferta-card.is-expandida .oferta-card__meta li:nth-child(3) { animation-delay: 0.30s; }
+
+/* 5. Bloque de pestañas de Información (Documentos de admisión, Inversión, Horarios) */
+.oferta-card.is-expandida .oferta-card__informacion {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.36s;
+}
+
+/* 6. Bloque de Perfil del programa */
+.oferta-card.is-expandida .oferta-card__perfil {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.44s;
+}
+
+/* 7. Bloque de Competencias */
+.oferta-card.is-expandida .oferta-card__competencias {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.52s;
+}
+
+/* 8. Bloque de Documentos de Carrera (PDFs) */
+.oferta-card.is-expandida .oferta-card__documentos {
+    animation: oferta-expand-text 0.44s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.60s;
+}
+
+/* 9. Botones de acción ("Solicitar Información", "Matricúlame") */
+.oferta-card.is-expandida .oferta-card__acciones {
+    animation: oferta-expand-text 0.46s cubic-bezier(0.16, 1, 0.3, 1) both;
+    animation-delay: 0.68s;
+}
+
+/* Micro-animación suave al cambiar de panel o pestaña */
+.oferta-card__info-panel:not([hidden]),
+.oferta-card__tab-panel:not([hidden]) {
+    animation: oferta-expand-text 0.28s ease-out;
+}
+
 /* ---- Paginación ---- */
 .oferta-buscador__paginacion {
     display: flex;
@@ -600,6 +901,10 @@
         row-gap: 16px;
     }
 
+    .oferta-card__resumen {
+        gap: 18px;
+    }
+
     /* En una sola columna el grid coloca los 4 hijos en orden del DOM
        (Filtros, Mostrando..., caja de filtros, tarjetas) y cada encabezado
        quedaria lejos de lo que encabeza. Con order se reagrupan por pares. */
@@ -653,6 +958,29 @@
         position: static;
         align-self: flex-start;
     }
+}
+
+@media (max-width: 560px) {
+    .oferta-card__resumen {
+        align-items: flex-start;
+        display: grid;
+        grid-template-columns: 1fr auto;
+    }
+
+    .oferta-card__resumen .oferta-card__img {
+        grid-column: 1 / -1;
+        width: 100%;
+        height: 160px;
+    }
+
+    .oferta-card__toggle { grid-column: 2; grid-row: 2; align-self: center; }
+    .oferta-card.is-expandida .oferta-card__resumen { display: block; }
+    .oferta-card.is-expandida .oferta-card__resumen .oferta-card__img { height: auto; }
+    .oferta-card.is-expandida .oferta-card__meta { gap: 7px 12px; }
+    .oferta-card__info-tabs { gap: 12px; }
+    .oferta-card__documentos-pie { align-items: stretch; flex-direction: column; }
+    .oferta-card__acciones { align-items: stretch; flex-direction: column; }
+    .oferta-card__acciones .navbar__btn { justify-content: center; }
 }
 
 @media (max-width: 600px) {
@@ -728,12 +1056,9 @@
 
     .oferta-buscador__grupo h4,
     .oferta-buscador__radio,
-    .oferta-buscador__check {
-        padding-left: 10px;
-    }
-
+    .oferta-buscador__check,
     .oferta-buscador__campo {
-        padding-left: 34px;
+        padding-left: 10px;
     }
 
     .oferta-buscador__resultados-head {

@@ -1,4 +1,4 @@
-﻿/* =============================================
+/* =============================================
    HERO SECTION
    ============================================= */
 .hero {
@@ -76,7 +76,7 @@
     will-change: transform;
 }
 
-/* Slide activo: en pantalla (posiciÃ³n normal) */
+/* Slide activo: en pantalla (posición normal) */
 .hero__slide--active {
     transform: translateY(0%);
 }
