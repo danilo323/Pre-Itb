@@ -19,155 +19,87 @@ require_once dirname(__DIR__) . '/includes/db.php';
 const REGISTROS_MAX_NOMBRE = 25;
 
 function registros_archivo(): string {
-    $dir = dirname(__DIR__) . '/data';
-    if (!is_dir($dir)) {
-        @mkdir($dir, 0755, true);
-    }
-    return $dir . '/registros.json';
+    return '';
 }
 
 /**
- * Devuelve todos los registros, del más reciente al más antiguo.
+ * Devuelve todos los registros directamente desde MySQL, del más reciente al más antiguo.
  */
 function registros_leer(): array {
-    $archivo = registros_archivo();
-    if (!file_exists($archivo)) {
-        return [];
-    }
-    $crudo = @file_get_contents($archivo);
-    if ($crudo === false || $crudo === '') {
-        return [];
-    }
-    $datos = json_decode($crudo, true);
-    return is_array($datos) ? $datos : [];
-}
-
-/**
- * Escribe la lista completa. Escritura atómica (a un temporal y luego rename)
- * para que un corte a media escritura no deje el archivo a medias.
- */
-function registros_escribir(array $lista): bool {
-    $archivo = registros_archivo();
-    $dir = dirname($archivo);
-
-    $json = json_encode(array_values($lista), JSON_PRETTY_PRINT | JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES);
-    if ($json === false) {
-        return false;
-    }
-
-    $tmp = $dir . '/registros.json.tmp_' . bin2hex(random_bytes(8));
-    if (@file_put_contents($tmp, $json, LOCK_EX) === false) {
-        if (file_exists($tmp)) @unlink($tmp);
-        return false;
-    }
-
-    // En Windows rename() no sobrescribe, hay que quitar el destino antes.
-    if (strtoupper(substr(PHP_OS, 0, 3)) === 'WIN' && file_exists($archivo)) {
-        @unlink($archivo);
-    }
-    if (!@rename($tmp, $archivo)) {
-        @file_put_contents($archivo, $json, LOCK_EX);
-        if (file_exists($tmp)) @unlink($tmp);
-    }
-    return true;
-}
-
-/**
- * Añade un registro ya validado y devuelve su id.
- */
-function registros_agregar(array $datos): int {
-    $lista = registros_leer();
-
-    $ultimo = 0;
-    foreach ($lista as $r) {
-        $ultimo = max($ultimo, (int)($r['id'] ?? 0));
-    }
-    $id = $ultimo + 1;
-
-    $fila = [
-        'id'           => $id,
-        'fecha'        => date('Y-m-d H:i:s'),
-        'nombre'       => $datos['nombre'],
-        'apellido'     => $datos['apellido'],
-        'email'        => $datos['email'],
-        'telefono'     => $datos['telefono'],
-        'cedula'       => $datos['cedula'],
-        'nacionalidad' => $datos['nacionalidad'],
-        'bachiller'    => $datos['bachiller'],
-        'carrera'      => $datos['carrera'],
-        'modalidad'    => $datos['modalidad'],
-        'mensaje'      => $datos['mensaje'],
-    ];
-
-    // Los más nuevos primero: es el orden en el que se quieren ver en el panel.
-    array_unshift($lista, $fila);
-    registros_escribir($lista);
-
-    registros_copiar_a_mysql($fila);
-
-    return $id;
-}
-
-function registros_eliminar(int $id): bool {
-    $lista = registros_leer();
-    $antes = count($lista);
-    $lista = array_values(array_filter($lista, function ($r) use ($id) {
-        return (int)($r['id'] ?? 0) !== $id;
-    }));
-    if (count($lista) === $antes) {
-        return false;
-    }
-    registros_escribir($lista);
-
-    $pdo = db();
-    if ($pdo) {
-        try {
-            $pdo->prepare("DELETE FROM form_registros WHERE id = ?")->execute([$id]);
-        } catch (Exception $e) {
-            error_log('registros: no se pudo borrar en MySQL: ' . $e->getMessage());
-        }
-    }
-    return true;
-}
-
-/**
- * Copia de seguridad en MySQL. Si no hay base de datos no pasa nada: el JSON
- * ya guardó el registro y es el que se lee.
- */
-function registros_copiar_a_mysql(array $fila): void {
     $pdo = db();
     if (!$pdo) {
-        return;
+        error_log('[ITB-REGISTROS] No hay conexión a MySQL para leer registros.');
+        return [];
     }
+
     try {
-        $pdo->exec("
-            CREATE TABLE IF NOT EXISTS `form_registros` (
-                `id`           INT           NOT NULL,
-                `fecha`        DATETIME      NOT NULL,
-                `nombre`       VARCHAR(50)   NOT NULL,
-                `apellido`     VARCHAR(50)   NOT NULL,
-                `email`        VARCHAR(120)  NOT NULL,
-                `telefono`     VARCHAR(20)   NOT NULL,
-                `cedula`       VARCHAR(20)   NOT NULL,
-                `nacionalidad` VARCHAR(20)   NOT NULL,
-                `bachiller`    VARCHAR(10)   NOT NULL,
-                `carrera`      VARCHAR(150)  NOT NULL,
-                `modalidad`    VARCHAR(80)   NOT NULL,
-                `mensaje`      TEXT          NULL,
-                PRIMARY KEY (`id`)
-            ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci
-        ");
-        $sql = "INSERT INTO form_registros
-                (id, fecha, nombre, apellido, email, telefono, cedula, nacionalidad, bachiller, carrera, modalidad, mensaje)
-                VALUES (?,?,?,?,?,?,?,?,?,?,?,?)
-                ON DUPLICATE KEY UPDATE fecha = VALUES(fecha)";
-        $pdo->prepare($sql)->execute([
-            $fila['id'], $fila['fecha'], $fila['nombre'], $fila['apellido'],
-            $fila['email'], $fila['telefono'], $fila['cedula'], $fila['nacionalidad'],
-            $fila['bachiller'], $fila['carrera'], $fila['modalidad'], $fila['mensaje'],
-        ]);
+        $stmt = $pdo->query("SELECT * FROM form_registros ORDER BY id DESC");
+        return $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
     } catch (Exception $e) {
-        error_log('registros: no se pudo copiar a MySQL: ' . $e->getMessage());
+        error_log('[ITB-REGISTROS] Error leyendo form_registros: ' . $e->getMessage());
+        return [];
+    }
+}
+
+/**
+ * Escribe o sincroniza la lista completa en MySQL (compatibilidad).
+ */
+function registros_escribir(array $lista): bool {
+    return true;
+}
+
+/**
+ * Añade un registro ya validado directamente en MySQL y devuelve su ID autoincremental.
+ */
+function registros_agregar(array $datos): int {
+    $pdo = db();
+    if (!$pdo) {
+        error_log('[ITB-REGISTROS] No hay conexión a MySQL para agregar registro.');
+        return 0;
+    }
+
+    try {
+        $stmt = $pdo->prepare("
+            INSERT INTO form_registros 
+            (fecha, nombre, apellido, email, telefono, cedula, nacionalidad, bachiller, carrera, modalidad, mensaje)
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+        ");
+        $stmt->execute([
+            date('Y-m-d H:i:s'),
+            $datos['nombre'],
+            $datos['apellido'],
+            $datos['email'],
+            $datos['telefono'],
+            $datos['cedula'],
+            $datos['nacionalidad'],
+            $datos['bachiller'],
+            $datos['carrera'],
+            $datos['modalidad'],
+            $datos['mensaje'],
+        ]);
+        return (int)$pdo->lastInsertId();
+    } catch (Exception $e) {
+        error_log('[ITB-REGISTROS] Error insertando en form_registros: ' . $e->getMessage());
+        return 0;
+    }
+}
+
+/**
+ * Elimina un registro de la base de datos MySQL por su ID.
+ */
+function registros_eliminar(int $id): bool {
+    $pdo = db();
+    if (!$pdo) {
+        return false;
+    }
+
+    try {
+        $stmt = $pdo->prepare("DELETE FROM form_registros WHERE id = ?");
+        $stmt->execute([$id]);
+        return $stmt->rowCount() > 0;
+    } catch (Exception $e) {
+        error_log('[ITB-REGISTROS] Error borrando en MySQL: ' . $e->getMessage());
+        return false;
     }
 }
 

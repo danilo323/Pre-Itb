@@ -52,15 +52,12 @@ assert_test("Login exitoso resetea el contador de Rate Limiting", $clearedCheck[
 auth_session_start();
 assert_test("Nombre de sesión personalizado configurado (itb_admin_sess)", session_name() === 'itb_admin_sess');
 
-// 4. Verificación del Motor de Almacenamiento JSON (Atomicidad, Backups, Lock)
+// 4. Verificación del Motor de Persistencia 100% MySQL (Transacciones, UPSERT)
 $testData = storage_load();
-assert_test("storage_load() carga datos válidos", is_array($testData));
+assert_test("storage_load() carga datos válidos desde MySQL site_content", is_array($testData) && !empty($testData));
 
 $saveResult = storage_save($testData);
-assert_test("storage_save() ejecuta escritura atómica con LOCK_EX exitosamente", $saveResult === true);
-
-$bak1 = storage_file() . '.bak_1';
-assert_test("storage_save() genera automáticamente backup rotativo (.bak_1)", file_exists($bak1));
+assert_test("storage_save() ejecuta guardado transaccional en MySQL exitosamente", $saveResult === true);
 
 // 5. Verificación de ID Autoincremental Seguro
 $id1 = storage_next_id('test_col', $testData);
@@ -68,15 +65,13 @@ $id2 = storage_next_id('test_col', $testData);
 assert_test("storage_next_id() genera IDs secuenciales únicos (ID1={$id1}, ID2={$id2})", $id2 === $id1 + 1);
 
 // 6. Verificación de Protección HTTP (.htaccess)
-$dataHtaccess = dirname(__DIR__) . '/data/.htaccess';
 $imgHtaccess  = dirname(__DIR__) . '/img/.htaccess';
-assert_test("data/.htaccess existe para bloquear acceso directo a JSON", file_exists($dataHtaccess));
 assert_test("img/.htaccess existe para bloquear ejecución de scripts PHP", file_exists($imgHtaccess));
 
 $imgContent = file_get_contents($imgHtaccess);
 assert_test("img/.htaccess desactiva motor PHP (php_flag engine off)", strpos($imgContent, 'php_flag engine off') !== false);
 
-// 7. Verificación de Capa PDO MySQL
+// 7. Verificación de Capa PDO MySQL y Tablas Activas
 $pdo = db();
 assert_test("Conexión PDO a MySQL inicializada exitosamente", $pdo instanceof PDO);
 
@@ -84,11 +79,13 @@ if ($pdo) {
     $stmt = Database::query("SELECT 1 as alive");
     $row = $stmt ? $stmt->fetch() : null;
     assert_test("Consulta preparada PDO ejecutada con éxito", $row && $row['alive'] == 1);
-}
 
-// 8. Verificación de Semilla
-$seedFile = dirname(__DIR__) . '/data/seed/content.json';
-assert_test("Semilla versionada data/seed/content.json existe", file_exists($seedFile));
+    // Verificar existencia de tablas requeridas en MySQL
+    $tables = $pdo->query("SHOW TABLES")->fetchAll(PDO::FETCH_COLUMN);
+    assert_test("Tabla site_content activa en MySQL", in_array('site_content', $tables));
+    assert_test("Tabla form_registros activa en MySQL", in_array('form_registros', $tables));
+    assert_test("Tabla auth_rate_limits activa en MySQL", in_array('auth_rate_limits', $tables));
+}
 
 echo "\n=== RESUMEN DE AUDITORÍA ===\n";
 echo "Pruebas superadas: {$passed}\n";

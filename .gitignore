@@ -12,8 +12,8 @@ CLAUDE.md
 md/
 
 # Estado de runtime del panel (no versionar)
-data/registros.json
-data/rate_limits.json
+data/*.json
+data/**/*.json
 data/*.bak_*
 data/*.tmp_*
 

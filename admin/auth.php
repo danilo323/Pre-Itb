@@ -1,6 +1,7 @@
 <?php
 // admin/auth.php
 require_once __DIR__ . '/base_url.php';
+require_once dirname(__DIR__) . '/includes/db.php';
 
 /**
  * Carga la configuración del sistema.
@@ -64,18 +65,14 @@ function auth_client_ip(): string {
 }
 
 /**
- * Archivo donde se registra el Rate Limiting.
+ * Archivo de rate limits (mantenido solo por compatibilidad, ahora usa MySQL).
  */
 function auth_rate_limit_file(): string {
-    $dir = dirname(__DIR__) . '/data';
-    if (!is_dir($dir)) {
-        @mkdir($dir, 0755, true);
-    }
-    return $dir . '/rate_limits.json';
+    return '';
 }
 
 /**
- * Verifica si la IP actual está bloqueada por exceso de intentos fallidos.
+ * Verifica si la IP actual está bloqueada por exceso de intentos fallidos en MySQL.
  * Retorna array ['locked' => bool, 'seconds_left' => int]
  */
 function auth_rate_limit_check(?string $ip = null): array {
@@ -84,73 +81,82 @@ function auth_rate_limit_check(?string $ip = null): array {
     $maxAttempts = (int)($config['login_max_attempts'] ?? 5);
     $lockoutSeconds = (int)($config['login_lockout_seconds'] ?? 900);
 
-    $file = auth_rate_limit_file();
-    if (!file_exists($file)) {
+    $pdo = db();
+    if (!$pdo) {
         return ['locked' => false, 'seconds_left' => 0];
     }
 
-    $json = @file_get_contents($file);
-    $data = json_decode($json ?: '{}', true);
-    if (!is_array($data) || !isset($data[$ip])) {
-        return ['locked' => false, 'seconds_left' => 0];
-    }
-
-    $entry = $data[$ip];
-    $attempts = (int)($entry['attempts'] ?? 0);
-    $lastAttempt = (int)($entry['last_attempt'] ?? 0);
-    $elapsed = time() - $lastAttempt;
-
-    if ($attempts >= $maxAttempts) {
-        if ($elapsed < $lockoutSeconds) {
-            return [
-                'locked' => true,
-                'seconds_left' => $lockoutSeconds - $elapsed
-            ];
-        } else {
-            // Ya expiró el bloqueo, resetear
-            unset($data[$ip]);
-            @file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT), LOCK_EX);
+    try {
+        $stmt = $pdo->prepare("SELECT attempts, last_attempt FROM auth_rate_limits WHERE ip = ?");
+        $stmt->execute([$ip]);
+        $entry = $stmt->fetch(PDO::FETCH_ASSOC);
+        if (!$entry) {
             return ['locked' => false, 'seconds_left' => 0];
         }
+
+        $attempts = (int)($entry['attempts'] ?? 0);
+        $lastAttempt = (int)($entry['last_attempt'] ?? 0);
+        $elapsed = time() - $lastAttempt;
+
+        if ($attempts >= $maxAttempts) {
+            if ($elapsed < $lockoutSeconds) {
+                return [
+                    'locked' => true,
+                    'seconds_left' => $lockoutSeconds - $elapsed
+                ];
+            } else {
+                // Ya expiró el bloqueo, resetear en MySQL
+                $del = $pdo->prepare("DELETE FROM auth_rate_limits WHERE ip = ?");
+                $del->execute([$ip]);
+                return ['locked' => false, 'seconds_left' => 0];
+            }
+        }
+    } catch (Exception $e) {
+        error_log('[ITB-AUTH] Error comprobando rate limit: ' . $e->getMessage());
     }
 
     return ['locked' => false, 'seconds_left' => 0];
 }
 
 /**
- * Registra un intento fallido de login para la IP.
+ * Registra un intento fallido de login para la IP en MySQL.
  */
 function auth_rate_limit_fail(?string $ip = null): void {
     $ip = $ip ?? auth_client_ip();
-    $file = auth_rate_limit_file();
-    $data = [];
-    if (file_exists($file)) {
-        $json = @file_get_contents($file);
-        $data = json_decode($json ?: '{}', true) ?: [];
+    $pdo = db();
+    if (!$pdo) {
+        return;
     }
 
-    $entry = $data[$ip] ?? ['attempts' => 0, 'last_attempt' => 0];
-    $entry['attempts'] = (int)($entry['attempts'] ?? 0) + 1;
-    $entry['last_attempt'] = time();
-    $data[$ip] = $entry;
-
-    @file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT), LOCK_EX);
+    try {
+        $stmt = $pdo->prepare("
+            INSERT INTO auth_rate_limits (ip, attempts, last_attempt) 
+            VALUES (?, 1, ?) 
+            ON DUPLICATE KEY UPDATE 
+                attempts = attempts + 1, 
+                last_attempt = VALUES(last_attempt)
+        ");
+        $stmt->execute([$ip, time()]);
+    } catch (Exception $e) {
+        error_log('[ITB-AUTH] Error registrando fallo en rate limit: ' . $e->getMessage());
+    }
 }
 
 /**
- * Resetea el contador de intentos fallidos al tener un login exitoso.
+ * Resetea el contador de intentos fallidos al tener un login exitoso en MySQL.
  */
 function auth_rate_limit_reset(?string $ip = null): void {
     $ip = $ip ?? auth_client_ip();
-    $file = auth_rate_limit_file();
-    if (!file_exists($file)) {
+    $pdo = db();
+    if (!$pdo) {
         return;
     }
-    $json = @file_get_contents($file);
-    $data = json_decode($json ?: '{}', true) ?: [];
-    if (isset($data[$ip])) {
-        unset($data[$ip]);
-        @file_put_contents($file, json_encode($data, JSON_PRETTY_PRINT), LOCK_EX);
+
+    try {
+        $stmt = $pdo->prepare("DELETE FROM auth_rate_limits WHERE ip = ?");
+        $stmt->execute([$ip]);
+    } catch (Exception $e) {
+        error_log('[ITB-AUTH] Error reseteando rate limit: ' . $e->getMessage());
     }
 }
 
@@ -215,9 +221,26 @@ function auth_require(): void {
 }
 
 /**
- * Autentica credenciales contra la configuración usando password_verify estrictamente.
+ * Autentica credenciales contra la base de datos MySQL (tabla admin_users)
+ * o contra la configuración local de config.php usando password_verify estrictamente.
  */
 function auth_verify_credentials(string $user, string $password): bool {
+    // 1. Intentar validar contra base de datos MySQL (tabla admin_users) si existe
+    $pdo = db();
+    if ($pdo) {
+        try {
+            $stmt = $pdo->prepare("SELECT password_hash, activo FROM admin_users WHERE email = ? LIMIT 1");
+            $stmt->execute([$user]);
+            $u = $stmt->fetch(PDO::FETCH_ASSOC);
+            if ($u && !empty($u['activo']) && password_verify($password, $u['password_hash'])) {
+                return true;
+            }
+        } catch (Exception $e) {
+            // Continuar con config.php
+        }
+    }
+
+    // 2. Validar contra credenciales de config.php (ej. admin / 1234)
     $config = auth_config();
     $adminUser = $config['admin_user'] ?? 'admin';
     $adminHash = $config['admin_hash'] ?? '';

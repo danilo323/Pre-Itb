@@ -1,0 +1,60 @@
+services:
+  # Servidor Web (PHP 8.2 + Apache)
+  web:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: itb_web
+    restart: unless-stopped
+    ports:
+      - "8080:80"
+    volumes:
+      - .:/var/www/html
+    environment:
+      DB_HOST: db
+      DB_PORT: 3306
+      DB_NAME: itb_admin
+      DB_USER: root
+      DB_PASS: 12345
+    depends_on:
+      db:
+        condition: service_healthy
+
+  # Base de Datos (MySQL 8.0)
+  db:
+    image: mysql:8.0
+    container_name: itb_db
+    restart: unless-stopped
+    command: --default-authentication-plugin=mysql_native_password --character-set-server=utf8mb4 --collation-server=utf8mb4_unicode_ci
+    ports:
+      - "3307:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: 12345
+      MYSQL_DATABASE: itb_admin
+    volumes:
+      - db_data:/var/lib/mysql
+      - ./database/init.sql:/docker-entrypoint-initdb.d/01_init.sql:ro
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost", "-u", "root", "-p12345"]
+      interval: 5s
+      timeout: 3s
+      retries: 10
+
+  # Gestor Visual de Base de Datos (phpMyAdmin)
+  phpmyadmin:
+    image: phpmyadmin:latest
+    container_name: itb_pma
+    restart: unless-stopped
+    ports:
+      - "8081:80"
+    environment:
+      PMA_HOST: db
+      PMA_PORT: 3306
+      PMA_USER: root
+      PMA_PASSWORD: 12345
+    depends_on:
+      - db
+
+volumes:
+  db_data:
+    driver: local
