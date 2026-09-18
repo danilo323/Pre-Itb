@@ -2,17 +2,17 @@
 //
 // Dos cosas relacionadas con la documentos de documentos:
 //
-//   1. window.abrirdocumentos(callback) â€” el selector que sale al pulsar
+//   1. window.abrirdocumentos(callback) — el selector que sale al pulsar
 //      "Elegir de la documentos" en cualquier campo de documento del panel.
 //      Se carga en TODAS las pantallas (lo mete views/layout.php), porque
-//      cualquier secciÃ³n puede tener un campo de documento.
+//      cualquier sección puede tener un campo de documento.
 //
 //   2. La pantalla admin/documentos.php: arrastrar y soltar archivos.
 //
-// Las dos suben por el mismo sitio: subirdocumento(), aquÃ­ abajo. Antes la
-// subida vivÃ­a dentro del bloque de la pantalla de documentos, que sale
-// antes en cualquier otra pantalla, asÃ­ que el selector no podÃ­a subir y
-// se limitaba a enlazar a la documentos en una pestaÃ±a nueva.
+// Las dos suben por el mismo sitio: subirdocumento(), aquí abajo. Antes la
+// subida vivía dentro del bloque de la pantalla de documentos, que sale
+// antes en cualquier otra pantalla, así que el selector no podía subir y
+// se limitaba a enlazar a la documentos en una pestaña nueva.
 
 (function () {
     'use strict';
@@ -34,7 +34,7 @@
     }
 
     // Sube UN archivo y va contando su progreso. XMLHttpRequest y no fetch,
-    // porque fetch todavÃ­a no informa del progreso de subida.
+    // porque fetch todavía no informa del progreso de subida.
     // Resuelve siempre (nunca rechaza): { ok, documento } o { ok:false, error }.
     function subirdocumento(archivo, alProgresar) {
         return new Promise((resolve) => {
@@ -45,7 +45,7 @@
 
             const xhr = new XMLHttpRequest();
             // Siempre a documentos.php, no a la pantalla actual: el endpoint
-            // responde antes de pintar nada, asÃ­ que sirve desde cualquiera.
+            // responde antes de pintar nada, así que sirve desde cualquiera.
             xhr.open('POST', baseAdmin + '/documentos.php', true);
 
             xhr.upload.addEventListener('progress', (e) => {
@@ -60,14 +60,14 @@
                     resolve({ ok: true, documento: r.documento });
                 } else if (xhr.status === 403) {
                     // csrf_check() corta con texto plano, no con JSON.
-                    resolve({ ok: false, error: 'La sesiÃ³n caducÃ³. Recarga la pÃ¡gina e intÃ©ntalo otra vez.' });
+                    resolve({ ok: false, error: 'La sesión caducó. Recarga la página e inténtalo otra vez.' });
                 } else {
                     resolve({ ok: false, error: r.error || 'No se pudo subir.' });
                 }
             });
 
             xhr.addEventListener('error', () => {
-                resolve({ ok: false, error: 'Se perdiÃ³ la conexiÃ³n.' });
+                resolve({ ok: false, error: 'Se perdió la conexión.' });
             });
 
             xhr.send(datos);
@@ -81,13 +81,13 @@
     }
 
     /* ============================================================
-       1. SELECTOR DE IMÃGENES
+       1. SELECTOR DE IMÁGENES
        ============================================================ */
 
     let overlay = null;      // el modal, se construye una sola vez
-    let alElegir = null;     // callback del campo que lo abriÃ³
-    let documentoes = [];       // Ãºltima lista traÃ­da del servidor
-    let recienSubidas = [];  // rutas de esta sesiÃ³n del modal, para destacarlas
+    let alElegir = null;     // callback del campo que lo abrió
+    let documentoes = [];       // última lista traída del servidor
+    let recienSubidas = [];  // rutas de esta sesión del modal, para destacarlas
     let subiendoEnPicker = false;
 
     function construirModal() {
@@ -140,8 +140,8 @@
         overlay.querySelector('.bib-picker__cerrar').addEventListener('click', cerrar);
         overlay.querySelector('.bib-picker__cancelar').addEventListener('click', cerrar);
 
-        // Clic FUERA de la caja cierra; dentro, no. Sin esta comprobaciÃ³n,
-        // cualquier clic en la rejilla cerrarÃ­a el selector.
+        // Clic FUERA de la caja cierra; dentro, no. Sin esta comprobación,
+        // cualquier clic en la rejilla cerraría el selector.
         overlay.addEventListener('click', e => { if (e.target === overlay) cerrar(); });
 
         buscar.addEventListener('input', function () {
@@ -156,7 +156,7 @@
             buscar.focus();
         });
 
-        // DelegaciÃ³n: las tarjetas se repintan al buscar, asÃ­ que el listener
+        // Delegación: las tarjetas se repintan al buscar, así que el listener
         // va en el contenedor y no en cada una.
         overlay.querySelector('.bib-picker__grid').addEventListener('click', function (e) {
             const card = e.target.closest('.bib-picker__item');
@@ -175,8 +175,8 @@
 
         document.addEventListener('keydown', e => {
             if (e.key !== 'Escape' || !overlay.classList.contains('is-visible')) return;
-            // Con la bÃºsqueda escrita, Escape la limpia antes de cerrar: es lo
-            // que espera quien estÃ¡ filtrando.
+            // Con la búsqueda escrita, Escape la limpia antes de cerrar: es lo
+            // que espera quien está filtrando.
             if (buscar.value !== '') {
                 buscar.value = '';
                 limpiar.hidden = true;
@@ -189,7 +189,7 @@
 
     /* ---- Arrastrar y soltar sobre el selector ----
        Mismo planteamiento que en la pantalla de documentos: dragenter y
-       dragleave burbujean por cada hijo, asÃ­ que hace falta un contador; y
+       dragleave burbujean por cada hijo, así que hace falta un contador; y
        el velo se quita SIEMPRE al soltar, incluso si lo soltado no eran
        archivos, porque si no se queda tapando el modal y parece colgado. */
     function engancharArrastre() {
@@ -233,7 +233,7 @@
         });
 
         // Redes de seguridad: si el arrastre acaba fuera de la ventana no
-        // llega ningÃºn evento y el velo se quedarÃ­a puesto.
+        // llega ningún evento y el velo se quedaría puesto.
         window.addEventListener('blur', quitar);
         document.addEventListener('visibilitychange', () => { if (document.hidden) quitar(); });
         document.addEventListener('keydown', (e) => { if (e.key === 'Escape') quitar(); });
@@ -262,7 +262,7 @@
             return `
             <button type="button" class="bib-picker__item${nueva ? ' is-nueva' : ''}" data-ruta="${escapar(i.ruta)}" data-src="${escapar(i.src)}">
                 <span class="bib-picker__thumb"><i class="bi bi-file-earmark-text"></i></span>
-                ${nueva ? '<span class="bib-picker__nueva">ReciÃ©n subida</span>' : ''}
+                ${nueva ? '<span class="bib-picker__nueva">Recién subida</span>' : ''}
                 <span class="bib-picker__nombre" title="${escapar(i.nombre)}">${escapar(i.nombre)}</span>
                 <span class="bib-picker__peso">${escapar(i.peso)}</span>
             </button>`;
@@ -272,8 +272,8 @@
     }
 
     /* ---- Subir desde el selector ----
-       Se sube de una en una para poder enseÃ±ar el progreso real de cada
-       archivo y decir cuÃ¡l fallÃ³ y por quÃ©, igual que en la pantalla de
+       Se sube de una en una para poder enseñar el progreso real de cada
+       archivo y decir cuál falló y por qué, igual que en la pantalla de
        documentos. Las que entran se colocan las PRIMERAS de la rejilla y se
        marcan, que es lo que se acaba de subir y lo que se va a elegir. */
     async function subirEnPicker(archivos) {
@@ -310,7 +310,7 @@
                 entradas.push(r.documento);
                 recienSubidas.push(r.documento.ruta);
                 // Al principio: documentos_listar() ordena por fecha
-                // descendente, asÃ­ que ahÃ­ es donde le toca.
+                // descendente, así que ahí es donde le toca.
                 documentoes.unshift(r.documento);
             } else {
                 item.estado = 'error';
@@ -323,8 +323,8 @@
         subiendoEnPicker = false;
         overlay.querySelector('.bib-picker__subir').disabled = false;
 
-        // La bÃºsqueda se limpia: si habÃ­a un filtro puesto, lo reciÃ©n subido
-        // no aparecerÃ­a y darÃ­a la sensaciÃ³n de que no se subiÃ³.
+        // La búsqueda se limpia: si había un filtro puesto, lo recién subido
+        // no aparecería y daría la sensación de que no se subió.
         const buscar = overlay.querySelector('.bib-picker__buscar');
         buscar.value = '';
         overlay.querySelector('.bib-picker__limpiar').hidden = true;
@@ -333,8 +333,8 @@
         if (entradas.length) {
             const grid = overlay.querySelector('.bib-picker__grid');
             grid.scrollTop = 0;
-            // Se le da el foco a la primera: asÃ­ se elige con Enter, sin
-            // tener que buscarla entre las demÃ¡s.
+            // Se le da el foco a la primera: así se elige con Enter, sin
+            // tener que buscarla entre las demás.
             const primera = grid.querySelector('.bib-picker__item.is-nueva');
             if (primera) primera.focus();
         }
@@ -399,8 +399,8 @@
         overlay.classList.remove('is-hidden');
         requestAnimationFrame(() => overlay.classList.add('is-visible'));
 
-        // Cada apertura empieza limpia: la marca de "reciÃ©n subida" es de la
-        // sesiÃ³n anterior y ya no dice nada.
+        // Cada apertura empieza limpia: la marca de "recién subida" es de la
+        // sesión anterior y ya no dice nada.
         recienSubidas = [];
         const cola = overlay.querySelector('.bib-picker__cola');
         cola.hidden = true;
@@ -410,10 +410,10 @@
         buscar.value = '';
         overlay.querySelector('.bib-picker__limpiar').hidden = true;
         overlay.querySelector('.bib-picker__grid').innerHTML =
-            '<p class="bib-picker__vacio">Cargando documentosâ€¦</p>';
+            '<p class="bib-picker__vacio">Cargando documentos…</p>';
 
         // Se pide la lista CADA vez que se abre, no una sola al cargar la
-        // pÃ¡gina: asÃ­ una documento reciÃ©n subida en la otra pestaÃ±a ya aparece.
+        // página: así una documento recién subida en la otra pestaña ya aparece.
         fetch(baseAdmin + '/documentos.php?ajax=lista', { credentials: 'same-origin' })
             .then(r => r.json())
             .then(data => {
@@ -423,7 +423,7 @@
             })
             .catch(() => {
                 overlay.querySelector('.bib-picker__grid').innerHTML =
-                    '<p class="bib-picker__vacio">No se pudo cargar la documentos. Recarga la pÃ¡gina e intÃ©ntalo otra vez.</p>';
+                    '<p class="bib-picker__vacio">No se pudo cargar la documentos. Recarga la página e inténtalo otra vez.</p>';
             });
     };
 
@@ -432,8 +432,8 @@
        2. PANTALLA DE LA documentos
        ============================================================
        Subida con progreso por archivo, filtros, orden, vistas,
-       selecciÃ³n mÃºltiple y visor. Todo sobre las tarjetas que PHP ya
-       pintÃ³: la Ãºnica ida al servidor es subir y eliminar. */
+       selección múltiple y visor. Todo sobre las tarjetas que PHP ya
+       pintó: la única ida al servidor es subir y eliminar. */
 
     const grid = document.getElementById('documentos-grid');
     const zona = document.getElementById('documentos-dropzone');
@@ -443,7 +443,7 @@
     // Mismo token que usa el selector: vive en el <body> (views/layout.php).
     const token = tokenCsrf;
 
-    // Mensaje flotante breve, para no recargar la pÃ¡gina por cada acciÃ³n.
+    // Mensaje flotante breve, para no recargar la página por cada acción.
     function avisar(texto, tipo) {
         let caja = $('documentos-avisos');
         if (!caja) {
@@ -560,7 +560,7 @@
             const pie = document.createElement('span');
             pie.className = 'documentos-preview__nombre';
             pie.textContent = item.archivo.name;
-            pie.title = item.archivo.name + ' Â· ' + pesoLegible(item.archivo.size);
+            pie.title = item.archivo.name + ' · ' + pesoLegible(item.archivo.size);
 
             caja.append(img, pie);
 
@@ -569,7 +569,7 @@
                 quitar.type = 'button';
                 quitar.className = 'documentos-preview__quitar';
                 quitar.innerHTML = '<i class="bi bi-x" aria-hidden="true"></i>';
-                quitar.setAttribute('aria-label', 'Quitar ' + item.archivo.name + ' de la selecciÃ³n');
+                quitar.setAttribute('aria-label', 'Quitar ' + item.archivo.name + ' de la selección');
                 quitar.addEventListener('click', () => {
                     URL.revokeObjectURL(item.url);
                     elegidos.splice(i, 1);
@@ -616,8 +616,8 @@
         pintarPreviews();
     }
 
-    // La subida en sÃ­ la hace subirdocumento(), compartida con el selector.
-    // AquÃ­ solo se traduce su progreso y su resultado a las miniaturas de
+    // La subida en sí la hace subirdocumento(), compartida con el selector.
+    // Aquí solo se traduce su progreso y su resultado a las miniaturas de
     // esta pantalla.
     async function subirUno(item) {
         item.estado = 'subiendo';
@@ -639,8 +639,8 @@
     }
 
     $('documentos-subida')?.addEventListener('submit', async (e) => {
-        // Con JavaScript se sube por aquÃ­, de una en una y con progreso. Sin
-        // JavaScript el formulario se envÃ­a solo y lo atiende el POST de PHP.
+        // Con JavaScript se sube por aquí, de una en una y con progreso. Sin
+        // JavaScript el formulario se envía solo y lo atiende el POST de PHP.
         e.preventDefault();
         if (subiendo) return;
 
@@ -662,7 +662,7 @@
         subiendo = false;
         pintarPreviews();
 
-        // Resumen honesto: cuÃ¡ntas entraron y cuÃ¡les no, con el motivo.
+        // Resumen honesto: cuántas entraron y cuáles no, con el motivo.
         if (ok && !fallos.length) {
             avisar(ok === 1 ? 'documento subida a la documentos.' : ok + ' documentos subidas a la documentos.');
             setTimeout(() => { limpiarSeleccion(); cerrarModal(); }, 700);
@@ -866,15 +866,15 @@
         lista.forEach((c) => grid.appendChild(c));
     });
 
-    // Solo los BOTONES del conmutador: la rejilla tambiÃ©n lleva data-vista
-    // para saber cÃ³mo pintarse, y sin acotar aquÃ­ acababa escuchando clics.
+    // Solo los BOTONES del conmutador: la rejilla también lleva data-vista
+    // para saber cómo pintarse, y sin acotar aquí acababa escuchando clics.
     document.querySelectorAll('.documentos-vistas [data-vista]').forEach((b) => {
         b.addEventListener('click', () => {
             document.querySelectorAll('.documentos-vistas [data-vista]').forEach((o) => {
                 o.classList.toggle('is-activo', o === b);
                 o.setAttribute('aria-pressed', String(o === b));
             });
-            // Cambiar de vista no toca los filtros ni lo que estÃ© marcado.
+            // Cambiar de vista no toca los filtros ni lo que esté marcado.
             if (grid) grid.dataset.vista = b.dataset.vista;
             try { localStorage.setItem('itb-documentos-vista', b.dataset.vista); } catch (err) {}
         });
@@ -886,7 +886,7 @@
         if (guardada === 'lista') document.querySelector('.documentos-vistas [data-vista="lista"]')?.click();
     } catch (err) {}
 
-    /* ---------- SELECCIÃ“N MÃšLTIPLE ---------- */
+    /* ---------- SELECCIÓN MÚLTIPLE ---------- */
 
     const lote        = $('documentos-lote');
     const loteTexto   = $('documentos-lote-texto');
@@ -1031,21 +1031,21 @@
         const d = boton.dataset;
 
         visorNombre.textContent = d.nombre || '';
-        if (visorPeso)  visorPeso.textContent  = d.peso || 'â€”';
-        if (visorTipo)  visorTipo.textContent  = d.tipo || 'â€”';
-        if (visorFecha) visorFecha.textContent = d.fecha || 'â€”';
+        if (visorPeso)  visorPeso.textContent  = d.peso || '—';
+        if (visorTipo)  visorTipo.textContent  = d.tipo || '—';
+        if (visorFecha) visorFecha.textContent = d.fecha || '—';
 
         if (visorRuta)   visorRuta.textContent = d.ruta || '';
         if (visorCopiar) visorCopiar.dataset.ruta = d.ruta || '';
         if (visorAbrir)  visorAbrir.href = d.src || '#';
 
-        // El tamaÃ±o real se lee de la propia documento al cargarla: pedÃ­rselo al
-        // servidor para las 107 de la rejilla ralentizarÃ­a la pantalla.
+        // El tamaño real se lee de la propia documento al cargarla: pedírselo al
+        // servidor para las 107 de la rejilla ralentizaría la pantalla.
         if (visorDim) {
-            visorDim.textContent = 'Midiendoâ€¦';
+            visorDim.textContent = 'Midiendo…';
             const medir = () => {
                 visorDim.textContent = visorImg.naturalWidth
-                    ? visorImg.naturalWidth + ' Ã— ' + visorImg.naturalHeight + ' px'
+                    ? visorImg.naturalWidth + ' × ' + visorImg.naturalHeight + ' px'
                     : 'No disponible';
             };
             if (visorImg.complete && visorImg.naturalWidth) medir();
@@ -1058,7 +1058,7 @@
             if (!usos.length) {
                 const li = document.createElement('li');
                 li.className = 'is-libre';
-                li.textContent = 'No se estÃ¡ usando en ninguna secciÃ³n. Se puede eliminar.';
+                li.textContent = 'No se está usando en ninguna sección. Se puede eliminar.';
                 visorUsos.appendChild(li);
             } else {
                 usos.forEach((u) => {
@@ -1129,7 +1129,7 @@
     visorCerrar?.addEventListener('click', cerrarVisor);
     visor?.addEventListener('click', (e) => { if (e.target === visor) cerrarVisor(); });
 
-    // Escape cierra la ventana que estÃ© abierta, la de subir o la del visor.
+    // Escape cierra la ventana que esté abierta, la de subir o la del visor.
     document.addEventListener('keydown', (e) => {
         const visorAbierto = visor && !visor.classList.contains('is-hidden');
 

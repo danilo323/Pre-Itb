@@ -1,6 +1,9 @@
 -- Base de Datos ITB (MySQL)
 -- Generado automáticamente al guardar en el panel de administración
--- Fecha: 2026-09-18 18:01:36
+-- Fecha: 2026-09-18 18:12:46
+
+SET NAMES utf8mb4;
+SET CHARACTER SET utf8mb4;
 
 CREATE DATABASE IF NOT EXISTS `itb_admin` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;
 USE `itb_admin`;

@@ -1,8 +1,8 @@
 /* admin/assets/biblioteca.css
-   Biblioteca de imÃ¡genes: la pantalla (rejilla + zona de subida) y el selector
+   Biblioteca de imágenes: la pantalla (rejilla + zona de subida) y el selector
    que sale desde cualquier campo de imagen del panel.
 
-   El selector se usa en TODAS las pantallas, asÃ­ que este archivo lo carga
+   El selector se usa en TODAS las pantallas, así que este archivo lo carga
    views/layout.php siempre; la parte de la pantalla solo se ve en
    admin/biblioteca.php. */
 
@@ -55,10 +55,10 @@
     cursor: pointer;
 }
 
-/* Barra que aparece al elegir archivos, con el botÃ³n de confirmar.
+/* Barra que aparece al elegir archivos, con el botón de confirmar.
    La regla .is-hidden de admin.css tiene la misma especificidad que esta y
-   este archivo se carga despuÃ©s, asÃ­ que sin el selector doble de abajo el
-   display:flex ganarÃ­a y la barra se verÃ­a siempre. */
+   este archivo se carga después, así que sin el selector doble de abajo el
+   display:flex ganaría y la barra se vería siempre. */
 .documentos-seleccion.is-hidden {
     display: none;
 }
@@ -119,8 +119,8 @@
 
 /* La foto llena la tarjeta, como en cualquier biblioteca de medios: la
    rejilla sirve para reconocer la imagen de un vistazo, y para verla entera
-   estÃ¡ el visor. El fondo es un gris liso; los cuadros de tablero de ajedrez
-   ensuciaban la pantalla entera y solo servÃ­an para las pocas imÃ¡genes con
+   está el visor. El fondo es un gris liso; los cuadros de tablero de ajedrez
+   ensuciaban la pantalla entera y solo servían para las pocas imágenes con
    transparencia, que se siguen viendo bien sobre gris. */
 .documentos-card__img {
     height: 150px;
@@ -151,7 +151,7 @@
 }
 
 /* El nombre de un archivo subido es un hash largo: se corta con puntos
-   suspensivos para que la tarjeta no se estire. El title lo enseÃ±a entero. */
+   suspensivos para que la tarjeta no se estire. El title lo enseña entero. */
 .documentos-card__nombre {
     font-size: .8rem;
     font-weight: 600;
@@ -204,7 +204,7 @@
 }
 
 /* =============================================
-   SELECTOR (modal) â€” sale en cualquier pantalla
+   SELECTOR (modal) — sale en cualquier pantalla
    ============================================= */
 .bib-picker-overlay {
     position: fixed;
@@ -346,7 +346,7 @@
     box-shadow: 0 0 0 3px var(--primary-light);
 }
 
-/* La aspa nativa de type="search" sobra: ya hay un botÃ³n propio, que ademÃ¡s
+/* La aspa nativa de type="search" sobra: ya hay un botón propio, que además
    aparece y desaparece con el contenido. */
 .bib-picker__buscar::-webkit-search-cancel-button {
     -webkit-appearance: none;
@@ -378,7 +378,7 @@
     display: none;
 }
 
-/* --- BotÃ³n de subir --- */
+/* --- Botón de subir --- */
 .bib-picker__subir {
     display: inline-flex;
     align-items: center;
@@ -490,7 +490,7 @@
     transition: width .15s ease;
 }
 
-/* La rejilla es lo Ãºnico que hace scroll: la cabecera con el buscador y el
+/* La rejilla es lo único que hace scroll: la cabecera con el buscador y el
    pie con Cancelar se quedan siempre a la vista. */
 .bib-picker__grid {
     flex: 1;
@@ -531,7 +531,7 @@
 }
 
 /* Lo que se acaba de subir: va lo primero y se marca, para no tener que
-   buscarlo entre las demÃ¡s. La marca dura lo que dure el modal abierto. */
+   buscarlo entre las demás. La marca dura lo que dure el modal abierto. */
 .bib-picker__item.is-nueva {
     border-color: var(--primary);
     box-shadow: 0 0 0 3px var(--primary-light);
@@ -614,7 +614,7 @@
 }
 
 /* Se conserva la puerta a la Biblioteca completa: desde el selector solo se
-   sube y se elige; borrar, ver usos y renombrar siguen estando allÃ­. */
+   sube y se elige; borrar, ver usos y renombrar siguen estando allí. */
 .bib-picker__enlace {
     display: inline-flex;
     align-items: center;
@@ -631,7 +631,7 @@
 }
 
 /* --- Velo de arrastre ---
-   pointer-events:none es imprescindible: si captura el ratÃ³n, el navegador
+   pointer-events:none es imprescindible: si captura el ratón, el navegador
    deja de mandar dragleave y el velo se queda pegado tapando el modal. */
 .bib-picker__soltar {
     position: absolute;
@@ -699,7 +699,7 @@
 }
 
 /* =============================================
-   CABECERA CON ACCIÃ“N
+   CABECERA CON ACCIÓN
    ============================================= */
 .dash-header--con-accion {
     display: flex;
@@ -716,8 +716,8 @@
 
 /* =============================================
    VENTANA DE SUBIDA
-   Reaprovecha .admin-confirm-overlay del panel (posiciÃ³n, fondo y el
-   is-visible que la desvanece); aquÃ­ solo se cambia el tamaÃ±o de la caja,
+   Reaprovecha .admin-confirm-overlay del panel (posición, fondo y el
+   is-visible que la desvanece); aquí solo se cambia el tamaño de la caja,
    porque esta lleva la zona de arrastre y las miniaturas.
    ============================================= */
 .documentos-modal__caja {
@@ -871,8 +871,8 @@
 }
 
 /* =============================================
-   VISOR A TAMAÃ‘O COMPLETO
-   La miniatura de la rejilla recorta para cuadrar; aquÃ­ se ve entera.
+   VISOR A TAMAÑO COMPLETO
+   La miniatura de la rejilla recorta para cuadrar; aquí se ve entera.
    ============================================= */
 .documentos-visor__caja {
     background: var(--bg-panel);
@@ -927,7 +927,7 @@
 }
 
 /* =============================================
-   LA MINIATURA ES UN BOTÃ“N (abre el visor)
+   LA MINIATURA ES UN BOTÓN (abre el visor)
    ============================================= */
 .documentos-card__img.js-ver-imagen {
     position: relative;
@@ -979,8 +979,8 @@
 
 /* =============================================
    BARRA DE HERRAMIENTAS
-   Buscar Â· filtrar por uso Â· ordenar Â· rejilla o lista.
-   PatrÃ³n habitual de las bibliotecas de medios: la rejilla sirve para
+   Buscar · filtrar por uso · ordenar · rejilla o lista.
+   Patrón habitual de las bibliotecas de medios: la rejilla sirve para
    reconocer una foto de un vistazo y la lista para comparar nombre, peso
    y fecha. Cambiar de vista no toca los filtros ni lo marcado.
    ============================================= */
@@ -1136,7 +1136,7 @@
 
 /* =============================================
    ACCIONES EN LOTE
-   Con 105 imÃ¡genes, borrarlas de una en una no es viable.
+   Con 105 imágenes, borrarlas de una en una no es viable.
    ============================================= */
 .documentos-lote {
     position: sticky;
@@ -1177,7 +1177,7 @@
 }
 
 /* =============================================
-   TARJETA: CASILLA DE SELECCIÃ“N
+   TARJETA: CASILLA DE SELECCIÓN
    ============================================= */
 .documentos-card {
     position: relative;
@@ -1245,7 +1245,7 @@
     box-shadow: 0 0 0 2px var(--primary-light-strong);
 }
 
-/* Entrada de una imagen reciÃ©n subida, para no perderla de vista. */
+/* Entrada de una imagen recién subida, para no perderla de vista. */
 .documentos-card.is-nueva {
     animation: documentos-entra .45s ease-out;
 }
@@ -1327,9 +1327,9 @@
 
 /* =============================================
    SUBIDA: PROGRESO POR ARCHIVO
-   Una barra real por archivo, con su resultado. El patrÃ³n que usan las
+   Una barra real por archivo, con su resultado. El patrón que usan las
    bibliotecas de medios serias: nada de un giro indefinido que no dice
-   cuÃ¡nto queda ni cuÃ¡l de los archivos fallÃ³.
+   cuánto queda ni cuál de los archivos falló.
    ============================================= */
 .documentos-preview {
     position: relative;
@@ -1408,7 +1408,7 @@
 
 /* =============================================
    AVISOS FLOTANTES
-   Evitan recargar la pÃ¡gina entera por cada acciÃ³n.
+   Evitan recargar la página entera por cada acción.
    ============================================= */
 .documentos-avisos {
     position: fixed;
@@ -1465,9 +1465,9 @@
 }
 
 /* =============================================
-   AJUSTES DE DISEÃ‘O
-   Reescriben reglas de mÃ¡s arriba. Van al final para que ganen sin
-   tener que subir la especificidad con selectores mÃ¡s largos.
+   AJUSTES DE DISEÑO
+   Reescriben reglas de más arriba. Van al final para que ganen sin
+   tener que subir la especificidad con selectores más largos.
    ============================================= */
 
 /* ---------------------------------------------
@@ -1567,7 +1567,7 @@
    TARJETA
    Menos ruido: las acciones aparecen al acercarse o al enfocar con el
    teclado. Antes los dos botones estaban siempre a la vista en las 107
-   tarjetas y competÃ­an con las fotos.
+   tarjetas y competían con las fotos.
    --------------------------------------------- */
 .documentos-card {
     border-radius: 14px;
@@ -1605,7 +1605,7 @@
     transform: none;
 }
 
-/* En pantallas tÃ¡ctiles no hay "pasar el cursor": siempre visibles. */
+/* En pantallas táctiles no hay "pasar el cursor": siempre visibles. */
 @media (hover: none) {
     .documentos-card__acciones {
         opacity: 1;
@@ -1655,10 +1655,10 @@
 }
 
 /* ---------------------------------------------
-   SELECCIÃ“N
-   Antes solo cambiaba el borde y con 107 tarjetas costaba ver cuÃ¡les
+   SELECCIÓN
+   Antes solo cambiaba el borde y con 107 tarjetas costaba ver cuáles
    estaban marcadas. Ahora la casilla se ve siempre en la esquina, la
-   tarjeta marcada se tiÃ±e y toda la miniatura es zona de marcado.
+   tarjeta marcada se tiñe y toda la miniatura es zona de marcado.
    --------------------------------------------- */
 .documentos-card__marca span {
     width: 26px;
@@ -1699,7 +1699,7 @@
 }
 
 /* ---------------------------------------------
-   BARRA DE SELECCIÃ“N
+   BARRA DE SELECCIÓN
    --------------------------------------------- */
 .documentos-lote {
     border-radius: 14px;
@@ -1746,7 +1746,7 @@
 }
 
 /* ---------------------------------------------
-   ESTADO VACÃO
+   ESTADO VACÍO
    --------------------------------------------- */
 .documentos-vacia {
     background: var(--bg-panel);
@@ -1773,8 +1773,8 @@
    AJUSTES DE LA VISTA DE LISTA
    --------------------------------------------- */
 
-/* La insignia conserva su color segÃºn el estado: en la lista se quedaba
-   en gris y "En uso" apenas se distinguÃ­a de "Sin usar". */
+/* La insignia conserva su color según el estado: en la lista se quedaba
+   en gris y "En uso" apenas se distinguía de "Sin usar". */
 .documentos-grid[data-vista="lista"] .documentos-card__uso {
     background: var(--bg-subtle);
     color: var(--text-body);
@@ -1789,7 +1789,7 @@
 }
 
 /* En la rejilla los botones se reparten el ancho; en la lista van al
-   contenido, o "Copiar ruta" se partÃ­a en dos renglones. */
+   contenido, o "Copiar ruta" se partía en dos renglones. */
 .documentos-grid[data-vista="lista"] .documentos-card__acciones .btn {
     flex: 0 0 auto;
     white-space: nowrap;
@@ -1798,8 +1798,8 @@
 /* =============================================
    VISOR CON FICHA
    La imagen a la izquierda y sus datos a la derecha, como en cualquier
-   biblioteca de medios. Antes solo se veÃ­a la foto y una lÃ­nea de texto:
-   para saber el tamaÃ±o real, la ruta o dÃ³nde estaba puesta habÃ­a que
+   biblioteca de medios. Antes solo se veía la foto y una línea de texto:
+   para saber el tamaño real, la ruta o dónde estaba puesta había que
    salir a buscarlo.
    ============================================= */
 .documentos-visor__caja {
@@ -1995,8 +1995,8 @@
     }
 }
 
-/* El botÃ³n de la cabecera va por encima del adorno circular, igual que el
-   tÃ­tulo y el pÃ¡rrafo, que ya llevan position: relative por el mismo motivo. */
+/* El botón de la cabecera va por encima del adorno circular, igual que el
+   título y el párrafo, que ya llevan position: relative por el mismo motivo. */
 .dash-header--con-accion .btn {
     position: relative;
     z-index: 1;
@@ -2004,7 +2004,7 @@
 }
 
 /* =============================================
-   VENTANA DE SUBIDA â€” DISEÃ‘O
+   VENTANA DE SUBIDA — DISEÑO
    ============================================= */
 .documentos-modal__caja {
     width: min(760px, 94vw);
@@ -2095,7 +2095,7 @@
     margin-bottom: 16px;
 }
 
-/* QuÃ© se admite, en tres apuntes cortos en vez de una frase larga. */
+/* Qué se admite, en tres apuntes cortos en vez de una frase larga. */
 .documentos-dropzone__notas {
     display: flex;
     justify-content: center;
@@ -2223,7 +2223,7 @@
     background: linear-gradient(160deg, var(--primary-blue-light) 0%, var(--primary-blue-dark) 100%);
 }
 
-/* Solo aquÃ­, y solo si se pide: el tablero sirve para comprobar quÃ© parte
+/* Solo aquí, y solo si se pide: el tablero sirve para comprobar qué parte
    de un logo es transparente. */
 .documentos-visor__lienzo[data-fondo="cuadros"] {
     background-color: var(--bg-panel);
@@ -2235,7 +2235,7 @@
 }
 
 /* La imagen se despega del fondo con una sombra, en vez de con un marco
-   blanco que competÃ­a con las fotos de fondo claro. */
+   blanco que competía con las fotos de fondo claro. */
 .documentos-visor__lienzo img {
     border-radius: 10px;
     box-shadow: 0 10px 34px rgba(15, 34, 67, .18);

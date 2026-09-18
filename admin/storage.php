@@ -131,6 +131,8 @@ function storage_dump_sql(): bool {
         $out = "-- Base de Datos ITB (MySQL)\n";
         $out .= "-- Generado automáticamente al guardar en el panel de administración\n";
         $out .= "-- Fecha: " . date('Y-m-d H:i:s') . "\n\n";
+        $out .= "SET NAMES utf8mb4;\n";
+        $out .= "SET CHARACTER SET utf8mb4;\n\n";
         $out .= "CREATE DATABASE IF NOT EXISTS `itb_admin` CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci;\n";
         $out .= "USE `itb_admin`;\n\n";
 
