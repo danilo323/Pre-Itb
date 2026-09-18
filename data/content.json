@@ -1698,5 +1698,342 @@
                 "publicado": true
             }
         ]
+    },
+    "oferta_hero": {
+        "_visible": "1",
+        "info_propia": null,
+        "div_textos": null,
+        "titulo": "Oferta Académica",
+        "ruta_inicio": "Inicio",
+        "ruta_actual": "Oferta Académica",
+        "div_galeria": null,
+        "info_portada": null,
+        "animaciones": true,
+        "imagenes_fondo": [
+            {
+                "archivo": "img/hero_2.jpg",
+                "estatica": false
+            }
+        ]
+    },
+    "oferta_intro": {
+        "_visible": "1",
+        "titulo": "Cientos de programas.\r\nUn título diseñado a tu medida.",
+        "descripcion": "Elegir tu especialidad es solo el punto de partida. Diseña tu propia ruta académica combinando las materias y áreas que realmente te apasionan. Estudia con total flexibilidad y llega tan lejos como te propongas."
+    },
+    "oferta_programas": {
+        "_visible": "1",
+        "info_programas": null,
+        "div_botones": null,
+        "btn_solicitar_texto": "Solicitar Información",
+        "btn_solicitar_enlace": "#",
+        "btn_matricular_texto": "Matricúlame",
+        "btn_matricular_enlace": "#",
+        "lista_programas": [
+            {
+                "imagen": "img/enfermeria.jpg",
+                "nombre": "Tecnología Superior en Enfermería",
+                "facultad": "Facultad de Salud y Servicios Sociales",
+                "tipo": "Programa",
+                "campo_estudio": "FASSS",
+                "modalidad": "Presencial",
+                "anio_inicio": "2026",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "etiqueta": "Nueva",
+                "perfil": "",
+                "competencias_administrativa": "",
+                "competencias_asistencial": "",
+                "documentos_admision": "",
+                "inversion": "",
+                "horarios": "",
+                "documentos": [
+                    {
+                        "titulo": "Malla",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Acuerdo",
+                        "archivo": "docs/SE-VENDE-HIELO.pdf"
+                    },
+                    {
+                        "titulo": "Justificación",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Tríptico",
+                        "archivo": ""
+                    }
+                ],
+                "div_botones_item": null,
+                "btn_solicitar_texto": "",
+                "btn_solicitar_enlace": "",
+                "btn_matricular_texto": "",
+                "btn_matricular_enlace": ""
+            },
+            {
+                "imagen": "img/Mecanica.jpg",
+                "nombre": "Tecnología Superior en Mecánica Automotriz",
+                "facultad": "Facultad de Transporte y Vialidad",
+                "tipo": "Programa",
+                "campo_estudio": "FATV",
+                "modalidad": "Presencial",
+                "anio_inicio": "2026",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "etiqueta": "Destacada",
+                "perfil": "",
+                "competencias_administrativa": "",
+                "competencias_asistencial": "",
+                "documentos_admision": "",
+                "inversion": "",
+                "horarios": "",
+                "documentos": [
+                    {
+                        "titulo": "Malla",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Acuerdo",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Justificación",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Tríptico",
+                        "archivo": ""
+                    }
+                ],
+                "div_botones_item": null,
+                "btn_solicitar_texto": "",
+                "btn_solicitar_enlace": "",
+                "btn_matricular_texto": "",
+                "btn_matricular_enlace": ""
+            },
+            {
+                "imagen": "img/desarrollo_software.jpg",
+                "nombre": "Tecnología Superior en Desarrollo de Software",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "tipo": "Programa",
+                "campo_estudio": "FACES",
+                "modalidad": "Hibrida",
+                "anio_inicio": "2027",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "etiqueta": "Nueva",
+                "perfil": "",
+                "competencias_administrativa": "",
+                "competencias_asistencial": "",
+                "documentos_admision": "",
+                "inversion": "",
+                "horarios": "",
+                "documentos": [
+                    {
+                        "titulo": "Malla",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Acuerdo",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Justificación",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Tríptico",
+                        "archivo": ""
+                    }
+                ],
+                "div_botones_item": null,
+                "btn_solicitar_texto": "",
+                "btn_solicitar_enlace": "",
+                "btn_matricular_texto": "",
+                "btn_matricular_enlace": ""
+            },
+            {
+                "imagen": "img/programa_administracion.jpg",
+                "nombre": "Tecnología Superior en Administración de Empresas",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "tipo": "Programa",
+                "campo_estudio": "FACES",
+                "modalidad": "Presencial",
+                "anio_inicio": "2026",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "etiqueta": "",
+                "perfil": "",
+                "competencias_administrativa": "",
+                "competencias_asistencial": "",
+                "documentos_admision": "",
+                "inversion": "",
+                "horarios": "",
+                "documentos": [
+                    {
+                        "titulo": "Malla",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Acuerdo",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Justificación",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Tríptico",
+                        "archivo": ""
+                    }
+                ],
+                "div_botones_item": null,
+                "btn_solicitar_texto": "",
+                "btn_solicitar_enlace": "",
+                "btn_matricular_texto": "",
+                "btn_matricular_enlace": ""
+            },
+            {
+                "imagen": "img/programa_contabilidad.jpg",
+                "nombre": "Tecnología Superior en Contabilidad",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "tipo": "Programa",
+                "campo_estudio": "FACES",
+                "modalidad": "Hibrida",
+                "anio_inicio": "2027",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "etiqueta": "",
+                "perfil": "",
+                "competencias_administrativa": "",
+                "competencias_asistencial": "",
+                "documentos_admision": "",
+                "inversion": "",
+                "horarios": "",
+                "documentos": [
+                    {
+                        "titulo": "Malla",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Acuerdo",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Justificación",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Tríptico",
+                        "archivo": ""
+                    }
+                ],
+                "div_botones_item": null,
+                "btn_solicitar_texto": "",
+                "btn_solicitar_enlace": "",
+                "btn_matricular_texto": "",
+                "btn_matricular_enlace": ""
+            },
+            {
+                "imagen": "img/programa_diseno_grafico.jpg",
+                "nombre": "Tecnología Superior en Diseño Gráfico",
+                "facultad": "Facultad de Ciencias Empresariales y Sistemas",
+                "tipo": "Programa",
+                "campo_estudio": "FACES",
+                "modalidad": "Remoto",
+                "anio_inicio": "2026",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "etiqueta": "Destacada",
+                "perfil": "",
+                "competencias_administrativa": "",
+                "competencias_asistencial": "",
+                "documentos_admision": "",
+                "inversion": "",
+                "horarios": "",
+                "documentos": [
+                    {
+                        "titulo": "Malla",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Acuerdo",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Justificación",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Tríptico",
+                        "archivo": ""
+                    }
+                ],
+                "div_botones_item": null,
+                "btn_solicitar_texto": "",
+                "btn_solicitar_enlace": "",
+                "btn_matricular_texto": "",
+                "btn_matricular_enlace": ""
+            },
+            {
+                "imagen": "img/programa_gastronomia.jpg",
+                "nombre": "Tecnología Superior en Gastronomía",
+                "facultad": "Facultad de Transporte y Vialidad",
+                "tipo": "Programa",
+                "campo_estudio": "FATV",
+                "modalidad": "Presencial",
+                "anio_inicio": "2027",
+                "duracion": "2 Años (4 Semestres)",
+                "campus": "Campus Teresa Benites",
+                "etiqueta": "",
+                "perfil": "",
+                "competencias_administrativa": "",
+                "competencias_asistencial": "",
+                "documentos_admision": "",
+                "inversion": "",
+                "horarios": "",
+                "documentos": [
+                    {
+                        "titulo": "Malla",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Acuerdo",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Justificación",
+                        "archivo": ""
+                    },
+                    {
+                        "titulo": "Tríptico",
+                        "archivo": ""
+                    }
+                ],
+                "div_botones_item": null,
+                "btn_solicitar_texto": "",
+                "btn_solicitar_enlace": "",
+                "btn_matricular_texto": "",
+                "btn_matricular_enlace": ""
+            }
+        ]
+    },
+    "oferta_filtros": {
+        "_visible": "1",
+        "info_filtros": null,
+        "div_filtro_tipo": null,
+        "filtro_tipo_titulo": "Mostrar resultados por",
+        "filtro_tipo_opcion_cursos": "Cursos",
+        "filtro_tipo_opcion_programas": "Programas",
+        "div_filtro_modalidad": null,
+        "filtro_modalidad_titulo": "Modalidad",
+        "filtro_modalidad_opciones": "Presencial\r\nHíbrida\r\nRemoto",
+        "div_filtro_anio": null,
+        "filtro_anio_titulo": "Año de Inicio",
+        "filtro_anio_opciones": "2026\r\n2027",
+        "div_filtro_campo": null,
+        "filtro_campo_titulo": "Campo de Estudio",
+        "filtro_campo_opciones": "FASSS\r\nFATV\r\nFACES"
     }
 }
